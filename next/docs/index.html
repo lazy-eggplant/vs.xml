@@ -9,20 +9,20 @@
       
       
       
-        <link rel="prev" href="../compatibility/">
+      
+        <link rel="next" href="building/">
       
       
-      
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
     
     
       
-        <title>Embedded - vs.xml</title>
+        <title>vs.xml</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.2afb09e1.min.css">
       
       
 
@@ -41,7 +41,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -71,7 +71,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="vs.xml" class="md-header__button md-logo" aria-label="vs.xml" data-md-component="logo">
+    <a href="." title="vs.xml" class="md-header__button md-logo" aria-label="vs.xml" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -91,7 +91,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Embedded
+              Home
             
           </span>
         </div>
@@ -181,7 +181,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="vs.xml" class="md-nav__button md-logo" aria-label="vs.xml" data-md-component="logo">
+    <a href="." title="vs.xml" class="md-nav__button md-logo" aria-label="vs.xml" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -208,10 +208,17 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="." class="md-nav__link md-nav__link--active">
         
   
   
@@ -222,6 +229,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -233,7 +241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../building/" class="md-nav__link">
+      <a href="building/" class="md-nav__link">
         
   
   
@@ -255,7 +263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../compatibility/" class="md-nav__link">
+      <a href="compatibility/" class="md-nav__link">
         
   
   
@@ -274,17 +282,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="embedded/" class="md-nav__link">
         
   
   
@@ -295,7 +296,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -335,11 +335,14 @@
   
 
 
-  <h1>Embedded</h1>
+  <h1>Home</h1>
 
-<p>Most usage of <code>libc++</code> is only related to header features, so it might be possible to introduce alternatives:
-- <code>libfmt</code> to cover <code>std::format</code> and <code>std::print</code>.
-- Some implementation for <code>std::vector</code>, <code>std::stack</code> and <code>std::unordered_map</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ongoing project, not ready for release or usage yet. Many features are still missing.</p>
+</div>
+<p>This library offers a mostly-compliant[^1] XML parser, tree builder and several related utilities.<br />
+It is not intended as a general purpose library, which means it might not be a good fit for your project. Please, read the rest of this readme for more information.  </p>
 
 
 
@@ -388,10 +391,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
   </body>
