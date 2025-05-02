@@ -1,0 +1,10 @@
+/.cache
+/.clangd
+/.venv
+/build/ 
+/build.*/
+/subprojects/*
+!/subprojects/packagefiles/
+*.autogen.*
+/private/
+/.vscode/
