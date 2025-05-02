@@ -77,7 +77,8 @@ enum struct type_t{
     COMMENT,
     PROC,
     CDATA,
-    INJECT
+    INJECT,
+    EOT //End of Tree
 };
 
 namespace serialize{
@@ -146,23 +147,30 @@ namespace serialize{
     }
 
     constexpr ret_t to_xml_text(std::string_view str){
-        int rule_a = 0;
-        int rule_b = 0;
+        int rule_a = 0; //Offset for 1-character escape sequiences
+        int rule_b = 0; //Intermediate steps of ]]>
+        int rule_c = 0; //Offset for rule_b
         for(auto& c : str){
             if(c=='<')rule_a+=sizeof("&lt;")-1-1;
             else if(c=='&')rule_a+=sizeof("&amp;")-1-1;
-            if(rule_b==0 && c==']')rule_b=1;
-            if(rule_b==1 && c==']')rule_b=2;
-            if(rule_b==2 && c=='>')return {};   //]]> not allowed in text, it must be escaped as `]]&gt;`.
-
+            else if(rule_b==0 && c==']')rule_b=1;
+            else if(rule_b==1 && c==']')rule_b=2;
+            else if(rule_b==2 && c=='>'){rule_b=0;rule_c+=sizeof("&gt;")-1-1;}   //]]> not allowed in text, it must be escaped as `]]&gt;`.
+            else rule_b=0;
             //Maybe some config to enable the others as well even if not needed for a correct XML serialization?
         }
-        if(rule_a==0)return str;
+        if(rule_a==0 && rule_c==0)return str;
         else{
             std::string tmp;
-            tmp.reserve(str.length()+rule_a);
+            tmp.reserve(str.length()+rule_a+rule_c);
+            int rule_b = 0;
             for(auto& c : str){
-                if(c=='<')tmp+="&lt;";
+                if(rule_b==0 && c==']')rule_b=1;
+                else if(rule_b==1 && c==']')rule_b=2;
+                else if(rule_b==2 && c=='>'){rule_b=0;tmp+="]]&gt;";}   //]]> not allowed in text, it must be escaped as `]]&gt;`.
+                else if(rule_b==1){rule_b=0;tmp+="]";}
+                else if(rule_b==2){rule_b=0;tmp+="]]";}
+                else if(c=='<')tmp+="&lt;";
                 else if(c=='&')tmp+="&amp;";
                 else tmp+=c;
             }
@@ -259,6 +267,9 @@ struct base_t{
     friend Tree;
 };
 
+struct eot_t{
+    type_t _type = type_t::EOT;
+};
 
 struct attr_t{
     private:
@@ -276,6 +287,10 @@ struct attr_t{
     constexpr inline std::expected<sv,feature_t> ns() const {return _ns;}
     constexpr inline std::expected<sv,feature_t> name() const {return _name;}
     constexpr inline std::expected<sv,feature_t> value() const {return _value;}
+
+    //The presence of AOT at the end of the tree allows me to now implement parent, next and prev for attributes as well.
+    //parent must go left up to the point a node is found.
+    //prev can go left up to the point a node is found.
 };
 
 
@@ -774,6 +789,10 @@ struct Builder{
         open=false;
         if(stack.size()!=1)return std::unexpected(error_t::MISFORMED);
         stack.pop();
+
+        buffer.resize(buffer.size()+sizeof(eot_t));
+        new ((node_t*) & (uint8_t&) *( buffer.end()-sizeof(eot_t) )) eot_t();
+
         return Tree(std::move(buffer),std::move(symbols));
     }
 
