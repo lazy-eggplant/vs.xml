@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#features" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -242,6 +247,19 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Building
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -253,6 +271,74 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xml-parsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      XML parsing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tree-builder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tree builder
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xml-serialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      XML serialization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -342,6 +428,65 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xml-parsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      XML parsing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tree-builder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tree builder
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xml-serialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      XML serialization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -361,7 +506,43 @@
 
   <h1>Building</h1>
 
-
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">#</a></h2>
+<h3 id="xml-parsing">XML parsing<a class="headerlink" href="#xml-parsing" title="Permanent link">#</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> namespaces [^1]</li>
+<li class="task-list-item"><input type="checkbox" disabled/> cdata
+    - [ ] optional reduction to <code>text</code></li>
+<li class="task-list-item"><input type="checkbox" disabled/> text
+    - [ ] optional merging of close text blocks</li>
+<li class="task-list-item"><input type="checkbox" disabled/> comments 
+    - [ ] optional stripping</li>
+<li class="task-list-item"><input type="checkbox" disabled/> basic entities</li>
+</ul>
+<h3 id="tree-builder">Tree builder<a class="headerlink" href="#tree-builder" title="Permanent link">#</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" disabled checked/> namespaces</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> processing</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> cdata</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> text</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> comments</li>
+</ul>
+<h3 id="algorithms">Algorithms<a class="headerlink" href="#algorithms" title="Permanent link">#</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" disabled checked/> iterators for nodes</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> iterators for attributes</li>
+<li class="task-list-item"><input type="checkbox" disabled/> tree/sub-tree cloning</li>
+<li class="task-list-item"><input type="checkbox" disabled/> attributes reordering</li>
+<li class="task-list-item"><input type="checkbox" disabled/> node injection</li>
+</ul>
+<h3 id="xml-serialization">XML serialization<a class="headerlink" href="#xml-serialization" title="Permanent link">#</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" disabled checked/> namespaces</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> processing</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> cdata</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> text</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> comments</li>
+</ul>
+<p>[^1]: Partially, no validation for them</p>
 
 
 

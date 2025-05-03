@@ -362,20 +362,22 @@
 <p>The memory layout for the tree structure used by this library has the following properties:
 - It is based on a contiguous memory slice.
 - It is built in-place, as such children are placed directly after their parent.
-- Pointers between nodes in the tree are not defined as absolute, but relative to the address of the current one.</p>
+- Attributes are immediately stored after a node.
+- Pointers between nodes in the tree are not defined as absolute, but relative to the address of the current one.
+- All strings are represented as string views over a common base offset.</p>
 <p>The structure of the various nodes is based on the size of three data types:</p>
 <ul>
-<li><code>delta_ptr_t</code> is the type of a relative pointer. Realistically, 16bits is plenty enough for most realistic scenarios with XML files humans can handle.</li>
+<li><code>delta_ptr_t</code> is the type of relative pointers. Realistically, 16bits is plenty enough for most realistic scenarios with XML files humans can handle.</li>
 <li><code>xml_size_t</code> is the type used to represent the size of nodes in bytes. It should be as high as the max size in byte a tree can have. 16bits is also often sufficient.</li>
 <li><code>xml_count_t</code> is the type used to represent the count of things. Like the number of attributes, or number of bytes in a string. Its size is mostly determined by the maximum length of strings_views. Depending on the application as low as 8bit could be enough, 16bit a more reasonable default.</li>
 <li><code>xml_enum_size_t</code> is the size of enums when stored. 8bit is plenty enough.</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you want to use a very compact memory layout more suitable for embedded applications, you will have to manually override parts of this code and possibly work with bitfields.</p>
+<p>If you have very specific needs for a compact memory layout, probably more suitable for embedded applications, you will have to manually override parts of this code and possibly work with bit-fields.</p>
 </div>
 <blockquote>
-<p>This goes beyond the configurability granted via macros and forking this library is likely the best solution.</p>
+<p>This goes beyond the configurability granted via macros, and forking this library is likely the best solution.</p>
 </blockquote>
 
 
