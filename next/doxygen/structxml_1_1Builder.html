@@ -86,7 +86,7 @@ $(function() {
 <p>Helper class to build an XML tree via commands.  
  <a href="structxml_1_1Builder.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="vs-xml_8hpp_source.html">vs-xml.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="builder_8hpp_source.html">builder.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for xml::Builder:</div>
 <div class="dyncontent">
@@ -113,15 +113,18 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9281075aac6886120cbd65262bb26a3a" id="r_a9281075aac6886120cbd65262bb26a3a"><td class="memItemLeft" align="right" valign="top"><a id="a9281075aac6886120cbd65262bb26a3a" name="a9281075aac6886120cbd65262bb26a3a"></a>
+<tr class="memitem:a2270d7bc5dbd3df47e062e36350af2e4" id="r_a2270d7bc5dbd3df47e062e36350af2e4"><td class="memItemLeft" align="right" valign="top"><a id="a2270d7bc5dbd3df47e062e36350af2e4" name="a2270d7bc5dbd3df47e062e36350af2e4"></a>
+std::expected&lt; <a class="el" href="structxml_1_1Tree.html">Tree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
+<tr class="separator:a2270d7bc5dbd3df47e062e36350af2e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b436f8cbe3eceb6a80ffacda732c386" id="r_a7b436f8cbe3eceb6a80ffacda732c386"><td class="memItemLeft" align="right" valign="top"><a id="a7b436f8cbe3eceb6a80ffacda732c386" name="a7b436f8cbe3eceb6a80ffacda732c386"></a>
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (std::string_view name, std::string_view ns=&quot;&quot;)</td></tr>
-<tr class="separator:a9281075aac6886120cbd65262bb26a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6de45f4b9c8d5c1c52bfb28b8c318a38" id="r_a6de45f4b9c8d5c1c52bfb28b8c318a38"><td class="memItemLeft" align="right" valign="top"><a id="a6de45f4b9c8d5c1c52bfb28b8c318a38" name="a6de45f4b9c8d5c1c52bfb28b8c318a38"></a>
+<tr class="separator:a7b436f8cbe3eceb6a80ffacda732c386"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af111a39fe79e382dcfa8fb535617e660" id="r_af111a39fe79e382dcfa8fb535617e660"><td class="memItemLeft" align="right" valign="top"><a id="af111a39fe79e382dcfa8fb535617e660" name="af111a39fe79e382dcfa8fb535617e660"></a>
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
-<tr class="separator:a6de45f4b9c8d5c1c52bfb28b8c318a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67155cae76a317c508200f9a7bf5a70b" id="r_a67155cae76a317c508200f9a7bf5a70b"><td class="memItemLeft" align="right" valign="top"><a id="a67155cae76a317c508200f9a7bf5a70b" name="a67155cae76a317c508200f9a7bf5a70b"></a>
+<tr class="separator:af111a39fe79e382dcfa8fb535617e660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeac6745d13491ce712a1abc134f64e4b" id="r_aeac6745d13491ce712a1abc134f64e4b"><td class="memItemLeft" align="right" valign="top"><a id="aeac6745d13491ce712a1abc134f64e4b" name="aeac6745d13491ce712a1abc134f64e4b"></a>
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>attr</b> (std::string_view name, std::string_view value, std::string_view ns=&quot;&quot;)</td></tr>
-<tr class="separator:a67155cae76a317c508200f9a7bf5a70b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aeac6745d13491ce712a1abc134f64e4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c26abba2ba73c7e43cc135b8d8b1423" id="r_a4c26abba2ba73c7e43cc135b8d8b1423"><td class="memItemLeft" align="right" valign="top"><a id="a4c26abba2ba73c7e43cc135b8d8b1423" name="a4c26abba2ba73c7e43cc135b8d8b1423"></a>
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>text</b> (std::string_view value)</td></tr>
 <tr class="separator:a4c26abba2ba73c7e43cc135b8d8b1423"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,15 +140,12 @@ error_t&#160;</td><td class="memItemRight" valign="bottom"><b>proc</b> (std::str
 <tr class="memitem:a384fec642e9e5cdd9a5db5c7db4fa266" id="r_a384fec642e9e5cdd9a5db5c7db4fa266"><td class="memItemLeft" align="right" valign="top"><a id="a384fec642e9e5cdd9a5db5c7db4fa266" name="a384fec642e9e5cdd9a5db5c7db4fa266"></a>
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>inject</b> (std::string_view value)</td></tr>
 <tr class="separator:a384fec642e9e5cdd9a5db5c7db4fa266"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5be58388a3c2ad7d9ee769dc62a37d8" id="r_ab5be58388a3c2ad7d9ee769dc62a37d8"><td class="memItemLeft" align="right" valign="top"><a id="ab5be58388a3c2ad7d9ee769dc62a37d8" name="ab5be58388a3c2ad7d9ee769dc62a37d8"></a>
-std::expected&lt; <a class="el" href="structxml_1_1Tree.html">Tree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
-<tr class="separator:ab5be58388a3c2ad7d9ee769dc62a37d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ab1ac08d2f50e52d834e9b42b8e64975c" id="r_ab1ac08d2f50e52d834e9b42b8e64975c"><td class="memItemLeft" align="right" valign="top"><a id="ab1ac08d2f50e52d834e9b42b8e64975c" name="ab1ac08d2f50e52d834e9b42b8e64975c"></a>
+<tr class="memitem:ad3a062f5f6a832b69528abb7bad24719" id="r_ad3a062f5f6a832b69528abb7bad24719"><td class="memItemLeft" align="right" valign="top"><a id="ad3a062f5f6a832b69528abb7bad24719" name="ad3a062f5f6a832b69528abb7bad24719"></a>
 std::expected&lt; <a class="el" href="structxml_1_1Tree.html">Tree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> (std::vector&lt; uint8_t &gt; &amp;&amp;symbols)</td></tr>
-<tr class="separator:ab1ac08d2f50e52d834e9b42b8e64975c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ad3a062f5f6a832b69528abb7bad24719"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -155,8 +155,9 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>label_offset</b> = 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Helper class to build an XML tree via commands. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/vs-xml/<a class="el" href="vs-xml_8hpp_source.html">vs-xml.hpp</a></li>
+</div><hr/>The documentation for this struct was generated from the following files:<ul>
+<li>include/vs-xml/<a class="el" href="builder_8hpp_source.html">builder.hpp</a></li>
+<li>src/<b>builder.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
