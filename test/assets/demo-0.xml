@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<base xmlns:s="vs.s" xmlns:r="vs.r" xmlns:w="vs.w" xmlns:v="vs.v">
+    <s:hello w:attr0="1" v:attr0="1"/>
+    <r:hello w:attr0="1"/>
+</base>

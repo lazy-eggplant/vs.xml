@@ -6,13 +6,14 @@ project(
   default_options: ['cpp_std=c++23'],
 )
 
-include_dirs = include_directories('include/vs-xml')
+include_dirs = include_directories('include')
 
+add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
 #add_project_arguments(['-Wno-vla-cxx-extension'], language: 'cpp')
 
 vs_xml_lib = library(
     'vs-xml',
-    [],
+    ['src/tree.cpp','src/builder.cpp'],
     install: true,
     dependencies: [],
     include_directories: include_dirs,

@@ -1,5 +1,7 @@
-#include <vs-xml/vs-xml.hpp>
-//#include <print>
+//#include <vs-xml/vs-xml.hpp>
+#include <vs-xml/builder.hpp>
+
+#include <print>
 #include <iostream>
 
 int main(){
@@ -15,6 +17,7 @@ int main(){
             build.text("Banana <hello ciao=\"worldo\" &amp; &></world>"); 
         build.end();
         build.begin("hello3","s");
+            build.comment("hello");
             build.begin("hello5","s");
             build.attr("op1", "val1");
             build.attr("op2", "val1");
@@ -29,5 +32,6 @@ int main(){
     auto tree = *build.close();
 
     tree.print(std::cout,{});
+    std::print("\n");
     return 0;
 }
