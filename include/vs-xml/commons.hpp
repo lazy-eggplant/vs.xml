@@ -17,6 +17,8 @@ namespace xml{
 
 typedef std::ptrdiff_t delta_ptr_t ;
 typedef size_t xml_size_t;
+typedef size_t xml_count_t;
+typedef size_t xml_enum_size_t;
 
 /**
  * @brief Compact position-free string_view
@@ -24,7 +26,7 @@ typedef size_t xml_size_t;
  */
 struct sv{
     delta_ptr_t  base;
-    xml_size_t   length;
+    xml_count_t  length;
 
     inline sv(delta_ptr_t b, xml_size_t len):base(b),length(len){}
     inline sv(void* offset, std::string_view v){base=((uint8_t*)v.data()-(uint8_t*)offset);length=v.length();}
@@ -53,7 +55,7 @@ enum struct feature_t{
     NOT_IMPLEMENTED,
 };
 
-enum struct type_t{
+enum struct type_t : xml_enum_size_t{
     UNKNOWN,
     NODE,
     ATTR,
@@ -62,7 +64,6 @@ enum struct type_t{
     PROC,
     CDATA,
     INJECT,
-    EOT //End of Tree
 };
 
 template<typename T>

@@ -36,10 +36,7 @@ std::expected<Tree,Builder::error_t> Builder::close(std::vector<uint8_t>&& symbo
     open=false;
     if(stack.size()!=1)return std::unexpected(error_t::MISFORMED);
     stack.pop();
-
-    buffer.resize(buffer.size()+sizeof(eot_t));
-    new ((node_t*) & (uint8_t&) *( buffer.end()-sizeof(eot_t) )) eot_t();
-
+    
     return Tree(std::move(buffer),std::move(symbols));
 }
 

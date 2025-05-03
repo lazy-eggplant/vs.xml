@@ -65,13 +65,8 @@ struct base_t{
     friend Tree;
 };
 
-struct eot_t{
-    type_t _type = type_t::EOT;
-};
-
 struct attr_t{
     private:
-    //type_t _type = type_t::ATTR;
     sv _ns;
     sv _name;
     sv _value;
@@ -98,9 +93,9 @@ struct node_t : base_t<node_t>{
     delta_ptr_t _prev;
     delta_ptr_t _next;
 
-    delta_ptr_t _size;
+    xml_size_t  _size;
 
-    xml_size_t  attrs_count;
+    xml_count_t  attrs_count;
 
     sv _ns;
     sv _name;
