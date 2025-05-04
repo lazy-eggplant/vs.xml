@@ -9,5 +9,6 @@ var searchData=
   ['base_5ft_3c_20text_5ft_20_3e_6',['base_t&lt; text_t &gt;',['../structxml_1_1base__t.html',1,'xml']]],
   ['base_5ft_3c_20unknown_5ft_20_3e_7',['base_t&lt; unknown_t &gt;',['../structxml_1_1base__t.html',1,'xml']]],
   ['builder_8',['Builder',['../structxml_1_1Builder.html',1,'xml']]],
-  ['buildercompressed_9',['BuilderCompressed',['../structxml_1_1BuilderCompressed.html',1,'xml']]]
+  ['builder_2ehpp_9',['builder.hpp',['../builder_8hpp.html',1,'']]],
+  ['buildercompressed_10',['BuilderCompressed',['../structxml_1_1BuilderCompressed.html',1,'xml']]]
 ];
