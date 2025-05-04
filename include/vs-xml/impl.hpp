@@ -95,6 +95,8 @@ struct node_t : base_t<node_t>{
     sv _ns;
     sv _name;
 
+    attr_t _attrs[];
+
     constexpr inline node_t(void* offset, node_t* _parent, std::string_view _ns, std::string_view _name):
         _ns(offset,*serialize::validate_xml_label(_ns)),
         _name(offset,*serialize::validate_xml_label(_name))
@@ -109,7 +111,7 @@ struct node_t : base_t<node_t>{
     constexpr inline void set_next(unknown_t* next){auto tmp=(uint8_t*)next-(uint8_t*)this;_next=tmp;xml_assert((std::ptrdiff_t)_next==tmp);}
 
     //Unsafe, not boundary checked.
-    constexpr inline attr_t& get_attr(xml_count_t a) const{return *(((attr_t*)(this+1))+a);}
+    constexpr inline attr_t& get_attr(xml_count_t a) const{return (attr_t&)_attrs[a];}
 
     public:
 

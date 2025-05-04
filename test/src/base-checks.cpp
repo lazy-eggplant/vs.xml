@@ -8,10 +8,11 @@ int main(){
     xml::BuilderCompressed build;
 
     build.begin("hello");
-        build.attr("op3", "v'>&al1");
-        build.attr("op1", "val1", "w");
-        build.attr("op2", "val\"1");
-        build.attr("op5", "val\"1");
+        build.attr("op3-a", "v'>&al1");
+        build.attr("op1-a", "val1", "w");
+        build.attr("op2-a", "val\"1");
+        build.attr("op5-a", "val\"1");
+        build.attr("op6-a", "val1", "w");
         build.begin("hello1","s");
         build.end();
         build.begin("hello2","s");
