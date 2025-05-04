@@ -110,7 +110,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    delta_ptr_t  base;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    xml_count_t  length;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structxml_1_1sv.html">sv</a>(std::ptrdiff_t b, <span class="keywordtype">size_t</span> len):base(b),length(len){xml_assert((std::ptrdiff_t)base == b);xml_assert((std::ptrdiff_t)length == len);}</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structxml_1_1sv.html">sv</a>(std::ptrdiff_t b, <span class="keywordtype">size_t</span> len):base(b),length(len){xml_assert((std::ptrdiff_t)base == b);xml_assert((xml_count_t)length == len);}</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structxml_1_1sv.html">sv</a>(<span class="keywordtype">void</span>* offset, std::string_view v){base=((uint8_t*)v.data()-(uint8_t*)offset);length=v.length();}</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_struct" href="structxml_1_1sv.html">sv</a>()=<span class="keyword">delete</span>;</div>
@@ -179,14 +179,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructxml_1_1Parser_html"><div class="ttname"><a href="structxml_1_1Parser.html">xml::Parser</a></div><div class="ttdef"><b>Definition</b> parser.hpp:17</div></div>
 <div class="ttc" id="astructxml_1_1Tree_html"><div class="ttname"><a href="structxml_1_1Tree.html">xml::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:28</div></div>
 <div class="ttc" id="astructxml_1_1attr__t_html"><div class="ttname"><a href="structxml_1_1attr__t.html">xml::attr_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:67</div></div>
-<div class="ttc" id="astructxml_1_1cdata__t_html"><div class="ttname"><a href="structxml_1_1cdata__t.html">xml::cdata_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:215</div></div>
-<div class="ttc" id="astructxml_1_1comment__t_html"><div class="ttname"><a href="structxml_1_1comment__t.html">xml::comment_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:205</div></div>
-<div class="ttc" id="astructxml_1_1inject__t_html"><div class="ttname"><a href="structxml_1_1inject__t.html">xml::inject_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:245</div></div>
+<div class="ttc" id="astructxml_1_1cdata__t_html"><div class="ttname"><a href="structxml_1_1cdata__t.html">xml::cdata_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:218</div></div>
+<div class="ttc" id="astructxml_1_1comment__t_html"><div class="ttname"><a href="structxml_1_1comment__t.html">xml::comment_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:208</div></div>
+<div class="ttc" id="astructxml_1_1inject__t_html"><div class="ttname"><a href="structxml_1_1inject__t.html">xml::inject_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:248</div></div>
 <div class="ttc" id="astructxml_1_1node__t_html"><div class="ttname"><a href="structxml_1_1node__t.html">xml::node_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:85</div></div>
-<div class="ttc" id="astructxml_1_1proc__t_html"><div class="ttname"><a href="structxml_1_1proc__t.html">xml::proc_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:235</div></div>
+<div class="ttc" id="astructxml_1_1proc__t_html"><div class="ttname"><a href="structxml_1_1proc__t.html">xml::proc_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:238</div></div>
 <div class="ttc" id="astructxml_1_1sv_html"><div class="ttname"><a href="structxml_1_1sv.html">xml::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:39</div></div>
-<div class="ttc" id="astructxml_1_1text__t_html"><div class="ttname"><a href="structxml_1_1text__t.html">xml::text_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:225</div></div>
-<div class="ttc" id="astructxml_1_1unknown__t_html"><div class="ttname"><a href="structxml_1_1unknown__t.html">xml::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:277</div></div>
+<div class="ttc" id="astructxml_1_1text__t_html"><div class="ttname"><a href="structxml_1_1text__t.html">xml::text_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:228</div></div>
+<div class="ttc" id="astructxml_1_1unknown__t_html"><div class="ttname"><a href="structxml_1_1unknown__t.html">xml::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:280</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
