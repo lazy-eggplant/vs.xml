@@ -1,5 +1,15 @@
 #pragma once
 
+/**
+ * @file tree.hpp
+ * @author karurochari
+ * @brief Internal tree structure
+ * @date 2025-05-01
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include <cassert>
 #include <cstdint>
 

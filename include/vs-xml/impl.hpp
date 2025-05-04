@@ -1,10 +1,9 @@
 #pragma once
 
 /**
- * @file impl.cpp
+ * @file impl.hpp
  * @author karurochari
- * @brief 
- * @version 0.1
+ * @brief Implementation of the node logic
  * @date 2025-05-01
  * 
  * @copyright Copyright (c) 2025

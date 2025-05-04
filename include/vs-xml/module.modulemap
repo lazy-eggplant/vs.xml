@@ -1,4 +1,8 @@
-module vs {
-    header "vs-xml.hpp"
+module xml {
+    header "builder.hpp"
+    header "commons.hpp"
+    header "parser.hpp"
+    header "serializer.hpp"
+    header "tree.hpp"
     export *
 }

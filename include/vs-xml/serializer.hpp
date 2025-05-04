@@ -1,5 +1,15 @@
 #pragma once
 
+/**
+ * @file serializer.hpp
+ * @author karurochari
+ * @brief Implementation of serialization/deserialization helpers
+ * @date 2025-05-01
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include <cassert>
 
 #include <expected>
