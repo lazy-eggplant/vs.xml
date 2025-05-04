@@ -20,6 +20,8 @@ typedef size_t xml_size_t;
 typedef size_t xml_count_t;
 typedef size_t xml_enum_size_t;
 
+inline void xml_assert(bool b){return assert(b);}
+
 /**
  * @brief Compact position-free string_view
  * 
@@ -28,7 +30,7 @@ struct sv{
     delta_ptr_t  base;
     xml_count_t  length;
 
-    inline sv(delta_ptr_t b, xml_size_t len):base(b),length(len){}
+    inline sv(std::ptrdiff_t b, size_t len):base(b),length(len){xml_assert((std::ptrdiff_t)base == b);xml_assert((std::ptrdiff_t)length == len);}
     inline sv(void* offset, std::string_view v){base=((uint8_t*)v.data()-(uint8_t*)offset);length=v.length();}
 
     sv()=delete;

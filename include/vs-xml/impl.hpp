@@ -81,10 +81,6 @@ struct attr_t{
     constexpr inline std::expected<sv,feature_t> ns() const {return _ns;}
     constexpr inline std::expected<sv,feature_t> name() const {return _name;}
     constexpr inline std::expected<sv,feature_t> value() const {return _value;}
-
-    //The presence of AOT at the end of the tree allows me to now implement parent, next and prev for attributes as well.
-    //parent must go left up to the point a node is found.
-    //prev can go left up to the point a node is found.
 };
 
 struct node_t : base_t<node_t>{
@@ -101,17 +97,17 @@ struct node_t : base_t<node_t>{
     sv _name;
 
     constexpr inline node_t(void* offset, node_t* _parent, std::string_view _ns, std::string_view _name):
-        _parent((uint8_t*)_parent-(uint8_t*)this),
         _ns(offset,*serialize::validate_xml_label(_ns)),
         _name(offset,*serialize::validate_xml_label(_name))
     {
+        set_parent(_parent);
         _size=0;
         attrs_count=0;
     }
 
-    constexpr inline void set_parent(node_t* parent){_parent=(uint8_t*)parent-(uint8_t*)this;}
-    constexpr inline void set_prev(unknown_t* prev){_prev=(uint8_t*)prev-(uint8_t*)this;}
-    constexpr inline void set_next(unknown_t* next){_next=(uint8_t*)next-(uint8_t*)this;}
+    constexpr inline void set_parent(node_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
+    constexpr inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
+    constexpr inline void set_next(unknown_t* next){auto tmp=(uint8_t*)next-(uint8_t*)this;_next=tmp;xml_assert((std::ptrdiff_t)_next==tmp);}
 
     public:
 
@@ -174,9 +170,9 @@ struct leaf_t : base_t<T>{
 
     sv _value;
 
-    constexpr inline void set_parent(node_t* parent){_parent=(uint8_t*)parent-(uint8_t*)this;}
-    constexpr inline void set_prev(unknown_t* prev){_prev=(uint8_t*)prev-(uint8_t*)this;}
-    constexpr inline void set_next(unknown_t* next){/*_next=(uint8_t*)next-(uint8_t*)this;*/}
+    constexpr inline void set_parent(node_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
+    constexpr inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
+    constexpr inline void set_next(unknown_t* next){/*not needed*/}
 
 
     protected:
