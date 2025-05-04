@@ -178,17 +178,17 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_struct" href="structxml_1_1sv.html">sv</a> _name;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <a class="code hl_struct" href="structxml_1_1node__t.html">node_t</a>(<span class="keywordtype">void</span>* offset, <a class="code hl_struct" href="structxml_1_1node__t.html">node_t</a>* _parent, std::string_view _ns, std::string_view _name):</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        _parent((uint8_t*)_parent-(uint8_t*)<span class="keyword">this</span>),</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        _ns(offset,*serialize::validate_xml_label(_ns)),</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        _name(offset,*serialize::validate_xml_label(_name))</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        _ns(offset,*serialize::validate_xml_label(_ns)),</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        _name(offset,*serialize::validate_xml_label(_name))</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        set_parent(_parent);</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        _size=0;</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        attrs_count=0;</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_parent(<a class="code hl_struct" href="structxml_1_1node__t.html">node_t</a>* parent){_parent=(uint8_t*)parent-(uint8_t*)<span class="keyword">this</span>;}</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_prev(<a class="code hl_struct" href="structxml_1_1unknown__t.html">unknown_t</a>* prev){_prev=(uint8_t*)prev-(uint8_t*)<span class="keyword">this</span>;}</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_next(<a class="code hl_struct" href="structxml_1_1unknown__t.html">unknown_t</a>* next){_next=(uint8_t*)next-(uint8_t*)<span class="keyword">this</span>;}</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_parent(<a class="code hl_struct" href="structxml_1_1node__t.html">node_t</a>* parent){<span class="keyword">auto</span> tmp=(uint8_t*)parent-(uint8_t*)<span class="keyword">this</span>;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_prev(<a class="code hl_struct" href="structxml_1_1unknown__t.html">unknown_t</a>* prev){<span class="keyword">auto</span> tmp=(uint8_t*)prev-(uint8_t*)<span class="keyword">this</span>;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_next(<a class="code hl_struct" href="structxml_1_1unknown__t.html">unknown_t</a>* next){<span class="keyword">auto</span> tmp=(uint8_t*)next-(uint8_t*)<span class="keyword">this</span>;_next=tmp;xml_assert((std::ptrdiff_t)_next==tmp);}</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
@@ -253,9 +253,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <a class="code hl_struct" href="structxml_1_1sv.html">sv</a> _value;</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_parent(<a class="code hl_struct" href="structxml_1_1node__t.html">node_t</a>* parent){_parent=(uint8_t*)parent-(uint8_t*)<span class="keyword">this</span>;}</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_prev(<a class="code hl_struct" href="structxml_1_1unknown__t.html">unknown_t</a>* prev){_prev=(uint8_t*)prev-(uint8_t*)<span class="keyword">this</span>;}</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_next(<a class="code hl_struct" href="structxml_1_1unknown__t.html">unknown_t</a>* next){<span class="comment">/*_next=(uint8_t*)next-(uint8_t*)this;*/</span>}</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_parent(<a class="code hl_struct" href="structxml_1_1node__t.html">node_t</a>* parent){<span class="keyword">auto</span> tmp=(uint8_t*)parent-(uint8_t*)<span class="keyword">this</span>;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_prev(<a class="code hl_struct" href="structxml_1_1unknown__t.html">unknown_t</a>* prev){<span class="keyword">auto</span> tmp=(uint8_t*)prev-(uint8_t*)<span class="keyword">this</span>;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> set_next(<a class="code hl_struct" href="structxml_1_1unknown__t.html">unknown_t</a>* next){<span class="comment">/*not needed*/</span>}</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keyword">protected</span>:</div>
@@ -505,7 +505,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span> </div>
 <div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span> </div>
 <div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>}</div>
-<div class="ttc" id="aconceptxml_1_1thing__i_html"><div class="ttname"><a href="conceptxml_1_1thing__i.html">xml::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:70</div></div>
+<div class="ttc" id="aconceptxml_1_1thing__i_html"><div class="ttname"><a href="conceptxml_1_1thing__i.html">xml::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:72</div></div>
 <div class="ttc" id="astructxml_1_1Builder_html"><div class="ttname"><a href="structxml_1_1Builder.html">xml::Builder</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:25</div></div>
 <div class="ttc" id="astructxml_1_1Tree_html"><div class="ttname"><a href="structxml_1_1Tree.html">xml::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:18</div></div>
 <div class="ttc" id="astructxml_1_1attr__iterator_html"><div class="ttname"><a href="structxml_1_1attr__iterator.html">xml::attr_iterator</a></div><div class="ttdef"><b>Definition</b> impl.hpp:350</div></div>
@@ -518,7 +518,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructxml_1_1node__iterator_html"><div class="ttname"><a href="structxml_1_1node__iterator.html">xml::node_iterator</a></div><div class="ttdef"><b>Definition</b> impl.hpp:323</div></div>
 <div class="ttc" id="astructxml_1_1node__t_html"><div class="ttname"><a href="structxml_1_1node__t.html">xml::node_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:90</div></div>
 <div class="ttc" id="astructxml_1_1proc__t_html"><div class="ttname"><a href="structxml_1_1proc__t.html">xml::proc_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:240</div></div>
-<div class="ttc" id="astructxml_1_1sv_html"><div class="ttname"><a href="structxml_1_1sv.html">xml::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:27</div></div>
+<div class="ttc" id="astructxml_1_1sv_html"><div class="ttname"><a href="structxml_1_1sv.html">xml::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:29</div></div>
 <div class="ttc" id="astructxml_1_1text__t_html"><div class="ttname"><a href="structxml_1_1text__t.html">xml::text_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:230</div></div>
 <div class="ttc" id="astructxml_1_1unknown__t_html"><div class="ttname"><a href="structxml_1_1unknown__t.html">xml::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:282</div></div>
 </div><!-- fragment --></div><!-- contents -->
