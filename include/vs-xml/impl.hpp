@@ -108,6 +108,9 @@ struct node_t : base_t<node_t>{
     constexpr inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
     constexpr inline void set_next(unknown_t* next){auto tmp=(uint8_t*)next-(uint8_t*)this;_next=tmp;xml_assert((std::ptrdiff_t)_next==tmp);}
 
+    //Unsafe, not boundary checked.
+    constexpr inline attr_t& get_attr(xml_count_t a) const{return *(((attr_t*)(this+1))+a);}
+
     public:
 
     using base_t::type;

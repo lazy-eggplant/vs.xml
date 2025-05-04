@@ -8,9 +8,10 @@ int main(){
     xml::BuilderCompressed build;
 
     build.begin("hello");
-        build.attr("op1", "v'>&al1");
-        build.attr("op2", "val1", "w");
-        build.attr("op3", "val\"1");
+        build.attr("op3", "v'>&al1");
+        build.attr("op1", "val1", "w");
+        build.attr("op2", "val\"1");
+        build.attr("op5", "val\"1");
         build.begin("hello1","s");
         build.end();
         build.begin("hello2","s");
@@ -19,9 +20,9 @@ int main(){
         build.begin("hello3","s");
             build.comment("hello");
             build.begin("hello5","s");
-            build.attr("op1", "val1");
-            build.attr("op2", "val1");
             build.attr("op3", "val1");
+            build.attr("op2", "val11");
+            build.attr("op1", "val1");
             build.cdata("Hello'''''&&&& world!");
             build.end();
         build.end();
@@ -30,7 +31,9 @@ int main(){
         build.end();
     build.end();
     auto tree = *build.close();
-
+    tree.print(std::cout,{});
+    std::print("\n");
+    tree.reorder();
     tree.print(std::cout,{});
     std::print("\n");
     return 0;

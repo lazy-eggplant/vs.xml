@@ -40,7 +40,7 @@ struct sv{
     delta_ptr_t  base;
     xml_count_t  length;
 
-    inline sv(std::ptrdiff_t b, size_t len):base(b),length(len){xml_assert((std::ptrdiff_t)base == b);xml_assert((std::ptrdiff_t)length == len);}
+    inline sv(std::ptrdiff_t b, size_t len):base(b),length(len){xml_assert((std::ptrdiff_t)base == b);xml_assert((xml_count_t)length == len);}
     inline sv(void* offset, std::string_view v){base=((uint8_t*)v.data()-(uint8_t*)offset);length=v.length();}
 
     sv()=delete;

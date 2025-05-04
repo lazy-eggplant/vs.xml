@@ -31,9 +31,12 @@ struct Tree{
     const node_t& root;
     void* label_offset;
 
-    Tree(std::vector<uint8_t>&& src):buffer(src),symbols({}),root(*(node_t*)src.data()),label_offset(nullptr){}
+    static std::function<bool(const unknown_t&, const unknown_t&)> def_order_node;
+    std::function<bool(const attr_t&, const attr_t&)> def_order_attrs();
 
-    Tree(std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):buffer(src),symbols(sym),root(*(node_t*)src.data()),label_offset(symbols.data()){}
+    Tree(std::vector<uint8_t>&& src):buffer(src),symbols({}),root(*(node_t*)buffer.data()),label_offset(nullptr){}
+
+    Tree(std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):buffer(src),symbols(sym),root(*(node_t*)buffer.data()),label_offset(symbols.data()){}
 
     /**
         * @brief Reorder (in-place) children of a node based on a custom ordering criterion.
@@ -42,7 +45,10 @@ struct Tree{
         * @param fn Criterion to determine the order of nodes. -1 for left<right, 0 for equals, 1 for left>right
         * @return true if the operation is successful
         */
-    bool reorder_children(const node_t* ref, const std::function<int(const unknown_t*, const unknown_t*)>& fn){return false;}
+    bool reorder_children(
+        const node_t* ref, 
+        const std::function<bool(const unknown_t&, const unknown_t&)>& fn
+    ){return false;}
 
     /**
         * @brief Reorder (in-place) attributes of a node based on a custom ordering criterion.
@@ -51,7 +57,14 @@ struct Tree{
         * @param fn Criterion to determine the order of nodes. -1 for left<right, 0 for equals, 1 for left>right
         * @return true if the operation is successful
         */
-    bool reorder(const node_t* ref, const std::function<int(const attr_t*, const attr_t*)>& fn){return false;}
+    bool reorder(
+        const std::function<bool(const attr_t&, const attr_t&)>& fn,
+        const node_t* ref = nullptr, 
+        bool recursive = true
+    );
+
+    inline bool reorder(const node_t* ref=nullptr, bool recursive = true){return reorder(def_order_attrs(),ref,recursive);}
+
 
     /**
         * @brief 
