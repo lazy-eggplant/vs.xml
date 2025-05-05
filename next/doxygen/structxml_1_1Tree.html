@@ -77,7 +77,7 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="structxml_1_1Tree-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">xml::Tree Struct Reference</div></div>
 </div><!--header-->
@@ -102,15 +102,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a153b93e5cbbff1e3f629fa8ef69b96ac" id="r_a153b93e5cbbff1e3f629fa8ef69b96ac"><td class="memItemLeft" align="right" valign="top"><a id="a153b93e5cbbff1e3f629fa8ef69b96ac" name="a153b93e5cbbff1e3f629fa8ef69b96ac"></a>
+std::function&lt; bool(const <a class="el" href="structxml_1_1unknown__t.html">unknown_t</a> &amp;, const <a class="el" href="structxml_1_1unknown__t.html">unknown_t</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>def_order_node</b> ()</td></tr>
+<tr class="separator:a153b93e5cbbff1e3f629fa8ef69b96ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f8309d5bb58f3e79386a8ee905ca9bc" id="r_a2f8309d5bb58f3e79386a8ee905ca9bc"><td class="memItemLeft" align="right" valign="top"><a id="a2f8309d5bb58f3e79386a8ee905ca9bc" name="a2f8309d5bb58f3e79386a8ee905ca9bc"></a>
 std::function&lt; bool(const <a class="el" href="structxml_1_1attr__t.html">attr_t</a> &amp;, const <a class="el" href="structxml_1_1attr__t.html">attr_t</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>def_order_attrs</b> ()</td></tr>
 <tr class="separator:a2f8309d5bb58f3e79386a8ee905ca9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5c3682cd63f50da7aec5b247def67aa" id="r_aa5c3682cd63f50da7aec5b247def67aa"><td class="memItemLeft" align="right" valign="top"><a id="aa5c3682cd63f50da7aec5b247def67aa" name="aa5c3682cd63f50da7aec5b247def67aa"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Tree</b> (std::vector&lt; uint8_t &gt; &amp;&amp;src)</td></tr>
-<tr class="separator:aa5c3682cd63f50da7aec5b247def67aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5cf40af1a956b82c4ca72c27e3295d2" id="r_af5cf40af1a956b82c4ca72c27e3295d2"><td class="memItemLeft" align="right" valign="top"><a id="af5cf40af1a956b82c4ca72c27e3295d2" name="af5cf40af1a956b82c4ca72c27e3295d2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Tree</b> (std::vector&lt; uint8_t &gt; &amp;&amp;src, std::vector&lt; uint8_t &gt; &amp;&amp;sym)</td></tr>
-<tr class="separator:af5cf40af1a956b82c4ca72c27e3295d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a232fbb0130bcc3ea3ea7ad0df146a95d" id="r_a232fbb0130bcc3ea3ea7ad0df146a95d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structxml_1_1Tree.html#a232fbb0130bcc3ea3ea7ad0df146a95d">reorder_children</a> (const <a class="el" href="structxml_1_1node__t.html">node_t</a> *ref, const std::function&lt; bool(const <a class="el" href="structxml_1_1unknown__t.html">unknown_t</a> &amp;, const <a class="el" href="structxml_1_1unknown__t.html">unknown_t</a> &amp;)&gt; &amp;fn)</td></tr>
 <tr class="memdesc:a232fbb0130bcc3ea3ea7ad0df146a95d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder (in-place) children of a node based on a custom ordering criterion.  <br /></td></tr>
 <tr class="separator:a232fbb0130bcc3ea3ea7ad0df146a95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,9 +125,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>inject_before</b> (co
 <tr class="memitem:aac0eb97533212bdc1ea89425fda2a865" id="r_aac0eb97533212bdc1ea89425fda2a865"><td class="memItemLeft" align="right" valign="top"><a id="aac0eb97533212bdc1ea89425fda2a865" name="aac0eb97533212bdc1ea89425fda2a865"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>inject_after</b> (const <a class="el" href="structxml_1_1unknown__t.html">unknown_t</a> *ref, const <a class="el" href="structxml_1_1unknown__t.html">unknown_t</a> *start, const <a class="el" href="structxml_1_1unknown__t.html">unknown_t</a> *end)</td></tr>
 <tr class="separator:aac0eb97533212bdc1ea89425fda2a865"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4e8fb2515109de0f087df1350deb535" id="r_ab4e8fb2515109de0f087df1350deb535"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structxml_1_1Tree.html">Tree</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structxml_1_1Tree.html#ab4e8fb2515109de0f087df1350deb535">clone</a> () const</td></tr>
-<tr class="memdesc:ab4e8fb2515109de0f087df1350deb535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a perfect deep copy of the current tree structure.  <br /></td></tr>
-<tr class="separator:ab4e8fb2515109de0f087df1350deb535"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b0a402a0652788688c4414e7bbcf085" id="r_a4b0a402a0652788688c4414e7bbcf085"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structxml_1_1Tree.html">Tree</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structxml_1_1Tree.html#a4b0a402a0652788688c4414e7bbcf085">clone</a> (const <a class="el" href="structxml_1_1node__t.html">node_t</a> *ref=nullptr, bool reduce=true) const</td></tr>
+<tr class="memdesc:a4b0a402a0652788688c4414e7bbcf085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a perfect deep copy of the current tree structure.  <br /></td></tr>
+<tr class="separator:a4b0a402a0652788688c4414e7bbcf085"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf75fc361506785bd8a6ce30ac1f0660" id="r_aaf75fc361506785bd8a6ce30ac1f0660"><td class="memItemLeft" align="right" valign="top"><a id="aaf75fc361506785bd8a6ce30ac1f0660" name="aaf75fc361506785bd8a6ce30ac1f0660"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (std::ostream &amp;out, const <a class="el" href="structxml_1_1Tree_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}) const</td></tr>
 <tr class="separator:aaf75fc361506785bd8a6ce30ac1f0660"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,15 +150,18 @@ const <a class="el" href="structxml_1_1node__t.html">node_t</a> &amp;&#160;</td>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>label_offset</b></td></tr>
 <tr class="separator:a4e2307f097c1f0a3fcb623ec6c12a0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:aa28ccdde0068b7bb53bc71cf7d27311d" id="r_aa28ccdde0068b7bb53bc71cf7d27311d"><td class="memItemLeft" align="right" valign="top"><a id="aa28ccdde0068b7bb53bc71cf7d27311d" name="aa28ccdde0068b7bb53bc71cf7d27311d"></a>
-static std::function&lt; bool(const <a class="el" href="structxml_1_1unknown__t.html">unknown_t</a> &amp;, const <a class="el" href="structxml_1_1unknown__t.html">unknown_t</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>def_order_node</b></td></tr>
-<tr class="separator:aa28ccdde0068b7bb53bc71cf7d27311d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a87aa5e3b05e72bc0bd9ce0a762fd1673" id="r_a87aa5e3b05e72bc0bd9ce0a762fd1673"><td class="memItemLeft" align="right" valign="top"><a id="a87aa5e3b05e72bc0bd9ce0a762fd1673" name="a87aa5e3b05e72bc0bd9ce0a762fd1673"></a>
+struct&#160;</td><td class="memItemRight" valign="bottom"><b>Builder</b></td></tr>
+<tr class="separator:a87aa5e3b05e72bc0bd9ce0a762fd1673"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa704576a8c21a76044873e7a936a5ebb" id="r_aa704576a8c21a76044873e7a936a5ebb"><td class="memItemLeft" align="right" valign="top"><a id="aa704576a8c21a76044873e7a936a5ebb" name="aa704576a8c21a76044873e7a936a5ebb"></a>
+struct&#160;</td><td class="memItemRight" valign="bottom"><b>Parser</b></td></tr>
+<tr class="separator:aa704576a8c21a76044873e7a936a5ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab4e8fb2515109de0f087df1350deb535" name="ab4e8fb2515109de0f087df1350deb535"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4e8fb2515109de0f087df1350deb535">&#9670;&#160;</a></span>clone()</h2>
+<a id="a4b0a402a0652788688c4414e7bbcf085" name="a4b0a402a0652788688c4414e7bbcf085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b0a402a0652788688c4414e7bbcf085">&#9670;&#160;</a></span>clone()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,14 +169,25 @@ static std::function&lt; bool(const <a class="el" href="structxml_1_1unknown__t.
         <tr>
           <td class="memname"><a class="el" href="structxml_1_1Tree.html">Tree</a> xml::Tree::clone </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">const <a class="el" href="structxml_1_1node__t.html">node_t</a> *&#160;</td>
+          <td class="paramname"><em>ref</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>reduce</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Return a perfect deep copy of the current tree structure. </p>
-<dl class="section return"><dt>Returns</dt><dd>tree </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structxml_1_1Tree.html">Tree</a> </dd></dl>
 
 </div>
 </div>

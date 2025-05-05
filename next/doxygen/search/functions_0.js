@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['clone_0',['clone',['../structxml_1_1Tree.html#ab4e8fb2515109de0f087df1350deb535',1,'xml::Tree']]]
+  ['clone_0',['clone',['../structxml_1_1Tree.html#a4b0a402a0652788688c4414e7bbcf085',1,'xml::Tree']]]
 ];
