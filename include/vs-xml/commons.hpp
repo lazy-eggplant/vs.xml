@@ -59,6 +59,9 @@ struct Parser;
 struct Builder;
 struct Tree;
 
+template <typename T>
+struct wrp_base_t;
+
 enum struct feature_t{
     OK,
     NONE,

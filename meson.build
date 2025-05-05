@@ -13,7 +13,11 @@ add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
 
 vs_xml_lib = library(
     'vs-xml',
-    ['src/tree.cpp','src/builder.cpp'],
+    [
+      'src/tree.cpp',
+      'src/builder.cpp',
+      'src/wrp-impl.cpp'
+    ],
     install: true,
     dependencies: [],
     include_directories: include_dirs,

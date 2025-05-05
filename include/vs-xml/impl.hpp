@@ -257,7 +257,7 @@ struct inject_t : leaf_t<inject_t>{
     friend Tree;
 };
 
-#define DISPATCH(X,Y) \
+#define DISPATCH(X) \
 if (type() == type_t::NODE) return ((node_t*)this) -> X;\
 else if (type() == type_t::TEXT) return ((text_t*)this)-> X;\
 else if (type() == type_t::COMMENT) return ((comment_t*)this)-> X;\
@@ -265,10 +265,10 @@ else if (type() == type_t::PROC) return ((proc_t*)this)-> X;\
 else if (type() == type_t::CDATA) return ((cdata_t*)this)-> X;\
 else if (type() == type_t::INJECT) return ((inject_t*)this)-> X;\
 else{\
-    Y;\
+    std::terminate();\
 }
 
-#define CDISPATCH(X,Y) \
+#define CDISPATCH(X) \
 if (type() == type_t::NODE) return ((const node_t*)this) -> X;\
 else if (type() == type_t::TEXT) return ((const text_t*)this)-> X;\
 else if (type() == type_t::COMMENT) return ((const comment_t*)this)-> X;\
@@ -276,34 +276,34 @@ else if (type() == type_t::PROC) return ((const proc_t*)this)-> X;\
 else if (type() == type_t::CDATA) return ((const cdata_t*)this)-> X;\
 else if (type() == type_t::INJECT) return ((const inject_t*)this)-> X;\
 else{\
-    Y;\
+    std::terminate();\
 }
 
 struct unknown_t : base_t<unknown_t>{
     private:
 
-    constexpr void set_parent(node_t* parent){DISPATCH(set_parent(parent),std::terminate());}
-    constexpr void set_prev(unknown_t* prev){DISPATCH(set_prev(prev),std::terminate());}
-    constexpr void set_next(unknown_t* next){DISPATCH(set_next(next),std::terminate());}
+    constexpr void set_parent(node_t* parent){DISPATCH(set_parent(parent));}
+    constexpr void set_prev(unknown_t* prev){DISPATCH(set_prev(prev));}
+    constexpr void set_next(unknown_t* next){DISPATCH(set_next(next));}
 
     public:
 
     constexpr static inline type_t deftype() {return type_t::UNKNOWN;};
 
-    constexpr std::expected<sv,feature_t> ns() const {CDISPATCH(ns(),std::terminate());}
-    constexpr std::expected<sv,feature_t> name() const {CDISPATCH(name(),std::terminate());}
-    constexpr std::expected<sv,feature_t> value() const {CDISPATCH(value(),std::terminate());}
+    constexpr std::expected<sv,feature_t> ns() const {CDISPATCH(ns());}
+    constexpr std::expected<sv,feature_t> name() const {CDISPATCH(name());}
+    constexpr std::expected<sv,feature_t> value() const {CDISPATCH(value());}
 
-    constexpr std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {CDISPATCH(children(),std::terminate());}
-    constexpr std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {CDISPATCH(attrs(),std::terminate());}
+    constexpr std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {CDISPATCH(children());}
+    constexpr std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {CDISPATCH(attrs());}
 
-    constexpr const node_t* parent() const {CDISPATCH(parent(),std::terminate());}
-    constexpr const unknown_t* prev() const {CDISPATCH(prev(),std::terminate());}
-    constexpr const unknown_t* next() const {CDISPATCH(next(),std::terminate());}
+    constexpr const node_t* parent() const {CDISPATCH(parent());}
+    constexpr const unknown_t* prev() const {CDISPATCH(prev());}
+    constexpr const unknown_t* next() const {CDISPATCH(next());}
 
-    constexpr inline bool has_parent() const {CDISPATCH(has_parent(),std::terminate());}
-    constexpr inline bool has_prev() const {CDISPATCH(has_prev(),std::terminate());}
-    constexpr inline bool has_next() const {CDISPATCH(has_next(),std::terminate());}
+    constexpr inline bool has_parent() const {CDISPATCH(has_parent());}
+    constexpr inline bool has_prev() const {CDISPATCH(has_prev());}
+    constexpr inline bool has_next() const {CDISPATCH(has_next());}
 
     friend Builder;
     friend Tree;
@@ -327,20 +327,20 @@ struct node_iterator{
     using pointer           = const value_type*;
     using reference         = const value_type&;
 
-    node_iterator(pointer ptr) : m_ptr(ptr) {}
+    inline  node_iterator(pointer ptr) : m_ptr(ptr) {}
 
 
-    reference operator*() const { return *m_ptr; }
-    pointer operator->() { return m_ptr; }
+    inline  reference operator*() const { return *m_ptr; }
+    inline pointer operator->() { return m_ptr; }
 
-    node_iterator& operator++() { m_ptr=m_ptr->next(); return *this; }  
-    node_iterator& operator--() { m_ptr=m_ptr->prev(); return *this; }  
+    inline node_iterator& operator++() { m_ptr=m_ptr->next(); return *this; }  
+    inline node_iterator& operator--() { m_ptr=m_ptr->prev(); return *this; }  
 
-    node_iterator operator++(int) { node_iterator tmp = *this; ++(*this); return tmp; }
-    node_iterator operator--(int) { node_iterator tmp = *this; --(*this); return tmp; }
+    inline node_iterator operator++(int) { node_iterator tmp = *this; ++(*this); return tmp; }
+    inline node_iterator operator--(int) { node_iterator tmp = *this; --(*this); return tmp; }
 
-    friend bool operator== (const node_iterator& a, const node_iterator& b) { return a.m_ptr == b.m_ptr; };
-    friend bool operator!= (const node_iterator& a, const node_iterator& b) { return a.m_ptr != b.m_ptr; };  
+    inline friend bool operator== (const node_iterator& a, const node_iterator& b) { return a.m_ptr == b.m_ptr; };
+    inline friend bool operator!= (const node_iterator& a, const node_iterator& b) { return a.m_ptr != b.m_ptr; };  
 
 
     private:
@@ -354,20 +354,20 @@ struct attr_iterator{
     using pointer           = const value_type*;
     using reference         = const value_type&;
 
-    attr_iterator(pointer ptr) : m_ptr(ptr) {}
+    inline attr_iterator(pointer ptr) : m_ptr(ptr) {}
 
 
-    reference operator*() const { return *m_ptr; }
-    pointer operator->() { return m_ptr; }
+    inline reference operator*() const { return *m_ptr; }
+    inline pointer operator->() { return m_ptr; }
 
-    attr_iterator& operator++() { m_ptr++; return *this; }  
-    attr_iterator& operator--() { m_ptr--; return *this; }  
+    inline attr_iterator& operator++() { m_ptr++; return *this; }  
+    inline attr_iterator& operator--() { m_ptr--; return *this; }  
 
-    attr_iterator operator++(int) { attr_iterator tmp = *this; ++(*this); return tmp; }
-    attr_iterator operator--(int) { attr_iterator tmp = *this; --(*this); return tmp; }
+    inline attr_iterator operator++(int) { attr_iterator tmp = *this; ++(*this); return tmp; }
+    inline attr_iterator operator--(int) { attr_iterator tmp = *this; --(*this); return tmp; }
 
-    friend bool operator== (const attr_iterator& a, const attr_iterator& b) { return a.m_ptr == b.m_ptr; };
-    friend bool operator!= (const attr_iterator& a, const attr_iterator& b) { return a.m_ptr != b.m_ptr; };  
+    inline friend bool operator== (const attr_iterator& a, const attr_iterator& b) { return a.m_ptr == b.m_ptr; };
+    inline friend bool operator!= (const attr_iterator& a, const attr_iterator& b) { return a.m_ptr != b.m_ptr; };  
 
 
     private:
@@ -375,7 +375,7 @@ struct attr_iterator{
 };
 
 template <typename T>
-constexpr auto base_t<T>::children_fwd() const{
+inline constexpr auto base_t<T>::children_fwd() const{
 
     struct self{
         node_iterator begin() const {return (*base.children()).first;}
@@ -391,7 +391,7 @@ constexpr auto base_t<T>::children_fwd() const{
 }
 
 template <typename T>
-constexpr auto base_t<T>::attrs_fwd() const{
+inline constexpr auto base_t<T>::attrs_fwd() const{
 
     struct self{
         attr_iterator begin() const {return (*base.attrs()).first;}
@@ -406,33 +406,6 @@ constexpr auto base_t<T>::attrs_fwd() const{
     return self(*this);
 }
 
-template <typename T>
-struct tree_ptr_t{
-    private:
-        const T*          ptr;
-        const Tree&       base;
-    
-    public:
-
-
-    constexpr std::expected<std::string_view,feature_t> ns() const {}
-    constexpr std::expected<std::string_view,feature_t> name() const {}
-    constexpr std::expected<std::string_view,feature_t> value() const {}
-
-    constexpr std::expected<std::pair<tree_ptr_t<unknown_t>, tree_ptr_t<unknown_t>>,feature_t> children() const {}
-    constexpr std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {}
-
-    constexpr tree_ptr_t<node_t> parent() const {}
-    constexpr tree_ptr_t<unknown_t> prev() const {}
-    constexpr tree_ptr_t<unknown_t> next() const {}
-
-    constexpr inline bool has_parent() const {CDISPATCH(has_parent(),std::terminate());}
-    constexpr inline bool has_prev() const {CDISPATCH(has_prev(),std::terminate());}
-    constexpr inline bool has_next() const {CDISPATCH(has_next(),std::terminate());}
-
-    constexpr auto children_fwd() const;
-    constexpr auto attrs_fwd() const{}
-};
 
 
 }

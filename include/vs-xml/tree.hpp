@@ -59,7 +59,9 @@ struct Tree{
         bool recursive = true
     );
 
-    inline bool reorder(const node_t* ref=nullptr, bool recursive = true){return reorder(def_order_attrs(),ref,recursive);}
+    inline bool reorder(const node_t* ref=nullptr, bool recursive = true){
+        return reorder(def_order_attrs(),ref,recursive);
+    }
 
     /**
         * @brief 
@@ -106,6 +108,11 @@ struct Tree{
  
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
+    bool reorder_h(
+        const std::function<bool(const attr_t&, const attr_t&)>& fn,
+        const node_t* ref, 
+        bool recursive = true
+    );
 
     friend struct Builder;
     friend struct Parser;
