@@ -130,51 +130,54 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">struct </span><a class="code hl_struct" href="structxml_1_1Builder.html">Builder</a>;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">struct </span><a class="code hl_struct" href="structxml_1_1Tree.html">Tree</a>;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">enum struct</span> feature_t{</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    OK,</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    NONE,</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    ERROR,</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    NOT_SUPPORTED,</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    NOT_IMPLEMENTED,</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>};</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">enum struct</span> type_t : xml_enum_size_t{</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    UNKNOWN,</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    NODE,</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    ATTR,</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    TEXT,</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    COMMENT,</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    PROC,</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    CDATA,</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    INJECT,</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>};</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="conceptxml_1_1thing__i.html">   82</a></span><span class="keyword">concept </span><a class="code hl_concept" href="conceptxml_1_1thing__i.html">thing_i</a> = <span class="keyword">requires</span>(T self){</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    {self.type()} -&gt; std::same_as&lt;type_t&gt;;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    {self.ns()} -&gt; std::same_as&lt;std::expected&lt;sv,feature_t&gt;&gt;;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    {self.name()} -&gt; std::same_as&lt;std::expected&lt;sv,feature_t&gt;&gt;;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    {self.value()} -&gt; std::same_as&lt;std::expected&lt;sv,feature_t&gt;&gt;;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    {self.children()} -&gt; std::same_as&lt;std::expected&lt;std::pair&lt;const unknown_t*, const unknown_t*&gt;,feature_t&gt;&gt;;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    {self.attrs()} -&gt; std::same_as&lt;std::expected&lt;std::pair&lt;const attr_t*, const attr_t*&gt;,feature_t&gt;&gt;;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keyword">struct </span><a class="code hl_struct" href="structxml_1_1wrp__base__t.html">wrp_base_t</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">enum struct</span> feature_t{</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    OK,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    NONE,</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    ERROR,</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    NOT_SUPPORTED,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    NOT_IMPLEMENTED,</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">enum struct</span> type_t : xml_enum_size_t{</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    UNKNOWN,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    NODE,</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    ATTR,</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    TEXT,</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    COMMENT,</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    PROC,</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    CDATA,</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    INJECT,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>};</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="conceptxml_1_1thing__i.html">   85</a></span><span class="keyword">concept </span><a class="code hl_concept" href="conceptxml_1_1thing__i.html">thing_i</a> = <span class="keyword">requires</span>(T self){</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    {self.type()} -&gt; std::same_as&lt;type_t&gt;;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    {self.ns()} -&gt; std::same_as&lt;std::expected&lt;sv,feature_t&gt;&gt;;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    {self.name()} -&gt; std::same_as&lt;std::expected&lt;sv,feature_t&gt;&gt;;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    {self.value()} -&gt; std::same_as&lt;std::expected&lt;sv,feature_t&gt;&gt;;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    {self.parent()} -&gt; std::same_as&lt;const node_t*&gt;;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    {self.prev()} -&gt; std::same_as&lt;const unknown_t*&gt;;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    {self.next()} -&gt; std::same_as&lt;const unknown_t*&gt;;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    {self.has_parent()} -&gt; std::same_as&lt;bool&gt;;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    {self.has_prev()} -&gt; std::same_as&lt;bool&gt;;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    {self.has_next()} -&gt; std::same_as&lt;bool&gt;;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    {self.path()} -&gt; std::same_as&lt;std::string&gt;;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>};</div>
-</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    {self.children()} -&gt; std::same_as&lt;std::expected&lt;std::pair&lt;const unknown_t*, const unknown_t*&gt;,feature_t&gt;&gt;;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    {self.attrs()} -&gt; std::same_as&lt;std::expected&lt;std::pair&lt;const attr_t*, const attr_t*&gt;,feature_t&gt;&gt;;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    {self.parent()} -&gt; std::same_as&lt;const node_t*&gt;;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    {self.prev()} -&gt; std::same_as&lt;const unknown_t*&gt;;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    {self.next()} -&gt; std::same_as&lt;const unknown_t*&gt;;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    {self.has_parent()} -&gt; std::same_as&lt;bool&gt;;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    {self.has_prev()} -&gt; std::same_as&lt;bool&gt;;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    {self.has_next()} -&gt; std::same_as&lt;bool&gt;;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}</div>
-<div class="ttc" id="aconceptxml_1_1thing__i_html"><div class="ttname"><a href="conceptxml_1_1thing__i.html">xml::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:82</div></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    {self.path()} -&gt; std::same_as&lt;std::string&gt;;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>};</div>
+</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}</div>
+<div class="ttc" id="aconceptxml_1_1thing__i_html"><div class="ttname"><a href="conceptxml_1_1thing__i.html">xml::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:85</div></div>
 <div class="ttc" id="astructxml_1_1Builder_html"><div class="ttname"><a href="structxml_1_1Builder.html">xml::Builder</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:35</div></div>
 <div class="ttc" id="astructxml_1_1Parser_html"><div class="ttname"><a href="structxml_1_1Parser.html">xml::Parser</a></div><div class="ttdef"><b>Definition</b> parser.hpp:17</div></div>
 <div class="ttc" id="astructxml_1_1Tree_html"><div class="ttname"><a href="structxml_1_1Tree.html">xml::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:28</div></div>
@@ -187,6 +190,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructxml_1_1sv_html"><div class="ttname"><a href="structxml_1_1sv.html">xml::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:39</div></div>
 <div class="ttc" id="astructxml_1_1text__t_html"><div class="ttname"><a href="structxml_1_1text__t.html">xml::text_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:230</div></div>
 <div class="ttc" id="astructxml_1_1unknown__t_html"><div class="ttname"><a href="structxml_1_1unknown__t.html">xml::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:282</div></div>
+<div class="ttc" id="astructxml_1_1wrp__base__t_html"><div class="ttname"><a href="structxml_1_1wrp__base__t.html">xml::wrp_base_t</a></div><div class="ttdef"><b>Definition</b> wrp-impl.hpp:81</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
