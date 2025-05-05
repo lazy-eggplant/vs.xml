@@ -1,11 +1,14 @@
-#include "vs-xml/commons.hpp"
 #include <cstring>
+#include <vs-xml/commons.hpp>
 #include <vs-xml/tree.hpp>
 #include <vs-xml/impl.hpp>
 
 namespace xml{
 
-std::function<bool(const unknown_t&, const unknown_t&)> Tree::def_order_node;
+std::function<bool(const unknown_t&, const unknown_t&)> Tree::def_order_node(){
+    throw "Not implemented";
+}
+
 std::function<bool(const attr_t&, const attr_t&)> Tree::def_order_attrs() {
     return [this](const attr_t& a, const attr_t& b){
         {
@@ -22,8 +25,10 @@ std::function<bool(const attr_t&, const attr_t&)> Tree::def_order_attrs() {
     };
 }
 
-//Speed could be improved by using an intermediate swapping function, but attr_t elements are small enough that it might not be worthed.
 bool Tree::reorder(const std::function<bool(const attr_t&, const attr_t&)>& fn, const node_t* ref,  bool recursive){
+    //Speed could be improved by using an intermediate swapping function, but attr_t elements are small enough that it might not be worthed.
+    //TODO: at some point, convert it not to be recursive.
+
     if(ref==nullptr)ref=&this->root;
     if(ref->type()!=type_t::NODE)return false;
 
@@ -40,8 +45,9 @@ bool Tree::reorder(const std::function<bool(const attr_t&, const attr_t&)>& fn, 
 };
 
 
-//TODO: at some point, convert it not to be recursive.
 bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* ptr) const{
+    //TODO: at some point, convert it not to be recursive.
+
     if(ptr->type()==type_t::NODE){
         if(ptr->children()->first==ptr->children()->second){
             out << std::format("<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
@@ -103,4 +109,25 @@ bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* p
     }
     return false;
 };
+
+Tree Tree::clone(const node_t* ref, bool reduce) const{
+    if(ref==nullptr)ref=&root;
+    
+    std::vector<uint8_t> buffer;
+    std::vector<uint8_t> symbols;
+    buffer.resize(ref->_size);
+    memcpy((void*)buffer.data(),ref,ref->_size);
+
+    if(reduce==false){
+       symbols = this->symbols;
+    }
+    else{
+        //TODO: create a new symbols vector, only providing what is needed.
+        symbols = this->symbols;
+
+    }
+
+    return Tree(std::move(buffer),std::move(symbols));
+}
+
 }

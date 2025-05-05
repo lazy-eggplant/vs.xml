@@ -23,7 +23,9 @@
 - [x] iterators for nodes
 - [x] iterators for attributes
 - [ ] tree/sub-tree cloning
-- [ ] attributes reordering
+    - [x] Basic copy
+    - [ ] String compression
+- [x] attributes reordering
 - [ ] node injection
 
 ### XML serialization
