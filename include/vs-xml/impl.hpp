@@ -406,6 +406,33 @@ constexpr auto base_t<T>::attrs_fwd() const{
     return self(*this);
 }
 
+template <typename T>
+struct tree_ptr_t{
+    private:
+        const T*          ptr;
+        const Tree&       base;
+    
+    public:
+
+
+    constexpr std::expected<std::string_view,feature_t> ns() const {}
+    constexpr std::expected<std::string_view,feature_t> name() const {}
+    constexpr std::expected<std::string_view,feature_t> value() const {}
+
+    constexpr std::expected<std::pair<tree_ptr_t<unknown_t>, tree_ptr_t<unknown_t>>,feature_t> children() const {}
+    constexpr std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {}
+
+    constexpr tree_ptr_t<node_t> parent() const {}
+    constexpr tree_ptr_t<unknown_t> prev() const {}
+    constexpr tree_ptr_t<unknown_t> next() const {}
+
+    constexpr inline bool has_parent() const {CDISPATCH(has_parent(),std::terminate());}
+    constexpr inline bool has_prev() const {CDISPATCH(has_prev(),std::terminate());}
+    constexpr inline bool has_next() const {CDISPATCH(has_next(),std::terminate());}
+
+    constexpr auto children_fwd() const;
+    constexpr auto attrs_fwd() const{}
+};
 
 
 }
