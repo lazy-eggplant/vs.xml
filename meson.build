@@ -16,7 +16,7 @@ vs_xml_lib = library(
     [
       'src/tree.cpp',
       'src/builder.cpp',
-      'src/wrp-impl.cpp'
+      'src/wrp-tree.cpp'
     ],
     install: true,
     dependencies: [],

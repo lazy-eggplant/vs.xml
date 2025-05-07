@@ -59,9 +59,6 @@ struct Parser;
 struct Builder;
 struct Tree;
 
-template <typename T>
-struct wrp_base_t;
-
 enum struct feature_t{
     OK,
     NONE,
@@ -102,5 +99,8 @@ concept thing_i = requires(T self){
     {self.path()} -> std::same_as<std::string>;
 };
 
+template <thing_i T>
+struct wrp_base_t;
+struct WrpTree;
 
 }

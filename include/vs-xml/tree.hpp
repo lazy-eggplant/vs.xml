@@ -26,10 +26,12 @@
 namespace xml{
 
 struct Tree{
-    std::vector<uint8_t> buffer;
-    std::vector<uint8_t> symbols;
-    const node_t& root;
-    void* label_offset;
+    protected:
+        std::vector<uint8_t> buffer;
+        std::vector<uint8_t> symbols;
+        void* label_offset;
+
+    public:
 
     std::function<bool(const unknown_t&, const unknown_t&)> def_order_node();
     std::function<bool(const attr_t&, const attr_t&)> def_order_attrs();
@@ -86,8 +88,10 @@ struct Tree{
 
     struct print_cfg_t{};
 
+    inline const node_t& root() const {return *(const node_t*)buffer.data();}
+
     inline bool print(std::ostream& out, const print_cfg_t& cfg = {})const{
-        return print_h(out, cfg, (const unknown_t*)&root);
+        return print_h(out, cfg, (const unknown_t*)&root());
     }
 
     inline std::string_view rsv(sv s) const{
@@ -99,12 +103,12 @@ struct Tree{
     /**
      * @brief Construct a new Tree object, with the list of strings being external. Make sure its lifetime contains the one of the Tree.
      */
-    Tree(std::vector<uint8_t>&& src, void* label_offset=nullptr):buffer(src),symbols({}),root(*(node_t*)buffer.data()),label_offset(label_offset){}
+    Tree(std::vector<uint8_t>&& src, void* label_offset=nullptr):buffer(src),symbols({}),label_offset(label_offset){}
 
     /**
      * @brief Construct a new Tree object, owning its own table of strings
      */
-    Tree(std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):buffer(src),symbols(sym),root(*(node_t*)buffer.data()),label_offset(symbols.data()){}
+    Tree(std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):buffer(src),symbols(sym),label_offset(symbols.data()){}
  
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;

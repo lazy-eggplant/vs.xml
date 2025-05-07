@@ -4,5 +4,6 @@ module xml {
     header "parser.hpp"
     header "serializer.hpp"
     header "tree.hpp"
+    header "wrp-tree.hpp"
     export *
 }

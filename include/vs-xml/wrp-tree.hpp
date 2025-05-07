@@ -1,26 +1,9 @@
 #pragma once
 
-/**
- * @file wrp-impl.hpp
- * @author karurochari
- * @brief Implementation of the wrapped node logic to add better context
- * @date 2025-05-01
- * 
- * @copyright Copyright (c) 2025
- * 
- */
-
- #include <cstddef>
- #include <cassert>
- 
- #include <iterator>
- #include <expected> 
-
- #include "commons.hpp"
- #include "impl.hpp"
+#include "tree.hpp"
+#include "vs-xml/impl.hpp"
 
 namespace xml{
-
 
 struct wrp_node_iterator{
     using iterator_category = std::bidirectional_iterator_tag;
@@ -30,7 +13,6 @@ struct wrp_node_iterator{
     using reference         = const value_type&;
 
     inline wrp_node_iterator(pointer ptr) : m_ptr(ptr) {}
-
 
     inline reference operator*() const { return *m_ptr; }
     inline pointer operator->() { return m_ptr; }
@@ -77,7 +59,7 @@ struct wrp_attr_iterator{
 };
 
 
-template <typename T>
+template <thing_i T>
 struct wrp_base_t{
     private:
         const Tree&       base;
@@ -85,26 +67,30 @@ struct wrp_base_t{
     
         wrp_base_t(const Tree& base, const T* ptr):base(base),ptr(ptr){}
         wrp_base_t(wrp_base_t p, const T* ptr):base(p.base),ptr(ptr){}
+
+        friend struct WrpTree;
+        template <thing_i W>
+        friend struct wrp_base_t;
     public:
 
     constexpr inline operator const T*() const {return ptr;}
 
     constexpr delta_ptr_t portable() const;
 
-    constexpr std::expected<std::string_view,feature_t> ns() const;
-    constexpr std::expected<std::string_view,feature_t> name() const;
-    constexpr std::expected<std::string_view,feature_t> value() const;
+    inline constexpr std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
+    inline constexpr std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
+    inline constexpr std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
 
-    constexpr std::expected<std::pair<wrp_base_t<unknown_t>, wrp_base_t<unknown_t>>,feature_t> children() const;
-    constexpr std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const;
+    inline constexpr std::expected<std::pair<wrp_base_t<unknown_t>, wrp_base_t<unknown_t>>,feature_t> children() const;
+    inline constexpr std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const{return ptr->attrs();}
 
-    constexpr wrp_base_t<node_t> parent() const;
-    constexpr wrp_base_t<unknown_t> prev() const;
-    constexpr wrp_base_t<unknown_t> next() const;
+    inline constexpr wrp_base_t<node_t> parent() const {return {base,ptr->parent()};}
+    inline constexpr wrp_base_t<unknown_t> prev() const {return {base,ptr->prev()};}
+    inline constexpr wrp_base_t<unknown_t> next() const {return {base,ptr->next()};}
 
-    constexpr inline bool has_parent() const;
-    constexpr inline bool has_prev() const;
-    constexpr inline bool has_next() const;
+    inline constexpr bool has_parent() const{return ptr->has_parent();}
+    inline constexpr bool has_prev() const{return ptr->has_prev();}
+    inline constexpr bool has_next() const{return ptr->has_next();}
 
     inline constexpr auto attrs_fwd() const{
         struct self{
@@ -122,8 +108,8 @@ struct wrp_base_t{
 
     inline constexpr auto children_fwd() const{
         struct self{
-            wrp_node_iterator begin() const {return (*base.children()).first;}
-            wrp_node_iterator end() const {return (*base.children()).second;}
+            wrp_node_iterator begin() const {return (const unknown_t*) ((*base.children()).first);}
+            wrp_node_iterator end() const {return (const unknown_t*) ((*base.children()).second);}
     
             self(const wrp_base_t& b):base(b){}
     
@@ -135,5 +121,19 @@ struct wrp_base_t{
     }
 };
 
+struct WrpTree : Tree{
+    private:
+    using Tree::rsv;
+    using Tree::clone;
+    using Tree::root;
+
+    public:
+    inline WrpTree(Tree&& ref):Tree(std::move(ref)){}
+
+    inline WrpTree clone(const node_t* ref=nullptr, bool reduce=true) const{return Tree::clone(ref,reduce);}
+
+    wrp_base_t<node_t> root() const;
+
+};
 
 }

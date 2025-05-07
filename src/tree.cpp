@@ -2,7 +2,6 @@
 #include <vs-xml/commons.hpp>
 #include <vs-xml/tree.hpp>
 #include <vs-xml/impl.hpp>
-#include <vs-xml/wrp-impl.hpp>
 
 namespace xml{
 
@@ -27,6 +26,8 @@ std::function<bool(const attr_t&, const attr_t&)> Tree::def_order_attrs() {
 }
 
 bool Tree::reorder(const std::function<bool(const attr_t&, const attr_t&)>& fn, const node_t* ref,  bool recursive){
+    if(ref==nullptr)ref=&root();
+
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size());
     xml_assert(ref->type()==type_t::NODE);
     return reorder_h(def_order_attrs(),ref,recursive);
@@ -36,7 +37,6 @@ bool Tree::reorder_h(const std::function<bool(const attr_t&, const attr_t&)>& fn
     //Speed could be improved by using an intermediate swapping function, but attr_t elements are small enough that it might not be worthed.
     //TODO: at some point, convert it not to be recursive.
 
-    if(ref==nullptr)ref=&this->root;
     if(ref->type()!=type_t::NODE)return false;
 
     std::sort((attr_t*)ref->_attrs,(attr_t*)ref->_attrs+ref->attrs_count,fn);
@@ -121,7 +121,7 @@ Tree Tree::clone(const node_t* ref, bool reduce) const{
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size());
     xml_assert(ref->type()==type_t::NODE);
 
-    if(ref==nullptr)ref=&root;
+    if(ref==nullptr)ref=&root();
 
     std::vector<uint8_t> buffer;
     std::vector<uint8_t> symbols;

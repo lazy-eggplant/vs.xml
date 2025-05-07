@@ -1,4 +1,5 @@
 //#include <vs-xml/vs-xml.hpp>
+#include "vs-xml/wrp-tree.hpp"
 #include <vs-xml/builder.hpp>
 
 #include <print>
@@ -36,6 +37,13 @@ int main(){
     std::print("\n");
     tree.reorder();
     tree.print(std::cout,{});
+    std::print("\n");
+    xml::WrpTree wrp_tree(std::move(tree));
+    wrp_tree.print(std::cout,{});
+
+    auto root = wrp_tree.root();
+    for(auto& element:root.attrs_fwd()){}
+
     std::print("\n");
     return 0;
 }
