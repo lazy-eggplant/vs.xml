@@ -42,7 +42,13 @@ int main(){
     wrp_tree.print(std::cout,{});
 
     auto root = wrp_tree.root();
-    for(auto& element:root.attrs_fwd()){}
+    for(auto& attr:root.attrs_fwd()){
+        std::print("{}\n",attr.name().value_or("--"));
+    }
+
+    for(auto& element:root.children_fwd()){
+        std::print("{}\n",element.name().value_or("--"));
+    }
 
     std::print("\n");
     return 0;

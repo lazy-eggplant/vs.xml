@@ -347,6 +347,7 @@ struct node_iterator{
     pointer m_ptr;
 };
 
+//TODO: it should be  std::random_access_iterator_tag;
 struct attr_iterator{
     using iterator_category = std::bidirectional_iterator_tag;
     using difference_type   = std::ptrdiff_t;

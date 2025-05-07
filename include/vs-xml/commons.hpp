@@ -99,7 +99,7 @@ concept thing_i = requires(T self){
     {self.path()} -> std::same_as<std::string>;
 };
 
-template <thing_i T>
+template <typename T>
 struct wrp_base_t;
 struct WrpTree;
 

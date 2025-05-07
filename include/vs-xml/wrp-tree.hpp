@@ -2,64 +2,16 @@
 
 #include "tree.hpp"
 #include "vs-xml/impl.hpp"
+#include <iterator>
 
 namespace xml{
 
-struct wrp_node_iterator{
-    using iterator_category = std::bidirectional_iterator_tag;
-    using difference_type   = std::ptrdiff_t;
-    using value_type        = const unknown_t;
-    using pointer           = const value_type*;
-    using reference         = const value_type&;
-
-    inline wrp_node_iterator(pointer ptr) : m_ptr(ptr) {}
-
-    inline reference operator*() const { return *m_ptr; }
-    inline pointer operator->() { return m_ptr; }
-
-    inline wrp_node_iterator& operator++() { m_ptr=m_ptr->next(); return *this; }  
-    inline wrp_node_iterator& operator--() { m_ptr=m_ptr->prev(); return *this; }  
-
-    inline wrp_node_iterator operator++(int) { wrp_node_iterator tmp = *this; ++(*this); return tmp; }
-    inline wrp_node_iterator operator--(int) { wrp_node_iterator tmp = *this; --(*this); return tmp; }
-
-    inline friend bool operator== (const wrp_node_iterator& a, const wrp_node_iterator& b) { return a.m_ptr == b.m_ptr; };
-    inline friend bool operator!= (const wrp_node_iterator& a, const wrp_node_iterator& b) { return a.m_ptr != b.m_ptr; };  
+struct wrp_node_iterator;
+struct wrp_attr_iterator;
 
 
-    private:
-    pointer m_ptr;
-};
 
-struct wrp_attr_iterator{
-    using iterator_category = std::bidirectional_iterator_tag;
-    using difference_type   = std::ptrdiff_t;
-    using value_type        = const attr_t;
-    using pointer           = const value_type*;
-    using reference         = const value_type&;
-
-    inline wrp_attr_iterator(pointer ptr) : m_ptr(ptr) {}
-
-
-    inline reference operator*() const { return *m_ptr; }
-    inline pointer operator->() { return m_ptr; }
-
-    inline wrp_attr_iterator& operator++() { m_ptr++; return *this; }  
-    inline wrp_attr_iterator& operator--() { m_ptr--; return *this; }  
-
-    inline wrp_attr_iterator operator++(int) { wrp_attr_iterator tmp = *this; ++(*this); return tmp; }
-    inline wrp_attr_iterator operator--(int) { wrp_attr_iterator tmp = *this; --(*this); return tmp; }
-
-    inline friend bool operator== (const wrp_attr_iterator& a, const wrp_attr_iterator& b) { return a.m_ptr == b.m_ptr; };
-    inline friend bool operator!= (const wrp_attr_iterator& a, const wrp_attr_iterator& b) { return a.m_ptr != b.m_ptr; };  
-
-
-    private:
-    pointer m_ptr;
-};
-
-
-template <thing_i T>
+template <typename T>
 struct wrp_base_t{
     private:
         const Tree&       base;
@@ -69,11 +21,14 @@ struct wrp_base_t{
         wrp_base_t(wrp_base_t p, const T* ptr):base(p.base),ptr(ptr){}
 
         friend struct WrpTree;
-        template <thing_i W>
+        template <typename W>
         friend struct wrp_base_t;
+
+        friend struct wrp_node_iterator;
+        friend struct wrp_attr_iterator;
     public:
 
-    constexpr inline operator const T*() const {return ptr;}
+    constexpr inline explicit operator const T*() const  {return ptr;}
 
     constexpr delta_ptr_t portable() const;
 
@@ -81,7 +36,11 @@ struct wrp_base_t{
     inline constexpr std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
     inline constexpr std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
 
-    inline constexpr std::expected<std::pair<wrp_base_t<unknown_t>, wrp_base_t<unknown_t>>,feature_t> children() const;
+    inline constexpr std::expected<std::pair<wrp_base_t<unknown_t>, wrp_base_t<unknown_t>>,feature_t> children() const{
+        auto tmp = ptr->children();
+        if(!tmp.has_value())return std::unexpected{tmp.error()};
+        else return std::pair{wrp_base_t<unknown_t>{base,tmp->first}, wrp_base_t<unknown_t>{base,tmp->second}};
+    }
     inline constexpr std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const{return ptr->attrs();}
 
     inline constexpr wrp_base_t<node_t> parent() const {return {base,ptr->parent()};}
@@ -92,34 +51,121 @@ struct wrp_base_t{
     inline constexpr bool has_prev() const{return ptr->has_prev();}
     inline constexpr bool has_next() const{return ptr->has_next();}
 
-    inline constexpr auto attrs_fwd() const{
-        struct self{
-            wrp_attr_iterator begin() const {return (*base.attrs()).first;}
-            wrp_attr_iterator end() const {return (*base.attrs()).second;}
-    
-            self(const wrp_base_t& b):base(b){}
-    
-            private:
-                const wrp_base_t& base;
-        };
-
-        return self(*this);
-    }
-
-    inline constexpr auto children_fwd() const{
-        struct self{
-            wrp_node_iterator begin() const {return (const unknown_t*) ((*base.children()).first);}
-            wrp_node_iterator end() const {return (const unknown_t*) ((*base.children()).second);}
-    
-            self(const wrp_base_t& b):base(b){}
-    
-            private:
-                const wrp_base_t& base;
-        };
-    
-        return self(*this);
-    }
+    inline constexpr auto attrs_fwd() const;
+    inline constexpr auto children_fwd() const;
 };
+
+
+template <>
+struct wrp_base_t<attr_t>{
+    private:
+        const Tree&       base;
+        const attr_t*          ptr;
+    
+        wrp_base_t(const Tree& base, const attr_t* ptr):base(base),ptr(ptr){}
+        wrp_base_t(wrp_base_t p, const attr_t* ptr):base(p.base),ptr(ptr){}
+
+        friend struct WrpTree;
+        template <typename W>
+        friend struct wrp_base_t;
+
+        friend struct wrp_node_iterator;
+        friend struct wrp_attr_iterator;
+    public:
+
+    constexpr inline explicit operator const attr_t*() const  {return ptr;}
+
+    constexpr delta_ptr_t portable() const;
+
+    inline constexpr std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
+    inline constexpr std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
+    inline constexpr std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
+};
+
+
+struct wrp_node_iterator{
+    using iterator_category = std::bidirectional_iterator_tag;
+    using difference_type   = std::ptrdiff_t;
+    using value_type        = const unknown_t;
+    using pointer           = wrp_base_t<unknown_t>;
+    using reference         = wrp_base_t<unknown_t>;
+
+    inline wrp_node_iterator(wrp_base_t<unknown_t> ptr) : m_ptr(ptr) {}
+
+    inline const wrp_base_t<unknown_t>& operator*() const { return m_ptr; }
+    inline wrp_base_t<unknown_t> operator->() { return m_ptr; }
+
+    inline wrp_node_iterator& operator++() { m_ptr.ptr = m_ptr.ptr->next(); return *this; }  
+    inline wrp_node_iterator& operator--() { m_ptr.ptr = m_ptr.ptr->prev(); return *this; }  
+
+    inline wrp_node_iterator operator++(int) { wrp_node_iterator tmp = *this; ++(*this); return tmp; }
+    inline wrp_node_iterator operator--(int) { wrp_node_iterator tmp = *this; --(*this); return tmp; }
+
+    inline friend bool operator== (const wrp_node_iterator& a, const wrp_node_iterator& b) { return (&a.m_ptr.base == &b.m_ptr.base) && (a.m_ptr.ptr == b.m_ptr.ptr); };
+    inline friend bool operator!= (const wrp_node_iterator& a, const wrp_node_iterator& b) { return (&a.m_ptr.base != &b.m_ptr.base) || (a.m_ptr.ptr != b.m_ptr.ptr); };  
+
+
+    private:
+    wrp_base_t<unknown_t> m_ptr;
+};
+
+//TODO: it should be  std::random_access_iterator_tag;
+struct wrp_attr_iterator{
+    using iterator_category = std::bidirectional_iterator_tag; 
+    using difference_type   = std::ptrdiff_t;
+    using value_type        = const attr_t;
+    using pointer           = wrp_base_t<attr_t>;
+    using reference         = wrp_base_t<attr_t>;
+
+    inline wrp_attr_iterator(wrp_base_t<attr_t> ptr) : m_ptr(ptr) {}
+
+
+    inline const wrp_base_t<attr_t>& operator*() const { return m_ptr; }
+    inline wrp_base_t<attr_t> operator->() { return m_ptr; }
+
+    inline wrp_attr_iterator& operator++() { m_ptr.ptr++; return *this; }  
+    inline wrp_attr_iterator& operator--() { m_ptr.ptr--; return *this; }  
+
+    inline wrp_attr_iterator operator++(int) { wrp_attr_iterator tmp = *this; ++(*this); return tmp; }
+    inline wrp_attr_iterator operator--(int) { wrp_attr_iterator tmp = *this; --(*this); return tmp; }
+
+    inline friend bool operator== (const wrp_attr_iterator& a, const wrp_attr_iterator& b) { return (&a.m_ptr.base == &b.m_ptr.base) && (a.m_ptr.ptr == b.m_ptr.ptr); };
+    inline friend bool operator!= (const wrp_attr_iterator& a, const wrp_attr_iterator& b) { return (&a.m_ptr.base != &b.m_ptr.base) || (a.m_ptr.ptr != b.m_ptr.ptr); }; 
+
+
+    private:
+    wrp_base_t<attr_t> m_ptr;
+};
+
+template <typename T>
+inline constexpr auto wrp_base_t<T>::attrs_fwd() const{
+    struct self{
+        wrp_attr_iterator begin() const {return  wrp_base_t<attr_t>{base.base, (*base.attrs()).first};}
+        wrp_attr_iterator end() const {return  wrp_base_t<attr_t>{base.base, (*base.attrs()).second};}
+
+        self(const wrp_base_t& b):base(b){}
+
+        private:
+            const wrp_base_t& base;
+    };
+
+    return self(*this);
+}
+
+template <typename T>
+inline constexpr auto wrp_base_t<T>::children_fwd() const{
+    struct self{
+        wrp_node_iterator begin() const {return wrp_base_t<unknown_t>{base.base, (const unknown_t*)(*base.children()).first};}
+        wrp_node_iterator end() const {return wrp_base_t<unknown_t>{base.base, (const unknown_t*)(*base.children()).second};}
+
+        self(const wrp_base_t& b):base(b){}
+
+        private:
+            const wrp_base_t& base;
+    };
+
+    return self(*this);
+}
 
 struct WrpTree : Tree{
     private:
