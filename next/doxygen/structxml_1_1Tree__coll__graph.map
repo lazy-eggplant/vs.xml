@@ -1,7 +1,0 @@
-<map id="xml::Tree" name="xml::Tree">
-<area shape="rect" id="Node000001" title=" " alt="" coords="50,168,133,193"/>
-<area shape="rect" id="Node000002" href="$structxml_1_1node__t.html" title=" " alt="" coords="42,80,141,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,119,94,167,89,167,89,119"/>
-<area shape="rect" id="Node000003" href="$structxml_1_1base__t.html" title=" " alt="" coords="5,5,177,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,45,94,80,89,80,89,45"/>
-</map>

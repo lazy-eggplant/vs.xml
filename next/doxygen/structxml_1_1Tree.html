@@ -76,22 +76,20 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="structxml_1_1Tree-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">xml::Tree Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="dynheader">
-Collaboration diagram for xml::Tree:</div>
+Inheritance diagram for xml::Tree:</div>
 <div class="dyncontent">
-<div class="center"><img src="structxml_1_1Tree__coll__graph.png" border="0" usemap="#axml_1_1Tree_coll__map" alt="Collaboration graph"/></div>
-<map name="axml_1_1Tree_coll__map" id="axml_1_1Tree_coll__map">
-<area shape="rect" title=" " alt="" coords="50,168,133,193"/>
-<area shape="rect" href="structxml_1_1node__t.html" title=" " alt="" coords="42,80,141,105"/>
-<area shape="poly" title=" " alt="" coords="94,119,94,167,89,167,89,119"/>
-<area shape="rect" href="structxml_1_1base__t.html" title=" " alt="" coords="5,5,177,31"/>
-<area shape="poly" title=" " alt="" coords="94,45,94,80,89,80,89,45"/>
+<div class="center"><img src="structxml_1_1Tree__inherit__graph.png" border="0" usemap="#axml_1_1Tree_inherit__map" alt="Inheritance graph"/></div>
+<map name="axml_1_1Tree_inherit__map" id="axml_1_1Tree_inherit__map">
+<area shape="rect" title=" " alt="" coords="18,5,101,31"/>
+<area shape="rect" href="structxml_1_1WrpTree.html" title=" " alt="" coords="5,79,113,104"/>
+<area shape="poly" title=" " alt="" coords="62,44,62,79,57,79,57,44"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -128,6 +126,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>inject_after</b> (con
 <tr class="memitem:a4b0a402a0652788688c4414e7bbcf085" id="r_a4b0a402a0652788688c4414e7bbcf085"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structxml_1_1Tree.html">Tree</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structxml_1_1Tree.html#a4b0a402a0652788688c4414e7bbcf085">clone</a> (const <a class="el" href="structxml_1_1node__t.html">node_t</a> *ref=nullptr, bool reduce=true) const</td></tr>
 <tr class="memdesc:a4b0a402a0652788688c4414e7bbcf085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a perfect deep copy of the current tree structure.  <br /></td></tr>
 <tr class="separator:a4b0a402a0652788688c4414e7bbcf085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ff8e40dc9a06d4f704edc325ccb90a5" id="r_a1ff8e40dc9a06d4f704edc325ccb90a5"><td class="memItemLeft" align="right" valign="top"><a id="a1ff8e40dc9a06d4f704edc325ccb90a5" name="a1ff8e40dc9a06d4f704edc325ccb90a5"></a>
+const <a class="el" href="structxml_1_1node__t.html">node_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>root</b> () const</td></tr>
+<tr class="separator:a1ff8e40dc9a06d4f704edc325ccb90a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf75fc361506785bd8a6ce30ac1f0660" id="r_aaf75fc361506785bd8a6ce30ac1f0660"><td class="memItemLeft" align="right" valign="top"><a id="aaf75fc361506785bd8a6ce30ac1f0660" name="aaf75fc361506785bd8a6ce30ac1f0660"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (std::ostream &amp;out, const <a class="el" href="structxml_1_1Tree_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}) const</td></tr>
 <tr class="separator:aaf75fc361506785bd8a6ce30ac1f0660"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,17 +136,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (std::ostre
 std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>rsv</b> (<a class="el" href="structxml_1_1sv.html">sv</a> s) const</td></tr>
 <tr class="separator:ab97e30a977c8f5bdac9940f6f09fbe3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:a274b735cf5d7561ada27a00ce60c1d24" id="r_a274b735cf5d7561ada27a00ce60c1d24"><td class="memItemLeft" align="right" valign="top"><a id="a274b735cf5d7561ada27a00ce60c1d24" name="a274b735cf5d7561ada27a00ce60c1d24"></a>
 std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 <tr class="separator:a274b735cf5d7561ada27a00ce60c1d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add35d9e5bfcd0a27b9b8d96c910d295e" id="r_add35d9e5bfcd0a27b9b8d96c910d295e"><td class="memItemLeft" align="right" valign="top"><a id="add35d9e5bfcd0a27b9b8d96c910d295e" name="add35d9e5bfcd0a27b9b8d96c910d295e"></a>
 std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>symbols</b></td></tr>
 <tr class="separator:add35d9e5bfcd0a27b9b8d96c910d295e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08d6e6102ea0257a7b10354e7e7088c5" id="r_a08d6e6102ea0257a7b10354e7e7088c5"><td class="memItemLeft" align="right" valign="top"><a id="a08d6e6102ea0257a7b10354e7e7088c5" name="a08d6e6102ea0257a7b10354e7e7088c5"></a>
-const <a class="el" href="structxml_1_1node__t.html">node_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>root</b></td></tr>
-<tr class="separator:a08d6e6102ea0257a7b10354e7e7088c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e2307f097c1f0a3fcb623ec6c12a0da" id="r_a4e2307f097c1f0a3fcb623ec6c12a0da"><td class="memItemLeft" align="right" valign="top"><a id="a4e2307f097c1f0a3fcb623ec6c12a0da" name="a4e2307f097c1f0a3fcb623ec6c12a0da"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>label_offset</b></td></tr>
 <tr class="separator:a4e2307f097c1f0a3fcb623ec6c12a0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
