@@ -4,7 +4,9 @@
 #include "vs-xml/impl.hpp"
 #include <iterator>
 
-namespace xml{
+namespace VS_XML_NS{
+
+namespace details{
 
 struct wrp_node_iterator;
 struct wrp_attr_iterator;
@@ -20,7 +22,7 @@ struct wrp_base_t{
         wrp_base_t(const Tree& base, const T* ptr):base(base),ptr(ptr){}
         wrp_base_t(wrp_base_t p, const T* ptr):base(p.base),ptr(ptr){}
 
-        friend struct WrpTree;
+        friend struct xml::WrpTree;
         template <typename W>
         friend struct wrp_base_t;
 
@@ -167,6 +169,8 @@ inline constexpr auto wrp_base_t<T>::children_fwd() const{
     return self(*this);
 }
 
+}
+
 struct WrpTree : Tree{
     private:
     using Tree::rsv;
@@ -178,7 +182,7 @@ struct WrpTree : Tree{
 
     inline WrpTree clone(const node_t* ref=nullptr, bool reduce=true) const{return Tree::clone(ref,reduce);}
 
-    wrp_base_t<node_t> root() const;
+    details::wrp_base_t<node_t> root() const;
 
 };
 

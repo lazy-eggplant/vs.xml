@@ -3,7 +3,7 @@
 #include <vs-xml/tree.hpp>
 #include <vs-xml/impl.hpp>
 
-namespace xml{
+namespace VS_XML_NS{
 
 std::function<bool(const unknown_t&, const unknown_t&)> Tree::def_order_node(){
     throw "Not implemented";

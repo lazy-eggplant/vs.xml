@@ -25,7 +25,7 @@
 #include "commons.hpp"
 #include "tree.hpp"
 
-namespace xml{
+namespace VS_XML_NS{
 
 
 /**

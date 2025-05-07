@@ -1,7 +1,7 @@
 #include <vs-xml/builder.hpp>
 #include <vs-xml/impl.hpp>
 
-namespace xml{
+namespace VS_XML_NS{
 
 template<typename T>
 Builder::error_t Builder::leaf(std::string_view value){

@@ -26,7 +26,7 @@
 #include "commons.hpp"
 #include "serializer.hpp"
 
-namespace xml{
+namespace VS_XML_NS{
 
 template <typename T>
 struct base_t{

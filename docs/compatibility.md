@@ -27,6 +27,7 @@
     - [ ] String compression
 - [x] attributes reordering
 - [ ] node injection
+- [x] simplified tree wrapper to avoid xml::sv->string_view conversions.
 
 ### XML serialization
 - [x] namespaces

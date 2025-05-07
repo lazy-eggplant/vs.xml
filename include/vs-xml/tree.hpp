@@ -23,7 +23,7 @@
 
 #include "commons.hpp"
 
-namespace xml{
+namespace VS_XML_NS{
 
 struct Tree{
     protected:

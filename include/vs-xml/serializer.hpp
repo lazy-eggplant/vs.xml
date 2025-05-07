@@ -19,7 +19,7 @@
 #include <string>
 #include <string_view>
 
-namespace xml{
+namespace VS_XML_NS{
 namespace serialize{
 //https://stackoverflow.com/questions/1091945/what-characters-do-i-need-to-escape-in-xml-documents
 //An attempt will be made to keep the input string_view, unless escaping is needed.

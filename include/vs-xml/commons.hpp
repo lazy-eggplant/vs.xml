@@ -22,8 +22,11 @@
 #include <string>
 #include <string_view>
 
+#ifndef VS_XML_NS
+#define VS_XML_NS xml
+#endif
 
-namespace xml{
+namespace VS_XML_NS{
 
 typedef std::ptrdiff_t delta_ptr_t ;
 typedef size_t xml_size_t;
@@ -99,8 +102,6 @@ concept thing_i = requires(T self){
     {self.path()} -> std::same_as<std::string>;
 };
 
-template <typename T>
-struct wrp_base_t;
 struct WrpTree;
 
 }
