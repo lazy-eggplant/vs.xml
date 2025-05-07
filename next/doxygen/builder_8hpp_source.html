@@ -98,11 +98,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;commons.hpp&quot;</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="tree_8hpp.html">tree.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">namespace </span>xml{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">namespace </span>VS_XML_NS{</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structxml_1_1Builder.html">   35</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structxml_1_1Builder.html">Builder</a>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1Builder.html">   35</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1Builder.html">Builder</a>{</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">enum struct</span> error_t{</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        OK,</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        TREE_CLOSED,</div>
@@ -128,7 +128,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_struct" href="structxml_1_1Builder.html">Builder</a>();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1Builder.html">Builder</a>();</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    std::expected&lt;Tree,error_t&gt; close();</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    error_t begin(std::string_view name, std::string_view ns=<span class="stringliteral">&quot;&quot;</span>);</div>
@@ -145,22 +145,22 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="foldopen" id="foldopen00080" data-start="{" data-end="};">
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="structxml_1_1BuilderCompressed.html">   80</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structxml_1_1BuilderCompressed.html">BuilderCompressed</a> : <span class="keyword">protected</span> <a class="code hl_struct" href="structxml_1_1Builder.html">Builder</a>{</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1BuilderCompressed.html">   80</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1BuilderCompressed.html">BuilderCompressed</a> : <span class="keyword">protected</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Builder.html">Builder</a>{</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    std::unordered_set&lt;<a class="code hl_struct" href="structxml_1_1sv.html">sv</a>, std::function&lt;uint64_t(<a class="code hl_struct" href="structxml_1_1sv.html">sv</a>)&gt;,std::function&lt;bool(<a class="code hl_struct" href="structxml_1_1sv.html">sv</a>, <a class="code hl_struct" href="structxml_1_1sv.html">sv</a>)&gt;&gt; idx_symbols;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    std::unordered_set&lt;<a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>, std::function&lt;uint64_t(<a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>)&gt;,std::function&lt;bool(<a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>, <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>)&gt;&gt; idx_symbols;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    std::vector&lt;uint8_t&gt; symbols;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">inline</span> std::string_view rsv(<a class="code hl_struct" href="structxml_1_1sv.html">sv</a> s){</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">inline</span> std::string_view rsv(<a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a> s){</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordflow">return</span> std::string_view(s.base+(<span class="keywordtype">char</span>*)label_offset,s.base+(<span class="keywordtype">char</span>*)label_offset+s.length);</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <a class="code hl_struct" href="structxml_1_1sv.html">sv</a> symbol(std::string_view s);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a> symbol(std::string_view s);</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structxml_1_1BuilderCompressed.html">BuilderCompressed</a>():idx_symbols(64,</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        [<span class="keyword">this</span>](<a class="code hl_struct" href="structxml_1_1sv.html">sv</a> a){<span class="keywordflow">return</span> std::hash&lt;std::string_view&gt;{}(rsv(a));},</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        [<span class="keyword">this</span>](<a class="code hl_struct" href="structxml_1_1sv.html">sv</a> a, <a class="code hl_struct" href="structxml_1_1sv.html">sv</a> b){<span class="keywordflow">return</span> rsv(a)==rsv(b);}),symbols(){</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1BuilderCompressed.html">BuilderCompressed</a>():idx_symbols(64,</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        [<span class="keyword">this</span>](<a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a> a){<span class="keywordflow">return</span> std::hash&lt;std::string_view&gt;{}(rsv(a));},</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        [<span class="keyword">this</span>](<a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a> a, <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a> b){<span class="keywordflow">return</span> rsv(a)==rsv(b);}),symbols(){</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            label_offset=symbols.data(); </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
@@ -198,9 +198,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
-<div class="ttc" id="astructxml_1_1BuilderCompressed_html"><div class="ttname"><a href="structxml_1_1BuilderCompressed.html">xml::BuilderCompressed</a></div><div class="ttdoc">Wrapper of Builder to compress labels before usage, reducing the final memory footprint.</div><div class="ttdef"><b>Definition</b> builder.hpp:80</div></div>
-<div class="ttc" id="astructxml_1_1Builder_html"><div class="ttname"><a href="structxml_1_1Builder.html">xml::Builder</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:35</div></div>
-<div class="ttc" id="astructxml_1_1sv_html"><div class="ttname"><a href="structxml_1_1sv.html">xml::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:39</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1BuilderCompressed_html"><div class="ttname"><a href="structVS__XML__NS_1_1BuilderCompressed.html">VS_XML_NS::BuilderCompressed</a></div><div class="ttdoc">Wrapper of Builder to compress labels before usage, reducing the final memory footprint.</div><div class="ttdef"><b>Definition</b> builder.hpp:80</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Builder_html"><div class="ttname"><a href="structVS__XML__NS_1_1Builder.html">VS_XML_NS::Builder</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:35</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:42</div></div>
 <div class="ttc" id="atree_8hpp_html"><div class="ttname"><a href="tree_8hpp.html">tree.hpp</a></div><div class="ttdoc">Internal tree structure.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cdata_5ft_0',['cdata_t',['../structxml_1_1cdata__t.html',1,'xml']]],
-  ['clone_1',['clone',['../structxml_1_1Tree.html#a4b0a402a0652788688c4414e7bbcf085',1,'xml::Tree']]],
-  ['comment_5ft_2',['comment_t',['../structxml_1_1comment__t.html',1,'xml']]]
+  ['cdata_5ft_0',['cdata_t',['../structVS__XML__NS_1_1cdata__t.html',1,'VS_XML_NS']]],
+  ['clone_1',['clone',['../structVS__XML__NS_1_1Tree.html#a7cd0061283ca1ef6048d0d7300dde10f',1,'VS_XML_NS::Tree']]],
+  ['comment_5ft_2',['comment_t',['../structVS__XML__NS_1_1comment__t.html',1,'VS_XML_NS']]]
 ];
