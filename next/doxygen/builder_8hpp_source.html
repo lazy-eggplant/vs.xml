@@ -96,7 +96,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;commons.hpp&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="tree_8hpp.html">tree.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;wrp-tree.hpp&quot;</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">namespace </span>VS_XML_NS{</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
@@ -124,12 +124,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span>* label_offset = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    std::expected&lt;Tree,error_t&gt; close(std::vector&lt;uint8_t&gt;&amp;&amp; symbols);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    std::expected&lt;WrpTree,error_t&gt; close(std::vector&lt;uint8_t&gt;&amp;&amp; symbols);</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1Builder.html">Builder</a>();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    std::expected&lt;Tree,error_t&gt; close();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    std::expected&lt;WrpTree,error_t&gt; close();</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    error_t begin(std::string_view name, std::string_view ns=<span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    error_t end();</div>
@@ -192,7 +192,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">return</span> Builder::inject(rsv( symbol(value)));</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    std::expected&lt;Tree,error_t&gt; close();</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    std::expected&lt;WrpTree,error_t&gt; close();</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>};</div>
 </div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
@@ -201,7 +201,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructVS__XML__NS_1_1BuilderCompressed_html"><div class="ttname"><a href="structVS__XML__NS_1_1BuilderCompressed.html">VS_XML_NS::BuilderCompressed</a></div><div class="ttdoc">Wrapper of Builder to compress labels before usage, reducing the final memory footprint.</div><div class="ttdef"><b>Definition</b> builder.hpp:80</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Builder_html"><div class="ttname"><a href="structVS__XML__NS_1_1Builder.html">VS_XML_NS::Builder</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:35</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:42</div></div>
-<div class="ttc" id="atree_8hpp_html"><div class="ttname"><a href="tree_8hpp.html">tree.hpp</a></div><div class="ttdoc">Internal tree structure.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
