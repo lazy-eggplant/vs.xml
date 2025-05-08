@@ -23,7 +23,7 @@
 #include <string_view>
 
 #include "commons.hpp"
-#include "tree.hpp"
+#include "wrp-tree.hpp"
 
 namespace VS_XML_NS{
 
@@ -54,12 +54,12 @@ struct Builder{
     protected:
     void* label_offset = nullptr;
 
-    std::expected<Tree,error_t> close(std::vector<uint8_t>&& symbols);
+    std::expected<WrpTree,error_t> close(std::vector<uint8_t>&& symbols);
 
     public:
 
     Builder();
-    std::expected<Tree,error_t> close();
+    std::expected<WrpTree,error_t> close();
 
     error_t begin(std::string_view name, std::string_view ns="");
     error_t end();
@@ -131,7 +131,7 @@ struct BuilderCompressed : protected Builder{
         return Builder::inject(rsv( symbol(value)));
     }
 
-    std::expected<Tree,error_t> close();
+    std::expected<WrpTree,error_t> close();
 };
 
 

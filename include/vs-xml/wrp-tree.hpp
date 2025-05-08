@@ -184,6 +184,7 @@ struct WrpTree : Tree{
 
     details::wrp_base_t<node_t> root() const;
 
+    inline Tree& downgrade(){return *this;}
 };
 
 }
