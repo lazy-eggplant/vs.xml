@@ -73,8 +73,8 @@ struct attr_t{
     public:
 
     inline attr_t(void* offset, std::string_view _ns, std::string_view _name, std::string_view _value):
-        _ns(offset,*serialize::validate_xml_label(_ns)),
-        _name(offset,*serialize::validate_xml_label(_name)),
+        _ns(offset,serialize::validate_xml_label(_ns)),
+        _name(offset,serialize::validate_xml_label(_name)),
         _value(offset,_value){}
 
     inline std::expected<sv,feature_t> ns() const {return _ns;}
@@ -98,8 +98,8 @@ struct node_t : base_t<node_t>{
     attr_t _attrs[];
 
     inline node_t(void* offset, node_t* _parent, std::string_view _ns, std::string_view _name):
-        _ns(offset,*serialize::validate_xml_label(_ns)),
-        _name(offset,*serialize::validate_xml_label(_name))
+        _ns(offset,serialize::validate_xml_label(_ns)),
+        _name(offset,serialize::validate_xml_label(_name))
     {
         set_parent(_parent);
         _size=0;

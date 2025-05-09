@@ -119,7 +119,6 @@ struct Tree{
     );
 
     friend struct Builder;
-    friend struct Parser;
 };
 
 

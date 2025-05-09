@@ -58,8 +58,8 @@ struct proc_t;
 struct inject_t;
 struct unknown_t;
 
-struct Parser;
 struct Builder;
+struct BuilderCompressed;
 struct Tree;
 
 enum struct feature_t{
@@ -103,5 +103,11 @@ concept thing_i = requires(T self){
 };
 
 struct WrpTree;
+
+template <typename T>
+concept ProperBuilder = std::same_as<T, BuilderCompressed> || std::same_as<T, Builder>;
+
+template<ProperBuilder Builder_t>
+class Parser;
 
 }

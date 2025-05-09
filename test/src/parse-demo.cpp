@@ -1,120 +1,40 @@
+#include "vs-xml/builder.hpp"
+#include "vs-xml/impl.hpp"
+#include <concepts>
+#include <iostream>
 #include <string_view>
+#include <type_traits>
 #include <vs-xml/parser.hpp>
+#include <vs-xml/serializer.hpp>
 #include <print>
 
-auto parse(std::string_view src){
-    enum struct error_t{
-        OK,
-        BAD_SPECIAL_SEQ,
-    };
+//-----------------------------------------------------
+// Example main (for testing purposes)
+//-----------------------------------------------------
+int main() {
+    //The parser can mutate this string. I will have to identify if there is any better ownership mechanism here to use
+    std::string xmlData = R"(
+<ns1:hello op3-a="v'>&amp;al1" op1-a="val1" ns2:op2-a="val&quot;1" op5-a="val&quot;1" op6-a="val1">
+    <hello1 ns='s'/>
+    <hello2 ns="s">Banana &lt;hello ciao=&quot;worldo&quot; &amp; &gt;</hello2>
+    <ns3:hello3 ns="s">
+        <!--hello-->
+        <hello5 ns="s" op3="val1" ns4:op2="val11" op1="val1"><![CDATA[Hello'''''&&&& world!]]></hello5>
+    </ns3:hello3>
+    <hello4 ns="s"/>
+</ns1:hello>
+)";
 
-    enum struct state_t{
-        S0,
-        S1,
-        Sb2 /*PROC_BEG*/ ,S3,
-        Se2 /*PROC_END*/,
-        Sb4_1, Sb4, /*COMMENT_BEG*/
-        Se4_1, Se4_2, /*COMMENT_END*/
-        Sb5_1, Sb5_2, Sb5_3, Sb5_4, Sb5_5, Sb5_6, Sb5 /*CDATA_BEG*/,
-        Se5_1, Se5_2, /*CDATA_END*/
-        ERROR
-    }state=state_t::S0;
-
-    for(auto c : src){
-        if(state==state_t::S0 and (c==' ' or c=='\t' or c=='\n' or c=='\r')){}
-        else if(state==state_t::S0){
-            if(c=='<'){state=state_t::S1;}
-            else if(c=='&'){
-
-            }
-            else{/*ADD_TEXT*/}
-        }
-        else if(state==state_t::S1){
-            if(c=='?') /*PROC*/ {state=state_t::Sb2;}
-            else if(c=='!') /*COMMENT,CDATA/*/ {state=state_t::S3;}
-        }
-        else if(state==state_t::Sb2){
-            if(c=='?'){state=state_t::Se2;}
-            else{/*ADD_PROC*/}
-        }
-        else if(state==state_t::Se2){
-            if(c=='>'){state=state_t::S0;}
-            else{/*ADD_PROC+?*/}
-        }
-        else if(state==state_t::S3){
-            if(c=='-'){state=state_t::Sb4_1;}
-            if(c=='['){state=state_t::Sb5_1;}
-            else{return error_t::BAD_SPECIAL_SEQ;}
-        }
-        else if(state==state_t::Sb4_1){
-            if(c=='-'){state=state_t::Sb4;}
-            else{return error_t::BAD_SPECIAL_SEQ;}
-        }
-        else if(state==state_t::Sb4){
-            if(c=='-'){state=state_t::Se4_1;}
-            else{/*ADD_COMMENT*/}
-        }
-        else if(state==state_t::Se4_1){
-            if(c=='-'){state=state_t::Se4_2;}
-            else{/*ADD_COMMENT+-*/}
-        }
-        else if(state==state_t::Se4_2){
-            if(c=='>'){state=state_t::S0;}
-            else{/*ADD_COMMENT+--*/}
-        }
-        else if(state==state_t::Sb5_1){
-            if(c=='C'){state=state_t::Sb5_2;}
-            else{return error_t::BAD_SPECIAL_SEQ;}
-        }
-        else if(state==state_t::Sb5_2){
-            if(c=='D'){state=state_t::Sb5_3;}
-            else{return error_t::BAD_SPECIAL_SEQ;}
-        }
-        else if(state==state_t::Sb5_3){
-            if(c=='A'){state=state_t::Sb5_4;}
-            else{return error_t::BAD_SPECIAL_SEQ;}
-        }
-        else if(state==state_t::Sb5_4){
-            if(c=='T'){state=state_t::Sb5_5;}
-            else{return error_t::BAD_SPECIAL_SEQ;}
-        }
-        else if(state==state_t::Sb5_5){
-            if(c=='A'){state=state_t::Sb5_6;}
-            else{return error_t::BAD_SPECIAL_SEQ;}
-        }
-        else if(state==state_t::Sb5_6){
-            if(c=='['){state=state_t::Sb5;}
-            else{return error_t::BAD_SPECIAL_SEQ;}
-        }
-        else if(state==state_t::Sb5){
-            if(c==']'){state=state_t::Se5_1;}
-            else{/*ADD_CDATA*/}
-        }
-        else if(state==state_t::Se5_1){
-            if(c==']'){state=state_t::Se5_2;}
-            else{/*ADD_CDATA+]*/}
-        }
-        else if(state==state_t::Se5_2){
-            if(c=='>'){state=state_t::S0;}
-            else{/*ADD_CDATA+]]*/}
-        }
+    xml::Builder builder;
+    try {
+        xml::Parser parser(std::move(xmlData), builder);
+        parser.parse();
+    } catch (const std::exception &ex) {
+        std::cerr << "Error while parsing XML: " << ex.what() << "\n";
+        return 1;
     }
+    auto tree = *builder.close();
+    tree.print(std::cout,{});
 
-    return error_t::OK;
-}
-
-int main(){
-    constexpr char file[] = {
-        #embed "assets/demo-0.xml"
-        ,'\0'
-    };
-    
-    std::string_view file_sv{file, file+sizeof(file)};
-
-    xml::Parser parser;
-
-    //tree.print(std::cout,{});
-    std::print("{}",file);
-    std::print("\n");
     return 0;
 }

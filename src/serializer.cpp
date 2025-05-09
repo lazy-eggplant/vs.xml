@@ -1,11 +1,13 @@
+#include <stdexcept>
 #include <vs-xml/commons.hpp>
 #include <vs-xml/serializer.hpp>
 
 namespace VS_XML_NS{
 namespace serialize{
 
+//TODO: Add support to output &#... escapes
 
-std::optional<std::string_view> __validate_xml_label(std::string_view str){
+std::string_view validate_xml_label(std::string_view str){
     int pos = 0;
     for(auto& c : str){
         if(pos==0 && (c=='_' or (c>'a' && c<'z') or (c>'A' && c<'Z'))){/*OK*/}
@@ -13,7 +15,7 @@ std::optional<std::string_view> __validate_xml_label(std::string_view str){
         else if(pos!=0 && (c=='_' or c=='.' or c=='-' or (c>='0' && c<='9') or (c>='a' && c<='z') or (c>='A' && c<='Z') or (c>127))){/*OK*/}
         else{
             //std::print("{} @ pos {}----- {} {} {} \n",(int)c, pos, str, (void*)str.data(), str.length());
-            return {};
+            throw std::runtime_error("Invalid XML label");
         }
         pos++;
     }

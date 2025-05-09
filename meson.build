@@ -1,7 +1,7 @@
 project(
   'vs-xml',
   ['cpp'],
-  version: '0.1.0',
+  version: '0.1.4',
   meson_version: '>= 1.1',
   default_options: ['cpp_std=c++23'],
 )
@@ -9,11 +9,11 @@ project(
 include_dirs = include_directories('include')
 
 add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
-#add_project_arguments(['-Wno-vla-cxx-extension'], language: 'cpp')
 
 vs_xml_lib = library(
     'vs-xml',
     [
+      'src/parser.cpp',
       'src/serializer.cpp',
       'src/tree.cpp',
       'src/builder.cpp',
@@ -42,7 +42,7 @@ endif
 pconf = import('pkgconfig')
 pconf.generate(
   vs_xml_lib,
-  description: 'XML parser and tree builder',
+  description: 'XML parser and tree builder for limited mutability scenarios',
   url: 'https://github.com/lazy-eggplant/vs-xml',
   version: meson.project_version(),
 )
