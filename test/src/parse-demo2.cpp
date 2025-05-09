@@ -7,6 +7,7 @@
 //-----------------------------------------------------
 // Helper: Unescape common XML entities in a string_view.
 // Returns a new std::string.
+/*
 std::string unescape_xml(std::string_view sv) {
     std::string result;
     result.reserve(sv.size());
@@ -59,6 +60,75 @@ std::string unescape_xml(std::string_view sv) {
         }
     }
     return result;
+}
+*/
+
+
+std::string_view unescape_xml(std::string_view sv) {
+    // We assume that sv.data() points to mutable memory.
+    // Remove constness.
+    char *buffer = const_cast<char*>(sv.data());
+    size_t len = sv.size();
+    size_t read = 0;
+    size_t write = 0;
+
+    while (read < len) {
+        if (buffer[read] == '&') {
+            // Check known entities.
+            if (read + 3 < len && std::string_view(buffer + read, 4) == "&lt;") {
+                buffer[write++] = '<';
+                read += 4;
+            } else if (read + 3 < len && std::string_view(buffer + read, 4) == "&gt;") {
+                buffer[write++] = '>';
+                read += 4;
+            } else if (read + 4 < len && std::string_view(buffer + read, 5) == "&amp;") {
+                buffer[write++] = '&';
+                read += 5;
+            } else if (read + 5 < len && std::string_view(buffer + read, 6) == "&quot;") {
+                buffer[write++] = '\"';
+                read += 6;
+            } else if (read + 5 < len && std::string_view(buffer + read, 6) == "&apos;") {
+                buffer[write++] = '\'';
+                read += 6;
+            } else if (read + 1 < len && buffer[read + 1] == '#') {
+                // Numeric entity.
+                size_t j = read + 2;
+                bool hex = false;
+                if (j < len && (buffer[j] == 'x' || buffer[j] == 'X')) {
+                    hex = true;
+                    ++j;
+                }
+                size_t numStart = j;
+                while (j < len && buffer[j] != ';')
+                    ++j;
+                if (j < len && buffer[j] == ';') {
+                    // Create a temporary std::string_view for the number.
+                    std::string_view numStr(buffer + numStart, j - numStart);
+                    
+                    // Convert to an integer.
+                    int code = '?';
+                    try {
+                        code = std::stoi(std::string(numStr), nullptr, hex ? 16 : 10);
+                    } catch (...) {
+                        // Use '?' as a replacement on error.
+                        code = '?';
+                    }
+                    buffer[write++] = static_cast<char>(code);
+                    read = j + 1;
+                } else {
+                    // No semicolon found; treat as literal.
+                    buffer[write++] = buffer[read++];
+                }
+            } else {
+                // Unknown entity; copy '&'
+                buffer[write++] = buffer[read++];
+            }
+        } else {
+            buffer[write++] = buffer[read++];
+        }
+    }
+    
+    return std::string_view(buffer, write);
 }
 
 //-----------------------------------------------------
@@ -273,7 +343,7 @@ private:
                 while (pos_ < data_.size() && data_[pos_] != '<')
                     ++pos_;
                 auto textContent = data_.substr(textStart, pos_ - textStart);
-                std::string unescapedText = unescape_xml(textContent);
+                std::string_view unescapedText = unescape_xml(textContent);
                 if (!unescapedText.empty() &&
                     unescapedText.find_first_not_of(" \t\r\n") != std::string::npos)
                 {
