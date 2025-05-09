@@ -2,5 +2,6 @@ var searchData=
 [
   ['cdata_5ft_0',['cdata_t',['../structVS__XML__NS_1_1cdata__t.html',1,'VS_XML_NS']]],
   ['clone_1',['clone',['../structVS__XML__NS_1_1Tree.html#a7cd0061283ca1ef6048d0d7300dde10f',1,'VS_XML_NS::Tree']]],
-  ['comment_5ft_2',['comment_t',['../structVS__XML__NS_1_1comment__t.html',1,'VS_XML_NS']]]
+  ['comment_5ft_2',['comment_t',['../structVS__XML__NS_1_1comment__t.html',1,'VS_XML_NS']]],
+  ['config_5ft_3',['config_t',['../structVS__XML__NS_1_1Builder_1_1config__t.html',1,'VS_XML_NS::Builder']]]
 ];

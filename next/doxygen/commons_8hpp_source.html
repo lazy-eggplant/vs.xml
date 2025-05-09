@@ -111,9 +111,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">typedef</span> <span class="keywordtype">size_t</span> xml_enum_size_t;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">inline</span> <span class="keywordtype">void</span> xml_assert(<span class="keywordtype">bool</span> condition, <span class="keyword">const</span> <span class="keywordtype">char</span>* errorMessage=<span class="stringliteral">&quot;&quot;</span>){</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">inline</span> <span class="keywordtype">void</span> xml_assert(<span class="keywordtype">bool</span> condition, <span class="keyword">const</span> <span class="keywordtype">char</span>* errorMessage=<span class="stringliteral">&quot;&quot;</span>) {</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">    #ifndef VS_XML_NO_ASSERT</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> modern_assert(condition,errorMessage);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    modern_assert(condition,errorMessage);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">    #endif </span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
@@ -195,9 +195,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>}</div>
 <div class="ttc" id="aconceptVS__XML__NS_1_1ProperBuilder_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1ProperBuilder.html">VS_XML_NS::ProperBuilder</a></div><div class="ttdef"><b>Definition</b> commons.hpp:117</div></div>
 <div class="ttc" id="aconceptVS__XML__NS_1_1thing__i_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1thing__i.html">VS_XML_NS::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:94</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1BuilderCompressed_html"><div class="ttname"><a href="structVS__XML__NS_1_1BuilderCompressed.html">VS_XML_NS::BuilderCompressed</a></div><div class="ttdoc">Wrapper of Builder to compress labels before usage, reducing the final memory footprint.</div><div class="ttdef"><b>Definition</b> builder.hpp:80</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Builder_html"><div class="ttname"><a href="structVS__XML__NS_1_1Builder.html">VS_XML_NS::Builder</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:35</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:28</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1BuilderCompressed_html"><div class="ttname"><a href="structVS__XML__NS_1_1BuilderCompressed.html">VS_XML_NS::BuilderCompressed</a></div><div class="ttdoc">Wrapper of Builder to compress labels before usage, reducing the final memory footprint.</div><div class="ttdef"><b>Definition</b> builder.hpp:87</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Builder_html"><div class="ttname"><a href="structVS__XML__NS_1_1Builder.html">VS_XML_NS::Builder</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:36</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1WrpTree_html"><div class="ttname"><a href="structVS__XML__NS_1_1WrpTree.html">VS_XML_NS::WrpTree</a></div><div class="ttdef"><b>Definition</b> wrp-tree.hpp:174</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__t.html">VS_XML_NS::attr_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:67</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1cdata__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1cdata__t.html">VS_XML_NS::cdata_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:220</div></div>
@@ -207,7 +207,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructVS__XML__NS_1_1proc__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1proc__t.html">VS_XML_NS::proc_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:240</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:51</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1text__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1text__t.html">VS_XML_NS::text_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:230</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1unknown__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1unknown__t.html">VS_XML_NS::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:282</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1unknown__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1unknown__t.html">VS_XML_NS::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:284</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
