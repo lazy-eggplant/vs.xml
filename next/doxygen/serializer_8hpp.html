@@ -120,6 +120,8 @@ This graph shows which files directly or indirectly include this file:</div>
 <area shape="poly" title=" " alt="" coords="113,118,113,152,107,152,107,118"/>
 <area shape="rect" href="builder_8hpp.html" title="Tree builder classes." alt="" coords="13,240,207,265"/>
 <area shape="poly" title=" " alt="" coords="113,206,113,240,107,240,107,206"/>
+<area shape="rect" href="parser_8hpp.html" title="Implementation of the parse logic." alt="" coords="15,313,205,339"/>
+<area shape="poly" title=" " alt="" coords="113,279,113,313,107,313,107,279"/>
 </map>
 </div>
 </div>
@@ -133,27 +135,30 @@ typedef std::optional&lt; std::variant&lt; std::string, std::string_view &gt; &g
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af9182d983168dc4a0b0afee6ce481e48" id="r_af9182d983168dc4a0b0afee6ce481e48"><td class="memItemLeft" align="right" valign="top"><a id="af9182d983168dc4a0b0afee6ce481e48" name="af9182d983168dc4a0b0afee6ce481e48"></a>
-constexpr std::optional&lt; std::string_view &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::validate_xml_label</b> (std::string_view str)</td></tr>
-<tr class="separator:af9182d983168dc4a0b0afee6ce481e48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab397b6d94d0d3a6bc0490355571dda6b" id="r_ab397b6d94d0d3a6bc0490355571dda6b"><td class="memItemLeft" align="right" valign="top"><a id="ab397b6d94d0d3a6bc0490355571dda6b" name="ab397b6d94d0d3a6bc0490355571dda6b"></a>
-constexpr ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_attr_1</b> (std::string_view str)</td></tr>
-<tr class="separator:ab397b6d94d0d3a6bc0490355571dda6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec1ffd997126ff1c4e4375c3ed461d8e" id="r_aec1ffd997126ff1c4e4375c3ed461d8e"><td class="memItemLeft" align="right" valign="top"><a id="aec1ffd997126ff1c4e4375c3ed461d8e" name="aec1ffd997126ff1c4e4375c3ed461d8e"></a>
-constexpr ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_attr_2</b> (std::string_view str)</td></tr>
-<tr class="separator:aec1ffd997126ff1c4e4375c3ed461d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a113c940f463ed41b4f870a73e2cc50f9" id="r_a113c940f463ed41b4f870a73e2cc50f9"><td class="memItemLeft" align="right" valign="top"><a id="a113c940f463ed41b4f870a73e2cc50f9" name="a113c940f463ed41b4f870a73e2cc50f9"></a>
-constexpr ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_text</b> (std::string_view str)</td></tr>
-<tr class="separator:a113c940f463ed41b4f870a73e2cc50f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8358b64d160e13770f5d0a270b5bc412" id="r_a8358b64d160e13770f5d0a270b5bc412"><td class="memItemLeft" align="right" valign="top"><a id="a8358b64d160e13770f5d0a270b5bc412" name="a8358b64d160e13770f5d0a270b5bc412"></a>
-constexpr ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_cdata</b> (std::string_view str)</td></tr>
-<tr class="separator:a8358b64d160e13770f5d0a270b5bc412"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a837e86043cb0e0e490143710728b6a78" id="r_a837e86043cb0e0e490143710728b6a78"><td class="memItemLeft" align="right" valign="top"><a id="a837e86043cb0e0e490143710728b6a78" name="a837e86043cb0e0e490143710728b6a78"></a>
-constexpr ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_comment</b> (std::string_view str)</td></tr>
-<tr class="separator:a837e86043cb0e0e490143710728b6a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa04fca0f58eb893c3995cdfa40eabde" id="r_afa04fca0f58eb893c3995cdfa40eabde"><td class="memItemLeft" align="right" valign="top"><a id="afa04fca0f58eb893c3995cdfa40eabde" name="afa04fca0f58eb893c3995cdfa40eabde"></a>
-constexpr ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_proc</b> (std::string_view str)</td></tr>
-<tr class="separator:afa04fca0f58eb893c3995cdfa40eabde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bab89759a19e8f24d65e9a32558cea7" id="r_a1bab89759a19e8f24d65e9a32558cea7"><td class="memItemLeft" align="right" valign="top"><a id="a1bab89759a19e8f24d65e9a32558cea7" name="a1bab89759a19e8f24d65e9a32558cea7"></a>
+std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::validate_xml_label</b> (std::string_view str)</td></tr>
+<tr class="separator:a1bab89759a19e8f24d65e9a32558cea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c12b8238d92dd46fa833dc69ff52f1f" id="r_a9c12b8238d92dd46fa833dc69ff52f1f"><td class="memItemLeft" align="right" valign="top"><a id="a9c12b8238d92dd46fa833dc69ff52f1f" name="a9c12b8238d92dd46fa833dc69ff52f1f"></a>
+ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_attr_1</b> (std::string_view str)</td></tr>
+<tr class="separator:a9c12b8238d92dd46fa833dc69ff52f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61c637290a7defdeff6a4c84ec706af9" id="r_a61c637290a7defdeff6a4c84ec706af9"><td class="memItemLeft" align="right" valign="top"><a id="a61c637290a7defdeff6a4c84ec706af9" name="a61c637290a7defdeff6a4c84ec706af9"></a>
+ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_attr_2</b> (std::string_view str)</td></tr>
+<tr class="separator:a61c637290a7defdeff6a4c84ec706af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47acabcbef4103d1f907d357e6f87790" id="r_a47acabcbef4103d1f907d357e6f87790"><td class="memItemLeft" align="right" valign="top"><a id="a47acabcbef4103d1f907d357e6f87790" name="a47acabcbef4103d1f907d357e6f87790"></a>
+ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_text</b> (std::string_view str)</td></tr>
+<tr class="separator:a47acabcbef4103d1f907d357e6f87790"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cd94cc0cd50dfd3b6b1ff8498ad0a22" id="r_a8cd94cc0cd50dfd3b6b1ff8498ad0a22"><td class="memItemLeft" align="right" valign="top"><a id="a8cd94cc0cd50dfd3b6b1ff8498ad0a22" name="a8cd94cc0cd50dfd3b6b1ff8498ad0a22"></a>
+ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_cdata</b> (std::string_view str)</td></tr>
+<tr class="separator:a8cd94cc0cd50dfd3b6b1ff8498ad0a22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9846f13d8c057139ba6bec28ba2285a9" id="r_a9846f13d8c057139ba6bec28ba2285a9"><td class="memItemLeft" align="right" valign="top"><a id="a9846f13d8c057139ba6bec28ba2285a9" name="a9846f13d8c057139ba6bec28ba2285a9"></a>
+ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_comment</b> (std::string_view str)</td></tr>
+<tr class="separator:a9846f13d8c057139ba6bec28ba2285a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1128b88545f535ac1f9f9137900b11a0" id="r_a1128b88545f535ac1f9f9137900b11a0"><td class="memItemLeft" align="right" valign="top"><a id="a1128b88545f535ac1f9f9137900b11a0" name="a1128b88545f535ac1f9f9137900b11a0"></a>
+ret_t&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::to_xml_proc</b> (std::string_view str)</td></tr>
+<tr class="separator:a1128b88545f535ac1f9f9137900b11a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13faa94a7865b9417281239b3ad84d0d" id="r_a13faa94a7865b9417281239b3ad84d0d"><td class="memItemLeft" align="right" valign="top"><a id="a13faa94a7865b9417281239b3ad84d0d" name="a13faa94a7865b9417281239b3ad84d0d"></a>
+std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::serialize::unescape_xml</b> (std::string_view <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>)</td></tr>
+<tr class="separator:a13faa94a7865b9417281239b3ad84d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of serialization/deserialization helpers. </p>

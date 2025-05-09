@@ -129,8 +129,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1inject__t.html">inject_t</a>;</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a>;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1Parser.html">Parser</a>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1Builder.html">Builder</a>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1Builder.html">Builder</a>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1BuilderCompressed.html">BuilderCompressed</a>;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">enum struct</span> feature_t{</div>
@@ -177,10 +177,17 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1WrpTree.html">WrpTree</a>;</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="conceptVS__XML__NS_1_1ProperBuilder.html">  108</a></span><span class="keyword">concept </span><a class="code hl_concept" href="conceptVS__XML__NS_1_1ProperBuilder.html">ProperBuilder</a> = std::same_as&lt;T, BuilderCompressed&gt; || std::same_as&lt;T, Builder&gt;;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keyword">template</span>&lt;ProperBuilder Builder_t&gt;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keyword">class </span>Parser;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}</div>
+<div class="ttc" id="aconceptVS__XML__NS_1_1ProperBuilder_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1ProperBuilder.html">VS_XML_NS::ProperBuilder</a></div><div class="ttdef"><b>Definition</b> commons.hpp:108</div></div>
 <div class="ttc" id="aconceptVS__XML__NS_1_1thing__i_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1thing__i.html">VS_XML_NS::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:85</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1BuilderCompressed_html"><div class="ttname"><a href="structVS__XML__NS_1_1BuilderCompressed.html">VS_XML_NS::BuilderCompressed</a></div><div class="ttdoc">Wrapper of Builder to compress labels before usage, reducing the final memory footprint.</div><div class="ttdef"><b>Definition</b> builder.hpp:80</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Builder_html"><div class="ttname"><a href="structVS__XML__NS_1_1Builder.html">VS_XML_NS::Builder</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:35</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Parser_html"><div class="ttname"><a href="structVS__XML__NS_1_1Parser.html">VS_XML_NS::Parser</a></div><div class="ttdef"><b>Definition</b> parser.hpp:17</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:28</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1WrpTree_html"><div class="ttname"><a href="structVS__XML__NS_1_1WrpTree.html">VS_XML_NS::WrpTree</a></div><div class="ttdef"><b>Definition</b> wrp-tree.hpp:174</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__t.html">VS_XML_NS::attr_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:67</div></div>
