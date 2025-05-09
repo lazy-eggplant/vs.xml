@@ -27,8 +27,12 @@ namespace VS_XML_NS{
 
 struct Tree{
     protected:
-        std::vector<uint8_t> buffer;
-        std::vector<uint8_t> symbols;
+        std::vector<uint8_t> buffer_i;
+        std::vector<uint8_t> symbols_i;
+
+        std::span<uint8_t> buffer;
+        std::span<uint8_t> symbols;
+
         void* label_offset;
 
     public:
@@ -103,13 +107,29 @@ struct Tree{
     /**
      * @brief Construct a new Tree object, with the list of strings being external. Make sure its lifetime contains the one of the Tree.
      */
-    Tree(std::vector<uint8_t>&& src, void* label_offset=nullptr):buffer(src),symbols({}),label_offset(label_offset){}
+    Tree(std::vector<uint8_t>&& src, void* label_offset=nullptr):
+        buffer_i(src),symbols_i({}),
+        buffer(buffer_i),symbols(symbols_i),
+        label_offset(label_offset){}
 
     /**
      * @brief Construct a new Tree object, owning its own table of strings
      */
-    Tree(std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):buffer(src),symbols(sym),label_offset(symbols.data()){}
+    Tree(std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):
+        buffer_i(src),symbols_i(sym),
+        buffer(buffer_i),symbols(symbols_i),
+        label_offset(symbols.data()){}
  
+    //Weak, used when loading from disk
+    Tree(std::span<uint8_t> src, void* label_offset=nullptr):
+        buffer(src),
+        label_offset(label_offset){}
+
+    //Weak, used when loading from disk
+    Tree(std::span<uint8_t> src, std::span<uint8_t> sym):
+        buffer(src),symbols(sym),
+        label_offset(symbols.data()){}
+
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
     bool reorder_h(

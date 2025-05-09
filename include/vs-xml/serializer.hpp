@@ -36,7 +36,7 @@ ret_t to_xml_cdata(std::string_view str);
 ret_t to_xml_comment(std::string_view str);
 ret_t to_xml_proc(std::string_view str);
 
-std::string_view unescape_xml(std::string_view sv);
+std::string_view unescape_xml(std::string_view sv); //It should be a span. String views are assumed immutable.
 
 }
 }

@@ -130,12 +130,13 @@ Tree Tree::clone(const node_t* ref, bool reduce) const{
     memcpy((void*)buffer.data(),ref,ref->_size);
 
     if(reduce==false){
-       symbols = this->symbols;
+        //symbols.assign_range(this->symbols_i);
+        symbols.assign(this->symbols_i.begin(),this->symbols_i.end());
     }
     else{
         //TODO: create a new symbols vector, only providing what is needed.
-        symbols = this->symbols;
-
+        //symbols.assign_range(this->symbols_i);
+        symbols.assign(this->symbols_i.begin(),this->symbols_i.end());
     }
 
     return Tree(std::move(buffer),std::move(symbols));

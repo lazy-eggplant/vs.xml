@@ -23,8 +23,8 @@ namespace VS_XML_NS{
 template<ProperBuilder Builder_t>
 class Parser {
 public:
-    Parser(std::string_view data, Builder_t &builder)
-        : data_(data), pos_(0), builder_(builder)
+    Parser(std::span<char> data, Builder_t &builder)
+        : data_(data.data(),data.size()), pos_(0), builder_(builder)
     {}
 
     // Start parsing from the beginning of the XML document.
@@ -39,6 +39,7 @@ public:
     }
 
 private:
+    //This should logically be a span<char>, but we don't have *.find for it, so we keep it as is for now.
     std::string_view data_;
     size_t pos_;
     Builder_t &builder_;

@@ -1,12 +1,9 @@
-#include "vs-xml/builder.hpp"
-#include "vs-xml/impl.hpp"
-#include <concepts>
 #include <iostream>
-#include <string_view>
-#include <type_traits>
+#include <print>
+
 #include <vs-xml/parser.hpp>
 #include <vs-xml/serializer.hpp>
-#include <print>
+#include <vs-xml/builder.hpp>
 
 //-----------------------------------------------------
 // Example main (for testing purposes)
@@ -27,7 +24,7 @@ int main() {
 
     xml::Builder builder;
     try {
-        xml::Parser parser(std::move(xmlData), builder);
+        xml::Parser parser(xmlData, builder);
         parser.parse();
     } catch (const std::exception &ex) {
         std::cerr << "Error while parsing XML: " << ex.what() << "\n";

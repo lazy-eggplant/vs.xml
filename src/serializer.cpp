@@ -130,7 +130,7 @@ ret_t to_xml_proc(std::string_view str){
 }
 
 
-std::string_view unescape_xml(std::string_view sv) {
+std::string_view unescape_xml(std::string_view sv) { //It should be a span. String views are assumed immutable.
     // We assume that sv.data() points to mutable memory.
     // Remove constness.
     char *buffer = const_cast<char*>(sv.data());
