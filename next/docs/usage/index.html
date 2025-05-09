@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../layout/">
       
-      
-        <link rel="next" href="../faq/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>Building - vs.xml</title>
+        <title>Usage - vs.xml</title>
       
     
     
@@ -61,6 +59,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#installing" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -93,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Building
+              Usage
             
           </span>
         </div>
@@ -232,36 +235,6 @@
       
   
   
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Building
-    
-  </span>
-  
-
-      </a>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
   
   
     <li class="md-nav__item">
@@ -324,6 +297,84 @@
   
 
     
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -342,6 +393,32 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -359,9 +436,18 @@
   
 
 
-  <h1>Building</h1>
+  <h1>Usage</h1>
 
-
+<h2 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">#</a></h2>
+<p>Use it as a meson dependency, be it a subproject of after installing it on your system.  </p>
+<p>The process is basically as usual:</p>
+<pre><code class="language-sh">meson setup build           #Add more flags to setup release, lto optimizations etc based on your needs
+meson install -C build      #You might have to define DESTDIR to perform a dry run or if you have a strange location
+</code></pre>
+<p>A simplified makefile is made available, which has some reasonable defaults.  </p>
+<p>Tarballs are also offered for some distributions in releases.  </p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h2>
+<p>TBW</p>
 
 
 
