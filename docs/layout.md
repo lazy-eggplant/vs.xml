@@ -3,7 +3,7 @@ The memory layout for the tree structure used by this library has the following 
 - It is built in-place, as such children are placed directly after their parent.
 - Attributes are immediately stored after a node.
 - Pointers between nodes in the tree are not defined as absolute, but relative to the address of the current one.
-- All strings are represented as string views over a common base offset.
+- All strings are represented as string views over a common base offset which is valid for the whole tree.
 
 The structure of the various nodes is based on the size of three data types:
 

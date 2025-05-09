@@ -3,14 +3,15 @@
 ## Features
 
 ### XML parsing
-- [ ] namespaces [^1]
-- [ ] cdata
+- [x] namespaces [^1]
+- [x] cdata
     - [ ] optional reduction to `text`
-- [ ] text
+- [x] text
     - [ ] optional merging of close text blocks
-- [ ] comments 
+- [x] comments 
     - [ ] optional stripping
-- [ ] basic entities
+- [x] basic entities
+- [x] complex entities
 
 ### Tree builder
 - [x] namespaces

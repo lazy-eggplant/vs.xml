@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include <vs-xml/builder.hpp>
 #include <vs-xml/impl.hpp>
 
@@ -120,7 +121,7 @@ sv BuilderCompressed::symbol(std::string_view s){
 
         sv ret(symbols.size()-s.length(),s.length());
         auto it = idx_symbols.insert(ret); 
-        if(it.second==false)throw "NOOOOO";
+        if(it.second==false)throw std::runtime_error("Unable to insert symbol in symbol table");
         return *it.first;
     }
     else{
