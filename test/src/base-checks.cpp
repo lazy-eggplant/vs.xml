@@ -7,7 +7,7 @@
 
 int main(){
     xml::BuilderCompressed build;
-
+    
     build.begin("hello");
         build.attr("op3-a", "v'>&al1");
         build.attr("op1-a", "val1", "w");

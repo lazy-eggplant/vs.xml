@@ -10,7 +10,7 @@ namespace serialize{
 std::string_view validate_xml_label(std::string_view str){
     int pos = 0;
     for(auto& c : str){
-        if(pos==0 && (c=='_' or (c>'a' && c<'z') or (c>'A' && c<'Z'))){/*OK*/}
+        if(pos==0 && (c=='_' or (c>='a' && c<='z') or (c>='A' && c<='Z'))){/*OK*/}
         //In theory some intervals of utf8 should be negated. But this filter is good enough for now.
         else if(pos!=0 && (c=='_' or c=='.' or c=='-' or (c>='0' && c<='9') or (c>='a' && c<='z') or (c>='A' && c<='Z') or (c>127))){/*OK*/}
         else{

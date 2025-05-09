@@ -22,6 +22,10 @@
 #include <string>
 #include <string_view>
 
+#ifndef VS_XML_NO_ASSERT
+#include "assert.hpp"
+#endif 
+
 #ifndef VS_XML_NS
 #define VS_XML_NS xml
 #endif
@@ -33,7 +37,12 @@ typedef size_t xml_size_t;
 typedef size_t xml_count_t;
 typedef size_t xml_enum_size_t;
 
-inline void xml_assert(bool b){return assert(b);}
+
+inline void xml_assert(bool condition, const char* errorMessage=""){
+    #ifndef VS_XML_NO_ASSERT
+    return modern_assert(condition,errorMessage);
+    #endif 
+}
 
 /**
  * @brief Compact position-free string_view

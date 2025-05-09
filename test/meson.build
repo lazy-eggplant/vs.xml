@@ -17,6 +17,7 @@ test('parse-demo',executable(
     cpp_args: [],
     link_args: [],
     dependencies: [
-        vs_xml_dep
+        vs_xml_dep,
+        mio_dep
     ],
 ))

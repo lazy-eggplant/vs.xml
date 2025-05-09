@@ -6,6 +6,7 @@
 /subprojects/*
 !/subprojects/packagefiles/
 !/subprojects/nanobench.wrap
+!/subprojects/mio.wrap
 *.autogen.*
 /private/
 /.vscode/

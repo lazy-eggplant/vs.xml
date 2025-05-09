@@ -6,6 +6,10 @@ project(
   default_options: ['cpp_std=c++23'],
 )
 
+
+nanobench_dep = dependency('nanobench')
+mio_dep = dependency('mio')
+
 include_dirs = include_directories('include')
 
 add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
@@ -38,6 +42,8 @@ endif
 if get_option('benchmarks')
   subdir(['./benchmark/'])
 endif
+
+
 
 pconf = import('pkgconfig')
 pconf.generate(

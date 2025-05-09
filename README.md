@@ -33,3 +33,16 @@ I am working with C++23 for development, and I don't really plan on directly sup
 [^1]: XML 1.0 is covered as a best-effort, but there will be small things where either the official XML standard or this implementation is going to be incompatible or a superset.  
       For more information on compatibility, please check [here](./docs/features.md).
 [^2]: Namespaces are supported in the sense that the namespace is split from the element or attribute name if present, but its handling, validation or whatever is left to the user.
+
+
+### External dependencies
+
+While they are not used by the library itself, tests and benchmarks do:
+- [mio](https://github.com/StrikerX3/mio) a simple way to handle memory mapped files.
+- [nanobench](https://github.com/martinus/nanobench) to perform benchmarks.
+
+### Licence
+
+This library is released as `LGPL3.0`.  
+Documentation is CC4.0 Attribution Share-Alike.  
+Examples are CC0 unless something else is specified.

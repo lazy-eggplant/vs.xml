@@ -3,5 +3,6 @@
 - Support for saving/loading functions of trees without needing serialization.
 - Random access to attributes for the iterator.
 - Tree builder method to use injection maps when generating the tree.
+- Fix xml parsing bug when the file starts with `<?xml?>`
 
 With these features, the library would be considered complete.
