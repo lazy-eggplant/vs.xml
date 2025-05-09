@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../embedded/">
+        <link rel="prev" href="../compatibility/">
       
       
       
@@ -274,28 +274,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../embedded/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Embedded
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -364,7 +342,7 @@
 - It is built in-place, as such children are placed directly after their parent.
 - Attributes are immediately stored after a node.
 - Pointers between nodes in the tree are not defined as absolute, but relative to the address of the current one.
-- All strings are represented as string views over a common base offset.</p>
+- All strings are represented as string views over a common base offset which is valid for the whole tree.</p>
 <p>The structure of the various nodes is based on the size of three data types:</p>
 <ul>
 <li><code>delta_ptr_t</code> is the type of relative pointers. Realistically, 16bits is plenty enough for most realistic scenarios with XML files humans can handle.</li>
