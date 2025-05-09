@@ -9,7 +9,7 @@
 - [x] text
     - [ ] optional merging of close text blocks
 - [x] comments 
-    - [ ] optional stripping
+    - [x] optional stripping
 - [x] basic entities
 - [x] complex entities
 

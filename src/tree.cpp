@@ -144,7 +144,19 @@ Tree Tree::clone(const node_t* ref, bool reduce) const{
 }
 
 
-bool Tree::save_binary(std::ostream& out)const{return false;} //TODO:
+bool Tree::save_binary(std::ostream& out)const{
+    if(symbols.data()==nullptr)return false;
+
+    serialized_header_t header;
+    header.offset_symbols = buffer.size_bytes();
+    header.offset_end = buffer.size_bytes()+symbols.size_bytes();
+    out.write((const char*) &header, sizeof(header));
+    out.write((const char*)buffer.data(), buffer.size_bytes());
+    out.write((const char*)symbols.data(), symbols.size_bytes());
+    out.flush();
+    return true;
+}
+
 Tree::Tree(std::span<uint8_t> region){} //TODO:
 
 }

@@ -1,4 +1,6 @@
+#include <fstream>
 #include <iostream>
+#include <ostream>
 #include <print>
 
 #include <vs-xml/parser.hpp>
@@ -11,7 +13,8 @@
 // Example main (for testing purposes)
 //-----------------------------------------------------
 int main() {
-    mio::mmap_sink mmap("./test/assets/demo-0.xml");
+    mio::mmap_source mmap("./test/assets/demo-0.xml");
+    std::span<char> w((char*)mmap.data(),mmap.size());
 
     //The parser can mutate this string. I will have to identify if there is any better ownership mechanism here to use
     std::string xmlData = R"(
@@ -25,11 +28,10 @@ int main() {
     <hello4 ns="s"/>
 </ns1:hello>
 )";
-    std::span<char> w((char*)mmap.data(),mmap.size());
 
-    xml::Builder builder;
+    xml::BuilderCompressed builder;
     try {
-        xml::Parser parser(w, builder);
+        xml::Parser parser(xmlData, builder);
         parser.parse();
     } catch (const std::exception &ex) {
         std::cerr << "Error while parsing XML: " << ex.what() << "\n";
@@ -38,5 +40,8 @@ int main() {
     auto tree = *builder.close();
     tree.print(std::cout,{});
 
+    //std::ofstream file("./test/assets/out.bin",std::ios::binary|std::ios::out);
+    //    tree.save_binary(file);
+    //file.close();
     return 0;
 }

@@ -27,6 +27,13 @@
 namespace VS_XML_NS{
 
 struct Tree{
+    struct __attribute__ ((packed)) serialized_header_t{
+        const char magic[4] = {'$','X','M','L'};
+        uint32_t reserved_cfg = 0;
+        size_t offset_symbols;
+        size_t offset_end;
+    };
+
     protected:
         std::vector<uint8_t> buffer_i;
         std::vector<uint8_t> symbols_i;
