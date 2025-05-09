@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../building/">
       
       
-        <link rel="next" href="../faq/">
+        <link rel="next" href="../features/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Building - vs.xml</title>
+        <title>Faq - vs.xml</title>
       
     
     
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Building
+              Faq
             
           </span>
         </div>
@@ -232,6 +232,28 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../building/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Building
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -247,35 +269,13 @@
   
   
   <span class="md-ellipsis">
-    Building
-    
-  </span>
-  
-
-      </a>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../faq/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
     Faq
     
   </span>
   
 
       </a>
+      
     </li>
   
 
@@ -359,9 +359,30 @@
   
 
 
-  <h1>Building</h1>
+  <h1>Faq</h1>
 
-
+<blockquote>
+<p>Why the binary serialization of the XML is bigger compared to the base file?</p>
+</blockquote>
+<p>That is to be expected. XML has little overhead with extra symbols and marker. By comparison, nodes as represented by this library are storing contextual information about their neighbours to speed up navigation.<br />
+This additional pre-computed information is the reason for the extra space needed. Even when compressed via gzip, the source XML has a meaningful edge.  </p>
+<blockquote>
+<p>So why should I save the binary serialization?</p>
+</blockquote>
+<p>Because you don&rsquo;t need to parse the file any longer. You just need to memory-map it and use it as is. This lowers start-up time quite a bit.</p>
+<blockquote>
+<p>What is the point of a representation which is not mutable?</p>
+</blockquote>
+<p>It is not immutable, it is just that some mutations would be very expensive, almost like rebuilding the tree from scratch.<br />
+However, there are some mutations which are still viable, like reordering attributes, changing value if the new literal is already in memory, or removing nodes/leaves.<br />
+Some of them are implemented by the library, others could be.  </p>
+<p>As for why, there is plenty of applications where there is no need to mutate the tree structure after its build process has ended.<br />
+This library tries to optimize for such cases as much as possible.</p>
+<blockquote>
+<p>Why pointers are relative?</p>
+</blockquote>
+<p>To allow them to be serialized and still provide random access on the tree regardless of the device or medium on which it is being stored.<br />
+This allows to share annotations for a tree for cheap even in offloaded contexts.</p>
 
 
 
