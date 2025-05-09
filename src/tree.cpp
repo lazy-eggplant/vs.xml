@@ -1,5 +1,6 @@
 #include <cstring>
 #include <algorithm>
+#include <string_view>
 #include <vs-xml/commons.hpp>
 #include <vs-xml/tree.hpp>
 #include <vs-xml/impl.hpp>
@@ -157,6 +158,16 @@ bool Tree::save_binary(std::ostream& out)const{
     return true;
 }
 
-Tree::Tree(std::span<uint8_t> region){} //TODO:
+Tree::Tree(std::span<uint8_t> region){
+    xml_assert(region.size_bytes()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
+    serialized_header_t header;
+    memcpy(&header,region.data(),sizeof(serialized_header_t));
+    xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
+    xml_assert(region.size_bytes()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
+    xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
+
+    this->buffer={region.data()+sizeof(header), region.data()+sizeof(header)+header.offset_symbols};
+    this->symbols={region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end};
+}
 
 }

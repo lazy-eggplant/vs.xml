@@ -40,8 +40,21 @@ int main() {
     auto tree = *builder.close();
     tree.print(std::cout,{});
 
-    //std::ofstream file("./test/assets/out.bin",std::ios::binary|std::ios::out);
-    //    tree.save_binary(file);
-    //file.close();
+    {
+        std::ofstream file("./test/assets/demo-0.bin",std::ios::binary|std::ios::out);
+            tree.save_binary(file);
+        file.close();
+    }
+
+    std::print("\n~~~~\n");
+
+    {
+        mio::mmap_sink mmap("./test/assets/demo-0.bin");
+        xml::Tree tmp(std::span((uint8_t*)mmap.data(),mmap.size()));
+        tmp.print(std::cout,{});
+    }
+
+    std::print("\n~~~~\n");
+
     return 0;
 }
