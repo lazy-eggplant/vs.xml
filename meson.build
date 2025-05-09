@@ -14,6 +14,7 @@ add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
 vs_xml_lib = library(
     'vs-xml',
     [
+      'src/serializer.cpp',
       'src/tree.cpp',
       'src/builder.cpp',
       'src/wrp-tree.cpp'

@@ -36,29 +36,29 @@ struct base_t{
     public:
     typedef T base;
 
-    constexpr inline type_t type() const {return _type;};
+    type_t type() const {return _type;};
 
-    constexpr inline std::expected<sv,feature_t> ns() const {return static_cast<const T*>(this)->ns();}
-    constexpr inline std::expected<sv,feature_t> name() const {return static_cast<const T*>(this)->name();}
-    constexpr inline std::expected<sv,feature_t> value() const {return static_cast<const T*>(this)->value();}
+    std::expected<sv,feature_t> ns() const {return static_cast<const T*>(this)->ns();}
+    std::expected<sv,feature_t> name() const {return static_cast<const T*>(this)->name();}
+    std::expected<sv,feature_t> value() const {return static_cast<const T*>(this)->value();}
 
-    constexpr inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {return static_cast<const T*>(this)->children();}
-    constexpr inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return static_cast<const T*>(this)->attrs();}
+    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {return static_cast<const T*>(this)->children();}
+    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return static_cast<const T*>(this)->attrs();}
 
-    constexpr inline const node_t* parent() const {return static_cast<const T*>(this)->parent();}
-    constexpr inline const unknown_t* prev() const {return static_cast<const T*>(this)->prev();}
-    constexpr inline const unknown_t* next() const {return static_cast<const T*>(this)->next();}
+    const node_t* parent() const {return static_cast<const T*>(this)->parent();}
+    const unknown_t* prev() const {return static_cast<const T*>(this)->prev();}
+    const unknown_t* next() const {return static_cast<const T*>(this)->next();}
 
-    constexpr inline bool has_parent() const {return static_cast<const T*>(this)->has_parent();}
-    constexpr inline bool has_prev() const {return static_cast<const T*>(this)->has_prev();}
-    constexpr inline bool has_next() const {return static_cast<const T*>(this)->has_next();}
+    bool has_parent() const {return static_cast<const T*>(this)->has_parent();}
+    bool has_prev() const {return static_cast<const T*>(this)->has_prev();}
+    bool has_next() const {return static_cast<const T*>(this)->has_next();}
 
-    constexpr inline std::string path() const {
+    std::string path() const {
         return std::format("{}/{}",parent()!=nullptr?parent()->path():"",static_cast<const T*>(this)->path_h());
     }
 
-    constexpr auto children_fwd() const;
-    constexpr auto attrs_fwd() const;
+    auto children_fwd() const;
+    auto attrs_fwd() const;
 
     friend Builder;
     friend Tree;
@@ -72,14 +72,14 @@ struct attr_t{
 
     public:
 
-    constexpr inline attr_t(void* offset, std::string_view _ns, std::string_view _name, std::string_view _value):
+    inline attr_t(void* offset, std::string_view _ns, std::string_view _name, std::string_view _value):
         _ns(offset,*serialize::validate_xml_label(_ns)),
         _name(offset,*serialize::validate_xml_label(_name)),
         _value(offset,_value){}
 
-    constexpr inline std::expected<sv,feature_t> ns() const {return _ns;}
-    constexpr inline std::expected<sv,feature_t> name() const {return _name;}
-    constexpr inline std::expected<sv,feature_t> value() const {return _value;}
+    inline std::expected<sv,feature_t> ns() const {return _ns;}
+    inline std::expected<sv,feature_t> name() const {return _name;}
+    inline std::expected<sv,feature_t> value() const {return _value;}
 };
 
 struct node_t : base_t<node_t>{
@@ -97,7 +97,7 @@ struct node_t : base_t<node_t>{
 
     attr_t _attrs[];
 
-    constexpr inline node_t(void* offset, node_t* _parent, std::string_view _ns, std::string_view _name):
+    inline node_t(void* offset, node_t* _parent, std::string_view _ns, std::string_view _name):
         _ns(offset,*serialize::validate_xml_label(_ns)),
         _name(offset,*serialize::validate_xml_label(_name))
     {
@@ -106,54 +106,54 @@ struct node_t : base_t<node_t>{
         attrs_count=0;
     }
 
-    constexpr inline void set_parent(node_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
-    constexpr inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
-    constexpr inline void set_next(unknown_t* next){auto tmp=(uint8_t*)next-(uint8_t*)this;_next=tmp;xml_assert((std::ptrdiff_t)_next==tmp);}
+    inline void set_parent(node_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
+    inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
+    inline void set_next(unknown_t* next){auto tmp=(uint8_t*)next-(uint8_t*)this;_next=tmp;xml_assert((std::ptrdiff_t)_next==tmp);}
 
     //Unsafe, not boundary checked.
-    constexpr inline attr_t& get_attr(xml_count_t a) const{return (attr_t&)_attrs[a];}
+    inline attr_t& get_attr(xml_count_t a) const{return (attr_t&)_attrs[a];}
 
     public:
 
     using base_t::type;
     
-    constexpr static inline type_t deftype() {return type_t::NODE;};
-    constexpr inline std::expected<sv,feature_t> ns() const {return _ns;}
-    constexpr inline std::expected<sv,feature_t> name() const {return _name;}
-    constexpr inline std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    static inline type_t deftype() {return type_t::NODE;};
+    inline std::expected<sv,feature_t> ns() const {return _ns;}
+    inline std::expected<sv,feature_t> name() const {return _name;}
+    inline std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
-    constexpr inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {
+    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {
         return std::pair{
             (const unknown_t*)((const uint8_t*)this+sizeof(node_t)+sizeof(attr_t)*attrs_count),
             (const unknown_t*)((const uint8_t*)this+_size)
         };
     }
-    constexpr inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {
+    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {
         return std::pair{
             (const attr_t*)((const uint8_t*)this+sizeof(node_t)),
             (const attr_t*)((const uint8_t*)this+sizeof(node_t)+sizeof(attr_t)*attrs_count)
         };
     }
 
-    constexpr inline const node_t* parent() const {
+    inline const node_t* parent() const {
         if(_parent==0)return nullptr;
         return (const node_t*)((const uint8_t*)this+_parent);
     }
-    constexpr inline const unknown_t* prev() const {
+    inline const unknown_t* prev() const {
         if(_prev==0)return nullptr;  //TODO: check this one
         return (const unknown_t*)((const uint8_t*)this+_prev);
     }
-    constexpr inline const unknown_t* next() const {
+    inline const unknown_t* next() const {
         if(_next==0)return (const unknown_t*) (parent()->_size+_parent+(const uint8_t*)this); 
         return (const unknown_t*)((const uint8_t*)this+_next);
     }
 
-    constexpr inline bool has_parent() const {return _parent!=0;}
-    constexpr inline bool has_prev() const {return _prev!=0;}
-    constexpr inline bool has_next() const {return _next!=0;}
+    inline bool has_parent() const {return _parent!=0;}
+    inline bool has_prev() const {return _prev!=0;}
+    inline bool has_next() const {return _next!=0;}
 
     /*
-    constexpr inline std::string path_h() const {
+    inline std::string path_h() const {
         return std::format("{}{}{}", _ns, _ns==""?"":":", _name);
     }
     */
@@ -174,33 +174,33 @@ struct leaf_t : base_t<T>{
 
     sv _value;
 
-    constexpr inline void set_parent(node_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
-    constexpr inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
-    constexpr inline void set_next(unknown_t* next){/*not needed*/}
+    inline void set_parent(node_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
+    inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
+    inline void set_next(unknown_t* next){/*not needed*/}
 
 
     protected:
     
-    constexpr leaf_t(void* offset, std::string_view value):_value(offset,value){}
+    leaf_t(void* offset, std::string_view value):_value(offset,value){}
 
     public:
 
     using base_t<T>::type;
 
-    constexpr inline std::expected<sv,feature_t> ns() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    constexpr inline std::expected<sv,feature_t> name() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    constexpr inline std::expected<sv,feature_t> value() const {return _value;}
+    inline std::expected<sv,feature_t> ns() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<sv,feature_t> name() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<sv,feature_t> value() const {return _value;}
 
-    constexpr inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    constexpr inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
-    constexpr inline const node_t* parent() const {return (const node_t*)((const uint8_t*)this+_parent);}
-    constexpr inline const unknown_t*prev() const {return (const unknown_t*)((const uint8_t*)this+_prev);}
-    constexpr inline const unknown_t* next() const {return (const unknown_t*)((const uint8_t*)this+sizeof(leaf_t));}
+    inline const node_t* parent() const {return (const node_t*)((const uint8_t*)this+_parent);}
+    inline const unknown_t*prev() const {return (const unknown_t*)((const uint8_t*)this+_prev);}
+    inline const unknown_t* next() const {return (const unknown_t*)((const uint8_t*)this+sizeof(leaf_t));}
 
-    constexpr inline bool has_parent() const {return _parent!=0;}
-    constexpr inline bool has_prev() const {return _prev!=0;}
-    constexpr inline bool has_next() const {return has_parent() && (next()<(parent()->children())->second)!=0;}   //TODO:check
+    inline bool has_parent() const {return _parent!=0;}
+    inline bool has_prev() const {return _prev!=0;}
+    inline bool has_next() const {return has_parent() && (next()<(parent()->children())->second)!=0;}   //TODO:check
 
     friend Builder;
     friend Tree;
@@ -209,9 +209,9 @@ struct leaf_t : base_t<T>{
 
 struct comment_t : leaf_t<comment_t>{
     comment_t(void* offset, std::string_view value):leaf_t(offset, value){}
-    constexpr static inline type_t deftype() {return type_t::COMMENT;};
+    static inline type_t deftype() {return type_t::COMMENT;};
 
-    constexpr inline std::string path_h() const { return std::format("#comment"); }
+    inline std::string path_h() const { return std::format("#comment"); }
 
     friend Builder;
     friend Tree;
@@ -219,9 +219,9 @@ struct comment_t : leaf_t<comment_t>{
 
 struct cdata_t : leaf_t<cdata_t>{
     cdata_t(void* offset, std::string_view value):leaf_t(offset, value){}
-    constexpr static inline type_t deftype() {return type_t::CDATA;};
+    static inline type_t deftype() {return type_t::CDATA;};
 
-    constexpr inline std::string path_h() const { return std::format("#cdata"); }
+    inline std::string path_h() const { return std::format("#cdata"); }
 
     friend Builder;
     friend Tree;
@@ -229,9 +229,9 @@ struct cdata_t : leaf_t<cdata_t>{
 
 struct text_t : leaf_t<text_t>{
     text_t(void* offset, std::string_view value):leaf_t(offset, value){}
-    constexpr static inline type_t deftype() {return type_t::TEXT;};
+    static inline type_t deftype() {return type_t::TEXT;};
 
-    constexpr inline std::string path_h() const { return std::format("#text"); }
+    inline std::string path_h() const { return std::format("#text"); }
     
     friend Builder;
     friend Tree;
@@ -239,9 +239,9 @@ struct text_t : leaf_t<text_t>{
 
 struct proc_t : leaf_t<proc_t>{
     proc_t(void* offset, std::string_view value):leaf_t(offset, value){}
-    constexpr static inline type_t deftype() {return type_t::PROC;};
+    static inline type_t deftype() {return type_t::PROC;};
 
-    constexpr inline std::string path_h() const { return std::format("#proc"); }
+    inline std::string path_h() const { return std::format("#proc"); }
 
     friend Builder;
     friend Tree;
@@ -249,9 +249,9 @@ struct proc_t : leaf_t<proc_t>{
 
 struct inject_t : leaf_t<inject_t>{
     inject_t(void* offset, std::string_view value):leaf_t(offset, value){}
-    constexpr static inline type_t deftype() {return type_t::INJECT;};
+    static inline type_t deftype() {return type_t::INJECT;};
 
-    constexpr inline std::string path_h() const { return std::format("#leaf"); }
+    inline std::string path_h() const { return std::format("#leaf"); }
 
     friend Builder;
     friend Tree;
@@ -282,28 +282,28 @@ else{\
 struct unknown_t : base_t<unknown_t>{
     private:
 
-    constexpr void set_parent(node_t* parent){DISPATCH(set_parent(parent));}
-    constexpr void set_prev(unknown_t* prev){DISPATCH(set_prev(prev));}
-    constexpr void set_next(unknown_t* next){DISPATCH(set_next(next));}
+    void set_parent(node_t* parent){DISPATCH(set_parent(parent));}
+    void set_prev(unknown_t* prev){DISPATCH(set_prev(prev));}
+    void set_next(unknown_t* next){DISPATCH(set_next(next));}
 
     public:
 
-    constexpr static inline type_t deftype() {return type_t::UNKNOWN;};
+    static inline type_t deftype() {return type_t::UNKNOWN;};
 
-    constexpr std::expected<sv,feature_t> ns() const {CDISPATCH(ns());}
-    constexpr std::expected<sv,feature_t> name() const {CDISPATCH(name());}
-    constexpr std::expected<sv,feature_t> value() const {CDISPATCH(value());}
+    std::expected<sv,feature_t> ns() const {CDISPATCH(ns());}
+    std::expected<sv,feature_t> name() const {CDISPATCH(name());}
+    std::expected<sv,feature_t> value() const {CDISPATCH(value());}
 
-    constexpr std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {CDISPATCH(children());}
-    constexpr std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {CDISPATCH(attrs());}
+    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {CDISPATCH(children());}
+    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {CDISPATCH(attrs());}
 
-    constexpr const node_t* parent() const {CDISPATCH(parent());}
-    constexpr const unknown_t* prev() const {CDISPATCH(prev());}
-    constexpr const unknown_t* next() const {CDISPATCH(next());}
+    const node_t* parent() const {CDISPATCH(parent());}
+    const unknown_t* prev() const {CDISPATCH(prev());}
+    const unknown_t* next() const {CDISPATCH(next());}
 
-    constexpr inline bool has_parent() const {CDISPATCH(has_parent());}
-    constexpr inline bool has_prev() const {CDISPATCH(has_prev());}
-    constexpr inline bool has_next() const {CDISPATCH(has_next());}
+    inline bool has_parent() const {CDISPATCH(has_parent());}
+    inline bool has_prev() const {CDISPATCH(has_prev());}
+    inline bool has_next() const {CDISPATCH(has_next());}
 
     friend Builder;
     friend Tree;
@@ -376,7 +376,7 @@ struct attr_iterator{
 };
 
 template <typename T>
-inline constexpr auto base_t<T>::children_fwd() const{
+inline auto base_t<T>::children_fwd() const{
 
     struct self{
         node_iterator begin() const {return (*base.children()).first;}
@@ -392,7 +392,7 @@ inline constexpr auto base_t<T>::children_fwd() const{
 }
 
 template <typename T>
-inline constexpr auto base_t<T>::attrs_fwd() const{
+inline auto base_t<T>::attrs_fwd() const{
 
     struct self{
         attr_iterator begin() const {return (*base.attrs()).first;}

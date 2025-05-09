@@ -1,7 +1,9 @@
 #include "vs-xml/builder.hpp"
+#include "vs-xml/impl.hpp"
 #include <iostream>
 #include <string_view>
 #include <vs-xml/parser.hpp>
+#include <vs-xml/serializer.hpp>
 #include <print>
 
 //-----------------------------------------------------
@@ -63,87 +65,8 @@ std::string unescape_xml(std::string_view sv) {
 }
 */
 
+namespace xml{
 
-std::string_view unescape_xml(std::string_view sv) {
-    // We assume that sv.data() points to mutable memory.
-    // Remove constness.
-    char *buffer = const_cast<char*>(sv.data());
-    size_t len = sv.size();
-    size_t read = 0;
-    size_t write = 0;
-
-    while (read < len) {
-        if (buffer[read] == '&') {
-            // Check known entities.
-            if (read + 3 < len && std::string_view(buffer + read, 4) == "&lt;") {
-                buffer[write++] = '<';
-                read += 4;
-            } else if (read + 3 < len && std::string_view(buffer + read, 4) == "&gt;") {
-                buffer[write++] = '>';
-                read += 4;
-            } else if (read + 4 < len && std::string_view(buffer + read, 5) == "&amp;") {
-                buffer[write++] = '&';
-                read += 5;
-            } else if (read + 5 < len && std::string_view(buffer + read, 6) == "&quot;") {
-                buffer[write++] = '\"';
-                read += 6;
-            } else if (read + 5 < len && std::string_view(buffer + read, 6) == "&apos;") {
-                buffer[write++] = '\'';
-                read += 6;
-            } else if (read + 1 < len && buffer[read + 1] == '#') {
-                // Numeric entity.
-                size_t j = read + 2;
-                bool hex = false;
-                if (j < len && (buffer[j] == 'x' || buffer[j] == 'X')) {
-                    hex = true;
-                    ++j;
-                }
-                size_t numStart = j;
-                while (j < len && buffer[j] != ';')
-                    ++j;
-                if (j < len && buffer[j] == ';') {
-                    // Create a temporary std::string_view for the number.
-                    std::string_view numStr(buffer + numStart, j - numStart);
-                    
-                    // Convert to an integer.
-                    int code = '?';
-                    try {
-                        code = std::stoi(std::string(numStr), nullptr, hex ? 16 : 10);
-                    } catch (...) {
-                        // Use '?' as a replacement on error.
-                        code = '?';
-                    }
-                    buffer[write++] = static_cast<char>(code);
-                    read = j + 1;
-                } else {
-                    // No semicolon found; treat as literal.
-                    buffer[write++] = buffer[read++];
-                }
-            } else {
-                // Unknown entity; copy '&'
-                buffer[write++] = buffer[read++];
-            }
-        } else {
-            buffer[write++] = buffer[read++];
-        }
-    }
-    
-    return std::string_view(buffer, write);
-}
-
-//-----------------------------------------------------
-// Helper: Split a qualified name "prefix:local" into namespace and local name.
-// If no colon exists, returns { name, "" }.
-// The returned pair is in the form (local name, namespace)
-// because builder calls are of the form begin(localName, ns).
-std::pair<std::string_view, std::string_view> split_namespace(std::string_view qualified) {
-    size_t pos = qualified.find(':');
-    if (pos != std::string_view::npos) {
-        // Namespace is the left side, local name is right side.
-        return { qualified.substr(pos + 1), qualified.substr(0, pos) };
-    }
-    return { qualified, "" };
-}
 
 //-----------------------------------------------------
 // XML Parser class
@@ -169,6 +92,21 @@ private:
     std::string_view data_;
     size_t pos_;
     xml::BuilderCompressed &builder_;
+
+    //-----------------------------------------------------
+    // Helper: Split a qualified name "prefix:local" into namespace and local name.
+    // If no colon exists, returns { name, "" }.
+    // The returned pair is in the form (local name, namespace)
+    // because builder calls are of the form begin(localName, ns).
+    static std::pair<std::string_view, std::string_view> split_namespace(std::string_view qualified) {
+        size_t pos = qualified.find(':');
+        if (pos != std::string_view::npos) {
+            // Namespace is the left side, local name is right side.
+            return { qualified.substr(pos + 1), qualified.substr(0, pos) };
+        }
+        return { qualified, "" };
+    }
+
 
     // Skip whitespace characters.
     void skip_whitespace() {
@@ -220,7 +158,7 @@ private:
             if (procEnd == std::string_view::npos)
                 throw std::runtime_error("Unterminated processing instruction.");
             auto procContent = data_.substr(pos_, procEnd - pos_);
-            builder_.proc(unescape_xml(procContent));
+            builder_.proc(serialize::unescape_xml(procContent));
             pos_ = procEnd + 2;
             return;
         }
@@ -235,7 +173,7 @@ private:
                 if (commentEnd == std::string_view::npos)
                     throw std::runtime_error("Unterminated XML comment.");
                 auto commentContent = data_.substr(pos_, commentEnd - pos_);
-                builder_.comment(unescape_xml(commentContent));
+                builder_.comment(serialize::unescape_xml(commentContent));
                 pos_ = commentEnd + 3;
                 return;
             } 
@@ -302,7 +240,7 @@ private:
                 throw std::runtime_error("Expected closing quote for attribute value.");
 
             // Call builder's attr with local name and corresponding namespace.
-            builder_.attr(attrLocal, unescape_xml(attrValue), attrNs);
+            builder_.attr(attrLocal, serialize::unescape_xml(attrValue), attrNs);
         }
 
         // Self-closing element?
@@ -343,7 +281,7 @@ private:
                 while (pos_ < data_.size() && data_[pos_] != '<')
                     ++pos_;
                 auto textContent = data_.substr(textStart, pos_ - textStart);
-                std::string_view unescapedText = unescape_xml(textContent);
+                std::string_view unescapedText = serialize::unescape_xml(textContent);
                 if (!unescapedText.empty() &&
                     unescapedText.find_first_not_of(" \t\r\n") != std::string::npos)
                 {
@@ -353,6 +291,12 @@ private:
         }
     }
 }; // end class XmlParser
+
+}
+
+consteval auto hello() {
+    xml::node_t builder(nullptr,nullptr,"hello","ww");
+}
 
 //-----------------------------------------------------
 // Example main (for testing purposes)
@@ -372,7 +316,7 @@ int main() {
 
     xml::BuilderCompressed builder;
     try {
-        XmlParser parser(xmlData, builder);
+        xml::XmlParser parser(xmlData, builder);
         parser.parse();
     } catch (const std::exception &ex) {
         std::cerr << "Error while parsing XML: " << ex.what() << "\n";
@@ -380,5 +324,7 @@ int main() {
     }
     auto tree = *builder.close();
     tree.print(std::cout,{});
+
+    hello();
     return 0;
 }

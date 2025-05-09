@@ -2,6 +2,7 @@
 #include <vs-xml/commons.hpp>
 #include <vs-xml/tree.hpp>
 #include <vs-xml/impl.hpp>
+#include <vs-xml/serializer.hpp>
 
 namespace VS_XML_NS{
 

@@ -30,31 +30,31 @@ struct wrp_base_t{
         friend struct wrp_attr_iterator;
     public:
 
-    constexpr inline explicit operator const T*() const  {return ptr;}
+    inline explicit operator const T*() const  {return ptr;}
 
     constexpr delta_ptr_t portable() const;
 
-    inline constexpr std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
-    inline constexpr std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
-    inline constexpr std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
+    inline std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
+    inline std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
+    inline std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
 
-    inline constexpr std::expected<std::pair<wrp_base_t<unknown_t>, wrp_base_t<unknown_t>>,feature_t> children() const{
+    inline std::expected<std::pair<wrp_base_t<unknown_t>, wrp_base_t<unknown_t>>,feature_t> children() const{
         auto tmp = ptr->children();
         if(!tmp.has_value())return std::unexpected{tmp.error()};
         else return std::pair{wrp_base_t<unknown_t>{base,tmp->first}, wrp_base_t<unknown_t>{base,tmp->second}};
     }
-    inline constexpr std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const{return ptr->attrs();}
+    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const{return ptr->attrs();}
 
-    inline constexpr wrp_base_t<node_t> parent() const {return {base,ptr->parent()};}
-    inline constexpr wrp_base_t<unknown_t> prev() const {return {base,ptr->prev()};}
-    inline constexpr wrp_base_t<unknown_t> next() const {return {base,ptr->next()};}
+    inline wrp_base_t<node_t> parent() const {return {base,ptr->parent()};}
+    inline wrp_base_t<unknown_t> prev() const {return {base,ptr->prev()};}
+    inline wrp_base_t<unknown_t> next() const {return {base,ptr->next()};}
 
-    inline constexpr bool has_parent() const{return ptr->has_parent();}
-    inline constexpr bool has_prev() const{return ptr->has_prev();}
-    inline constexpr bool has_next() const{return ptr->has_next();}
+    inline bool has_parent() const{return ptr->has_parent();}
+    inline bool has_prev() const{return ptr->has_prev();}
+    inline bool has_next() const{return ptr->has_next();}
 
-    inline constexpr auto attrs_fwd() const;
-    inline constexpr auto children_fwd() const;
+    inline auto attrs_fwd() const;
+    inline auto children_fwd() const;
 };
 
 
@@ -75,9 +75,9 @@ struct wrp_base_t<attr_t>{
         friend struct wrp_attr_iterator;
     public:
 
-    constexpr inline explicit operator const attr_t*() const  {return ptr;}
+    inline explicit operator const attr_t*() const  {return ptr;}
 
-    constexpr delta_ptr_t portable() const;
+    delta_ptr_t portable() const;
 
     inline constexpr std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
     inline constexpr std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
@@ -140,7 +140,7 @@ struct wrp_attr_iterator{
 };
 
 template <typename T>
-inline constexpr auto wrp_base_t<T>::attrs_fwd() const{
+inline auto wrp_base_t<T>::attrs_fwd() const{
     struct self{
         wrp_attr_iterator begin() const {return  wrp_base_t<attr_t>{base.base, (*base.attrs()).first};}
         wrp_attr_iterator end() const {return  wrp_base_t<attr_t>{base.base, (*base.attrs()).second};}
@@ -155,7 +155,7 @@ inline constexpr auto wrp_base_t<T>::attrs_fwd() const{
 }
 
 template <typename T>
-inline constexpr auto wrp_base_t<T>::children_fwd() const{
+inline auto wrp_base_t<T>::children_fwd() const{
     struct self{
         wrp_node_iterator begin() const {return wrp_base_t<unknown_t>{base.base, (const unknown_t*)(*base.children()).first};}
         wrp_node_iterator end() const {return wrp_base_t<unknown_t>{base.base, (const unknown_t*)(*base.children()).second};}
