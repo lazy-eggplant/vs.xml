@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../compatibility/">
+        <link rel="prev" href="../features/">
       
       
       
@@ -58,6 +58,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#memory-layout" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -255,12 +260,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../compatibility/" class="md-nav__link">
+      <a href="../features/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Compatibility
+    Features
     
   </span>
   
@@ -284,6 +289,19 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Layout
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -295,6 +313,41 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#memory-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Layout
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#binary-serialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binary serialization
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -318,6 +371,32 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#memory-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Layout
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#binary-serialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binary serialization
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -337,6 +416,7 @@
 
   <h1>Layout</h1>
 
+<h2 id="memory-layout">Memory Layout<a class="headerlink" href="#memory-layout" title="Permanent link">#</a></h2>
 <p>The memory layout for the tree structure used by this library has the following properties:
 - It is based on a contiguous memory slice.
 - It is built in-place, as such children are placed directly after their parent.
@@ -352,11 +432,11 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you have very specific needs for a compact memory layout, probably more suitable for embedded applications, you will have to manually override parts of this code and possibly work with bit-fields.</p>
+<p>If you have very specific needs for a compact memory layout, probably more suitable for embedded applications, you will have to manually override parts of this code and possibly work with bit-fields.
+ This goes beyond the configurability granted via macros, and forking this library is likely the best solution.</p>
 </div>
-<blockquote>
-<p>This goes beyond the configurability granted via macros, and forking this library is likely the best solution.</p>
-</blockquote>
+<h2 id="binary-serialization">Binary serialization<a class="headerlink" href="#binary-serialization" title="Permanent link">#</a></h2>
+<p>Except for a small header, the binary serialization of a tree is identical to its representation in memory.</p>
 
 
 
