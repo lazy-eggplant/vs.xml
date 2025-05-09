@@ -1,4 +1,5 @@
 #include <cstring>
+#include <algorithm>
 #include <vs-xml/commons.hpp>
 #include <vs-xml/tree.hpp>
 #include <vs-xml/impl.hpp>

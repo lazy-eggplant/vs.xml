@@ -27,12 +27,18 @@
 
 namespace VS_XML_NS{
 
+//TODO: Implement collapse data. Only use text, and if a new text or cdata is defined, append to the prev one.
 
 /**
  * @brief Helper class to build an XML tree via commands.
  * 
  */
 struct Builder{
+    struct config_t{
+        bool allow_comments ;
+        bool collapse_text ;
+    };
+
     enum struct error_t{
         OK,
         TREE_CLOSED,
@@ -47,6 +53,7 @@ struct Builder{
     bool attribute_block = false;   //True after a begin to add attributes. It is automatically closed when any other command is triggered.
     
     std::stack<std::pair<ptrdiff_t,ptrdiff_t>> stack;
+    config_t cfg;
 
     template<typename T>
     error_t leaf(std::string_view value);
@@ -55,10 +62,10 @@ struct Builder{
     void* label_offset = nullptr;
 
     std::expected<WrpTree,error_t> close(std::vector<uint8_t>&& symbols);
-
+    
     public:
 
-    Builder();
+    Builder(config_t cfg={true,false});
     std::expected<WrpTree,error_t> close();
 
     error_t begin(std::string_view name, std::string_view ns="");
@@ -78,6 +85,7 @@ struct Builder{
  * 
  */
 struct BuilderCompressed : protected Builder{
+
     private:
     std::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx_symbols;
     std::vector<uint8_t> symbols;
@@ -97,7 +105,9 @@ struct BuilderCompressed : protected Builder{
 
     public:
 
-    inline BuilderCompressed():idx_symbols(64,
+
+    inline BuilderCompressed(config_t cfg = {true,false}):
+        Builder(cfg),idx_symbols(64,
         [this](sv a){return std::hash<std::string_view>{}(rsv(a));},
         [this](sv a, sv b){return rsv(a)==rsv(b);}),symbols(){
             label_offset=symbols.data(); 

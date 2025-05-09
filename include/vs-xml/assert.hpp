@@ -6,7 +6,7 @@
 
 #include <source_location>
 #include <iostream>
-#include <stacktrace>
+//#include <stacktrace>
 
 namespace VS_XML_NS{
 

@@ -38,9 +38,9 @@ typedef size_t xml_count_t;
 typedef size_t xml_enum_size_t;
 
 
-inline void xml_assert(bool condition, const char* errorMessage=""){
+inline void xml_assert(bool condition, const char* errorMessage="") {
     #ifndef VS_XML_NO_ASSERT
-    return modern_assert(condition,errorMessage);
+    modern_assert(condition,errorMessage);
     #endif 
 }
 

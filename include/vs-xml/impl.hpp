@@ -17,11 +17,11 @@
 #include <iterator>
 #include <expected>
 
-#include <optional>
 #include <string>
 #include <string_view>
 
 #include <format>
+#include <utility>
 
 #include "commons.hpp"
 #include "serializer.hpp"
@@ -265,7 +265,8 @@ else if (type() == type_t::PROC) return ((proc_t*)this)-> X;\
 else if (type() == type_t::CDATA) return ((cdata_t*)this)-> X;\
 else if (type() == type_t::INJECT) return ((inject_t*)this)-> X;\
 else{\
-    std::terminate();\
+    xml_assert(false,"Invalid XML thing type");\
+    std::unreachable();\
 }
 
 #define CDISPATCH(X) \
@@ -276,7 +277,8 @@ else if (type() == type_t::PROC) return ((const proc_t*)this)-> X;\
 else if (type() == type_t::CDATA) return ((const cdata_t*)this)-> X;\
 else if (type() == type_t::INJECT) return ((const inject_t*)this)-> X;\
 else{\
-    std::terminate();\
+    xml_assert(false,"Invalid XML thing type");\
+    std::unreachable();\
 }
 
 struct unknown_t : base_t<unknown_t>{

@@ -41,7 +41,7 @@ std::expected<WrpTree,Builder::error_t> Builder::close(std::vector<uint8_t>&& sy
     return WrpTree(Tree(std::move(buffer),std::move(symbols)));
 }
 
-Builder::Builder(){stack.push({0,-1});}
+Builder::Builder(config_t cfg):cfg(cfg){stack.push({0,-1});}
 
 Builder::error_t Builder::begin(std::string_view name, std::string_view ns){
     if(open==false)return error_t::TREE_CLOSED;
