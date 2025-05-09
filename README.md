@@ -35,6 +35,11 @@ I am working with C++23 for development, and I don't really plan on directly sup
 [^2]: Namespaces are supported in the sense that the namespace is split from the element or attribute name if present, but its handling, validation or whatever is left to the user.
 
 
+## Documentation
+
+Doxygen and the generated documentation can be found in the [github pages](https://lazy-eggplant.github.io/vs.xml/next/) of this project.
+
+
 ### External dependencies
 
 While they are not used by the library itself, tests and benchmarks do:

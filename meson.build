@@ -6,10 +6,6 @@ project(
   default_options: ['cpp_std=c++23'],
 )
 
-
-nanobench_dep = dependency('nanobench')
-mio_dep = dependency('mio')
-
 include_dirs = include_directories('include')
 
 add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
@@ -33,7 +29,7 @@ vs_xml_dep = declare_dependency(
   include_directories: ['include'],
 )
 
-install_subdir('include/vs-xml', install_dir : 'include/vs-xml', strip_directory: false )
+install_subdir('include/vs-xml', install_dir : 'include', strip_directory: false )
 
 if get_option('tests')
   subdir(['./test/'])

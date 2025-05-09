@@ -1,3 +1,5 @@
+mio_dep = dependency('mio')
+
 test('base-checks',executable(
     'base-checks',
     'src/base-checks.cpp',

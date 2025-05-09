@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: vs.xml
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - name: lazy-eggplant
+  - given-names: karurochari
+    affiliation: lazy-eggplant
+    email: public@karurochari.com
+repository-code: 'https://github.com/lazy-eggplant/vs.xml'
+url: 'https://lazy-eggplant.github.io/vs.xml/'
+abstract: >-
+  XML parser and tree builder for mostly static and
+  relocatable schema-less documents.
+keywords:
+  - xml
+  - parser
+  - tree-builder
+license: LGPL-3.0-only

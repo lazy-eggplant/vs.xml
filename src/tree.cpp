@@ -161,7 +161,7 @@ bool Tree::save_binary(std::ostream& out)const{
 Tree::Tree(std::span<uint8_t> region){
     xml_assert(region.size_bytes()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
     serialized_header_t header;
-    memcpy(&header,region.data(),sizeof(serialized_header_t));
+    memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
     xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
     xml_assert(region.size_bytes()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
     xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
