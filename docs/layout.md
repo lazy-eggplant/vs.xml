@@ -1,3 +1,5 @@
+## Memory Layout
+
 The memory layout for the tree structure used by this library has the following properties:
 - It is based on a contiguous memory slice.
 - It is built in-place, as such children are placed directly after their parent.
@@ -15,3 +17,7 @@ The structure of the various nodes is based on the size of three data types:
 > [!NOTE]  
 > If you have very specific needs for a compact memory layout, probably more suitable for embedded applications, you will have to manually override parts of this code and possibly work with bit-fields.
 > This goes beyond the configurability granted via macros, and forking this library is likely the best solution.
+
+## Binary serialization
+
+Except for a small header, the binary serialization of a tree is identical to its representation in memory.

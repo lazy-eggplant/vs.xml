@@ -1,7 +1,7 @@
 project(
   'vs-xml',
   ['cpp'],
-  version: '0.1.4',
+  version: '0.1.6',
   meson_version: '>= 1.1',
   default_options: ['cpp_std=c++23'],
 )
