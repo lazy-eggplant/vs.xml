@@ -30,10 +30,9 @@ struct Tree{
         std::vector<uint8_t> buffer_i;
         std::vector<uint8_t> symbols_i;
 
-        std::span<uint8_t> buffer;
-        std::span<uint8_t> symbols;
+        std::span<uint8_t> buffer;      //Overlay of buffer_i, or external
+        std::span<uint8_t> symbols;     //Overlay of symbols_i, or external
 
-        void* label_offset;
 
     public:
 
@@ -98,8 +97,11 @@ struct Tree{
         return print_h(out, cfg, (const unknown_t*)&root());
     }
 
+    bool save_binary(std::ostream& out)const;
+    Tree(std::span<uint8_t> region);
+
     inline std::string_view rsv(sv s) const{
-        return std::string_view(s.base+(char*)label_offset,s.base+(char*)label_offset+s.length);
+        return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
     }
 
     private:
@@ -109,26 +111,22 @@ struct Tree{
      */
     Tree(std::vector<uint8_t>&& src, void* label_offset=nullptr):
         buffer_i(src),symbols_i({}),
-        buffer(buffer_i),symbols(symbols_i),
-        label_offset(label_offset){}
+        buffer(buffer_i),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent){}
 
     /**
      * @brief Construct a new Tree object, owning its own table of strings
      */
     Tree(std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):
         buffer_i(src),symbols_i(sym),
-        buffer(buffer_i),symbols(symbols_i),
-        label_offset(symbols.data()){}
+        buffer(buffer_i),symbols(symbols_i){}
  
     //Weak, used when loading from disk
     Tree(std::span<uint8_t> src, void* label_offset=nullptr):
-        buffer(src),
-        label_offset(label_offset){}
+        buffer(src),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent){}
 
     //Weak, used when loading from disk
     Tree(std::span<uint8_t> src, std::span<uint8_t> sym):
-        buffer(src),symbols(sym),
-        label_offset(symbols.data()){}
+        buffer(src),symbols(sym){}
 
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;

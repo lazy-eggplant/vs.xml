@@ -142,4 +142,8 @@ Tree Tree::clone(const node_t* ref, bool reduce) const{
     return Tree(std::move(buffer),std::move(symbols));
 }
 
+
+bool Tree::save_binary(std::ostream& out)const{return false;} //TODO:
+Tree::Tree(std::span<uint8_t> region){} //TODO:
+
 }
