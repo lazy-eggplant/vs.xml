@@ -28,8 +28,6 @@
 
 namespace VS_XML_NS{
 
-//TODO: Implement collapse data. Only use text, and if a new text or cdata is defined, append to the prev one.
-
 /**
  * @brief Helper class to build an XML tree via commands.
  * 

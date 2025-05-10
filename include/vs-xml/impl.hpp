@@ -28,6 +28,7 @@
 
 namespace VS_XML_NS{
 
+
 template <typename T>
 struct base_t{
     protected:
@@ -42,8 +43,9 @@ struct base_t{
     std::expected<sv,feature_t> name() const {return static_cast<const T*>(this)->name();}
     std::expected<sv,feature_t> value() const {return static_cast<const T*>(this)->value();}
 
-    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {return static_cast<const T*>(this)->children();}
-    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return static_cast<const T*>(this)->attrs();}
+    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {return static_cast<const T*>(this)->children_range();}
+    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return static_cast<const T*>(this)->attrs_range();}
+    std::expected<void,feature_t> text_range() const {return static_cast<const T*>(this)->attrs_range();}
 
     const element_t* parent() const {return static_cast<const T*>(this)->parent();}
     const unknown_t* prev() const {return static_cast<const T*>(this)->prev();}
@@ -57,8 +59,9 @@ struct base_t{
         return std::format("{}/{}",parent()!=nullptr?parent()->path():"",static_cast<const T*>(this)->path_h());
     }
 
-    auto children_fwd() const;
-    auto attrs_fwd() const;
+    auto children() const;
+    auto attrs() const;
+    auto text() const;
 
     friend Builder;
     friend Tree;
@@ -121,14 +124,15 @@ struct element_t : base_t<element_t>{
     inline std::expected<sv,feature_t> ns() const {return _ns;}
     inline std::expected<sv,feature_t> name() const {return _name;}
     inline std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<void,feature_t> text_range() const {return std::unexpected(feature_t::NOT_IMPLEMENTED);}
 
-    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {
+    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {
         return std::pair{
             (const unknown_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count),
             (const unknown_t*)((const uint8_t*)this+_size)
         };
     }
-    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {
+    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {
         return std::pair{
             (const attr_t*)((const uint8_t*)this+sizeof(element_t)),
             (const attr_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count)
@@ -181,14 +185,15 @@ struct root_t : base_t<root_t>{
     inline std::expected<sv,feature_t> ns() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
     inline std::expected<sv,feature_t> name() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
     inline std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<void,feature_t> text_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
-    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {
+    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {
         return std::pair{
             (const unknown_t*)((const uint8_t*)this+sizeof(root_t)),
             (const unknown_t*)((const uint8_t*)this+_size)
         };
     }
-    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
     inline const element_t* parent() const {return nullptr;}
     inline const unknown_t* prev() const {return nullptr;}
@@ -236,9 +241,10 @@ struct leaf_t : base_t<T>{
     inline std::expected<sv,feature_t> ns() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
     inline std::expected<sv,feature_t> name() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
     inline std::expected<sv,feature_t> value() const {return _value;}
+    inline std::expected<void,feature_t> text_range() const {return std::unexpected(feature_t::NOT_IMPLEMENTED);}
 
-    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
     inline const element_t* parent() const {return (const element_t*)((const uint8_t*)this+_parent);}
     inline const unknown_t*prev() const {return (const unknown_t*)((const uint8_t*)this+_prev);}
@@ -246,7 +252,7 @@ struct leaf_t : base_t<T>{
 
     inline bool has_parent() const {return _parent!=0;}
     inline bool has_prev() const {return _prev!=0;}
-    inline bool has_next() const {return has_parent() && (next()<(parent()->children())->second)!=0;}   //TODO:check
+    inline bool has_next() const {return has_parent() && (next()<(parent()->children_range())->second)!=0;}   //TODO:check
 
     friend Builder;
     friend Tree;
@@ -341,9 +347,10 @@ struct unknown_t : base_t<unknown_t>{
     std::expected<sv,feature_t> ns() const {CDISPATCH(ns());}
     std::expected<sv,feature_t> name() const {CDISPATCH(name());}
     std::expected<sv,feature_t> value() const {CDISPATCH(value());}
+    std::expected<void,feature_t> text_range() const {CDISPATCH(text_range());}
 
-    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {CDISPATCH(children());}
-    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {CDISPATCH(attrs());}
+    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {CDISPATCH(children_range());}
+    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {CDISPATCH(attrs_range());}
 
     const element_t* parent() const {CDISPATCH(parent());}
     const unknown_t* prev() const {CDISPATCH(prev());}
@@ -423,12 +430,14 @@ struct attr_iterator{
     pointer m_ptr;
 };
 
+struct text_iterator{}; //TODO: implement
+
 template <typename T>
-inline auto base_t<T>::children_fwd() const{
+inline auto base_t<T>::children() const{
 
     struct self{
-        node_iterator begin() const {return (*base.children()).first;}
-        node_iterator end() const {return (*base.children()).second;}
+        node_iterator begin() const {return (*base.children_range()).first;}
+        node_iterator end() const {return (*base.children_range()).second;}
 
         self(const base_t& b):base(b){}
 
@@ -440,11 +449,11 @@ inline auto base_t<T>::children_fwd() const{
 }
 
 template <typename T>
-inline auto base_t<T>::attrs_fwd() const{
+inline auto base_t<T>::attrs() const{
 
     struct self{
-        attr_iterator begin() const {return (*base.attrs()).first;}
-        attr_iterator end() const {return (*base.attrs()).second;}
+        attr_iterator begin() const {return (*base.attrs_range()).first;}
+        attr_iterator end() const {return (*base.attrs_range()).second;}
 
         self(const base_t& b):base(b){}
 
@@ -455,6 +464,21 @@ inline auto base_t<T>::attrs_fwd() const{
     return self(*this);
 }
 
+//TODO: implement
+template <typename T>
+inline auto base_t<T>::text() const{
 
+    struct self{
+        text_iterator begin() const {return (*base.text_range()).first;}
+        text_iterator end() const {return (*base.text_range()).second;}
+
+        self(const base_t& b):base(b){}
+
+        private:
+            const base_t& base;
+    };
+
+    return self(*this);
+}
 
 }

@@ -38,12 +38,12 @@ struct wrp_base_t{
     inline std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
     inline std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
 
-    inline std::expected<std::pair<wrp_base_t<unknown_t>, wrp_base_t<unknown_t>>,feature_t> children() const{
-        auto tmp = ptr->children();
+    inline std::expected<std::pair<wrp_base_t<unknown_t>, wrp_base_t<unknown_t>>,feature_t> children_range() const{
+        auto tmp = ptr->children_range();
         if(!tmp.has_value())return std::unexpected{tmp.error()};
         else return std::pair{wrp_base_t<unknown_t>{base,tmp->first}, wrp_base_t<unknown_t>{base,tmp->second}};
     }
-    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const{return ptr->attrs();}
+    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const{return ptr->attrs_range();}
 
     inline wrp_base_t<element_t> parent() const {return {base,ptr->parent()};}
     inline wrp_base_t<unknown_t> prev() const {return {base,ptr->prev()};}
@@ -53,8 +53,8 @@ struct wrp_base_t{
     inline bool has_prev() const{return ptr->has_prev();}
     inline bool has_next() const{return ptr->has_next();}
 
-    inline auto attrs_fwd() const;
-    inline auto children_fwd() const;
+    inline auto attrs() const;
+    inline auto children() const;
 };
 
 
@@ -140,10 +140,10 @@ struct wrp_attr_iterator{
 };
 
 template <typename T>
-inline auto wrp_base_t<T>::attrs_fwd() const{
+inline auto wrp_base_t<T>::attrs() const{
     struct self{
-        wrp_attr_iterator begin() const {return  wrp_base_t<attr_t>{base.base, (*base.attrs()).first};}
-        wrp_attr_iterator end() const {return  wrp_base_t<attr_t>{base.base, (*base.attrs()).second};}
+        wrp_attr_iterator begin() const {return  wrp_base_t<attr_t>{base.base, (*base.attrs_range()).first};}
+        wrp_attr_iterator end() const {return  wrp_base_t<attr_t>{base.base, (*base.attrs_range()).second};}
 
         self(const wrp_base_t& b):base(b){}
 
@@ -155,10 +155,10 @@ inline auto wrp_base_t<T>::attrs_fwd() const{
 }
 
 template <typename T>
-inline auto wrp_base_t<T>::children_fwd() const{
+inline auto wrp_base_t<T>::children() const{
     struct self{
-        wrp_node_iterator begin() const {return wrp_base_t<unknown_t>{base.base, (const unknown_t*)(*base.children()).first};}
-        wrp_node_iterator end() const {return wrp_base_t<unknown_t>{base.base, (const unknown_t*)(*base.children()).second};}
+        wrp_node_iterator begin() const {return wrp_base_t<unknown_t>{base.base, (const unknown_t*)(*base.children_range()).first};}
+        wrp_node_iterator end() const {return wrp_base_t<unknown_t>{base.base, (const unknown_t*)(*base.children_range()).second};}
 
         self(const wrp_base_t& b):base(b){}
 

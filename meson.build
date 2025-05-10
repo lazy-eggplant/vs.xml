@@ -40,8 +40,8 @@ if get_option('benchmarks')
   subdir(['./benchmark/'])
 endif
 
-if get_option('benchmarks')
-  subdir(['./example/'])
+if get_option('examples')
+  subdir(['./examples/'])
 endif
 
 

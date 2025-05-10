@@ -99,8 +99,9 @@ concept thing_i = requires(T self){
     {self.name()} -> std::same_as<std::expected<sv,feature_t>>;
     {self.value()} -> std::same_as<std::expected<sv,feature_t>>;
 
-    {self.children()} -> std::same_as<std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t>>;
-    {self.attrs()} -> std::same_as<std::expected<std::pair<const attr_t*, const attr_t*>,feature_t>>;
+    {self.children_range()} -> std::same_as<std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t>>;
+    {self.attrs_range()} -> std::same_as<std::expected<std::pair<const attr_t*, const attr_t*>,feature_t>>;
+    {self.text_range()} -> std::same_as<std::expected<void,feature_t>>;
 
     {self.parent()} -> std::same_as<const element_t*>;
     {self.prev()} -> std::same_as<const unknown_t*>;

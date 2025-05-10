@@ -45,7 +45,7 @@ bool Tree::reorder_h(const std::function<bool(const attr_t&, const attr_t&)>& fn
     std::sort((attr_t*)ref->_attrs,(attr_t*)ref->_attrs+ref->attrs_count,fn);
 
     if(recursive){
-        for(auto &i: ref->children_fwd()){
+        for(auto &i: ref->children()){
             if(i.type()==type_t::ELEMENT)
             reorder_h(fn,&(const element_t&)i,recursive);
         }
@@ -59,9 +59,9 @@ bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* p
     //TODO: at some point, convert it not to be recursive.
 
     if(ptr->type()==type_t::ELEMENT){
-        if(ptr->children()->first==ptr->children()->second){
+        if(ptr->children_range()->first==ptr->children_range()->second){
             out << std::format("<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
-            for(auto& i : ptr->attrs_fwd()){
+            for(auto& i : ptr->attrs()){
                 auto t = serialize::to_xml_attr_2(rsv(*i.value()));
                 if(!t.has_value()){/*TODO: Error*/}
                 auto tt = t.value_or(std::string_view(""));
@@ -72,7 +72,7 @@ bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* p
         }
         else{
             out << std::format("<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
-            for(auto& i : ptr->attrs_fwd()){
+            for(auto& i : ptr->attrs()){
                 auto t = serialize::to_xml_attr_2(rsv(*i.value()));
                 if(!t.has_value()){/*TODO: Error*/}
                 auto tt = t.value_or(std::string_view(""));
@@ -80,7 +80,7 @@ bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* p
                 out << std::format(" {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), sv);
             }
             out << ">";
-            for(auto& i : ptr->children_fwd()){
+            for(auto& i : ptr->children()){
                 print_h(out,cfg,&i);
             }
             out << std::format("</{}{}{}>", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
