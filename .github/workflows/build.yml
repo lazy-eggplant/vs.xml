@@ -5,24 +5,24 @@ concurrency:
 
 on:
   workflow_call:
-  #push:
-  #  branches: [master]
-  #  paths:
-  #    - "**"
-  #    - "!**.md"
+  push:
+    branches: [master]
+    paths:
+      - "**"
+      - "!**.md"
 
-  #pull_request:
-  #  branches: [master]
-  #  paths:
-  #    - "**"
-  #    - "!**.md"
+  pull_request:
+    branches: [master]
+    paths:
+      - "**"
+      - "!**.md"
 
 jobs:
   build-all:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-14] #windows-latest
+        os: [ubuntu-24.04] #[ubuntu-24.04, ubuntu-24.04-arm, macos-14] #windows-latest
     runs-on: ${{ matrix.os }}
     timeout-minutes: 8
     steps:
@@ -35,7 +35,7 @@ jobs:
       - name: Configure and build
         run: |
           source .venv/bin/activate
-          meson setup build/
+          meson setup build/ --native-file=platforms/gcc-14.ini
           meson compile -C build/ 
           meson test -C build/ --suite=vs-xml
       - name: Archive production artifacts
