@@ -171,8 +171,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    {self.name()} -&gt; std::same_as&lt;std::expected&lt;sv,feature_t&gt;&gt;;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    {self.value()} -&gt; std::same_as&lt;std::expected&lt;sv,feature_t&gt;&gt;;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    {self.children()} -&gt; std::same_as&lt;std::expected&lt;std::pair&lt;const unknown_t*, const unknown_t*&gt;,feature_t&gt;&gt;;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    {self.attrs()} -&gt; std::same_as&lt;std::expected&lt;std::pair&lt;const attr_t*, const attr_t*&gt;,feature_t&gt;&gt;;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    {self.children_range()} -&gt; std::same_as&lt;std::expected&lt;std::pair&lt;const unknown_t*, const unknown_t*&gt;,feature_t&gt;&gt;;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    {self.attrs_range()} -&gt; std::same_as&lt;std::expected&lt;std::pair&lt;const attr_t*, const attr_t*&gt;,feature_t&gt;&gt;;</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    {self.parent()} -&gt; std::same_as&lt;const element_t*&gt;;</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    {self.prev()} -&gt; std::same_as&lt;const unknown_t*&gt;;</div>
@@ -197,20 +197,20 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
 <div class="ttc" id="aconceptVS__XML__NS_1_1ProperBuilder_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1ProperBuilder.html">VS_XML_NS::ProperBuilder</a></div><div class="ttdef"><b>Definition</b> commons.hpp:119</div></div>
 <div class="ttc" id="aconceptVS__XML__NS_1_1thing__i_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1thing__i.html">VS_XML_NS::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:96</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1BuilderCompressed_html"><div class="ttname"><a href="structVS__XML__NS_1_1BuilderCompressed.html">VS_XML_NS::BuilderCompressed</a></div><div class="ttdoc">Wrapper of Builder to compress labels before usage, reducing the final memory footprint.</div><div class="ttdef"><b>Definition</b> builder.hpp:93</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Builder_html"><div class="ttname"><a href="structVS__XML__NS_1_1Builder.html">VS_XML_NS::Builder</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:37</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1BuilderCompressed_html"><div class="ttname"><a href="structVS__XML__NS_1_1BuilderCompressed.html">VS_XML_NS::BuilderCompressed</a></div><div class="ttdoc">Wrapper of Builder to compress labels before usage, reducing the final memory footprint.</div><div class="ttdef"><b>Definition</b> builder.hpp:91</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Builder_html"><div class="ttname"><a href="structVS__XML__NS_1_1Builder.html">VS_XML_NS::Builder</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:35</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1WrpTree_html"><div class="ttname"><a href="structVS__XML__NS_1_1WrpTree.html">VS_XML_NS::WrpTree</a></div><div class="ttdef"><b>Definition</b> wrp-tree.hpp:174</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__t.html">VS_XML_NS::attr_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:67</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1cdata__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1cdata__t.html">VS_XML_NS::cdata_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:266</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1comment__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1comment__t.html">VS_XML_NS::comment_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:256</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1element__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1element__t.html">VS_XML_NS::element_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:85</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1marker__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1marker__t.html">VS_XML_NS::marker_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:296</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1proc__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1proc__t.html">VS_XML_NS::proc_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:286</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1root__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1root__t.html">VS_XML_NS::root_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:167</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__t.html">VS_XML_NS::attr_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:70</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1cdata__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1cdata__t.html">VS_XML_NS::cdata_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:272</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1comment__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1comment__t.html">VS_XML_NS::comment_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:262</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1element__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1element__t.html">VS_XML_NS::element_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:88</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1marker__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1marker__t.html">VS_XML_NS::marker_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:302</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1proc__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1proc__t.html">VS_XML_NS::proc_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:292</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1root__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1root__t.html">VS_XML_NS::root_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:171</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:51</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1text__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1text__t.html">VS_XML_NS::text_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:276</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1unknown__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1unknown__t.html">VS_XML_NS::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:330</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1text__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1text__t.html">VS_XML_NS::text_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:282</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1unknown__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1unknown__t.html">VS_XML_NS::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:336</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

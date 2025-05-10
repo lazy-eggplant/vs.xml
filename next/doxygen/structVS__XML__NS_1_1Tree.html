@@ -106,12 +106,12 @@ struct&#160;</td><td class="memItemRight" valign="bottom"><b>__attribute__</b> (
 <tr class="memitem:a3218edc2baf56f06165d1f7f4211f237" id="r_a3218edc2baf56f06165d1f7f4211f237"><td class="memItemLeft" align="right" valign="top"><a id="a3218edc2baf56f06165d1f7f4211f237" name="a3218edc2baf56f06165d1f7f4211f237"></a>
 std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>def_order_node</b> ()</td></tr>
 <tr class="separator:a3218edc2baf56f06165d1f7f4211f237"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67d289b4f0a9675cf9486e6ed5e44a18" id="r_a67d289b4f0a9675cf9486e6ed5e44a18"><td class="memItemLeft" align="right" valign="top"><a id="a67d289b4f0a9675cf9486e6ed5e44a18" name="a67d289b4f0a9675cf9486e6ed5e44a18"></a>
-std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>def_order_attrs</b> ()</td></tr>
-<tr class="separator:a67d289b4f0a9675cf9486e6ed5e44a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76f8ebe44c5867894f75371954bbd2db" id="r_a76f8ebe44c5867894f75371954bbd2db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1Tree.html#a76f8ebe44c5867894f75371954bbd2db">reorder_children</a> (const <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> *ref, const std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;)&gt; &amp;fn)</td></tr>
-<tr class="memdesc:a76f8ebe44c5867894f75371954bbd2db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder (in-place) children of a node based on a custom ordering criterion.  <br /></td></tr>
-<tr class="separator:a76f8ebe44c5867894f75371954bbd2db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d77c1566ce6da09e7b0b5d1daac0ad" id="r_ac2d77c1566ce6da09e7b0b5d1daac0ad"><td class="memItemLeft" align="right" valign="top"><a id="ac2d77c1566ce6da09e7b0b5d1daac0ad" name="ac2d77c1566ce6da09e7b0b5d1daac0ad"></a>
+std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>def_order_attrs_range</b> ()</td></tr>
+<tr class="separator:ac2d77c1566ce6da09e7b0b5d1daac0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37d84195defe54a851cc46f7b093d2a1" id="r_a37d84195defe54a851cc46f7b093d2a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1Tree.html#a37d84195defe54a851cc46f7b093d2a1">reorder_children_range</a> (const <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> *ref, const std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;)&gt; &amp;fn)</td></tr>
+<tr class="memdesc:a37d84195defe54a851cc46f7b093d2a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder (in-place) children of a node based on a custom ordering criterion.  <br /></td></tr>
+<tr class="separator:a37d84195defe54a851cc46f7b093d2a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a415b532b15a16033be5cb61782fd0b07" id="r_a415b532b15a16033be5cb61782fd0b07"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1Tree.html#a415b532b15a16033be5cb61782fd0b07">reorder</a> (const std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;)&gt; &amp;fn, const <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> *ref=nullptr, bool recursive=true)</td></tr>
 <tr class="memdesc:a415b532b15a16033be5cb61782fd0b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder (in-place) attributes of a node based on a custom ordering criterion.  <br /></td></tr>
 <tr class="separator:a415b532b15a16033be5cb61782fd0b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -297,8 +297,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a76f8ebe44c5867894f75371954bbd2db" name="a76f8ebe44c5867894f75371954bbd2db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76f8ebe44c5867894f75371954bbd2db">&#9670;&#160;</a></span>reorder_children()</h2>
+<a id="a37d84195defe54a851cc46f7b093d2a1" name="a37d84195defe54a851cc46f7b093d2a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37d84195defe54a851cc46f7b093d2a1">&#9670;&#160;</a></span>reorder_children_range()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -307,7 +307,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool VS_XML_NS::Tree::reorder_children </td>
+          <td class="memname">bool VS_XML_NS::Tree::reorder_children_range </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> *&#160;</td>
           <td class="paramname"><em>ref</em>, </td>
