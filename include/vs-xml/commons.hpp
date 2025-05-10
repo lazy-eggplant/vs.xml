@@ -65,6 +65,7 @@ struct comment_t;
 struct cdata_t;
 struct proc_t;
 struct inject_t;
+struct root_t;
 struct unknown_t;
 
 struct Builder;
@@ -81,6 +82,7 @@ enum struct feature_t{
 
 enum struct type_t : xml_enum_size_t{
     UNKNOWN,
+    ROOT,
     NODE,
     ATTR,
     TEXT,

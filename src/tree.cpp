@@ -120,9 +120,19 @@ bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* p
     return false;
 };
 
+const Tree Tree::slice(const node_t* ref) const{
+    xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
+    xml_assert(ref->type()==type_t::NODE, "cannot slice something which is not a node");
+
+    if(ref==nullptr)ref=&root();
+
+    std::span<uint8_t> tmp = {( uint8_t*)ref,ref->_size};
+    return Tree(tmp,this->symbols);
+};
+
 Tree Tree::clone(const node_t* ref, bool reduce) const{
-    xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size());
-    xml_assert(ref->type()==type_t::NODE);
+    xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
+    xml_assert(ref->type()==type_t::NODE, "cannot clone something which is not a node");
 
     if(ref==nullptr)ref=&root();
 
@@ -146,6 +156,7 @@ Tree Tree::clone(const node_t* ref, bool reduce) const{
 
 
 bool Tree::save_binary(std::ostream& out)const{
+    //Symbols not relocatable.
     if(symbols.data()==nullptr)return false;
 
     serialized_header_t header;

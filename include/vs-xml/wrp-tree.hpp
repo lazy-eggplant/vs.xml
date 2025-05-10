@@ -179,7 +179,9 @@ struct WrpTree : Tree{
 
     public:
     inline WrpTree(Tree&& ref):Tree(std::move(ref)){}
+    inline WrpTree(const Tree&& ref):Tree(std::move(ref)){}
 
+    inline const WrpTree slice(const node_t* ref=nullptr) const{return Tree::slice(ref);}
     inline WrpTree clone(const node_t* ref=nullptr, bool reduce=true) const{return Tree::clone(ref,reduce);}
 
     details::wrp_base_t<node_t> root() const;

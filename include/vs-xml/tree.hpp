@@ -91,9 +91,18 @@ struct Tree{
     bool inject_after(const unknown_t* ref, const unknown_t* start, const unknown_t* end);
 
     /**
-     * @brief Return a perfect deep copy of the current tree structure.
+     * @brief Obtain a weak slice of a specific subtree.
      * 
-     * @return Tree 
+     * @param ref the node where to start slicing.
+     * @return const Tree 
+     */
+    const Tree slice(const node_t* ref=nullptr) const;
+
+    /**
+     * @brief Return a perfect deep copy of the current tree structure.
+    * @param ref the node where to start cloning.
+    * @param reduce if true, a new 
+    * @return Tree 
      */
     Tree clone(const node_t* ref=nullptr, bool reduce=true) const;
 
@@ -132,11 +141,12 @@ struct Tree{
     //Weak, used when loading from disk
     Tree(std::span<uint8_t> src, void* label_offset):
         buffer(src),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent){}
-
-    //Weak, used when loading from disk
+    */
+    
+    //Weak, used when loading from disk or creatung slices
     Tree(std::span<uint8_t> src, std::span<uint8_t> sym):
         buffer(src),symbols(sym){}
-    */
+
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
     bool reorder_h(

@@ -17,7 +17,8 @@ vs_xml_lib = library(
       'src/serializer.cpp',
       'src/tree.cpp',
       'src/builder.cpp',
-      'src/wrp-tree.cpp'
+      'src/wrp-tree.cpp',
+      'src/document.cpp'
     ],
     install: true,
     dependencies: [],

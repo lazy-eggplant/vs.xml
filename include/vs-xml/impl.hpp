@@ -164,6 +164,52 @@ struct node_t : base_t<node_t>{
 };
 
 
+struct root_t : base_t<root_t>{
+    private:
+    xml_size_t  _size;
+
+    inline root_t()
+    {
+        _size=0;
+    }
+
+    public:
+
+    using base_t::type;
+    
+    static inline type_t deftype() {return type_t::NODE;};
+    inline std::expected<sv,feature_t> ns() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<sv,feature_t> name() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    inline std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+
+    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {
+        return std::pair{
+            (const unknown_t*)((const uint8_t*)this+sizeof(root_t)),
+            (const unknown_t*)((const uint8_t*)this+_size)
+        };
+    }
+    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+
+    inline const node_t* parent() const {return nullptr;}
+    inline const unknown_t* prev() const {return nullptr;}
+    inline const unknown_t* next() const {return nullptr;}
+
+    inline bool has_parent() const {return false;}
+    inline bool has_prev() const {return false;}
+    inline bool has_next() const {return false;}
+
+    /*
+    inline std::string path_h() const {
+        return std::format("{}{}{}", _ns, _ns==""?"":":", _name);
+    }
+    */
+    
+    friend Builder;
+    friend Tree;
+    friend unknown_t;
+};
+
+
 template<typename T>
 struct leaf_t : base_t<T>{
     private:
