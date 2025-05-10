@@ -28,26 +28,26 @@ std::function<bool(const attr_t&, const attr_t&)> Tree::def_order_attrs() {
     };
 }
 
-bool Tree::reorder(const std::function<bool(const attr_t&, const attr_t&)>& fn, const node_t* ref,  bool recursive){
+bool Tree::reorder(const std::function<bool(const attr_t&, const attr_t&)>& fn, const element_t* ref,  bool recursive){
     if(ref==nullptr)ref=&root();
 
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size());
-    xml_assert(ref->type()==type_t::NODE);
+    xml_assert(ref->type()==type_t::ELEMENT);
     return reorder_h(def_order_attrs(),ref,recursive);
 }
 
-bool Tree::reorder_h(const std::function<bool(const attr_t&, const attr_t&)>& fn, const node_t* ref,  bool recursive){
+bool Tree::reorder_h(const std::function<bool(const attr_t&, const attr_t&)>& fn, const element_t* ref,  bool recursive){
     //Speed could be improved by using an intermediate swapping function, but attr_t elements are small enough that it might not be worthed.
     //TODO: at some point, convert it not to be recursive.
 
-    if(ref->type()!=type_t::NODE)return false;
+    if(ref->type()!=type_t::ELEMENT)return false;
 
     std::sort((attr_t*)ref->_attrs,(attr_t*)ref->_attrs+ref->attrs_count,fn);
 
     if(recursive){
         for(auto &i: ref->children_fwd()){
-            if(i.type()==type_t::NODE)
-            reorder_h(fn,&(const node_t&)i,recursive);
+            if(i.type()==type_t::ELEMENT)
+            reorder_h(fn,&(const element_t&)i,recursive);
         }
     }
 
@@ -58,7 +58,7 @@ bool Tree::reorder_h(const std::function<bool(const attr_t&, const attr_t&)>& fn
 bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* ptr) const{
     //TODO: at some point, convert it not to be recursive.
 
-    if(ptr->type()==type_t::NODE){
+    if(ptr->type()==type_t::ELEMENT){
         if(ptr->children()->first==ptr->children()->second){
             out << std::format("<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
             for(auto& i : ptr->attrs_fwd()){
@@ -114,15 +114,15 @@ bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* p
         std::string_view sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
         out << std::format("<?{}?>",sv);
     }
-    else if(ptr->type()==type_t::INJECT){
+    else if(ptr->type()==type_t::MARKER){
         //Skip, injection points are not XML, they are only internally used.
     }
     return false;
 };
 
-const Tree Tree::slice(const node_t* ref) const{
+const Tree Tree::slice(const element_t* ref) const{
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
-    xml_assert(ref->type()==type_t::NODE, "cannot slice something which is not a node");
+    xml_assert(ref->type()==type_t::ELEMENT, "cannot slice something which is not a node");
 
     if(ref==nullptr)ref=&root();
 
@@ -130,9 +130,9 @@ const Tree Tree::slice(const node_t* ref) const{
     return Tree(tmp,this->symbols);
 };
 
-Tree Tree::clone(const node_t* ref, bool reduce) const{
+Tree Tree::clone(const element_t* ref, bool reduce) const{
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
-    xml_assert(ref->type()==type_t::NODE, "cannot clone something which is not a node");
+    xml_assert(ref->type()==type_t::ELEMENT, "cannot clone something which is not a node");
 
     if(ref==nullptr)ref=&root();
 

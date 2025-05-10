@@ -55,7 +55,7 @@ struct Tree{
         * @return true if the operation is successful
         */
     bool reorder_children(
-        const node_t* ref, 
+        const element_t* ref, 
         const std::function<bool(const unknown_t&, const unknown_t&)>& fn
     ){return false;}
 
@@ -68,11 +68,11 @@ struct Tree{
         */
     bool reorder(
         const std::function<bool(const attr_t&, const attr_t&)>& fn,
-        const node_t* ref = nullptr, 
+        const element_t* ref = nullptr, 
         bool recursive = true
     );
 
-    inline bool reorder(const node_t* ref=nullptr, bool recursive = true){
+    inline bool reorder(const element_t* ref=nullptr, bool recursive = true){
         return reorder(def_order_attrs(),ref,recursive);
     }
 
@@ -96,7 +96,7 @@ struct Tree{
      * @param ref the node where to start slicing.
      * @return const Tree 
      */
-    const Tree slice(const node_t* ref=nullptr) const;
+    const Tree slice(const element_t* ref=nullptr) const;
 
     /**
      * @brief Return a perfect deep copy of the current tree structure.
@@ -104,11 +104,11 @@ struct Tree{
     * @param reduce if true, a new 
     * @return Tree 
      */
-    Tree clone(const node_t* ref=nullptr, bool reduce=true) const;
+    Tree clone(const element_t* ref=nullptr, bool reduce=true) const;
 
     struct print_cfg_t{};
 
-    inline const node_t& root() const {return *(const node_t*)buffer.data();}
+    inline const element_t& root() const {return *(const element_t*)buffer.data();}
 
     inline bool print(std::ostream& out, const print_cfg_t& cfg = {})const{
         return print_h(out, cfg, (const unknown_t*)&root());
@@ -142,7 +142,7 @@ struct Tree{
     Tree(std::span<uint8_t> src, void* label_offset):
         buffer(src),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent){}
     */
-    
+
     //Weak, used when loading from disk or creatung slices
     Tree(std::span<uint8_t> src, std::span<uint8_t> sym):
         buffer(src),symbols(sym){}
@@ -151,7 +151,7 @@ struct Tree{
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
     bool reorder_h(
         const std::function<bool(const attr_t&, const attr_t&)>& fn,
-        const node_t* ref, 
+        const element_t* ref, 
         bool recursive = true
     );
 

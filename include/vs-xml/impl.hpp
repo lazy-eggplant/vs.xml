@@ -45,7 +45,7 @@ struct base_t{
     std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {return static_cast<const T*>(this)->children();}
     std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return static_cast<const T*>(this)->attrs();}
 
-    const node_t* parent() const {return static_cast<const T*>(this)->parent();}
+    const element_t* parent() const {return static_cast<const T*>(this)->parent();}
     const unknown_t* prev() const {return static_cast<const T*>(this)->prev();}
     const unknown_t* next() const {return static_cast<const T*>(this)->next();}
 
@@ -82,7 +82,7 @@ struct attr_t{
     inline std::expected<sv,feature_t> value() const {return _value;}
 };
 
-struct node_t : base_t<node_t>{
+struct element_t : base_t<element_t>{
     private:
     delta_ptr_t _parent;
     delta_ptr_t _prev;
@@ -97,7 +97,7 @@ struct node_t : base_t<node_t>{
 
     attr_t _attrs[];
 
-    inline node_t(void* offset, node_t* _parent, std::string_view _ns, std::string_view _name):
+    inline element_t(void* offset, element_t* _parent, std::string_view _ns, std::string_view _name):
         _ns(offset,serialize::validate_xml_label(_ns)),
         _name(offset,serialize::validate_xml_label(_name))
     {
@@ -106,7 +106,7 @@ struct node_t : base_t<node_t>{
         attrs_count=0;
     }
 
-    inline void set_parent(node_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
+    inline void set_parent(element_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
     inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
     inline void set_next(unknown_t* next){auto tmp=(uint8_t*)next-(uint8_t*)this;_next=tmp;xml_assert((std::ptrdiff_t)_next==tmp);}
 
@@ -117,27 +117,27 @@ struct node_t : base_t<node_t>{
 
     using base_t::type;
     
-    static inline type_t deftype() {return type_t::NODE;};
+    static inline type_t deftype() {return type_t::ELEMENT;};
     inline std::expected<sv,feature_t> ns() const {return _ns;}
     inline std::expected<sv,feature_t> name() const {return _name;}
     inline std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
     inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {
         return std::pair{
-            (const unknown_t*)((const uint8_t*)this+sizeof(node_t)+sizeof(attr_t)*attrs_count),
+            (const unknown_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count),
             (const unknown_t*)((const uint8_t*)this+_size)
         };
     }
     inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {
         return std::pair{
-            (const attr_t*)((const uint8_t*)this+sizeof(node_t)),
-            (const attr_t*)((const uint8_t*)this+sizeof(node_t)+sizeof(attr_t)*attrs_count)
+            (const attr_t*)((const uint8_t*)this+sizeof(element_t)),
+            (const attr_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count)
         };
     }
 
-    inline const node_t* parent() const {
+    inline const element_t* parent() const {
         if(_parent==0)return nullptr;
-        return (const node_t*)((const uint8_t*)this+_parent);
+        return (const element_t*)((const uint8_t*)this+_parent);
     }
     inline const unknown_t* prev() const {
         if(_prev==0)return nullptr;  //TODO: check this one
@@ -177,7 +177,7 @@ struct root_t : base_t<root_t>{
 
     using base_t::type;
     
-    static inline type_t deftype() {return type_t::NODE;};
+    static inline type_t deftype() {return type_t::ELEMENT;};
     inline std::expected<sv,feature_t> ns() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
     inline std::expected<sv,feature_t> name() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
     inline std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
@@ -190,7 +190,7 @@ struct root_t : base_t<root_t>{
     }
     inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
-    inline const node_t* parent() const {return nullptr;}
+    inline const element_t* parent() const {return nullptr;}
     inline const unknown_t* prev() const {return nullptr;}
     inline const unknown_t* next() const {return nullptr;}
 
@@ -220,7 +220,7 @@ struct leaf_t : base_t<T>{
 
     sv _value;
 
-    inline void set_parent(node_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
+    inline void set_parent(element_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
     inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
     inline void set_next(unknown_t* next){/*not needed*/}
 
@@ -240,7 +240,7 @@ struct leaf_t : base_t<T>{
     inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
     inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
-    inline const node_t* parent() const {return (const node_t*)((const uint8_t*)this+_parent);}
+    inline const element_t* parent() const {return (const element_t*)((const uint8_t*)this+_parent);}
     inline const unknown_t*prev() const {return (const unknown_t*)((const uint8_t*)this+_prev);}
     inline const unknown_t* next() const {return (const unknown_t*)((const uint8_t*)this+sizeof(leaf_t));}
 
@@ -293,9 +293,9 @@ struct proc_t : leaf_t<proc_t>{
     friend Tree;
 };
 
-struct inject_t : leaf_t<inject_t>{
-    inject_t(void* offset, std::string_view value):leaf_t(offset, value){}
-    static inline type_t deftype() {return type_t::INJECT;};
+struct marker_t : leaf_t<marker_t>{
+    marker_t(void* offset, std::string_view value):leaf_t(offset, value){}
+    static inline type_t deftype() {return type_t::MARKER;};
 
     inline std::string path_h() const { return std::format("#leaf"); }
 
@@ -304,24 +304,24 @@ struct inject_t : leaf_t<inject_t>{
 };
 
 #define DISPATCH(X) \
-if (type() == type_t::NODE) return ((node_t*)this) -> X;\
+if (type() == type_t::ELEMENT) return ((element_t*)this) -> X;\
 else if (type() == type_t::TEXT) return ((text_t*)this)-> X;\
 else if (type() == type_t::COMMENT) return ((comment_t*)this)-> X;\
 else if (type() == type_t::PROC) return ((proc_t*)this)-> X;\
 else if (type() == type_t::CDATA) return ((cdata_t*)this)-> X;\
-else if (type() == type_t::INJECT) return ((inject_t*)this)-> X;\
+else if (type() == type_t::MARKER) return ((marker_t*)this)-> X;\
 else{\
     xml_assert(false,"Invalid XML thing type");\
     std::unreachable();\
 }
 
 #define CDISPATCH(X) \
-if (type() == type_t::NODE) return ((const node_t*)this) -> X;\
+if (type() == type_t::ELEMENT) return ((const element_t*)this) -> X;\
 else if (type() == type_t::TEXT) return ((const text_t*)this)-> X;\
 else if (type() == type_t::COMMENT) return ((const comment_t*)this)-> X;\
 else if (type() == type_t::PROC) return ((const proc_t*)this)-> X;\
 else if (type() == type_t::CDATA) return ((const cdata_t*)this)-> X;\
-else if (type() == type_t::INJECT) return ((const inject_t*)this)-> X;\
+else if (type() == type_t::MARKER) return ((const marker_t*)this)-> X;\
 else{\
     xml_assert(false,"Invalid XML thing type");\
     std::unreachable();\
@@ -330,7 +330,7 @@ else{\
 struct unknown_t : base_t<unknown_t>{
     private:
 
-    void set_parent(node_t* parent){DISPATCH(set_parent(parent));}
+    void set_parent(element_t* parent){DISPATCH(set_parent(parent));}
     void set_prev(unknown_t* prev){DISPATCH(set_prev(prev));}
     void set_next(unknown_t* next){DISPATCH(set_next(next));}
 
@@ -345,7 +345,7 @@ struct unknown_t : base_t<unknown_t>{
     std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children() const {CDISPATCH(children());}
     std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const {CDISPATCH(attrs());}
 
-    const node_t* parent() const {CDISPATCH(parent());}
+    const element_t* parent() const {CDISPATCH(parent());}
     const unknown_t* prev() const {CDISPATCH(prev());}
     const unknown_t* next() const {CDISPATCH(next());}
 
@@ -360,12 +360,12 @@ struct unknown_t : base_t<unknown_t>{
 #undef DISPATCH
 #undef CDISPATCH
 
-static_assert(thing_i<node_t>);
+static_assert(thing_i<element_t>);
 static_assert(thing_i<comment_t>);
 static_assert(thing_i<cdata_t>);
 static_assert(thing_i<text_t>);
 static_assert(thing_i<proc_t>);
-static_assert(thing_i<inject_t>);
+static_assert(thing_i<marker_t>);
 static_assert(thing_i<unknown_t>);
 
 struct node_iterator{
@@ -375,10 +375,10 @@ struct node_iterator{
     using pointer           = const value_type*;
     using reference         = const value_type&;
 
-    inline  node_iterator(pointer ptr) : m_ptr(ptr) {}
+    inline node_iterator(pointer ptr) : m_ptr(ptr) {}
 
 
-    inline  reference operator*() const { return *m_ptr; }
+    inline reference operator*() const { return *m_ptr; }
     inline pointer operator->() { return m_ptr; }
 
     inline node_iterator& operator++() { m_ptr=m_ptr->next(); return *this; }  

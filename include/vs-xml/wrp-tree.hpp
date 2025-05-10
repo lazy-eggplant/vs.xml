@@ -45,7 +45,7 @@ struct wrp_base_t{
     }
     inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs() const{return ptr->attrs();}
 
-    inline wrp_base_t<node_t> parent() const {return {base,ptr->parent()};}
+    inline wrp_base_t<element_t> parent() const {return {base,ptr->parent()};}
     inline wrp_base_t<unknown_t> prev() const {return {base,ptr->prev()};}
     inline wrp_base_t<unknown_t> next() const {return {base,ptr->next()};}
 
@@ -181,10 +181,10 @@ struct WrpTree : Tree{
     inline WrpTree(Tree&& ref):Tree(std::move(ref)){}
     inline WrpTree(const Tree&& ref):Tree(std::move(ref)){}
 
-    inline const WrpTree slice(const node_t* ref=nullptr) const{return Tree::slice(ref);}
-    inline WrpTree clone(const node_t* ref=nullptr, bool reduce=true) const{return Tree::clone(ref,reduce);}
+    inline const WrpTree slice(const element_t* ref=nullptr) const{return Tree::slice(ref);}
+    inline WrpTree clone(const element_t* ref=nullptr, bool reduce=true) const{return Tree::clone(ref,reduce);}
 
-    details::wrp_base_t<node_t> root() const;
+    details::wrp_base_t<element_t> root() const;
 
     inline Tree& downgrade(){return *this;}
 };

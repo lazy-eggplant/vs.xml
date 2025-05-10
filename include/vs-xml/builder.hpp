@@ -23,6 +23,7 @@
 #include <string_view>
 
 #include "commons.hpp"
+#include "vs-xml/impl.hpp"
 #include "wrp-tree.hpp"
 
 namespace VS_XML_NS{
@@ -77,7 +78,12 @@ struct Builder{
     inline error_t comment(std::string_view value){return leaf<comment_t>(value);}
     inline error_t cdata(std::string_view value){return leaf<cdata_t>(value);}
     inline error_t proc(std::string_view value){return leaf<proc_t>(value);}
-    inline error_t inject(std::string_view value){return leaf<inject_t>(value);}
+    inline error_t marker(std::string_view value){return leaf<marker_t>(value);}
+
+    //TODO: injection can be a simple memcpy if the symbols space is shared, or require full tree refactoring.
+    error_t inject(node_iterator start, node_iterator end);
+    error_t inject(const Tree& tree);
+    error_t inject(const WrpTree& tree);
 };
 
 /**
@@ -137,8 +143,8 @@ struct BuilderCompressed : protected Builder{
     inline error_t proc(std::string_view value){
         return Builder::proc(rsv( symbol(value)));
     }
-    inline error_t inject(std::string_view value){
-        return Builder::inject(rsv( symbol(value)));
+    inline error_t marker(std::string_view value){
+        return Builder::marker(rsv( symbol(value)));
     }
 
     std::expected<WrpTree,error_t> close();

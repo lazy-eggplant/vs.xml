@@ -10,6 +10,6 @@
 
 namespace VS_XML_NS{
 
-details::wrp_base_t<node_t> WrpTree::root() const{return {*this, &Tree::root()};}
+details::wrp_base_t<element_t> WrpTree::root() const{return {*this, &Tree::root()};}
 
 }

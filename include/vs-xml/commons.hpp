@@ -58,13 +58,13 @@ struct sv{
     sv()=delete;
 };
 
-struct node_t;
+struct element_t;
 struct attr_t;
 struct text_t;
 struct comment_t;
 struct cdata_t;
 struct proc_t;
-struct inject_t;
+struct marker_t;
 struct root_t;
 struct unknown_t;
 
@@ -83,13 +83,13 @@ enum struct feature_t{
 enum struct type_t : xml_enum_size_t{
     UNKNOWN,
     ROOT,
-    NODE,
+    ELEMENT,
     ATTR,
     TEXT,
     COMMENT,
     PROC,
     CDATA,
-    INJECT,
+    MARKER,
 };
 
 template<typename T>
@@ -102,7 +102,7 @@ concept thing_i = requires(T self){
     {self.children()} -> std::same_as<std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t>>;
     {self.attrs()} -> std::same_as<std::expected<std::pair<const attr_t*, const attr_t*>,feature_t>>;
 
-    {self.parent()} -> std::same_as<const node_t*>;
+    {self.parent()} -> std::same_as<const element_t*>;
     {self.prev()} -> std::same_as<const unknown_t*>;
     {self.next()} -> std::same_as<const unknown_t*>;
 

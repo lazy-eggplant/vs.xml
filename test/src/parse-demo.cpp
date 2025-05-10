@@ -49,7 +49,7 @@ int main() {
     std::print("\n~~~~\n");
 
     {
-        mio::mmap_sink mmap("./test/assets/demo-0.bin");
+        mio::mmap_source mmap("./test/assets/demo-0.bin");
         xml::Tree tmp(std::span((uint8_t*)mmap.data(),mmap.size()));
         tmp.print(std::cout,{});
     }

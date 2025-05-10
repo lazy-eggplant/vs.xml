@@ -15,7 +15,7 @@ Builder::error_t Builder::leaf(std::string_view value){
 
     unknown_t* prev = old_ctx.second!=-1?(unknown_t*)(buffer.data()+old_ctx.second):nullptr;
 
-    T* tmp_node = new ((node_t*) & (uint8_t&) *( buffer.end()-sizeof(T) )) T(label_offset,value);
+    T* tmp_node = new ((element_t*) & (uint8_t&) *( buffer.end()-sizeof(T) )) T(label_offset,value);
 
     if(prev!=nullptr){
         prev->set_next((unknown_t*)tmp_node);
@@ -30,7 +30,7 @@ template Builder::error_t Builder::leaf<comment_t>(std::string_view value);
 template Builder::error_t Builder::leaf<cdata_t>(std::string_view value);
 template Builder::error_t Builder::leaf<text_t>(std::string_view value);
 template Builder::error_t Builder::leaf<proc_t>(std::string_view value);
-template Builder::error_t Builder::leaf<inject_t>(std::string_view value);
+template Builder::error_t Builder::leaf<marker_t>(std::string_view value);
 
 std::expected<WrpTree,Builder::error_t> Builder::close(std::vector<uint8_t>&& symbols){
     if(open==false)return std::unexpected(error_t::TREE_CLOSED);
@@ -46,15 +46,15 @@ Builder::Builder(config_t cfg):cfg(cfg){stack.push({0,-1});}
 Builder::error_t Builder::begin(std::string_view name, std::string_view ns){
     if(open==false)return error_t::TREE_CLOSED;
 
-    buffer.resize(buffer.size()+sizeof(node_t));
+    buffer.resize(buffer.size()+sizeof(element_t));
 
     auto& old_ctx = stack.top();
 
-    node_t* parent = (node_t*)(buffer.data()+old_ctx.first);
+    element_t* parent = (element_t*)(buffer.data()+old_ctx.first);
     unknown_t* prev = old_ctx.second!=-1?(unknown_t*)(buffer.data()+old_ctx.second):nullptr;
 
     //Emplace node
-    node_t* tmp_node = new ((node_t*) & (uint8_t&) *( buffer.end()-sizeof(node_t) )) node_t(label_offset,parent,ns,name);
+    element_t* tmp_node = new ((element_t*) & (uint8_t&) *( buffer.end()-sizeof(element_t) )) element_t(label_offset,parent,ns,name);
 
     if(prev!=nullptr){
         prev->set_next((unknown_t*)tmp_node);
@@ -75,7 +75,7 @@ Builder::error_t Builder::end(){
     attribute_block=false;
 
     auto& ctx = stack.top();
-    node_t* parent = (node_t*)(buffer.data()+ctx.first);
+    element_t* parent = (element_t*)(buffer.data()+ctx.first);
     parent->_size=buffer.size()-ctx.first;
 
     stack.pop();
@@ -91,7 +91,7 @@ Builder::error_t Builder::attr(std::string_view name, std::string_view value, st
 
     auto& old_ctx = stack.top();
 
-    node_t* parent = (node_t*)(buffer.data()+old_ctx.first);
+    element_t* parent = (element_t*)(buffer.data()+old_ctx.first);
 
     //Emplace node
     new ((attr_t*) & (uint8_t&) *( buffer.end()-sizeof(attr_t) )) attr_t(label_offset,ns,name,value);
