@@ -30,12 +30,25 @@ Other dependencies are only used for the test-suite and benchmarks, they are not
 Also, a modern version of C++ should be used.  
 I am working with C++23 for development, and I don't really plan on directly supporting older revisions of the language at the expense of code simplicity.  
 
-[^1]: XML 1.0 is covered as a best-effort, but there will be small things where either the official XML standard or this implementation is going to be incompatible or a superset.  
-      For more information on compatibility, please check [here](./docs/features.md).
-[^2]: Namespaces are supported in the sense that the namespace is split from the element or attribute name if present, but its handling, validation or whatever is left to the user.
+### Typical applications
 
+Examples of where this library is meant to fit:
 
-## Documentation
+#### Very big XML files
+
+This library allows serializing XML files into a binary format for fast navigation and information linking.  
+It is very easy to do it once, and then load your terabyte big XML as a memory mapped file.  
+Since nodes are random accessible via fully relocatable addresses, you will not get the constant penalties of page misses for each nested layer you need to visit.  
+
+#### Patches and annotations
+
+Annotating the tree, or even adding small patches on a huge tree can be quite easy[^3]; since addresses are all relative and stable, it is trivial to share your annotations or patches with others.
+
+#### Efficient tree building
+
+Tree building is not heap-allocating each node individually, and strings are unescaped in place when parsing a source XML file, so there are no expensive memory allocation needed for that.
+
+### Documentation
 
 Doxygen and the generated documentation can be found in the [github pages](https://lazy-eggplant.github.io/vs.xml/next/) of this project.
 
@@ -51,3 +64,9 @@ While they are not used by the library itself, tests and benchmarks do:
 This library is released as `LGPL3.0`.  
 Documentation is CC4.0 Attribution Share-Alike.  
 Examples are CC0 unless something else is specified.
+
+[^1]: XML 1.0 is covered as a best-effort, but there will be small things where either the official XML standard or this implementation is going to be incompatible or a superset.  
+      For more information on compatibility, please check [here](./docs/features.md).
+[^2]: Namespaces are supported in the sense that the namespace is split from the element or attribute name if present, but its handling, validation or whatever is left to the user.
+
+[^3]: However, using such patches would require a downstream implementation of wrapper classes.
