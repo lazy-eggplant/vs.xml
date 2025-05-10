@@ -19,7 +19,7 @@ all: configure build install docs
 # Configure step.
 configure:
 	@echo "Configuring project with $(MESON) (build type: $(BUILDTYPE))..."
-	$(MESON) setup $(BUILD_DIR) -Db_lto=true -Db_thinlto_cache=true -Db_lto_mode=thin --reconfigure --prefix=$(PREFIX) --buildtype=$(BUILDTYPE) --native-file $(TOOLCHAIN) 
+	$(MESON) setup $(BUILD_DIR) -Db_lto=true -Db_thinlto_cache=true -Db_lto_mode=thin --reconfigure --prefix=$(PREFIX) --buildtype=$(BUILDTYPE) --native-file $(TOOLCHAIN) -Dtests=true -Dexamples=true -Dbenchmarks=true
 
 # Build step depends on configuration.
 build: configure

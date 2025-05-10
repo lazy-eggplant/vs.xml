@@ -1,7 +1,7 @@
 project(
   'vs-xml',
   ['cpp'],
-  version: '0.1.7',
+  version: '0.1.8',
   meson_version: '>= 1.1',
   default_options: ['cpp_std=c++23'],
 )
@@ -40,6 +40,9 @@ if get_option('benchmarks')
   subdir(['./benchmark/'])
 endif
 
+if get_option('benchmarks')
+  subdir(['./example/'])
+endif
 
 
 pconf = import('pkgconfig')
