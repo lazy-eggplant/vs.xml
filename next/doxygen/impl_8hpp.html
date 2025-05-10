@@ -151,12 +151,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="center"><img src="impl_8hpp__dep__incl.png" border="0" usemap="#ainclude_2vs-xml_2impl_8hppdep" alt=""/></div>
 <map name="ainclude_2vs-xml_2impl_8hppdep" id="ainclude_2vs-xml_2impl_8hppdep">
 <area shape="rect" title="Implementation of the node logic." alt="" coords="13,5,192,31"/>
-<area shape="rect" href="wrp-tree_8hpp_source.html" title=" " alt="" coords="29,79,176,119"/>
-<area shape="poly" title=" " alt="" coords="105,44,105,79,100,79,100,44"/>
 <area shape="rect" href="builder_8hpp.html" title="Tree builder classes." alt="" coords="5,167,200,192"/>
-<area shape="poly" title=" " alt="" coords="105,132,105,166,100,166,100,132"/>
+<area shape="poly" title=" " alt="" coords="91,44,76,79,73,99,76,118,85,144,97,165,93,168,81,146,71,119,68,99,71,78,86,42"/>
+<area shape="rect" href="wrp-tree_8hpp_source.html" title=" " alt="" coords="85,79,232,119"/>
+<area shape="poly" title=" " alt="" coords="121,40,147,77,143,80,117,43"/>
 <area shape="rect" href="parser_8hpp.html" title="Implementation of the parse logic." alt="" coords="7,240,198,265"/>
 <area shape="poly" title=" " alt="" coords="105,206,105,240,100,240,100,206"/>
+<area shape="poly" title=" " alt="" coords="139,132,113,168,109,165,135,128"/>
 </map>
 </div>
 </div>
@@ -168,7 +169,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1attr__t.html">VS_XML_NS::attr_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1node__t.html">VS_XML_NS::node_t</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1element__t.html">VS_XML_NS::element_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1root__t.html">VS_XML_NS::root_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,7 +183,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1proc__t.html">VS_XML_NS::proc_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1inject__t.html">VS_XML_NS::inject_t</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1marker__t.html">VS_XML_NS::marker_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1unknown__t.html">VS_XML_NS::unknown_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,12 +220,12 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (type() == type_t::NODE) <span class="keywordflow">return</span> ((<span class="keyword">const</span> node_t*)<span class="keyword">this</span>) -&gt; X;\</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (type() == type_t::ELEMENT) <span class="keywordflow">return</span> ((<span class="keyword">const</span> element_t*)<span class="keyword">this</span>) -&gt; X;\</div>
 <div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::TEXT) <span class="keywordflow">return</span> ((<span class="keyword">const</span> text_t*)<span class="keyword">this</span>)-&gt; X;\</div>
 <div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::COMMENT) <span class="keywordflow">return</span> ((<span class="keyword">const</span> comment_t*)<span class="keyword">this</span>)-&gt; X;\</div>
 <div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::PROC) <span class="keywordflow">return</span> ((<span class="keyword">const</span> proc_t*)<span class="keyword">this</span>)-&gt; X;\</div>
 <div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::CDATA) <span class="keywordflow">return</span> ((<span class="keyword">const</span> cdata_t*)<span class="keyword">this</span>)-&gt; X;\</div>
-<div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::INJECT) <span class="keywordflow">return</span> ((<span class="keyword">const</span> inject_t*)<span class="keyword">this</span>)-&gt; X;\</div>
+<div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::MARKER) <span class="keywordflow">return</span> ((<span class="keyword">const</span> marker_t*)<span class="keyword">this</span>)-&gt; X;\</div>
 <div class="line"><span class="keywordflow">else</span>{\</div>
 <div class="line">    xml_assert(<span class="keyword">false</span>,<span class="stringliteral">&quot;Invalid XML thing type&quot;</span>);\</div>
 <div class="line">    std::unreachable();\</div>
@@ -247,12 +248,12 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (type() == type_t::NODE) <span class="keywordflow">return</span> ((node_t*)<span class="keyword">this</span>) -&gt; X;\</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (type() == type_t::ELEMENT) <span class="keywordflow">return</span> ((element_t*)<span class="keyword">this</span>) -&gt; X;\</div>
 <div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::TEXT) <span class="keywordflow">return</span> ((text_t*)<span class="keyword">this</span>)-&gt; X;\</div>
 <div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::COMMENT) <span class="keywordflow">return</span> ((comment_t*)<span class="keyword">this</span>)-&gt; X;\</div>
 <div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::PROC) <span class="keywordflow">return</span> ((proc_t*)<span class="keyword">this</span>)-&gt; X;\</div>
 <div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::CDATA) <span class="keywordflow">return</span> ((cdata_t*)<span class="keyword">this</span>)-&gt; X;\</div>
-<div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::INJECT) <span class="keywordflow">return</span> ((inject_t*)<span class="keyword">this</span>)-&gt; X;\</div>
+<div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (type() == type_t::MARKER) <span class="keywordflow">return</span> ((marker_t*)<span class="keyword">this</span>)-&gt; X;\</div>
 <div class="line"><span class="keywordflow">else</span>{\</div>
 <div class="line">    xml_assert(<span class="keyword">false</span>,<span class="stringliteral">&quot;Invalid XML thing type&quot;</span>);\</div>
 <div class="line">    std::unreachable();\</div>

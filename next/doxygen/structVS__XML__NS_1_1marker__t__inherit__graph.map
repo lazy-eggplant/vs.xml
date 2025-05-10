@@ -1,5 +1,5 @@
-<map id="VS_XML_NS::inject_t" name="VS_XML_NS::inject_t">
-<area shape="rect" id="Node000001" title=" " alt="" coords="22,152,177,177"/>
+<map id="VS_XML_NS::marker_t" name="VS_XML_NS::marker_t">
+<area shape="rect" id="Node000001" title=" " alt="" coords="17,152,182,177"/>
 <area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1leaf__t.html" title=" " alt="" coords="8,79,191,104"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,118,102,152,97,152,97,118"/>
 <area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1base__t.html" title=" " alt="" coords="5,5,193,31"/>

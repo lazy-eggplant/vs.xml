@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['vs_5fxml_5fns_3a_3aproperbuilder_0',['ProperBuilder',['../conceptVS__XML__NS_1_1ProperBuilder.html',1,'VS_XML_NS']]],
-  ['vs_5fxml_5fns_3a_3athing_5fi_1',['thing_i',['../conceptVS__XML__NS_1_1thing__i.html',1,'VS_XML_NS']]]
+  ['text_5ft_0',['text_t',['../structVS__XML__NS_1_1text__t.html',1,'VS_XML_NS']]],
+  ['tree_1',['Tree',['../structVS__XML__NS_1_1Tree.html',1,'VS_XML_NS']]],
+  ['tree_2ehpp_2',['tree.hpp',['../tree_8hpp.html',1,'']]]
 ];
