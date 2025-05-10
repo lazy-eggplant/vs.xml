@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structVS__XML__NS_1_1Builder_1_1config__t.html" title=" " alt="" coords="5,5,159,45"/>
+<area shape="rect" id="Node000000" href="$structVS__XML__NS_1_1Builder.html" title="Helper class to build an XML tree via commands." alt="" coords="5,5,159,31"/>
+<area shape="rect" id="Node000001" href="$structVS__XML__NS_1_1BuilderCompressed.html" title="Wrapper of Builder to compress labels before usage, reducing the final memory footprint." alt="" coords="207,5,441,31"/>
+<area shape="poly" id="edge15_Node000000_Node000001" title=" " alt="" coords="173,15,206,15,206,21,173,21"/>
 </map>

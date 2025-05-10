@@ -126,6 +126,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>inject_before</b> (co
 <tr class="memitem:a4822d40fe731b2f45efd6733373db66a" id="r_a4822d40fe731b2f45efd6733373db66a"><td class="memItemLeft" align="right" valign="top"><a id="a4822d40fe731b2f45efd6733373db66a" name="a4822d40fe731b2f45efd6733373db66a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>inject_after</b> (const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *ref, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *start, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *end)</td></tr>
 <tr class="separator:a4822d40fe731b2f45efd6733373db66a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af99d07ece6acca08a9b682ac357e1394" id="r_af99d07ece6acca08a9b682ac357e1394"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1Tree.html#af99d07ece6acca08a9b682ac357e1394">slice</a> (const <a class="el" href="structVS__XML__NS_1_1node__t.html">node_t</a> *ref=nullptr) const</td></tr>
+<tr class="memdesc:af99d07ece6acca08a9b682ac357e1394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a weak slice of a specific subtree.  <br /></td></tr>
+<tr class="separator:af99d07ece6acca08a9b682ac357e1394"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cd0061283ca1ef6048d0d7300dde10f" id="r_a7cd0061283ca1ef6048d0d7300dde10f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1Tree.html#a7cd0061283ca1ef6048d0d7300dde10f">clone</a> (const <a class="el" href="structVS__XML__NS_1_1node__t.html">node_t</a> *ref=nullptr, bool reduce=true) const</td></tr>
 <tr class="memdesc:a7cd0061283ca1ef6048d0d7300dde10f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a perfect deep copy of the current tree structure.  <br /></td></tr>
 <tr class="separator:a7cd0061283ca1ef6048d0d7300dde10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,6 +197,13 @@ struct&#160;</td><td class="memItemRight" valign="bottom"><b>Builder</b></td></t
 </div><div class="memdoc">
 
 <p>Return a perfect deep copy of the current tree structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ref</td><td>the node where to start cloning. </td></tr>
+    <tr><td class="paramname">reduce</td><td>if true, a new </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a> </dd></dl>
 
 </div>
@@ -330,6 +340,33 @@ false </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the operation is successful </dd></dl>
+
+</div>
+</div>
+<a id="af99d07ece6acca08a9b682ac357e1394" name="af99d07ece6acca08a9b682ac357e1394"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af99d07ece6acca08a9b682ac357e1394">&#9670;&#160;</a></span>slice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a> VS_XML_NS::Tree::slice </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVS__XML__NS_1_1node__t.html">node_t</a> *&#160;</td>
+          <td class="paramname"><em>ref</em> = <code>nullptr</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtain a weak slice of a specific subtree. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ref</td><td>the node where to start slicing. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>const <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a> </dd></dl>
 
 </div>
 </div>
