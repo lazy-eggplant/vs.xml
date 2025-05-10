@@ -10,3 +10,6 @@
 *.autogen.*
 /private/
 /.vscode/
+/assets/*
+!/assets/pull.sh
+!/assets/local/
