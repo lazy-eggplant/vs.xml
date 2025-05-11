@@ -1,12 +1,12 @@
 <map id="include/vs&#45;xml/serializer.hpp" name="include/vs&#45;xml/serializer.hpp">
-<area shape="rect" id="Node000001" title="Implementation of serialization/deserialization helpers." alt="" coords="5,5,215,31"/>
-<area shape="rect" id="Node000002" href="$impl_8hpp.html" title="Implementation of the node logic." alt="" coords="21,79,199,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,44,113,79,107,79,107,44"/>
-<area shape="rect" id="Node000003" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="13,240,207,265"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="98,117,83,153,80,172,83,191,93,217,105,238,100,241,88,219,78,193,75,172,78,151,93,115"/>
-<area shape="rect" id="Node000005" href="$wrp-tree_8hpp_source.html" title=" " alt="" coords="93,152,239,192"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="128,114,155,150,150,153,124,117"/>
-<area shape="rect" id="Node000004" href="$parser_8hpp.html" title="Implementation of the parse logic." alt="" coords="15,313,205,339"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="113,279,113,313,107,313,107,279"/>
-<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="147,205,121,241,116,238,142,202"/>
+<area shape="rect" id="Node000001" title="Implementation of serialization/deserialization helpers." alt="" coords="102,5,311,31"/>
+<area shape="rect" id="Node000002" href="$impl_8hpp.html" title="Implementation of the node logic." alt="" coords="13,79,192,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,41,121,81,118,76,177,36"/>
+<area shape="rect" id="Node000005" href="$parser_8hpp.html" title="Implementation of the parse logic." alt="" coords="217,79,407,104"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="237,36,296,76,293,81,234,41"/>
+<area shape="rect" id="Node000003" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="5,240,200,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,117,76,153,73,172,76,191,85,217,97,238,93,241,81,219,71,193,68,172,71,151,86,115"/>
+<area shape="rect" id="Node000004" href="$wrp-tree_8hpp_source.html" title=" " alt="" coords="85,152,232,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="121,114,147,150,143,153,117,117"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="139,205,113,241,109,238,135,202"/>
 </map>
