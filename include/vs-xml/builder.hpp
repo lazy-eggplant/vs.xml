@@ -34,12 +34,15 @@ namespace VS_XML_NS{
  */
 struct Builder{
     struct config_t{
-        bool allow_comments ;
-        bool collapse_text ;
+        bool allow_comments = true;
+        bool allow_procs = true;
+        bool compress_symbols = false;
+        //bool collapse_text ;
     };
 
     enum struct error_t{
-        OK,
+        SKIP = -1,
+        OK = 0,
         TREE_CLOSED,
         TREE_ATTR_CLOSED,
         STACK_EMPTY,
@@ -64,7 +67,7 @@ struct Builder{
     
     public:
 
-    Builder(config_t cfg={true,false});
+    Builder(config_t cfg);
     std::expected<WrpTree,error_t> close();
 
     error_t begin(std::string_view name, std::string_view ns="");
@@ -73,9 +76,9 @@ struct Builder{
     error_t attr(std::string_view name, std::string_view value, std::string_view ns="");
  
     inline error_t text(std::string_view value){return leaf<text_t>(value);}
-    inline error_t comment(std::string_view value){return leaf<comment_t>(value);}
+    inline error_t comment(std::string_view value){if(cfg.allow_comments)return leaf<comment_t>(value);else return error_t::SKIP;}
     inline error_t cdata(std::string_view value){return leaf<cdata_t>(value);}
-    inline error_t proc(std::string_view value){return leaf<proc_t>(value);}
+    inline error_t proc(std::string_view value){if(cfg.allow_procs)return leaf<proc_t>(value);else return error_t::SKIP;}
     inline error_t marker(std::string_view value){return leaf<marker_t>(value);}
 
     //TODO: injection can be a simple memcpy if the symbols space is shared, or require full tree refactoring.
