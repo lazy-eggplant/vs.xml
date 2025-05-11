@@ -11,7 +11,7 @@ var searchData=
   ['base_5ft_3c_20unknown_5ft_20_3e_8',['base_t&lt; unknown_t &gt;',['../structVS__XML__NS_1_1base__t.html',1,'VS_XML_NS']]],
   ['builder_9',['Builder',['../structVS__XML__NS_1_1Builder.html',1,'VS_XML_NS']]],
   ['builder_5fconfig_5ft_10',['builder_config_t',['../structVS__XML__NS_1_1builder__config__t.html',1,'VS_XML_NS']]],
-  ['builderbase_11',['BuilderBase',['../structVS__XML__NS_1_1BuilderBase.html',1,'VS_XML_NS']]],
+  ['builderbase_11',['BuilderBase',['../structVS__XML__NS_1_1details_1_1BuilderBase.html',1,'VS_XML_NS::details']]],
   ['builderimpl_12',['BuilderImpl',['../structVS__XML__NS_1_1details_1_1BuilderImpl.html',1,'VS_XML_NS::details']]],
   ['builderimpl_3c_20false_20_3e_13',['BuilderImpl&lt; false &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01false_01_4.html',1,'VS_XML_NS::details']]],
   ['builderimpl_3c_20true_20_3e_14',['BuilderImpl&lt; true &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01true_01_4.html',1,'VS_XML_NS::details']]],
