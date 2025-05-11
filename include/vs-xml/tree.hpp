@@ -161,4 +161,24 @@ struct Tree{
 };
 
 
+
+struct WrpTree : Tree{
+    private:
+    using Tree::rsv;
+    using Tree::clone;
+    using Tree::root;
+
+    public:
+    inline WrpTree(Tree&& ref):Tree(std::move(ref)){}
+    inline WrpTree(const Tree&& ref):Tree(std::move(ref)){}
+
+    inline const WrpTree slice(const element_t* ref=nullptr) const{return Tree::slice(ref);}
+    inline WrpTree clone(const element_t* ref=nullptr, bool reduce=true) const{return Tree::clone(ref,reduce);}
+
+    wrp::base_t<element_t> root() const;
+
+    inline Tree& downgrade(){return *this;}
+};
+
+
 }

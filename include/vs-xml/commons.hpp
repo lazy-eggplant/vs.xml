@@ -79,11 +79,16 @@ struct unknown_t;
 template<builder_config_t CFG>
 struct Builder;
 struct Tree;
+struct WrpTree;
 
 namespace details{
     struct BuilderBase;
 }
 
+namespace wrp{
+    template <typename T>
+    struct base_t;
+}
 
 enum struct feature_t{
     OK,
@@ -127,7 +132,6 @@ concept thing_i = requires(T self){
     {self.path()} -> std::same_as<std::string>;
 };
 
-struct WrpTree;
 
 template <typename T>
 concept ProperBuilder =  true;

@@ -23,8 +23,8 @@
 #include <string_view>
 
 #include "commons.hpp"
-#include "vs-xml/impl.hpp"
-#include "wrp-tree.hpp"
+#include "impl.hpp"
+#include "wrp-impl.hpp"
 
 namespace VS_XML_NS{
 
