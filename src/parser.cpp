@@ -3,7 +3,6 @@
 
 namespace VS_XML_NS{
 
-template class Parser<xml::Builder>;
-template class Parser<xml::BuilderCompressed>;
+//template class Parser<xml::Builder>;
 
 }

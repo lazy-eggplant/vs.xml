@@ -6,7 +6,7 @@
 #include <iostream>
 
 int main(){
-    xml::BuilderCompressed build;
+    xml::Builder build;
     
     build.begin("hello");
         build.attr("op3-a", "v'>&al1");
@@ -32,6 +32,7 @@ int main(){
         
         build.end();
     build.end();
+
     auto tree = *build.close();
     tree.print(std::cout,{});
     std::print("\n");

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "builder.hpp"
 
 /**
  * @file parser.hpp
@@ -12,7 +11,9 @@
  * 
  */
 
+#include <span>
 #include "commons.hpp"
+#include "serializer.hpp"
 
 namespace VS_XML_NS{
 

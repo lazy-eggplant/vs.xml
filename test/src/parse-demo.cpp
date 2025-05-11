@@ -30,7 +30,7 @@ int main() {
 </ns1:hello>
 )";
 
-    xml::BuilderCompressed builder;
+    xml::Builder<{.compress_symbols=true}> builder;
     try {
         xml::Parser parser(xmlData, builder);
         parser.parse();

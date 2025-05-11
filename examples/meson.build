@@ -9,7 +9,6 @@ executable(
     ],
 )
 
-
 executable(
     'document-building',
     './src/document-building.cpp',
@@ -18,7 +17,6 @@ executable(
         vs_xml_dep
     ],
 )
-
 
 executable(
     'from-xml',

@@ -63,8 +63,10 @@ struct base_t{
     auto attrs() const;
     auto text() const;
 
-    friend Builder;
-    friend Tree;
+    template<builder_config_t>
+    friend struct Builder;
+    friend struct BuilderBase;
+    friend struct Tree;
 };
 
 struct attr_t{
@@ -161,10 +163,11 @@ struct element_t : base_t<element_t>{
         return std::format("{}{}{}", _ns, _ns==""?"":":", _name);
     }
     */
-    
-    friend Builder;
-    friend Tree;
-    friend unknown_t;
+    template<builder_config_t>
+    friend struct Builder;
+    friend struct BuilderBase;
+    friend struct Tree;
+    friend struct unknown_t;
 };
 
 
@@ -209,9 +212,11 @@ struct root_t : base_t<root_t>{
     }
     */
     
-    friend Builder;
-    friend Tree;
-    friend unknown_t;
+    template<builder_config_t>
+    friend struct Builder;
+    friend struct BuilderBase;
+    friend struct Tree;
+    friend struct unknown_t;
 };
 
 
@@ -254,9 +259,11 @@ struct leaf_t : base_t<T>{
     inline bool has_prev() const {return _prev!=0;}
     inline bool has_next() const {return has_parent() && (next()<(parent()->children_range())->second)!=0;}   //TODO:check
 
-    friend Builder;
-    friend Tree;
-    friend unknown_t;
+    template<builder_config_t>
+    friend struct Builder;
+    friend struct BuilderBase;
+    friend struct Tree;
+    friend struct unknown_t;
 };
 
 struct comment_t : leaf_t<comment_t>{
@@ -265,8 +272,10 @@ struct comment_t : leaf_t<comment_t>{
 
     inline std::string path_h() const { return std::format("#comment"); }
 
-    friend Builder;
-    friend Tree;
+    template<builder_config_t>
+    friend struct Builder;
+    friend struct BuilderBase;
+    friend struct Tree;
 };
 
 struct cdata_t : leaf_t<cdata_t>{
@@ -275,8 +284,10 @@ struct cdata_t : leaf_t<cdata_t>{
 
     inline std::string path_h() const { return std::format("#cdata"); }
 
-    friend Builder;
-    friend Tree;
+    template<builder_config_t>
+    friend struct Builder;
+    friend struct BuilderBase;
+    friend struct Tree;
 };
 
 struct text_t : leaf_t<text_t>{
@@ -285,8 +296,10 @@ struct text_t : leaf_t<text_t>{
 
     inline std::string path_h() const { return std::format("#text"); }
     
-    friend Builder;
-    friend Tree;
+    template<builder_config_t>
+    friend struct Builder;
+    friend struct BuilderBase;
+    friend struct Tree;
 };
 
 struct proc_t : leaf_t<proc_t>{
@@ -295,8 +308,10 @@ struct proc_t : leaf_t<proc_t>{
 
     inline std::string path_h() const { return std::format("#proc"); }
 
-    friend Builder;
-    friend Tree;
+    template<builder_config_t>
+    friend struct Builder;
+    friend struct BuilderBase;
+    friend struct Tree;
 };
 
 struct marker_t : leaf_t<marker_t>{
@@ -305,8 +320,10 @@ struct marker_t : leaf_t<marker_t>{
 
     inline std::string path_h() const { return std::format("#leaf"); }
 
-    friend Builder;
-    friend Tree;
+    template<builder_config_t>
+    friend struct Builder;
+    friend struct BuilderBase;
+    friend struct Tree;
 };
 
 #define DISPATCH(X) \
@@ -360,8 +377,10 @@ struct unknown_t : base_t<unknown_t>{
     inline bool has_prev() const {CDISPATCH(has_prev());}
     inline bool has_next() const {CDISPATCH(has_next());}
 
-    friend Builder;
-    friend Tree;
+    template<builder_config_t>
+    friend struct Builder;
+    friend struct BuilderBase;
+    friend struct Tree;
 };
 
 #undef DISPATCH

@@ -1,11 +1,10 @@
-#include <stdexcept>
 #include <vs-xml/builder.hpp>
 #include <vs-xml/impl.hpp>
 
 namespace VS_XML_NS{
 
 template<typename T>
-Builder::error_t Builder::leaf(std::string_view value){
+BuilderBase::error_t BuilderBase::leaf(std::string_view value){
     if(open==false)return error_t::TREE_CLOSED;
     attribute_block=false;
 
@@ -26,13 +25,13 @@ Builder::error_t Builder::leaf(std::string_view value){
     return error_t::OK;
 }
 
-template Builder::error_t Builder::leaf<comment_t>(std::string_view value);
-template Builder::error_t Builder::leaf<cdata_t>(std::string_view value);
-template Builder::error_t Builder::leaf<text_t>(std::string_view value);
-template Builder::error_t Builder::leaf<proc_t>(std::string_view value);
-template Builder::error_t Builder::leaf<marker_t>(std::string_view value);
+template BuilderBase::error_t BuilderBase::leaf<comment_t>(std::string_view value);
+template BuilderBase::error_t BuilderBase::leaf<cdata_t>(std::string_view value);
+template BuilderBase::error_t BuilderBase::leaf<text_t>(std::string_view value);
+template BuilderBase::error_t BuilderBase::leaf<proc_t>(std::string_view value);
+template BuilderBase::error_t BuilderBase::leaf<marker_t>(std::string_view value);
 
-std::expected<WrpTree,Builder::error_t> Builder::close(std::vector<uint8_t>&& symbols){
+std::expected<WrpTree,BuilderBase::error_t> BuilderBase::close(std::vector<uint8_t>&& symbols){
     if(open==false)return std::unexpected(error_t::TREE_CLOSED);
     open=false;
     if(stack.size()!=1)return std::unexpected(error_t::MISFORMED);
@@ -41,9 +40,9 @@ std::expected<WrpTree,Builder::error_t> Builder::close(std::vector<uint8_t>&& sy
     return WrpTree(Tree(std::move(buffer),std::move(symbols)));
 }
 
-Builder::Builder(config_t cfg):cfg(cfg){stack.push({0,-1});}
+BuilderBase::BuilderBase(){stack.push({0,-1});}
 
-Builder::error_t Builder::begin(std::string_view name, std::string_view ns){
+BuilderBase::error_t BuilderBase::begin(std::string_view name, std::string_view ns){
     if(open==false)return error_t::TREE_CLOSED;
 
     buffer.resize(buffer.size()+sizeof(element_t));
@@ -68,7 +67,7 @@ Builder::error_t Builder::begin(std::string_view name, std::string_view ns){
     return error_t::OK;
 }
 
-Builder::error_t Builder::end(){
+BuilderBase::error_t BuilderBase::end(){
     if(open==false)return error_t::TREE_CLOSED;
     if(stack.size()<=1)return error_t::STACK_EMPTY;
 
@@ -83,7 +82,7 @@ Builder::error_t Builder::end(){
     return error_t::OK;
 }
 
-Builder::error_t Builder::attr(std::string_view name, std::string_view value, std::string_view ns){
+BuilderBase::error_t BuilderBase::attr(std::string_view name, std::string_view value, std::string_view ns){
     if(open==false)return error_t::TREE_CLOSED;
     if(attribute_block==false)return error_t::TREE_ATTR_CLOSED;
 
@@ -101,7 +100,7 @@ Builder::error_t Builder::attr(std::string_view name, std::string_view value, st
     return error_t::OK;
 }
 
-std::expected<WrpTree,Builder::error_t> Builder::close(){
+std::expected<WrpTree,BuilderBase::error_t> BuilderBase::close(){
     if(open==false)return std::unexpected(error_t::TREE_CLOSED);
     open=false;
     if(stack.size()!=1)return std::unexpected(error_t::MISFORMED);
@@ -110,7 +109,7 @@ std::expected<WrpTree,Builder::error_t> Builder::close(){
 }
 
 
-sv BuilderCompressed::symbol(std::string_view s){
+sv details::BuilderImpl<true>::symbol(std::string_view s){
     if(s.length()==0)return {0,0};
 
     auto it = idx_symbols.find(sv(label_offset,s));
@@ -127,11 +126,6 @@ sv BuilderCompressed::symbol(std::string_view s){
     else{
         return *it;
     }
-}
-
-std::expected<WrpTree,BuilderCompressed::error_t> BuilderCompressed::close(){
-    idx_symbols.clear();
-    return Builder::close(std::move(symbols));
 }
 
 }

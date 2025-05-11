@@ -155,7 +155,9 @@ struct Tree{
         bool recursive = true
     );
 
+    template<builder_config_t>
     friend struct Builder;
+    friend struct BuilderBase;
 };
 
 

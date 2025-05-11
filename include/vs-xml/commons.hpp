@@ -58,6 +58,13 @@ struct sv{
     sv()=delete;
 };
 
+struct builder_config_t{
+    bool allow_comments = true;
+    bool allow_procs = true;
+    bool compress_symbols = false;
+    //bool collapse_text ;
+};
+
 struct element_t;
 struct attr_t;
 struct text_t;
@@ -68,8 +75,8 @@ struct marker_t;
 struct root_t;
 struct unknown_t;
 
+template<builder_config_t CFG>
 struct Builder;
-struct BuilderCompressed;
 struct Tree;
 
 enum struct feature_t{
@@ -117,9 +124,10 @@ concept thing_i = requires(T self){
 struct WrpTree;
 
 template <typename T>
-concept ProperBuilder = std::same_as<T, BuilderCompressed> || std::same_as<T, Builder>;
+concept ProperBuilder =  true;
 
 template<ProperBuilder Builder_t>
 class Parser;
+
 
 }
