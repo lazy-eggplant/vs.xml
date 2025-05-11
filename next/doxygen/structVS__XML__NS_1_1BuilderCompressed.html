@@ -142,12 +142,13 @@ std::expected&lt; <a class="el" href="structVS__XML__NS_1_1WrpTree.html">WrpTree
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_types_structVS__XML__NS_1_1Builder"><td colspan="2" onclick="javascript:toggleInherit('pro_types_structVS__XML__NS_1_1Builder')"><img src="closed.png" alt="-"/>&#160;Protected Types inherited from <a class="el" href="structVS__XML__NS_1_1Builder.html">VS_XML_NS::Builder</a></td></tr>
 <tr class="memitem:adfc7251b9dbb0a5a547d70c570131120 inherit pro_types_structVS__XML__NS_1_1Builder" id="r_adfc7251b9dbb0a5a547d70c570131120"><td class="memItemLeft" align="right" valign="top"><a id="adfc7251b9dbb0a5a547d70c570131120" name="adfc7251b9dbb0a5a547d70c570131120"></a>enum struct &#160;</td><td class="memItemRight" valign="bottom"><b>error_t</b> { <br />
-&#160;&#160;<b>OK</b>
+&#160;&#160;<b>SKIP</b> = -1
+, <b>OK</b> = 0
 , <b>TREE_CLOSED</b>
 , <b>TREE_ATTR_CLOSED</b>
-, <b>STACK_EMPTY</b>
 , <br />
-&#160;&#160;<b>MISFORMED</b>
+&#160;&#160;<b>STACK_EMPTY</b>
+, <b>MISFORMED</b>
 <br />
  }</td></tr>
 <tr class="separator:adfc7251b9dbb0a5a547d70c570131120 inherit pro_types_structVS__XML__NS_1_1Builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,9 +156,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ab5cbf9a6121de1066f76bcf13edcb347 inherit pro_methods_structVS__XML__NS_1_1Builder" id="r_ab5cbf9a6121de1066f76bcf13edcb347"><td class="memItemLeft" align="right" valign="top">
 std::expected&lt; <a class="el" href="structVS__XML__NS_1_1WrpTree.html">WrpTree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> (std::vector&lt; uint8_t &gt; &amp;&amp;symbols)</td></tr>
 <tr class="separator:ab5cbf9a6121de1066f76bcf13edcb347 inherit pro_methods_structVS__XML__NS_1_1Builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a127b12d2dfdd6ff5af90e99b307df2b6 inherit pro_methods_structVS__XML__NS_1_1Builder" id="r_a127b12d2dfdd6ff5af90e99b307df2b6"><td class="memItemLeft" align="right" valign="top">
-&#160;</td><td class="memItemRight" valign="bottom"><b>Builder</b> (<a class="el" href="structVS__XML__NS_1_1Builder_1_1config__t.html">config_t</a> cfg={true, false})</td></tr>
-<tr class="separator:a127b12d2dfdd6ff5af90e99b307df2b6 inherit pro_methods_structVS__XML__NS_1_1Builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9e80c6b3190add1bd890fb2f32c50e2 inherit pro_methods_structVS__XML__NS_1_1Builder" id="r_ae9e80c6b3190add1bd890fb2f32c50e2"><td class="memItemLeft" align="right" valign="top">
+&#160;</td><td class="memItemRight" valign="bottom"><b>Builder</b> (<a class="el" href="structVS__XML__NS_1_1Builder_1_1config__t.html">config_t</a> cfg)</td></tr>
+<tr class="separator:ae9e80c6b3190add1bd890fb2f32c50e2 inherit pro_methods_structVS__XML__NS_1_1Builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a484a0aeb7870871b41c02570741b78af inherit pro_methods_structVS__XML__NS_1_1Builder" id="r_a484a0aeb7870871b41c02570741b78af"><td class="memItemLeft" align="right" valign="top">
 std::expected&lt; <a class="el" href="structVS__XML__NS_1_1WrpTree.html">WrpTree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
 <tr class="separator:a484a0aeb7870871b41c02570741b78af inherit pro_methods_structVS__XML__NS_1_1Builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
