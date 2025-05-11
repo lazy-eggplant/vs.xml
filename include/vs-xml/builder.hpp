@@ -28,55 +28,55 @@
 
 namespace VS_XML_NS{
 
-struct BuilderBase{
-    enum struct error_t{
-        SKIP = -1,
-        OK = 0,
-        TREE_CLOSED,
-        TREE_ATTR_CLOSED,
-        STACK_EMPTY,
-        MISFORMED,
-    };
-
-    private:
-        std::vector<uint8_t> buffer;
-        bool open = true;               //True if the tree is still open to append things.
-        bool attribute_block = false;   //True after a begin to add attributes. It is automatically closed when any other command is triggered.
-        
-        std::stack<std::pair<ptrdiff_t,ptrdiff_t>> stack;
-
-        template<typename T>
-        error_t leaf(std::string_view value);
-
-    protected:
-        void* label_offset = nullptr;
-
-        std::expected<WrpTree,error_t> close(std::vector<uint8_t>&& symbols);
-    
-    public:
-
-        BuilderBase();
-        std::expected<WrpTree,error_t> close();
-
-        error_t begin(std::string_view name, std::string_view ns="");
-        error_t end();
-
-        error_t attr(std::string_view name, std::string_view value, std::string_view ns="");
-
-        inline error_t text(std::string_view value){return leaf<text_t>(value);}
-        inline error_t comment(std::string_view value){return leaf<comment_t>(value);}
-        inline error_t cdata(std::string_view value){return leaf<cdata_t>(value);}
-        inline error_t proc(std::string_view value){return leaf<proc_t>(value);}
-        inline error_t marker(std::string_view value){return leaf<marker_t>(value);}
-
-        //TODO: injection can be a simple memcpy if the symbols space is shared, or require full tree refactoring.
-        error_t inject(node_iterator start, node_iterator end);
-        error_t inject(const Tree& tree);
-        error_t inject(const WrpTree& tree);
-};
 
 namespace details{
-
+    struct BuilderBase{
+        enum struct error_t{
+            SKIP = -1,
+            OK = 0,
+            TREE_CLOSED,
+            TREE_ATTR_CLOSED,
+            STACK_EMPTY,
+            MISFORMED,
+        };
+    
+        private:
+            std::vector<uint8_t> buffer;
+            bool open = true;               //True if the tree is still open to append things.
+            bool attribute_block = false;   //True after a begin to add attributes. It is automatically closed when any other command is triggered.
+            
+            std::stack<std::pair<ptrdiff_t,ptrdiff_t>> stack;
+    
+            template<typename T>
+            error_t leaf(std::string_view value);
+    
+        protected:
+            void* label_offset = nullptr;
+    
+            std::expected<WrpTree,error_t> close(std::vector<uint8_t>&& symbols);
+        
+        public:
+    
+            BuilderBase();
+            std::expected<WrpTree,error_t> close();
+    
+            error_t begin(std::string_view name, std::string_view ns="");
+            error_t end();
+    
+            error_t attr(std::string_view name, std::string_view value, std::string_view ns="");
+    
+            inline error_t text(std::string_view value){return leaf<text_t>(value);}
+            inline error_t comment(std::string_view value){return leaf<comment_t>(value);}
+            inline error_t cdata(std::string_view value){return leaf<cdata_t>(value);}
+            inline error_t proc(std::string_view value){return leaf<proc_t>(value);}
+            inline error_t marker(std::string_view value){return leaf<marker_t>(value);}
+    
+            //TODO: injection can be a simple memcpy if the symbols space is shared, or require full tree refactoring.
+            error_t inject(node_iterator start, node_iterator end);
+            error_t inject(const Tree& tree);
+            error_t inject(const WrpTree& tree);
+    };
+    
 /**
  * @brief Helper class to build an XML tree via commands.
  * 
@@ -134,37 +134,38 @@ struct Builder : protected details::BuilderImpl<cfg.compress_symbols>{
 
     public:
         using details::BuilderImpl<cfg.compress_symbols>::rsv;
-    
+        using error_t = details::BuilderBase::error_t;
+
         inline Builder(){}
 
-        inline BuilderBase::error_t begin(std::string_view name, std::string_view ns=""){
+        inline error_t begin(std::string_view name, std::string_view ns=""){
             auto a =symbol(name), b = symbol(ns);
-            return BuilderBase::begin(rsv(a),rsv(b));
+            return details::BuilderBase::begin(rsv(a),rsv(b));
         }
-        inline BuilderBase::error_t end(){
-            return BuilderBase::end();
+        inline error_t end(){
+            return details::BuilderBase::end();
         }
-        inline BuilderBase::error_t attr(std::string_view name, std::string_view value, std::string_view ns=""){
+        inline error_t attr(std::string_view name, std::string_view value, std::string_view ns=""){
             auto a =symbol(name), b = symbol(value), c = symbol(ns);
-            return BuilderBase::attr(rsv(a),rsv(b),rsv(c));
+            return details::BuilderBase::attr(rsv(a),rsv(b),rsv(c));
         }
 
-        inline BuilderBase::error_t text(std::string_view value){
-            return BuilderBase::text(rsv( symbol(value)));
+        inline error_t text(std::string_view value){
+            return details::BuilderBase::text(rsv( symbol(value)));
         }
-        inline BuilderBase::error_t comment(std::string_view value){
+        inline error_t comment(std::string_view value){
             if constexpr(!cfg.allow_comments)return Builder::error_t::SKIP;
-            else return BuilderBase::comment(rsv( symbol(value)));
+            else return details::BuilderBase::comment(rsv( symbol(value)));
         }
-        inline BuilderBase::error_t cdata(std::string_view value){
-            return BuilderBase::cdata(rsv( symbol(value)));
+        inline error_t cdata(std::string_view value){
+            return details::BuilderBase::cdata(rsv( symbol(value)));
         }
-        inline BuilderBase::error_t proc(std::string_view value){
+        inline error_t proc(std::string_view value){
             if constexpr(!cfg.allow_procs)return Builder::error_t::SKIP;
-            else return BuilderBase::proc(rsv( symbol(value)));
+            else return details::BuilderBase::proc(rsv( symbol(value)));
         }
-        inline BuilderBase::error_t marker(std::string_view value){
-            return BuilderBase::marker(rsv( symbol(value)));
+        inline error_t marker(std::string_view value){
+            return details::BuilderBase::marker(rsv( symbol(value)));
         }
 
         using details::BuilderImpl<cfg.compress_symbols>::close;

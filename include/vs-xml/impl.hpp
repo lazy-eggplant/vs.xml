@@ -65,7 +65,7 @@ struct base_t{
 
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
     friend struct Tree;
 };
 
@@ -165,7 +165,7 @@ struct element_t : base_t<element_t>{
     */
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
     friend struct Tree;
     friend struct unknown_t;
 };
@@ -214,7 +214,7 @@ struct root_t : base_t<root_t>{
     
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
     friend struct Tree;
     friend struct unknown_t;
 };
@@ -261,7 +261,7 @@ struct leaf_t : base_t<T>{
 
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
     friend struct Tree;
     friend struct unknown_t;
 };
@@ -274,7 +274,7 @@ struct comment_t : leaf_t<comment_t>{
 
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
     friend struct Tree;
 };
 
@@ -286,7 +286,7 @@ struct cdata_t : leaf_t<cdata_t>{
 
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
     friend struct Tree;
 };
 
@@ -298,7 +298,7 @@ struct text_t : leaf_t<text_t>{
     
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
     friend struct Tree;
 };
 
@@ -310,7 +310,7 @@ struct proc_t : leaf_t<proc_t>{
 
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
     friend struct Tree;
 };
 
@@ -322,7 +322,7 @@ struct marker_t : leaf_t<marker_t>{
 
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
     friend struct Tree;
 };
 
@@ -379,7 +379,7 @@ struct unknown_t : base_t<unknown_t>{
 
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
     friend struct Tree;
 };
 

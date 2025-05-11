@@ -32,6 +32,7 @@
 
 namespace VS_XML_NS{
 
+
 typedef std::ptrdiff_t delta_ptr_t ;
 typedef size_t xml_size_t;
 typedef size_t xml_count_t;
@@ -78,6 +79,11 @@ struct unknown_t;
 template<builder_config_t CFG>
 struct Builder;
 struct Tree;
+
+namespace details{
+    struct BuilderBase;
+}
+
 
 enum struct feature_t{
     OK,
@@ -128,6 +134,7 @@ concept ProperBuilder =  true;
 
 template<ProperBuilder Builder_t>
 class Parser;
+
 
 
 }

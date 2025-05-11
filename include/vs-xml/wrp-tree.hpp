@@ -22,7 +22,7 @@ struct wrp_base_t{
         wrp_base_t(const Tree& base, const T* ptr):base(base),ptr(ptr){}
         wrp_base_t(wrp_base_t p, const T* ptr):base(p.base),ptr(ptr){}
 
-        friend struct xml::WrpTree;
+        friend struct VS_XML_NS::WrpTree;
         template <typename W>
         friend struct wrp_base_t;
 

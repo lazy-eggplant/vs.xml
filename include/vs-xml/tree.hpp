@@ -157,7 +157,7 @@ struct Tree{
 
     template<builder_config_t>
     friend struct Builder;
-    friend struct BuilderBase;
+    friend struct details::BuilderBase;
 };
 
 

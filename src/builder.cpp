@@ -3,6 +3,8 @@
 
 namespace VS_XML_NS{
 
+namespace details{
+
 template<typename T>
 BuilderBase::error_t BuilderBase::leaf(std::string_view value){
     if(open==false)return error_t::TREE_CLOSED;
@@ -109,7 +111,7 @@ std::expected<WrpTree,BuilderBase::error_t> BuilderBase::close(){
 }
 
 
-sv details::BuilderImpl<true>::symbol(std::string_view s){
+sv BuilderImpl<true>::symbol(std::string_view s){
     if(s.length()==0)return {0,0};
 
     auto it = idx_symbols.find(sv(label_offset,s));
@@ -126,6 +128,8 @@ sv details::BuilderImpl<true>::symbol(std::string_view s){
     else{
         return *it;
     }
+}
+
 }
 
 }
