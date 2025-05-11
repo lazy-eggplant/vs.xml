@@ -197,16 +197,40 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>}</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="foldopen" id="foldopen00165" data-start="{" data-end="};">
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1WrpTree.html">  165</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1WrpTree.html">WrpTree</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>{</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keyword">using </span>Tree::rsv;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keyword">using </span>Tree::clone;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keyword">using </span>Tree::root;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1WrpTree.html">WrpTree</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>&amp;&amp; ref):<a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>(std::move(ref)){}</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1WrpTree.html">WrpTree</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>&amp;&amp; ref):<a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>(std::move(ref)){}</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1WrpTree.html">WrpTree</a> slice(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>* ref=<span class="keyword">nullptr</span>)<span class="keyword"> const</span>{<span class="keywordflow">return</span> Tree::slice(ref);}</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1WrpTree.html">WrpTree</a> clone(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>* ref=<span class="keyword">nullptr</span>, <span class="keywordtype">bool</span> reduce=<span class="keyword">true</span>)<span class="keyword"> const</span>{<span class="keywordflow">return</span> Tree::clone(ref,reduce);}</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t&lt;element_t&gt;</a> root() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>&amp; downgrade(){<span class="keywordflow">return</span> *<span class="keyword">this</span>;}</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>};</div>
+</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>}</div>
 <div class="ttc" id="astructVS__XML__NS_1_1Tree_1_1print__cfg__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree_1_1print__cfg__t.html">VS_XML_NS::Tree::print_cfg_t</a></div><div class="ttdef"><b>Definition</b> tree.hpp:109</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Tree_html_a271b21f7493c9078a946c9864aca7cc2"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html#a271b21f7493c9078a946c9864aca7cc2">VS_XML_NS::Tree::inject</a></div><div class="ttdeci">bool inject(const unknown_t *ref, const unknown_t *start, const unknown_t *end)</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Tree_html_a3dc4d71468f7a3c1b561ae941fe0bc25"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html#a3dc4d71468f7a3c1b561ae941fe0bc25">VS_XML_NS::Tree::clone</a></div><div class="ttdeci">Tree clone(const element_t *ref=nullptr, bool reduce=true) const</div><div class="ttdoc">Return a perfect deep copy of the current tree structure.</div><div class="ttdef"><b>Definition</b> tree.cpp:134</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Tree_html_a41297f1b3aaa8582c2cc373913d020b4"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html#a41297f1b3aaa8582c2cc373913d020b4">VS_XML_NS::Tree::slice</a></div><div class="ttdeci">const Tree slice(const element_t *ref=nullptr) const</div><div class="ttdoc">Obtain a weak slice of a specific subtree.</div><div class="ttdef"><b>Definition</b> tree.cpp:124</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Tree_html_a76f8ebe44c5867894f75371954bbd2db"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html#a76f8ebe44c5867894f75371954bbd2db">VS_XML_NS::Tree::reorder_children</a></div><div class="ttdeci">bool reorder_children(const element_t *ref, const std::function&lt; bool(const unknown_t &amp;, const unknown_t &amp;)&gt; &amp;fn)</div><div class="ttdoc">Reorder (in-place) children of a node based on a custom ordering criterion.</div><div class="ttdef"><b>Definition</b> tree.hpp:57</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1WrpTree_html"><div class="ttname"><a href="structVS__XML__NS_1_1WrpTree.html">VS_XML_NS::WrpTree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:165</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__t.html">VS_XML_NS::attr_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:72</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1element__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1element__t.html">VS_XML_NS::element_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:90</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1unknown__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1unknown__t.html">VS_XML_NS::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:353</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1wrp_1_1base__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1wrp_1_1base__t.html">VS_XML_NS::wrp::base_t</a></div><div class="ttdef"><b>Definition</b> wrp-impl.hpp:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
