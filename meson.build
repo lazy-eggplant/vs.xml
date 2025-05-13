@@ -1,7 +1,7 @@
 project(
   'vs-xml',
   ['cpp'],
-  version: '0.1.9',
+  version: '0.1.10',
   meson_version: '>= 1.1',
   default_options: ['cpp_std=c++23'],
 )
@@ -13,12 +13,12 @@ add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
 vs_xml_lib = library(
     'vs-xml',
     [
-      'src/parser.cpp',
-      'src/serializer.cpp',
-      'src/tree.cpp',
-      'src/builder.cpp',
-      'src/document.cpp',
-      'src/world.cpp'
+      'lib/parser.cpp',
+      'lib/serializer.cpp',
+      'lib/tree.cpp',
+      'lib/builder.cpp',
+      'lib/document.cpp',
+      'lib/world.cpp'
     ],
     install: true,
     dependencies: [],
@@ -44,6 +44,9 @@ if get_option('examples')
   subdir(['./examples/'])
 endif
 
+if get_option('utils')
+  subdir(['./utils/'])
+endif
 
 pconf = import('pkgconfig')
 pconf.generate(

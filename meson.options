@@ -1,3 +1,4 @@
 option('tests', type: 'boolean', value: false)
 option('benchmarks', type: 'boolean', value: false)
 option('examples', type: 'boolean', value: false)
+option('utils', type: 'boolean', value: true)
