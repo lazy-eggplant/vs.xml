@@ -13,8 +13,6 @@
 // Example main (for testing purposes)
 //-----------------------------------------------------
 int main() {
-    mio::mmap_source mmap("./assets/local/demo-0.xml");
-    std::span<char> w((char*)mmap.data(),mmap.size());
 
     //The parser can mutate this string. I will have to identify if there is any better ownership mechanism here to use
     std::string xmlData = R"(
@@ -29,7 +27,7 @@ int main() {
 </ns1:hello>
 )";
 
-    xml::Builder<{.compress_symbols=false}> builder;
+    xml::Builder<{.compress_symbols=true}> builder;
     try {
         xml::Parser parser(xmlData, builder);
         parser.parse();
@@ -38,6 +36,10 @@ int main() {
     }
     auto tree = *builder.close();
     tree.print(std::cout,{});
+
+    mio::mmap_source mmap("./assets/local/demo-0.xml");
+    std::span<char> w((char*)mmap.data(),mmap.size());
+
 
     {
         std::ofstream file("./assets/local/demo-0.bin",std::ios::binary|std::ios::out);
@@ -49,7 +51,7 @@ int main() {
 
     {
         mio::mmap_source mmap("./assets/local/demo-0.bin");
-        xml::Tree tmp({.raw_strings=true},std::span((uint8_t*)mmap.data(),mmap.size()));
+        auto tmp = xml::Tree::from_binary({.raw_strings=true},std::span((uint8_t*)mmap.data(),mmap.size()));
         tmp.print(std::cout,{});
     }
 

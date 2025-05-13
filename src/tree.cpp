@@ -9,11 +9,11 @@
 
 namespace VS_XML_NS{
 
-std::function<bool(const unknown_t&, const unknown_t&)> Tree::def_order_node(){
+std::function<bool(const unknown_t&, const unknown_t&)> Tree::def_order_node() const{
     throw "Not implemented";
 }
 
-std::function<bool(const attr_t&, const attr_t&)> Tree::def_order_attrs() {
+std::function<bool(const attr_t&, const attr_t&)> Tree::def_order_attrs() const{
     return [this](const attr_t& a, const attr_t& b){
         {
             auto va = rsv(*a.ns()), vb= rsv(*b.ns());
@@ -170,16 +170,33 @@ bool Tree::save_binary(std::ostream& out)const{
     return true;
 }
 
-Tree::Tree(const builder_config_t& cfg, std::span<uint8_t> region):configs(cfg){
+Tree Tree::from_binary(const builder_config_t& cfg, std::span<uint8_t> region){
     xml_assert(region.size_bytes()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
-    serialized_header_t header;
+    Tree::serialized_header_t header;
     memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
     xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
     xml_assert(region.size_bytes()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
     xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
 
-    this->buffer={region.data()+sizeof(header), region.data()+sizeof(header)+header.offset_symbols};
-    this->symbols={region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end};
+    return Tree(cfg,
+        std::span<uint8_t>{region.data()+sizeof(header), region.data()+sizeof(header)+header.offset_symbols},
+        std::span<uint8_t>{region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end}
+    );
+}
+
+//TODO: check if there are more checks between the const and mutable versions
+const Tree Tree::from_binary(const builder_config_t& cfg, std::string_view region){
+    xml_assert(region.size()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
+    Tree::serialized_header_t header;
+    memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
+    xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
+    xml_assert(region.size()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
+    xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
+
+    return Tree(cfg,
+        std::string_view{region.data()+sizeof(header), region.data()+sizeof(header)+header.offset_symbols},
+        std::string_view{region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end}
+    );
 }
 
 }

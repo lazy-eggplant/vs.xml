@@ -4,7 +4,7 @@
 #include <iostream>
 
 int main(){
-    xml::Builder build;
+    xml::Builder<{.compress_symbols=true}> build;
     
     build.begin("hello");
         build.attr("op3-a", "v'>&al1");

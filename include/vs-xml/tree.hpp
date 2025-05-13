@@ -41,12 +41,12 @@ struct Tree{
         std::span<uint8_t> buffer;      //Overlay of buffer_i, or external
         std::span<uint8_t> symbols;     //Overlay of symbols_i, or external
 
-        const builder_config_t configs;
+        builder_config_t configs;
 
     public:
 
-    std::function<bool(const unknown_t&, const unknown_t&)> def_order_node();
-    std::function<bool(const attr_t&, const attr_t&)> def_order_attrs();
+    std::function<bool(const unknown_t&, const unknown_t&)> def_order_node() const;
+    std::function<bool(const attr_t&, const attr_t&)> def_order_attrs() const;
 
     /**
         * @brief Reorder (in-place) children of a node based on a custom ordering criterion.
@@ -116,7 +116,9 @@ struct Tree{
     }
 
     bool save_binary(std::ostream& out)const;
-    Tree(const builder_config_t& cfg,std::span<uint8_t> region);
+
+    static Tree from_binary(const builder_config_t& cfg,std::span<uint8_t> region);
+    static const Tree from_binary(const builder_config_t& cfg,std::string_view region);
 
     inline std::string_view rsv(sv s) const{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
@@ -150,6 +152,9 @@ struct Tree{
     Tree(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym):
         buffer(src),symbols(sym),configs(cfg){}
 
+    Tree(const builder_config_t& cfg, std::string_view src, std::string_view sym):
+        buffer((uint8_t*)src.data(),src.length()),symbols((uint8_t*)sym.data(),sym.length()),configs(cfg){
+    }
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
     bool reorder_h(

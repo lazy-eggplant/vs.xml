@@ -118,7 +118,10 @@ template <>
 struct BuilderImpl<false> : protected BuilderBase{
     inline std::string_view rsv(std::string_view s){return s;}
     inline std::string_view symbol(std::string_view s){return s;}
-    
+
+    //inline std::string_view rsv(sv s){return std::string_view(s.base+(char*)label_offset,s.base+(char*)label_offset+s.length);}
+    //inline sv symbol(std::string_view s){return sv(label_offset,s);}
+
     protected:
         using BuilderBase::close;
         using BuilderBase::get_buffer;
@@ -142,7 +145,7 @@ struct Builder : protected details::BuilderImpl<cfg.compress_symbols>{
         using details::BuilderImpl<cfg.compress_symbols>::rsv;
         using error_t = details::BuilderBase::error_t;
 
-        inline Builder(){}
+        //inline Builder():details::BuilderImpl<cfg.compress_symbols>(){}
 
         inline error_t begin(std::string_view name, std::string_view ns=""){
             auto a =symbol(name), b = symbol(ns);
@@ -176,7 +179,8 @@ struct Builder : protected details::BuilderImpl<cfg.compress_symbols>{
 
         inline std::expected<WrpTree,error_t> close(){
             details::BuilderImpl<cfg.compress_symbols>::close();
-            return WrpTree(Tree(configs,std::move(this->get_buffer()),{}));
+            if constexpr (cfg.compress_symbols)return WrpTree(Tree(configs,std::move(this->get_buffer()),std::move(this->symbols)));
+            else if(cfg.compress_symbols)return WrpTree(Tree(configs,std::move(this->get_buffer()),this->label_offset));
         }
         
         using details::BuilderImpl<cfg.compress_symbols>::close;
