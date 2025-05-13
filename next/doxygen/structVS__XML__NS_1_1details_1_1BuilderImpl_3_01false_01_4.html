@@ -75,7 +75,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="structVS__XML__NS_1_1details_1_1BuilderImpl_3_01false_01_4-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">VS_XML_NS::details::BuilderImpl&lt; false &gt; Struct Reference</div></div>
 </div><!--header-->
@@ -110,14 +109,20 @@ std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>rsv</b> (
 std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>symbol</b> (std::string_view s)</td></tr>
 <tr class="separator:ad456ce8b406ec60798d671a3a50ee783"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a611d2308b5d565a2a92f973917eb282a" id="r_a611d2308b5d565a2a92f973917eb282a"><td class="memItemLeft" align="right" valign="top"><a id="a611d2308b5d565a2a92f973917eb282a" name="a611d2308b5d565a2a92f973917eb282a"></a>
-error_t&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
-<tr class="separator:a611d2308b5d565a2a92f973917eb282a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d1921aa3c1c02e32a6465558a6c8f54" id="r_a0d1921aa3c1c02e32a6465558a6c8f54"><td class="memItemLeft" align="right" valign="top"><a id="a0d1921aa3c1c02e32a6465558a6c8f54" name="a0d1921aa3c1c02e32a6465558a6c8f54"></a>
-std::vector&lt; uint8_t &gt; &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_buffer</b> ()</td></tr>
-<tr class="separator:a0d1921aa3c1c02e32a6465558a6c8f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_types_structVS__XML__NS_1_1details_1_1BuilderBase"><td colspan="2" onclick="javascript:toggleInherit('pro_types_structVS__XML__NS_1_1details_1_1BuilderBase')"><img src="closed.png" alt="-"/>&#160;Protected Types inherited from <a class="el" href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></td></tr>
+<tr class="memitem:a8a48002aefd9bcc1c0c82412669b5adb inherit pro_types_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a8a48002aefd9bcc1c0c82412669b5adb"><td class="memItemLeft" align="right" valign="top"><a id="a8a48002aefd9bcc1c0c82412669b5adb" name="a8a48002aefd9bcc1c0c82412669b5adb"></a>enum struct &#160;</td><td class="memItemRight" valign="bottom"><b>error_t</b> { <br />
+&#160;&#160;<b>SKIP</b> = -1
+, <b>OK</b> = 0
+, <b>TREE_CLOSED</b>
+, <b>TREE_ATTR_CLOSED</b>
+, <br />
+&#160;&#160;<b>STACK_EMPTY</b>
+, <b>MISFORMED</b>
+<br />
+ }</td></tr>
+<tr class="separator:a8a48002aefd9bcc1c0c82412669b5adb inherit pro_types_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></td></tr>
 <tr class="memitem:a0d1921aa3c1c02e32a6465558a6c8f54 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a0d1921aa3c1c02e32a6465558a6c8f54"><td class="memItemLeft" align="right" valign="top">
 std::vector&lt; uint8_t &gt; &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_buffer</b> ()</td></tr>
@@ -149,30 +154,9 @@ error_t&#160;</td><td class="memItemRight" valign="bottom"><b>proc</b> (std::str
 <tr class="memitem:ac6277b8d1232628d18c956915c719803 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_ac6277b8d1232628d18c956915c719803"><td class="memItemLeft" align="right" valign="top">
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>marker</b> (std::string_view value)</td></tr>
 <tr class="separator:ac6277b8d1232628d18c956915c719803 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96936f5e9c4ff8c982d28e3590e5ba80 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a96936f5e9c4ff8c982d28e3590e5ba80"><td class="memItemLeft" align="right" valign="top">
-error_t&#160;</td><td class="memItemRight" valign="bottom"><b>inject</b> (<a class="el" href="structVS__XML__NS_1_1node__iterator.html">node_iterator</a> start, <a class="el" href="structVS__XML__NS_1_1node__iterator.html">node_iterator</a> end)</td></tr>
-<tr class="separator:a96936f5e9c4ff8c982d28e3590e5ba80 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73c01ee828987c25d0473635778e4d2e inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a73c01ee828987c25d0473635778e4d2e"><td class="memItemLeft" align="right" valign="top">
-error_t&#160;</td><td class="memItemRight" valign="bottom"><b>inject</b> (const <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a> &amp;tree)</td></tr>
-<tr class="separator:a73c01ee828987c25d0473635778e4d2e inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9324ef194642dc196ec81af5079d7c9 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_aa9324ef194642dc196ec81af5079d7c9"><td class="memItemLeft" align="right" valign="top">
-error_t&#160;</td><td class="memItemRight" valign="bottom"><b>inject</b> (const <a class="el" href="structVS__XML__NS_1_1WrpTree.html">WrpTree</a> &amp;tree)</td></tr>
-<tr class="separator:aa9324ef194642dc196ec81af5079d7c9 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_types_structVS__XML__NS_1_1details_1_1BuilderBase"><td colspan="2" onclick="javascript:toggleInherit('pro_types_structVS__XML__NS_1_1details_1_1BuilderBase')"><img src="closed.png" alt="-"/>&#160;Protected Types inherited from <a class="el" href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></td></tr>
-<tr class="memitem:a8a48002aefd9bcc1c0c82412669b5adb inherit pro_types_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a8a48002aefd9bcc1c0c82412669b5adb"><td class="memItemLeft" align="right" valign="top"><a id="a8a48002aefd9bcc1c0c82412669b5adb" name="a8a48002aefd9bcc1c0c82412669b5adb"></a>enum struct &#160;</td><td class="memItemRight" valign="bottom"><b>error_t</b> { <br />
-&#160;&#160;<b>SKIP</b> = -1
-, <b>OK</b> = 0
-, <b>TREE_CLOSED</b>
-, <b>TREE_ATTR_CLOSED</b>
-, <br />
-&#160;&#160;<b>STACK_EMPTY</b>
-, <b>MISFORMED</b>
-<br />
- }</td></tr>
-<tr class="separator:a8a48002aefd9bcc1c0c82412669b5adb inherit pro_types_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfd2b9bd330138e60f22bd747221f357 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_abfd2b9bd330138e60f22bd747221f357"><td class="memItemLeft" align="right" valign="top">
+error_t&#160;</td><td class="memItemRight" valign="bottom"><b>inject</b> (const <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a> &amp;tree, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *base=nullptr, bool include_root=false)</td></tr>
+<tr class="separator:abfd2b9bd330138e60f22bd747221f357 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></td></tr>
 <tr class="memitem:aa34d03cbdef89e48919bdb00e19568f1 inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_aa34d03cbdef89e48919bdb00e19568f1"><td class="memItemLeft" align="right" valign="top">
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>label_offset</b> = nullptr</td></tr>
