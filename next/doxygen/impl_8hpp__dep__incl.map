@@ -1,8 +1,10 @@
 <map id="include/vs&#45;xml/impl.hpp" name="include/vs&#45;xml/impl.hpp">
-<area shape="rect" id="Node000001" title="Implementation of the node logic." alt="" coords="13,5,192,31"/>
-<area shape="rect" id="Node000002" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="5,167,200,192"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,44,76,79,73,99,76,118,85,144,97,165,93,168,81,146,71,119,68,99,71,78,86,42"/>
-<area shape="rect" id="Node000003" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="85,79,232,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="121,40,147,77,143,80,117,43"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="139,132,113,168,109,165,135,128"/>
+<area shape="rect" id="Node000001" title="Implementation of the node logic." alt="" coords="23,5,202,31"/>
+<area shape="rect" id="Node000002" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="15,167,210,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,44,86,79,83,99,86,118,95,144,107,165,103,168,91,146,81,119,78,99,81,78,96,42"/>
+<area shape="rect" id="Node000004" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="95,79,242,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="131,40,157,77,153,80,127,43"/>
+<area shape="rect" id="Node000003" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,240,220,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,206,115,240,110,240,110,206"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="149,132,123,168,119,165,145,128"/>
 </map>

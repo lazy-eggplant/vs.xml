@@ -1,9 +1,0 @@
-<map id="VS_XML_NS::Builder&lt; cfg &gt;" name="VS_XML_NS::Builder&lt; cfg &gt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="140,197,293,237"/>
-<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1details_1_1BuilderImpl.html" title="Helper class to build an XML tree via commands." alt="" coords="5,95,220,135"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,142,199,195,195,199,140,146"/>
-<area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="37,5,188,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,59,115,95,110,95,110,59"/>
-<area shape="rect" id="Node000004" href="$structVS__XML__NS_1_1builder__config__t.html" title=" " alt="" coords="245,95,397,135"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="293,146,238,199,234,195,289,142"/>
-</map>

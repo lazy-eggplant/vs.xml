@@ -17,7 +17,8 @@ var searchData=
   ['builder_5fconfig_5ft_14',['builder_config_t',['../structVS__XML__NS_1_1builder__config__t.html',1,'VS_XML_NS']]],
   ['builderbase_15',['BuilderBase',['../structVS__XML__NS_1_1details_1_1BuilderBase.html',1,'VS_XML_NS::details']]],
   ['builderimpl_16',['BuilderImpl',['../structVS__XML__NS_1_1details_1_1BuilderImpl.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_3c_20false_20_3e_17',['BuilderImpl&lt; false &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01false_01_4.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_3c_20true_20_3e_18',['BuilderImpl&lt; true &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01true_01_4.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_3c_20_7b_7d_20_2ecompress_5fsymbols_20_3e_19',['BuilderImpl&lt; {} .compress_symbols &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl.html',1,'VS_XML_NS::details']]]
+  ['builderimpl_3c_20cfg_2ecompress_5fsymbols_20_3e_17',['BuilderImpl&lt; cfg.compress_symbols &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl.html',1,'VS_XML_NS::details']]],
+  ['builderimpl_3c_20false_20_3e_18',['BuilderImpl&lt; false &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01false_01_4.html',1,'VS_XML_NS::details']]],
+  ['builderimpl_3c_20true_20_3e_19',['BuilderImpl&lt; true &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01true_01_4.html',1,'VS_XML_NS::details']]],
+  ['builderimpl_3c_20_7b_7d_20_2ecompress_5fsymbols_20_3e_20',['BuilderImpl&lt; {} .compress_symbols &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl.html',1,'VS_XML_NS::details']]]
 ];

@@ -1,7 +1,11 @@
 <map id="VS_XML_NS::details::BuilderImpl&lt; compressed &gt;" name="VS_XML_NS::details::BuilderImpl&lt; compressed &gt;">
-<area shape="rect" id="Node000001" title="Helper class to build an XML tree via commands." alt="" coords="5,93,220,133"/>
-<area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1Builder.html" title=" " alt="" coords="36,181,189,221"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="115,147,115,181,110,181,110,147"/>
-<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="37,5,188,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,59,115,93,110,93,110,59"/>
+<area shape="rect" id="Node000001" title="Helper class to build an XML tree via commands." alt="" coords="89,93,304,133"/>
+<area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="5,181,185,221"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,144,119,183,116,179,162,140"/>
+<area shape="rect" id="Node000004" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="209,181,389,221"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="232,140,278,179,275,183,228,144"/>
+<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="121,5,272,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,59,199,93,194,93,194,59"/>
+<area shape="rect" id="Node000005" href="$structVS__XML__NS_1_1DocBuilder.html" title=" " alt="" coords="210,269,389,309"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="302,235,302,269,297,269,297,235"/>
 </map>

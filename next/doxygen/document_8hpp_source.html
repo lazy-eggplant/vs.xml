@@ -85,18 +85,31 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;commons.hpp&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="tree_8hpp.html">tree.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structDocument.html">   16</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structDocument.html">Document</a> : Tree {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>};</div>
-</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="builder_8hpp.html">builder.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>VS_XML_NS{</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structWrpDocument.html">   19</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structWrpDocument.html">WrpDocument</a> : WrpTree {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>};</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">template</span>&lt;builder_config_t cfg = {}&gt;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1DocBuilder.html">   20</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1DocBuilder.html">DocBuilder</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>&lt;cfg&gt;{};</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1DocumentRaw.html">   22</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
 </div>
-<div class="ttc" id="astructDocument_html"><div class="ttname"><a href="structDocument.html">Document</a></div><div class="ttdef"><b>Definition</b> document.hpp:16</div></div>
-<div class="ttc" id="astructWrpDocument_html"><div class="ttname"><a href="structWrpDocument.html">WrpDocument</a></div><div class="ttdef"><b>Definition</b> document.hpp:19</div></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1Document.html">   25</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
+</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
+<div class="ttc" id="abuilder_8hpp_html"><div class="ttname"><a href="builder_8hpp.html">builder.hpp</a></div><div class="ttdoc">Tree builder classes.</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1DocBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1DocBuilder.html">VS_XML_NS::DocBuilder</a></div><div class="ttdef"><b>Definition</b> document.hpp:20</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1DocumentRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1DocumentRaw.html">VS_XML_NS::DocumentRaw</a></div><div class="ttdef"><b>Definition</b> document.hpp:22</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Document_html"><div class="ttname"><a href="structVS__XML__NS_1_1Document.html">VS_XML_NS::Document</a></div><div class="ttdef"><b>Definition</b> document.hpp:25</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a></div><div class="ttdef"><b>Definition</b> builder.hpp:134</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:173</div></div>
 <div class="ttc" id="atree_8hpp_html"><div class="ttname"><a href="tree_8hpp.html">tree.hpp</a></div><div class="ttdoc">Internal tree structure.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
