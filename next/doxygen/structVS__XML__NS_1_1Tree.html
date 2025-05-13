@@ -76,6 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="structVS__XML__NS_1_1Tree-members.html">List of all members</a>  </div>
@@ -113,12 +114,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7a451d528632f97221fbcbed73d7b95b" id="r_a7a451d528632f97221fbcbed73d7b95b"><td class="memItemLeft" align="right" valign="top"><a id="a7a451d528632f97221fbcbed73d7b95b" name="a7a451d528632f97221fbcbed73d7b95b"></a>
 struct&#160;</td><td class="memItemRight" valign="bottom"><b>__attribute__</b> ((packed)) serialized_header_t</td></tr>
 <tr class="separator:a7a451d528632f97221fbcbed73d7b95b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3218edc2baf56f06165d1f7f4211f237" id="r_a3218edc2baf56f06165d1f7f4211f237"><td class="memItemLeft" align="right" valign="top"><a id="a3218edc2baf56f06165d1f7f4211f237" name="a3218edc2baf56f06165d1f7f4211f237"></a>
-std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>def_order_node</b> ()</td></tr>
-<tr class="separator:a3218edc2baf56f06165d1f7f4211f237"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67d289b4f0a9675cf9486e6ed5e44a18" id="r_a67d289b4f0a9675cf9486e6ed5e44a18"><td class="memItemLeft" align="right" valign="top"><a id="a67d289b4f0a9675cf9486e6ed5e44a18" name="a67d289b4f0a9675cf9486e6ed5e44a18"></a>
-std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>def_order_attrs</b> ()</td></tr>
-<tr class="separator:a67d289b4f0a9675cf9486e6ed5e44a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c5aac42110204fbbd4c576cbfc295ac" id="r_a8c5aac42110204fbbd4c576cbfc295ac"><td class="memItemLeft" align="right" valign="top"><a id="a8c5aac42110204fbbd4c576cbfc295ac" name="a8c5aac42110204fbbd4c576cbfc295ac"></a>
+std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>def_order_node</b> () const</td></tr>
+<tr class="separator:a8c5aac42110204fbbd4c576cbfc295ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae40f288cbae8571ee61b95e43be4170b" id="r_ae40f288cbae8571ee61b95e43be4170b"><td class="memItemLeft" align="right" valign="top"><a id="ae40f288cbae8571ee61b95e43be4170b" name="ae40f288cbae8571ee61b95e43be4170b"></a>
+std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>def_order_attrs</b> () const</td></tr>
+<tr class="separator:ae40f288cbae8571ee61b95e43be4170b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76f8ebe44c5867894f75371954bbd2db" id="r_a76f8ebe44c5867894f75371954bbd2db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1Tree.html#a76f8ebe44c5867894f75371954bbd2db">reorder_children</a> (const <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> *ref, const std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;)&gt; &amp;fn)</td></tr>
 <tr class="memdesc:a76f8ebe44c5867894f75371954bbd2db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder (in-place) children of a node based on a custom ordering criterion.  <br /></td></tr>
 <tr class="separator:a76f8ebe44c5867894f75371954bbd2db"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,12 +152,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (std::ostre
 <tr class="memitem:adab62684fad7985f04b9730817332fe7" id="r_adab62684fad7985f04b9730817332fe7"><td class="memItemLeft" align="right" valign="top"><a id="adab62684fad7985f04b9730817332fe7" name="adab62684fad7985f04b9730817332fe7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>save_binary</b> (std::ostream &amp;out) const</td></tr>
 <tr class="separator:adab62684fad7985f04b9730817332fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab50924c44fb03f78eebbb0960c1083cc" id="r_ab50924c44fb03f78eebbb0960c1083cc"><td class="memItemLeft" align="right" valign="top"><a id="ab50924c44fb03f78eebbb0960c1083cc" name="ab50924c44fb03f78eebbb0960c1083cc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Tree</b> (const <a class="el" href="structVS__XML__NS_1_1builder__config__t.html">builder_config_t</a> &amp;cfg, std::span&lt; uint8_t &gt; region)</td></tr>
-<tr class="separator:ab50924c44fb03f78eebbb0960c1083cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaeb53eecd79de31dc3c36553ead3dc8" id="r_aaaeb53eecd79de31dc3c36553ead3dc8"><td class="memItemLeft" align="right" valign="top"><a id="aaaeb53eecd79de31dc3c36553ead3dc8" name="aaaeb53eecd79de31dc3c36553ead3dc8"></a>
 std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>rsv</b> (<a class="el" href="structVS__XML__NS_1_1sv.html">sv</a> s) const</td></tr>
 <tr class="separator:aaaeb53eecd79de31dc3c36553ead3dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ad1ebdb9afea8a78283d14f099a13aca5" id="r_ad1ebdb9afea8a78283d14f099a13aca5"><td class="memItemLeft" align="right" valign="top"><a id="ad1ebdb9afea8a78283d14f099a13aca5" name="ad1ebdb9afea8a78283d14f099a13aca5"></a>
+static <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_binary</b> (const <a class="el" href="structVS__XML__NS_1_1builder__config__t.html">builder_config_t</a> &amp;cfg, std::span&lt; uint8_t &gt; region)</td></tr>
+<tr class="separator:ad1ebdb9afea8a78283d14f099a13aca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8de7ca625d6e4428c03ee4f7b3d9448b" id="r_a8de7ca625d6e4428c03ee4f7b3d9448b"><td class="memItemLeft" align="right" valign="top"><a id="a8de7ca625d6e4428c03ee4f7b3d9448b" name="a8de7ca625d6e4428c03ee4f7b3d9448b"></a>
+static const <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_binary</b> (const <a class="el" href="structVS__XML__NS_1_1builder__config__t.html">builder_config_t</a> &amp;cfg, std::string_view region)</td></tr>
+<tr class="separator:a8de7ca625d6e4428c03ee4f7b3d9448b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -172,9 +179,9 @@ std::span&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b
 <tr class="memitem:a108dfce859d7e24227e75653065bcf58" id="r_a108dfce859d7e24227e75653065bcf58"><td class="memItemLeft" align="right" valign="top"><a id="a108dfce859d7e24227e75653065bcf58" name="a108dfce859d7e24227e75653065bcf58"></a>
 std::span&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>symbols</b></td></tr>
 <tr class="separator:a108dfce859d7e24227e75653065bcf58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f3b956f6bbef82bbbeeac5aae1dbad6" id="r_a1f3b956f6bbef82bbbeeac5aae1dbad6"><td class="memItemLeft" align="right" valign="top"><a id="a1f3b956f6bbef82bbbeeac5aae1dbad6" name="a1f3b956f6bbef82bbbeeac5aae1dbad6"></a>
-const <a class="el" href="structVS__XML__NS_1_1builder__config__t.html">builder_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>configs</b></td></tr>
-<tr class="separator:a1f3b956f6bbef82bbbeeac5aae1dbad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a973346d0458f7ee559b55da4423787c3" id="r_a973346d0458f7ee559b55da4423787c3"><td class="memItemLeft" align="right" valign="top"><a id="a973346d0458f7ee559b55da4423787c3" name="a973346d0458f7ee559b55da4423787c3"></a>
+<a class="el" href="structVS__XML__NS_1_1builder__config__t.html">builder_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>configs</b></td></tr>
+<tr class="separator:a973346d0458f7ee559b55da4423787c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
