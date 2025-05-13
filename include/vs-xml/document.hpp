@@ -12,9 +12,17 @@
 
 #include "commons.hpp"
 #include "tree.hpp"
+#include "builder.hpp"
+
+namespace VS_XML_NS{
+
+template<builder_config_t cfg = {}>
+struct DocBuilder : TreeBuilder<cfg>{};
+
+struct DocumentRaw : TreeRaw {
+};
 
 struct Document : Tree {
 };
 
-struct WrpDocument : WrpTree {
-};
+}

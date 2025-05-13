@@ -124,7 +124,7 @@ sv BuilderImpl<true>::symbol(std::string_view s){
 }
 
 
-BuilderBase::error_t BuilderBase::inject(const Tree& tree, const unknown_t* base, bool include_root){
+BuilderBase::error_t BuilderBase::inject(const TreeRaw& tree, const unknown_t* base, bool include_root){
     if(base==nullptr)base=(const unknown_t*)&tree.root();
     //If the symbol offset for tree and BuilderBase is the same, we are good and memcopy is possible.
     //If not, and the Builder has no symbols compression ongoing, the injection will be rejected.

@@ -88,7 +88,7 @@ template<builder_config_t cfg>
 struct Builder;
 
 struct Tree;
-struct WrpTree;
+struct Tree;
 
 
 enum struct feature_t{

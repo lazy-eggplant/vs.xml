@@ -71,9 +71,9 @@ namespace details{
             inline error_t marker(std::string_view value){return leaf<marker_t>(value);}
     
             //TODO: injection can be a simple memcpy if the symbols space is shared, or require full tree refactoring.
-            error_t inject(const Tree& tree, const unknown_t* base = nullptr, bool include_root = false);
+            error_t inject(const TreeRaw& tree, const unknown_t* base = nullptr, bool include_root = false);
 
-//            error_t inject(const WrpTree& tree);
+//            error_t inject(const Tree& tree);
     };
     
 /**
@@ -131,14 +131,14 @@ struct BuilderImpl<false> : protected BuilderBase{
 }
 
 template<builder_config_t cfg = {}>
-struct Builder : protected details::BuilderImpl<cfg.compress_symbols>{
+struct TreeBuilder : protected details::BuilderImpl<cfg.compress_symbols>{
     protected:
         using details::BuilderImpl<cfg.compress_symbols>::symbol;
 
         //TODO: not sure if this is needed any longer
-        /*inline std::expected<WrpTree,error_t> close(std::vector<uint8_t>&& symbols){
+        /*inline std::expected<Tree,error_t> close(std::vector<uint8_t>&& symbols){
             details::BuilderImpl<cfg.compress_symbols>::close();
-            return WrpTree(Tree(config,std::move(this->buffer),std::move(symbols)));
+            return Tree(Tree(config,std::move(this->buffer),std::move(symbols)));
         }*/
 
     public:
@@ -164,24 +164,24 @@ struct Builder : protected details::BuilderImpl<cfg.compress_symbols>{
             return details::BuilderBase::text(rsv( symbol(value)));
         }
         inline error_t comment(std::string_view value){
-            if constexpr(!cfg.allow_comments)return Builder::error_t::SKIP;
+            if constexpr(!cfg.allow_comments)return error_t::SKIP;
             else return details::BuilderBase::comment(rsv( symbol(value)));
         }
         inline error_t cdata(std::string_view value){
             return details::BuilderBase::cdata(rsv( symbol(value)));
         }
         inline error_t proc(std::string_view value){
-            if constexpr(!cfg.allow_procs)return Builder::error_t::SKIP;
+            if constexpr(!cfg.allow_procs)return error_t::SKIP;
             else return details::BuilderBase::proc(rsv( symbol(value)));
         }
         inline error_t marker(std::string_view value){
             return details::BuilderBase::marker(rsv( symbol(value)));
         }
 
-        inline std::expected<WrpTree,error_t> close(){
+        inline std::expected<Tree,error_t> close(){
             details::BuilderImpl<cfg.compress_symbols>::close();
-            if constexpr (cfg.compress_symbols)return WrpTree(Tree(configs,std::move(this->get_buffer()),std::move(this->symbols)));
-            else if(cfg.compress_symbols)return WrpTree(Tree(configs,std::move(this->get_buffer()),this->label_offset));
+            if constexpr (cfg.compress_symbols)return Tree(TreeRaw(configs,std::move(this->get_buffer()),std::move(this->symbols)));
+            else if(cfg.compress_symbols)return Tree(Tree(configs,std::move(this->get_buffer()),this->label_offset));
         }
         
         using details::BuilderImpl<cfg.compress_symbols>::close;

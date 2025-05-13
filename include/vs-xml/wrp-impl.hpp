@@ -16,13 +16,13 @@ struct attr_iterator;
 template <typename T>
 struct base_t{
     private:
-        const Tree&       base;
-        const T*          ptr;
+        const TreeRaw&          base;
+        const T*                ptr;
     
-        base_t(const Tree& base, const T* ptr):base(base),ptr(ptr){}
+        base_t(const TreeRaw& base, const T* ptr):base(base),ptr(ptr){}
         base_t(base_t p, const T* ptr):base(p.base),ptr(ptr){}
 
-        friend struct VS_XML_NS::WrpTree;
+        friend struct VS_XML_NS::Tree;
         template <typename W>
         friend struct base_t;
 
@@ -61,13 +61,13 @@ struct base_t{
 template <>
 struct base_t<attr_t>{
     private:
-        const Tree&       base;
+        const TreeRaw&         base;
         const attr_t*          ptr;
     
-        base_t(const Tree& base, const attr_t* ptr):base(base),ptr(ptr){}
+        base_t(const TreeRaw& base, const attr_t* ptr):base(base),ptr(ptr){}
         base_t(base_t p, const attr_t* ptr):base(p.base),ptr(ptr){}
 
-        friend struct WrpTree;
+        friend struct Tree;
         template <typename W>
         friend struct wrp::base_t;
 

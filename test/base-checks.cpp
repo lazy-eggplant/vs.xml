@@ -4,7 +4,7 @@
 #include <iostream>
 
 int main(){
-    xml::Builder<{.compress_symbols=true}> build;
+    xml::TreeBuilder<{.compress_symbols=true}> build;
     
     build.begin("hello");
         build.attr("op3-a", "v'>&al1");
@@ -37,7 +37,7 @@ int main(){
     tree.reorder();
     tree.print(std::cout,{});
     std::print("\n");
-    xml::WrpTree wrp_tree(std::move(tree));
+    xml::Tree wrp_tree(std::move(tree));
     wrp_tree.print(std::cout,{});
 
     auto root = wrp_tree.root();

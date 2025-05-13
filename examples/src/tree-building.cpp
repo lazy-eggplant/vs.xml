@@ -5,7 +5,7 @@ using namespace xml;
 
 int main(){
     //Builder preserves the 
-    Builder bld({.compress_symbols=true});
+    TreeBuilder<{.compress_symbols=true}> bld;
 
     //These will later be expanded in nodes.
     std::string_view texts[] = {"Text 0", "Text 1", "Text 2"};

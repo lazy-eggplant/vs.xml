@@ -10,11 +10,11 @@
 
 namespace VS_XML_NS{
 
-std::function<bool(const unknown_t&, const unknown_t&)> Tree::def_order_node() const{
+std::function<bool(const unknown_t&, const unknown_t&)> TreeRaw::def_order_node() const{
     throw "Not implemented";
 }
 
-std::function<bool(const attr_t&, const attr_t&)> Tree::def_order_attrs() const{
+std::function<bool(const attr_t&, const attr_t&)> TreeRaw::def_order_attrs() const{
     return [this](const attr_t& a, const attr_t& b){
         {
             auto va = rsv(*a.ns()), vb= rsv(*b.ns());
@@ -30,7 +30,7 @@ std::function<bool(const attr_t&, const attr_t&)> Tree::def_order_attrs() const{
     };
 }
 
-bool Tree::reorder(const std::function<bool(const attr_t&, const attr_t&)>& fn, const element_t* ref,  bool recursive){
+bool TreeRaw::reorder(const std::function<bool(const attr_t&, const attr_t&)>& fn, const element_t* ref,  bool recursive){
     if(ref==nullptr)ref=&root();
 
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size());
@@ -38,7 +38,7 @@ bool Tree::reorder(const std::function<bool(const attr_t&, const attr_t&)>& fn, 
     return reorder_h(def_order_attrs(),ref,recursive);
 }
 
-bool Tree::reorder_h(const std::function<bool(const attr_t&, const attr_t&)>& fn, const element_t* ref,  bool recursive){
+bool TreeRaw::reorder_h(const std::function<bool(const attr_t&, const attr_t&)>& fn, const element_t* ref,  bool recursive){
     //Speed could be improved by using an intermediate swapping function, but attr_t elements are small enough that it might not be worthed.
     //TODO: at some point, convert it not to be recursive.
 
@@ -57,7 +57,7 @@ bool Tree::reorder_h(const std::function<bool(const attr_t&, const attr_t&)>& fn
 };
 
 
-bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* ptr) const{
+bool TreeRaw::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* ptr) const{
     //TODO: at some point, convert it not to be recursive.
     //TODO: satisfy raw_strings config info.
     if(ptr->type()==type_t::ELEMENT){
@@ -148,17 +148,17 @@ bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* p
     return false;
 };
 
-const Tree Tree::slice(const element_t* ref) const{
+const TreeRaw TreeRaw::slice(const element_t* ref) const{
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
     xml_assert(ref->type()==type_t::ELEMENT, "cannot slice something which is not a node");
 
     if(ref==nullptr)ref=&root();
 
     std::span<uint8_t> tmp = {( uint8_t*)ref,ref->_size};
-    return Tree(configs,tmp,this->symbols);
+    return TreeRaw(configs,tmp,this->symbols);
 };
 
-Tree Tree::clone(const element_t* ref, bool reduce) const{
+TreeRaw TreeRaw::clone(const element_t* ref, bool reduce) const{
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
     xml_assert(ref->type()==type_t::ELEMENT, "cannot clone something which is not a node");
 
@@ -179,11 +179,11 @@ Tree Tree::clone(const element_t* ref, bool reduce) const{
         symbols.assign(this->symbols_i.begin(),this->symbols_i.end());
     }
 
-    return Tree(configs,std::move(buffer),std::move(symbols));
+    return TreeRaw(configs,std::move(buffer),std::move(symbols));
 }
 
 
-bool Tree::save_binary(std::ostream& out)const{
+bool TreeRaw::save_binary(std::ostream& out)const{
     //Symbols not relocatable.
     if(symbols.data()==nullptr)return false;
 
@@ -197,35 +197,35 @@ bool Tree::save_binary(std::ostream& out)const{
     return true;
 }
 
-Tree Tree::from_binary(const builder_config_t& cfg, std::span<uint8_t> region){
+TreeRaw TreeRaw::from_binary(const builder_config_t& cfg, std::span<uint8_t> region){
     xml_assert(region.size_bytes()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
-    Tree::serialized_header_t header;
+    TreeRaw::serialized_header_t header;
     memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
     xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
     xml_assert(region.size_bytes()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
     xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
 
-    return Tree(cfg,
+    return TreeRaw(cfg,
         std::span<uint8_t>{region.data()+sizeof(header), region.data()+sizeof(header)+header.offset_symbols},
         std::span<uint8_t>{region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end}
     );
 }
 
 //TODO: check if there are more checks between the const and mutable versions
-const Tree Tree::from_binary(const builder_config_t& cfg, std::string_view region){
+const TreeRaw TreeRaw::from_binary(const builder_config_t& cfg, std::string_view region){
     xml_assert(region.size()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
-    Tree::serialized_header_t header;
+    TreeRaw::serialized_header_t header;
     memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
     xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
     xml_assert(region.size()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
     xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
 
-    return Tree(cfg,
+    return TreeRaw(cfg,
         std::string_view{region.data()+sizeof(header), region.data()+sizeof(header)+header.offset_symbols},
         std::string_view{region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end}
     );
 }
 
-wrp::base_t<element_t> WrpTree::root() const{return {*this, &Tree::root()};}
+wrp::base_t<element_t> Tree::root() const{return {*this, &TreeRaw::root()};}
 
 }

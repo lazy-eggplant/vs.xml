@@ -26,7 +26,7 @@
 
 namespace VS_XML_NS{
 
-struct Tree{
+struct TreeRaw{
     struct __attribute__ ((packed)) serialized_header_t{
         const char magic[4] = {'$','X','M','L'};
         uint32_t reserved_cfg = 0;
@@ -97,15 +97,15 @@ struct Tree{
      * @param ref the node where to start slicing.
      * @return const Tree 
      */
-    const Tree slice(const element_t* ref=nullptr) const;
+    const TreeRaw slice(const element_t* ref=nullptr) const;
 
     /**
      * @brief Return a perfect deep copy of the current tree structure.
-    * @param ref the node where to start cloning.
-    * @param reduce if true, a new 
-    * @return Tree 
+     * @param ref the node where to start cloning.
+     * @param reduce if true, a new 
+     * @return Tree 
      */
-    Tree clone(const element_t* ref=nullptr, bool reduce=true) const;
+    TreeRaw clone(const element_t* ref=nullptr, bool reduce=true) const;
 
     struct print_cfg_t{};
 
@@ -117,8 +117,8 @@ struct Tree{
 
     bool save_binary(std::ostream& out)const;
 
-    static Tree from_binary(const builder_config_t& cfg,std::span<uint8_t> region);
-    static const Tree from_binary(const builder_config_t& cfg,std::string_view region);
+    static TreeRaw from_binary(const builder_config_t& cfg,std::span<uint8_t> region);
+    static const TreeRaw from_binary(const builder_config_t& cfg,std::string_view region);
 
     inline std::string_view rsv(sv s) const{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
@@ -129,7 +129,7 @@ struct Tree{
     /**
      * @brief Construct a new Tree object, with the list of strings being external. Make sure its lifetime contains the one of the Tree.
      */
-    Tree(const builder_config_t& cfg, std::vector<uint8_t>&& src, void* label_offset=nullptr):
+    TreeRaw(const builder_config_t& cfg, std::vector<uint8_t>&& src, void* label_offset=nullptr):
         buffer_i(src),symbols_i({}),
         buffer(buffer_i),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent),
         configs(cfg){}
@@ -137,7 +137,7 @@ struct Tree{
     /**
      * @brief Construct a new Tree object, owning its own table of strings
      */
-    Tree(const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):
+    TreeRaw(const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):
         buffer_i(src),symbols_i(sym),
         buffer(buffer_i),symbols(symbols_i),
         configs(cfg){}
@@ -149,10 +149,10 @@ struct Tree{
     */
 
     //Weak, used when loading from disk or creatung slices
-    Tree(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym):
+    TreeRaw(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym):
         buffer(src),symbols(sym),configs(cfg){}
 
-    Tree(const builder_config_t& cfg, std::string_view src, std::string_view sym):
+    TreeRaw(const builder_config_t& cfg, std::string_view src, std::string_view sym):
         buffer((uint8_t*)src.data(),src.length()),symbols((uint8_t*)sym.data(),sym.length()),configs(cfg){
     }
 
@@ -164,28 +164,28 @@ struct Tree{
     );
 
     template<builder_config_t>
-    friend struct Builder;
+    friend struct TreeBuilder;
     friend struct details::BuilderBase;
 };
 
 
 
-struct WrpTree : Tree{
+struct Tree : TreeRaw{
     private:
-    using Tree::rsv;
-    using Tree::clone;
-    using Tree::root;
+    using TreeRaw::rsv;
+    using TreeRaw::clone;
+    using TreeRaw::root;
 
     public:
-    inline WrpTree(Tree&& ref):Tree(std::move(ref)){}
-    inline WrpTree(const Tree&& ref):Tree(std::move(ref)){}
+    inline Tree(TreeRaw&& ref):TreeRaw(std::move(ref)){}
+    inline Tree(const TreeRaw&& ref):TreeRaw(std::move(ref)){}
 
-    inline const WrpTree slice(const element_t* ref=nullptr) const{return Tree::slice(ref);}
-    inline WrpTree clone(const element_t* ref=nullptr, bool reduce=true) const{return Tree::clone(ref,reduce);}
+    inline const Tree slice(const element_t* ref=nullptr) const{return TreeRaw::slice(ref);}
+    inline Tree clone(const element_t* ref=nullptr, bool reduce=true) const{return TreeRaw::clone(ref,reduce);}
 
     wrp::base_t<element_t> root() const;
 
-    inline Tree& downgrade(){return *this;}
+    inline TreeRaw& downgrade(){return *this;}
 };
 
 
