@@ -2,7 +2,7 @@ mio_dep = dependency('mio')
 
 test('base-checks',executable(
     'base-checks',
-    'base-checks.cpp',
+    './src/base-checks.cpp',
     install: false,
     cpp_args: [],
     link_args: [],
@@ -14,7 +14,7 @@ test('base-checks',executable(
 
 test('parse-demo',executable(
     'parse-demo',
-    'parse-demo.cpp',
+    './src/parse-demo.cpp',
     install: false,
     cpp_args: [],
     link_args: [],

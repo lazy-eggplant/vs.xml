@@ -20,3 +20,8 @@ This library tries to optimize for such cases as much as possible.
 
 To allow them to be serialized and still provide random access on the tree regardless of the device or medium on which it is being stored.  
 This allows to share annotations for a tree for cheap even in offloaded contexts.
+
+> Why is XML serialization/de-serialization single threaded?
+
+Because they are mostly meant as one-shot operations, while the bulk of the operations is going to be on the binary representation.  
+There is no trivial way to make XML parsing or serialization "parallel" without making the code involved much more complex, and it is better to have different thread serialize different files if possible.

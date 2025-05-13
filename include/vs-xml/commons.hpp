@@ -62,7 +62,13 @@ struct sv{
 struct builder_config_t{
     bool allow_comments :1 = true;          //If true, comments are allowed. Else skip.
     bool allow_procs :1  = true;            //If true, processing nodes are allowed. Else skip.
-    bool compress_symbols :1  = false;      //If true, a new table of symbols is computed, else string_views are used directly.
+    enum struct symbols_t: uint8_t{
+        EXTERN_ABS,
+        EXTERN_REL,
+        OWNED,
+        COMPRESS_LABELS,
+        COMPRESS_ALL
+    } symbols : 3 = symbols_t::EXTERN_ABS;
     bool raw_strings :1  = false;           //If true, the string views being passed will not be de-escaped. XML serialization of the derived tree will have to escape them if they have been de-escaped.
 };
 
