@@ -12,6 +12,7 @@
  */
 
 #include <span>
+#include <stdexcept>
 #include "commons.hpp"
 #include "serializer.hpp"
 
@@ -37,6 +38,15 @@ public:
             throw std::runtime_error("Expected '<' at beginning of XML document.");
             
         parseElement();
+    }
+
+    void parse_document() {
+        skip_whitespace();
+        // Expecting the first tag to begin with '<'
+        if (!consume('<'))
+            throw std::runtime_error("Expected '<' at beginning of XML document.");
+            
+        parseElement<true>();
     }
 
 private:
@@ -97,6 +107,7 @@ private:
     }
 
     // Main element parser. It assumes that a '<' has already been consumed.
+    template<bool ROOT=false>
     void parseElement() {
         skip_whitespace();
         if (pos_ >= data_.size())
@@ -132,7 +143,7 @@ private:
                 return;
             } 
             // CDATA: <![CDATA[ ... ]]>
-            else if (data_.substr(pos_, 7) == "[CDATA[") {
+            else if (data_.substr(pos_, 7) == "[CDATA[" && !ROOT) {
                 pos_ += 7; // skip "[CDATA["
                 size_t cdataEnd = data_.find("]]>", pos_);
                 if (cdataEnd == std::string_view::npos)
@@ -141,11 +152,13 @@ private:
                 builder_.cdata(cdataContent); // CDATA content provided as-is.
                 pos_ = cdataEnd + 3;
                 return;
-            } else {
+            } else if(!ROOT){
                 // Other declarations - skip until '>'
                 get_until('>');
                 consume('>');
                 return;
+            } else{
+                throw std::runtime_error("Node type not allowed in the document root.");
             }
         }
 
@@ -238,7 +251,7 @@ private:
                     ++pos_;
                 auto textContent = data_.substr(textStart, pos_ - textStart);
                 std::string_view unescapedText;
-                
+
                 if constexpr (Builder_t::configs.raw_strings )unescapedText=textContent;
                 else unescapedText = serialize::unescape_xml(textContent);
 
