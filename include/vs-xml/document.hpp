@@ -10,4 +10,11 @@
  * 
  */
 
- #include "commons.hpp"
+#include "commons.hpp"
+#include "tree.hpp"
+
+struct Document : Tree {
+};
+
+struct WrpDocument : WrpTree {
+};

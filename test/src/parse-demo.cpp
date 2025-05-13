@@ -40,6 +40,11 @@ int main() {
     mio::mmap_source mmap("./assets/local/demo-0.xml");
     std::span<char> w((char*)mmap.data(),mmap.size());
 
+    xml::Builder<{.compress_symbols=true}> builder2;
+    builder.begin("wrapper");
+        builder2.inject(tree);
+    builder2.end();
+    auto tree2 = builder2.close();
 
     {
         std::ofstream file("./assets/local/demo-0.bin",std::ios::binary|std::ios::out);

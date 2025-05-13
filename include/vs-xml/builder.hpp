@@ -71,9 +71,9 @@ namespace details{
             inline error_t marker(std::string_view value){return leaf<marker_t>(value);}
     
             //TODO: injection can be a simple memcpy if the symbols space is shared, or require full tree refactoring.
-            error_t inject(node_iterator start, node_iterator end);
-            error_t inject(const Tree& tree);
-            error_t inject(const WrpTree& tree);
+            error_t inject(const Tree& tree, const unknown_t* base = nullptr, bool include_root = false);
+
+//            error_t inject(const WrpTree& tree);
     };
     
 /**
@@ -82,7 +82,14 @@ namespace details{
  */
 
 template <bool compressed>
-struct BuilderImpl;
+struct BuilderImpl: protected BuilderBase{
+    protected:
+        using BuilderBase::close;
+        using BuilderBase::get_buffer;
+    public:
+    using BuilderBase::inject;
+
+};
 
 template <>
 struct BuilderImpl<true>: protected BuilderBase{
@@ -109,9 +116,6 @@ struct BuilderImpl<true>: protected BuilderBase{
         [this](sv a, sv b){return rsv(a)==rsv(b);}),symbols(){
             label_offset=symbols.data(); 
         }
-
-        using BuilderBase::close;
-        using BuilderBase::get_buffer;
 };
 
 template <>
@@ -122,9 +126,6 @@ struct BuilderImpl<false> : protected BuilderBase{
     //inline std::string_view rsv(sv s){return std::string_view(s.base+(char*)label_offset,s.base+(char*)label_offset+s.length);}
     //inline sv symbol(std::string_view s){return sv(label_offset,s);}
 
-    protected:
-        using BuilderBase::close;
-        using BuilderBase::get_buffer;
 };
 
 }
@@ -184,6 +185,7 @@ struct Builder : protected details::BuilderImpl<cfg.compress_symbols>{
         }
         
         using details::BuilderImpl<cfg.compress_symbols>::close;
+        using details::BuilderImpl<cfg.compress_symbols>::inject;
 
 };
 
