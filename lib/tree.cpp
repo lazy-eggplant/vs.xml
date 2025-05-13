@@ -188,6 +188,8 @@ bool TreeRaw::save_binary(std::ostream& out)const{
     if(symbols.data()==nullptr)return false;
 
     serialized_header_t header;
+    header.binformat_rev = 0;
+    header.configs = configs;
     header.offset_symbols = buffer.size_bytes();
     header.offset_end = buffer.size_bytes()+symbols.size_bytes();
     out.write((const char*) &header, sizeof(header));
@@ -197,7 +199,8 @@ bool TreeRaw::save_binary(std::ostream& out)const{
     return true;
 }
 
-TreeRaw TreeRaw::from_binary(const builder_config_t& cfg, std::span<uint8_t> region){
+//TODO: check if there are more checks between the const and mutable versions based on the configuration bits
+TreeRaw TreeRaw::from_binary(std::span<uint8_t> region){
     xml_assert(region.size_bytes()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
     TreeRaw::serialized_header_t header;
     memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
@@ -205,14 +208,13 @@ TreeRaw TreeRaw::from_binary(const builder_config_t& cfg, std::span<uint8_t> reg
     xml_assert(region.size_bytes()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
     xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
 
-    return TreeRaw(cfg,
+    return TreeRaw(header.configs,
         std::span<uint8_t>{region.data()+sizeof(header), region.data()+sizeof(header)+header.offset_symbols},
         std::span<uint8_t>{region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end}
     );
 }
 
-//TODO: check if there are more checks between the const and mutable versions
-const TreeRaw TreeRaw::from_binary(const builder_config_t& cfg, std::string_view region){
+const TreeRaw TreeRaw::from_binary(std::string_view region){
     xml_assert(region.size()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
     TreeRaw::serialized_header_t header;
     memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
@@ -220,7 +222,7 @@ const TreeRaw TreeRaw::from_binary(const builder_config_t& cfg, std::string_view
     xml_assert(region.size()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
     xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
 
-    return TreeRaw(cfg,
+    return TreeRaw(header.configs,
         std::string_view{region.data()+sizeof(header), region.data()+sizeof(header)+header.offset_symbols},
         std::string_view{region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end}
     );

@@ -104,7 +104,7 @@ BuilderBase::error_t BuilderBase::close(){
 }
 
 
-sv BuilderImpl<true>::symbol(std::string_view s){
+sv BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>::symbol(std::string_view s){
     if(s.length()==0)return {0,0};
 
     auto it = idx_symbols.find(sv(label_offset,s));

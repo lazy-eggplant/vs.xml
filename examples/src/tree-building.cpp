@@ -1,3 +1,4 @@
+#include "vs-xml/commons.hpp"
 #include <iostream>
 #include <string_view>
 #include <vs-xml/builder.hpp>
@@ -5,7 +6,7 @@ using namespace xml;
 
 int main(){
     //Builder preserves the 
-    TreeBuilder<{.compress_symbols=true}> bld;
+    TreeBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
 
     //These will later be expanded in nodes.
     std::string_view texts[] = {"Text 0", "Text 1", "Text 2"};

@@ -29,7 +29,9 @@ namespace VS_XML_NS{
 struct TreeRaw{
     struct __attribute__ ((packed)) serialized_header_t{
         const char magic[4] = {'$','X','M','L'};
-        uint32_t reserved_cfg = 0;
+        uint8_t binformat_rev : 8;
+        builder_config_t configs;
+        uint8_t reserved_cfg [2];
         size_t offset_symbols;
         size_t offset_end;
     };
@@ -117,8 +119,8 @@ struct TreeRaw{
 
     bool save_binary(std::ostream& out)const;
 
-    static TreeRaw from_binary(const builder_config_t& cfg,std::span<uint8_t> region);
-    static const TreeRaw from_binary(const builder_config_t& cfg,std::string_view region);
+    static TreeRaw from_binary(std::span<uint8_t> region);
+    static const TreeRaw from_binary(std::string_view region);
 
     inline std::string_view rsv(sv s) const{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);

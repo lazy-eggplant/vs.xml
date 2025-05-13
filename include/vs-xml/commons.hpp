@@ -59,17 +59,17 @@ struct sv{
     sv()=delete;
 };
 
-struct builder_config_t{
+struct __attribute__ ((packed)) builder_config_t{
+    enum symbols_t: uint8_t{
+        EXTERN_ABS,                         //It was `false` in the previous flag. Cannot be saved as binary.
+        EXTERN_REL,                         //Not yet implemented. Can be saved as binary, but it requires the tree to bind a symbols table later.
+        OWNED,                              //Not yet implemented. No compression of symbols, but they are owned.
+        COMPRESS_LABELS,                    //Not yet implemented. Only compressing symbols which are used for tag and prop labels.
+        COMPRESS_ALL                        //It was `true` in the previous flag. Compress all symbols.
+    } symbols : 3 = EXTERN_ABS;
+    bool raw_strings :1  = false;           //If true, the string views being passed will not be de-escaped. XML serialization of the derived tree will have to escape them if they have been de-escaped.
     bool allow_comments :1 = true;          //If true, comments are allowed. Else skip.
     bool allow_procs :1  = true;            //If true, processing nodes are allowed. Else skip.
-    enum struct symbols_t: uint8_t{
-        EXTERN_ABS,
-        EXTERN_REL,
-        OWNED,
-        COMPRESS_LABELS,
-        COMPRESS_ALL
-    } symbols : 3 = symbols_t::EXTERN_ABS;
-    bool raw_strings :1  = false;           //If true, the string views being passed will not be de-escaped. XML serialization of the derived tree will have to escape them if they have been de-escaped.
 };
 
 struct element_t;

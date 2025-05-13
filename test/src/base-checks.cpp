@@ -1,10 +1,11 @@
+#include "vs-xml/commons.hpp"
 #include <vs-xml/builder.hpp>
 
 #include <print>
 #include <iostream>
 
 int main(){
-    xml::TreeBuilder<{.compress_symbols=true}> build;
+    xml::TreeBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> build;
     
     build.begin("hello");
         build.attr("op3-a", "v'>&al1");

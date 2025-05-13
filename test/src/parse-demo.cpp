@@ -1,3 +1,4 @@
+#include "vs-xml/commons.hpp"
 #include <fstream>
 #include <iostream>
 #include <ostream>
@@ -27,7 +28,7 @@ int main() {
 </ns1:hello>
 )";
 
-    xml::TreeBuilder<{.compress_symbols=true}> builder;
+    xml::TreeBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> builder;
     try {
         xml::Parser parser(xmlData, builder);
         parser.parse();
@@ -40,7 +41,7 @@ int main() {
     mio::mmap_source mmap("./assets/local/demo-0.xml");
     std::span<char> w((char*)mmap.data(),mmap.size());
 
-    xml::TreeBuilder<{.compress_symbols=true}> builder2;
+    xml::TreeBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> builder2;
     builder.begin("wrapper");
         builder2.inject(tree);
     builder2.end();
@@ -56,7 +57,7 @@ int main() {
 
     {
         mio::mmap_source mmap("./assets/local/demo-0.bin");
-        auto tmp = xml::TreeRaw::from_binary({.raw_strings=true},std::span((uint8_t*)mmap.data(),mmap.size()));
+        auto tmp = xml::TreeRaw::from_binary(std::span((uint8_t*)mmap.data(),mmap.size()));
         tmp.print(std::cout,{});
     }
 

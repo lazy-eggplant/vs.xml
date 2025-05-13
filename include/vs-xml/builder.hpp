@@ -81,7 +81,7 @@ namespace details{
  * 
  */
 
-template <bool compressed>
+template <builder_config_t::symbols_t COMPRESSION>
 struct BuilderImpl: protected BuilderBase{
     protected:
         using BuilderBase::close;
@@ -92,7 +92,7 @@ struct BuilderImpl: protected BuilderBase{
 };
 
 template <>
-struct BuilderImpl<true>: protected BuilderBase{
+struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>: protected BuilderBase{
     protected:
         std::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx_symbols;
         std::vector<uint8_t> symbols;
@@ -119,7 +119,7 @@ struct BuilderImpl<true>: protected BuilderBase{
 };
 
 template <>
-struct BuilderImpl<false> : protected BuilderBase{
+struct BuilderImpl<builder_config_t::symbols_t::EXTERN_ABS> : protected BuilderBase{
     inline std::string_view rsv(std::string_view s){return s;}
     inline std::string_view symbol(std::string_view s){return s;}
 
@@ -131,9 +131,9 @@ struct BuilderImpl<false> : protected BuilderBase{
 }
 
 template<builder_config_t cfg = {}>
-struct TreeBuilder : protected details::BuilderImpl<cfg.compress_symbols>{
+struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
     protected:
-        using details::BuilderImpl<cfg.compress_symbols>::symbol;
+        using details::BuilderImpl<cfg.symbols>::symbol;
 
         //TODO: not sure if this is needed any longer
         /*inline std::expected<Tree,error_t> close(std::vector<uint8_t>&& symbols){
@@ -143,7 +143,7 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.compress_symbols>{
 
     public:
         constexpr static inline builder_config_t configs = cfg;
-        using details::BuilderImpl<cfg.compress_symbols>::rsv;
+        using details::BuilderImpl<cfg.symbols>::rsv;
         using error_t = details::BuilderBase::error_t;
 
         //inline Builder():details::BuilderImpl<cfg.compress_symbols>(){}
@@ -179,13 +179,17 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.compress_symbols>{
         }
 
         inline std::expected<Tree,error_t> close(){
-            details::BuilderImpl<cfg.compress_symbols>::close();
-            if constexpr (cfg.compress_symbols)return Tree(TreeRaw(configs,std::move(this->get_buffer()),std::move(this->symbols)));
-            else if(cfg.compress_symbols)return Tree(Tree(configs,std::move(this->get_buffer()),this->label_offset));
+            details::BuilderImpl<cfg.symbols>::close();
+            if constexpr (
+                cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||
+                cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||
+                cfg.symbols==builder_config_t::symbols_t::OWNED 
+            )return Tree(TreeRaw(configs,std::move(this->get_buffer()),std::move(this->symbols)));
+            else return Tree(Tree(configs,std::move(this->get_buffer()),this->label_offset));
         }
         
-        using details::BuilderImpl<cfg.compress_symbols>::close;
-        using details::BuilderImpl<cfg.compress_symbols>::inject;
+        using details::BuilderImpl<cfg.symbols>::close;
+        using details::BuilderImpl<cfg.symbols>::inject;
 
 };
 
