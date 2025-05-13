@@ -309,6 +309,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../modes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Modes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../usage/" class="md-nav__link">
         
   
@@ -383,6 +405,11 @@ This library tries to optimize for such cases as much as possible.</p>
 </blockquote>
 <p>To allow them to be serialized and still provide random access on the tree regardless of the device or medium on which it is being stored.<br />
 This allows to share annotations for a tree for cheap even in offloaded contexts.</p>
+<blockquote>
+<p>Why is XML serialization/de-serialization single threaded?</p>
+</blockquote>
+<p>Because they are mostly meant as one-shot operations, while the bulk of the operations is going to be on the binary representation.<br />
+There is no trivial way to make XML parsing or serialization &ldquo;parallel&rdquo; without making the code involved much more complex, and it is better to have different thread serialize different files if possible.</p>
 
 
 
