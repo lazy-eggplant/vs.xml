@@ -13,8 +13,7 @@
 // Example main (for testing purposes)
 //-----------------------------------------------------
 int main() {
-    return 0; //Failing while testing because memory mapped files are not handled well by testing infrastructure. I will restore it later.
-    mio::mmap_source mmap("./test/assets/demo-0.xml");
+    mio::mmap_source mmap("./assets/local/demo-0.xml");
     std::span<char> w((char*)mmap.data(),mmap.size());
 
     //The parser can mutate this string. I will have to identify if there is any better ownership mechanism here to use
@@ -30,19 +29,18 @@ int main() {
 </ns1:hello>
 )";
 
-    xml::Builder<{.compress_symbols=true}> builder;
+    xml::Builder<{.compress_symbols=false}> builder;
     try {
         xml::Parser parser(xmlData, builder);
         parser.parse();
     } catch (const std::exception &ex) {
         std::cerr << "Error while parsing XML: " << ex.what() << "\n";
-        return 1;
     }
     auto tree = *builder.close();
     tree.print(std::cout,{});
 
     {
-        std::ofstream file("./test/assets/demo-0.bin",std::ios::binary|std::ios::out);
+        std::ofstream file("./assets/local/demo-0.bin",std::ios::binary|std::ios::out);
             tree.save_binary(file);
         file.close();
     }
@@ -50,8 +48,8 @@ int main() {
     std::print("\n~~~~\n");
 
     {
-        mio::mmap_source mmap("./test/assets/demo-0.bin");
-        xml::Tree tmp(std::span((uint8_t*)mmap.data(),mmap.size()));
+        mio::mmap_source mmap("./assets/local/demo-0.bin");
+        xml::Tree tmp({.raw_strings=true},std::span((uint8_t*)mmap.data(),mmap.size()));
         tmp.print(std::cout,{});
     }
 

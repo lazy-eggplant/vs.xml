@@ -33,14 +33,6 @@ template BuilderBase::error_t BuilderBase::leaf<text_t>(std::string_view value);
 template BuilderBase::error_t BuilderBase::leaf<proc_t>(std::string_view value);
 template BuilderBase::error_t BuilderBase::leaf<marker_t>(std::string_view value);
 
-std::expected<WrpTree,BuilderBase::error_t> BuilderBase::close(std::vector<uint8_t>&& symbols){
-    if(open==false)return std::unexpected(error_t::TREE_CLOSED);
-    open=false;
-    if(stack.size()!=1)return std::unexpected(error_t::MISFORMED);
-    stack.pop();
-    
-    return WrpTree(Tree(std::move(buffer),std::move(symbols)));
-}
 
 BuilderBase::BuilderBase(){stack.push({0,-1});}
 
@@ -102,12 +94,12 @@ BuilderBase::error_t BuilderBase::attr(std::string_view name, std::string_view v
     return error_t::OK;
 }
 
-std::expected<WrpTree,BuilderBase::error_t> BuilderBase::close(){
-    if(open==false)return std::unexpected(error_t::TREE_CLOSED);
+BuilderBase::error_t BuilderBase::close(){
+    if(open==false)return error_t::TREE_CLOSED;
     open=false;
-    if(stack.size()!=1)return std::unexpected(error_t::MISFORMED);
+    if(stack.size()!=1)return error_t::MISFORMED;
     stack.pop();
-    return WrpTree(Tree(std::move(buffer),{}));
+    return error_t::OK;
 }
 
 

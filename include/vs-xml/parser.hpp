@@ -110,7 +110,8 @@ private:
             if (procEnd == std::string_view::npos)
                 throw std::runtime_error("Unterminated processing instruction.");
             auto procContent = data_.substr(pos_, procEnd - pos_);
-            builder_.proc(serialize::unescape_xml(procContent));
+            if constexpr (Builder_t::configs.raw_strings ) builder_.proc(procContent);
+            else builder_.proc(serialize::unescape_xml(procContent));
             pos_ = procEnd + 2;
             return;
         }
@@ -125,7 +126,8 @@ private:
                 if (commentEnd == std::string_view::npos)
                     throw std::runtime_error("Unterminated XML comment.");
                 auto commentContent = data_.substr(pos_, commentEnd - pos_);
-                builder_.comment(serialize::unescape_xml(commentContent));
+                if constexpr (Builder_t::configs.raw_strings ) builder_.comment(commentContent);
+                else builder_.comment(serialize::unescape_xml(commentContent));
                 pos_ = commentEnd + 3;
                 return;
             } 
@@ -192,7 +194,9 @@ private:
                 throw std::runtime_error("Expected closing quote for attribute value.");
 
             // Call builder's attr with local name and corresponding namespace.
-            builder_.attr(attrLocal, serialize::unescape_xml(attrValue), attrNs);
+            if constexpr (Builder_t::configs.raw_strings ) builder_.attr(attrLocal, attrValue, attrNs);
+            else builder_.attr(attrLocal, serialize::unescape_xml(attrValue), attrNs);
+            
         }
 
         // Self-closing element?
@@ -233,7 +237,11 @@ private:
                 while (pos_ < data_.size() && data_[pos_] != '<')
                     ++pos_;
                 auto textContent = data_.substr(textStart, pos_ - textStart);
-                std::string_view unescapedText = serialize::unescape_xml(textContent);
+                std::string_view unescapedText;
+                
+                if constexpr (Builder_t::configs.raw_strings )unescapedText=textContent;
+                else unescapedText = serialize::unescape_xml(textContent);
+
                 if (!unescapedText.empty() &&
                     unescapedText.find_first_not_of(" \t\r\n") != std::string::npos)
                 {

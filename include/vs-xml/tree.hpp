@@ -41,6 +41,7 @@ struct Tree{
         std::span<uint8_t> buffer;      //Overlay of buffer_i, or external
         std::span<uint8_t> symbols;     //Overlay of symbols_i, or external
 
+        const builder_config_t configs;
 
     public:
 
@@ -115,7 +116,7 @@ struct Tree{
     }
 
     bool save_binary(std::ostream& out)const;
-    Tree(std::span<uint8_t> region);
+    Tree(const builder_config_t& cfg,std::span<uint8_t> region);
 
     inline std::string_view rsv(sv s) const{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
@@ -126,16 +127,18 @@ struct Tree{
     /**
      * @brief Construct a new Tree object, with the list of strings being external. Make sure its lifetime contains the one of the Tree.
      */
-    Tree(std::vector<uint8_t>&& src, void* label_offset=nullptr):
+    Tree(const builder_config_t& cfg, std::vector<uint8_t>&& src, void* label_offset=nullptr):
         buffer_i(src),symbols_i({}),
-        buffer(buffer_i),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent){}
+        buffer(buffer_i),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent),
+        configs(cfg){}
 
     /**
      * @brief Construct a new Tree object, owning its own table of strings
      */
-    Tree(std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):
+    Tree(const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):
         buffer_i(src),symbols_i(sym),
-        buffer(buffer_i),symbols(symbols_i){}
+        buffer(buffer_i),symbols(symbols_i),
+        configs(cfg){}
  
     /*
     //Weak, used when loading from disk
@@ -144,8 +147,8 @@ struct Tree{
     */
 
     //Weak, used when loading from disk or creatung slices
-    Tree(std::span<uint8_t> src, std::span<uint8_t> sym):
-        buffer(src),symbols(sym){}
+    Tree(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym):
+        buffer(src),symbols(sym),configs(cfg){}
 
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;

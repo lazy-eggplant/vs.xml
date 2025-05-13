@@ -60,10 +60,10 @@ struct sv{
 };
 
 struct builder_config_t{
-    bool allow_comments = true;
-    bool allow_procs = true;
-    bool compress_symbols = false;
-    //bool collapse_text ;
+    bool allow_comments :1 = true;          //If true, comments are allowed. Else skip.
+    bool allow_procs :1  = true;            //If true, processing nodes are allowed. Else skip.
+    bool compress_symbols :1  = false;      //If true, a new table of symbols is computed, else string_views are used directly.
+    bool raw_strings :1  = false;           //If true, the string views being passed will not be de-escaped. XML serialization of the derived tree will have to escape them if they have been de-escaped.
 };
 
 struct element_t;
@@ -76,19 +76,20 @@ struct marker_t;
 struct root_t;
 struct unknown_t;
 
-template<builder_config_t CFG>
-struct Builder;
-struct Tree;
-struct WrpTree;
-
-namespace details{
-    struct BuilderBase;
-}
-
 namespace wrp{
     template <typename T>
     struct base_t;
 }
+
+namespace details{
+    struct BuilderBase;
+}
+template<builder_config_t cfg>
+struct Builder;
+
+struct Tree;
+struct WrpTree;
+
 
 enum struct feature_t{
     OK,
@@ -134,7 +135,7 @@ concept thing_i = requires(T self){
 
 
 template <typename T>
-concept ProperBuilder =  true;
+concept ProperBuilder =  true;  //TODO: specialization of Builder_t
 
 template<ProperBuilder Builder_t>
 class Parser;

@@ -1,3 +1,4 @@
+#include <charconv>
 #include <stdexcept>
 #include <vs-xml/commons.hpp>
 #include <vs-xml/serializer.hpp>
@@ -170,15 +171,10 @@ std::string_view unescape_xml(std::string_view sv) { //It should be a span. Stri
                 if (j < len && buffer[j] == ';') {
                     // Create a temporary std::string_view for the number.
                     std::string_view numStr(buffer + numStart, j - numStart);
-                    
+
                     // Convert to an integer.
                     int code = '?';
-                    try {
-                        code = std::stoi(std::string(numStr), nullptr, hex ? 16 : 10);
-                    } catch (...) {
-                        // Use '?' as a replacement on error.
-                        code = '?';
-                    }
+                    std::from_chars<int>(numStr.begin(),numStr.end(),code,hex ? 16 : 10);
                     buffer[write++] = static_cast<char>(code);
                     read = j + 1;
                 } else {

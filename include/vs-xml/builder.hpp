@@ -52,13 +52,12 @@ namespace details{
     
         protected:
             void* label_offset = nullptr;
-    
-            std::expected<WrpTree,error_t> close(std::vector<uint8_t>&& symbols);
+            inline std::vector<uint8_t>&& get_buffer() {return std::move(buffer);}
         
         public:
     
             BuilderBase();
-            std::expected<WrpTree,error_t> close();
+            error_t close();
     
             error_t begin(std::string_view name, std::string_view ns="");
             error_t end();
@@ -111,18 +110,18 @@ struct BuilderImpl<true>: protected BuilderBase{
             label_offset=symbols.data(); 
         }
 
-    public:
-        inline std::expected<WrpTree,error_t> close(){
-            idx_symbols.clear();
-            return BuilderBase::close(std::move(symbols));
-        }
+        using BuilderBase::close;
+        using BuilderBase::get_buffer;
 };
 
 template <>
 struct BuilderImpl<false> : protected BuilderBase{
     inline std::string_view rsv(std::string_view s){return s;}
     inline std::string_view symbol(std::string_view s){return s;}
-    inline std::expected<WrpTree,error_t> close(){return BuilderBase::close();}
+    
+    protected:
+        using BuilderBase::close;
+        using BuilderBase::get_buffer;
 };
 
 }
@@ -132,7 +131,14 @@ struct Builder : protected details::BuilderImpl<cfg.compress_symbols>{
     protected:
         using details::BuilderImpl<cfg.compress_symbols>::symbol;
 
+        //TODO: not sure if this is needed any longer
+        /*inline std::expected<WrpTree,error_t> close(std::vector<uint8_t>&& symbols){
+            details::BuilderImpl<cfg.compress_symbols>::close();
+            return WrpTree(Tree(config,std::move(this->buffer),std::move(symbols)));
+        }*/
+
     public:
+        constexpr static inline builder_config_t configs = cfg;
         using details::BuilderImpl<cfg.compress_symbols>::rsv;
         using error_t = details::BuilderBase::error_t;
 
@@ -168,6 +174,11 @@ struct Builder : protected details::BuilderImpl<cfg.compress_symbols>{
             return details::BuilderBase::marker(rsv( symbol(value)));
         }
 
+        inline std::expected<WrpTree,error_t> close(){
+            details::BuilderImpl<cfg.compress_symbols>::close();
+            return WrpTree(Tree(configs,std::move(this->get_buffer()),{}));
+        }
+        
         using details::BuilderImpl<cfg.compress_symbols>::close;
 
 };

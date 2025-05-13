@@ -58,7 +58,7 @@ bool Tree::reorder_h(const std::function<bool(const attr_t&, const attr_t&)>& fn
 
 bool Tree::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* ptr) const{
     //TODO: at some point, convert it not to be recursive.
-
+    //TODO: satisfy raw_strings config info.
     if(ptr->type()==type_t::ELEMENT){
         if(ptr->children_range()->first==ptr->children_range()->second){
             out << std::format("<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
@@ -128,7 +128,7 @@ const Tree Tree::slice(const element_t* ref) const{
     if(ref==nullptr)ref=&root();
 
     std::span<uint8_t> tmp = {( uint8_t*)ref,ref->_size};
-    return Tree(tmp,this->symbols);
+    return Tree(configs,tmp,this->symbols);
 };
 
 Tree Tree::clone(const element_t* ref, bool reduce) const{
@@ -152,7 +152,7 @@ Tree Tree::clone(const element_t* ref, bool reduce) const{
         symbols.assign(this->symbols_i.begin(),this->symbols_i.end());
     }
 
-    return Tree(std::move(buffer),std::move(symbols));
+    return Tree(configs,std::move(buffer),std::move(symbols));
 }
 
 
@@ -170,7 +170,7 @@ bool Tree::save_binary(std::ostream& out)const{
     return true;
 }
 
-Tree::Tree(std::span<uint8_t> region){
+Tree::Tree(const builder_config_t& cfg, std::span<uint8_t> region):configs(cfg){
     xml_assert(region.size_bytes()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
     serialized_header_t header;
     memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
