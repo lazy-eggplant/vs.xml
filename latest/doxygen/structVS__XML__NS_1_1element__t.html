@@ -76,7 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="structVS__XML__NS_1_1element__t-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">VS_XML_NS::element_t Struct Reference</div></div>
 </div><!--header-->
@@ -113,12 +113,15 @@ std::expected&lt; <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>, feat
 <tr class="memitem:ab0181e1dee86ee938d5d3ef117370095" id="r_ab0181e1dee86ee938d5d3ef117370095"><td class="memItemLeft" align="right" valign="top"><a id="ab0181e1dee86ee938d5d3ef117370095" name="ab0181e1dee86ee938d5d3ef117370095"></a>
 std::expected&lt; <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>value</b> () const</td></tr>
 <tr class="separator:ab0181e1dee86ee938d5d3ef117370095"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a940f7a6410665514a3c9da7bd0606b47" id="r_a940f7a6410665514a3c9da7bd0606b47"><td class="memItemLeft" align="right" valign="top"><a id="a940f7a6410665514a3c9da7bd0606b47" name="a940f7a6410665514a3c9da7bd0606b47"></a>
-std::expected&lt; std::pair&lt; const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> * &gt;, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>children</b> () const</td></tr>
-<tr class="separator:a940f7a6410665514a3c9da7bd0606b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27da78943d1c09d760ff261b03d8c952" id="r_a27da78943d1c09d760ff261b03d8c952"><td class="memItemLeft" align="right" valign="top"><a id="a27da78943d1c09d760ff261b03d8c952" name="a27da78943d1c09d760ff261b03d8c952"></a>
-std::expected&lt; std::pair&lt; const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> *, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> * &gt;, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>attrs</b> () const</td></tr>
-<tr class="separator:a27da78943d1c09d760ff261b03d8c952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12b0805f14a534ea477ce8783b3f5502" id="r_a12b0805f14a534ea477ce8783b3f5502"><td class="memItemLeft" align="right" valign="top"><a id="a12b0805f14a534ea477ce8783b3f5502" name="a12b0805f14a534ea477ce8783b3f5502"></a>
+std::expected&lt; void, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>text_range</b> () const</td></tr>
+<tr class="separator:a12b0805f14a534ea477ce8783b3f5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21ecc3108cf5907ae244c43f5a99df44" id="r_a21ecc3108cf5907ae244c43f5a99df44"><td class="memItemLeft" align="right" valign="top"><a id="a21ecc3108cf5907ae244c43f5a99df44" name="a21ecc3108cf5907ae244c43f5a99df44"></a>
+std::expected&lt; std::pair&lt; const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> * &gt;, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>children_range</b> () const</td></tr>
+<tr class="separator:a21ecc3108cf5907ae244c43f5a99df44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab52cb5c692b3598ec8b7a7c77f6a1ba6" id="r_ab52cb5c692b3598ec8b7a7c77f6a1ba6"><td class="memItemLeft" align="right" valign="top"><a id="ab52cb5c692b3598ec8b7a7c77f6a1ba6" name="ab52cb5c692b3598ec8b7a7c77f6a1ba6"></a>
+std::expected&lt; std::pair&lt; const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> *, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> * &gt;, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>attrs_range</b> () const</td></tr>
+<tr class="separator:ab52cb5c692b3598ec8b7a7c77f6a1ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b58853aeed975adb3345598ca2f8339" id="r_a2b58853aeed975adb3345598ca2f8339"><td class="memItemLeft" align="right" valign="top"><a id="a2b58853aeed975adb3345598ca2f8339" name="a2b58853aeed975adb3345598ca2f8339"></a>
 const <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>parent</b> () const</td></tr>
 <tr class="separator:a2b58853aeed975adb3345598ca2f8339"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,12 +156,15 @@ std::expected&lt; <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>, feat
 <tr class="memitem:a6c015819d181c1c1cedd2b8138d29454 inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_a6c015819d181c1c1cedd2b8138d29454"><td class="memItemLeft" align="right" valign="top">
 std::expected&lt; <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>value</b> () const</td></tr>
 <tr class="separator:a6c015819d181c1c1cedd2b8138d29454 inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aceebcf9d39772e79a93ad60f7188413f inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_aceebcf9d39772e79a93ad60f7188413f"><td class="memItemLeft" align="right" valign="top">
-std::expected&lt; std::pair&lt; const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> * &gt;, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>children</b> () const</td></tr>
-<tr class="separator:aceebcf9d39772e79a93ad60f7188413f inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab971e4ff56132326655f0b78fff52953 inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_ab971e4ff56132326655f0b78fff52953"><td class="memItemLeft" align="right" valign="top">
-std::expected&lt; std::pair&lt; const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> *, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> * &gt;, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>attrs</b> () const</td></tr>
-<tr class="separator:ab971e4ff56132326655f0b78fff52953 inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c9735953625270955e0a272de02b8a4 inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_a9c9735953625270955e0a272de02b8a4"><td class="memItemLeft" align="right" valign="top">
+std::expected&lt; std::pair&lt; const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> * &gt;, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>children_range</b> () const</td></tr>
+<tr class="separator:a9c9735953625270955e0a272de02b8a4 inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f86bbd17bdf5903a62d3d0c1b91c1b8 inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_a5f86bbd17bdf5903a62d3d0c1b91c1b8"><td class="memItemLeft" align="right" valign="top">
+std::expected&lt; std::pair&lt; const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> *, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> * &gt;, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>attrs_range</b> () const</td></tr>
+<tr class="separator:a5f86bbd17bdf5903a62d3d0c1b91c1b8 inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8369c93978433910c16b909bfd1b18c5 inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_a8369c93978433910c16b909bfd1b18c5"><td class="memItemLeft" align="right" valign="top">
+std::expected&lt; void, feature_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>text_range</b> () const</td></tr>
+<tr class="separator:a8369c93978433910c16b909bfd1b18c5 inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ab24e051feaa97f0a85b208d903b9dd inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_a7ab24e051feaa97f0a85b208d903b9dd"><td class="memItemLeft" align="right" valign="top">
 const <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>parent</b> () const</td></tr>
 <tr class="separator:a7ab24e051feaa97f0a85b208d903b9dd inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,12 +186,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>has_next</b> () const
 <tr class="memitem:ad7574bf18bf2b5bde818ce0ce2080051 inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_ad7574bf18bf2b5bde818ce0ce2080051"><td class="memItemLeft" align="right" valign="top">
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>path</b> () const</td></tr>
 <tr class="separator:ad7574bf18bf2b5bde818ce0ce2080051 inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a1db2ab853dece9b1dae655a9ad0c41 inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_a6a1db2ab853dece9b1dae655a9ad0c41"><td class="memItemLeft" align="right" valign="top">
-auto&#160;</td><td class="memItemRight" valign="bottom"><b>children_fwd</b> () const</td></tr>
-<tr class="separator:a6a1db2ab853dece9b1dae655a9ad0c41 inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafec04fe835c064fe8645a9eb7012c58 inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_aafec04fe835c064fe8645a9eb7012c58"><td class="memItemLeft" align="right" valign="top">
-auto&#160;</td><td class="memItemRight" valign="bottom"><b>attrs_fwd</b> () const</td></tr>
-<tr class="separator:aafec04fe835c064fe8645a9eb7012c58 inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adef0fe6e39fa0da2b12a90e0d6230616 inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_adef0fe6e39fa0da2b12a90e0d6230616"><td class="memItemLeft" align="right" valign="top">
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>children</b> () const</td></tr>
+<tr class="separator:adef0fe6e39fa0da2b12a90e0d6230616 inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a3bf76baf3d61809dbee52aff2526af inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_a0a3bf76baf3d61809dbee52aff2526af"><td class="memItemLeft" align="right" valign="top">
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>attrs</b> () const</td></tr>
+<tr class="separator:a0a3bf76baf3d61809dbee52aff2526af inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e8ded91ef4b78d93c46a3cb8464fef9 inherit pub_methods_structVS__XML__NS_1_1base__t" id="r_a9e8ded91ef4b78d93c46a3cb8464fef9"><td class="memItemLeft" align="right" valign="top">
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>text</b> () const</td></tr>
+<tr class="separator:a9e8ded91ef4b78d93c46a3cb8464fef9 inherit pub_methods_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -193,24 +202,21 @@ Static Public Member Functions</h2></td></tr>
 static type_t&#160;</td><td class="memItemRight" valign="bottom"><b>deftype</b> ()</td></tr>
 <tr class="separator:ace6997aee2822775ba1fc6e50cd9556e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a770cac4e995806e73262d7362225b590" id="r_a770cac4e995806e73262d7362225b590"><td class="memItemLeft" align="right" valign="top"><a id="a770cac4e995806e73262d7362225b590" name="a770cac4e995806e73262d7362225b590"></a>
-friend&#160;</td><td class="memItemRight" valign="bottom"><b>Builder</b></td></tr>
-<tr class="separator:a770cac4e995806e73262d7362225b590"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3654a0613b839bb0fe1897070a7e0d39" id="r_a3654a0613b839bb0fe1897070a7e0d39"><td class="memItemLeft" align="right" valign="top"><a id="a3654a0613b839bb0fe1897070a7e0d39" name="a3654a0613b839bb0fe1897070a7e0d39"></a>
-friend&#160;</td><td class="memItemRight" valign="bottom"><b>Tree</b></td></tr>
-<tr class="separator:a3654a0613b839bb0fe1897070a7e0d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdab82f192184c512f2f1a79142c2ff0" id="r_afdab82f192184c512f2f1a79142c2ff0"><td class="memItemLeft" align="right" valign="top"><a id="afdab82f192184c512f2f1a79142c2ff0" name="afdab82f192184c512f2f1a79142c2ff0"></a>
-friend&#160;</td><td class="memItemRight" valign="bottom"><b>unknown_t</b></td></tr>
-<tr class="separator:afdab82f192184c512f2f1a79142c2ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_structVS__XML__NS_1_1base__t"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structVS__XML__NS_1_1base__t')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="structVS__XML__NS_1_1base__t.html">VS_XML_NS::base_t&lt; T &gt;</a></td></tr>
-<tr class="memitem:ab4e017fbaa74269580ceae2cfa4dc6f1 inherit pub_attribs_structVS__XML__NS_1_1base__t" id="r_ab4e017fbaa74269580ceae2cfa4dc6f1"><td class="memItemLeft" align="right" valign="top">
-friend&#160;</td><td class="memItemRight" valign="bottom"><b>Builder</b></td></tr>
-<tr class="separator:ab4e017fbaa74269580ceae2cfa4dc6f1 inherit pub_attribs_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e52c33f0a2cbfcc1a3f0dd5aecf12d1 inherit pub_attribs_structVS__XML__NS_1_1base__t" id="r_a8e52c33f0a2cbfcc1a3f0dd5aecf12d1"><td class="memItemLeft" align="right" valign="top">
-friend&#160;</td><td class="memItemRight" valign="bottom"><b>Tree</b></td></tr>
-<tr class="separator:a8e52c33f0a2cbfcc1a3f0dd5aecf12d1 inherit pub_attribs_structVS__XML__NS_1_1base__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a61fcb0f86ceb64a233f6ca2b6d14fac1" id="r_a61fcb0f86ceb64a233f6ca2b6d14fac1"><td class="memTemplParams" colspan="2"><a id="a61fcb0f86ceb64a233f6ca2b6d14fac1" name="a61fcb0f86ceb64a233f6ca2b6d14fac1"></a>
+template&lt;<a class="el" href="structVS__XML__NS_1_1builder__config__t.html">builder_config_t</a> &gt; </td></tr>
+<tr class="memitem:a61fcb0f86ceb64a233f6ca2b6d14fac1"><td class="memTemplItemLeft" align="right" valign="top">struct&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Builder</b></td></tr>
+<tr class="separator:a61fcb0f86ceb64a233f6ca2b6d14fac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f51e7b54b4057846b6d4609aa8ea3a4" id="r_a9f51e7b54b4057846b6d4609aa8ea3a4"><td class="memItemLeft" align="right" valign="top"><a id="a9f51e7b54b4057846b6d4609aa8ea3a4" name="a9f51e7b54b4057846b6d4609aa8ea3a4"></a>
+struct&#160;</td><td class="memItemRight" valign="bottom"><b>details::BuilderBase</b></td></tr>
+<tr class="separator:a9f51e7b54b4057846b6d4609aa8ea3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01992fff18ce21dcaba7b11e93bb05ee" id="r_a01992fff18ce21dcaba7b11e93bb05ee"><td class="memItemLeft" align="right" valign="top"><a id="a01992fff18ce21dcaba7b11e93bb05ee" name="a01992fff18ce21dcaba7b11e93bb05ee"></a>
+struct&#160;</td><td class="memItemRight" valign="bottom"><b>Tree</b></td></tr>
+<tr class="separator:a01992fff18ce21dcaba7b11e93bb05ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a96874d7392a33bb8601403d81ee6d9" id="r_a9a96874d7392a33bb8601403d81ee6d9"><td class="memItemLeft" align="right" valign="top"><a id="a9a96874d7392a33bb8601403d81ee6d9" name="a9a96874d7392a33bb8601403d81ee6d9"></a>
+struct&#160;</td><td class="memItemRight" valign="bottom"><b>unknown_t</b></td></tr>
+<tr class="separator:a9a96874d7392a33bb8601403d81ee6d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>

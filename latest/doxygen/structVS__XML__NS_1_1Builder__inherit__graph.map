@@ -1,5 +1,7 @@
-<map id="VS_XML_NS::Builder" name="VS_XML_NS::Builder">
-<area shape="rect" id="Node000001" title="Helper class to build an XML tree via commands." alt="" coords="46,5,199,31"/>
-<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1BuilderCompressed.html" title="Wrapper of Builder to compress labels before usage, reducing the final memory footprint." alt="" coords="5,79,240,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,44,125,79,120,79,120,44"/>
+<map id="VS_XML_NS::Builder&lt; cfg &gt;" name="VS_XML_NS::Builder&lt; cfg &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="36,181,189,221"/>
+<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1details_1_1BuilderImpl.html" title="Helper class to build an XML tree via commands." alt="" coords="5,93,220,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,147,115,181,110,181,110,147"/>
+<area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="37,5,188,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,59,115,93,110,93,110,59"/>
 </map>
