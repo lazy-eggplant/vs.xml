@@ -5,6 +5,7 @@
 #include <vs-xml/commons.hpp>
 #include <vs-xml/tree.hpp>
 #include <vs-xml/impl.hpp>
+#include <vs-xml/wrp-impl.hpp>
 #include <vs-xml/serializer.hpp>
 
 namespace VS_XML_NS{
@@ -198,5 +199,7 @@ const Tree Tree::from_binary(const builder_config_t& cfg, std::string_view regio
         std::string_view{region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end}
     );
 }
+
+wrp::base_t<element_t> WrpTree::root() const{return {*this, &Tree::root()};}
 
 }
