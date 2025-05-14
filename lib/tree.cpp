@@ -193,7 +193,8 @@ bool TreeRaw::save_binary(std::ostream& out)const{
     if(symbols.data()==nullptr)return false;
 
     serialized_header_t header;
-    header.binformat_rev = 0;
+    header.format_major = format_major;
+    header.format_major = format_minor;
     header.configs = configs;
     header.offset_symbols = buffer.size_bytes();
     header.offset_end = buffer.size_bytes()+symbols.size_bytes();
@@ -210,6 +211,8 @@ TreeRaw TreeRaw::from_binary(std::span<uint8_t> region){
     TreeRaw::serialized_header_t header;
     memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
     xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
+    xml_assert(header.format_major==format_major,"This binary was generated in an older version no longer compatible");
+    xml_assert(header.format_minor<format_minor,"This binary was generated in an older version no longer compatible");
     xml_assert(region.size_bytes()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
     xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
 
@@ -224,6 +227,8 @@ const TreeRaw TreeRaw::from_binary(std::string_view region){
     TreeRaw::serialized_header_t header;
     memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
     xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
+    xml_assert(header.format_major==format_major,"This binary was generated in an older version no longer compatible");
+    xml_assert(header.format_minor<format_minor,"This binary was generated in an older version no longer compatible");
     xml_assert(region.size()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
     xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
 

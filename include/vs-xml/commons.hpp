@@ -32,12 +32,13 @@
 
 namespace VS_XML_NS{
 
+constexpr static inline int format_major = 0; ///Current binary format major revision. Major revisions are breaking.
+constexpr static inline int format_minor = 0; ///Current binary format minor revision. Minor revisions are not breaking, but older does not support recent.
 
 typedef std::ptrdiff_t delta_ptr_t ;
 typedef size_t xml_size_t;
 typedef size_t xml_count_t;
 typedef size_t xml_enum_size_t;
-
 
 inline void xml_assert(bool condition, const char* errorMessage="") {
     #ifndef VS_XML_NO_ASSERT
