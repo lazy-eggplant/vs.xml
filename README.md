@@ -46,7 +46,7 @@ int main(){
 Serialize them:
 ```cpp
   auto document = *bld.close(); //Make sure to handle the return error if present in production code.
-  document->print(std::cout);
+  document.print(std::cout, {/*serialization configuration*/});
 ```
 
 And access the tree structure:

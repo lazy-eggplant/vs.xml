@@ -16,8 +16,8 @@ struct attr_iterator;
 template <typename T>
 struct base_t{
     private:
-        const TreeRaw&          base;
-        const T*                ptr;
+        const TreeRaw& base;
+        const T*       ptr;
     
         base_t(const TreeRaw& base, const T* ptr):base(base),ptr(ptr){}
         base_t(base_t p, const T* ptr):base(p.base),ptr(ptr){}
@@ -61,8 +61,8 @@ struct base_t{
 template <>
 struct base_t<attr_t>{
     private:
-        const TreeRaw&         base;
-        const attr_t*          ptr;
+        const TreeRaw& base;
+        const attr_t*  ptr;
     
         base_t(const TreeRaw& base, const attr_t* ptr):base(base),ptr(ptr){}
         base_t(base_t p, const attr_t* ptr):base(p.base),ptr(ptr){}

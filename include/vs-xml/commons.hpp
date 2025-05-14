@@ -60,6 +60,10 @@ struct sv{
     sv()=delete;
 };
 
+/**
+ * @brief Configuraton structure for builders, trees and documents.
+ * 
+ */
 struct __attribute__ ((packed)) builder_config_t{
     enum symbols_t: uint8_t{
         EXTERN_ABS,                         //It was `false` in the previous flag. Cannot be saved as binary.
@@ -106,8 +110,12 @@ enum struct feature_t{
     NOT_IMPLEMENTED,
 };
 
+/**
+ * @brief All types of nodes represented. Some are special values not part of XML
+ * 
+ */
 enum struct type_t : xml_enum_size_t{
-    UNKNOWN,
+    UNKNOWN,    ///Used for dynamic dispatching
     ROOT,
     ELEMENT,
     ATTR,
@@ -115,7 +123,7 @@ enum struct type_t : xml_enum_size_t{
     COMMENT,
     PROC,
     CDATA,
-    MARKER,
+    MARKER,     ///Special type used to represent injection point or annotations.
 };
 
 template<typename T>

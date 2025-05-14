@@ -11,7 +11,7 @@ meson install -C build      #You might have to define DESTDIR to perform a dry r
 
 A simplified makefile is made available, which has some reasonable defaults.  
 
-Tarballs are also offered for some distributions in releases.  
+Tarballs will also be offered for some distributions as part of future releases.  
 
 ## Usage
 

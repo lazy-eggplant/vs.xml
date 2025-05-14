@@ -55,7 +55,7 @@ struct TreeRaw{
         * @brief Reorder (in-place) children of a node based on a custom ordering criterion.
         * 
         * @param ref Node whose children are to be ordered
-        * @param fn Criterion to determine the order of nodes. -1 for left<right, 0 for equals, 1 for left>right
+        * @param fn Criterion to determine the order of nodes.
         * @return true if the operation is successful
         */
     bool reorder_children(
@@ -67,7 +67,7 @@ struct TreeRaw{
         * @brief Reorder (in-place) attributes of a node based on a custom ordering criterion.
         * 
         * @param ref Node whose attributes are to be ordered
-        * @param fn Criterion to determine the order of nodes. -1 for left<right, 0 for equals, 1 for left>right
+        * @param fn Criterion to determine the order of nodes.
         * @return true if the operation is successful
         */
     bool reorder(
@@ -169,8 +169,6 @@ struct TreeRaw{
     template<builder_config_t>
     friend struct TreeBuilder;
     friend struct details::BuilderBase;
-
-
 };
 
 
