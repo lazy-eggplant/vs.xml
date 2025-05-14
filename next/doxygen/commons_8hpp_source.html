@@ -124,7 +124,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    xml_count_t  length;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>(std::ptrdiff_t b, <span class="keywordtype">size_t</span> len):base(b),length(len){xml_assert((std::ptrdiff_t)base == b);xml_assert((xml_count_t)length == len);}</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>(<span class="keywordtype">void</span>* offset, std::string_view v){base=((uint8_t*)v.data()-(uint8_t*)offset);length=v.length();}</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view v){base=((uint8_t*)v.data()-(uint8_t*)offset);length=v.length();}</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>()=<span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>};</div>

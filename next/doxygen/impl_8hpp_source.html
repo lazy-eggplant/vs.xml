@@ -153,7 +153,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1attr__t.html">attr_t</a>(<span class="keywordtype">void</span>* offset, std::string_view _ns, std::string_view _name, std::string_view _value):</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1attr__t.html">attr_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view _ns, std::string_view _name, std::string_view _value):</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        _ns(offset,serialize::validate_xml_label(_ns)),</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        _name(offset,serialize::validate_xml_label(_name)),</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        _value(offset,_value){}</div>
@@ -180,7 +180,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> _attrs[];</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>(<span class="keywordtype">void</span>* offset, <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>* _parent, std::string_view _ns, std::string_view _name):</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>* _parent, std::string_view _ns, std::string_view _name):</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        _ns(offset,serialize::validate_xml_label(_ns)),</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        _name(offset,serialize::validate_xml_label(_name))</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    {</div>
@@ -319,7 +319,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(<span class="keywordtype">void</span>* offset, std::string_view value):_value(offset,value){}</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):_value(offset,value){}</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
@@ -351,7 +351,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
 <div class="foldopen" id="foldopen00269" data-start="{" data-end="};">
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1comment__t.html">  269</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1comment__t.html">comment_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>&lt;comment_t&gt;{</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1comment__t.html">comment_t</a>(<span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1comment__t.html">comment_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::COMMENT;};</div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <span class="keyword">inline</span> std::string path_h()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> std::format(<span class="stringliteral">&quot;#comment&quot;</span>); }</div>
@@ -365,7 +365,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
 <div class="foldopen" id="foldopen00281" data-start="{" data-end="};">
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1cdata__t.html">  281</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1cdata__t.html">cdata_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>&lt;cdata_t&gt;{</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1cdata__t.html">cdata_t</a>(<span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1cdata__t.html">cdata_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::CDATA;};</div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keyword">inline</span> std::string path_h()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> std::format(<span class="stringliteral">&quot;#cdata&quot;</span>); }</div>
@@ -379,7 +379,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
 <div class="foldopen" id="foldopen00293" data-start="{" data-end="};">
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1text__t.html">  293</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1text__t.html">text_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>&lt;text_t&gt;{</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1text__t.html">text_t</a>(<span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1text__t.html">text_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::TEXT;};</div>
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="keyword">inline</span> std::string path_h()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> std::format(<span class="stringliteral">&quot;#text&quot;</span>); }</div>
@@ -393,7 +393,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
 <div class="foldopen" id="foldopen00305" data-start="{" data-end="};">
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1proc__t.html">  305</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1proc__t.html">proc_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>&lt;proc_t&gt;{</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1proc__t.html">proc_t</a>(<span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1proc__t.html">proc_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::PROC;};</div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="keyword">inline</span> std::string path_h()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> std::format(<span class="stringliteral">&quot;#proc&quot;</span>); }</div>
@@ -407,7 +407,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
 <div class="foldopen" id="foldopen00317" data-start="{" data-end="};">
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1marker__t.html">  317</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1marker__t.html">marker_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>&lt;marker_t&gt;{</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1marker__t.html">marker_t</a>(<span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1marker__t.html">marker_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::MARKER;};</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keyword">inline</span> std::string path_h()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> std::format(<span class="stringliteral">&quot;#leaf&quot;</span>); }</div>
@@ -602,7 +602,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>}</div>
 <div class="ttc" id="aconceptVS__XML__NS_1_1thing__i_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1thing__i.html">VS_XML_NS::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:121</div></div>
 <div class="ttc" id="aserializer_8hpp_html"><div class="ttname"><a href="serializer_8hpp.html">serializer.hpp</a></div><div class="ttdoc">Implementation of serialization/deserialization helpers.</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a></div><div class="ttdef"><b>Definition</b> builder.hpp:134</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a></div><div class="ttdef"><b>Definition</b> builder.hpp:164</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1attr__iterator_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__iterator.html">VS_XML_NS::attr_iterator</a></div><div class="ttdef"><b>Definition</b> impl.hpp:425</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__t.html">VS_XML_NS::attr_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:72</div></div>
