@@ -37,16 +37,7 @@ public:
         if (!consume('<'))
             throw std::runtime_error("Expected '<' at beginning of XML document.");
             
-        parseElement();
-    }
-
-    void parse_document() {
-        skip_whitespace();
-        // Expecting the first tag to begin with '<'
-        if (!consume('<'))
-            throw std::runtime_error("Expected '<' at beginning of XML document.");
-            
-        parseElement<true>();
+        parseElement<Builder_t::is_document>();
     }
 
 private:

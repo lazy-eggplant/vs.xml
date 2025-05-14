@@ -173,6 +173,8 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
 
     public:
         constexpr static inline builder_config_t configs = cfg;
+        constexpr static inline bool is_document = false;
+
         using details::BuilderImpl<cfg.symbols>::rsv;
         using error_t = details::BuilderBase::error_t;
 

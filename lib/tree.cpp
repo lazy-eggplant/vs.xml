@@ -149,7 +149,8 @@ bool TreeRaw::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t
         //Skip, marker points are not XML, they are only internally used.
         //or emit something in a special namespace? not sure
     }
-    return false;
+    else{return false;}
+    return true;
 };
 
 const TreeRaw TreeRaw::slice(const element_t* ref) const{

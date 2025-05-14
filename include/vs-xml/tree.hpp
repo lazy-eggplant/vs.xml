@@ -126,7 +126,7 @@ struct TreeRaw{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
     }
 
-    private:
+    protected:
 
     /**
      * @brief Construct a new Tree object, with the list of strings being external. Make sure its lifetime contains the one of the Tree.
@@ -168,6 +168,8 @@ struct TreeRaw{
     template<builder_config_t>
     friend struct TreeBuilder;
     friend struct details::BuilderBase;
+
+
 };
 
 
