@@ -62,9 +62,9 @@ struct sv{
 struct __attribute__ ((packed)) builder_config_t{
     enum symbols_t: uint8_t{
         EXTERN_ABS,                         //It was `false` in the previous flag. Cannot be saved as binary.
-        EXTERN_REL,                         //Not yet implemented. Can be saved as binary, but it requires the tree to bind a symbols table later.
-        OWNED,                              //Not yet implemented. No compression of symbols, but they are owned.
-        COMPRESS_LABELS,                    //Not yet implemented. Only compressing symbols which are used for tag and prop labels.
+        EXTERN_REL,                         //Can be saved as binary, but it requires the tree to bind a symbols table later.
+        OWNED,                              //No compression of symbols, but they are owned.
+        COMPRESS_LABELS,                    //Only compressing symbols which are used for tag and prop labels.
         COMPRESS_ALL                        //It was `true` in the previous flag. Compress all symbols.
     } symbols : 3 = EXTERN_ABS;
     bool raw_strings :1  = false;           //If true, the string views being passed will not be de-escaped. XML serialization of the derived tree will have to escape them if they have been de-escaped.

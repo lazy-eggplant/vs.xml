@@ -17,6 +17,7 @@
 #include <expected>
 #include <functional>
 
+
 #include <unordered_set>
 #include <vector>
 #include <stack>
@@ -108,6 +109,7 @@ struct BuilderImpl<builder_config_t::symbols_t::OWNED>: BuilderBase{
     protected:    
         std::vector<uint8_t> symbols_i;
         sv symbol(std::string_view s);
+        inline sv symbol_2(std::string_view s){return symbol(s);}
 
     public:   
         inline BuilderImpl():BuilderBase(){
@@ -120,6 +122,7 @@ struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>: BuilderImpl<build
     protected:
         std::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx_symbols;
         sv symbol(std::string_view s);
+        inline sv symbol_2(std::string_view s){return symbol(s);}
 
     public:
         inline BuilderImpl():idx_symbols(64,
@@ -133,7 +136,7 @@ struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>: BuilderImpl<build
 template <>
 struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_LABELS>: BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>{
     protected:
-        sv symbol(std::string_view s);
+        sv symbol_2(std::string_view s);
 };
 
 
@@ -142,6 +145,8 @@ struct BuilderImpl<builder_config_t::symbols_t::EXTERN_ABS> : BuilderBase{
     protected:
         inline std::string_view rsv(std::string_view s){return s;}
         inline std::string_view symbol(std::string_view s){return s;}
+        inline std::string_view symbol_2(std::string_view s){return s;}
+
 };
 
 template <>
@@ -150,12 +155,11 @@ struct BuilderImpl<builder_config_t::symbols_t::EXTERN_REL> : BuilderImpl<builde
         //TODO: Add checks?
         inline std::string_view rsv(sv s){return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);}
         inline sv symbol(std::string_view s){return sv(symbols.data(),s);}
+        inline sv symbol_2(std::string_view s){return sv(symbols.data(),s);}
 
         inline BuilderImpl(std::string_view src){
             this->symbols = src;
         }
-
-        BuilderImpl() = delete;
 };
 
 }
@@ -163,15 +167,19 @@ struct BuilderImpl<builder_config_t::symbols_t::EXTERN_REL> : BuilderImpl<builde
 template<builder_config_t cfg = {}>
 struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
     protected:
-        using details::BuilderImpl<cfg.symbols>::symbol;
-
-        //TODO: not sure if this is needed any longer
-        /*inline std::expected<Tree,error_t> close(std::vector<uint8_t>&& symbols){
-            details::BuilderImpl<cfg.compress_symbols>::close();
-            return Tree(Tree(config,std::move(this->buffer),std::move(symbols)));
-        }*/
+        using details::BuilderImpl<cfg.symbols>::symbol;        //Used for those which should be compressed if possible.
+        using details::BuilderImpl<cfg.symbols>::symbol_2;      //Used by those which are not so easy to compress, so they can be more favourably skipped.
 
     public:
+        TreeBuilder(std::string_view src){
+            static_assert(cfg.symbols==builder_config_t::EXTERN_REL, "Only EXTERN_REL builders can pass the source symbol table");
+            this->symbols=src;
+        }
+
+        TreeBuilder():details::BuilderImpl<cfg.symbols>(){
+            static_assert(cfg.symbols!=builder_config_t::EXTERN_REL, "EXTERN_REL cannot build without a source symbol table");
+        }
+
         constexpr static inline builder_config_t configs = cfg;
         constexpr static inline bool is_document = false;
 
@@ -188,26 +196,26 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
             return details::BuilderBase::end();
         }
         inline error_t attr(std::string_view name, std::string_view value, std::string_view ns=""){
-            auto a =symbol(name), b = symbol(value), c = symbol(ns);
+            auto a =symbol(name), b = symbol_2(value), c = symbol(ns);
             return details::BuilderBase::attr(rsv(a),rsv(b),rsv(c));
         }
 
         inline error_t text(std::string_view value){
-            return details::BuilderBase::text(rsv( symbol(value)));
+            return details::BuilderBase::text(rsv( symbol_2(value)));
         }
         inline error_t comment(std::string_view value){
             if constexpr(!cfg.allow_comments)return error_t::SKIP;
-            else return details::BuilderBase::comment(rsv( symbol(value)));
+            return details::BuilderBase::comment(rsv( symbol_2(value)));
         }
         inline error_t cdata(std::string_view value){
-            return details::BuilderBase::cdata(rsv( symbol(value)));
+            return details::BuilderBase::cdata(rsv( symbol_2(value)));
         }
         inline error_t proc(std::string_view value){
             if constexpr(!cfg.allow_procs)return error_t::SKIP;
-            else return details::BuilderBase::proc(rsv( symbol(value)));
+            return details::BuilderBase::proc(rsv( symbol_2(value)));
         }
         inline error_t marker(std::string_view value){
-            return details::BuilderBase::marker(rsv( symbol(value)));
+            return details::BuilderBase::marker(rsv( symbol_2(value)));
         }
 
         inline std::expected<Tree,error_t> close(){

@@ -1,3 +1,4 @@
+#include "vs-xml/tree.hpp"
 #include <vs-xml/commons.hpp>
 #include <vs-xml/builder.hpp>
 #include <vs-xml/impl.hpp>
@@ -132,6 +133,18 @@ sv BuilderImpl<builder_config_t::symbols_t::OWNED>::symbol(std::string_view s){
     sv ret(symbols_i.size()-s.length(),s.length());
     return ret;
 }
+
+
+sv BuilderImpl<builder_config_t::symbols_t::COMPRESS_LABELS>::symbol_2(std::string_view s){
+    if(s.length()==0)return {0,0};
+
+    symbols_i.insert(symbols_i.end(),s.begin(),s.end());
+    symbols={(const char*)symbols_i.data(),(const char*)symbols_i.data()+symbols_i.size()};    //Keeep this updated so that when sv are used they are always relative.
+
+    sv ret(symbols_i.size()-s.length(),s.length());
+    return ret;
+}
+
 
 //TODO: Add symbol2 for COMPRESS_ALL which does not compress it.
 
