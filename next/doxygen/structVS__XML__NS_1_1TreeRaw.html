@@ -77,6 +77,7 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="structVS__XML__NS_1_1TreeRaw-members.html">List of all members</a>  </div>
@@ -93,8 +94,8 @@ Inheritance diagram for VS_XML_NS::TreeRaw:</div>
 <area shape="poly" title=" " alt="" coords="178,41,124,81,121,76,175,37"/>
 <area shape="rect" href="structVS__XML__NS_1_1Tree.html" title=" " alt="" coords="233,79,367,104"/>
 <area shape="poly" title=" " alt="" coords="231,37,286,76,283,81,228,41"/>
-<area shape="rect" href="structVS__XML__NS_1_1Document.html" title=" " alt="" coords="213,152,387,177"/>
-<area shape="poly" title=" " alt="" coords="303,118,303,152,297,152,297,118"/>
+<area shape="rect" href="structVS__XML__NS_1_1Document.html" title=" " alt="" coords="19,152,194,177"/>
+<area shape="poly" title=" " alt="" coords="109,118,109,152,104,152,104,118"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -158,6 +159,29 @@ static <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>&#160;<
 <tr class="memitem:a11585bbc77e9a896a33e6575f1c78f74" id="r_a11585bbc77e9a896a33e6575f1c78f74"><td class="memItemLeft" align="right" valign="top"><a id="a11585bbc77e9a896a33e6575f1c78f74" name="a11585bbc77e9a896a33e6575f1c78f74"></a>
 static const <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_binary</b> (std::string_view region)</td></tr>
 <tr class="separator:a11585bbc77e9a896a33e6575f1c78f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a3ce6b6e083d9256d38d3f5b8d483c0ac" id="r_a3ce6b6e083d9256d38d3f5b8d483c0ac"><td class="memItemLeft" align="right" valign="top"><a id="a3ce6b6e083d9256d38d3f5b8d483c0ac" name="a3ce6b6e083d9256d38d3f5b8d483c0ac"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>TreeRaw</b> (const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, const void *label_offset=nullptr)</td></tr>
+<tr class="memdesc:a3ce6b6e083d9256d38d3f5b8d483c0ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a> object, with the list of strings being external. Make sure its lifetime contains the one of the <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>. <br /></td></tr>
+<tr class="separator:a3ce6b6e083d9256d38d3f5b8d483c0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e685554e5aeb819dd403bb774a50d4a" id="r_a3e685554e5aeb819dd403bb774a50d4a"><td class="memItemLeft" align="right" valign="top"><a id="a3e685554e5aeb819dd403bb774a50d4a" name="a3e685554e5aeb819dd403bb774a50d4a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>TreeRaw</b> (const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, std::vector&lt; uint8_t &gt; &amp;&amp;sym)</td></tr>
+<tr class="memdesc:a3e685554e5aeb819dd403bb774a50d4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a> object, owning its own table of strings. <br /></td></tr>
+<tr class="separator:a3e685554e5aeb819dd403bb774a50d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ca23b7ea706cbb6e8064ed70f711a46" id="r_a9ca23b7ea706cbb6e8064ed70f711a46"><td class="memItemLeft" align="right" valign="top"><a id="a9ca23b7ea706cbb6e8064ed70f711a46" name="a9ca23b7ea706cbb6e8064ed70f711a46"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>TreeRaw</b> (const builder_config_t &amp;cfg, std::span&lt; uint8_t &gt; src, std::span&lt; uint8_t &gt; sym)</td></tr>
+<tr class="separator:a9ca23b7ea706cbb6e8064ed70f711a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20179fe411af2f7c6c9dab2dec805459" id="r_a20179fe411af2f7c6c9dab2dec805459"><td class="memItemLeft" align="right" valign="top"><a id="a20179fe411af2f7c6c9dab2dec805459" name="a20179fe411af2f7c6c9dab2dec805459"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>TreeRaw</b> (const builder_config_t &amp;cfg, std::string_view src, std::string_view sym)</td></tr>
+<tr class="separator:a20179fe411af2f7c6c9dab2dec805459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd08ea935ee2a5c2d16bf10e0e312cfc" id="r_abd08ea935ee2a5c2d16bf10e0e312cfc"><td class="memItemLeft" align="right" valign="top"><a id="abd08ea935ee2a5c2d16bf10e0e312cfc" name="abd08ea935ee2a5c2d16bf10e0e312cfc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>print_h</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *ptr=nullptr) const</td></tr>
+<tr class="separator:abd08ea935ee2a5c2d16bf10e0e312cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a382d5590502c3135e6ad9f9e77fed8de" id="r_a382d5590502c3135e6ad9f9e77fed8de"><td class="memItemLeft" align="right" valign="top"><a id="a382d5590502c3135e6ad9f9e77fed8de" name="a382d5590502c3135e6ad9f9e77fed8de"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>reorder_h</b> (const std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;)&gt; &amp;fn, const <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> *ref, bool recursive=true)</td></tr>
+<tr class="separator:a382d5590502c3135e6ad9f9e77fed8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>

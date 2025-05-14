@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['treeraw_0',['treeraw',['../structVS__XML__NS_1_1TreeRaw.html#a3ce6b6e083d9256d38d3f5b8d483c0ac',1,'VS_XML_NS::TreeRaw::TreeRaw(const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, const void *label_offset=nullptr)'],['../structVS__XML__NS_1_1TreeRaw.html#a3e685554e5aeb819dd403bb774a50d4a',1,'VS_XML_NS::TreeRaw::TreeRaw(const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, std::vector&lt; uint8_t &gt; &amp;&amp;sym)'],['../structVS__XML__NS_1_1DocumentRaw.html#a3ce6b6e083d9256d38d3f5b8d483c0ac',1,'VS_XML_NS::DocumentRaw::TreeRaw(const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, const void *label_offset=nullptr)'],['../structVS__XML__NS_1_1DocumentRaw.html#a3e685554e5aeb819dd403bb774a50d4a',1,'VS_XML_NS::DocumentRaw::TreeRaw(const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, std::vector&lt; uint8_t &gt; &amp;&amp;sym)']]]
+];
