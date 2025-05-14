@@ -1,5 +1,5 @@
-<map id="VS_XML_NS::details::BuilderImpl&lt; compressed &gt;" name="VS_XML_NS::details::BuilderImpl&lt; compressed &gt;">
-<area shape="rect" id="Node000001" title="Helper class to build an XML tree via commands." alt="" coords="5,93,220,133"/>
-<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="37,5,188,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,59,115,93,110,93,110,59"/>
+<map id="VS_XML_NS::details::BuilderImpl&lt; COMPRESSION &gt;" name="VS_XML_NS::details::BuilderImpl&lt; COMPRESSION &gt;">
+<area shape="rect" id="Node000001" title="Helper class to build an XML tree via commands." alt="" coords="5,93,236,133"/>
+<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="45,5,196,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,59,123,93,118,93,118,59"/>
 </map>
