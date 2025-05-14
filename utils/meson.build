@@ -5,7 +5,8 @@ executable(
     'encode.cpp',
     install: true,
     dependencies: [
-        vs_xml_dep
+        vs_xml_dep,
+        mio_dep,
     ],
 )
 
@@ -14,6 +15,7 @@ executable(
     'encode.cpp',
     install: true,
     dependencies: [
-        vs_xml_dep
+        vs_xml_dep,
+        mio_dep,
     ],
 )

@@ -32,12 +32,22 @@ public:
     // Start parsing from the beginning of the XML document.
     // Throws an exception on error.
     void parse() {
-        skip_whitespace();
-        // Expecting the first tag to begin with '<'
-        if (!consume('<'))
-            throw std::runtime_error("Expected '<' at beginning of XML document.");
-            
-        parseElement<Builder_t::is_document>();
+        if constexpr(!Builder_t::is_document){
+            skip_whitespace();
+            // Expecting the first tag to begin with '<'
+            if (!consume('<'))
+                throw std::runtime_error("Expected '<' at beginning of XML document.");
+
+            parseElement<Builder_t::is_document>();
+        }
+        else while(pos_ < data_.size()){
+            skip_whitespace();
+            // Expecting the first tag to begin with '<'
+            if (!consume('<'))
+                throw std::runtime_error("Expected '<' at beginning of XML document.");
+
+            parseElement<Builder_t::is_document>();
+        }
     }
 
 private:
