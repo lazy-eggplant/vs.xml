@@ -449,7 +449,14 @@
 <ul>
 <li><code>allow_comments</code> if true allows comments to be appended in the tree, else they are silently skipped (but can still throw exceptions for validation)</li>
 <li><code>allow_procs</code> if true allows processing directives to be appended in the tree, else they are silently skipped (but can still throw exceptions for validation)</li>
-<li>&hellip;</li>
+<li><code>symbols</code>:<ul>
+<li><code>EXTERN_ABS</code> using full memory in absolute position; the generated tree cannot be saved as binary.</li>
+<li><code>EXTERN_REL</code> can be saved as binary, but it requires the tree to bind a symbol table later when constructed.</li>
+<li><code>OWNED</code> no compression of symbols, but they are owned.</li>
+<li><code>COMPRESS_LABELS</code> only compressing symbols which are used for tag and prop labels (and namespaces).</li>
+<li><code>COMPRESS_ALL</code> all symbols are compressed.</li>
+</ul>
+</li>
 <li><code>raw_strings</code> if true, strings are assumed to be kept as is when serialized or deserialized from XML. Make sure you manually escape those used in comparisons or to append further data.</li>
 </ul>
 
