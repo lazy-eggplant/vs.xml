@@ -1,4 +1,4 @@
-The `TreeBuilder` is parametrized by a configuration structure and initialized in ways which defines its behaviour and ownership of data.
+Builders are parametrized by a configuration structure and initialized in ways which defines its behaviour and ownership of data.
 
 ### Configuration fields
 

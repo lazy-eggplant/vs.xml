@@ -7,6 +7,7 @@ int main(){
     //These will later be expanded in nodes.
     std::string_view texts[] = {"Text 0", "Text 1", "Text 2"};
 
+    //Just a shorthand for the typical XML prefix. Use `bld.proc` to make a custom one.
     bld.xml();
     bld.comment("This is a comment!");
     bld.begin("root","s");

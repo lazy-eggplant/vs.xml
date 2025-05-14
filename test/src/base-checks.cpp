@@ -4,9 +4,9 @@
 #include <print>
 #include <iostream>
 
-int main(){
-    xml::TreeBuilder<{.symbols=xml::builder_config_t::OWNED}> build;
-    
+template<xml::builder_config_t cfg>
+auto mk_tree(){
+    xml::TreeBuilder<cfg> build;
     build.begin("hello");
         build.attr("op3-a", "v'>&al1");
         build.attr("op1-a", "val1", "w");
@@ -33,14 +33,20 @@ int main(){
         build.end();
     build.end();
 
-    auto tree = *build.close();
+    return build.close();
+}
+
+template<xml::builder_config_t cfg>
+auto test(){
+    auto tree = *mk_tree<cfg>();
     tree.print(std::cout,{});
-    std::print("\n");
+    std::print("\n---\n");
     tree.reorder();
     tree.print(std::cout,{});
-    std::print("\n");
+    std::print("\n---\n");
     xml::Tree wrp_tree(std::move(tree));
     wrp_tree.print(std::cout,{});
+    std::print("\n---\n");
 
     auto root = wrp_tree.root();
     for(auto& attr:root.attrs()){
@@ -52,5 +58,10 @@ int main(){
     }
 
     std::print("\n");
+}
+
+
+int main(){
+    test<{.symbols=xml::builder_config_t::OWNED}>();    
     return 0;
 }

@@ -2,7 +2,7 @@ mio_dep = dependency('mio')
 
 executable(
     'tree-building',
-    './src/tree-building.cpp',
+    './src/build-tree.cpp',
     install: false,
     dependencies: [
         vs_xml_dep
@@ -11,7 +11,7 @@ executable(
 
 executable(
     'document-building',
-    './src/document-building.cpp',
+    './src/build-doc.cpp',
     install: false,
     dependencies: [
         vs_xml_dep

@@ -22,6 +22,6 @@ The structure of the various nodes is based on the size of three data types:
 
 Except for a small header, the binary serialization of a tree is identical to its representation in memory.
 
-### Header format
+### Binary format
 
 TBW.
