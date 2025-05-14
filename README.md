@@ -101,6 +101,7 @@ This library is fully standalone (aside from the C/C++ standard libraries).
 However, examples, tests, optional utilities and benchmarks have some dependencies:
 - [mio](https://github.com/StrikerX3/mio) a simple way to handle memory mapped files, and pretty much the intended way to use `vs-xml` downstream.
 - [nanobench](https://github.com/martinus/nanobench) to perform benchmarks.
+- [pugixml](https://pugixml.org/) since it is the one I am testing against in benchmarks; these two libraries are very different in scope, so comparative benchmarks can only be marginal and not very useful.
 
 ## Licence
 

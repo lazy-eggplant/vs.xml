@@ -1,10 +1,9 @@
 #pragma once
 
-
 /**
  * @file parser.hpp
  * @author karurochari
- * @brief Implementation of the parse logic
+ * @brief Implementation of the parser logic
  * @date 2025-05-04
  * 
  * @copyright Copyright (c) 2025
@@ -13,15 +12,18 @@
 
 #include <span>
 #include <stdexcept>
+
 #include "commons.hpp"
 #include "serializer.hpp"
 
 namespace VS_XML_NS{
 
 
-//-----------------------------------------------------
-// XML Parser class
-//-----------------------------------------------------
+/**
+ * @brief Generic interface for the XML parser, responsible for filling in a builder
+ * 
+ * @tparam Builder_t the builder class on which this parser is being based.
+ */
 template<ProperBuilder Builder_t>
 class Parser {
 public:
@@ -264,7 +266,7 @@ private:
             }
         }
     }
-}; // end class XmlParser
+};
 
 
 }
