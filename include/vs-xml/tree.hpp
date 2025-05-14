@@ -131,7 +131,7 @@ struct TreeRaw{
     /**
      * @brief Construct a new Tree object, with the list of strings being external. Make sure its lifetime contains the one of the Tree.
      */
-    TreeRaw(const builder_config_t& cfg, std::vector<uint8_t>&& src, void* label_offset=nullptr):
+    TreeRaw(const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr):
         buffer_i(src),symbols_i({}),
         buffer(buffer_i),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent),
         configs(cfg){}

@@ -77,7 +77,7 @@ struct attr_t{
 
     public:
 
-    inline attr_t(void* offset, std::string_view _ns, std::string_view _name, std::string_view _value):
+    inline attr_t(const void* offset, std::string_view _ns, std::string_view _name, std::string_view _value):
         _ns(offset,serialize::validate_xml_label(_ns)),
         _name(offset,serialize::validate_xml_label(_name)),
         _value(offset,_value){}
@@ -102,7 +102,7 @@ struct element_t : base_t<element_t>{
 
     attr_t _attrs[];
 
-    inline element_t(void* offset, element_t* _parent, std::string_view _ns, std::string_view _name):
+    inline element_t(const void* offset, element_t* _parent, std::string_view _ns, std::string_view _name):
         _ns(offset,serialize::validate_xml_label(_ns)),
         _name(offset,serialize::validate_xml_label(_name))
     {
@@ -237,7 +237,7 @@ struct leaf_t : base_t<T>{
 
     protected:
     
-    leaf_t(void* offset, std::string_view value):_value(offset,value){}
+    leaf_t(const void* offset, std::string_view value):_value(offset,value){}
 
     public:
 
@@ -267,7 +267,7 @@ struct leaf_t : base_t<T>{
 };
 
 struct comment_t : leaf_t<comment_t>{
-    comment_t(void* offset, std::string_view value):leaf_t(offset, value){}
+    comment_t(const void* offset, std::string_view value):leaf_t(offset, value){}
     static inline type_t deftype() {return type_t::COMMENT;};
 
     inline std::string path_h() const { return std::format("#comment"); }
@@ -279,7 +279,7 @@ struct comment_t : leaf_t<comment_t>{
 };
 
 struct cdata_t : leaf_t<cdata_t>{
-    cdata_t(void* offset, std::string_view value):leaf_t(offset, value){}
+    cdata_t(const void* offset, std::string_view value):leaf_t(offset, value){}
     static inline type_t deftype() {return type_t::CDATA;};
 
     inline std::string path_h() const { return std::format("#cdata"); }
@@ -291,7 +291,7 @@ struct cdata_t : leaf_t<cdata_t>{
 };
 
 struct text_t : leaf_t<text_t>{
-    text_t(void* offset, std::string_view value):leaf_t(offset, value){}
+    text_t(const void* offset, std::string_view value):leaf_t(offset, value){}
     static inline type_t deftype() {return type_t::TEXT;};
 
     inline std::string path_h() const { return std::format("#text"); }
@@ -303,7 +303,7 @@ struct text_t : leaf_t<text_t>{
 };
 
 struct proc_t : leaf_t<proc_t>{
-    proc_t(void* offset, std::string_view value):leaf_t(offset, value){}
+    proc_t(const void* offset, std::string_view value):leaf_t(offset, value){}
     static inline type_t deftype() {return type_t::PROC;};
 
     inline std::string path_h() const { return std::format("#proc"); }
@@ -315,7 +315,7 @@ struct proc_t : leaf_t<proc_t>{
 };
 
 struct marker_t : leaf_t<marker_t>{
-    marker_t(void* offset, std::string_view value):leaf_t(offset, value){}
+    marker_t(const void* offset, std::string_view value):leaf_t(offset, value){}
     static inline type_t deftype() {return type_t::MARKER;};
 
     inline std::string path_h() const { return std::format("#leaf"); }

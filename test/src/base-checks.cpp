@@ -5,7 +5,7 @@
 #include <iostream>
 
 int main(){
-    xml::TreeBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> build;
+    xml::TreeBuilder<{.symbols=xml::builder_config_t::OWNED}> build;
     
     build.begin("hello");
         build.attr("op3-a", "v'>&al1");
@@ -13,6 +13,7 @@ int main(){
         build.attr("op2-a", "val\"1");
         build.attr("op5-a", "val\"1");
         build.attr("op6-a", "val1", "w");
+        build.comment("01234567890123456789Banana <hello ciao=\"worldo\" &amp; &></world>"); 
         build.begin("hello1","s");
         build.end();
         build.begin("hello2","s");

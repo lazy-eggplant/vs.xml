@@ -51,9 +51,21 @@ namespace details{
             error_t leaf(std::string_view value);
     
         protected:
-            void* label_offset = nullptr;
+            std::string_view symbols;
             inline std::vector<uint8_t>&& get_buffer() {return std::move(buffer);}
         
+
+            /**
+            * @brief 
+            * NOTICE! The generated string_views have a very narrow lifetime. As symbols changes they are done.
+            * Do not let them survive beyon the next change to symbols!
+            * @param s 
+            * @return std::string_view 
+            */
+            inline std::string_view rsv(sv s){
+                return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
+            }
+
         public:
     
             BuilderBase();
@@ -86,46 +98,64 @@ struct BuilderImpl: protected BuilderBase{
     protected:
         using BuilderBase::close;
         using BuilderBase::get_buffer;
-    public:
-    using BuilderBase::inject;
 
+    public:
+        using BuilderBase::inject;
 };
 
 template <>
-struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>: protected BuilderBase{
-    protected:
-        std::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx_symbols;
-        std::vector<uint8_t> symbols;
-
-        /**
-        * @brief 
-        * NOTICE! The generated string_views have a very narrow lifetime. As symbols changes they are done.
-        * Do not let them survive beyon the next change to symbols!
-        * @param s 
-        * @return std::string_view 
-        */
-        inline std::string_view rsv(sv s){
-            return std::string_view(s.base+(char*)label_offset,s.base+(char*)label_offset+s.length);
-        }
-    
+struct BuilderImpl<builder_config_t::symbols_t::OWNED>: BuilderBase{
+    protected:    
+        std::vector<uint8_t> symbols_i;
         sv symbol(std::string_view s);
 
-        inline BuilderImpl():
-        BuilderBase(),idx_symbols(64,
-        [this](sv a){return std::hash<std::string_view>{}(rsv(a));},
-        [this](sv a, sv b){return rsv(a)==rsv(b);}),symbols(){
-            label_offset=symbols.data(); 
+    public:   
+        inline BuilderImpl():BuilderBase(){
+            symbols= std::string_view((char*)symbols.data(),(char*)symbols.data()+symbols.size()); 
         }
 };
 
 template <>
-struct BuilderImpl<builder_config_t::symbols_t::EXTERN_ABS> : protected BuilderBase{
-    inline std::string_view rsv(std::string_view s){return s;}
-    inline std::string_view symbol(std::string_view s){return s;}
+struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>: BuilderImpl<builder_config_t::symbols_t::OWNED>{
+    protected:
+        std::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx_symbols;
+        sv symbol(std::string_view s);
 
-    //inline std::string_view rsv(sv s){return std::string_view(s.base+(char*)label_offset,s.base+(char*)label_offset+s.length);}
-    //inline sv symbol(std::string_view s){return sv(label_offset,s);}
+    public:
+        inline BuilderImpl():idx_symbols(64,
+        [this](sv a){return std::hash<std::string_view>{}(rsv(a));},
+        [this](sv a, sv b){return rsv(a)==rsv(b);}){
+            symbols= std::string_view((char*)this->symbols_i.data(),(char*)symbols_i.data()+symbols_i.size()); 
+        }
+};
 
+
+template <>
+struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_LABELS>: BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>{
+    protected:
+        sv symbol(std::string_view s);
+};
+
+
+template <>
+struct BuilderImpl<builder_config_t::symbols_t::EXTERN_ABS> : BuilderBase{
+    protected:
+        inline std::string_view rsv(std::string_view s){return s;}
+        inline std::string_view symbol(std::string_view s){return s;}
+};
+
+template <>
+struct BuilderImpl<builder_config_t::symbols_t::EXTERN_REL> : BuilderImpl<builder_config_t::symbols_t::EXTERN_ABS> {
+    protected:
+        //TODO: Add checks?
+        inline std::string_view rsv(sv s){return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);}
+        inline sv symbol(std::string_view s){return sv(symbols.data(),s);}
+
+        inline BuilderImpl(std::string_view src){
+            this->symbols = src;
+        }
+
+        BuilderImpl() = delete;
 };
 
 }
@@ -184,14 +214,13 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||
                 cfg.symbols==builder_config_t::symbols_t::OWNED 
-            )return Tree(TreeRaw(configs,std::move(this->get_buffer()),std::move(this->symbols)));
-            else return Tree(Tree(configs,std::move(this->get_buffer()),this->label_offset));
+            )return Tree(TreeRaw(configs,std::move(this->get_buffer()),std::move(this->symbols_i)));
+            else return Tree(TreeRaw(configs,std::move(this->get_buffer()),this->symbols.data()));
         }
         
         using details::BuilderImpl<cfg.symbols>::close;
         using details::BuilderImpl<cfg.symbols>::inject;
 
 };
-
 
 }
