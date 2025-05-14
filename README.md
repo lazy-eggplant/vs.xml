@@ -17,9 +17,51 @@ Please, read the rest of this readme to know more about its objectives and drawb
 
 Non objectives:
 
-- Support for arbitrary editing operations. As pointed out before, this library is special-purpose.  
-  It is better for you to assume trees are immutable. They are not, and some interesting operations are allowed, but the memory layout dictates heavy restrictions to keep good performance on the rest.
+- Support for arbitrary editing operations. This library is special-purpose, so only a small number of mutable operations will be supported to keep the rest as fast as possible.
 - Extended XML entities, base64, DTD... none of that is needed for the intended target of this library.
+
+## Quick statup
+
+Just use it as any meson dependency by adding a wrap file to this repository.  
+Or installing it in your system first and using it as a system dependency.  
+
+You can easily build documents:
+```cpp
+#include <vs-xml/document.hpp>
+#include <iostream>
+using namespace xml;
+
+int main(){
+  DocBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
+  bld.xml();
+  bld.comment("This is a comment!");
+  bld.begin("root");
+      bld.attr("hello", "world");
+      //Children after the attribute block.
+      bld.text("This is some text! <escape> sequences will be handled.");
+      bld.cdata("This is some cdata! <escape> sequences will be handled.");
+  bld.end();
+```
+
+Serialize them:
+```cpp
+  auto document = *bld.close(); //Make sure to handle the return error if present in production code.
+  document->print(std::cout);
+```
+
+And access the tree structure:
+```cpp
+  for(auto& it: document.root().children()){
+    //... use the tree node in here.
+  }
+  return 0;
+}
+```
+
+And more, like reading and saving them from binary files (usually memory mapped).  
+Learn more by checking the [examples](./examples/src/).  
+Doxygen and the generated documentation can be found in the [github pages](https://lazy-eggplant.github.io/vs.xml/next/) of this project.
+
 
 ## Supported platforms
 
@@ -48,9 +90,9 @@ Annotating the tree, or even adding small patches on a huge tree can be quite ea
 
 Tree building is not heap-allocating each node individually, and strings are unescaped in place when parsing a source XML file, so there are no expensive memory allocation needed for that.
 
-## Documentation
+### But why?
 
-Doxygen and the generated documentation can be found in the [github pages](https://lazy-eggplant.github.io/vs.xml/next/) of this project.
+You can find a FAQ page with some questions being answered. For all the others just ask :). 
 
 
 ## External dependencies
@@ -67,7 +109,7 @@ All documentation is under CC4.0 Attribution Share-Alike.
 Examples are CC0, unless something else is specified, but this does not cover datasets for which you will have to individually check.
 
 [^1]: XML 1.0 is covered as a best-effort, but there will be small things where either the official XML standard or this implementation is going to be incompatible or a superset.  
-      For more information on compatibility, please check [here](./docs/features.md).
+      For more information on compatibility and supported features, please check [here](./docs/features.md) where they are being tracked.
 [^2]: Namespaces are supported in the sense that the namespace is split from the element or attribute name if present, but its handling, validation or whatever is left to the user.
 
 [^3]: However, using such patches would require a downstream implementation of wrapper classes.
