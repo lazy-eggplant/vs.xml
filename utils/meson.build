@@ -12,7 +12,7 @@ executable(
 
 executable(
     'vs-xml.decode',
-    'encode.cpp',
+    'decode.cpp',
     install: true,
     dependencies: [
         vs_xml_dep,

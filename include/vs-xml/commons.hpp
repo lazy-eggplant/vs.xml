@@ -77,6 +77,20 @@ struct __attribute__ ((packed)) builder_config_t{
     bool allow_procs :1  = true;            //If true, processing nodes are allowed. Else skip.
 };
 
+
+struct __attribute__ ((packed)) binary_header_t{
+    const char magic[4] = {'$','X','M','L'};
+    size_t offset_tree;
+    size_t offset_symbols;
+    size_t offset_end;
+    uint8_t format_major : 8;
+    uint8_t format_minor : 8;
+    builder_config_t configs;
+    uint8_t reserved_cfg [1];
+    //TODO: add fields for the type data size and endianess?
+};
+
+
 struct element_t;
 struct attr_t;
 struct text_t;

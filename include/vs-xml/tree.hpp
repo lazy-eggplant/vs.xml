@@ -27,16 +27,6 @@
 namespace VS_XML_NS{
 
 struct TreeRaw{
-    struct __attribute__ ((packed)) serialized_header_t{
-        const char magic[4] = {'$','X','M','L'};
-        uint8_t format_major : 8;
-        uint8_t format_minor : 8;
-        builder_config_t configs;
-        uint8_t reserved_cfg [1];
-        size_t offset_symbols;
-        size_t offset_end;
-    };
-
     protected:
         std::vector<uint8_t> buffer_i;
         std::vector<uint8_t> symbols_i;

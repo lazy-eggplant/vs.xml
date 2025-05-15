@@ -186,8 +186,6 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
         using details::BuilderImpl<cfg.symbols>::rsv;
         using error_t = details::BuilderBase::error_t;
 
-        //inline Builder():details::BuilderImpl<cfg.compress_symbols>(){}
-
         inline error_t begin(std::string_view name, std::string_view ns=""){
             auto a =symbol(name), b = symbol(ns);
             return details::BuilderBase::begin(rsv(a),rsv(b));
@@ -228,6 +226,15 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
             else return Tree(TreeRaw(configs,std::move(this->get_buffer()),this->symbols.data()));
         }
         
+        /**
+         * @brief Reserves space for the buffer to avoid many of the initial small allocations.
+         * 
+         * @param bytes 
+         */
+        inline void reserve(size_t bytes){
+            this->buffer.reserve(bytes);
+        }
+
         using details::BuilderImpl<cfg.symbols>::close;
         using details::BuilderImpl<cfg.symbols>::inject;
 

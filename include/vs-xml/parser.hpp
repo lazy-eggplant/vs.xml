@@ -31,6 +31,12 @@ public:
         : data_(data.data(),data.size()), pos_(0), builder_(builder)
     {}
 
+    Parser(std::string_view data, Builder_t &builder)
+        : data_(data.data(),data.size()), pos_(0), builder_(builder)
+    {
+        static_assert(Builder_t::configs.raw_strings, "Cannot pass immutable buffer if the input strings might need mutation");
+    }
+
     // Start parsing from the beginning of the XML document.
     // Throws an exception on error.
     void parse() {

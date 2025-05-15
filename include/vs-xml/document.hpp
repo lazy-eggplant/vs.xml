@@ -32,8 +32,16 @@ struct DocumentRaw : TreeRaw {
         return true;
     }
 
+    static inline DocumentRaw from_binary(std::span<uint8_t> region){return DocumentRaw(TreeRaw::from_binary(region));}
+    static inline const DocumentRaw from_binary(std::string_view region){return DocumentRaw(TreeRaw::from_binary(region));}
+
     template<builder_config_t cfg>
     friend struct DocBuilder;
+
+    protected:
+        DocumentRaw(TreeRaw&& src):TreeRaw(src){}
+        DocumentRaw(const TreeRaw&& src):TreeRaw(src){}
+
 };
 
 struct Document : DocumentRaw {

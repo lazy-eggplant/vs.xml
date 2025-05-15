@@ -189,15 +189,18 @@ TreeRaw TreeRaw::clone(const element_t* ref, bool reduce) const{
 
 
 bool TreeRaw::save_binary(std::ostream& out)const{
-    //Symbols not relocatable.
-    if(symbols.data()==nullptr)return false;
+    if(configs.symbols==builder_config_t::EXTERN_ABS)return false; //Symbols not relocatable.
 
-    serialized_header_t header;
+    binary_header_t header;
     header.format_major = format_major;
-    header.format_major = format_minor;
+    header.format_minor = format_minor;
     header.configs = configs;
-    header.offset_symbols = buffer.size_bytes();
-    header.offset_end = buffer.size_bytes()+symbols.size_bytes();
+    if(header.configs.symbols==builder_config_t::EXTERN_REL)header.configs.symbols=builder_config_t::OWNED; //Symbols are copied even if the where shared, so they are now owned.
+
+    header.offset_tree = sizeof(binary_header_t);
+    header.offset_symbols = sizeof(binary_header_t)+buffer.size_bytes();
+    header.offset_end = sizeof(binary_header_t)+buffer.size_bytes()+symbols.size_bytes();
+
     out.write((const char*) &header, sizeof(header));
     out.write((const char*)buffer.data(), buffer.size_bytes());
     out.write((const char*)symbols.data(), symbols.size_bytes());
@@ -205,37 +208,26 @@ bool TreeRaw::save_binary(std::ostream& out)const{
     return true;
 }
 
-//TODO: check if there are more checks between the const and mutable versions based on the configuration bits
 TreeRaw TreeRaw::from_binary(std::span<uint8_t> region){
-    xml_assert(region.size_bytes()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
-    TreeRaw::serialized_header_t header;
-    memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
+    xml_assert(region.size_bytes()>sizeof(binary_header_t),"Header of loaded file not matching minimum size");
+    binary_header_t header;
+    memcpy((void*)&header,region.data(),sizeof(binary_header_t));
+    
     xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
-    xml_assert(header.format_major==format_major,"This binary was generated in an older version no longer compatible");
-    xml_assert(header.format_minor<format_minor,"This binary was generated in an older version no longer compatible");
-    xml_assert(region.size_bytes()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
+    xml_assert(header.format_major==format_major,"This binary was generated in a different major revision of the format.");
+    xml_assert(header.format_minor<=format_minor,"This binary was generated in a minor released after this build.");
+    xml_assert(region.size_bytes()>=header.offset_end, "Truncated span for the loaded file");
+    xml_assert(header.offset_tree<=header.offset_symbols, "Tree for loaded file is out of bounds");
     xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
 
     return TreeRaw(header.configs,
-        std::span<uint8_t>{region.data()+sizeof(header), region.data()+sizeof(header)+header.offset_symbols},
-        std::span<uint8_t>{region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end}
+        std::span<uint8_t>{region.data()+header.offset_tree, region.data()+header.offset_symbols},
+        std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.offset_end}
     );
 }
 
 const TreeRaw TreeRaw::from_binary(std::string_view region){
-    xml_assert(region.size()>sizeof(serialized_header_t),"Header of loaded file not matching minimum size");
-    TreeRaw::serialized_header_t header;
-    memcpy((void*)&header,region.data(),sizeof(serialized_header_t));
-    xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
-    xml_assert(header.format_major==format_major,"This binary was generated in an older version no longer compatible");
-    xml_assert(header.format_minor<format_minor,"This binary was generated in an older version no longer compatible");
-    xml_assert(region.size()>=sizeof(serialized_header_t)+header.offset_end, "Truncated span for the loaded file");
-    xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
-
-    return TreeRaw(header.configs,
-        std::string_view{region.data()+sizeof(header), region.data()+sizeof(header)+header.offset_symbols},
-        std::string_view{region.data()+sizeof(header)+header.offset_symbols, region.data()+sizeof(header)+header.offset_end}
-    );
+    return from_binary(std::span<uint8_t>{(uint8_t*)region.begin(),(uint8_t*)region.end()});
 }
 
 wrp::base_t<element_t> Tree::root() const{return {*this, &TreeRaw::root()};}

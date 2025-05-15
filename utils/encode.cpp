@@ -1,10 +1,10 @@
-#include "vs-xml/commons.hpp"
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <ostream>
 #include <print>
 
+#include <vs-xml/commons.hpp>
 #include <vs-xml/parser.hpp>
 #include <vs-xml/serializer.hpp>
 #include <vs-xml/document.hpp>
@@ -15,7 +15,7 @@ template<xml::builder_config_t cfg>
 int encode(std::filesystem::path input, std::filesystem::path output){
     try{
         mio::mmap_source mmap(input.c_str());
-        std::span<char> xmlInput((char*)mmap.data(),mmap.size());
+        std::string_view xmlInput(mmap.data(),mmap.size());
 
         xml::DocBuilder<cfg> bld;
         xml::Parser parser(xmlInput, bld);
@@ -31,7 +31,7 @@ int encode(std::filesystem::path input, std::filesystem::path output){
 
         std::ofstream file(output,std::ios::binary|std::ios::out);
         if(!file.is_open()){
-            std::cerr << "Error opening file" << tree.error() << "\n";
+            std::cerr << "Error opening file\n";
             return 4;
         }
 
