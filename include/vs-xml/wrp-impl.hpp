@@ -30,6 +30,8 @@ struct base_t{
         friend struct node_iterator;
         friend struct attr_iterator;
     public:
+    
+    base_t(const base_t& ) = default;
 
     inline explicit operator const T*() const  {return ptr;}
 
@@ -42,7 +44,7 @@ struct base_t{
     inline std::expected<std::pair<base_t<unknown_t>, base_t<unknown_t>>,feature_t> children_range() const{
         auto tmp = ptr->children_range();
         if(!tmp.has_value())return std::unexpected{tmp.error()};
-        else return std::pair{base_t<unknown_t>{*base,tmp->first}, base_t<unknown_t>{*base,tmp->second}};
+        else return std::pair{base_t<unknown_t>(*base,tmp->first), base_t<unknown_t>(*base,tmp->second)};
     }
     inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const{return ptr->attrs_range();}
 
@@ -68,7 +70,6 @@ struct base_t<attr_t>{
         base_t(const TreeRaw& base, const attr_t* ptr):base(&base),ptr(ptr){}
         base_t(base_t p, const attr_t* ptr):base(p.base),ptr(ptr){}
         base_t() = default;
-        base_t(const base_t&) = default;
 
         friend struct Tree;
         template <typename W>
@@ -77,6 +78,8 @@ struct base_t<attr_t>{
         friend struct wrp::node_iterator;
         friend struct wrp::attr_iterator;
     public:
+
+    base_t(const base_t&) = default;
 
     inline explicit operator const attr_t*() const  {return ptr;}
 
@@ -96,8 +99,8 @@ struct node_iterator{
     using reference         = base_t<unknown_t>;
 
     inline node_iterator(base_t<unknown_t> ptr) : m_ptr(ptr) {}
-    node_iterator() = default;
-    node_iterator(const node_iterator&) = default;
+    inline node_iterator() = default;
+    inline node_iterator(const node_iterator&) = default;
 
     inline const base_t<unknown_t>& operator*() const { return m_ptr; }
     inline base_t<unknown_t> operator->() { return m_ptr; }
@@ -125,10 +128,10 @@ struct attr_iterator{
     using reference         = base_t<attr_t>;
 
     inline attr_iterator(base_t<attr_t> ptr) : m_ptr(ptr) {}
-    attr_iterator() = default;
-    attr_iterator(const attr_iterator&) = default;
+    inline attr_iterator() = default;
+    inline attr_iterator(const attr_iterator&) = default;
 
-    inline const base_t<attr_t>& operator*() const { return m_ptr; }
+    inline base_t<attr_t> operator*() const { return m_ptr; }
     inline base_t<attr_t> operator->() { return m_ptr; }
 
     inline attr_iterator& operator++() { m_ptr.ptr++; return *this; }  
@@ -149,13 +152,13 @@ template <typename T>
 inline auto base_t<T>::attrs() const{
     struct self{
 
-        attr_iterator begin() const {return  base_t<attr_t>{*base.base, (*base.attrs_range()).first};}
-        attr_iterator end() const {return  base_t<attr_t>{*base.base, (*base.attrs_range()).second};}
+        attr_iterator begin() const {return  base_t<attr_t>{*base->base, (*base->attrs_range()).first};}
+        attr_iterator end() const {return  base_t<attr_t>{*base->base, (*base->attrs_range()).second};}
 
-        self(const base_t& b):base(b){}
+        self(const base_t& b):base(&b){}
 
         private:
-            const base_t& base;
+            const base_t* base;
     };
 
     return self(*this);
@@ -165,13 +168,13 @@ inline auto base_t<T>::attrs() const{
 template <typename T>
 inline auto base_t<T>::children() const{
     struct self{
-        node_iterator begin() const {return base_t<unknown_t>{*base.base, (const unknown_t*)(*base.children_range()).first};}
-        node_iterator end() const {return base_t<unknown_t>{*base.base, (const unknown_t*)(*base.children_range()).second};}
+        node_iterator begin() const {return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).first};}
+        node_iterator end() const {return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).second};}
 
-        self(const base_t& b):base(b){}
+        self(const base_t& b):base(&b){}
 
         private:
-            const base_t& base;
+            const base_t* base;
     };
 
     return self(*this);

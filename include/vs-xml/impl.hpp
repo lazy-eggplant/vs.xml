@@ -402,8 +402,9 @@ struct node_iterator{
     using reference         = const value_type&;
 
     inline node_iterator(pointer ptr) : m_ptr(ptr) {}
-    node_iterator() = default;
-    node_iterator(const node_iterator&) = default;
+    inline node_iterator(reference r) : m_ptr(&r) {}
+    inline node_iterator() = default;
+    inline node_iterator(const node_iterator&) = default;
 
     inline reference operator*() const { return *m_ptr; }
     inline pointer operator->() { return m_ptr; }
@@ -431,8 +432,9 @@ struct attr_iterator{
     using reference         = const value_type&;
 
     inline attr_iterator(pointer ptr) : m_ptr(ptr) {}
-    attr_iterator() = default;
-    attr_iterator(const attr_iterator&) = default;
+    inline attr_iterator(reference r) : m_ptr(&r) {}
+    inline attr_iterator() = default;
+    inline attr_iterator(const attr_iterator&) = default;
 
     inline reference operator*() const { return *m_ptr; }
     inline pointer operator->() { return m_ptr; }
@@ -457,13 +459,13 @@ template <typename T>
 inline auto base_t<T>::children() const{
 
     struct self{
-        node_iterator begin() const {return (*base.children_range()).first;}
-        node_iterator end() const {return (*base.children_range()).second;}
+        node_iterator begin() const {return (*base->children_range()).first;}
+        node_iterator end() const {return (*base->children_range()).second;}
 
-        self(const base_t& b):base(b){}
+        self(const base_t& b):base(&b){}
 
         private:
-            const base_t& base;
+            const base_t* base;
     };
 
     return self(*this);
@@ -473,13 +475,13 @@ template <typename T>
 inline auto base_t<T>::attrs() const{
 
     struct self{
-        attr_iterator begin() const {return (*base.attrs_range()).first;}
-        attr_iterator end() const {return (*base.attrs_range()).second;}
+        attr_iterator begin() const {return (*base->attrs_range()).first;}
+        attr_iterator end() const {return (*base->attrs_range()).second;}
 
-        self(const base_t& b):base(b){}
+        self(const base_t& b):base(&b){}
 
         private:
-            const base_t& base;
+            const base_t* base;
     };
 
     return self(*this);
@@ -490,13 +492,13 @@ template <typename T>
 inline auto base_t<T>::text() const{
 
     struct self{
-        text_iterator begin() const {return (*base.text_range()).first;}
-        text_iterator end() const {return (*base.text_range()).second;}
+        text_iterator begin() const {return (*base->text_range()).first;}
+        text_iterator end() const {return (*base->text_range()).second;}
 
-        self(const base_t& b):base(b){}
+        self(const base_t& b):base(&b){}
 
         private:
-            const base_t& base;
+            const base_t* base;
     };
 
     return self(*this);
