@@ -402,7 +402,8 @@ struct node_iterator{
     using reference         = const value_type&;
 
     inline node_iterator(pointer ptr) : m_ptr(ptr) {}
-
+    node_iterator() = default;
+    node_iterator(const node_iterator&) = default;
 
     inline reference operator*() const { return *m_ptr; }
     inline pointer operator->() { return m_ptr; }
@@ -430,7 +431,8 @@ struct attr_iterator{
     using reference         = const value_type&;
 
     inline attr_iterator(pointer ptr) : m_ptr(ptr) {}
-
+    attr_iterator() = default;
+    attr_iterator(const attr_iterator&) = default;
 
     inline reference operator*() const { return *m_ptr; }
     inline pointer operator->() { return m_ptr; }

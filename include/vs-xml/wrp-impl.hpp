@@ -16,11 +16,12 @@ struct attr_iterator;
 template <typename T>
 struct base_t{
     private:
-        const TreeRaw& base;
+        const TreeRaw* base;
         const T*       ptr;
     
-        base_t(const TreeRaw& base, const T* ptr):base(base),ptr(ptr){}
+        base_t(const TreeRaw& base, const T* ptr):base(&base),ptr(ptr){}
         base_t(base_t p, const T* ptr):base(p.base),ptr(ptr){}
+        base_t() = default;
 
         friend struct VS_XML_NS::Tree;
         template <typename W>
@@ -34,14 +35,14 @@ struct base_t{
 
     delta_ptr_t portable() const;
 
-    inline std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
-    inline std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
-    inline std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
+    inline std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
+    inline std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
+    inline std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
 
     inline std::expected<std::pair<base_t<unknown_t>, base_t<unknown_t>>,feature_t> children_range() const{
         auto tmp = ptr->children_range();
         if(!tmp.has_value())return std::unexpected{tmp.error()};
-        else return std::pair{base_t<unknown_t>{base,tmp->first}, base_t<unknown_t>{base,tmp->second}};
+        else return std::pair{base_t<unknown_t>{*base,tmp->first}, base_t<unknown_t>{*base,tmp->second}};
     }
     inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const{return ptr->attrs_range();}
 
@@ -61,11 +62,13 @@ struct base_t{
 template <>
 struct base_t<attr_t>{
     private:
-        const TreeRaw& base;
+        const TreeRaw* base;
         const attr_t*  ptr;
     
-        base_t(const TreeRaw& base, const attr_t* ptr):base(base),ptr(ptr){}
+        base_t(const TreeRaw& base, const attr_t* ptr):base(&base),ptr(ptr){}
         base_t(base_t p, const attr_t* ptr):base(p.base),ptr(ptr){}
+        base_t() = default;
+        base_t(const base_t&) = default;
 
         friend struct Tree;
         template <typename W>
@@ -79,9 +82,9 @@ struct base_t<attr_t>{
 
     delta_ptr_t portable() const;
 
-    inline std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
-    inline std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
-    inline std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base.rsv(*tmp);}
+    inline std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
+    inline std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
+    inline std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
 };
 
 
@@ -93,6 +96,8 @@ struct node_iterator{
     using reference         = base_t<unknown_t>;
 
     inline node_iterator(base_t<unknown_t> ptr) : m_ptr(ptr) {}
+    node_iterator() = default;
+    node_iterator(const node_iterator&) = default;
 
     inline const base_t<unknown_t>& operator*() const { return m_ptr; }
     inline base_t<unknown_t> operator->() { return m_ptr; }
@@ -120,7 +125,8 @@ struct attr_iterator{
     using reference         = base_t<attr_t>;
 
     inline attr_iterator(base_t<attr_t> ptr) : m_ptr(ptr) {}
-
+    attr_iterator() = default;
+    attr_iterator(const attr_iterator&) = default;
 
     inline const base_t<attr_t>& operator*() const { return m_ptr; }
     inline base_t<attr_t> operator->() { return m_ptr; }
@@ -142,8 +148,9 @@ struct attr_iterator{
 template <typename T>
 inline auto base_t<T>::attrs() const{
     struct self{
-        attr_iterator begin() const {return  base_t<attr_t>{base.base, (*base.attrs_range()).first};}
-        attr_iterator end() const {return  base_t<attr_t>{base.base, (*base.attrs_range()).second};}
+
+        attr_iterator begin() const {return  base_t<attr_t>{*base.base, (*base.attrs_range()).first};}
+        attr_iterator end() const {return  base_t<attr_t>{*base.base, (*base.attrs_range()).second};}
 
         self(const base_t& b):base(b){}
 
@@ -153,12 +160,13 @@ inline auto base_t<T>::attrs() const{
 
     return self(*this);
 }
+
 
 template <typename T>
 inline auto base_t<T>::children() const{
     struct self{
-        node_iterator begin() const {return base_t<unknown_t>{base.base, (const unknown_t*)(*base.children_range()).first};}
-        node_iterator end() const {return base_t<unknown_t>{base.base, (const unknown_t*)(*base.children_range()).second};}
+        node_iterator begin() const {return base_t<unknown_t>{*base.base, (const unknown_t*)(*base.children_range()).first};}
+        node_iterator end() const {return base_t<unknown_t>{*base.base, (const unknown_t*)(*base.children_range()).second};}
 
         self(const base_t& b):base(b){}
 
@@ -170,5 +178,6 @@ inline auto base_t<T>::children() const{
 }
 
 }
+
 
 }

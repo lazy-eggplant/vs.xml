@@ -1,4 +1,6 @@
 #include "vs-xml/commons.hpp"
+#include "vs-xml/impl.hpp"
+#include <ranges>
 #include <vs-xml/builder.hpp>
 
 #include <print>
@@ -36,6 +38,37 @@ auto mk_tree(){
     return build.close();
 }
 
+/*
+struct it_test {
+    using iterator_category = std::bidirectional_iterator_tag;
+    using difference_type   = std::ptrdiff_t;
+    using value_type        = int;           // Use int since we dereference to a value.
+    using pointer           = const int*;
+    using reference         = const int&;
+
+    it_test() = default;
+    it_test(int idx)  {}    //This is what is missing somehow.
+
+    inline reference operator*() const {return {};}
+    inline pointer operator->() const {return {};}
+
+    inline it_test& operator++() {return *this;}
+    inline it_test operator++(int) {return {};}
+
+    inline it_test& operator--() {return *this;}
+    inline it_test operator--(int) {return {};}
+
+    friend bool operator==(const it_test& a, const it_test& b) {return false;}
+    friend bool operator!=(const it_test& a, const it_test& b) {return false;}
+};
+
+struct container_test : public std::ranges::view_interface<container_test> {
+    it_test begin() const { return {}; }
+    it_test end() const { return {}; }
+};
+*/
+
+
 template<xml::builder_config_t cfg>
 auto test(){
     auto tree = *mk_tree<cfg>();
@@ -57,6 +90,19 @@ auto test(){
         std::print("{}\n",element.name().value_or("--"));
     }
 
+    auto root2 = wrp_tree.downgrade().root();
+
+
+    auto fn= [](const xml::attr_iterator& i){return true;};
+    
+    static_assert(std::bidirectional_iterator<xml::attr_iterator>);
+
+/*
+    for(auto& element: root.attrs() | std::views::filter([](auto){return true;})){
+        std::print("{}\n",element.name().value_or("--"));
+    }
+*/
+ 
     std::print("\n");
 }
 
