@@ -84,16 +84,52 @@ $(document).ready(function() { init_codefold(0); });
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;commons.hpp&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span>VS_XML_NS{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;ranges&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="namespaceVS__XML__NS_1_1filters.html">   21</a></span><span class="keyword">namespace </span>filters{</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="comment">//TODO</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>VS_XML_NS{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="}">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="namespaceVS__XML__NS_1_1filters.html">   23</a></span><span class="keyword">namespace </span>filters{</div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="namespaceVS__XML__NS_1_1filters.html#a413cb33b54f8c56e92554dd0f2d2512e">   30</a></span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="namespaceVS__XML__NS_1_1filters.html#a413cb33b54f8c56e92554dd0f2d2512e">ns</a>(std::string_view <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>){</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">return</span> std::views::filter([<a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>](<span class="keyword">auto</span>&amp; it){<span class="keywordflow">return</span> (it.ns().value_or(<span class="stringliteral">&quot;&quot;</span>) == <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>);});</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    } </div>
 </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="namespaceVS__XML__NS_1_1filters.html#a5c3624b13599fa9c38562d6a2e790693">   40</a></span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="namespaceVS__XML__NS_1_1filters.html#a5c3624b13599fa9c38562d6a2e790693">name</a>(std::string_view <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>){</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">return</span> std::views::filter([<a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>](<span class="keyword">auto</span>&amp; it){<span class="keywordflow">return</span> (it.name().value_or(<span class="stringliteral">&quot;&quot;</span>) == <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>);});</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    } </div>
+</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="namespaceVS__XML__NS_1_1filters.html#a868d5264adcdfca37c68aaf8d7c81f93">   50</a></span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="namespaceVS__XML__NS_1_1filters.html#a868d5264adcdfca37c68aaf8d7c81f93">prefix</a>(std::string_view <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>){</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">return</span> std::views::filter([<a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>](<span class="keyword">auto</span>&amp; it){<span class="keywordflow">return</span> (it.name().value_or(<span class="stringliteral">&quot;&quot;</span>).starts_with(<a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">sv</a>));});</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    } </div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="namespaceVS__XML__NS_1_1filters.html#a7a0c812bd61539401043875cd0314ba0">   59</a></span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="namespaceVS__XML__NS_1_1filters.html#a7a0c812bd61539401043875cd0314ba0">is_element</a>(){</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">return</span> std::views::filter([](<span class="keyword">auto</span>&amp; it){<span class="keywordflow">return</span> it.type()==type_t::ELEMENT;});</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    } </div>
+</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespaceVS__XML__NS_1_1filters.html#a0fb2d9fa6ac6536b1cca511fd087099c">   68</a></span>    <span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="namespaceVS__XML__NS_1_1filters.html#a0fb2d9fa6ac6536b1cca511fd087099c">is_text</a>(){</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> std::views::filter([](<span class="keyword">auto</span>&amp; it){<span class="keywordflow">return</span> it.type()==type_t::CDATA || it.type()==type_t::TEXT;});</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    } </div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}</div>
+<div class="ttc" id="anamespaceVS__XML__NS_1_1filters_html_a0fb2d9fa6ac6536b1cca511fd087099c"><div class="ttname"><a href="namespaceVS__XML__NS_1_1filters.html#a0fb2d9fa6ac6536b1cca511fd087099c">VS_XML_NS::filters::is_text</a></div><div class="ttdeci">constexpr auto is_text()</div><div class="ttdoc">Filter only those which are XML text elements (proper TEXT and CDATA both).</div><div class="ttdef"><b>Definition</b> filters.hpp:68</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_1_1filters_html_a413cb33b54f8c56e92554dd0f2d2512e"><div class="ttname"><a href="namespaceVS__XML__NS_1_1filters.html#a413cb33b54f8c56e92554dd0f2d2512e">VS_XML_NS::filters::ns</a></div><div class="ttdeci">constexpr auto ns(std::string_view sv)</div><div class="ttdoc">Only pick nodes for which the namespace is set to sv</div><div class="ttdef"><b>Definition</b> filters.hpp:30</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_1_1filters_html_a5c3624b13599fa9c38562d6a2e790693"><div class="ttname"><a href="namespaceVS__XML__NS_1_1filters.html#a5c3624b13599fa9c38562d6a2e790693">VS_XML_NS::filters::name</a></div><div class="ttdeci">constexpr auto name(std::string_view sv)</div><div class="ttdoc">Only pick nodes for which the name is set to sv</div><div class="ttdef"><b>Definition</b> filters.hpp:40</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_1_1filters_html_a7a0c812bd61539401043875cd0314ba0"><div class="ttname"><a href="namespaceVS__XML__NS_1_1filters.html#a7a0c812bd61539401043875cd0314ba0">VS_XML_NS::filters::is_element</a></div><div class="ttdeci">constexpr auto is_element()</div><div class="ttdoc">Filter only those which are XML elements.</div><div class="ttdef"><b>Definition</b> filters.hpp:59</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_1_1filters_html_a868d5264adcdfca37c68aaf8d7c81f93"><div class="ttname"><a href="namespaceVS__XML__NS_1_1filters.html#a868d5264adcdfca37c68aaf8d7c81f93">VS_XML_NS::filters::prefix</a></div><div class="ttdeci">constexpr auto prefix(std::string_view sv)</div><div class="ttdoc">Only pick nodes for which the name has prefix sv</div><div class="ttdef"><b>Definition</b> filters.hpp:50</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:53</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
