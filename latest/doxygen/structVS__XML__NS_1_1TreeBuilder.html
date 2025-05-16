@@ -146,6 +146,9 @@ error_t&#160;</td><td class="memItemRight" valign="bottom"><b>marker</b> (std::s
 <tr class="memitem:ad2fd742da45362ef4c32e3d59d5ccaab" id="r_ad2fd742da45362ef4c32e3d59d5ccaab"><td class="memItemLeft" align="right" valign="top"><a id="ad2fd742da45362ef4c32e3d59d5ccaab" name="ad2fd742da45362ef4c32e3d59d5ccaab"></a>
 std::expected&lt; <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
 <tr class="separator:ad2fd742da45362ef4c32e3d59d5ccaab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45cd376cbf737cc561552f8b3c8e4b1c" id="r_a45cd376cbf737cc561552f8b3c8e4b1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a45cd376cbf737cc561552f8b3c8e4b1c">reserve</a> (size_t bytes)</td></tr>
+<tr class="memdesc:a45cd376cbf737cc561552f8b3c8e4b1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves space for the buffer to avoid many of the initial small allocations.  <br /></td></tr>
+<tr class="separator:a45cd376cbf737cc561552f8b3c8e4b1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -222,6 +225,43 @@ error_t&#160;</td><td class="memItemRight" valign="bottom"><b>inject</b> (const 
 std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>symbols</b></td></tr>
 <tr class="separator:a402ae7c565bbb5bf70a3266c9e45fbdb inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a45cd376cbf737cc561552f8b3c8e4b1c" name="a45cd376cbf737cc561552f8b3c8e4b1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45cd376cbf737cc561552f8b3c8e4b1c">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;builder_config_t cfg = {}&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::reserve </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bytes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reserves space for the buffer to avoid many of the initial small allocations. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bytes</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/vs-xml/<a class="el" href="builder_8hpp_source.html">builder.hpp</a></li>
 </ul>
