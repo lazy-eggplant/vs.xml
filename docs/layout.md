@@ -1,6 +1,7 @@
 ## Memory Layout
 
 The memory layout for the tree structure used by this library has the following properties:
+
 - It is based on a contiguous memory slice.
 - It is built in-place, as such children are placed directly after their parent.
 - Attributes are immediately stored after a node.
