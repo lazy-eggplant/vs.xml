@@ -1,4 +1,5 @@
 #include "vs-xml/commons.hpp"
+#include "vs-xml/filters.hpp"
 #include "vs-xml/impl.hpp"
 #include <ranges>
 #include <vs-xml/builder.hpp>
@@ -62,14 +63,10 @@ auto test(){
     for(auto& element:root.attrs()){
         std::print("{}\n",element.name().value_or("--"));
     }
-
-    auto fn= [](const xml::wrp::attr_iterator& i){return (*i).ns()=="w";};
     
-    static_assert(std::bidirectional_iterator<xml::attr_iterator>);
-
     std::print("\nNS\n");
 
-    for(auto& element: root.attrs(std::views::filter(fn)) ){
+    for(auto& element: root.attrs() | xml::filters::ns("w") ){
         std::print("{}\n",element.name().value_or("--"));
     }
 

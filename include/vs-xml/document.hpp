@@ -32,6 +32,11 @@ struct DocumentRaw : TreeRaw {
         return true;
     }
 
+    /**
+     * @brief Return the root of the proper tree inside the document (if present)
+     * 
+     * @return std::optional<node_iterator> 
+     */
     inline std::optional<node_iterator> tree_root() const{
         auto c  = TreeRaw::root().children();
         auto it = std::ranges::find_if(c,[](auto e){return e.type()==type_t::ELEMENT;});

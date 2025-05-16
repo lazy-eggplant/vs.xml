@@ -28,9 +28,12 @@ Or installing it in your system first and using it as a system dependency.
 You can easily build documents:
 ```cpp
 #include <vs-xml/document.hpp>
+#include <vs-xml/filters.hpp>
+
 #include <iostream>
 #include <ranges>
 #include <print>
+
 using namespace xml;
 
 int main(){
@@ -53,7 +56,13 @@ Serialize them:
 
 And access the tree structure:
 ```cpp
+  //Show comments only
   for(auto& it: document.root().children() | std::views::filter([](auto it){return it.type()==xml::type_t::COMMENT;})){
+    std::print("{}\n",it.value().value_or("-- Empty node --"));
+  }
+
+  //Example of a helper filter (defined in `vs-xml/filters.hpp`)
+  for(auto& it: document.root().children() | filters::name("base-node")){
     std::print("{}\n",it.value().value_or("-- Empty node --"));
   }
 
