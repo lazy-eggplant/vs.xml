@@ -1,9 +1,10 @@
 #pragma once
 
 #include "tree.hpp"
-#include "vs-xml/commons.hpp"
-#include "vs-xml/impl.hpp"
+#include "commons.hpp"
+#include "impl.hpp"
 #include <iterator>
+#include <string_view>
 
 namespace VS_XML_NS{
 
@@ -12,7 +13,13 @@ namespace wrp{
 struct node_iterator;
 struct attr_iterator;
 
+struct sv : xml::sv{
+    const TreeRaw* tree;
 
+    inline sv(const TreeRaw& tree, std::string_view v):xml::sv(tree.symbols.data(),v),tree(&tree){}
+    
+    operator std::string_view() const {return tree->rsv(*this);}
+};
 
 template <typename T>
 struct base_t{

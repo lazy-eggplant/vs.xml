@@ -104,6 +104,8 @@ struct unknown_t;
 namespace wrp{
     template <typename T>
     struct base_t;
+
+    struct sv;
 }
 
 namespace details{
