@@ -13,13 +13,29 @@ namespace wrp{
 struct node_iterator;
 struct attr_iterator;
 
-struct sv : xml::sv{
-    const TreeRaw* tree;
+struct sv  {
+    //Used to make combinations of string_views and sv work together as intended. 
+    // A small price on stack for better usability. These objects are just temp so it is not a concern.
+    private:
+        const TreeRaw* tree;
 
-    inline sv(const TreeRaw& tree, std::string_view v):xml::sv(tree.symbols.data(),v),tree(&tree){}
-    
-    operator std::string_view() const {return tree->rsv(*this);}
+        union{
+            xml::sv main;
+            std::string_view alt = {};  
+        }body;
+
+    public:
+
+    inline sv(const TreeRaw& tree, std::string_view v):tree(&tree),body({tree.symbols.data(),v}){}
+    inline sv(const TreeRaw& tree, xml::sv v):tree(&tree),body({v}){}
+    inline sv(std::string_view v):tree(nullptr){body.alt = v;}
+    inline sv(const char v[]):tree(nullptr){body.alt = v;}
+
+    operator std::string_view() const {if(tree!=nullptr)return tree->rsv(body.main);else return body.alt;}
+
+    //TODO: Add comparison operators. Since they can access the tree configs, it is possible to know if serialization is needed or not, picking the optimal comparison algorithm.
 };
+
 
 template <typename T>
 struct base_t{
@@ -46,9 +62,9 @@ struct base_t{
 
     delta_ptr_t portable() const;
 
-    inline std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
-    inline std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
-    inline std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
+    inline std::expected<sv,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
+    inline std::expected<sv,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
+    inline std::expected<sv,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
 
     inline std::expected<std::pair<base_t<unknown_t>, base_t<unknown_t>>,feature_t> children_range() const{
         auto tmp = ptr->children_range();
@@ -98,9 +114,9 @@ struct base_t<attr_t>{
 
     delta_ptr_t portable() const;
 
-    inline std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
-    inline std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
-    inline std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
+    inline std::expected<sv,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
+    inline std::expected<sv,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv{*base,*tmp};}
+    inline std::expected<sv,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv{*base,*tmp};}
 
     inline auto type() const {return type_t::ATTR;}
 };
@@ -206,3 +222,15 @@ inline auto base_t<T>::children(auto filter) const{ return children() | filter ;
 
 
 }
+
+
+/**
+ * @brief Formatter for xml::wrp::sv, the custom stringview used by this library for wrapper trees/documents
+ */
+template <>
+struct std::formatter<xml::wrp::sv, char> : std::formatter<std::string_view, char> {
+    template <typename FormatContext>
+    auto format(const xml::wrp::sv& value, FormatContext& ctx) const {
+        return std::formatter<std::string_view, char>::format((std::string_view)(value), ctx);
+    }
+};
