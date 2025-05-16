@@ -399,7 +399,7 @@ static_assert(thing_i<marker_t>);
 static_assert(thing_i<unknown_t>);
 
 struct node_iterator{
-    using iterator_category = std::bidirectional_iterator_tag;
+    //using iterator_category = std::bidirectional_iterator_tag;
     using difference_type   = std::ptrdiff_t;
     using value_type        = const unknown_t;
     using pointer           = const value_type*;

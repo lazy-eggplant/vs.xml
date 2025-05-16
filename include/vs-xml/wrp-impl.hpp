@@ -155,18 +155,19 @@ struct attr_iterator{
 };
 
 static_assert(std::bidirectional_iterator<attr_iterator>);
+static_assert(std::bidirectional_iterator<node_iterator>);
 
 template <typename T>
 inline auto base_t<T>::attrs() const{
     struct self{
 
-        attr_iterator begin() const {return  base_t<attr_t>{*base->base , (*base->attrs_range()).first};}
-        attr_iterator end() const {return  base_t<attr_t>{*base->base, (*base->attrs_range()).second};}
+        attr_iterator begin() const {return  base_t<attr_t>{*base.base , (*base.attrs_range()).first};}
+        attr_iterator end() const {return  base_t<attr_t>{*base.base, (*base.attrs_range()).second};}
 
-        self(const base_t& b):base(&b){}
+        self(const base_t& b):base(b){}
 
         private:
-            const base_t* base;
+            base_t base;
     };
 
     return self(*this);
@@ -175,13 +176,13 @@ inline auto base_t<T>::attrs() const{
 template <typename T>
 inline auto base_t<T>::children() const{
     struct self{
-        node_iterator begin() const {return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).first};}
-        node_iterator end() const {return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).second};}
+        node_iterator begin() const {return base_t<unknown_t>{*base.base, (const unknown_t*)(*base.children_range()).first};}
+        node_iterator end() const {return base_t<unknown_t>{*base.base, (const unknown_t*)(*base.children_range()).second};}
 
-        self(const base_t& b):base(&b){}
+        self(const base_t& b):base(b){}
 
         private:
-            const base_t* base;
+            base_t base;
     };
 
     return self(*this);
