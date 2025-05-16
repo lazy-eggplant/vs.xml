@@ -1,0 +1,14 @@
+<map id="include/vs&#45;xml/serializer.hpp" name="include/vs&#45;xml/serializer.hpp">
+<area shape="rect" id="Node000001" title="Implementation of serialization/deserialization helpers." alt="" coords="112,5,321,31"/>
+<area shape="rect" id="Node000002" href="$impl_8hpp.html" title="Implementation of the node logic." alt="" coords="23,79,202,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,41,131,81,128,76,187,36"/>
+<area shape="rect" id="Node000006" href="$parser_8hpp.html" title="Implementation of the parser logic." alt="" coords="227,79,417,104"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="247,36,306,76,303,81,244,41"/>
+<area shape="rect" id="Node000003" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="15,240,210,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,117,86,153,83,172,86,191,95,217,107,238,103,241,91,219,81,193,78,172,81,151,96,115"/>
+<area shape="rect" id="Node000005" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="95,152,242,192"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="131,114,157,150,153,153,127,117"/>
+<area shape="rect" id="Node000004" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,313,220,339"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,279,115,313,110,313,110,279"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="149,205,123,241,119,238,145,202"/>
+</map>
