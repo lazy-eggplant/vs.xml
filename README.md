@@ -104,7 +104,7 @@ Tree building is not heap-allocating each node individually, and strings are une
 
 ### But why?
 
-You can find a FAQ page with some questions being answered. For all the others just ask :). 
+You can find a [FAQ page](./docs/faq.md) with some questions being answered. For all the others just ask :). 
 
 
 ## External dependencies
