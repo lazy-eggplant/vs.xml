@@ -94,7 +94,7 @@ struct base_t<attr_t>{
 struct node_iterator{
     using iterator_category = std::bidirectional_iterator_tag;
     using difference_type   = std::ptrdiff_t;
-    using value_type        = const unknown_t;
+    using value_type        = base_t<unknown_t>;
     using pointer           = base_t<unknown_t>;
     using reference         = base_t<unknown_t>;
 
@@ -103,7 +103,7 @@ struct node_iterator{
     inline node_iterator(const node_iterator&) = default;
 
     inline const base_t<unknown_t>& operator*() const { return m_ptr; }
-    inline base_t<unknown_t> operator->() { return m_ptr; }
+    inline const base_t<unknown_t>& operator->() { return m_ptr; }
 
     inline node_iterator& operator++() { m_ptr.ptr = m_ptr.ptr->next(); return *this; }  
     inline node_iterator& operator--() { m_ptr.ptr = m_ptr.ptr->prev(); return *this; }  
@@ -123,7 +123,7 @@ struct node_iterator{
 struct attr_iterator{
     using iterator_category = std::bidirectional_iterator_tag; 
     using difference_type   = std::ptrdiff_t;
-    using value_type        = const attr_t;
+    using value_type        = base_t<attr_t>;
     using pointer           = base_t<attr_t>;
     using reference         = base_t<attr_t>;
 
@@ -131,8 +131,8 @@ struct attr_iterator{
     inline attr_iterator() = default;
     inline attr_iterator(const attr_iterator&) = default;
 
-    inline base_t<attr_t> operator*() const { return m_ptr; }
-    inline base_t<attr_t> operator->() { return m_ptr; }
+    inline const base_t<attr_t>& operator*() const { return m_ptr; }
+    inline const base_t<attr_t>& operator->() { return m_ptr; }
 
     inline attr_iterator& operator++() { m_ptr.ptr++; return *this; }  
     inline attr_iterator& operator--() { m_ptr.ptr--; return *this; }  
@@ -147,6 +147,8 @@ struct attr_iterator{
     private:
     base_t<attr_t> m_ptr;
 };
+
+static_assert(std::bidirectional_iterator<attr_iterator>);
 
 template <typename T>
 inline auto base_t<T>::attrs() const{
@@ -168,8 +170,8 @@ inline auto base_t<T>::attrs() const{
 template <typename T>
 inline auto base_t<T>::children() const{
     struct self{
-        node_iterator begin() const {return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).first};}
-        node_iterator end() const {return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).second};}
+        node_iterator begin() const {std::printf("%p %p --start\n",base->base,(const unknown_t*)(*base->children_range()).first);return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).first};}
+        node_iterator end() const {std::printf("%p %p --end\n",base->base,(const unknown_t*)(*base->children_range()).second);return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).second};}
 
         self(const base_t& b):base(&b){}
 
