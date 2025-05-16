@@ -29,6 +29,8 @@ You can easily build documents:
 ```cpp
 #include <vs-xml/document.hpp>
 #include <iostream>
+#include <ranges>
+#include <print>
 using namespace xml;
 
 int main(){
@@ -51,10 +53,10 @@ Serialize them:
 
 And access the tree structure:
 ```cpp
-  for(auto& it: document.root().children() | std::views::filter([](auto it){return it->type()==xml::type_t::COMMENT;})){
-    std::print("{}\n",element.value().value_or("-- Empty node --"));
+  for(auto& it: document.root().children() | std::views::filter([](auto it){return it.type()==xml::type_t::COMMENT;})){
+    std::print("{}\n",it.value().value_or("-- Empty node --"));
   }
-  
+
   return 0;
 }
 ```

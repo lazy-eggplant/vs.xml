@@ -113,7 +113,7 @@ template<builder_config_t cfg>
 struct Builder;
 
 struct Tree;
-struct Tree;
+struct Document;
 
 
 enum struct feature_t{

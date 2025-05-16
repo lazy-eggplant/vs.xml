@@ -1,6 +1,7 @@
 #pragma once
 
 #include "tree.hpp"
+#include "vs-xml/commons.hpp"
 #include "vs-xml/impl.hpp"
 #include <iterator>
 
@@ -24,6 +25,7 @@ struct base_t{
         base_t() = default;
 
         friend struct VS_XML_NS::Tree;
+        friend struct VS_XML_NS::Document;
         template <typename W>
         friend struct base_t;
 
@@ -60,6 +62,8 @@ struct base_t{
     inline auto attrs(auto filter) const;
     inline auto children() const;
     inline auto children(auto filter) const;
+
+    inline auto type() const {return ptr->type();}
 };
 
 
@@ -90,6 +94,8 @@ struct base_t<attr_t>{
     inline std::expected<std::string_view,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
     inline std::expected<std::string_view,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
     inline std::expected<std::string_view,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return base->rsv(*tmp);}
+
+    inline auto type() const {return type_t::ATTR;}
 };
 
 
@@ -154,7 +160,7 @@ template <typename T>
 inline auto base_t<T>::attrs() const{
     struct self{
 
-        attr_iterator begin() const {return  base_t<attr_t>{*base->base, (*base->attrs_range()).first};}
+        attr_iterator begin() const {return  base_t<attr_t>{*base->base , (*base->attrs_range()).first};}
         attr_iterator end() const {return  base_t<attr_t>{*base->base, (*base->attrs_range()).second};}
 
         self(const base_t& b):base(&b){}

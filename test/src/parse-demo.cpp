@@ -29,7 +29,7 @@ int main() {
 
     xml::TreeBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> builder;
     try {
-        xml::Parser parser(xmlData, builder);
+        xml::Parser parser(std::span<char>(xmlData), builder);
         parser.parse();
     } catch (const std::exception &ex) {
         std::cerr << "Error while parsing XML: " << ex.what() << "\n";

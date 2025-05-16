@@ -26,10 +26,17 @@ struct DocumentRaw : TreeRaw {
 
     //TODO: add real root opposed to document root.
     inline bool print(std::ostream& out, const print_cfg_t& cfg = {})const{
-        for(auto& it: root().children()){
+        for(auto& it: TreeRaw::root().children()){
             if(!print_h(out, cfg, &it))return false;
         }
         return true;
+    }
+
+    inline std::optional<node_iterator> tree_root() const{
+        auto c  = TreeRaw::root().children();
+        auto it = std::ranges::find_if(c,[](auto e){return e.type()==type_t::ELEMENT;});
+        if(it!=c.end()) return it;
+        return {};
     }
 
     static inline DocumentRaw from_binary(std::span<uint8_t> region){return DocumentRaw(TreeRaw::from_binary(region));}
@@ -45,6 +52,11 @@ struct DocumentRaw : TreeRaw {
 };
 
 struct Document : DocumentRaw {
+    private:
+    using DocumentRaw::rsv;
+    using DocumentRaw::clone;
+    using DocumentRaw::root;
+
     public:
     inline Document(DocumentRaw&& ref):DocumentRaw(std::move(ref)){}
     inline Document(const DocumentRaw&& ref):DocumentRaw(std::move(ref)){}
@@ -52,7 +64,7 @@ struct Document : DocumentRaw {
     inline const Tree slice(const element_t* ref=nullptr) const{return DocumentRaw::slice(ref);}
     inline Tree clone(const element_t* ref=nullptr, bool reduce=true) const{return DocumentRaw::clone(ref,reduce);}
 
-    wrp::base_t<element_t> root() const;
+    inline wrp::base_t<element_t> root() const{return {*this, &TreeRaw::root()};}
 
     inline DocumentRaw& downgrade(){return *this;}
 };
