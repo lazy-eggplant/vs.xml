@@ -11,10 +11,10 @@ auto mk_tree(){
     xml::TreeBuilder<cfg> build;
     build.begin("hello");
         build.attr("op3-a", "v'>&al1");
-        build.attr("op1-a", "val1", "w");
+        build.attr("op1-a-s", "val1", "w");
         build.attr("op2-a", "val\"1");
         build.attr("op5-a", "val\"1");
-        build.attr("op6-a", "val1", "w");
+        build.attr("op6-a-s", "val1", "w");
         build.comment("01234567890123456789Banana <hello ciao=\"worldo\" &amp; &></world>"); 
         build.begin("hello1","s");
         build.end();
@@ -54,26 +54,22 @@ auto test(){
     std::print("\n---\n");
     
     auto root = wrp_tree.root();
-
     
     for(auto& element:root.children()){
-        auto itw = element.name();
-        //std::print("{}\n",element.name().value_or("--"));
-    }
-
-return 0;
-
-    auto fn= [](const xml::attr_iterator& i){return true;};
-    
-    static_assert(std::bidirectional_iterator<xml::attr_iterator>);
-
-    
-    for(auto& element: root.attrs() | std::views::filter([](auto){return true;})){
         std::print("{}\n",element.name().value_or("--"));
     }
 
-    for(auto& element: root.attrs() | std::views::filter([](auto){return true;})){
-        element.name().value();
+    for(auto& element:root.attrs()){
+        std::print("{}\n",element.name().value_or("--"));
+    }
+
+    auto fn= [](const xml::wrp::attr_iterator& i){return (*i).ns()=="w";};
+    
+    static_assert(std::bidirectional_iterator<xml::attr_iterator>);
+
+    std::print("\nNS\n");
+
+    for(auto& element: root.attrs() | std::views::filter(fn)){
         std::print("{}\n",element.name().value_or("--"));
     }
  

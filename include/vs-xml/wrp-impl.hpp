@@ -48,9 +48,9 @@ struct base_t{
     }
     inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const{return ptr->attrs_range();}
 
-    inline base_t<element_t> parent() const {return {base,ptr->parent()};}
-    inline base_t<unknown_t> prev() const {return {base,ptr->prev()};}
-    inline base_t<unknown_t> next() const {return {base,ptr->next()};}
+    inline base_t<element_t> parent() const {return {*base,ptr->parent()};}
+    inline base_t<unknown_t> prev() const {return {*base,ptr->prev()};}
+    inline base_t<unknown_t> next() const {return {*base,ptr->next()};}
 
     inline bool has_parent() const{return ptr->has_parent();}
     inline bool has_prev() const{return ptr->has_prev();}
@@ -103,7 +103,7 @@ struct node_iterator{
     inline node_iterator(const node_iterator&) = default;
 
     inline const base_t<unknown_t>& operator*() const { return m_ptr; }
-    inline const base_t<unknown_t>& operator->() { return m_ptr; }
+    inline const unknown_t* operator->() { return m_ptr.ptr; }
 
     inline node_iterator& operator++() { m_ptr.ptr = m_ptr.ptr->next(); return *this; }  
     inline node_iterator& operator--() { m_ptr.ptr = m_ptr.ptr->prev(); return *this; }  
@@ -111,9 +111,8 @@ struct node_iterator{
     inline node_iterator operator++(int) { node_iterator tmp = *this; ++(*this); return tmp; }
     inline node_iterator operator--(int) { node_iterator tmp = *this; --(*this); return tmp; }
 
-    inline friend bool operator== (const node_iterator& a, const node_iterator& b) { return (&a.m_ptr.base == &b.m_ptr.base) && (a.m_ptr.ptr == b.m_ptr.ptr); };
-    inline friend bool operator!= (const node_iterator& a, const node_iterator& b) { return (&a.m_ptr.base != &b.m_ptr.base) || (a.m_ptr.ptr != b.m_ptr.ptr); };  
-
+    inline friend bool operator== (const node_iterator& a, const node_iterator& b) { return (a.m_ptr.base == b.m_ptr.base) && (a.m_ptr.ptr == b.m_ptr.ptr); };
+    inline friend bool operator!= (const node_iterator& a, const node_iterator& b) { return (a.m_ptr.base != b.m_ptr.base) || (a.m_ptr.ptr != b.m_ptr.ptr); };  
 
     private:
     base_t<unknown_t> m_ptr;
@@ -132,7 +131,7 @@ struct attr_iterator{
     inline attr_iterator(const attr_iterator&) = default;
 
     inline const base_t<attr_t>& operator*() const { return m_ptr; }
-    inline const base_t<attr_t>& operator->() { return m_ptr; }
+    inline const attr_t* operator->() { return m_ptr.ptr; }
 
     inline attr_iterator& operator++() { m_ptr.ptr++; return *this; }  
     inline attr_iterator& operator--() { m_ptr.ptr--; return *this; }  
@@ -140,9 +139,8 @@ struct attr_iterator{
     inline attr_iterator operator++(int) { attr_iterator tmp = *this; ++(*this); return tmp; }
     inline attr_iterator operator--(int) { attr_iterator tmp = *this; --(*this); return tmp; }
 
-    inline friend bool operator== (const attr_iterator& a, const attr_iterator& b) { return (&a.m_ptr.base == &b.m_ptr.base) && (a.m_ptr.ptr == b.m_ptr.ptr); };
-    inline friend bool operator!= (const attr_iterator& a, const attr_iterator& b) { return (&a.m_ptr.base != &b.m_ptr.base) || (a.m_ptr.ptr != b.m_ptr.ptr); }; 
-
+    inline friend bool operator== (const attr_iterator& a, const attr_iterator& b) { return (a.m_ptr.base == b.m_ptr.base) && (a.m_ptr.ptr == b.m_ptr.ptr); };
+    inline friend bool operator!= (const attr_iterator& a, const attr_iterator& b) { return (a.m_ptr.base != b.m_ptr.base) || (a.m_ptr.ptr != b.m_ptr.ptr); }; 
 
     private:
     base_t<attr_t> m_ptr;
@@ -170,8 +168,8 @@ inline auto base_t<T>::attrs() const{
 template <typename T>
 inline auto base_t<T>::children() const{
     struct self{
-        node_iterator begin() const {std::printf("%p %p --start\n",base->base,(const unknown_t*)(*base->children_range()).first);return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).first};}
-        node_iterator end() const {std::printf("%p %p --end\n",base->base,(const unknown_t*)(*base->children_range()).second);return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).second};}
+        node_iterator begin() const {return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).first};}
+        node_iterator end() const {return base_t<unknown_t>{*base->base, (const unknown_t*)(*base->children_range()).second};}
 
         self(const base_t& b):base(&b){}
 
