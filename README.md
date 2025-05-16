@@ -35,7 +35,7 @@ int main(){
   DocBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
   bld.xml();
   bld.comment("This is a comment!");
-  bld.begin("root");
+  bld.begin("base-node");
       bld.attr("hello", "world");
       //Children after the attribute block.
       bld.text("This is some text! <escape> sequences will be handled.");
@@ -51,9 +51,10 @@ Serialize them:
 
 And access the tree structure:
 ```cpp
-  for(auto& it: document.root().children()){
-    //... use the tree node in here.
+  for(auto& it: document.root().children() | std::views::filter([](auto it){return it->type()==xml::type_t::COMMENT;})){
+    std::print("{}\n",element.value().value_or("-- Empty node --"));
   }
+  
   return 0;
 }
 ```

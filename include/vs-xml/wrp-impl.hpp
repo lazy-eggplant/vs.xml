@@ -57,7 +57,9 @@ struct base_t{
     inline bool has_next() const{return ptr->has_next();}
 
     inline auto attrs() const;
+    inline auto attrs(auto filter) const;
     inline auto children() const;
+    inline auto children(auto filter) const;
 };
 
 
@@ -164,7 +166,6 @@ inline auto base_t<T>::attrs() const{
     return self(*this);
 }
 
-
 template <typename T>
 inline auto base_t<T>::children() const{
     struct self{
@@ -179,6 +180,13 @@ inline auto base_t<T>::children() const{
 
     return self(*this);
 }
+
+template <typename T>
+inline auto base_t<T>::attrs(auto filter) const{ return attrs() | filter ; }
+
+template <typename T>
+inline auto base_t<T>::children(auto filter) const{ return children() | filter ; }
+
 
 }
 

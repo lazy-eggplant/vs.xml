@@ -61,6 +61,10 @@ struct base_t{
 
     auto children() const;
     auto attrs() const;
+
+    auto children(auto filter) const;
+    auto attrs(auto filter) const;
+
     auto text() const;
 
     template<builder_config_t>
@@ -509,5 +513,11 @@ inline auto base_t<T>::text() const{
 
     return self(*this);
 }
+
+template <typename T>
+inline auto base_t<T>::attrs(auto filter) const{ return attrs() | filter ; }
+
+template <typename T>
+inline auto base_t<T>::children(auto filter) const{ return children() | filter ; }
 
 }

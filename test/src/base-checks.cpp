@@ -69,7 +69,7 @@ auto test(){
 
     std::print("\nNS\n");
 
-    for(auto& element: root.attrs() | std::views::filter(fn)){
+    for(auto& element: root.attrs(std::views::filter(fn)) ){
         std::print("{}\n",element.name().value_or("--"));
     }
  
