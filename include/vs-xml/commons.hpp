@@ -40,6 +40,13 @@ typedef size_t xml_size_t;
 typedef size_t xml_count_t;
 typedef size_t xml_enum_size_t;
 
+/*
+typedef int32_t delta_ptr_t ;
+typedef uint32_t xml_size_t;
+typedef uint16_t xml_count_t;
+typedef uint8_t xml_enum_size_t;
+*/
+
 inline void xml_assert(bool condition, const char* errorMessage="") {
     #ifndef VS_XML_NO_ASSERT
     modern_assert(condition,errorMessage);

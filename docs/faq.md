@@ -12,7 +12,7 @@ This lowers start-up time quite a bit and gives you constant access to its conte
 > What is the point of a representation which is not mutable? Why cannot I edit the tree?
 
 Technically it is not immutable; however some types of mutations would be very expensive, almost like rebuilding the tree from scratch.  
-However, there are some which are quite fast, like reordering attributes, changing value with literals which are already in memory, or adding annotations to mark changes.  
+Still, there are some which are quite fast, like reordering attributes, changing value with literals which are already in memory, or adding annotations to mark changes.  
 Some of them are implemented by this library, others could be in a nearby future.  
 
 As for why, there is plenty of applications where a mutable tree structure is no longer needed after it has being built.  

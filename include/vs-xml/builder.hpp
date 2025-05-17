@@ -41,7 +41,7 @@ namespace details{
             MISFORMED,
         };
     
-        private:
+        protected:
             std::vector<uint8_t> buffer;
             bool open = true;               //True if the tree is still open to append things.
             bool attribute_block = false;   //True after a begin to add attributes. It is automatically closed when any other command is triggered.
@@ -51,7 +51,6 @@ namespace details{
             template<typename T>
             error_t leaf(std::string_view value);
     
-        protected:
             std::string_view symbols;
             inline std::vector<uint8_t>&& get_buffer() {return std::move(buffer);}
         
@@ -171,9 +170,8 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
         using details::BuilderImpl<cfg.symbols>::symbol_2;      //Used by those which are not so easy to compress, so they can be more favourably skipped.
 
     public:
-        TreeBuilder(std::string_view src){
+        TreeBuilder(std::string_view src):details::BuilderImpl<cfg.symbols>(src){
             static_assert(cfg.symbols==builder_config_t::EXTERN_REL, "Only EXTERN_REL builders can pass the source symbol table");
-            this->symbols=src;
         }
 
         TreeBuilder():details::BuilderImpl<cfg.symbols>(){
