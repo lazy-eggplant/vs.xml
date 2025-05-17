@@ -114,6 +114,10 @@ std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>symbol</b
 std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>symbol_2</b> (std::string_view s)</td></tr>
 <tr class="separator:adeccf9e4c6728f7c00d71ef71b79a3a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></td></tr>
+<tr class="memitem:abae9c6f04bcc0eb1b97be810793d0fcc inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_abae9c6f04bcc0eb1b97be810793d0fcc"><td class="memTemplParams" colspan="2">
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:abae9c6f04bcc0eb1b97be810793d0fcc inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memTemplItemLeft" align="right" valign="top">error_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>leaf</b> (std::string_view value)</td></tr>
+<tr class="separator:abae9c6f04bcc0eb1b97be810793d0fcc inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d1921aa3c1c02e32a6465558a6c8f54 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a0d1921aa3c1c02e32a6465558a6c8f54"><td class="memItemLeft" align="right" valign="top">
 std::vector&lt; uint8_t &gt; &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_buffer</b> ()</td></tr>
 <tr class="separator:a0d1921aa3c1c02e32a6465558a6c8f54 inherit pro_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,6 +171,18 @@ error_t&#160;</td><td class="memItemRight" valign="bottom"><b>marker</b> (std::s
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>inject</b> (const <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a> &amp;tree, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *base=nullptr, bool include_root=false)</td></tr>
 <tr class="separator:a380fe2d5e1cbc8f44f36f33f1a4e5bc1 inherit pub_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></td></tr>
+<tr class="memitem:a28ceae0303ec34343ca29f21e9651f6d inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a28ceae0303ec34343ca29f21e9651f6d"><td class="memItemLeft" align="right" valign="top">
+std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
+<tr class="separator:a28ceae0303ec34343ca29f21e9651f6d inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ec2b8ad2541eb5814384f04c64dcc05 inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a4ec2b8ad2541eb5814384f04c64dcc05"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>open</b> = true</td></tr>
+<tr class="separator:a4ec2b8ad2541eb5814384f04c64dcc05 inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b98aff04d26387390056fbc0b19fc65 inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a0b98aff04d26387390056fbc0b19fc65"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>attribute_block</b> = false</td></tr>
+<tr class="separator:a0b98aff04d26387390056fbc0b19fc65 inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf65590d7739860c318ae67d73b4c1a3 inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_aaf65590d7739860c318ae67d73b4c1a3"><td class="memItemLeft" align="right" valign="top">
+std::stack&lt; std::pair&lt; ptrdiff_t, ptrdiff_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>stack</b></td></tr>
+<tr class="separator:aaf65590d7739860c318ae67d73b4c1a3 inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a402ae7c565bbb5bf70a3266c9e45fbdb inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a402ae7c565bbb5bf70a3266c9e45fbdb"><td class="memItemLeft" align="right" valign="top">
 std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>symbols</b></td></tr>
 <tr class="separator:a402ae7c565bbb5bf70a3266c9e45fbdb inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
