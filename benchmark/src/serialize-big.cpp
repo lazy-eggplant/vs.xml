@@ -94,14 +94,14 @@ int main(int argc, const char* argv[]) {
     std::string_view binInput(mmap3.data(),mmap3.size());
 
     for(int i = 0; i<3; i++){
-        std::vector<uint64_t> ticks;
-        ticks.push(std::chrono::system_clock::now());
+        std::vector<decltype(std::chrono::system_clock::now())> ticks;
+        ticks.push_back(std::chrono::system_clock::now());
         test_vs(xmlInput1);
-        ticks.push(std::chrono::system_clock::now());
+        ticks.push_back(std::chrono::system_clock::now());
         test_vs2(binInput);
-        ticks.push(std::chrono::system_clock::now());
+        ticks.push_back(std::chrono::system_clock::now());
         test_pugi(xmlInput2);
-        ticks.push(std::chrono::system_clock::now());
+        ticks.push_back(std::chrono::system_clock::now());
         
         std::print("vs   :   {}\n",  (ticks[1]-ticks[0]).count());
         std::print("vs2  :   {}\n",  (ticks[2]-ticks[1]).count());
