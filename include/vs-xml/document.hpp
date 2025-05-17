@@ -16,11 +16,17 @@
 
 namespace VS_XML_NS{
 
-//TODO: Not fully implemented yet, no wrapping or checks which are needed to store a valid XML.
+//TODO: Implemented but very lass on constraints. No wrapping nor checks which are needed to store a valid XML.
 
 template<builder_config_t cfg>
 struct DocBuilder;
 
+/**
+ * @brief Base class for an XML document. 
+ * @warning Unless you need MAXIMUM PERFORMANCE, your are better using its derived VS_XML_NS::Document
+ * @details This one does not wrap returned XML entities nor string views, so you are left on your own to handle them, but you might gain few points in complex pipelines.
+ * 
+ */
 struct DocumentRaw : TreeRaw {
     using TreeRaw::TreeRaw;
 
@@ -56,6 +62,10 @@ struct DocumentRaw : TreeRaw {
 
 };
 
+/**
+ * @brief The suggested-to-use Document class.
+ * @details In general, not to be used directly. Either load a binary file or generate it via a builder.
+ */
 struct Document : DocumentRaw {
     private:
     using DocumentRaw::rsv;
@@ -72,9 +82,17 @@ struct Document : DocumentRaw {
 
     inline  wrp::base_t<element_t>  root() {return wrp::base_t<element_t>{*(const TreeRaw*)this, &TreeRaw::root()};}
 
+    /**
+     * @brief Downgrade the current document into its base VS_XML_NS::DocumentRaw.
+     * 
+     * @return DocumentRaw& 
+     */
     inline DocumentRaw& downgrade(){return *this;}
 };
 
+/**
+ * @brief Specialized builder to construct a document.
+*/
 template<builder_config_t cfg = {}>
 struct DocBuilder : TreeBuilder<cfg>{
     protected:

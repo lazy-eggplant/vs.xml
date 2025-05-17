@@ -31,6 +31,10 @@
 #include <vs-xml/private/assert.hpp>
 #endif 
 
+/**
+ * @brief The main namespace for the application. By default `xml` and controlled via the macro VS_XML_NS.
+ * 
+ */
 namespace VS_XML_NS{
 
 constexpr static inline int format_major = 0; ///Current binary format major revision. Major revisions are breaking.
@@ -85,7 +89,10 @@ struct __attribute__ ((packed)) builder_config_t{
     bool allow_procs :1  = true;            //If true, processing nodes are allowed. Else skip.
 };
 
-
+/**
+ * @brief Data structure used to represent a tree (or document), for saving/loading
+ * 
+ */
 struct __attribute__ ((packed)) binary_header_t{
     const char magic[4] = {'$','X','M','L'};
     size_t offset_tree;
@@ -95,7 +102,7 @@ struct __attribute__ ((packed)) binary_header_t{
     uint8_t format_minor : 8;
     builder_config_t configs;
     uint8_t reserved_cfg [1];
-    //TODO: add fields for the type data size and endianess?
+    //TODO: (?) add fields for the type data size and endianess
 };
 
 
@@ -150,6 +157,8 @@ enum struct type_t : xml_enum_size_t{
     MARKER,     ///Special type used to represent injection point or annotations.
 };
 
+//TODO: At the moment not really used. Either remove this or fix it to do something. Anything.
+
 template<typename T>
 concept thing_i = requires(T self){
     {self.type()} -> std::same_as<type_t>;
@@ -172,9 +181,9 @@ concept thing_i = requires(T self){
     {self.path()} -> std::same_as<std::string>;
 };
 
-
+//TODO: specialization of Builder_t or just remove it?
 template <typename T>
-concept ProperBuilder =  true;  //TODO: specialization of Builder_t
+concept ProperBuilder =  true;  
 
 template<ProperBuilder Builder_t>
 class Parser;

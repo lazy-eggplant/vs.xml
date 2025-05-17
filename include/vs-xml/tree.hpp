@@ -26,6 +26,12 @@
 
 namespace VS_XML_NS{
 
+/**
+ * @brief Base class for a tree. 
+ * @warning Unless you need MAXIMUM PERFORMANCE, your are better using its derived VS_XML_NS::Tree
+ * @details This one does not wrap returned XML entities nor string views, so you are left on your own to handle them, but you might gain few points in complex pipelines.
+ * 
+ */
 struct TreeRaw{
     protected:
         std::vector<uint8_t> buffer_i;
@@ -167,7 +173,10 @@ struct TreeRaw{
 };
 
 
-
+/**
+ * @brief the tree class you should use.
+ * @warning make sure you also check VS_XML_NS::Document as you are more likely going to use that one
+ */
 struct Tree : TreeRaw{
     private:
     using TreeRaw::rsv;

@@ -6,7 +6,7 @@
 namespace VS_XML_NS{
 namespace serialize{
 
-//TODO: Add support to output &#... escapes
+//TODO: Add support to output &#... escapes. Added in the new functions, but they still need replacing in current code.
 
 std::string_view validate_xml_label(std::string_view str){
     //This operation alone is responsible for around 10% lower speed while parsing. It might be good to disable it if not needed?
