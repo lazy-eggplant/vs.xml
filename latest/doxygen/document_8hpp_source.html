@@ -106,92 +106,96 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    }</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">inline</span> std::optional&lt;node_iterator&gt; tree_root()<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keyword">auto</span> c  = TreeRaw::root().children();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keyword">auto</span> it = std::ranges::find_if(c,[](<span class="keyword">auto</span> e){<span class="keywordflow">return</span> e.type()==type_t::ELEMENT;});</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">if</span>(it!=c.end()) <span class="keywordflow">return</span> it;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> from_binary(std::span&lt;uint8_t&gt; region){<span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(TreeRaw::from_binary(region));}</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> from_binary(std::string_view region){<span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(TreeRaw::from_binary(region));}</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">template</span>&lt;builder_config_t cfg&gt;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">friend</span> <span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1DocBuilder.html">DocBuilder</a>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>&amp;&amp; src):<a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>(src){}</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>&amp;&amp; src):<a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>(src){}</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1DocumentRaw.html#a31f1ece0c2e012c0cc2c568c7f1617c7">   40</a></span>    <span class="keyword">inline</span> std::optional&lt;node_iterator&gt; <a class="code hl_function" href="structVS__XML__NS_1_1DocumentRaw.html#a31f1ece0c2e012c0cc2c568c7f1617c7">tree_root</a>()<span class="keyword"> const</span>{</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">auto</span> c  = TreeRaw::root().children();</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keyword">auto</span> it = std::ranges::find_if(c,[](<span class="keyword">auto</span> e){<span class="keywordflow">return</span> e.type()==type_t::ELEMENT;});</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">if</span>(it!=c.end()) <span class="keywordflow">return</span> it;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
 </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="foldopen" id="foldopen00054" data-start="{" data-end="};">
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1Document.html">   54</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">using </span>DocumentRaw::rsv;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">using </span>DocumentRaw::clone;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">using </span>DocumentRaw::root;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>&amp;&amp; ref):<a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(std::move(ref)){}</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>&amp;&amp; ref):<a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(std::move(ref)){}</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> from_binary(std::span&lt;uint8_t&gt; region){<span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(TreeRaw::from_binary(region));}</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> DocumentRaw from_binary(std::string_view region){<span class="keywordflow">return</span> DocumentRaw(TreeRaw::from_binary(region));}</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">template</span>&lt;builder_config_t cfg&gt;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">friend</span> <span class="keyword">struct </span>DocBuilder;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        DocumentRaw(TreeRaw&amp;&amp; src):<a class="code hl_function" href="structVS__XML__NS_1_1DocumentRaw.html#a3ce6b6e083d9256d38d3f5b8d483c0ac">TreeRaw</a>(src){}</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        DocumentRaw(<span class="keyword">const</span> TreeRaw&amp;&amp; src):<a class="code hl_function" href="structVS__XML__NS_1_1DocumentRaw.html#a3ce6b6e083d9256d38d3f5b8d483c0ac">TreeRaw</a>(src){}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>};</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="};">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1Document.html">   59</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">using </span>DocumentRaw::rsv;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">using </span>DocumentRaw::clone;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">using </span>DocumentRaw::root;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a> slice(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>* ref=<span class="keyword">nullptr</span>)<span class="keyword"> const</span>{<span class="keywordflow">return</span> DocumentRaw::slice(ref);}</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a> clone(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>* ref=<span class="keyword">nullptr</span>, <span class="keywordtype">bool</span> reduce=<span class="keyword">true</span>)<span class="keyword"> const</span>{<span class="keywordflow">return</span> DocumentRaw::clone(ref,reduce);}</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">inline</span>  <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t&lt;element_t&gt;</a>  root() {<span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t&lt;element_t&gt;</a>{*(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>*)<span class="keyword">this</span>, &amp;TreeRaw::root()};}</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>&amp;&amp; ref):<a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(std::move(ref)){}</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>&amp;&amp; ref):<a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(std::move(ref)){}</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>&amp; downgrade(){<span class="keywordflow">return</span> *<span class="keyword">this</span>;}</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};</div>
-</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a> slice(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>* ref=<span class="keyword">nullptr</span>)<span class="keyword"> const</span>{<span class="keywordflow">return</span> DocumentRaw::slice(ref);}</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a> clone(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>* ref=<span class="keyword">nullptr</span>, <span class="keywordtype">bool</span> reduce=<span class="keyword">true</span>)<span class="keyword"> const</span>{<span class="keywordflow">return</span> DocumentRaw::clone(ref,reduce);}</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">template</span>&lt;builder_config_t cfg = {}&gt;</div>
-<div class="foldopen" id="foldopen00074" data-start="{" data-end="};">
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1DocBuilder.html">   74</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1DocBuilder.html">DocBuilder</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>&lt;cfg&gt;{</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keyword">using </span><a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>&lt;cfg&gt;::close;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">constexpr</span> <span class="keyword">static</span> <span class="keyword">inline</span> builder_config_t configs = cfg;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">constexpr</span> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> is_document = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1DocBuilder.html">DocBuilder</a>(<span class="keyword">auto</span> ... a):<a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder&lt;cfg&gt;</a>(a...){</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        this-&gt;begin(<span class="stringliteral">&quot;ROOT&quot;</span>);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keyword">inline</span> details::BuilderBase::error_t xml(){</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">return</span> details::BuilderBase::proc(<a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder&lt;cfg&gt;::rsv</a>( <a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder&lt;cfg&gt;::symbol</a>(<span class="stringliteral">&quot;xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;&quot;</span>)));</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keyword">inline</span> std::expected&lt;Document,error_t&gt; close(){</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        this-&gt;end();</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <a class="code hl_struct" href="structVS__XML__NS_1_1details_1_1BuilderImpl.html">details::BuilderImpl&lt;cfg.symbols&gt;::close</a>();</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            cfg.symbols==builder_config_t::symbols_t::OWNED </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        )<span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(configs,std::move(this-&gt;get_buffer()),std::move(this-&gt;symbols_i)));</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(configs,std::move(this-&gt;get_buffer()),this-&gt;symbols.data()));</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>};</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">inline</span>  <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t&lt;element_t&gt;</a>  root() {<span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t&lt;element_t&gt;</a>{*(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>*)<span class="keyword">this</span>, &amp;TreeRaw::root()};}</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>&amp; downgrade(){<span class="keywordflow">return</span> *<span class="keyword">this</span>;}</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>};</div>
 </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">template</span>&lt;builder_config_t cfg = {}&gt;</div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="};">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1DocBuilder.html">   79</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1DocBuilder.html">DocBuilder</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>&lt;cfg&gt;{</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keyword">using </span><a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>&lt;cfg&gt;::close;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">constexpr</span> <span class="keyword">static</span> <span class="keyword">inline</span> builder_config_t configs = cfg;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keyword">constexpr</span> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> is_document = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1DocBuilder.html">DocBuilder</a>(<span class="keyword">auto</span> ... a):<a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder&lt;cfg&gt;</a>(a...){</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        this-&gt;begin(<span class="stringliteral">&quot;ROOT&quot;</span>);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keyword">inline</span> details::BuilderBase::error_t xml(){</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordflow">return</span> details::BuilderBase::proc(<a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder&lt;cfg&gt;::rsv</a>( <a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder&lt;cfg&gt;::symbol</a>(<span class="stringliteral">&quot;xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;&quot;</span>)));</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keyword">inline</span> std::expected&lt;Document,error_t&gt; close(){</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        this-&gt;end();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <a class="code hl_struct" href="structVS__XML__NS_1_1details_1_1BuilderImpl.html">details::BuilderImpl&lt;cfg.symbols&gt;::close</a>();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            cfg.symbols==builder_config_t::symbols_t::OWNED </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        )<span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(configs,std::move(this-&gt;get_buffer()),std::move(this-&gt;symbols_i)));</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Document.html">Document</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a>(configs,std::move(this-&gt;get_buffer()),this-&gt;symbols.data()));</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>};</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
 <div class="ttc" id="abuilder_8hpp_html"><div class="ttname"><a href="builder_8hpp.html">builder.hpp</a></div><div class="ttdoc">Tree builder classes.</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1DocBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1DocBuilder.html">VS_XML_NS::DocBuilder</a></div><div class="ttdef"><b>Definition</b> document.hpp:74</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1DocBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1DocBuilder.html">VS_XML_NS::DocBuilder</a></div><div class="ttdef"><b>Definition</b> document.hpp:79</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1DocumentRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1DocumentRaw.html">VS_XML_NS::DocumentRaw</a></div><div class="ttdef"><b>Definition</b> document.hpp:24</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Document_html"><div class="ttname"><a href="structVS__XML__NS_1_1Document.html">VS_XML_NS::Document</a></div><div class="ttdef"><b>Definition</b> document.hpp:54</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a></div><div class="ttdef"><b>Definition</b> builder.hpp:168</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1DocumentRaw_html_a31f1ece0c2e012c0cc2c568c7f1617c7"><div class="ttname"><a href="structVS__XML__NS_1_1DocumentRaw.html#a31f1ece0c2e012c0cc2c568c7f1617c7">VS_XML_NS::DocumentRaw::tree_root</a></div><div class="ttdeci">std::optional&lt; node_iterator &gt; tree_root() const</div><div class="ttdoc">Return the root of the proper tree inside the document (if present)</div><div class="ttdef"><b>Definition</b> document.hpp:40</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1DocumentRaw_html_a3ce6b6e083d9256d38d3f5b8d483c0ac"><div class="ttname"><a href="structVS__XML__NS_1_1DocumentRaw.html#a3ce6b6e083d9256d38d3f5b8d483c0ac">VS_XML_NS::DocumentRaw::TreeRaw</a></div><div class="ttdeci">TreeRaw(const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, const void *label_offset=nullptr)</div><div class="ttdoc">Construct a new Tree object, with the list of strings being external. Make sure its lifetime contains...</div><div class="ttdef"><b>Definition</b> tree.hpp:125</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Document_html"><div class="ttname"><a href="structVS__XML__NS_1_1Document.html">VS_XML_NS::Document</a></div><div class="ttdef"><b>Definition</b> document.hpp:59</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a></div><div class="ttdef"><b>Definition</b> builder.hpp:166</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_1_1print__cfg__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">VS_XML_NS::TreeRaw::print_cfg_t</a></div><div class="ttdef"><b>Definition</b> tree.hpp:103</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:166</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1details_1_1BuilderImpl_html"><div class="ttname"><a href="structVS__XML__NS_1_1details_1_1BuilderImpl.html">VS_XML_NS::details::BuilderImpl</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:98</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:171</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1details_1_1BuilderImpl_html"><div class="ttname"><a href="structVS__XML__NS_1_1details_1_1BuilderImpl.html">VS_XML_NS::details::BuilderImpl</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:96</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1element__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1element__t.html">VS_XML_NS::element_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:94</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1wrp_1_1base__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1wrp_1_1base__t.html">VS_XML_NS::wrp::base_t</a></div><div class="ttdef"><b>Definition</b> wrp-impl.hpp:18</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1wrp_1_1base__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1wrp_1_1base__t.html">VS_XML_NS::wrp::base_t</a></div><div class="ttdef"><b>Definition</b> wrp-impl.hpp:86</div></div>
 <div class="ttc" id="atree_8hpp_html"><div class="ttname"><a href="tree_8hpp.html">tree.hpp</a></div><div class="ttdoc">Internal tree structure.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../benchmarks/">
       
       
         <link rel="next" href="../features/">
@@ -232,6 +232,28 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../benchmarks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Benchmarks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -398,7 +420,7 @@ This lowers start-up time quite a bit and gives you constant access to its conte
 <p>What is the point of a representation which is not mutable? Why cannot I edit the tree?</p>
 </blockquote>
 <p>Technically it is not immutable; however some types of mutations would be very expensive, almost like rebuilding the tree from scratch.<br />
-However, there are some which are quite fast, like reordering attributes, changing value with literals which are already in memory, or adding annotations to mark changes.<br />
+Still, there are some which are quite fast, like reordering attributes, changing value with literals which are already in memory, or adding annotations to mark changes.<br />
 Some of them are implemented by this library, others could be in a nearby future.  </p>
 <p>As for why, there is plenty of applications where a mutable tree structure is no longer needed after it has being built.<br />
 This library tries to optimize such cases without introducing features which could compromise them.</p>

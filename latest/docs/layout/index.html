@@ -240,6 +240,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../benchmarks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Benchmarks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../faq/" class="md-nav__link">
         
   
@@ -493,12 +515,14 @@
   <h1>Layout</h1>
 
 <h2 id="memory-layout">Memory Layout<a class="headerlink" href="#memory-layout" title="Permanent link">#</a></h2>
-<p>The memory layout for the tree structure used by this library has the following properties:
-- It is based on a contiguous memory slice.
-- It is built in-place, as such children are placed directly after their parent.
-- Attributes are immediately stored after a node.
-- Pointers between nodes in the tree are not defined as absolute, but relative to the address of the current one.
-- All strings are represented as string views over a common base offset which is valid for the whole tree.</p>
+<p>The memory layout for the tree structure used by this library has the following properties:</p>
+<ul>
+<li>It is based on a contiguous memory slice.</li>
+<li>It is built in-place, as such children are placed directly after their parent.</li>
+<li>Attributes are immediately stored after a node.</li>
+<li>Pointers between nodes in the tree are not defined as absolute, but relative to the address of the current one.</li>
+<li>All strings are represented as string views over a common base offset which is valid for the whole tree.</li>
+</ul>
 <p>The structure of the various nodes is based on the size of three data types:</p>
 <ul>
 <li><code>delta_ptr_t</code> is the type of relative pointers. Realistically, 16bits is plenty enough for most realistic scenarios with XML files humans can handle.</li>

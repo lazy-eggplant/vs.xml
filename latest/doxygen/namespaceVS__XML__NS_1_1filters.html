@@ -73,15 +73,236 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">VS_XML_NS::filters Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Namespace for all filters to simplify DOM navigation, offering a small set of common requirements for XML elements.  
 <a href="namespaceVS__XML__NS_1_1filters.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a413cb33b54f8c56e92554dd0f2d2512e" id="r_a413cb33b54f8c56e92554dd0f2d2512e"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVS__XML__NS_1_1filters.html#a413cb33b54f8c56e92554dd0f2d2512e">ns</a> (std::string_view <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>)</td></tr>
+<tr class="memdesc:a413cb33b54f8c56e92554dd0f2d2512e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Only pick nodes for which the namespace is set to <code>sv</code>  <br /></td></tr>
+<tr class="separator:a413cb33b54f8c56e92554dd0f2d2512e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c3624b13599fa9c38562d6a2e790693" id="r_a5c3624b13599fa9c38562d6a2e790693"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVS__XML__NS_1_1filters.html#a5c3624b13599fa9c38562d6a2e790693">name</a> (std::string_view <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>)</td></tr>
+<tr class="memdesc:a5c3624b13599fa9c38562d6a2e790693"><td class="mdescLeft">&#160;</td><td class="mdescRight">Only pick nodes for which the name is set to <code>sv</code>  <br /></td></tr>
+<tr class="separator:a5c3624b13599fa9c38562d6a2e790693"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4181c90f1a11e50277762f830ab0405" id="r_ac4181c90f1a11e50277762f830ab0405"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVS__XML__NS_1_1filters.html#ac4181c90f1a11e50277762f830ab0405">value</a> (std::string_view <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>)</td></tr>
+<tr class="memdesc:ac4181c90f1a11e50277762f830ab0405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Only pick nodes for which the name is set to <code>sv</code>  <br /></td></tr>
+<tr class="separator:ac4181c90f1a11e50277762f830ab0405"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a868d5264adcdfca37c68aaf8d7c81f93" id="r_a868d5264adcdfca37c68aaf8d7c81f93"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVS__XML__NS_1_1filters.html#a868d5264adcdfca37c68aaf8d7c81f93">prefix</a> (std::string_view <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>)</td></tr>
+<tr class="memdesc:a868d5264adcdfca37c68aaf8d7c81f93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Only pick nodes for which the name has prefix <code>sv</code>  <br /></td></tr>
+<tr class="separator:a868d5264adcdfca37c68aaf8d7c81f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a0c812bd61539401043875cd0314ba0" id="r_a7a0c812bd61539401043875cd0314ba0"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVS__XML__NS_1_1filters.html#a7a0c812bd61539401043875cd0314ba0">is_element</a> ()</td></tr>
+<tr class="memdesc:a7a0c812bd61539401043875cd0314ba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter only those which are XML elements.  <br /></td></tr>
+<tr class="separator:a7a0c812bd61539401043875cd0314ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fb2d9fa6ac6536b1cca511fd087099c" id="r_a0fb2d9fa6ac6536b1cca511fd087099c"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVS__XML__NS_1_1filters.html#a0fb2d9fa6ac6536b1cca511fd087099c">is_text</a> ()</td></tr>
+<tr class="memdesc:a0fb2d9fa6ac6536b1cca511fd087099c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter only those which are XML text elements (proper TEXT and CDATA both).  <br /></td></tr>
+<tr class="separator:a0fb2d9fa6ac6536b1cca511fd087099c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Namespace for all filters to simplify DOM navigation, offering a small set of common requirements for XML elements. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a7a0c812bd61539401043875cd0314ba0" name="a7a0c812bd61539401043875cd0314ba0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a0c812bd61539401043875cd0314ba0">&#9670;&#160;</a></span>is_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto VS_XML_NS::filters::is_element </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Filter only those which are XML elements. </p>
+<dl class="section return"><dt>Returns</dt><dd>constexpr auto a filter to pipe after <code>children</code> or as argument. </dd></dl>
+
+</div>
+</div>
+<a id="a0fb2d9fa6ac6536b1cca511fd087099c" name="a0fb2d9fa6ac6536b1cca511fd087099c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fb2d9fa6ac6536b1cca511fd087099c">&#9670;&#160;</a></span>is_text()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto VS_XML_NS::filters::is_text </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Filter only those which are XML text elements (proper TEXT and CDATA both). </p>
+<dl class="section return"><dt>Returns</dt><dd>constexpr auto a filter to pipe after <code>children</code> or as argument. </dd></dl>
+
+</div>
+</div>
+<a id="a5c3624b13599fa9c38562d6a2e790693" name="a5c3624b13599fa9c38562d6a2e790693"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c3624b13599fa9c38562d6a2e790693">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto VS_XML_NS::filters::name </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>sv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Only pick nodes for which the name is set to <code>sv</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sv</td><td>the namespace to filter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>constexpr auto a filter to pipe after <code>children</code> or as argument. </dd></dl>
+
+</div>
+</div>
+<a id="a413cb33b54f8c56e92554dd0f2d2512e" name="a413cb33b54f8c56e92554dd0f2d2512e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a413cb33b54f8c56e92554dd0f2d2512e">&#9670;&#160;</a></span>ns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto VS_XML_NS::filters::ns </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>sv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Only pick nodes for which the namespace is set to <code>sv</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sv</td><td>the namespace to filter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>constexpr auto a filter to pipe after <code>children</code> or as argument. </dd></dl>
+
+</div>
+</div>
+<a id="a868d5264adcdfca37c68aaf8d7c81f93" name="a868d5264adcdfca37c68aaf8d7c81f93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a868d5264adcdfca37c68aaf8d7c81f93">&#9670;&#160;</a></span>prefix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto VS_XML_NS::filters::prefix </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>sv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Only pick nodes for which the name has prefix <code>sv</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sv</td><td>the namespace to filter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>constexpr auto a filter to pipe after <code>children</code> or as argument. </dd></dl>
+
+</div>
+</div>
+<a id="ac4181c90f1a11e50277762f830ab0405" name="ac4181c90f1a11e50277762f830ab0405"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4181c90f1a11e50277762f830ab0405">&#9670;&#160;</a></span>value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto VS_XML_NS::filters::value </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>sv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Only pick nodes for which the name is set to <code>sv</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sv</td><td>the namespace to filter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>constexpr auto a filter to pipe after <code>children</code> or as argument. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8

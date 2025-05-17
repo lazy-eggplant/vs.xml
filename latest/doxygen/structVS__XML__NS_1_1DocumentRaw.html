@@ -110,8 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5dd6e661a56340d6c40760de762178ba" id="r_a5dd6e661a56340d6c40760de762178ba"><td class="memItemLeft" align="right" valign="top"><a id="a5dd6e661a56340d6c40760de762178ba" name="a5dd6e661a56340d6c40760de762178ba"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}) const</td></tr>
 <tr class="separator:a5dd6e661a56340d6c40760de762178ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31f1ece0c2e012c0cc2c568c7f1617c7" id="r_a31f1ece0c2e012c0cc2c568c7f1617c7"><td class="memItemLeft" align="right" valign="top"><a id="a31f1ece0c2e012c0cc2c568c7f1617c7" name="a31f1ece0c2e012c0cc2c568c7f1617c7"></a>
-std::optional&lt; <a class="el" href="structVS__XML__NS_1_1node__iterator.html">node_iterator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tree_root</b> () const</td></tr>
+<tr class="memitem:a31f1ece0c2e012c0cc2c568c7f1617c7" id="r_a31f1ece0c2e012c0cc2c568c7f1617c7"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structVS__XML__NS_1_1node__iterator.html">node_iterator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1DocumentRaw.html#a31f1ece0c2e012c0cc2c568c7f1617c7">tree_root</a> () const</td></tr>
+<tr class="memdesc:a31f1ece0c2e012c0cc2c568c7f1617c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the root of the proper tree inside the document (if present)  <br /></td></tr>
 <tr class="separator:a31f1ece0c2e012c0cc2c568c7f1617c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ce6b6e083d9256d38d3f5b8d483c0ac" id="r_a3ce6b6e083d9256d38d3f5b8d483c0ac"><td class="memItemLeft" align="right" valign="top"><a id="a3ce6b6e083d9256d38d3f5b8d483c0ac" name="a3ce6b6e083d9256d38d3f5b8d483c0ac"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>TreeRaw</b> (const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, const void *label_offset=nullptr)</td></tr>
@@ -242,6 +242,35 @@ std::span&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b
 builder_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>configs</b></td></tr>
 <tr class="separator:afb60fcca70d93d25bc82b1e2aacc7780 inherit pro_attribs_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a31f1ece0c2e012c0cc2c568c7f1617c7" name="a31f1ece0c2e012c0cc2c568c7f1617c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31f1ece0c2e012c0cc2c568c7f1617c7">&#9670;&#160;</a></span>tree_root()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; <a class="el" href="structVS__XML__NS_1_1node__iterator.html">node_iterator</a> &gt; VS_XML_NS::DocumentRaw::tree_root </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the root of the proper tree inside the document (if present) </p>
+<dl class="section return"><dt>Returns</dt><dd>std::optional&lt;node_iterator&gt; </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/vs-xml/<a class="el" href="document_8hpp_source.html">document.hpp</a></li>
 </ul>
