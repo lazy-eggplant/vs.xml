@@ -3,6 +3,7 @@
 #include "tree.hpp"
 #include "commons.hpp"
 #include "impl.hpp"
+#include "vs-xml/serializer.hpp"
 #include <cstddef>
 #include <iterator>
 #include <string_view>
@@ -34,7 +35,51 @@ struct sv  {
 
     operator std::string_view() const {if(tree!=nullptr)return tree->rsv(body.main);else return body.alt;}
 
-    //TODO: Add comparison operators. Since they can access the tree configs, it is possible to know if serialization is needed or not, picking the optimal comparison algorithm.
+    //TODO: These comparison operators needs testing, but at least in theory their logic is ok.
+
+    friend inline bool operator==(const sv& l, const sv& r){
+        if(l.tree==nullptr && r.tree==nullptr) return std::string_view(l) == std::string_view(r);
+        else if(l.tree==nullptr) return std::string_view(l) == r;
+        else if(r.tree==nullptr) return std::string_view(r) == l;
+
+        if(l.tree->configs.raw_strings && r.tree->configs.raw_strings){
+            auto ll = xml::serialize::unescaped_view((std::string_view)l);
+            auto rr = xml::serialize::unescaped_view((std::string_view)l);
+            return std::equal(ll.begin(),ll.end(),rr.begin(),rr.end());
+        }
+        else if(!l.tree->configs.raw_strings && !r.tree->configs.raw_strings){
+            return (std::string_view)l == (std::string_view)r;
+        }
+        if(l.tree->configs.raw_strings){
+            auto ll = xml::serialize::unescaped_view((std::string_view)l);
+            auto rr = (std::string_view)r;
+            return std::equal(ll.begin(),ll.end(),rr.begin(),rr.end());
+        }
+        else{
+            auto ll = (std::string_view)l;
+            auto rr = xml::serialize::unescaped_view((std::string_view)r);
+            return std::equal(ll.begin(),ll.end(),rr.begin(),rr.end());
+        }
+    }
+    
+
+    friend inline bool operator==(const sv& l, std::string_view r){
+        if(l.tree!=nullptr && l.tree->configs.raw_strings){
+            auto ll = xml::serialize::unescaped_view((std::string_view)l);
+            auto rr= r;
+            return std::equal(ll.begin(),ll.end(),rr.begin(),rr.end());
+        }
+        else{
+            return (std::string_view)l == r;
+        }
+    }
+
+    friend inline bool operator==(std::string_view r, const sv& l){return l==r;}
+
+    friend inline bool operator!=(const sv& l, const sv& r){return !(l==r);}
+    friend inline bool operator!=(const sv& l, std::string_view r){return !(l==r);}
+    friend inline bool operator!=(std::string_view r, const sv& l){return l!=r;}
+
 };
 
 template <typename T>

@@ -14,7 +14,7 @@ BuilderBase::error_t BuilderBase::leaf(std::string_view value){
 
     buffer.resize(buffer.size()+sizeof(T));
 
-    auto& old_ctx = stack.top();
+    auto& old_ctx = stack.back();
 
     unknown_t* prev = old_ctx.second!=-1?(unknown_t*)(buffer.data()+old_ctx.second):nullptr;
 
@@ -36,14 +36,16 @@ template BuilderBase::error_t BuilderBase::leaf<proc_t>(std::string_view value);
 template BuilderBase::error_t BuilderBase::leaf<marker_t>(std::string_view value);
 
 
-BuilderBase::BuilderBase(){stack.push({0,-1});}
+BuilderBase::BuilderBase(){
+    stack.reserve(32);
+    stack.push_back({0,-1});}
 
 BuilderBase::error_t BuilderBase::begin(std::string_view name, std::string_view ns){
     if(open==false)return error_t::TREE_CLOSED;
 
     buffer.resize(buffer.size()+sizeof(element_t));
 
-    auto& old_ctx = stack.top();
+    auto& old_ctx = stack.back();
 
     element_t* parent = (element_t*)(buffer.data()+old_ctx.first);
     unknown_t* prev = old_ctx.second!=-1?(unknown_t*)(buffer.data()+old_ctx.second):nullptr;
@@ -57,7 +59,7 @@ BuilderBase::error_t BuilderBase::begin(std::string_view name, std::string_view 
     }
     old_ctx.second = (uint8_t*)tmp_node-buffer.data();
 
-    stack.push({((uint8_t*)tmp_node-(uint8_t*)buffer.data()),-1});
+    stack.push_back({((uint8_t*)tmp_node-(uint8_t*)buffer.data()),-1});
     attribute_block=true;
 
     return error_t::OK;
@@ -69,11 +71,11 @@ BuilderBase::error_t BuilderBase::end(){
 
     attribute_block=false;
 
-    auto& ctx = stack.top();
+    auto& ctx = stack.back();
     element_t* parent = (element_t*)(buffer.data()+ctx.first);
     parent->_size=buffer.size()-ctx.first;
 
-    stack.pop();
+    stack.pop_back();
 
     return error_t::OK;
 }
@@ -84,7 +86,7 @@ BuilderBase::error_t BuilderBase::attr(std::string_view name, std::string_view v
 
     buffer.resize(buffer.size()+sizeof(attr_t));
 
-    auto& old_ctx = stack.top();
+    auto& old_ctx = stack.back();
 
     element_t* parent = (element_t*)(buffer.data()+old_ctx.first);
 
@@ -100,7 +102,7 @@ BuilderBase::error_t BuilderBase::close(){
     if(open==false)return error_t::TREE_CLOSED;
     open=false;
     if(stack.size()!=1)return error_t::MISFORMED;
-    stack.pop();
+    stack.pop_back();
     return error_t::OK;
 }
 

@@ -10,11 +10,12 @@
 template<xml::builder_config_t cfg>
 auto mk_tree(){
     xml::TreeBuilder<cfg> build;
+    build.reserve(100000,100000);
     build.begin("hello");
         build.attr("op3-a", "v'>&al1");
         build.attr("op1-a-s", "val1", "w");
-        build.attr("op2-a", "val\"1");
-        build.attr("op5-a", "val\"1");
+        build.attr("op2-a", "va&gt;l\"1");
+        build.attr("op5-a", "va>l\"1");
         build.attr("op6-a-s", "val1", "w");
         build.comment("01234567890123456789Banana <hello ciao=\"worldo\" &amp; &></world>"); 
         build.begin("hello1","s");
@@ -74,11 +75,17 @@ auto test(){
         std::print("{}\n",element.name().value_or("--"));
     }
  
+    std::print("\n === \n");
+
+    for(auto& element: root.attrs(xml::filters::value("va>l\"1")) ){
+        std::print("{}\n",element.name().value_or("--"));
+    }
+
     std::print("\n");
 }
 
 
 int main(){
-    test<{.symbols=xml::builder_config_t::OWNED}>();    
+    test<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();    
     return 0;
 }

@@ -46,7 +46,7 @@ namespace details{
             bool open = true;               //True if the tree is still open to append things.
             bool attribute_block = false;   //True after a begin to add attributes. It is automatically closed when any other command is triggered.
             
-            std::stack<std::pair<ptrdiff_t,ptrdiff_t>> stack;
+            std::vector<std::pair<ptrdiff_t,ptrdiff_t>> stack;
     
             template<typename T>
             error_t leaf(std::string_view value);
@@ -229,8 +229,9 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
          * 
          * @param bytes 
          */
-        inline void reserve(size_t bytes){
+        inline void reserve(size_t bytes,size_t bytes2=0){
             this->buffer.reserve(bytes);
+            if constexpr(configs.symbols==builder_config_t::OWNED || configs.symbols==builder_config_t::COMPRESS_ALL || configs.symbols==builder_config_t::COMPRESS_LABELS)this->symbols_i.reserve(bytes2);
         }
 
         using details::BuilderImpl<cfg.symbols>::close;

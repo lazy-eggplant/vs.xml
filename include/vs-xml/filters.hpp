@@ -42,6 +42,16 @@ namespace filters{
     } 
 
     /**
+     * @brief Only pick nodes for which the name is set to `sv`
+     * 
+     * @param sv the namespace to filter
+     * @return constexpr auto a filter to pipe after `children` or as argument.
+     */
+     constexpr inline auto value(std::string_view sv){
+        return std::views::filter([sv](auto& it){return (it.value().value_or("") == sv);});
+    } 
+
+    /**
      * @brief Only pick nodes for which the name has prefix `sv`
      * 
      * @param sv the namespace to filter
