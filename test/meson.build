@@ -34,6 +34,5 @@ test('escape',executable(
     link_args: [],
     dependencies: [
         vs_xml_dep,
-        mio_dep
     ],
 ))
