@@ -104,14 +104,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>* tree;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keyword">union</span>{</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            xml::sv main;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a> main;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            std::string_view alt = {};  </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        }body;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1sv.html">sv</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>&amp; tree, std::string_view v):tree(&amp;tree),body({tree.symbols.data(),v}){}</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1sv.html">sv</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>&amp; tree, xml::sv v):tree(&amp;tree),body({v}){}</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1sv.html">sv</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>&amp; tree, <a class="code hl_struct" href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a> v):tree(&amp;tree),body({v}){}</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1sv.html">sv</a>(std::string_view v):tree(<span class="keyword">nullptr</span>){body.alt = v;}</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1sv.html">sv</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> v[]):tree(<span class="keyword">nullptr</span>){body.alt = v;}</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
@@ -319,9 +319,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="keyword">template</span> &lt;&gt;</div>
 <div class="foldopen" id="foldopen00231" data-start="{" data-end="};">
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01xml_1_1wrp_1_1sv_00_01char_01_4.html">  231</a></span><span class="keyword">struct </span>std::formatter&lt;xml::wrp::sv, char&gt; : std::formatter&lt;std::string_view, char&gt; {</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01VS__XML__NS_1_1wrp_1_1sv_00_01char_01_4.html">  231</a></span><span class="keyword">struct </span>std::formatter&lt;VS_XML_NS::wrp::sv, char&gt; : std::formatter&lt;std::string_view, char&gt; {</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FormatContext&gt;</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keyword">auto</span> format(<span class="keyword">const</span> xml::wrp::sv&amp; value, FormatContext&amp; ctx)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keyword">auto</span> format(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1sv.html">VS_XML_NS::wrp::sv</a>&amp; value, FormatContext&amp; ctx)<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">return</span> std::formatter&lt;std::string_view, char&gt;::format((std::string_view)(value), ctx);</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    }</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>};</div>
@@ -329,9 +329,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aimpl_8hpp_html"><div class="ttname"><a href="impl_8hpp.html">impl.hpp</a></div><div class="ttdoc">Implementation of the node logic.</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Document_html"><div class="ttname"><a href="structVS__XML__NS_1_1Document.html">VS_XML_NS::Document</a></div><div class="ttdef"><b>Definition</b> document.hpp:59</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:167</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:168</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__t.html">VS_XML_NS::attr_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:76</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1base__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1base__t.html">VS_XML_NS::base_t&lt; unknown_t &gt;</a></div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:60</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1unknown__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1unknown__t.html">VS_XML_NS::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:357</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1wrp_1_1attr__iterator_html"><div class="ttname"><a href="structVS__XML__NS_1_1wrp_1_1attr__iterator.html">VS_XML_NS::wrp::attr_iterator</a></div><div class="ttdef"><b>Definition</b> wrp-impl.hpp:153</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1wrp_1_1base__t_3_01attr__t_01_4_html"><div class="ttname"><a href="structVS__XML__NS_1_1wrp_1_1base__t_3_01attr__t_01_4.html">VS_XML_NS::wrp::base_t&lt; attr_t &gt;</a></div><div class="ttdef"><b>Definition</b> wrp-impl.hpp:94</div></div>
