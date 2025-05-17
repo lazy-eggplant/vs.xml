@@ -20,7 +20,6 @@
 
 #include <unordered_set>
 #include <vector>
-#include <stack>
 #include <string_view>
 
 #include "commons.hpp"
