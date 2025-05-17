@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['serializer_2ehpp_0',['serializer.hpp',['../serializer_8hpp.html',1,'']]]
+  ['impl_2ehpp_0',['impl.hpp',['../impl_8hpp.html',1,'']]]
 ];

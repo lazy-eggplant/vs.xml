@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>vs.xml: include/vs-xml/impl.hpp Source File</title>
+<title>vs.xml: include/vs-xml/private/impl.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3ac7cb26f1e5e7a740f6732916dd175b.html">vs-xml</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3ac7cb26f1e5e7a740f6732916dd175b.html">vs-xml</a></li><li class="navelem"><a class="el" href="dir_5c487968aae9e6fc24d4cf51a6b7bf6a.html">private</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -95,9 +95,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;commons.hpp&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="serializer_8hpp.html">serializer.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;format.hpp&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &lt;vs-xml/commons.hpp&gt;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;<a class="code" href="serializer_8hpp.html">vs-xml/serializer.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;<a class="code" href="format_8hpp.html">vs-xml/private/format.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">namespace </span>VS_XML_NS{</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
@@ -620,7 +620,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span><span class="keyword">inline</span> <span class="keyword">auto</span> base_t&lt;T&gt;::children(<span class="keyword">auto</span> filter)<span class="keyword"> const</span>{ <span class="keywordflow">return</span> children() | filter ; }</div>
 <div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span> </div>
 <div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>}</div>
-<div class="ttc" id="aconceptVS__XML__NS_1_1thing__i_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1thing__i.html">VS_XML_NS::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:153</div></div>
+<div class="ttc" id="aconceptVS__XML__NS_1_1thing__i_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1thing__i.html">VS_XML_NS::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:154</div></div>
+<div class="ttc" id="aformat_8hpp_html"><div class="ttname"><a href="format_8hpp.html">format.hpp</a></div><div class="ttdoc">Helpers to handle format/print portably.</div></div>
 <div class="ttc" id="aserializer_8hpp_html"><div class="ttname"><a href="serializer_8hpp.html">serializer.hpp</a></div><div class="ttdoc">Implementation of serialization/deserialization helpers.</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a></div><div class="ttdef"><b>Definition</b> builder.hpp:166</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
@@ -636,7 +637,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructVS__XML__NS_1_1node__iterator_html"><div class="ttname"><a href="structVS__XML__NS_1_1node__iterator.html">VS_XML_NS::node_iterator</a></div><div class="ttdef"><b>Definition</b> impl.hpp:401</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1proc__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1proc__t.html">VS_XML_NS::proc_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:309</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1root__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1root__t.html">VS_XML_NS::root_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:178</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:60</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:61</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1text__iterator_html"><div class="ttname"><a href="structVS__XML__NS_1_1text__iterator.html">VS_XML_NS::text_iterator</a></div><div class="ttdef"><b>Definition</b> impl.hpp:466</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1text__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1text__t.html">VS_XML_NS::text_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:297</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1unknown__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1unknown__t.html">VS_XML_NS::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:357</div></div>

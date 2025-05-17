@@ -1,0 +1,25 @@
+<map id="include/vs&#45;xml/private/assert.hpp" name="include/vs&#45;xml/private/assert.hpp">
+<area shape="rect" id="Node000001" title="Utility for assertions." alt="" coords="200,5,368,45"/>
+<area shape="rect" id="Node000002" href="$commons_8hpp_source.html" title=" " alt="" coords="176,93,391,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="286,59,286,93,281,93,281,59"/>
+<area shape="rect" id="Node000003" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="65,343,260,368"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="191,124,116,142,86,155,68,168,58,191,57,215,65,240,79,264,115,309,150,341,146,345,112,313,74,267,60,242,52,216,53,190,64,165,84,150,114,137,190,119"/>
+<area shape="rect" id="Node000004" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="55,416,270,441"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="180,124,101,142,70,154,51,169,29,192,18,206,11,224,8,247,13,278,28,317,55,367,68,383,85,395,121,414,119,418,82,400,64,386,51,369,23,319,8,279,3,247,6,223,14,204,25,189,47,165,67,150,99,137,179,118"/>
+<area shape="rect" id="Node000005" href="$filters_8hpp_source.html" title=" " alt="" coords="521,174,708,199"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="345,119,567,171,566,177,344,124"/>
+<area shape="rect" id="Node000006" href="$parser_8hpp.html" title="Implementation of the parser logic." alt="" coords="732,174,923,199"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="388,118,720,164,765,171,764,177,719,169,387,123"/>
+<area shape="rect" id="Node000007" href="$impl_8hpp.html" title="Implementation of the node logic." alt="" coords="78,167,246,207"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="256,129,193,169,190,164,253,124"/>
+<area shape="rect" id="Node000008" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="200,255,368,295"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="286,132,286,254,281,254,281,132"/>
+<area shape="rect" id="Node000009" href="$tree_8hpp.html" title="Internal tree structure." alt="" coords="321,174,497,199"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="315,124,392,172,389,176,312,128"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="165,382,165,416,160,416,160,382"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="165,221,165,343,160,343,160,221"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="202,212,258,252,255,257,199,217"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="244,304,182,345,179,340,241,300"/>
+<area shape="poly" id="edge13_Node000009_Node000004" title=" " alt="" coords="410,213,401,254,393,276,382,296,340,340,291,375,241,401,198,418,196,413,239,396,288,370,337,336,378,293,389,274,396,252,404,212"/>
+<area shape="poly" id="edge14_Node000009_Node000008" title=" " alt="" coords="382,209,313,257,310,252,379,205"/>
+</map>

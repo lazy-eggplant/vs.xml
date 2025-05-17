@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>vs.xml: include/vs-xml/impl.hpp File Reference</title>
+<title>vs.xml: include/vs-xml/private/impl.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3ac7cb26f1e5e7a740f6732916dd175b.html">vs-xml</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3ac7cb26f1e5e7a740f6732916dd175b.html">vs-xml</a></li><li class="navelem"><a class="el" href="dir_5c487968aae9e6fc24d4cf51a6b7bf6a.html">private</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -90,82 +90,81 @@ $(function() {
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
-<code>#include &quot;commons.hpp&quot;</code><br />
-<code>#include &quot;<a class="el" href="serializer_8hpp_source.html">serializer.hpp</a>&quot;</code><br />
-<code>#include &quot;format.hpp&quot;</code><br />
+<code>#include &lt;vs-xml/commons.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="serializer_8hpp_source.html">vs-xml/serializer.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="format_8hpp_source.html">vs-xml/private/format.hpp</a>&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for impl.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="impl_8hpp__incl.png" border="0" usemap="#ainclude_2vs-xml_2impl_8hpp" alt=""/></div>
-<map name="ainclude_2vs-xml_2impl_8hpp" id="ainclude_2vs-xml_2impl_8hpp">
-<area shape="rect" title="Implementation of the node logic." alt="" coords="465,5,643,31"/>
-<area shape="rect" title=" " alt="" coords="5,225,76,251"/>
-<area shape="poly" title=" " alt="" coords="465,27,354,44,295,60,239,81,185,112,135,149,62,217,58,213,132,145,182,107,237,76,294,55,353,39,464,22"/>
-<area shape="rect" title=" " alt="" coords="186,225,255,251"/>
-<area shape="poly" title=" " alt="" coords="471,33,412,48,348,72,289,106,263,128,240,153,227,182,223,212,218,211,222,181,236,151,259,124,286,102,346,67,410,43,470,28"/>
-<area shape="rect" title=" " alt="" coords="651,225,718,251"/>
-<area shape="poly" title=" " alt="" coords="598,28,643,45,694,70,742,105,762,126,779,151,783,162,783,173,772,193,752,209,728,222,726,217,749,205,768,189,778,172,778,163,774,153,758,130,738,109,691,75,641,50,596,33"/>
-<area shape="rect" title=" " alt="" coords="967,79,1037,104"/>
-<area shape="poly" title=" " alt="" coords="639,28,948,76,953,77,952,82,947,81,638,33"/>
-<area shape="rect" title=" " alt="" coords="498,225,581,251"/>
-<area shape="poly" title=" " alt="" coords="535,33,510,53,490,80,486,99,488,125,500,176,522,213,518,216,496,178,483,126,481,99,485,78,506,49,532,29"/>
-<area shape="rect" title=" " alt="" coords="103,225,162,251"/>
-<area shape="poly" title=" " alt="" coords="465,31,376,49,330,63,286,81,257,97,236,112,195,154,169,185,149,215,144,212,165,182,191,150,233,108,254,92,284,76,328,58,375,44,464,26"/>
-<area shape="rect" title=" " alt="" coords="855,225,952,251"/>
-<area shape="poly" title=" " alt="" coords="614,28,671,44,737,69,802,104,832,125,859,150,881,181,896,211,892,214,876,184,855,154,828,129,799,108,734,74,670,49,613,33"/>
-<area shape="rect" title=" " alt="" coords="1061,79,1121,104"/>
-<area shape="poly" title=" " alt="" coords="644,24,826,43,936,57,1048,76,1047,81,935,63,826,48,643,29"/>
-<area shape="rect" href="commons_8hpp_source.html" title=" " alt="" coords="277,152,391,177"/>
-<area shape="poly" title=" " alt="" coords="514,33,463,52,412,81,378,111,352,143,348,139,374,107,408,76,461,48,512,28"/>
-<area shape="rect" href="serializer_8hpp.html" title="Implementation of serialization/deserialization helpers." alt="" coords="499,79,609,104"/>
-<area shape="poly" title=" " alt="" coords="557,31,557,65,551,65,551,31"/>
-<area shape="rect" href="format_8hpp_source.html" title=" " alt="" coords="1145,79,1240,104"/>
-<area shape="poly" title=" " alt="" coords="644,23,862,43,1132,76,1131,81,861,49,643,29"/>
-<area shape="poly" title=" " alt="" coords="287,180,90,228,89,222,286,175"/>
-<area shape="poly" title=" " alt="" coords="317,180,252,220,249,216,314,175"/>
-<area shape="poly" title=" " alt="" coords="391,175,639,225,637,230,390,180"/>
-<area shape="poly" title=" " alt="" coords="368,175,494,218,492,223,366,180"/>
-<area shape="poly" title=" " alt="" coords="303,180,176,224,174,219,301,175"/>
-<area shape="poly" title=" " alt="" coords="392,171,842,226,841,232,391,176"/>
-<area shape="rect" title=" " alt="" coords="279,225,359,251"/>
-<area shape="poly" title=" " alt="" coords="334,178,327,212,322,211,329,177"/>
-<area shape="rect" href="assert_8hpp_source.html" title=" " alt="" coords="383,225,474,251"/>
-<area shape="poly" title=" " alt="" coords="351,175,404,215,401,219,348,179"/>
-<area shape="rect" title=" " alt="" coords="633,299,720,324"/>
-<area shape="poly" title=" " alt="" coords="469,248,624,292,623,297,468,253"/>
-<area shape="rect" title=" " alt="" coords="367,299,491,324"/>
-<area shape="poly" title=" " alt="" coords="431,251,431,285,426,285,426,251"/>
-<area shape="poly" title=" " alt="" coords="500,101,369,121,307,136,266,154,253,167,243,182,230,213,225,211,239,179,249,163,263,150,305,131,368,115,499,96"/>
-<area shape="poly" title=" " alt="" coords="542,106,523,126,507,153,505,168,508,184,523,213,518,216,503,186,500,168,502,151,518,123,538,102"/>
-<area shape="poly" title=" " alt="" coords="499,98,443,103,377,113,307,130,239,154,192,184,155,217,151,213,189,180,237,150,305,125,376,108,443,98,499,92"/>
-<area shape="poly" title=" " alt="" coords="609,93,657,99,711,109,768,126,822,150,861,180,890,213,886,216,857,184,819,154,766,131,710,114,656,104,609,98"/>
-<area shape="poly" title=" " alt="" coords="519,107,383,150,382,145,518,101"/>
-<area shape="poly" title=" " alt="" coords="610,97,708,117,751,132,779,150,788,170,789,189,783,209,772,229,741,264,707,292,704,288,737,260,768,226,778,207,784,189,783,171,775,154,749,136,707,122,609,102"/>
-<area shape="rect" title=" " alt="" coords="517,152,591,177"/>
-<area shape="poly" title=" " alt="" coords="557,104,557,138,551,138,551,104"/>
-<area shape="rect" title=" " alt="" coords="616,152,684,177"/>
-<area shape="poly" title=" " alt="" coords="571,102,625,141,622,146,568,106"/>
-<area shape="rect" title=" " alt="" coords="709,152,765,177"/>
-<area shape="poly" title=" " alt="" coords="584,102,697,145,695,150,582,107"/>
-<area shape="rect" title=" " alt="" coords="1118,152,1185,177"/>
-<area shape="poly" title=" " alt="" coords="1188,106,1167,141,1163,139,1184,103"/>
-<area shape="rect" title=" " alt="" coords="1209,152,1261,177"/>
-<area shape="poly" title=" " alt="" coords="1202,103,1224,139,1219,142,1197,106"/>
+<div class="center"><img src="impl_8hpp__incl.png" border="0" usemap="#ainclude_2vs-xml_2private_2impl_8hpp" alt=""/></div>
+<map name="ainclude_2vs-xml_2private_2impl_8hpp" id="ainclude_2vs-xml_2private_2impl_8hpp">
+<area shape="rect" title="Implementation of the node logic." alt="" coords="557,5,725,45"/>
+<area shape="rect" title=" " alt="" coords="5,167,76,192"/>
+<area shape="poly" title=" " alt="" coords="557,36,402,57,313,74,227,96,143,128,74,162,72,157,141,123,225,91,312,68,401,51,556,31"/>
+<area shape="rect" title=" " alt="" coords="714,167,783,192"/>
+<area shape="poly" title=" " alt="" coords="657,44,735,154,730,157,652,47"/>
+<area shape="rect" title=" " alt="" coords="101,167,167,192"/>
+<area shape="poly" title=" " alt="" coords="557,37,426,57,353,74,283,96,217,127,162,161,160,157,214,123,281,91,352,69,425,52,556,32"/>
+<area shape="rect" title=" " alt="" coords="481,93,552,119"/>
+<area shape="poly" title=" " alt="" coords="612,48,548,88,545,84,609,43"/>
+<area shape="rect" title=" " alt="" coords="807,167,890,192"/>
+<area shape="poly" title=" " alt="" coords="714,43,760,63,802,91,827,121,842,153,838,155,822,124,799,95,757,67,712,48"/>
+<area shape="rect" title=" " alt="" coords="509,167,567,192"/>
+<area shape="poly" title=" " alt="" coords="630,47,556,157,551,154,625,44"/>
+<area shape="rect" title=" " alt="" coords="592,167,689,192"/>
+<area shape="poly" title=" " alt="" coords="643,46,643,153,638,153,638,46"/>
+<area shape="rect" title=" " alt="" coords="729,93,789,119"/>
+<area shape="poly" title=" " alt="" coords="671,43,732,84,729,88,668,48"/>
+<area shape="rect" href="commons_8hpp_source.html" title=" " alt="" coords="294,93,457,119"/>
+<area shape="poly" title=" " alt="" coords="578,48,428,92,427,87,576,43"/>
+<area shape="rect" href="serializer_8hpp.html" title="Implementation of serialization/deserialization helpers." alt="" coords="865,93,1024,119"/>
+<area shape="poly" title=" " alt="" coords="714,43,888,87,886,92,713,48"/>
+<area shape="rect" href="format_8hpp.html" title="Helpers to handle format/print portably." alt="" coords="1173,93,1367,119"/>
+<area shape="poly" title=" " alt="" coords="725,34,1165,89,1164,94,725,40"/>
+<area shape="poly" title=" " alt="" coords="319,121,90,169,89,164,318,116"/>
+<area shape="poly" title=" " alt="" coords="444,116,701,164,700,169,443,121"/>
+<area shape="poly" title=" " alt="" coords="337,121,182,167,180,162,336,116"/>
+<area shape="poly" title=" " alt="" coords="457,116,794,164,793,169,456,121"/>
+<area shape="poly" title=" " alt="" coords="403,116,500,159,498,163,400,121"/>
+<area shape="poly" title=" " alt="" coords="419,116,585,160,584,166,417,121"/>
+<area shape="rect" title=" " alt="" coords="191,167,271,192"/>
+<area shape="poly" title=" " alt="" coords="353,121,268,163,266,158,351,116"/>
+<area shape="rect" href="assert_8hpp.html" title="Utility for assertions." alt="" coords="295,167,485,192"/>
+<area shape="poly" title=" " alt="" coords="380,118,387,153,382,154,375,120"/>
+<area shape="rect" title=" " alt="" coords="680,240,767,265"/>
+<area shape="poly" title=" " alt="" coords="444,189,667,237,666,242,443,195"/>
+<area shape="rect" title=" " alt="" coords="328,240,452,265"/>
+<area shape="poly" title=" " alt="" coords="393,192,393,226,387,226,387,192"/>
+<area shape="poly" title=" " alt="" coords="914,121,794,164,793,159,912,116"/>
+<area shape="poly" title=" " alt="" coords="931,121,877,160,874,156,928,117"/>
+<area shape="poly" title=" " alt="" coords="866,120,736,140,582,169,581,164,735,135,865,115"/>
+<area shape="poly" title=" " alt="" coords="896,121,703,166,702,161,895,116"/>
+<area shape="poly" title=" " alt="" coords="944,120,931,156,919,176,904,194,875,214,844,229,781,246,780,241,842,224,873,209,900,190,915,173,926,154,939,118"/>
+<area shape="rect" title=" " alt="" coords="965,167,1039,192"/>
+<area shape="poly" title=" " alt="" coords="956,117,986,154,982,158,952,121"/>
+<area shape="rect" title=" " alt="" coords="1064,167,1132,192"/>
+<area shape="poly" title=" " alt="" coords="970,116,1062,158,1060,163,968,121"/>
+<area shape="rect" title=" " alt="" coords="1157,167,1213,192"/>
+<area shape="poly" title=" " alt="" coords="984,116,1144,163,1143,168,982,121"/>
+<area shape="rect" title=" " alt="" coords="1237,167,1303,192"/>
+<area shape="poly" title=" " alt="" coords="1273,119,1273,153,1267,153,1267,119"/>
+<area shape="rect" title=" " alt="" coords="1328,167,1380,192"/>
+<area shape="poly" title=" " alt="" coords="1285,117,1331,155,1328,160,1282,121"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="impl_8hpp__dep__incl.png" border="0" usemap="#ainclude_2vs-xml_2impl_8hppdep" alt=""/></div>
-<map name="ainclude_2vs-xml_2impl_8hppdep" id="ainclude_2vs-xml_2impl_8hppdep">
-<area shape="rect" title="Implementation of the node logic." alt="" coords="23,5,202,31"/>
-<area shape="rect" href="builder_8hpp.html" title="Tree builder classes." alt="" coords="15,167,210,192"/>
-<area shape="poly" title=" " alt="" coords="101,44,86,79,83,99,86,118,95,144,107,165,103,168,91,146,81,119,78,99,81,78,96,42"/>
-<area shape="rect" href="wrp-impl_8hpp_source.html" title=" " alt="" coords="95,79,242,119"/>
-<area shape="poly" title=" " alt="" coords="131,40,157,77,153,80,127,43"/>
-<area shape="rect" href="document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,240,220,265"/>
-<area shape="poly" title=" " alt="" coords="115,206,115,240,110,240,110,206"/>
-<area shape="poly" title=" " alt="" coords="149,132,123,168,119,165,145,128"/>
+<div class="center"><img src="impl_8hpp__dep__incl.png" border="0" usemap="#ainclude_2vs-xml_2private_2impl_8hppdep" alt=""/></div>
+<map name="ainclude_2vs-xml_2private_2impl_8hppdep" id="ainclude_2vs-xml_2private_2impl_8hppdep">
+<area shape="rect" title="Implementation of the node logic." alt="" coords="29,5,197,45"/>
+<area shape="rect" href="builder_8hpp.html" title="Tree builder classes." alt="" coords="15,181,210,207"/>
+<area shape="poly" title=" " alt="" coords="95,58,81,94,77,113,81,133,92,159,106,180,101,183,87,161,75,134,72,113,75,93,91,56"/>
+<area shape="rect" href="wrp-impl_8hpp_source.html" title=" " alt="" coords="90,93,258,133"/>
+<area shape="poly" title=" " alt="" coords="136,55,163,92,158,95,132,58"/>
+<area shape="rect" href="document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,255,220,280"/>
+<area shape="poly" title=" " alt="" coords="115,220,115,255,110,255,110,220"/>
+<area shape="poly" title=" " alt="" coords="153,146,124,183,120,179,149,143"/>
 </map>
 </div>
 </div>

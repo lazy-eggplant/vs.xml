@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -92,46 +93,28 @@ $(function() {
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
-<code>#include &quot;commons.hpp&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for serializer.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="serializer_8hpp__incl.png" border="0" usemap="#ainclude_2vs-xml_2serializer_8hpp" alt=""/></div>
 <map name="ainclude_2vs-xml_2serializer_8hpp" id="ainclude_2vs-xml_2serializer_8hpp">
-<area shape="rect" title="Implementation of serialization/deserialization helpers." alt="" coords="337,5,546,31"/>
-<area shape="rect" title=" " alt="" coords="5,152,75,177"/>
-<area shape="poly" title=" " alt="" coords="404,33,256,81,81,149,79,144,254,76,402,28"/>
-<area shape="rect" title=" " alt="" coords="99,152,181,177"/>
-<area shape="poly" title=" " alt="" coords="417,33,313,81,176,148,174,143,311,76,415,28"/>
-<area shape="rect" title=" " alt="" coords="720,79,795,104"/>
-<area shape="poly" title=" " alt="" coords="493,28,707,76,706,81,492,33"/>
-<area shape="rect" title=" " alt="" coords="710,225,797,251"/>
-<area shape="poly" title=" " alt="" coords="481,28,669,89,758,123,788,138,805,150,810,168,806,187,795,203,781,218,777,214,790,200,801,184,805,169,800,154,786,142,756,128,667,94,479,33"/>
-<area shape="rect" title=" " alt="" coords="819,79,887,104"/>
-<area shape="poly" title=" " alt="" coords="523,28,652,48,806,76,805,81,651,53,522,33"/>
-<area shape="rect" title=" " alt="" coords="205,152,264,177"/>
-<area shape="poly" title=" " alt="" coords="425,33,355,81,263,146,260,142,352,76,422,29"/>
-<area shape="rect" title=" " alt="" coords="289,152,386,177"/>
-<area shape="poly" title=" " alt="" coords="426,33,399,53,374,80,358,110,347,139,342,137,353,107,370,77,396,49,422,29"/>
-<area shape="rect" title=" " alt="" coords="912,79,968,104"/>
-<area shape="poly" title=" " alt="" coords="547,26,713,46,899,76,900,76,899,81,898,81,712,51,546,31"/>
-<area shape="rect" href="commons_8hpp_source.html" title=" " alt="" coords="384,79,499,104"/>
-<area shape="poly" title=" " alt="" coords="444,31,444,65,439,65,439,31"/>
-<area shape="poly" title=" " alt="" coords="384,104,253,124,89,154,88,149,252,119,384,98"/>
-<area shape="poly" title=" " alt="" coords="394,107,195,153,194,148,392,101"/>
-<area shape="poly" title=" " alt="" coords="409,107,278,151,276,146,407,101"/>
-<area shape="poly" title=" " alt="" coords="426,106,367,146,364,142,423,102"/>
-<area shape="rect" title=" " alt="" coords="410,152,481,177"/>
-<area shape="poly" title=" " alt="" coords="445,104,447,138,441,139,439,104"/>
-<area shape="rect" title=" " alt="" coords="620,152,687,177"/>
-<area shape="poly" title=" " alt="" coords="476,101,608,145,606,150,475,107"/>
-<area shape="rect" title=" " alt="" coords="711,152,791,177"/>
-<area shape="poly" title=" " alt="" coords="492,101,698,149,697,154,490,107"/>
-<area shape="rect" href="assert_8hpp_source.html" title=" " alt="" coords="505,152,596,177"/>
-<area shape="poly" title=" " alt="" coords="460,102,523,142,520,147,457,106"/>
-<area shape="poly" title=" " alt="" coords="584,175,709,218,707,223,582,180"/>
-<area shape="rect" title=" " alt="" coords="489,225,613,251"/>
-<area shape="poly" title=" " alt="" coords="553,178,553,212,548,212,548,178"/>
+<area shape="rect" title="Implementation of serialization/deserialization helpers." alt="" coords="294,5,503,31"/>
+<area shape="rect" title=" " alt="" coords="5,79,75,104"/>
+<area shape="poly" title=" " alt="" coords="334,33,89,81,88,76,333,28"/>
+<area shape="rect" title=" " alt="" coords="99,79,181,104"/>
+<area shape="poly" title=" " alt="" coords="358,33,195,78,194,73,356,28"/>
+<area shape="rect" title=" " alt="" coords="205,79,280,104"/>
+<area shape="poly" title=" " alt="" coords="375,33,282,75,280,70,373,28"/>
+<area shape="rect" title=" " alt="" coords="305,79,391,104"/>
+<area shape="poly" title=" " alt="" coords="392,33,366,69,362,66,388,29"/>
+<area shape="rect" title=" " alt="" coords="415,79,483,104"/>
+<area shape="poly" title=" " alt="" coords="409,29,435,66,431,69,405,33"/>
+<area shape="rect" title=" " alt="" coords="508,79,567,104"/>
+<area shape="poly" title=" " alt="" coords="422,28,504,70,501,75,420,33"/>
+<area shape="rect" title=" " alt="" coords="591,79,689,104"/>
+<area shape="poly" title=" " alt="" coords="438,28,588,72,587,77,437,33"/>
+<area shape="rect" title=" " alt="" coords="713,79,769,104"/>
+<area shape="poly" title=" " alt="" coords="466,28,572,48,701,76,699,81,571,53,465,33"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -139,19 +122,19 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="serializer_8hpp__dep__incl.png" border="0" usemap="#ainclude_2vs-xml_2serializer_8hppdep" alt=""/></div>
 <map name="ainclude_2vs-xml_2serializer_8hppdep" id="ainclude_2vs-xml_2serializer_8hppdep">
-<area shape="rect" title="Implementation of serialization/deserialization helpers." alt="" coords="117,5,326,31"/>
-<area shape="rect" href="impl_8hpp.html" title="Implementation of the node logic." alt="" coords="5,79,184,104"/>
-<area shape="poly" title=" " alt="" coords="190,40,117,81,114,76,188,35"/>
-<area shape="rect" href="wrp-impl_8hpp_source.html" title=" " alt="" coords="132,152,279,192"/>
-<area shape="poly" title=" " alt="" coords="221,44,210,152,205,151,216,44"/>
-<area shape="rect" href="parser_8hpp.html" title="Implementation of the parser logic." alt="" coords="259,79,450,104"/>
-<area shape="poly" title=" " alt="" coords="256,35,334,76,332,81,253,39"/>
-<area shape="rect" href="builder_8hpp.html" title="Tree builder classes." alt="" coords="52,240,247,265"/>
-<area shape="poly" title=" " alt="" coords="102,117,122,191,145,239,140,241,118,193,97,119"/>
-<area shape="poly" title=" " alt="" coords="124,110,180,150,177,154,121,114"/>
-<area shape="rect" href="document_8hpp.html" title="Document wrapper for a tree." alt="" coords="42,313,257,339"/>
-<area shape="poly" title=" " alt="" coords="152,279,152,313,147,313,147,279"/>
-<area shape="poly" title=" " alt="" coords="186,205,160,241,156,238,182,202"/>
+<area shape="rect" title="Implementation of serialization/deserialization helpers." alt="" coords="200,5,409,31"/>
+<area shape="rect" href="parser_8hpp.html" title="Implementation of the parser logic." alt="" coords="5,86,196,111"/>
+<area shape="poly" title=" " alt="" coords="263,38,131,88,129,83,261,33"/>
+<area shape="rect" href="impl_8hpp.html" title="Implementation of the node logic." alt="" coords="221,79,389,119"/>
+<area shape="poly" title=" " alt="" coords="307,44,307,79,302,79,302,44"/>
+<area shape="rect" href="wrp-impl_8hpp_source.html" title=" " alt="" coords="342,167,510,207"/>
+<area shape="poly" title=" " alt="" coords="349,34,378,52,403,77,415,99,423,123,428,166,423,167,417,125,410,101,399,80,374,56,346,39"/>
+<area shape="rect" href="builder_8hpp.html" title="Tree builder classes." alt="" coords="267,255,462,280"/>
+<area shape="poly" title=" " alt="" coords="312,132,320,168,332,206,359,253,354,256,328,208,315,169,307,133"/>
+<area shape="poly" title=" " alt="" coords="344,124,401,164,398,169,341,129"/>
+<area shape="rect" href="document_8hpp.html" title="Document wrapper for a tree." alt="" coords="257,328,472,353"/>
+<area shape="poly" title=" " alt="" coords="367,294,367,328,362,328,362,294"/>
+<area shape="poly" title=" " alt="" coords="405,219,376,256,372,253,401,216"/>
 </map>
 </div>
 </div>
@@ -171,6 +154,12 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVS__XML__NS_1_1serialize_1_1unescaped__view_1_1iterator.html">VS_XML_NS::serialize::unescaped_view::iterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a180172a8f8f48a6da65327d010d53709" id="r_a180172a8f8f48a6da65327d010d53709"><td class="memItemLeft" align="right" valign="top"><a id="a180172a8f8f48a6da65327d010d53709" name="a180172a8f8f48a6da65327d010d53709"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS</b>&#160;&#160;&#160;xml</td></tr>
+<tr class="separator:a180172a8f8f48a6da65327d010d53709"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
