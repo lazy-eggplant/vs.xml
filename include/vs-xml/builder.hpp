@@ -22,9 +22,9 @@
 #include <vector>
 #include <string_view>
 
-#include "commons.hpp"
-#include "impl.hpp"
-#include "wrp-impl.hpp"
+#include <vs-xml/commons.hpp>
+#include <vs-xml/private/impl.hpp>
+#include <vs-xml/private/wrp-impl.hpp>
 
 namespace VS_XML_NS{
 

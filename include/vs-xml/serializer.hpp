@@ -21,8 +21,9 @@
 #include <string_view>
 #include <array>
 
-#include "commons.hpp"
-
+#ifndef VS_XML_NS
+#define VS_XML_NS xml
+#endif
 
 namespace VS_XML_NS{
 namespace serialize{

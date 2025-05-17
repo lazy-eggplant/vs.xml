@@ -25,8 +25,6 @@ vs_xml_lib = library(
       'lib/serializer.cpp',
       'lib/tree.cpp',
       'lib/builder.cpp',
-      'lib/document.cpp',
-      'lib/world.cpp'
     ],
     cpp_args: [use_fmt],
     install: true,

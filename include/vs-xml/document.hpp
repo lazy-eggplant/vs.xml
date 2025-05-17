@@ -10,9 +10,9 @@
  * 
  */
 
-#include "commons.hpp"
-#include "tree.hpp"
-#include "builder.hpp"
+#include  <vs-xml/commons.hpp>
+#include  <vs-xml/tree.hpp>
+#include  <vs-xml/builder.hpp>
 
 namespace VS_XML_NS{
 

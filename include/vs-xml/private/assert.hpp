@@ -1,8 +1,14 @@
 #pragma once
 
-#ifndef VS_XML_NS
-#define VS_XML_NS xml
-#endif
+/**
+ * @file assert.hpp
+ * @author karurochari
+ * @brief Utility for assertions 
+ * @date 2025-05-17
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #include <stdexcept>
 #include <source_location>

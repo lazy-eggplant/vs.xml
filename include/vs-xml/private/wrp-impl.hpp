@@ -1,12 +1,13 @@
 #pragma once
 
-#include "tree.hpp"
-#include "commons.hpp"
-#include "impl.hpp"
-#include "vs-xml/serializer.hpp"
 #include <cstddef>
 #include <iterator>
 #include <string_view>
+
+#include <vs-xml/commons.hpp>
+#include <vs-xml/tree.hpp>
+#include <vs-xml/private/impl.hpp>
+#include <vs-xml/serializer.hpp>
 
 namespace VS_XML_NS{
 

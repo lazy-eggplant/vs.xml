@@ -1,11 +1,11 @@
-#include "vs-xml/commons.hpp"
-#include "vs-xml/filters.hpp"
-#include "vs-xml/impl.hpp"
-#include <ranges>
-#include <vs-xml/builder.hpp>
-
 #include <print>
 #include <iostream>
+#include <ranges>
+
+#include <vs-xml/commons.hpp>
+#include <vs-xml/filters.hpp>
+#include <vs-xml/private/impl.hpp>
+#include <vs-xml/builder.hpp>
 
 template<xml::builder_config_t cfg>
 auto mk_tree(){

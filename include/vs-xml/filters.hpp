@@ -10,9 +10,11 @@
  * 
  */
 
-#include "commons.hpp"
 #include <ranges>
 #include <string_view>
+
+#include <vs-xml/commons.hpp>
+
 
 namespace VS_XML_NS{
 

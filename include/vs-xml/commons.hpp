@@ -22,13 +22,14 @@
 #include <string>
 #include <string_view>
 
-#ifndef VS_XML_NO_ASSERT
-#include "assert.hpp"
-#endif 
 
 #ifndef VS_XML_NS
 #define VS_XML_NS xml
 #endif
+
+#ifndef VS_XML_NO_ASSERT
+#include <vs-xml/private/assert.hpp>
+#endif 
 
 namespace VS_XML_NS{
 

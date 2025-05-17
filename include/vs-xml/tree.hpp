@@ -22,7 +22,7 @@
 
 #include <ostream>
 
-#include "commons.hpp"
+#include <vs-xml/commons.hpp>
 
 namespace VS_XML_NS{
 

@@ -1,7 +1,7 @@
-#include "vs-xml/tree.hpp"
+#include <vs-xml/tree.hpp>
 #include <vs-xml/commons.hpp>
 #include <vs-xml/builder.hpp>
-#include <vs-xml/impl.hpp>
+#include <vs-xml/private/impl.hpp>
 
 namespace VS_XML_NS{
 

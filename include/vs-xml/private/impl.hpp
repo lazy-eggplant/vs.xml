@@ -22,9 +22,9 @@
 
 #include <utility>
 
-#include "commons.hpp"
-#include "serializer.hpp"
-#include "format.hpp"
+#include <vs-xml/commons.hpp>
+#include <vs-xml/serializer.hpp>
+#include <vs-xml/private/format.hpp>
 
 namespace VS_XML_NS{
 
