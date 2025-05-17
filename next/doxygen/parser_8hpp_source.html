@@ -200,7 +200,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Unterminated processing instruction.&quot;</span>);</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keyword">auto</span> procContent = data_.substr(pos_, procEnd - pos_);</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (Builder_t::configs.raw_strings ) builder_.proc(procContent);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            <span class="keywordflow">else</span> builder_.proc(serialize::unescape_xml(procContent));</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            <span class="keywordflow">else</span> builder_.proc(serialize::inplace_unescape_xml(procContent));</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            pos_ = procEnd + 2;</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        }</div>
@@ -216,7 +216,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Unterminated XML comment.&quot;</span>);</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                <span class="keyword">auto</span> commentContent = data_.substr(pos_, commentEnd - pos_);</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (Builder_t::configs.raw_strings ) builder_.comment(commentContent);</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                <span class="keywordflow">else</span> builder_.comment(serialize::unescape_xml(commentContent));</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                <span class="keywordflow">else</span> builder_.comment(serialize::inplace_unescape_xml(commentContent));</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                pos_ = commentEnd + 3;</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            } </div>
@@ -286,7 +286,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            <span class="comment">// Call builder&#39;s attr with local name and corresponding namespace.</span></div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (Builder_t::configs.raw_strings ) builder_.attr(attrLocal, attrValue, attrNs);</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="keywordflow">else</span> builder_.attr(attrLocal, serialize::unescape_xml(attrValue), attrNs);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="keywordflow">else</span> builder_.attr(attrLocal, serialize::inplace_unescape_xml(attrValue), attrNs);</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            </div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        }</div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
@@ -331,7 +331,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                std::string_view unescapedText;</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>                <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (Builder_t::configs.raw_strings )unescapedText=textContent;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                <span class="keywordflow">else</span> unescapedText = serialize::unescape_xml(textContent);</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                <span class="keywordflow">else</span> unescapedText = serialize::inplace_unescape_xml(textContent);</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                <span class="keywordflow">if</span> (!unescapedText.empty() &amp;&amp;</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                    unescapedText.find_first_not_of(<span class="stringliteral">&quot; \t\r\n&quot;</span>) != std::string::npos)</div>
