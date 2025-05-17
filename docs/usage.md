@@ -16,3 +16,15 @@ Tarballs will also be offered for some distributions as part of future releases.
 ## Usage
 
 TBW
+
+## Configuration
+Read [this](./configuration.md).
+
+## Integration examples
+
+
+### External index
+
+### Containers & ranges
+
+### Performing queries

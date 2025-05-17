@@ -1,4 +1,4 @@
-- [ ] Add support for `&#...` escape sequences in xml serialization
+- [x] Add support for `&#...` escape sequences in xml serialization
 - [x] Better ownership handling for the xml parser of the string_view/string
 - [x] saving functions of trees without needing XML serialization.
 - [x] loading functions of trees without needing XML serialization.

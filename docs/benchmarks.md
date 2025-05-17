@@ -18,3 +18,11 @@ A more valid measure of performance will depend on the workload, and is going to
 Unsurprisingly, this is where `vs.xml` is weak by comparison. It is around 10% of pugixml speed.  
 This is mostly due to my poor implementation but also the underwhelming performance of `std::format`. Moving to `fmt::format` we are now around 27% of pugixml speed, which is quite a bump.  
 This metric will be surely improved as there is no good reason for it to be this bad, but XML serialization is not meant as a common operation for the scope of the library, so this result is not very impactful.
+
+## Tree construction
+
+To be tested.
+
+## Filtering & searching
+
+To be tested.
