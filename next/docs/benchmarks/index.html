@@ -12,7 +12,7 @@
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="../faq/">
+        <link rel="next" href="../configuration/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -303,10 +303,50 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tree-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tree construction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filtering-searching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering &amp; searching
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -362,34 +402,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../layout/" class="md-nav__link">
+      <a href="../formats/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Layout
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../modes/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Modes
+    Formats
     
   </span>
   
@@ -463,6 +481,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tree-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tree construction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filtering-searching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering &amp; searching
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -497,6 +533,10 @@ Even forcing a workload which requires access to the full buffer, this library w
 <p>Unsurprisingly, this is where <code>vs.xml</code> is weak by comparison. It is around 10% of pugixml speed.<br />
 This is mostly due to my poor implementation but also the underwhelming performance of <code>std::format</code>. Moving to <code>fmt::format</code> we are now around 27% of pugixml speed, which is quite a bump.<br />
 This metric will be surely improved as there is no good reason for it to be this bad, but XML serialization is not meant as a common operation for the scope of the library, so this result is not very impactful.</p>
+<h2 id="tree-construction">Tree construction<a class="headerlink" href="#tree-construction" title="Permanent link">#</a></h2>
+<p>To be tested.</p>
+<h2 id="filtering-searching">Filtering &amp; searching<a class="headerlink" href="#filtering-searching" title="Permanent link">#</a></h2>
+<p>To be tested.</p>
 
 
 
