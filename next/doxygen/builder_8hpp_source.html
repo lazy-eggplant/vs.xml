@@ -99,7 +99,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;<a class="code" href="impl_8hpp.html">vs-xml/private/impl.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;vs-xml/private/wrp-impl.hpp&gt;</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">namespace </span>VS_XML_NS{</div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespaceVS__XML__NS.html">   29</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceVS__XML__NS.html">VS_XML_NS</a>{</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">namespace </span>details{</div>
@@ -315,15 +316,17 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>}</div>
+</div>
 <div class="ttc" id="aimpl_8hpp_html"><div class="ttname"><a href="impl_8hpp.html">impl.hpp</a></div><div class="ttdoc">Implementation of the node logic.</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_html"><div class="ttname"><a href="namespaceVS__XML__NS.html">VS_XML_NS</a></div><div class="ttdoc">The main namespace for the application. By default xml and controlled via the macro VS_XML_NS.</div><div class="ttdef"><b>Definition</b> builder.hpp:29</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a></div><div class="ttdef"><b>Definition</b> builder.hpp:166</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html_a522578359330e54115c580ca304ade43"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html#a522578359330e54115c580ca304ade43">VS_XML_NS::TreeBuilder::reserve</a></div><div class="ttdeci">void reserve(size_t bytes, size_t bytes2=0)</div><div class="ttdoc">Reserves space for the buffer to avoid many of the initial small allocations.</div><div class="ttdef"><b>Definition</b> builder.hpp:231</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:171</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdoc">Base class for a tree.</div><div class="ttdef"><b>Definition</b> tree.hpp:35</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdoc">the tree class you should use.</div><div class="ttdef"><b>Definition</b> tree.hpp:180</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1details_1_1BuilderBase_html"><div class="ttname"><a href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></div><div class="ttdef"><b>Definition</b> builder.hpp:33</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1details_1_1BuilderBase_html_afbf9ddc4062ae615aa5a2e0880cc3d5b"><div class="ttname"><a href="structVS__XML__NS_1_1details_1_1BuilderBase.html#afbf9ddc4062ae615aa5a2e0880cc3d5b">VS_XML_NS::details::BuilderBase::rsv</a></div><div class="ttdeci">std::string_view rsv(sv s)</div><div class="ttdoc">NOTICE! The generated string_views have a very narrow lifetime. As symbols changes they are done....</div><div class="ttdef"><b>Definition</b> builder.hpp:64</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1details_1_1BuilderImpl_html"><div class="ttname"><a href="structVS__XML__NS_1_1details_1_1BuilderImpl.html">VS_XML_NS::details::BuilderImpl</a></div><div class="ttdoc">Helper class to build an XML tree via commands.</div><div class="ttdef"><b>Definition</b> builder.hpp:96</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:61</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:65</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

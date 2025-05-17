@@ -1,11 +1,14 @@
 var indexSectionsWithContent =
 {
-  0: "abcdefilmnprstuvx",
+  0: "_abcdefilmnprstuvx",
   1: "abcdefilmnprstux",
   2: "v",
   3: "abdfipst",
-  4: "cinprstv",
-  5: "v"
+  4: "_cdinprstv",
+  5: "d",
+  6: "t",
+  7: "r",
+  8: "v"
 };
 
 var indexSectionNames =
@@ -15,7 +18,10 @@ var indexSectionNames =
   2: "namespaces",
   3: "files",
   4: "functions",
-  5: "concepts"
+  5: "typedefs",
+  6: "enums",
+  7: "enumvalues",
+  8: "concepts"
 };
 
 var indexSectionLabels =
@@ -25,6 +31,9 @@ var indexSectionLabels =
   2: "Namespaces",
   3: "Files",
   4: "Functions",
-  5: "Concepts"
+  5: "Typedefs",
+  6: "Enumerations",
+  7: "Enumerator",
+  8: "Concepts"
 };
 

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['reorder_0',['reorder',['../structVS__XML__NS_1_1TreeRaw.html#ad9809d693c60165dc1d484cbabe26d5c',1,'VS_XML_NS::TreeRaw']]],
-  ['reorder_5fchildren_1',['reorder_children',['../structVS__XML__NS_1_1TreeRaw.html#acc2e584536c98165451234b8f5d30f5d',1,'VS_XML_NS::TreeRaw']]],
-  ['reserve_2',['reserve',['../structVS__XML__NS_1_1TreeBuilder.html#a522578359330e54115c580ca304ade43',1,'VS_XML_NS::TreeBuilder']]],
-  ['root_5ft_3',['root_t',['../structVS__XML__NS_1_1root__t.html',1,'VS_XML_NS']]],
-  ['rsv_4',['rsv',['../structVS__XML__NS_1_1details_1_1BuilderBase.html#afbf9ddc4062ae615aa5a2e0880cc3d5b',1,'VS_XML_NS::details::BuilderBase']]]
+  ['parser_0',['Parser',['../classVS__XML__NS_1_1Parser.html',1,'VS_XML_NS']]],
+  ['parser_2ehpp_1',['parser.hpp',['../parser_8hpp.html',1,'']]],
+  ['prefix_2',['prefix',['../namespaceVS__XML__NS_1_1filters.html#a868d5264adcdfca37c68aaf8d7c81f93',1,'VS_XML_NS::filters']]],
+  ['print_5fcfg_5ft_3',['print_cfg_t',['../structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html',1,'VS_XML_NS::TreeRaw']]],
+  ['proc_5ft_4',['proc_t',['../structVS__XML__NS_1_1proc__t.html',1,'VS_XML_NS']]]
 ];

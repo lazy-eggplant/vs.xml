@@ -92,7 +92,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="impl_8hpp.html">vs-xml/private/impl.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;<a class="code" href="serializer_8hpp.html">vs-xml/serializer.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>VS_XML_NS{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceVS__XML__NS.html">VS_XML_NS</a>{</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span>wrp{</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
@@ -367,7 +367,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="keyword">template</span> &lt;&gt;</div>
 <div class="foldopen" id="foldopen00279" data-start="{" data-end="};">
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01VS__XML__NS_1_1wrp_1_1sv_00_01char_01_4.html">  279</a></span><span class="keyword">struct </span>std::formatter&lt;VS_XML_NS::wrp::sv, char&gt; : std::formatter&lt;std::string_view, char&gt; {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01VS__XML__NS_1_1wrp_1_1sv_00_01char_01_4.html">  279</a></span><span class="keyword">struct </span>std::formatter&lt;<a class="code hl_namespace" href="namespaceVS__XML__NS.html">VS_XML_NS</a>::wrp::sv, char&gt; : std::formatter&lt;std::string_view, char&gt; {</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FormatContext&gt;</div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <span class="keyword">auto</span> format(<span class="keyword">const</span> <a class="code hl_struct" href="structVS__XML__NS_1_1wrp_1_1sv.html">VS_XML_NS::wrp::sv</a>&amp; value, FormatContext&amp; ctx)<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        <span class="keywordflow">return</span> std::formatter&lt;std::string_view, char&gt;::format((std::string_view)(value), ctx);</div>
@@ -375,13 +375,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>};</div>
 </div>
 <div class="ttc" id="aimpl_8hpp_html"><div class="ttname"><a href="impl_8hpp.html">impl.hpp</a></div><div class="ttdoc">Implementation of the node logic.</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_html"><div class="ttname"><a href="namespaceVS__XML__NS.html">VS_XML_NS</a></div><div class="ttdoc">The main namespace for the application. By default xml and controlled via the macro VS_XML_NS.</div><div class="ttdef"><b>Definition</b> builder.hpp:29</div></div>
 <div class="ttc" id="aserializer_8hpp_html"><div class="ttname"><a href="serializer_8hpp.html">serializer.hpp</a></div><div class="ttdoc">Implementation of serialization/deserialization helpers.</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Document_html"><div class="ttname"><a href="structVS__XML__NS_1_1Document.html">VS_XML_NS::Document</a></div><div class="ttdef"><b>Definition</b> document.hpp:59</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdef"><b>Definition</b> tree.hpp:171</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Document_html"><div class="ttname"><a href="structVS__XML__NS_1_1Document.html">VS_XML_NS::Document</a></div><div class="ttdoc">The suggested-to-use Document class.</div><div class="ttdef"><b>Definition</b> document.hpp:69</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdoc">Base class for a tree.</div><div class="ttdef"><b>Definition</b> tree.hpp:35</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdoc">the tree class you should use.</div><div class="ttdef"><b>Definition</b> tree.hpp:180</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__t.html">VS_XML_NS::attr_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:76</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1base__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1base__t.html">VS_XML_NS::base_t&lt; unknown_t &gt;</a></div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:61</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:65</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1unknown__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1unknown__t.html">VS_XML_NS::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:357</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1wrp_1_1attr__iterator_html"><div class="ttname"><a href="structVS__XML__NS_1_1wrp_1_1attr__iterator.html">VS_XML_NS::wrp::attr_iterator</a></div><div class="ttdef"><b>Definition</b> wrp-impl.hpp:201</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1wrp_1_1base__t_3_01attr__t_01_4_html"><div class="ttname"><a href="structVS__XML__NS_1_1wrp_1_1base__t_3_01attr__t_01_4.html">VS_XML_NS::wrp::base_t&lt; attr_t &gt;</a></div><div class="ttdef"><b>Definition</b> wrp-impl.hpp:141</div></div>

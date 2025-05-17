@@ -89,7 +89,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;commons.hpp&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="serializer_8hpp.html">serializer.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span>VS_XML_NS{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceVS__XML__NS.html">VS_XML_NS</a>{</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">template</span>&lt;ProperBuilder Builder_t&gt;</div>
@@ -221,7 +221,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            } </div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="comment">// CDATA: &lt;![CDATA[ ... ]]&gt;</span></div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (data_.substr(pos_, 7) == <span class="stringliteral">&quot;[CDATA[&quot;</span> &amp;&amp; !ROOT) {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (data_.substr(pos_, 7) == <span class="stringliteral">&quot;[CDATA[&quot;</span> &amp;&amp; !<a class="code hl_enumvalue" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60aea2adde5c377cb5e09d14b71935c6f32">ROOT</a>) {</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                pos_ += 7; <span class="comment">// skip &quot;[CDATA[&quot;</span></div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                <span class="keywordtype">size_t</span> cdataEnd = data_.find(<span class="stringliteral">&quot;]]&gt;&quot;</span>, pos_);</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                <span class="keywordflow">if</span> (cdataEnd == std::string_view::npos)</div>
@@ -230,7 +230,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                builder_.cdata(cdataContent); <span class="comment">// CDATA content provided as-is.</span></div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                pos_ = cdataEnd + 3;</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(!ROOT){</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(!<a class="code hl_enumvalue" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60aea2adde5c377cb5e09d14b71935c6f32">ROOT</a>){</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                <span class="comment">// Other declarations - skip until &#39;&gt;&#39;</span></div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                get_until(<span class="charliteral">&#39;&gt;&#39;</span>);</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                consume(<span class="charliteral">&#39;&gt;&#39;</span>);</div>
@@ -347,6 +347,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>}</div>
 <div class="ttc" id="aclassVS__XML__NS_1_1Parser_html"><div class="ttname"><a href="classVS__XML__NS_1_1Parser.html">VS_XML_NS::Parser</a></div><div class="ttdoc">Generic interface for the XML parser, responsible for filling in a builder.</div><div class="ttdef"><b>Definition</b> parser.hpp:28</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_html"><div class="ttname"><a href="namespaceVS__XML__NS.html">VS_XML_NS</a></div><div class="ttdoc">The main namespace for the application. By default xml and controlled via the macro VS_XML_NS.</div><div class="ttdef"><b>Definition</b> builder.hpp:29</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_html_adf9eb912fd1a94572b3ac45fd3e0ea60aea2adde5c377cb5e09d14b71935c6f32"><div class="ttname"><a href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60aea2adde5c377cb5e09d14b71935c6f32">VS_XML_NS::type_t::ROOT</a></div><div class="ttdeci">@ ROOT</div><div class="ttdoc">Used for dynamic dispatching.</div></div>
 <div class="ttc" id="aserializer_8hpp_html"><div class="ttname"><a href="serializer_8hpp.html">serializer.hpp</a></div><div class="ttdoc">Implementation of serialization/deserialization helpers.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
