@@ -2,8 +2,8 @@
 
 ## Parsing XML
 
-Moving from XML to the memory representation on the [big dataset nasa_10_f_bs](../assets/local/demo-0.xml), skipping escaping/de-escaping (`raw_strings` true) and without managing symbols (`EXTERN_REL`), is around 0.45 times the base throughput of pugixml.  
-Different configurations, like `COMPRESSED_ALL` or even just `OWNED` are clearly going to be more expensive (twice as slow for the worst case observed), but reducing the default types size has a positive impact (between 20 and 30% observed).
+Moving from XML to the memory representation on the [big dataset nasa_10_f_bs](../assets/local/demo-0.xml), skipping escaping/de-escaping (`raw_strings` true) and without managing symbols (`EXTERN_REL`), is around 0.45x the base throughput of `pugixml`.  
+Different configurations, like `COMPRESSED_ALL` or even just `OWNED` are clearly going to be more expensive (twice as slow for the worst case observed compared to `EXTERN_REL`), but reducing the default types size has a positive impact (between 20 and 30% improvement observed over the original 0.45x).
 
 This is to be expected, as this library handles namespaces, has a higher memory footprint by default, and is forced to work with relative pointers throughout, which require some additional computation.  
 So the slowdown is pretty tame overall, for what is intended as a rare operation. The expectation is that, once preprocessed, only the binary version of the original XML is going to be used.
@@ -16,5 +16,5 @@ A more valid measure of performance will depend on the workload, and is going to
 ## Saving as XML
 
 Unsurprisingly, this is where `vs.xml` is weak by comparison. It is around 10% of pugixml speed.  
-This is mostly due to my poor implementation and possibly some underwhelming performance of `std::format`?  
-It will be surely improved as there is no good reason to be this bad, but it is not meant as a common operation for the scope of the library, so this result is not very impactful.
+This is mostly due to my poor implementation but also the underwhelming performance of `std::format`. Moving to `fmt::format` we are now around 27% of pugixml speed, which is quite a bump.  
+This metric will be surely improved as there is no good reason for it to be this bad, but XML serialization is not meant as a common operation for the scope of the library, so this result is not very impactful.
