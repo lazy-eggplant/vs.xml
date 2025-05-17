@@ -8,6 +8,8 @@
 #include <vs-xml/wrp-impl.hpp>
 #include <vs-xml/serializer.hpp>
 
+#include <vs-xml/format.hpp>
+
 namespace VS_XML_NS{
 
 std::function<bool(const unknown_t&, const unknown_t&)> TreeRaw::def_order_node() const{
@@ -61,40 +63,40 @@ bool TreeRaw::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t
     //TODO: at some point, convert it not to be recursive.
     if(ptr->type()==type_t::ELEMENT){
         if(ptr->children_range()->first==ptr->children_range()->second){
-            out << std::format("<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
+            out << VS_XML_NS::format("<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
             for(auto& i : ptr->attrs()){
                 if(!configs.raw_strings){
                     auto t = serialize::to_xml_attr_2(rsv(*i.value()));
                     if(!t.has_value()){/*TODO: Error*/}
                     auto tt = t.value_or(std::string_view(""));
                     std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
-                    out << std::format(" {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), sv);
+                    out << VS_XML_NS::format(" {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), sv);
                 }
                 else{
-                    out << std::format(" {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), rsv(*i.value()));
+                    out << VS_XML_NS::format(" {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), rsv(*i.value()));
                 }
             }
             out << "/>";
         }
         else{
-            out << std::format("<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
+            out << VS_XML_NS::format("<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
             for(auto& i : ptr->attrs()){
                 if(!configs.raw_strings){
                     auto t = serialize::to_xml_attr_2(rsv(*i.value()));
                     if(!t.has_value()){/*TODO: Error*/}
                     auto tt = t.value_or(std::string_view(""));
                     std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
-                    out << std::format(" {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), sv);
+                    out << VS_XML_NS::format(" {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), sv);
                 }
                 else{
-                    out << std::format(" {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), rsv(*i.value()));
+                    out << VS_XML_NS::format(" {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), rsv(*i.value()));
                 }
             }
             out << ">";
             for(auto& i : ptr->children()){
                 print_h(out,cfg,&i);
             }
-            out << std::format("</{}{}{}>", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
+            out << VS_XML_NS::format("</{}{}{}>", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
         }
     }
     else if(ptr->type()==type_t::CDATA){
@@ -103,10 +105,10 @@ bool TreeRaw::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t
             if(!t.has_value()){/*TODO: Error*/}
             auto tt = t.value_or(std::string_view(""));
             std::string_view sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
-            out << std::format("<![CDATA[{}]]>",sv);
+            out << VS_XML_NS::format("<![CDATA[{}]]>",sv);
         }
         else{
-            out << std::format("<![CDATA[{}]]>",rsv(*ptr->value()));
+            out << VS_XML_NS::format("<![CDATA[{}]]>",rsv(*ptr->value()));
         }
     }
     else if(ptr->type()==type_t::COMMENT){
@@ -115,10 +117,10 @@ bool TreeRaw::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t
             if(!t.has_value()){/*TODO: Error*/}
             auto tt = t.value_or(std::string_view(""));
             std::string_view sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
-            out << std::format("<!--{}-->",sv);
+            out << VS_XML_NS::format("<!--{}-->",sv);
         }
         else{
-            out << std::format("<!--{}-->",rsv(*ptr->value()));
+            out << VS_XML_NS::format("<!--{}-->",rsv(*ptr->value()));
         }
     }
     else if(ptr->type()==type_t::TEXT){
@@ -127,10 +129,10 @@ bool TreeRaw::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t
             if(!t.has_value()){/*TODO: Error*/}
             auto tt = t.value_or(std::string_view(""));
             std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
-            out << std::format("{}",sv);
+            out << VS_XML_NS::format("{}",sv);
         }
         else{
-            out << std::format("{}",rsv(*ptr->value()));
+            out << VS_XML_NS::format("{}",rsv(*ptr->value()));
         }
     }
     else if(ptr->type()==type_t::PROC){
@@ -139,10 +141,10 @@ bool TreeRaw::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t
             if(!t.has_value()){/*TODO: Error*/}
             auto tt = t.value_or(std::string_view(""));
             std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
-            out << std::format("<?{}?>",sv);
+            out << VS_XML_NS::format("<?{}?>",sv);
         }
         else{
-            out << std::format("<?{}?>",rsv(*ptr->value()));
+            out << VS_XML_NS::format("<?{}?>",rsv(*ptr->value()));
         }
     }
     else if(ptr->type()==type_t::MARKER){

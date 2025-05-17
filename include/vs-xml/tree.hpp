@@ -150,6 +150,7 @@ struct TreeRaw{
     }
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
+
     bool reorder_h(
         const std::function<bool(const attr_t&, const attr_t&)>& fn,
         const element_t* ref, 

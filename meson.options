@@ -2,3 +2,6 @@ option('tests', type: 'boolean', value: false)
 option('benchmarks', type: 'boolean', value: false)
 option('examples', type: 'boolean', value: false)
 option('utils', type: 'boolean', value: true)
+
+#Optionally use fmt if available, even if there is std::format. Highly suggested, std::format is much worse in GCC
+option('use_fmt', type: 'boolean', value: true)

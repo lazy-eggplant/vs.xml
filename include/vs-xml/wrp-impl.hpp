@@ -20,14 +20,14 @@ struct sv  {
         const TreeRaw* tree;
 
         union{
-            xml::sv main;
+            VS_XML_NS::sv main;
             std::string_view alt = {};  
         }body;
 
     public:
 
     inline sv(const TreeRaw& tree, std::string_view v):tree(&tree),body({tree.symbols.data(),v}){}
-    inline sv(const TreeRaw& tree, xml::sv v):tree(&tree),body({v}){}
+    inline sv(const TreeRaw& tree, VS_XML_NS::sv v):tree(&tree),body({v}){}
     inline sv(std::string_view v):tree(nullptr){body.alt = v;}
     inline sv(const char v[]):tree(nullptr){body.alt = v;}
 
@@ -225,12 +225,12 @@ inline auto base_t<T>::children(auto filter) const{ return children() | filter ;
 
 
 /**
- * @brief Formatter for xml::wrp::sv, the custom stringview used by this library for wrapper trees/documents
+ * @brief Formatter for VS_XML_NS::wrp::sv, the custom stringview used by this library for wrapper trees/documents
  */
 template <>
-struct std::formatter<xml::wrp::sv, char> : std::formatter<std::string_view, char> {
+struct std::formatter<VS_XML_NS::wrp::sv, char> : std::formatter<std::string_view, char> {
     template <typename FormatContext>
-    auto format(const xml::wrp::sv& value, FormatContext& ctx) const {
+    auto format(const VS_XML_NS::wrp::sv& value, FormatContext& ctx) const {
         return std::formatter<std::string_view, char>::format((std::string_view)(value), ctx);
     }
 };

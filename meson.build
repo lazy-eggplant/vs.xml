@@ -10,6 +10,14 @@ include_dirs = include_directories('include')
 
 add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
 
+if get_option('use_fmt')
+  fmt_dep = dependency('fmt')
+  use_fmt = ['-D', 'USE_FMT']
+else 
+  fmt_dep = []
+  use_fmt = []
+endif
+
 vs_xml_lib = library(
     'vs-xml',
     [
@@ -20,8 +28,9 @@ vs_xml_lib = library(
       'lib/document.cpp',
       'lib/world.cpp'
     ],
+    cpp_args: [use_fmt],
     install: true,
-    dependencies: [],
+    dependencies: [fmt_dep],
     include_directories: include_dirs,
 )
 

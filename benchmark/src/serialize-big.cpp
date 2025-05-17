@@ -29,7 +29,7 @@ int test_vs(std::string_view xmlInput){
         std::string str;
         std::stringstream file(str);
 
-        //tree->print(file);
+        tree->print(file);
 
     }catch (const std::exception &ex) {
         std::cerr << "Error while testing: " << ex.what() << "\n";
@@ -73,7 +73,7 @@ int test_pugi(std::string_view xmlInput){
         std::string str;
         std::stringstream file(str);
 
-        //document.save(file);
+        document.save(file);
 
     }catch (const std::exception &ex) {
         std::cerr << "Error while testing: " << ex.what() << "\n";
