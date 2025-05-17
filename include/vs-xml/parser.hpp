@@ -131,7 +131,7 @@ private:
                 throw std::runtime_error("Unterminated processing instruction.");
             auto procContent = data_.substr(pos_, procEnd - pos_);
             if constexpr (Builder_t::configs.raw_strings ) builder_.proc(procContent);
-            else builder_.proc(serialize::unescape_xml(procContent));
+            else builder_.proc(serialize::inplace_unescape_xml(procContent));
             pos_ = procEnd + 2;
             return;
         }
@@ -147,7 +147,7 @@ private:
                     throw std::runtime_error("Unterminated XML comment.");
                 auto commentContent = data_.substr(pos_, commentEnd - pos_);
                 if constexpr (Builder_t::configs.raw_strings ) builder_.comment(commentContent);
-                else builder_.comment(serialize::unescape_xml(commentContent));
+                else builder_.comment(serialize::inplace_unescape_xml(commentContent));
                 pos_ = commentEnd + 3;
                 return;
             } 
@@ -217,7 +217,7 @@ private:
 
             // Call builder's attr with local name and corresponding namespace.
             if constexpr (Builder_t::configs.raw_strings ) builder_.attr(attrLocal, attrValue, attrNs);
-            else builder_.attr(attrLocal, serialize::unescape_xml(attrValue), attrNs);
+            else builder_.attr(attrLocal, serialize::inplace_unescape_xml(attrValue), attrNs);
             
         }
 
@@ -262,7 +262,7 @@ private:
                 std::string_view unescapedText;
 
                 if constexpr (Builder_t::configs.raw_strings )unescapedText=textContent;
-                else unescapedText = serialize::unescape_xml(textContent);
+                else unescapedText = serialize::inplace_unescape_xml(textContent);
 
                 if (!unescapedText.empty() &&
                     unescapedText.find_first_not_of(" \t\r\n") != std::string::npos)

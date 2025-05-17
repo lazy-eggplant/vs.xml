@@ -161,6 +161,9 @@ struct TreeRaw{
     friend struct TreeBuilder;
     friend struct details::BuilderBase;
     friend wrp::sv;
+
+    template <typename T>
+    friend struct wrp::base_t;
 };
 
 

@@ -23,3 +23,17 @@ test('parse-demo',executable(
         mio_dep
     ],
 ))
+
+
+
+test('escape',executable(
+    'escape',
+    './src/escape.cpp',
+    install: false,
+    cpp_args: [],
+    link_args: [],
+    dependencies: [
+        vs_xml_dep,
+        mio_dep
+    ],
+))

@@ -3,6 +3,7 @@
 #include "tree.hpp"
 #include "commons.hpp"
 #include "impl.hpp"
+#include <cstddef>
 #include <iterator>
 #include <string_view>
 
@@ -36,13 +37,13 @@ struct sv  {
     //TODO: Add comparison operators. Since they can access the tree configs, it is possible to know if serialization is needed or not, picking the optimal comparison algorithm.
 };
 
-
 template <typename T>
 struct base_t{
     private:
         const TreeRaw* base;
         const T*       ptr;
     
+        base_t(const TreeRaw& base, ptrdiff_t ptr):base(&base),ptr((const T* )((const char*)base.buffer.data()+ptr)){}
         base_t(const TreeRaw& base, const T* ptr):base(&base),ptr(ptr){}
         base_t(base_t p, const T* ptr):base(p.base),ptr(ptr){}
         base_t() = default;
@@ -60,7 +61,7 @@ struct base_t{
 
     inline explicit operator const T*() const  {return ptr;}
 
-    delta_ptr_t portable() const;
+    inline ptrdiff_t portable() const{return {T::type(),ptr-base->buffer.data()};}
 
     inline std::expected<sv,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
     inline std::expected<sv,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
@@ -96,6 +97,7 @@ struct base_t<attr_t>{
         const TreeRaw* base;
         const attr_t*  ptr;
     
+        base_t(const TreeRaw& base, ptrdiff_t ptr):base(&base),ptr((const attr_t* )((const char*)base.buffer.data()+ptr)){}
         base_t(const TreeRaw& base, const attr_t* ptr):base(&base),ptr(ptr){}
         base_t(base_t p, const attr_t* ptr):base(p.base),ptr(ptr){}
         base_t() = default;
@@ -112,7 +114,7 @@ struct base_t<attr_t>{
 
     inline explicit operator const attr_t*() const  {return ptr;}
 
-    delta_ptr_t portable() const;
+    inline ptrdiff_t portable() const{return (const uint8_t*)ptr-base->buffer.data();}
 
     inline std::expected<sv,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
     inline std::expected<sv,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv{*base,*tmp};}
