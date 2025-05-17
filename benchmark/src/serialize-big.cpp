@@ -4,6 +4,7 @@
 #include <print>
 #include <sstream>
 
+#include <string_view>
 #include <vs-xml/commons.hpp>
 #include <vs-xml/parser.hpp>
 #include <vs-xml/serializer.hpp>
@@ -13,12 +14,8 @@
 #include <pugixml.hpp>
 
 
-int test_vs(){
+int test_vs(std::string_view xmlInput){
     try{
-        mio::mmap_source mmap("./assets/nasa_10_f_bs.xml");
-        std::string_view xmlInput(mmap.data(),mmap.size());
-
-        
         xml::DocBuilder<{.symbols=xml::builder_config_t::EXTERN_REL,.raw_strings=true}> bld(xmlInput);
         xml::Parser parser(xmlInput, bld);
         parser.parse();
@@ -42,7 +39,7 @@ int test_vs(){
 }
 
 
-int test_vs2(){
+int test_vs2(std::string_view binInput){
     try{
         mio::mmap_source mmap("./assets/nasa_10_f_bs.xml.bin");
         std::string_view binInput(mmap.data(),mmap.size());
@@ -64,7 +61,7 @@ int test_vs2(){
 }
 
 
-int test_pugi(){
+int test_pugi(std::string_view xmlInput){
     try{
         mio::mmap_source mmap("./assets/nasa_10_f_bs.xml");
         std::string_view xmlInput(mmap.data(),mmap.size());
@@ -87,16 +84,28 @@ int test_pugi(){
 
 
 int main(int argc, const char* argv[]) {
-    for(int i = 0; i<2; i++){
-        auto t0 = std::chrono::system_clock::now();
-        test_vs();
-        auto t1 = std::chrono::system_clock::now();
-        test_pugi();
-        auto t2 = std::chrono::system_clock::now();
-        test_vs2();
-        auto t3 = std::chrono::system_clock::now();
+    mio::mmap_source mmap1("./assets/nasa_10_f_bs.xml");
+    std::string_view xmlInput1(mmap1.data(),mmap1.size());
 
-        std::print("vs:   {}\nvs2:  {}\npugi: {}\n",(t1-t0).count(), (t3-t2).count(), (t2-t1).count());
+    mio::mmap_source mmap2("./assets/nasa_10_f_bs.xml");
+    std::string_view xmlInput2(mmap2.data(),mmap2.size());
+
+    mio::mmap_source mmap3("./assets/nasa_10_f_bs.xml.bin");
+    std::string_view binInput(mmap3.data(),mmap3.size());
+
+    for(int i = 0; i<3; i++){
+        std::vector<uint64_t> ticks;
+        ticks.push(std::chrono::system_clock::now());
+        test_vs(xmlInput1);
+        ticks.push(std::chrono::system_clock::now());
+        test_vs2(binInput);
+        ticks.push(std::chrono::system_clock::now());
+        test_pugi(xmlInput2);
+        ticks.push(std::chrono::system_clock::now());
+        
+        std::print("vs   :   {}\n",  (ticks[1]-ticks[0]).count());
+        std::print("vs2  :   {}\n",  (ticks[2]-ticks[1]).count());
+        std::print("pugi :   {}\n",  (ticks[3]-ticks[2]).count());
     }
     
 
