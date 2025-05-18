@@ -3,6 +3,35 @@
 #include <coroutine>
 #include <cstdlib>
 
+#include <new> 
+#include <print> 
+
+// A very simple memory pool for demonstration purposes. DON'T SHIP IN THE LIBRARY!
+struct MemoryPool {
+    static constexpr size_t POOL_SIZE = 1024 * 10;
+    char pool[POOL_SIZE];
+    size_t offset = 0;
+
+    size_t counter;
+
+    void* allocate(size_t size) {
+        std::print("new : {} {} {}\n", offset, size, counter);
+        if (offset + size > POOL_SIZE) {
+            return nullptr;
+        }
+        void* ptr = pool + offset;
+        offset += size;
+        counter++;
+        return ptr;
+    }
+
+    void deallocate(){
+        counter--;
+    }
+};
+
+MemoryPool globalPool;
+
 // Minimal Generator implementation.
 template<typename T>
 struct Generator {
@@ -11,6 +40,26 @@ struct Generator {
 
     struct promise_type {
         T current_value;
+
+        // Overload operator new to allocate from our custom memory pool.
+        static void* operator new(std::size_t size) noexcept{
+            if (void* ptr = globalPool.allocate(size)) {
+                return ptr;
+            }
+            // Fall back to global new if pool is exhausted.
+            //return ::operator new(size);
+            return nullptr;
+        }
+
+        // Matching delete operator.
+        static void operator delete(void* ptr, std::size_t size) {
+            globalPool.deallocate();
+            // In this demo we are not reclaiming memory from the pool.
+            //::operator delete(ptr);
+            return;
+        }
+
+
         static auto get_return_object_on_allocation_failure() { return Generator{nullptr}; }
         auto get_return_object() { return Generator{handle_type::from_promise(*this)}; }
         auto initial_suspend() { return std::suspend_always{}; }
@@ -62,14 +111,17 @@ struct Node {
 
 //TODO: instead of a single filter, apply one from a constexpr vector for each nesting, and stop when they are done.
 
+#include <generator>
+
 // A coroutine-based generator to recursively traverse the tree.
-Generator<const Node*> traverse(const Node& node, auto filter) {
+std::generator<const Node*> traverse(const Node& node, auto filter, int v) {
+
     if (filter(node)) {
         co_yield &node;
     }
     for (const auto& child : node.getChildren()) {
         // Recursively yield from the child generator.
-        for (const Node* n : traverse(child, filter)) {
+        for (const Node* n : traverse(child, filter, v+1)) {
             co_yield n;
         }
     }
@@ -78,16 +130,19 @@ Generator<const Node*> traverse(const Node& node, auto filter) {
 int main() {
     Node root{0, {
         {1, { {3, {}}, {4, {}} }},
-        {2, { {5, {}}, {6, {}} }}
+        {2, { {5, {}}, {6, {}} }},
+        {4, { {5, {}}, {6, {}} }}
     }};
 
-    auto filterOdd = [](const Node& n) { return (n.value % 2) != 0; };
+    auto filterOdd = [](const Node& n) static { return (n.value % 2) != 0; };
 
     std::cout << "Lazy traversal with generators: ";
-    for (const Node* n : traverse(root, filterOdd)) {
+    for (const Node* n : traverse(root, filterOdd,0)) {
         std::cout << n->value << " ";
     }
     std::cout << std::endl;
+
+
 
     return 0;
 }
