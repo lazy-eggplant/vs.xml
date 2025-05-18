@@ -11,7 +11,6 @@ test('base-checks',executable(
     ],
 ))
 
-
 test('parse-demo',executable(
     'parse-demo',
     './src/parse-demo.cpp',
@@ -24,11 +23,20 @@ test('parse-demo',executable(
     ],
 ))
 
-
-
 test('escape',executable(
     'escape',
     './src/escape.cpp',
+    install: false,
+    cpp_args: [],
+    link_args: [],
+    dependencies: [
+        vs_xml_dep,
+    ],
+))
+
+test('query',executable(
+    'query',
+    './src/query.cpp',
     install: false,
     cpp_args: [],
     link_args: [],
