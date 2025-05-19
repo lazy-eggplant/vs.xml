@@ -118,7 +118,7 @@ sv BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>::symbol(std::string_vi
 
         sv ret(symbols_i.size()-s.length(),s.length());
         auto it = idx_symbols.insert(ret); 
-        if(it.second==false)throw std::runtime_error("Unable to insert symbol in symbol table");
+        xml_assert(it.second==true, "Unable to insert symbol in symbol table");
         return *it.first;
     }
     else{

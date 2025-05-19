@@ -8,21 +8,27 @@ namespace serialize{
 
 //TODO: Add support to output &#... escapes. Added in the new functions, but they still need replacing in current code.
 
-std::string_view validate_xml_label(std::string_view str){
-    //This operation alone is responsible for around 10% lower speed while parsing. It might be good to disable it if not needed?
-    if(str.size()==0)return str;
-    
-    if (str[0]=='_' or (str[0]>='a' && str[0]<='z') or (str[0]>='A' && str[0]<='Z')){}
-    else [[unlikely]] throw std::runtime_error("Invalid XML label");
-    
-    for(auto& c : std::string_view{str.begin()+1,str.end()}){
-        //In theory some intervals of utf8 should be negated. But this filter is good enough for now.
-        if((c=='_' or c=='.' or c=='-' or (c>='0' && c<='9') or (c>='a' && c<='z') or (c>='A' && c<='Z') or (c>127))){/*OK*/}
-        else [[unlikely]] {
-            throw std::runtime_error("Invalid XML label");
+std::string_view validate_xml_label(std::string_view str, bool optional) noexcept(VS_XML_NO_EXCEPT){
+    if constexpr(!VS_XML_NO_EXCEPT){
+        //This operation alone is responsible for around 10% lower speed while parsing. It might be good to disable it if not needed?
+        if(str.size()==0 && optional)return str;
+        else [[unlikely]] if(str.size()==0 && !optional)throw std::runtime_error("Invalid empty XML label");
+
+        if (str[0]=='_' or (str[0]>='a' && str[0]<='z') or (str[0]>='A' && str[0]<='Z')){}
+        else [[unlikely]] throw std::runtime_error("Invalid XML label");
+        
+        for(auto& c : std::string_view{str.begin()+1,str.end()}){
+            //In theory some intervals of utf8 should be negated. But this filter is good enough for now.
+            if((c=='_' or c=='.' or c=='-' or (c>='0' && c<='9') or (c>='a' && c<='z') or (c>='A' && c<='Z') or (c>127))){/*OK*/}
+            else [[unlikely]] {
+                throw std::runtime_error("Invalid XML label");
+            }
         }
+        return str;
+    } else{
+        //TODO: implement equivalent where some logs are recorded as side-effect but no exception is thrown.
+        return str;
     }
-    return str;
 }
 
 ret_t to_xml_attr_1(std::string_view str){

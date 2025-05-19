@@ -51,7 +51,6 @@ namespace details{
             error_t leaf(std::string_view value);
     
             std::string_view symbols;
-            inline std::vector<uint8_t>&& get_buffer() {return std::move(buffer);}
         
 
             /**
@@ -85,6 +84,7 @@ namespace details{
             error_t inject(const TreeRaw& tree, const unknown_t* base = nullptr, bool include_root = false);
 
 //            error_t inject(const Tree& tree);
+            //TODO: fork
     };
     
 /**
@@ -96,7 +96,7 @@ template <builder_config_t::symbols_t COMPRESSION>
 struct BuilderImpl: protected BuilderBase{
     protected:
         using BuilderBase::close;
-        using BuilderBase::get_buffer;
+        //using BuilderBase::fork;
 
     public:
         using BuilderBase::inject;
@@ -219,10 +219,30 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||
                 cfg.symbols==builder_config_t::symbols_t::OWNED 
-            )return Tree(TreeRaw(configs,std::move(this->get_buffer()),std::move(this->symbols_i)));
-            else return Tree(TreeRaw(configs,std::move(this->get_buffer()),this->symbols.data()));
+            )return Tree(TreeRaw(configs,std::move(this->buffer),std::move(this->symbols_i)));
+            else return Tree(TreeRaw(configs,std::move(this->buffer),this->symbols.data()));
         }
         
+        struct attr_t{
+            std::string_view name;
+            std::string_view value;
+            std::string_view ns;
+        };
+
+        constexpr void x(std::string_view ns, std::string_view name, const std::initializer_list<attr_t>& attrs={}, const std::function<void()>& items=[]{}){
+            begin(name,ns);
+
+            for(auto& a:attrs){
+                attr(a.name,a.value,a.ns);
+            }
+
+            items();
+
+            end();
+        }
+
+        constexpr void x(std::string_view name, const std::initializer_list<attr_t>& attrs={}, const std::function<void()>& items=[]{}){return x("",name,attrs,items);}
+
         /**
          * @brief Reserves space for the buffer to avoid many of the initial small allocations.
          * 

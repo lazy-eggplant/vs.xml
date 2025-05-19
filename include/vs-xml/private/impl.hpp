@@ -81,10 +81,10 @@ struct attr_t{
 
     public:
 
-    inline attr_t(const void* offset, std::string_view _ns, std::string_view _name, std::string_view _value):
-        _ns(offset,serialize::validate_xml_label(_ns)),
+    inline attr_t(const void* offset, std::string_view _ns, std::string_view _name, std::string_view _value) noexcept(VS_XML_NO_EXCEPT):
+        _ns(offset,serialize::validate_xml_label(_ns, true)),
         _name(offset,serialize::validate_xml_label(_name)),
-        _value(offset,_value){}
+        _value(offset,_value) {} 
 
     inline std::expected<sv,feature_t> ns() const {return _ns;}
     inline std::expected<sv,feature_t> name() const {return _name;}
@@ -106,8 +106,8 @@ struct element_t : base_t<element_t>{
 
     attr_t _attrs[];
 
-    inline element_t(const void* offset, element_t* _parent, std::string_view _ns, std::string_view _name):
-        _ns(offset,serialize::validate_xml_label(_ns)),
+    inline element_t(const void* offset, element_t* _parent, std::string_view _ns, std::string_view _name) noexcept(VS_XML_NO_EXCEPT):
+        _ns(offset,serialize::validate_xml_label(_ns,true)),
         _name(offset,serialize::validate_xml_label(_name))
     {
         set_parent(_parent);

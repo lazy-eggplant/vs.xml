@@ -31,7 +31,7 @@ namespace serialize{
 
 typedef std::optional<std::variant<std::string,std::string_view>> ret_t;
 
-std::string_view validate_xml_label(std::string_view str);
+std::string_view validate_xml_label(std::string_view str, bool optional=false);
 
 ret_t to_xml_attr_1(std::string_view str);
 ret_t to_xml_attr_2(std::string_view str);

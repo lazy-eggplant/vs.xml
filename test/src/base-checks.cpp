@@ -7,11 +7,17 @@
 #include <vs-xml/private/impl.hpp>
 #include <vs-xml/builder.hpp>
 
+
 template<xml::builder_config_t cfg>
 auto mk_tree(){
     xml::TreeBuilder<cfg> build;
     build.reserve(100000,100000);
     build.begin("hello");
+        build.x("AAA",{{"N1","N2"},{"N1","N3"}},[&]{
+            build.x("BBB");
+            build.comment("ss");
+            build.comment("comment2");
+        });
         build.attr("op3-a", "v'>&al1");
         build.attr("op1-a-s", "val1", "w");
         build.attr("op2-a", "va&gt;l\"1");
