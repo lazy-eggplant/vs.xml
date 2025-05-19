@@ -1,7 +1,9 @@
 <map id="include/vs&#45;xml/private/assert.hpp" name="include/vs&#45;xml/private/assert.hpp">
-<area shape="rect" id="Node000001" title="Utility for assertions." alt="" coords="29,5,197,45"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,92,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,47,69,84,65,81,95,44"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="116,93,240,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,44,162,81,158,84,126,47"/>
+<area shape="rect" id="Node000001" title="Utility for assertions." alt="" coords="54,5,222,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,71,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,48,65,87,62,82,112,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="95,93,181,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,46,141,79,135,79,135,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="205,93,329,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="171,43,238,84,235,88,168,48"/>
 </map>
