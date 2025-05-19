@@ -18,7 +18,7 @@ int test_vs(std::string_view xmlInput){
     try{
         xml::DocBuilder<{.symbols=xml::builder_config_t::EXTERN_REL,.raw_strings=true}> bld(xmlInput);
         xml::Parser parser(xmlInput, bld);
-        parser.parse();
+        std::ignore = parser.parse();
 
         auto tree = bld.close();
         if(!tree.has_value()){
@@ -51,7 +51,7 @@ int test_vs2(std::string_view binInput){
         std::stringstream file(str);
 
         //tree.print(file);
-        tree.save_binary(file);
+        tree->save_binary(file);
 
     }catch (const std::exception &ex) {
         std::cerr << "Error while testing: " << ex.what() << "\n";

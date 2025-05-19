@@ -44,6 +44,22 @@ struct TreeRaw{
 
     public:
 
+    struct from_binary_error_t {
+        enum Code {
+            OK = 0,
+            HeaderTooSmall,
+            MagicMismatch,
+            MajorVersionMismatch,
+            MinorVersionTooHigh,
+            TruncatedSpan,
+            TreeOutOfBounds,
+            SymbolsOutOfBounds
+        } code;
+        
+        std::string_view msg();
+    };
+    
+
     std::function<bool(const unknown_t&, const unknown_t&)> def_order_node() const;
     std::function<bool(const attr_t&, const attr_t&)> def_order_attrs() const;
 
@@ -116,8 +132,8 @@ struct TreeRaw{
 
     bool save_binary(std::ostream& out)const;
 
-    static TreeRaw from_binary(std::span<uint8_t> region);
-    static const TreeRaw from_binary(std::string_view region);
+    [[nodiscard]] static std::expected<TreeRaw, TreeRaw::from_binary_error_t> from_binary(std::span<uint8_t> region);
+    [[nodiscard]] static std::expected<const TreeRaw , TreeRaw::from_binary_error_t> from_binary(std::string_view region);
 
     inline std::string_view rsv(sv s) const{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);

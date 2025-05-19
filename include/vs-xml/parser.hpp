@@ -37,25 +37,61 @@ public:
         static_assert(Builder_t::configs.raw_strings, "Cannot pass immutable buffer if the input strings might need mutation");
     }
 
+    struct error_t{
+        enum ErrorCode {
+            OK = 0,
+            MISSING_LT_BEGIN,       // "Expected '<' at beginning of XML document."
+            UNTERMINATED_PROC,      // "Unterminated processing instruction."
+            UNTERMINATED_COMMENT,   // "Unterminated XML comment."
+            UNTERMINATED_CDATA,     // "Unterminated CDATA section."
+            UNTERMINATED_ATTR_VALUE,// "Unterminated attribute value."
+            MISSING_ATTR_EQUALS,    // "Expected '=' after attribute name."
+            MISSING_ATTR_QUOTES,    // "Expected quote for attribute value."
+            MISSING_GT_AFTER_TAG,   // "Expected '>' after tag name and attributes."
+            MISSING_GT_IN_END_TAG,  // "Expected '>' in closing tag."
+            UNEXPECTED_EOF,         // "Unexpected end of XML content."
+            NODE_NOT_ALLOWED_ROOT   // "Node type not allowed in the document root."
+        } code;
+        size_t ctx; // current position in the data
+        
+        std::string_view msg() const {
+            switch (code) {
+                case OK:                        return "OK";
+                case MISSING_LT_BEGIN:          return "Expected '<' at beginning of XML document.";
+                case UNTERMINATED_PROC:         return "Unterminated processing instruction.";
+                case UNTERMINATED_COMMENT:      return "Unterminated XML comment.";
+                case UNTERMINATED_CDATA:        return "Unterminated CDATA section.";
+                case UNTERMINATED_ATTR_VALUE:   return "Unterminated attribute value.";
+                case MISSING_ATTR_EQUALS:       return "Expected '=' after attribute name.";
+                case MISSING_ATTR_QUOTES:       return "Expected quote for attribute value.";
+                case MISSING_GT_AFTER_TAG:      return "Expected '>' after tag name and attributes.";
+                case MISSING_GT_IN_END_TAG:     return "Expected '>' in closing tag.";
+                case UNEXPECTED_EOF:            return "Unexpected end of XML content.";
+                case NODE_NOT_ALLOWED_ROOT:     return "Node type not allowed in the document root.";
+                default:                        return "Unknown error.";
+            }
+        }
+    };
+
     // Start parsing from the beginning of the XML document.
     // Throws an exception on error.
-    void parse() {
-        if constexpr(!Builder_t::is_document){
+    [[nodiscard("Don't discard the return value for parsing!")]] std::expected<void, error_t> parse() noexcept{
+        if constexpr(!Builder_t::is_document) {
             skip_whitespace();
             // Expecting the first tag to begin with '<'
             if (!consume('<'))
-                throw std::runtime_error("Expected '<' at beginning of XML document.");
-
+                return std::unexpected(error_t{error_t::MISSING_LT_BEGIN, pos_});
             parseElement<Builder_t::is_document>();
         }
-        else while(pos_ < data_.size()){
-            skip_whitespace();
-            // Expecting the first tag to begin with '<'
-            if (!consume('<'))
-                throw std::runtime_error("Expected '<' at beginning of XML document.");
-
-            parseElement<Builder_t::is_document>();
+        else {
+            while (pos_ < data_.size()) {
+                skip_whitespace();
+                if (!consume('<'))
+                    return std::unexpected(error_t{error_t::MISSING_LT_BEGIN, pos_});
+                parseElement<Builder_t::is_document>();
+            }
         }
+        return {};
     }
 
 private:
@@ -117,10 +153,10 @@ private:
 
     // Main element parser. It assumes that a '<' has already been consumed.
     template<bool ROOT=false>
-    void parseElement() {
+    std::expected<void, error_t> parseElement() noexcept{
         skip_whitespace();
         if (pos_ >= data_.size())
-            return;
+            return {};
 
         // Check for processing instruction <? ... ?>
         if (peek('?')) {
@@ -128,12 +164,12 @@ private:
             // Read processing instruction until "?>"
             size_t procEnd = data_.find("?>", pos_);
             if (procEnd == std::string_view::npos)
-                throw std::runtime_error("Unterminated processing instruction.");
+                { return std::unexpected(error_t{error_t::UNTERMINATED_PROC, pos_}); }
             auto procContent = data_.substr(pos_, procEnd - pos_);
             if constexpr (Builder_t::configs.raw_strings ) builder_.proc(procContent);
             else builder_.proc(serialize::inplace_unescape_xml(procContent));
             pos_ = procEnd + 2;
-            return;
+            return {};
         }
 
         // Check for comment or CDATA (both start with "!")
@@ -144,31 +180,32 @@ private:
                 pos_ += 2;
                 size_t commentEnd = data_.find("-->", pos_);
                 if (commentEnd == std::string_view::npos)
-                    throw std::runtime_error("Unterminated XML comment.");
+                    { return std::unexpected(error_t{error_t::UNTERMINATED_COMMENT, pos_}); }
                 auto commentContent = data_.substr(pos_, commentEnd - pos_);
                 if constexpr (Builder_t::configs.raw_strings ) builder_.comment(commentContent);
                 else builder_.comment(serialize::inplace_unescape_xml(commentContent));
                 pos_ = commentEnd + 3;
-                return;
+                return {};
             } 
             // CDATA: <![CDATA[ ... ]]>
             else if (data_.substr(pos_, 7) == "[CDATA[" && !ROOT) {
                 pos_ += 7; // skip "[CDATA["
                 size_t cdataEnd = data_.find("]]>", pos_);
                 if (cdataEnd == std::string_view::npos)
-                    throw std::runtime_error("Unterminated CDATA section.");
+                    { return std::unexpected(error_t{error_t::UNTERMINATED_CDATA, pos_}); }
                 auto cdataContent = data_.substr(pos_, cdataEnd - pos_);
                 builder_.cdata(cdataContent); // CDATA content provided as-is.
                 pos_ = cdataEnd + 3;
-                return;
-            } else if(!ROOT){
+                return {};
+            } 
+            else if(!ROOT){
                 // Other declarations - skip until '>'
                 get_until('>');
                 consume('>');
-                return;
-            } else{
-                throw std::runtime_error("Node type not allowed in the document root.");
-            }
+                return {};
+            } 
+            else return std::unexpected(error_t{error_t::NODE_NOT_ALLOWED_ROOT, pos_});
+      
         }
 
         // Standard element:
@@ -194,26 +231,22 @@ private:
             auto [attrLocal, attrNs] = split_namespace(attrQualified);
             
             skip_whitespace();
-            if (!consume('='))
-                throw std::runtime_error("Expected '=' after attribute name.");
+            if (!consume('='))return std::unexpected(error_t{error_t::MISSING_ATTR_EQUALS, pos_}); 
             skip_whitespace();
             // Expect a quoted attribute value.
             char quote = 0;
             if (peek('\"') || peek('\'')) {
                 quote = data_[pos_];
                 ++pos_;
-            } else {
-                throw std::runtime_error("Expected quote for attribute value.");
-            }
+            } 
+            else return std::unexpected(error_t{error_t::MISSING_ATTR_QUOTES, pos_}); 
+            
 
             size_t attrValueStart = pos_;
-            while (pos_ < data_.size() && data_[pos_] != quote)
-                ++pos_;
-            if (pos_ >= data_.size())
-                throw std::runtime_error("Unterminated attribute value.");
+            while (pos_ < data_.size() && data_[pos_] != quote) ++pos_;
+            if (pos_ >= data_.size()) return std::unexpected(error_t{error_t::UNTERMINATED_ATTR_VALUE, pos_}); 
             auto attrValue = data_.substr(attrValueStart, pos_ - attrValueStart);
-            if (!consume(quote))
-                throw std::runtime_error("Expected closing quote for attribute value.");
+            if (!consume(quote))return std::unexpected(error_t{error_t::MISSING_ATTR_QUOTES, pos_}); 
 
             // Call builder's attr with local name and corresponding namespace.
             if constexpr (Builder_t::configs.raw_strings ) builder_.attr(attrLocal, attrValue, attrNs);
@@ -225,18 +258,16 @@ private:
         if (data_.substr(pos_, 2) == "/>") {
             pos_ += 2;
             builder_.end();
-            return;
+            return {};
         }
 
         // Otherwise, consume the '>' and open the element.
-        if (!consume('>'))
-            throw std::runtime_error("Expected '>' after tag name and attributes.");
+        if (!consume('>')) return std::unexpected(error_t{error_t::MISSING_GT_AFTER_TAG, pos_}); 
 
         // Parse content within the element until encountering a matching end tag.
         while (pos_ < data_.size()) {
             skip_whitespace();
-            if (pos_ >= data_.size())
-                throw std::runtime_error("Unexpected end of XML content.");
+            if (pos_ >= data_.size()) return std::unexpected(error_t{error_t::UNEXPECTED_EOF, pos_}); 
 
             if (peek('<')) {
                 // Check for closing tag.
@@ -244,8 +275,7 @@ private:
                     pos_ += 2; // skip "</"
                     // Skip the qualified name inside end tag.
                     get_until('>');
-                    if (!consume('>'))
-                        throw std::runtime_error("Expected '>' in closing tag.");
+                    if (!consume('>')) return std::unexpected(error_t{error_t::MISSING_GT_IN_END_TAG, pos_});
                     builder_.end();
                     break;
                 } else {
@@ -271,6 +301,8 @@ private:
                 }
             }
         }
+
+        return {};
     }
 };
 

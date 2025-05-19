@@ -210,17 +210,30 @@ bool TreeRaw::save_binary(std::ostream& out)const{
     return true;
 }
 
-TreeRaw TreeRaw::from_binary(std::span<uint8_t> region){
-    xml_assert(region.size_bytes()>sizeof(binary_header_t),"Header of loaded file not matching minimum size");
+std::expected<TreeRaw, TreeRaw::from_binary_error_t> TreeRaw::from_binary(std::span<uint8_t> region){
+    if(region.size_bytes() < sizeof(binary_header_t))
+        return std::unexpected(from_binary_error_t{from_binary_error_t::HeaderTooSmall});
+    
     binary_header_t header;
     memcpy((void*)&header,region.data(),sizeof(binary_header_t));
     
-    xml_assert(memcmp(header.magic,"$XML",4)==0,"Header of loaded file not matching the format");
-    xml_assert(header.format_major==format_major,"This binary was generated in a different major revision of the format.");
-    xml_assert(header.format_minor<=format_minor,"This binary was generated in a minor released after this build.");
-    xml_assert(region.size_bytes()>=header.offset_end, "Truncated span for the loaded file");
-    xml_assert(header.offset_tree<=header.offset_symbols, "Tree for loaded file is out of bounds");
-    xml_assert(header.offset_symbols<=header.offset_end, "Symbol table for loaded file is out of bounds");
+    if(std::memcmp(header.magic, "$XML", 4) != 0)
+        return std::unexpected(from_binary_error_t{from_binary_error_t::MagicMismatch});
+    
+    if(header.format_major != format_major)
+        return std::unexpected(from_binary_error_t{from_binary_error_t::MajorVersionMismatch});
+    
+    if(header.format_minor > format_minor)
+        return std::unexpected(from_binary_error_t{from_binary_error_t::MinorVersionTooHigh});
+    
+    if(region.size_bytes() < header.offset_end)
+        return std::unexpected(from_binary_error_t{from_binary_error_t::TruncatedSpan});
+    
+    if(header.offset_tree > header.offset_symbols)
+        return std::unexpected(from_binary_error_t{from_binary_error_t::TreeOutOfBounds});
+    
+    if(header.offset_symbols > header.offset_end)
+        return std::unexpected(from_binary_error_t{from_binary_error_t::SymbolsOutOfBounds});
 
     return TreeRaw(header.configs,
         std::span<uint8_t>{region.data()+header.offset_tree, region.data()+header.offset_symbols},
@@ -228,8 +241,23 @@ TreeRaw TreeRaw::from_binary(std::span<uint8_t> region){
     );
 }
 
-const TreeRaw TreeRaw::from_binary(std::string_view region){
+
+std::expected<const TreeRaw, TreeRaw::from_binary_error_t>  TreeRaw::from_binary(std::string_view region){
     return from_binary(std::span<uint8_t>{(uint8_t*)region.begin(),(uint8_t*)region.end()});
+}
+
+std::string_view TreeRaw::from_binary_error_t::msg() {
+    switch(code) {
+        case OK:                  return "OK";
+        case HeaderTooSmall:      return "Header of loaded file not matching minimum size";
+        case MagicMismatch:       return "Header of loaded file not matching the format";
+        case MajorVersionMismatch:return "This binary was generated in a different major revision of the format.";
+        case MinorVersionTooHigh: return "This binary was generated in a minor released after this build.";
+        case TruncatedSpan:       return "Truncated span for the loaded file";
+        case TreeOutOfBounds:     return "Tree for loaded file is out of bounds";
+        case SymbolsOutOfBounds:  return "Symbol table for loaded file is out of bounds";
+        default:                  return "Unknown error";
+    }
 }
 
 wrp::base_t<element_t> Tree::root() const{return {*this, &TreeRaw::root()};}

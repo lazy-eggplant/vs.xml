@@ -10,6 +10,7 @@
  * 
  */
 
+#include <expected>
 #include  <vs-xml/commons.hpp>
 #include  <vs-xml/tree.hpp>
 #include  <vs-xml/builder.hpp>
@@ -50,8 +51,16 @@ struct DocumentRaw : TreeRaw {
         return {};
     }
 
-    static inline DocumentRaw from_binary(std::span<uint8_t> region){return DocumentRaw(TreeRaw::from_binary(region));}
-    static inline const DocumentRaw from_binary(std::string_view region){return DocumentRaw(TreeRaw::from_binary(region));}
+    [[nodiscard]] static inline std::expected<DocumentRaw,TreeRaw::from_binary_error_t> from_binary(std::span<uint8_t> region){
+        std::expected<TreeRaw, TreeRaw::from_binary_error_t> t = TreeRaw::from_binary(region); 
+        if(!t.has_value())return std::unexpected(t.error()); 
+        else return DocumentRaw(std::move(*t));
+    }
+    [[nodiscard]] static inline const std::expected<DocumentRaw,TreeRaw::from_binary_error_t> from_binary(std::string_view region){
+        std::expected<const TreeRaw, TreeRaw::from_binary_error_t> t = TreeRaw::from_binary(region); 
+        if(!t.has_value())return std::unexpected(t.error()); 
+        else return DocumentRaw(std::move(*t));
+    }
 
     template<builder_config_t cfg>
     friend struct DocBuilder;

@@ -16,6 +16,7 @@ int decode(std::filesystem::path input, std::filesystem::path output){
         mio::mmap_source mmap(input.c_str());
         std::string_view binaryInput(mmap.data(),mmap.size());
         auto tree = xml::Document::from_binary(binaryInput);
+        if(!tree.has_value())throw std::runtime_error(std::string(tree.error().msg()));
 
         std::ofstream file(output,std::ios::binary|std::ios::out);
         if(!file.is_open()){
@@ -23,7 +24,8 @@ int decode(std::filesystem::path input, std::filesystem::path output){
             return 4;
         }
 
-        if(!tree.print(file)){
+
+        if(!tree->print(file)){
             std::cerr << "Error in serialization to XML\n";
             return 5;
         }

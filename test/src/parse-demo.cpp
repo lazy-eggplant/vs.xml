@@ -3,6 +3,7 @@
 #include <ostream>
 #include <print>
 
+#include <stdexcept>
 #include <vs-xml/parser.hpp>
 #include <vs-xml/serializer.hpp>
 #include <vs-xml/builder.hpp>
@@ -30,7 +31,8 @@ int main() {
     xml::TreeBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> builder;
     try {
         xml::Parser parser(std::span<char>(xmlData), builder);
-        parser.parse();
+        auto ret = parser.parse();
+        if(!ret.has_value())throw std::runtime_error(std::string(ret.error().msg()));
     } catch (const std::exception &ex) {
         std::cerr << "Error while parsing XML: " << ex.what() << "\n";
     }
@@ -57,7 +59,7 @@ int main() {
     {
         mio::mmap_source mmap("./assets/local/demo-0.bin");
         auto tmp = xml::TreeRaw::from_binary(std::span((uint8_t*)mmap.data(),mmap.size()));
-        tmp.print(std::cout,{});
+        tmp->print(std::cout,{});
     }
 
     std::print("\n~~~~\n");
