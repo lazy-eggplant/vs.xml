@@ -21,9 +21,8 @@
 #include <string_view>
 #include <array>
 
-#ifndef VS_XML_NS
-#define VS_XML_NS xml
-#endif
+#include <vs-xml/commons.hpp>
+
 
 namespace VS_XML_NS{
 namespace serialize{
@@ -95,9 +94,10 @@ public:
         iterator(const escaped_view* parent, size_t pos)
             : parent_(parent), pos_(pos), escapePos_(0) {}
 
-        char operator*() const {
+        char operator*() const noexcept(VS_XML_NO_EXCEPT){
             if (parent_ == nullptr || pos_ >= parent_->sv_.size()) {
-                throw std::out_of_range("Dereferencing end iterator");
+                xml_assert(true,"Dereferencing end iterator");
+                //throw std::out_of_range("Dereferencing end iterator");
             }
             // When expanding an escape sequence, return the proper character.
             if (inEscapeExpansion())
@@ -192,9 +192,10 @@ public:
         iterator(const unescaped_view* parent, size_t pos)
             : parent_(parent), pos_(pos) {}
 
-        char operator*() const {
+        char operator*() const noexcept(VS_XML_NO_EXCEPT){
             if (parent_ == nullptr || pos_ >= parent_->sv_.size())
-                throw std::out_of_range("Dereferencing end iterator");
+                xml_assert(true,"Dereferencing end iterator");
+                //throw std::out_of_range("Dereferencing end iterator");
 
             if (auto [ch, len] = detectEscape(parent_->sv_.substr(pos_)); len > 0)
                 return ch;

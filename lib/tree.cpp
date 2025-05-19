@@ -156,6 +156,7 @@ bool TreeRaw::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t
 };
 
 const TreeRaw TreeRaw::slice(const element_t* ref) const{
+    //TODO: Move to std::expected
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
     xml_assert(ref->type()==type_t::ELEMENT, "cannot slice something which is not a node");
 
@@ -166,6 +167,7 @@ const TreeRaw TreeRaw::slice(const element_t* ref) const{
 };
 
 TreeRaw TreeRaw::clone(const element_t* ref, bool reduce) const{
+    //TODO: Move to std::expected
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
     xml_assert(ref->type()==type_t::ELEMENT, "cannot clone something which is not a node");
 

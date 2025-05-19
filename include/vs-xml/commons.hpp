@@ -27,6 +27,11 @@
 #define VS_XML_NS xml
 #endif
 
+#ifndef VS_XML_NO_EXCEPT
+#define VS_XML_NO_EXCEPT false
+#endif
+
+
 #ifndef VS_XML_NO_ASSERT
 #include <vs-xml/private/assert.hpp>
 #endif 

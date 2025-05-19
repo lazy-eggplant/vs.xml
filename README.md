@@ -118,8 +118,8 @@ However, examples, tests, optional utilities and benchmarks have some dependenci
 ## Licence
 
 This library is released as `LGPL3.0`.  
-All documentation is under CC4.0 Attribution Share-Alike.  
-Examples are CC0, unless something else is specified, but this does not cover datasets for which you will have to individually check.
+All documentation is under `CC4.0 Attribution Share-Alike`.  
+Examples are `CC0`, unless something else is specified, but this does not cover datasets for which you will have to individually check.
 
 [^1]: XML 1.0 is covered as a best-effort, but there will be small things where either the official XML standard or this implementation is going to be incompatible or a superset.  
       For more information on compatibility and supported features, please check [here](./docs/features.md) where they are being tracked.

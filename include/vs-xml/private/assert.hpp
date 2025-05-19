@@ -10,6 +10,7 @@
  * 
  */
 
+#include <cstdlib>
 #include <stdexcept>
 #include <source_location>
 //#include <iostream>
@@ -35,7 +36,11 @@ namespace VS_XML_NS{
             std::cerr << frame << std::endl;
 #endif
 */
+        #if not VS_XML_NO_EXCEPT
         throw std::runtime_error(errorMessage);
+        #else
+        std::exit(1);
+        #endif
     }
 }
 #endif
