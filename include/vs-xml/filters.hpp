@@ -69,7 +69,7 @@ namespace filters{
      * @return constexpr auto a filter to pipe after `children` or as argument.
      */
     constexpr inline auto is_element(){
-        return std::views::filter([](auto& it){return it.type()==type_t::ELEMENT;});
+        return std::views::filter([](auto& it)static{return it.type()==type_t::ELEMENT;});
     } 
 
     /**
@@ -78,7 +78,7 @@ namespace filters{
      * @return constexpr auto a filter to pipe after `children` or as argument.
      */
     constexpr inline auto is_text(){
-        return std::views::filter([](auto& it){return it.type()==type_t::CDATA || it.type()==type_t::TEXT;});
+        return std::views::filter([](auto& it)static{return it.type()==type_t::CDATA || it.type()==type_t::TEXT;});
     } 
 }
 

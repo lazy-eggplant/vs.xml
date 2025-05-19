@@ -77,7 +77,7 @@ auto test(){
         std::print("{}\n",element.name().value_or("--"));
     }
 
-    for(auto& element: root.attrs(std::views::filter([](auto& it){it.type();return true;})) ){
+    for(auto& element: root.attrs(std::views::filter([](auto& it)static{it.type();return true;})) ){
         std::print("{}\n",element.name().value_or("--"));
     }
  

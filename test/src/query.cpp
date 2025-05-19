@@ -30,7 +30,7 @@ struct MemoryPool {
     }
 };
 
-MemoryPool globalPool;
+thread_local MemoryPool globalPool;
 
 // Minimal Generator implementation.
 template<typename T>
@@ -127,7 +127,25 @@ std::generator<const Node*> traverse(const Node& node, auto filter, int v) {
     }
 }
 
+struct {
+  mutable std::array<uint8_t,255> sliceA;
+} constexpr reserved{};
+
+template<std::array<uint8_t,255>::iterator BEGIN,std::array<uint8_t,255>::iterator END>
+struct v{
+    v(){
+        for(auto it=BEGIN;it!=END;it++){
+            *it = 44;
+        }
+        for(auto it=BEGIN;it!=END;it++){
+            std::print("{} ",(int)*it);
+        }
+    }
+};
+
 int main() {
+    v<reserved.sliceA.begin(),reserved.sliceA.end()> A;
+
     Node root{0, {
         {1, { {3, {}}, {4, {}} }},
         {2, { {5, {}}, {6, {}} }},

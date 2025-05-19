@@ -46,7 +46,7 @@ struct DocumentRaw : TreeRaw {
      */
     inline std::optional<node_iterator> tree_root() const{
         auto c  = TreeRaw::root().children();
-        auto it = std::ranges::find_if(c,[](auto e){return e.type()==type_t::ELEMENT;});
+        auto it = std::ranges::find_if(c,[](auto e)static{return e.type()==type_t::ELEMENT;});
         if(it!=c.end()) return it;
         return {};
     }
