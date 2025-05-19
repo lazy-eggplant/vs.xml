@@ -1,7 +1,5 @@
 ## Standard compatibility
 
-## Features
-
 ### XML parsing
 - [x] namespaces [^1]
 - [x] cdata
@@ -12,6 +10,19 @@
     - [x] optional stripping
 - [x] basic entities
 - [x] complex entities
+
+### XML serialization
+- [x] namespaces
+- [x] processing
+- [x] cdata
+- [x] text
+- [x] comments
+- [ ] output configurability
+    - [ ] indentation
+    - [ ] newline style
+    - [ ] other linting
+
+## Library features
 
 ### Tree builder
 - [x] namespaces
@@ -30,15 +41,12 @@
 - [ ] node injection
 - [x] simplified tree wrapper to avoid xml::sv->string_view conversions.
 
-### XML serialization
-- [x] namespaces
-- [x] processing
-- [x] cdata
-- [x] text
-- [x] comments
-- [ ] output configurability
-    - [ ] indentation
-    - [ ] newline style
-    - [ ] other linting
+### Queries
+
+## Portability
+
+- [x] `noexcept` mode
+- [x] `noassert` mode
+- [ ] no memory allocations
 
 [^1]: Partially, no validation for them

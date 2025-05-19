@@ -11,7 +11,6 @@
  */
 
 #include <span>
-#include <stdexcept>
 
 #include "commons.hpp"
 #include "serializer.hpp"
