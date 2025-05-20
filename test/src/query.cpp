@@ -1,3 +1,4 @@
+#include <initializer_list>
 #include <iostream>
 #include <vector>
 #include <coroutine>
@@ -143,7 +144,14 @@ struct v{
     }
 };
 
+
+#include "vs-xml/query.hpp"
+
 int main() {
+    auto q = xml::query::query_t{}/xml::query::accept()/xml::query::accept();
+    constexpr auto q2 = xml::query::query2_t<10>{}/xml::query::accept()/xml::query::accept();
+
+/*
     v<reserved.sliceA.begin(),reserved.sliceA.end()> A;
 
     Node root{0, {
@@ -160,7 +168,7 @@ int main() {
     }
     std::cout << std::endl;
 
-
+*/
 
     return 0;
 }

@@ -10,56 +10,128 @@
  * 
  */
 
+#include "vs-xml/private/impl.hpp"
 #include <functional>
-#include <optional>
+#include <initializer_list>
+#include <iterator>
 #include <string_view>
+#include <variant>
 #include <vector>
 #include <vs-xml/commons.hpp>
 
 namespace VS_XML_NS{
 
-struct query{
-    //This token data structure is quite heavy.
-    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
-    struct token_t{
-        struct operand_t{
-            enum {IMM,FN,SKIP} mode;
-            union{
-                std::string_view sv;
-                std::function<bool(std::string_view)> fn;
-            };
-        };
+namespace query{
 
-        enum type_t : uint8_t{
-            /*Empty*/
-            ACCEPT, 
-            NEXT_LAYER, 
-            TYPE_ELEMENT, TYPE_COMMENT, TYPE_PROC, TYPE_TEXT, TYPE_CDATA,
-            /*Unary*/
-            MATCH_NS, MATCH_NAME, MATCH_VALUE, MATCH_ALL_TEXT,
-            /*Attr*/
-            MATCH_ATTR
-        } type;
-        
-        union{
-            struct{} empty;
-            struct{
-                operand_t ns;
-                operand_t name;
-                operand_t value;
-            } attr;
-            operand_t unary;
-        }args;
+struct token_t{
+    typedef std::variant<std::monostate,std::string_view,std::function<bool(std::string_view)>>  operand_t;
+
+    enum type_t : uint8_t{
+        /*Empty*/
+        ACCEPT, 
+        NEXT_LAYER, 
+        /*type_filter*/
+        TYPE,
+        /*Unary sv*/
+        MATCH_NS, MATCH_NAME, MATCH_VALUE, MATCH_ALL_TEXT,
+        /*Attr*/
+        MATCH_ATTR
+    };
+    
+    template<type_t T>
+    struct empty_t{};
+
+    template<type_t T>
+    struct single_t : operand_t{};
+
+    template<type_t T>
+    struct type_filter_t{
+        uint8_t is_element:1 = true ;
+        uint8_t is_commnent:1 = true ;
+        uint8_t is_proc:1 = true ;
+        uint8_t is_text:1 = true ;
+        uint8_t is_cdata:1 = true ;
     };
 
-    struct exp{};
+    template<type_t T>
+    struct attr_t{
+        operand_t ns = std::monostate{};
+        operand_t name = std::monostate{};
+        operand_t value = std::monostate{};
+    };
+
+    std::variant<
+        empty_t<ACCEPT>,
+        empty_t<NEXT_LAYER>,
+        type_filter_t<TYPE>,
+        single_t<MATCH_NS>,
+        single_t<MATCH_NAME>,
+        single_t<MATCH_VALUE>,
+        single_t<MATCH_ALL_TEXT>,
+        attr_t<MATCH_ATTR>
+        > args;
+};
+
+
+
+struct query_t{
+    //This token data structure is quite heavy.
+    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
 
     std::vector<token_t> tokens;
 
-    query& operator / (std::string_view){return *this;}
+
+    query_t& operator / (std::string_view){return *this;}
+    query_t& operator / (const token_t& tkn){tokens.push_back(tkn);return *this;}
 
 };
 
+template<size_t N>
+struct query2_t{
+    //This token data structure is quite heavy.
+    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
+
+    std::array<token_t,N> tokens;
+    size_t current=0;
+
+    constexpr query2_t& operator / (std::string_view){return *this;}
+    constexpr query2_t& operator / (const token_t& tkn){tokens[current]=tkn;current++;return *this;}
+
+};
+
+constexpr static token_t accept() {
+    return {token_t::empty_t<token_t::ACCEPT>{}};
+}
+
+constexpr static token_t next_layer() {
+    return {token_t::empty_t<token_t::NEXT_LAYER>{}};
+}
+
+constexpr static token_t type(token_t::type_filter_t<token_t::TYPE> arg) {
+    return {arg};
+}
+
+constexpr static token_t match_ns(token_t::single_t<token_t::MATCH_NS> arg) {
+    return {arg};
+}
+
+constexpr static token_t match_name(token_t::single_t<token_t::MATCH_NAME> arg) {
+    return {arg};
+}
+
+constexpr static token_t match_value(token_t::single_t<token_t::MATCH_VALUE> arg) {
+    return {arg};
+}
+
+constexpr static token_t match_all_text(token_t::single_t<token_t::MATCH_ALL_TEXT> arg) {
+    return {arg};
+}
+
+constexpr static token_t match_all_text(token_t::attr_t<token_t::MATCH_ATTR> arg) {
+    return {arg};
+}
+
+}
 //`is` generator references all nodes which are proven to complete the query
 //`has` generator references all nodes for which sub-nodes are proven to complete their query.
 
