@@ -811,7 +811,7 @@
 <h3 id="basic-commands">Basic commands<a class="headerlink" href="#basic-commands" title="Permanent link">#</a></h3>
 <ul>
 <li><code>next()</code> to force moving to the next layer in the filters.</li>
-<li><code>capture()</code> to match the current node and let the iterator go deeper.</li>
+<li><code>accept()</code> to accept the current node and let the iterator go deeper.</li>
 <li><code>type&lt;T&gt;()</code> to match a node type</li>
 <li><code>attr(name, fn)</code> if a given attribute satisfies <code>fn</code>, with specialized version where <code>fn</code> is just a string. </li>
 <li><code>attr(ns, name, fn)</code> if a given attribute (with namespace) satisfies <code>fn</code>, with specialized version where <code>fn</code> is just a string. </li>
@@ -821,13 +821,13 @@
 </ul>
 <h3 id="string-shorthands">String shorthands<a class="headerlink" href="#string-shorthands" title="Permanent link">#</a></h3>
 <ul>
-<li><code>"{ns}:{name}"</code> equivalent to <code>type&lt;element&gt;() + match_ns(ns) + match_name(name) + capture() + next()</code></li>
-<li><code>"{ns}:*"</code> equivalent to <code>type&lt;element&gt;() + match_ns(ns) + capture() + next()</code></li>
-<li><code>"{name}"</code> equivalent to <code>type&lt;element&gt;() + match_ns("") + match_name(name) + capture() + next()</code></li>
-<li><code>*</code> equivalent to <code>capture() + next()</code></li>
-<li><code>?</code> equivalent to <code>capture() + next()</code> OR <code>next()</code>.</li>
-<li><code>**</code> equivalent to <code>capture() + next()</code> OR <code>capture()</code></li>
-<li><code>*?</code> equivalent to <code>capture() + next()</code> OR <code>capture()</code> OR <code>next()</code>.</li>
+<li><code>"{ns}:{name}"</code> equivalent to <code>type&lt;element&gt;() + match_ns(ns) + match_name(name) + accept() + next()</code></li>
+<li><code>"{ns}:*"</code> equivalent to <code>type&lt;element&gt;() + match_ns(ns) + accept() + next()</code></li>
+<li><code>"{name}"</code> equivalent to <code>type&lt;element&gt;() + match_ns("") + match_name(name) + accept() + next()</code></li>
+<li><code>*</code> equivalent to <code>accept() + next()</code></li>
+<li><code>?</code> equivalent to <code>accept() + next()</code> OR <code>next()</code>.</li>
+<li><code>**</code> equivalent to <code>accept() + next()</code> OR <code>accept()</code></li>
+<li><code>*?</code> equivalent to <code>accept() + next()</code> OR <code>accept()</code> OR <code>next()</code>.</li>
 </ul>
 <h3 id="composition">Composition<a class="headerlink" href="#composition" title="Permanent link">#</a></h3>
 <ul>

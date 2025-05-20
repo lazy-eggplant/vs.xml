@@ -74,32 +74,82 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structVS__XML__NS_1_1query_1_1token__t-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">VS_XML_NS::query::token_t Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Collaboration diagram for VS_XML_NS::query::token_t:</div>
+<div class="dyncontent">
+<div class="center"><img src="structVS__XML__NS_1_1query_1_1token__t__coll__graph.png" border="0" usemap="#aVS__XML__NS_1_1query_1_1token__t_coll__map" alt="Collaboration graph"/></div>
+<map name="aVS__XML__NS_1_1query_1_1token__t_coll__map" id="aVS__XML__NS_1_1query_1_1token__t_coll__map">
+<area shape="rect" title=" " alt="" coords="5,152,204,177"/>
+<area shape="rect" href="structVS__XML__NS_1_1query_1_1token__t_1_1operand__t.html" title=" " alt="" coords="11,5,198,45"/>
+<area shape="poly" title=" " alt="" coords="107,59,107,152,102,152,102,59"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1operand__t.html">operand_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aa9f28bed033bf14c7057f201febc1f14" id="r_aa9f28bed033bf14c7057f201febc1f14"><td class="memItemLeft" align="right" valign="top"><a id="aa9f28bed033bf14c7057f201febc1f14" name="aa9f28bed033bf14c7057f201febc1f14"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>type_t</b> { <br />
-&#160;&#160;<b>VISIT_CHILDREN</b>
-, <b>VISIT_ATTRS</b>
-, <b>MATCH_TYPE</b>
+<tr class="memitem:a0e461c135d61cf6210ae2cae9f1c3057" id="r_a0e461c135d61cf6210ae2cae9f1c3057"><td class="memItemLeft" align="right" valign="top"><a id="a0e461c135d61cf6210ae2cae9f1c3057" name="a0e461c135d61cf6210ae2cae9f1c3057"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>type_t</b> : uint8_t { <br />
+&#160;&#160;<b>ACCEPT</b>
+, <b>NEXT_LAYER</b>
+, <b>TYPE_ELEMENT</b>
+, <b>TYPE_COMMENT</b>
+, <br />
+&#160;&#160;<b>TYPE_PROC</b>
+, <b>TYPE_TEXT</b>
+, <b>TYPE_CDATA</b>
 , <b>MATCH_NS</b>
 , <br />
 &#160;&#160;<b>MATCH_NAME</b>
 , <b>MATCH_VALUE</b>
+, <b>MATCH_ALL_TEXT</b>
+, <b>MATCH_ATTR</b>
 <br />
  }</td></tr>
-<tr class="separator:aa9f28bed033bf14c7057f201febc1f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a0e461c135d61cf6210ae2cae9f1c3057"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a5adde70b34e24a9c9f838ab2a098d69b" id="r_a5adde70b34e24a9c9f838ab2a098d69b"><td class="memItemLeft" align="right" valign="top"><a id="a5adde70b34e24a9c9f838ab2a098d69b" name="a5adde70b34e24a9c9f838ab2a098d69b"></a>
 enum VS_XML_NS::query::token_t::type_t&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
 <tr class="separator:a5adde70b34e24a9c9f838ab2a098d69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c0add7973f45517cec4b3f46066a1b0" id="r_a2c0add7973f45517cec4b3f46066a1b0"><td class="memItemLeft" ><a id="a2c0add7973f45517cec4b3f46066a1b0" name="a2c0add7973f45517cec4b3f46066a1b0"></a>
+union {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af63fc9328c73424e6b7576bd3d5bb29c" id="r_af63fc9328c73424e6b7576bd3d5bb29c"><td class="memItemLeft" >
+&#160;&#160;&#160;struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:af9c7974fecd6438978fdadca2240977f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af63fc9328c73424e6b7576bd3d5bb29c" id="r_af63fc9328c73424e6b7576bd3d5bb29c"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<b>empty</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:af63fc9328c73424e6b7576bd3d5bb29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ae7c76844ebf2043b7e44418bbcd433" id="r_a9ae7c76844ebf2043b7e44418bbcd433"><td class="memItemLeft" >
+&#160;&#160;&#160;struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a52339e8c4496bc6a141c673b67920d9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d185a4c5999d4e3baf2236eaebf3067" id="r_a9d185a4c5999d4e3baf2236eaebf3067"><td class="memItemLeft" >
+&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1operand__t.html">operand_t</a>&#160;&#160;&#160;<b>ns</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a9d185a4c5999d4e3baf2236eaebf3067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab189477f6f04d3ef98d2ed30f049a676" id="r_ab189477f6f04d3ef98d2ed30f049a676"><td class="memItemLeft" >
+&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1operand__t.html">operand_t</a>&#160;&#160;&#160;<b>name</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:ab189477f6f04d3ef98d2ed30f049a676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2434ec02a77f5a50b74af6d7987a4c9" id="r_ad2434ec02a77f5a50b74af6d7987a4c9"><td class="memItemLeft" >
+&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1operand__t.html">operand_t</a>&#160;&#160;&#160;<b>value</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:ad2434ec02a77f5a50b74af6d7987a4c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ae7c76844ebf2043b7e44418bbcd433" id="r_a9ae7c76844ebf2043b7e44418bbcd433"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<b>attr</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a9ae7c76844ebf2043b7e44418bbcd433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecde3e912c3458e4f924a9aa78eb0a8e" id="r_aecde3e912c3458e4f924a9aa78eb0a8e"><td class="memItemLeft" >
+&#160;&#160;&#160;<a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1operand__t.html">operand_t</a>&#160;&#160;&#160;<b>unary</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:aecde3e912c3458e4f924a9aa78eb0a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c0add7973f45517cec4b3f46066a1b0" id="r_a2c0add7973f45517cec4b3f46066a1b0"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>args</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a2c0add7973f45517cec4b3f46066a1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/vs-xml/<a class="el" href="query_8hpp_source.html">query.hpp</a></li>
