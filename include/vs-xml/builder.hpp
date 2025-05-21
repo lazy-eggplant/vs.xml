@@ -30,6 +30,60 @@ namespace VS_XML_NS{
 
 
 namespace details{
+    template <builder_config_t::symbols_t COMPRESSION>
+    struct Symbols{
+    };
+
+    template <>
+    struct Symbols<builder_config_t::symbols_t::EXTERN_ABS>{
+        inline std::string_view rsv(std::string_view s){return s;}
+        inline std::string_view symbol(std::string_view s){return s;}
+        inline std::string_view symbol_2(std::string_view s){return s;}
+    };
+
+    template <>
+    struct Symbols<builder_config_t::symbols_t::EXTERN_REL>{
+        std::string_view symbols;
+
+        //TODO: Add checks?
+        inline std::string_view rsv(sv s){return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);}
+        inline sv symbol(std::string_view s){return sv(symbols.data(),s);}
+        inline sv symbol_2(std::string_view s){return sv(symbols.data(),s);}
+
+        inline Symbols(std::string_view src){
+            this->symbols = src;
+        }
+    };
+
+    template <>
+    struct Symbols<builder_config_t::symbols_t::OWNED>{
+        std::vector<uint8_t> symbols;
+
+        sv symbol(std::string_view s);
+        inline sv symbol_2(std::string_view s){return symbol(s);}
+        inline std::string_view rsv(sv s){return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);}
+
+        inline Symbols(){}
+    };
+
+    template <>
+    struct Symbols<builder_config_t::symbols_t::COMPRESS_ALL> : Symbols<builder_config_t::symbols_t::OWNED>{
+        xml::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx;
+
+        sv symbol(std::string_view s);
+        inline sv symbol_2(std::string_view s){return symbol(s);}
+
+        inline Symbols():idx(64,
+        [this](sv a){return std::hash<std::string_view>{}(rsv(a));},
+        [this](sv a, sv b){return rsv(a)==rsv(b);}){}
+    };
+
+    template <>
+    struct Symbols<builder_config_t::symbols_t::COMPRESS_LABELS> : Symbols<builder_config_t::symbols_t::COMPRESS_ALL>{
+        sv symbol_2(std::string_view s);
+    };
+
+
     struct BuilderBase{
         enum struct error_t{
             SKIP = -1,
@@ -111,7 +165,7 @@ struct BuilderImpl<builder_config_t::symbols_t::OWNED>: BuilderBase{
 
     public:   
         inline BuilderImpl():BuilderBase(){
-            symbols= std::string_view((char*)symbols.data(),(char*)symbols.data()+symbols.size()); 
+            symbols= std::string_view((char*)symbols_i.data(),(char*)symbols_i.data()+symbols_i.size()); 
         }
 };
 
@@ -126,7 +180,7 @@ struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>: BuilderImpl<build
         inline BuilderImpl():idx_symbols(64,
         [this](sv a){return std::hash<std::string_view>{}(rsv(a));},
         [this](sv a, sv b){return rsv(a)==rsv(b);}){
-            symbols= std::string_view((char*)this->symbols_i.data(),(char*)symbols_i.data()+symbols_i.size()); 
+            symbols= std::string_view((char*)symbols_i.data(),(char*)symbols_i.data()+symbols_i.size()); 
         }
 };
 
@@ -213,7 +267,7 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
             return details::BuilderBase::marker(rsv( symbol_2(value)));
         }
 
-        inline std::expected<Tree,error_t> close(){
+        [[nodiscard]] inline std::expected<Tree,error_t> close(){
             details::BuilderImpl<cfg.symbols>::close();
             if constexpr (
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||

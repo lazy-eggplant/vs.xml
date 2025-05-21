@@ -119,7 +119,7 @@ struct DocBuilder : TreeBuilder<cfg>{
         return details::BuilderBase::proc(TreeBuilder<cfg>::rsv( TreeBuilder<cfg>::symbol("xml version=\"1.0\" encoding=\"UTF-8\"")));
     }
 
-    inline std::expected<Document,error_t> close(){
+    [[nodiscard]] inline std::expected<Document,details::BuilderBase::error_t> close(){
         this->end();
         details::BuilderImpl<cfg.symbols>::close();
         if constexpr (
