@@ -15,13 +15,5 @@ var searchData=
   ['batchbuilder_12',['BatchBuilder',['../structVS__XML__NS_1_1BatchBuilder.html',1,'VS_XML_NS']]],
   ['builder_13',['Builder',['../structVS__XML__NS_1_1Builder.html',1,'VS_XML_NS']]],
   ['builder_2ehpp_14',['builder.hpp',['../builder_8hpp.html',1,'']]],
-  ['builderbase_15',['BuilderBase',['../structVS__XML__NS_1_1details_1_1BuilderBase.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_16',['BuilderImpl',['../structVS__XML__NS_1_1details_1_1BuilderImpl.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_3c_20builder_5fconfig_5ft_3a_3asymbols_5ft_3a_3acompress_5fall_20_3e_17',['BuilderImpl&lt; builder_config_t::symbols_t::COMPRESS_ALL &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1COMPRESS__ALL_01_4.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_3c_20builder_5fconfig_5ft_3a_3asymbols_5ft_3a_3acompress_5flabels_20_3e_18',['BuilderImpl&lt; builder_config_t::symbols_t::COMPRESS_LABELS &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1COMPRESS__LABELS_01_4.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_3c_20builder_5fconfig_5ft_3a_3asymbols_5ft_3a_3aextern_5fabs_20_3e_19',['BuilderImpl&lt; builder_config_t::symbols_t::EXTERN_ABS &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1EXTERN__ABS_01_4.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_3c_20builder_5fconfig_5ft_3a_3asymbols_5ft_3a_3aextern_5frel_20_3e_20',['BuilderImpl&lt; builder_config_t::symbols_t::EXTERN_REL &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1EXTERN__REL_01_4.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_3c_20builder_5fconfig_5ft_3a_3asymbols_5ft_3a_3aowned_20_3e_21',['BuilderImpl&lt; builder_config_t::symbols_t::OWNED &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1OWNED_01_4.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_3c_20cfg_2esymbols_20_3e_22',['BuilderImpl&lt; cfg.symbols &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl.html',1,'VS_XML_NS::details']]],
-  ['builderimpl_3c_20_7b_7d_20_2esymbols_20_3e_23',['BuilderImpl&lt; {} .symbols &gt;',['../structVS__XML__NS_1_1details_1_1BuilderImpl.html',1,'VS_XML_NS::details']]]
+  ['builderbase_15',['BuilderBase',['../structVS__XML__NS_1_1details_1_1BuilderBase.html',1,'VS_XML_NS::details']]]
 ];
