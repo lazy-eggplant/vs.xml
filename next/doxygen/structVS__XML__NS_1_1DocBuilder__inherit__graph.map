@@ -1,5 +1,7 @@
 <map id="VS_XML_NS::DocBuilder&lt; cfg &gt;" name="VS_XML_NS::DocBuilder&lt; cfg &gt;">
 <area shape="rect" id="Node000001" title="Specialized builder to construct a document." alt="" coords="31,269,210,309"/>
+<area shape="rect" id="Node000005" href="$structVS__XML__NS_1_1BatchBuilder.html" title=" " alt="" coords="25,357,216,397"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="123,323,123,357,118,357,118,323"/>
 <area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="31,181,211,221"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,235,123,269,118,269,118,235"/>
 <area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1details_1_1BuilderImpl.html" title="Helper class to build an XML tree via commands." alt="" coords="5,93,236,133"/>

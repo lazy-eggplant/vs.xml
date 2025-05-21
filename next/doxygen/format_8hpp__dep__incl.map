@@ -4,11 +4,13 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,59,177,93,171,93,171,59"/>
 <area shape="rect" id="Node000003" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="15,269,210,295"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="120,142,97,160,80,182,76,205,81,229,93,250,105,268,101,271,88,253,76,230,70,205,76,180,94,156,117,138"/>
-<area shape="rect" id="Node000005" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="90,181,258,221"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="177,147,177,181,171,181,171,147"/>
-<area shape="rect" id="Node000006" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="283,189,468,214"/>
-<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="232,136,350,186,347,191,230,141"/>
+<area shape="rect" id="Node000006" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="90,181,258,221"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="177,147,177,181,171,181,171,147"/>
+<area shape="rect" id="Node000007" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="283,189,468,214"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="232,136,350,186,347,191,230,141"/>
 <area shape="rect" id="Node000004" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,343,220,368"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,308,115,343,110,343,110,308"/>
-<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="153,234,124,271,120,267,149,231"/>
+<area shape="rect" id="Node000005" href="$folder_8hpp.html" title="A collection of multiple documents, stored as a single tree. They use shared symbols and a common add..." alt="" coords="19,416,206,441"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="115,382,115,416,110,416,110,382"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="153,234,124,271,120,267,149,231"/>
 </map>

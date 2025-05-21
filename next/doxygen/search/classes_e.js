@@ -5,7 +5,8 @@ var searchData=
   ['token_5ft_2',['token_t',['../structVS__XML__NS_1_1query_1_1token__t.html',1,'VS_XML_NS::query']]],
   ['tree_3',['Tree',['../structVS__XML__NS_1_1Tree.html',1,'VS_XML_NS']]],
   ['treebuilder_4',['TreeBuilder',['../structVS__XML__NS_1_1TreeBuilder.html',1,'VS_XML_NS']]],
-  ['treebuilder_3c_20_7b_7d_20_3e_5',['TreeBuilder&lt; {} &gt;',['../structVS__XML__NS_1_1TreeBuilder.html',1,'VS_XML_NS']]],
-  ['treeraw_6',['TreeRaw',['../structVS__XML__NS_1_1TreeRaw.html',1,'VS_XML_NS']]],
-  ['type_5ffilter_5ft_7',['type_filter_t',['../structVS__XML__NS_1_1query_1_1token__t_1_1type__filter__t.html',1,'VS_XML_NS::query::token_t']]]
+  ['treebuilder_3c_20cfg_20_3e_5',['TreeBuilder&lt; cfg &gt;',['../structVS__XML__NS_1_1TreeBuilder.html',1,'VS_XML_NS']]],
+  ['treebuilder_3c_20_7b_7d_20_3e_6',['TreeBuilder&lt; {} &gt;',['../structVS__XML__NS_1_1TreeBuilder.html',1,'VS_XML_NS']]],
+  ['treeraw_7',['TreeRaw',['../structVS__XML__NS_1_1TreeRaw.html',1,'VS_XML_NS']]],
+  ['type_5ffilter_5ft_8',['type_filter_t',['../structVS__XML__NS_1_1query_1_1token__t_1_1type__filter__t.html',1,'VS_XML_NS::query::token_t']]]
 ];

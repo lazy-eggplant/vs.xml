@@ -6,20 +6,26 @@
 <area shape="poly" id="edge18_Node000000_Node000002" title=" " alt="" coords="168,127,244,107,245,112,170,132"/>
 <area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1details_1_1BuilderImpl.html" title="Helper class to build an XML tree via commands." alt="" coords="204,133,435,173"/>
 <area shape="poly" id="edge19_Node000000_Node000003" title=" " alt="" coords="169,151,204,151,204,156,169,156"/>
-<area shape="rect" id="Node000007" href="$structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1EXTERN__ABS_01_4.html" title=" " alt="" coords="237,197,402,267"/>
-<area shape="poly" id="edge23_Node000000_Node000007" title=" " alt="" coords="156,175,237,202,236,207,154,180"/>
-<area shape="rect" id="Node000009" href="$structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1OWNED_01_4.html" title=" " alt="" coords="237,291,402,360"/>
-<area shape="poly" id="edge25_Node000000_Node000009" title=" " alt="" coords="108,183,151,230,206,276,237,294,235,299,202,281,147,234,104,186"/>
-<area shape="rect" id="Node000004" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="483,69,663,109"/>
-<area shape="poly" id="edge20_Node000003_Node000004" title=" " alt="" coords="412,127,492,107,494,112,413,132"/>
-<area shape="rect" id="Node000005" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="483,133,663,173"/>
-<area shape="poly" id="edge21_Node000003_Node000005" title=" " alt="" coords="448,151,482,151,482,156,448,156"/>
-<area shape="rect" id="Node000006" href="$structVS__XML__NS_1_1DocBuilder.html" title="Specialized builder to construct a document." alt="" coords="711,133,889,173"/>
-<area shape="poly" id="edge22_Node000005_Node000006" title=" " alt="" coords="676,151,711,151,711,156,676,156"/>
-<area shape="rect" id="Node000008" href="$structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1EXTERN__REL_01_4.html" title=" " alt="" coords="490,197,655,267"/>
-<area shape="poly" id="edge24_Node000007_Node000008" title=" " alt="" coords="415,229,490,229,490,235,415,235"/>
-<area shape="rect" id="Node000010" href="$structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1COMPRESS__ALL_01_4.html" title=" " alt="" coords="490,291,655,360"/>
-<area shape="poly" id="edge26_Node000009_Node000010" title=" " alt="" coords="415,323,490,323,490,328,415,328"/>
-<area shape="rect" id="Node000011" href="$structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1COMPRESS__LABELS_01_4.html" title=" " alt="" coords="717,291,883,360"/>
-<area shape="poly" id="edge27_Node000010_Node000011" title=" " alt="" coords="669,323,717,323,717,328,669,328"/>
+<area shape="rect" id="Node000010" href="$structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1EXTERN__ABS_01_4.html" title=" " alt="" coords="237,197,402,267"/>
+<area shape="poly" id="edge26_Node000000_Node000010" title=" " alt="" coords="156,175,237,202,236,207,154,180"/>
+<area shape="rect" id="Node000012" href="$structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1OWNED_01_4.html" title=" " alt="" coords="237,291,402,360"/>
+<area shape="poly" id="edge28_Node000000_Node000012" title=" " alt="" coords="108,183,151,230,206,276,237,294,235,299,202,281,147,234,104,186"/>
+<area shape="rect" id="Node000004" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="483,5,663,45"/>
+<area shape="poly" id="edge20_Node000003_Node000004" title=" " alt="" coords="424,125,433,119,448,104,457,89,465,72,481,55,502,43,504,48,484,59,469,75,461,91,453,107,436,123,427,129"/>
+<area shape="rect" id="Node000005" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="483,69,663,109"/>
+<area shape="poly" id="edge21_Node000003_Node000005" title=" " alt="" coords="412,127,492,107,494,112,413,132"/>
+<area shape="rect" id="Node000006" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="483,133,663,173"/>
+<area shape="poly" id="edge22_Node000003_Node000006" title=" " alt="" coords="448,151,482,151,482,156,448,156"/>
+<area shape="rect" id="Node000007" href="$structVS__XML__NS_1_1DocBuilder.html" title=" " alt="" coords="711,101,889,141"/>
+<area shape="poly" id="edge23_Node000006_Node000007" title=" " alt="" coords="676,136,710,131,711,137,677,141"/>
+<area shape="rect" id="Node000008" href="$structVS__XML__NS_1_1DocBuilder.html" title="Specialized builder to construct a document." alt="" coords="711,165,889,205"/>
+<area shape="poly" id="edge24_Node000006_Node000008" title=" " alt="" coords="677,165,711,170,710,175,676,171"/>
+<area shape="rect" id="Node000009" href="$structVS__XML__NS_1_1BatchBuilder.html" title=" " alt="" coords="937,165,1128,205"/>
+<area shape="poly" id="edge25_Node000008_Node000009" title=" " alt="" coords="903,183,937,183,937,188,903,188"/>
+<area shape="rect" id="Node000011" href="$structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1EXTERN__REL_01_4.html" title=" " alt="" coords="490,197,655,267"/>
+<area shape="poly" id="edge27_Node000010_Node000011" title=" " alt="" coords="415,229,490,229,490,235,415,235"/>
+<area shape="rect" id="Node000013" href="$structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1COMPRESS__ALL_01_4.html" title=" " alt="" coords="490,291,655,360"/>
+<area shape="poly" id="edge29_Node000012_Node000013" title=" " alt="" coords="415,323,490,323,490,328,415,328"/>
+<area shape="rect" id="Node000014" href="$structVS__XML__NS_1_1details_1_1BuilderImpl_3_01builder__config__t_1_1symbols__t_1_1COMPRESS__LABELS_01_4.html" title=" " alt="" coords="717,291,883,360"/>
+<area shape="poly" id="edge30_Node000013_Node000014" title=" " alt="" coords="669,323,717,323,717,328,669,328"/>
 </map>

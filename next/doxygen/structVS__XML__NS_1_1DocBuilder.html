@@ -91,6 +91,8 @@ Inheritance diagram for VS_XML_NS::DocBuilder&lt; cfg &gt;:</div>
 <div class="center"><img src="structVS__XML__NS_1_1DocBuilder__inherit__graph.png" border="0" usemap="#aVS__XML__NS_1_1DocBuilder_3_01cfg_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aVS__XML__NS_1_1DocBuilder_3_01cfg_01_4_inherit__map" id="aVS__XML__NS_1_1DocBuilder_3_01cfg_01_4_inherit__map">
 <area shape="rect" title="Specialized builder to construct a document." alt="" coords="31,269,210,309"/>
+<area shape="rect" href="structVS__XML__NS_1_1BatchBuilder.html" title=" " alt="" coords="25,357,216,397"/>
+<area shape="poly" title=" " alt="" coords="123,323,123,357,118,357,118,323"/>
 <area shape="rect" href="structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="31,181,211,221"/>
 <area shape="poly" title=" " alt="" coords="123,235,123,269,118,269,118,235"/>
 <area shape="rect" href="structVS__XML__NS_1_1details_1_1BuilderImpl.html" title="Helper class to build an XML tree via commands." alt="" coords="5,93,236,133"/>
@@ -156,12 +158,18 @@ error_t&#160;</td><td class="memItemRight" valign="bottom"><b>marker</b> (std::s
 <tr class="memitem:ad2fd742da45362ef4c32e3d59d5ccaab inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_ad2fd742da45362ef4c32e3d59d5ccaab"><td class="memItemLeft" align="right" valign="top">
 std::expected&lt; <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
 <tr class="separator:ad2fd742da45362ef4c32e3d59d5ccaab inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f3d536f7e507f0901670627d0fe47bd inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_a8f3d536f7e507f0901670627d0fe47bd"><td class="memItemLeft" align="right" valign="top">
-constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>x</b> (std::string_view ns, std::string_view name, const std::initializer_list&lt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">attr_t</a> &gt; &amp;attrs={}, const std::function&lt; void()&gt; &amp;items=[]{})</td></tr>
-<tr class="separator:a8f3d536f7e507f0901670627d0fe47bd inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1b83d1d22162bde4b3c6a9d73bedf90 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_ad1b83d1d22162bde4b3c6a9d73bedf90"><td class="memItemLeft" align="right" valign="top">
-constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>x</b> (std::string_view name, const std::initializer_list&lt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">attr_t</a> &gt; &amp;attrs={}, const std::function&lt; void()&gt; &amp;items=[]{})</td></tr>
-<tr class="separator:ad1b83d1d22162bde4b3c6a9d73bedf90 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6df2a7aca63294fa5f7ca096d2d4d1c3 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_a6df2a7aca63294fa5f7ca096d2d4d1c3"><td class="memItemLeft" align="right" valign="top">
+constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>x</b> (std::string_view ns, std::string_view name, const std::initializer_list&lt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">attr_t</a> &gt; &amp;attrs, const std::function&lt; void(<a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a> &amp;)&gt; &amp;items)</td></tr>
+<tr class="separator:a6df2a7aca63294fa5f7ca096d2d4d1c3 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:added98b850df74d3046eec5e8bd5f94d inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_added98b850df74d3046eec5e8bd5f94d"><td class="memItemLeft" align="right" valign="top">
+constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>x</b> (std::string_view ns, std::string_view name, const std::initializer_list&lt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">attr_t</a> &gt; &amp;attrs={}, const std::function&lt; void()&gt; &amp;items=[](){})</td></tr>
+<tr class="separator:added98b850df74d3046eec5e8bd5f94d inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb39c07691d646701af626028bc44e08 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_adb39c07691d646701af626028bc44e08"><td class="memItemLeft" align="right" valign="top">
+constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>x</b> (std::string_view name, const std::initializer_list&lt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">attr_t</a> &gt; &amp;attrs, const std::function&lt; void(<a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a> &amp;)&gt; &amp;items)</td></tr>
+<tr class="separator:adb39c07691d646701af626028bc44e08 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a996ebe22d9407308be0da45630b7b31b inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_a996ebe22d9407308be0da45630b7b31b"><td class="memItemLeft" align="right" valign="top">
+constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>x</b> (std::string_view name, const std::initializer_list&lt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">attr_t</a> &gt; &amp;attrs={}, const std::function&lt; void()&gt; &amp;items=[](){})</td></tr>
+<tr class="separator:a996ebe22d9407308be0da45630b7b31b inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a522578359330e54115c580ca304ade43 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_a522578359330e54115c580ca304ade43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a522578359330e54115c580ca304ade43">reserve</a> (size_t bytes, size_t bytes2=0)</td></tr>
 <tr class="memdesc:a522578359330e54115c580ca304ade43 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves space for the buffer to avoid many of the initial small allocations.  <br /></td></tr>
 <tr class="separator:a522578359330e54115c580ca304ade43 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
