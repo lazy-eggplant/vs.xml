@@ -115,7 +115,10 @@ However, examples, tests, optional utilities and benchmarks have some dependenci
 - [mio](https://github.com/StrikerX3/mio) a simple way to handle memory mapped files, and pretty much the intended way to use `vs-xml` downstream.
 - [nanobench](https://github.com/martinus/nanobench) to perform benchmarks.
 - [pugixml](https://pugixml.org/) since it is the one I am testing against in benchmarks; these two libraries are very different in scope, so comparative benchmarks can only be marginal and not very useful.
+
+Also, parts of the standard library can be replaced to gain some sweet benchmarking numbers (or to gain additional functionality):
 - [fmt](https://github.com/fmtlib/fmt) as an optional replacement of `std::format` and `std::print`, as their performance by comparison are [trash](https://github.com/lazy-eggplant/vs.xml/issues/8).
+- [gtl](https://github.com/greg7mdp/gtl) as an optional replacement for some containers in the standard C++ library, with focus on performance and a serializable memory representation.
 
 ## Licence
 

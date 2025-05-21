@@ -18,6 +18,11 @@ auto mk_tree(){
             build.comment("ss");
             build.comment("comment2");
         });
+        build.x("a","AAA",{{"N1","N2"},{"N1","N3"}},[](auto& w) static{
+            w.x("BBB");
+            w.comment("ss");
+            w.comment("comment2");
+        });
         build.attr("op3-a", "v'>&al1");
         build.attr("op1-a-s", "val1", "w");
         build.attr("op2-a", "va&gt;l\"1");

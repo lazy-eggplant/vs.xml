@@ -18,7 +18,7 @@
 #include <functional>
 
 
-#include <unordered_set>
+#include <vs-xml/private/unordered_set.hpp>
 #include <vector>
 #include <string_view>
 
@@ -118,7 +118,7 @@ struct BuilderImpl<builder_config_t::symbols_t::OWNED>: BuilderBase{
 template <>
 struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>: BuilderImpl<builder_config_t::symbols_t::OWNED>{
     protected:
-        std::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx_symbols;
+        xml::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx_symbols;
         sv symbol(std::string_view s);
         inline sv symbol_2(std::string_view s){return symbol(s);}
 
@@ -229,7 +229,19 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
             std::string_view ns;
         };
 
-        constexpr void x(std::string_view ns, std::string_view name, const std::initializer_list<attr_t>& attrs={}, const std::function<void()>& items=[]{}){
+        constexpr void x(std::string_view ns, std::string_view name, const std::initializer_list<attr_t>& attrs, const std::function<void(TreeBuilder&)>& items){
+            begin(name,ns);
+
+            for(auto& a:attrs){
+                attr(a.name,a.value,a.ns);
+            }
+
+            items(*this);
+
+            end();
+        }
+
+        constexpr void x(std::string_view ns, std::string_view name, const std::initializer_list<attr_t>& attrs={}, const std::function<void()>& items=[](){}){
             begin(name,ns);
 
             for(auto& a:attrs){
@@ -241,7 +253,9 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
             end();
         }
 
-        constexpr void x(std::string_view name, const std::initializer_list<attr_t>& attrs={}, const std::function<void()>& items=[]{}){return x("",name,attrs,items);}
+        constexpr void x(std::string_view name, const std::initializer_list<attr_t>& attrs, const std::function<void(TreeBuilder&)>& items){return x("",name,attrs,items);}
+        constexpr void x(std::string_view name, const std::initializer_list<attr_t>& attrs={}, const std::function<void()>& items=[](){}){return x("",name,attrs,items);}
+
 
         /**
          * @brief Reserves space for the buffer to avoid many of the initial small allocations.

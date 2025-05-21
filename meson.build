@@ -12,10 +12,18 @@ add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
 
 if get_option('use_fmt')
   fmt_dep = dependency('fmt')
-  use_fmt = ['-D', 'USE_FMT']
+  use_fmt = ['-D', 'VS_XML_USE_FMT']
 else 
   fmt_dep = []
   use_fmt = []
+endif
+
+if get_option('use_gtl')
+  gtl_dep = dependency('gtl')
+  use_gtl = ['-D', 'VS_XML_USE_GTL']
+else 
+  gtl_dep = []
+  use_gtl = []
 endif
 
 vs_xml_lib = library(
@@ -28,9 +36,9 @@ vs_xml_lib = library(
       'lib/inplace-builder.cpp',
       'lib/query.cpp'
     ],
-    cpp_args: [use_fmt],
+    cpp_args: [use_fmt, use_gtl],
     install: true,
-    dependencies: [fmt_dep],
+    dependencies: [fmt_dep, gtl_dep],
     include_directories: include_dirs,
 )
 
