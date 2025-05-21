@@ -18,7 +18,7 @@ BuilderBase::error_t BuilderBase::leaf(std::string_view value){
 
     unknown_t* prev = old_ctx.second!=-1?(unknown_t*)(buffer.data()+old_ctx.second):nullptr;
 
-    T* tmp_node = new ((element_t*) & (uint8_t&) *( buffer.end()-sizeof(T) )) T(symbols.data(),value);
+    T* tmp_node = new ((element_t*) & (uint8_t&) *( buffer.end()-sizeof(T) )) T(symoffset,value);
 
     if(prev!=nullptr){
         prev->set_next((unknown_t*)tmp_node);
@@ -51,7 +51,7 @@ BuilderBase::error_t BuilderBase::begin(std::string_view name, std::string_view 
     unknown_t* prev = old_ctx.second!=-1?(unknown_t*)(buffer.data()+old_ctx.second):nullptr;
 
     //Emplace node
-    element_t* tmp_node = new ((element_t*) & (uint8_t&) *( buffer.end()-sizeof(element_t) )) element_t(symbols.data(),parent,ns,name);
+    element_t* tmp_node = new ((element_t*) & (uint8_t&) *( buffer.end()-sizeof(element_t) )) element_t(symoffset,parent,ns,name);
 
     if(prev!=nullptr){
         prev->set_next((unknown_t*)tmp_node);
@@ -91,7 +91,7 @@ BuilderBase::error_t BuilderBase::attr(std::string_view name, std::string_view v
     element_t* parent = (element_t*)(buffer.data()+old_ctx.first);
 
     //Emplace node
-    new ((attr_t*) & (uint8_t&) *( buffer.end()-sizeof(attr_t) )) attr_t((void*)symbols.data(),ns,name,value);
+    new ((attr_t*) & (uint8_t&) *( buffer.end()-sizeof(attr_t) )) attr_t((void*)symoffset,ns,name,value);
 
     parent->attrs_count++;
 
@@ -107,17 +107,16 @@ BuilderBase::error_t BuilderBase::close(){
 }
 
 
-sv BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>::symbol(std::string_view s){
+sv Symbols<builder_config_t::symbols_t::COMPRESS_ALL>::symbol(std::string_view s){
     if(s.length()==0)return {0,0};
 
-    auto it = idx_symbols.find(sv(symbols.data(),s));
+    auto it = idx.find(sv(symbols.data(),s));
 
-    if(it==idx_symbols.end()){
-        symbols_i.insert(symbols_i.end(),s.begin(),s.end());
-        symbols={(const char*)symbols_i.data(),(const char*)symbols_i.data()+symbols_i.size()};    //Keeep this updated so that when sv are used they are always relative.
+    if(it==idx.end()){
+        symbols.insert(symbols.end(),s.begin(),s.end());
 
-        sv ret(symbols_i.size()-s.length(),s.length());
-        auto it = idx_symbols.insert(ret); 
+        sv ret(symbols.size()-s.length(),s.length());
+        auto it = idx.insert(ret); 
         xml_assert(it.second==true, "Unable to insert symbol in symbol table");
         return *it.first;
     }
@@ -126,24 +125,22 @@ sv BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>::symbol(std::string_vi
     }
 }
 
-sv BuilderImpl<builder_config_t::symbols_t::OWNED>::symbol(std::string_view s){
+sv Symbols<builder_config_t::symbols_t::OWNED>::symbol(std::string_view s){
     if(s.length()==0)return {0,0};
 
-    symbols_i.insert(symbols_i.end(),s.begin(),s.end());
-    symbols={(const char*)symbols_i.data(),(const char*)symbols_i.data()+symbols_i.size()};    //Keeep this updated so that when sv are used they are always relative.
+    symbols.insert(symbols.end(),s.begin(),s.end());
 
-    sv ret(symbols_i.size()-s.length(),s.length());
+    sv ret(symbols.size()-s.length(),s.length());
     return ret;
 }
 
 
-sv BuilderImpl<builder_config_t::symbols_t::COMPRESS_LABELS>::symbol_2(std::string_view s){
+sv Symbols<builder_config_t::symbols_t::COMPRESS_LABELS>::symbol_2(std::string_view s){
     if(s.length()==0)return {0,0};
 
-    symbols_i.insert(symbols_i.end(),s.begin(),s.end());
-    symbols={(const char*)symbols_i.data(),(const char*)symbols_i.data()+symbols_i.size()};    //Keeep this updated so that when sv are used they are always relative.
+    symbols.insert(symbols.end(),s.begin(),s.end());
 
-    sv ret(symbols_i.size()-s.length(),s.length());
+    sv ret(symbols.size()-s.length(),s.length());
     return ret;
 }
 

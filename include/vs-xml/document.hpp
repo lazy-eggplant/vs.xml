@@ -121,12 +121,12 @@ struct DocBuilder : TreeBuilder<cfg>{
 
     [[nodiscard]] inline std::expected<Document,details::BuilderBase::error_t> close(){
         this->end();
-        details::BuilderImpl<cfg.symbols>::close();
+        details::BuilderBase::close();
         if constexpr (
             cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||
             cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||
             cfg.symbols==builder_config_t::symbols_t::OWNED 
-        )return Document(DocumentRaw(configs,std::move(this->buffer),std::move(this->symbols_i)));
+        )return Document(DocumentRaw(configs,std::move(this->buffer),std::move(this->symbols.symbols)));
         else return Document(DocumentRaw(configs,std::move(this->buffer),this->symbols.data()));
     }
     

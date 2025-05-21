@@ -36,6 +36,8 @@ namespace details{
 
     template <>
     struct Symbols<builder_config_t::symbols_t::EXTERN_ABS>{
+        std::string_view symbols = {nullptr,std::span<uint8_t>::extent};
+
         inline std::string_view rsv(std::string_view s){return s;}
         inline std::string_view symbol(std::string_view s){return s;}
         inline std::string_view symbol_2(std::string_view s){return s;}
@@ -96,27 +98,15 @@ namespace details{
     
         protected:
             std::vector<uint8_t> buffer;
+
             bool open = true;               //True if the tree is still open to append things.
             bool attribute_block = false;   //True after a begin to add attributes. It is automatically closed when any other command is triggered.
-            
             std::vector<std::pair<ptrdiff_t,ptrdiff_t>> stack;
-    
+
+            void* symoffset = nullptr;
+
             template<typename T>
             error_t leaf(std::string_view value);
-    
-            std::string_view symbols;
-        
-
-            /**
-            * @brief 
-            * NOTICE! The generated string_views have a very narrow lifetime. As symbols changes they are done.
-            * Do not let them survive beyon the next change to symbols!
-            * @param s 
-            * @return std::string_view 
-            */
-            inline std::string_view rsv(sv s){
-                return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
-            }
 
         public:
     
@@ -136,106 +126,45 @@ namespace details{
     
             //TODO: injection can be a simple memcpy if the symbols space is shared, or require full tree refactoring.
             error_t inject(const TreeRaw& tree, const unknown_t* base = nullptr, bool include_root = false);
-
-//            error_t inject(const Tree& tree);
             //TODO: fork
     };
     
-/**
- * @brief Helper class to build an XML tree via commands.
- * 
- */
-
-template <builder_config_t::symbols_t COMPRESSION>
-struct BuilderImpl: protected BuilderBase{
-    protected:
-        using BuilderBase::close;
-        //using BuilderBase::fork;
-
-    public:
-        using BuilderBase::inject;
-};
-
-template <>
-struct BuilderImpl<builder_config_t::symbols_t::OWNED>: BuilderBase{
-    protected:    
-        std::vector<uint8_t> symbols_i;
-        sv symbol(std::string_view s);
-        inline sv symbol_2(std::string_view s){return symbol(s);}
-
-    public:   
-        inline BuilderImpl():BuilderBase(){
-            symbols= std::string_view((char*)symbols_i.data(),(char*)symbols_i.data()+symbols_i.size()); 
-        }
-};
-
-template <>
-struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>: BuilderImpl<builder_config_t::symbols_t::OWNED>{
-    protected:
-        xml::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx_symbols;
-        sv symbol(std::string_view s);
-        inline sv symbol_2(std::string_view s){return symbol(s);}
-
-    public:
-        inline BuilderImpl():idx_symbols(64,
-        [this](sv a){return std::hash<std::string_view>{}(rsv(a));},
-        [this](sv a, sv b){return rsv(a)==rsv(b);}){
-            symbols= std::string_view((char*)symbols_i.data(),(char*)symbols_i.data()+symbols_i.size()); 
-        }
-};
-
-
-template <>
-struct BuilderImpl<builder_config_t::symbols_t::COMPRESS_LABELS>: BuilderImpl<builder_config_t::symbols_t::COMPRESS_ALL>{
-    protected:
-        sv symbol_2(std::string_view s);
-};
-
-
-template <>
-struct BuilderImpl<builder_config_t::symbols_t::EXTERN_ABS> : BuilderBase{
-    protected:
-        inline std::string_view rsv(std::string_view s){return s;}
-        inline std::string_view symbol(std::string_view s){return s;}
-        inline std::string_view symbol_2(std::string_view s){return s;}
-
-};
-
-template <>
-struct BuilderImpl<builder_config_t::symbols_t::EXTERN_REL> : BuilderImpl<builder_config_t::symbols_t::EXTERN_ABS> {
-    protected:
-        //TODO: Add checks?
-        inline std::string_view rsv(sv s){return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);}
-        inline sv symbol(std::string_view s){return sv(symbols.data(),s);}
-        inline sv symbol_2(std::string_view s){return sv(symbols.data(),s);}
-
-        inline BuilderImpl(std::string_view src){
-            this->symbols = src;
-        }
-};
-
 }
 
 template<builder_config_t cfg = {}>
-struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
+struct TreeBuilder : details::BuilderBase{
+    using error_t = details::BuilderBase::error_t;
+
     protected:
-        using details::BuilderImpl<cfg.symbols>::symbol;        //Used for those which should be compressed if possible.
-        using details::BuilderImpl<cfg.symbols>::symbol_2;      //Used by those which are not so easy to compress, so they can be more favourably skipped.
+        details::Symbols<cfg.symbols> symbols;
+
+        //Forwarding functions from symbols and updating symoffset if needed.
+        inline auto symbol(auto a){
+            auto tmp = symbols.symbol(a);
+            if constexpr(cfg.symbols==builder_config_t::OWNED || cfg.symbols==builder_config_t::COMPRESS_ALL || cfg.symbols==builder_config_t::COMPRESS_LABELS) symoffset = symbols.symbols.data();
+            return tmp;
+        }
+        inline auto symbol_2(auto a){
+            auto tmp = symbols.symbol_2(a);
+            if constexpr(cfg.symbols==builder_config_t::OWNED || cfg.symbols==builder_config_t::COMPRESS_ALL || cfg.symbols==builder_config_t::COMPRESS_LABELS) symoffset = symbols.symbols.data();
+            return tmp;
+        }
+        inline auto rsv(auto a){return symbols.rsv(a);}
+        
 
     public:
-        TreeBuilder(std::string_view src):details::BuilderImpl<cfg.symbols>(src){
+        TreeBuilder(std::string_view src):symbols(src){
             static_assert(cfg.symbols==builder_config_t::EXTERN_REL, "Only EXTERN_REL builders can pass the source symbol table");
+            symoffset = symbols.symbols.data();
         }
 
-        TreeBuilder():details::BuilderImpl<cfg.symbols>(){
+        TreeBuilder(){
             static_assert(cfg.symbols!=builder_config_t::EXTERN_REL, "EXTERN_REL cannot build without a source symbol table");
+            symoffset = symbols.symbols.data();
         }
 
         constexpr static inline builder_config_t configs = cfg;
         constexpr static inline bool is_document = false;
-
-        using details::BuilderImpl<cfg.symbols>::rsv;
-        using error_t = details::BuilderBase::error_t;
 
         inline error_t begin(std::string_view name, std::string_view ns=""){
             auto a =symbol(name), b = symbol(ns);
@@ -248,7 +177,6 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
             auto a =symbol(name), b = symbol_2(value), c = symbol(ns);
             return details::BuilderBase::attr(rsv(a),rsv(b),rsv(c));
         }
-
         inline error_t text(std::string_view value){
             return details::BuilderBase::text(rsv( symbol_2(value)));
         }
@@ -268,13 +196,13 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
         }
 
         [[nodiscard]] inline std::expected<Tree,error_t> close(){
-            details::BuilderImpl<cfg.symbols>::close();
+            details::BuilderBase::close();
             if constexpr (
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||
                 cfg.symbols==builder_config_t::symbols_t::OWNED 
-            )return Tree(TreeRaw(configs,std::move(this->buffer),std::move(this->symbols_i)));
-            else return Tree(TreeRaw(configs,std::move(this->buffer),this->symbols.data()));
+            )return Tree(TreeRaw(configs,std::move(buffer),std::move(symbols.symbols)));
+            else return Tree(TreeRaw(configs,std::move(buffer),symbols.symbols.data()));
         }
         
         struct attr_t{
@@ -318,12 +246,8 @@ struct TreeBuilder : protected details::BuilderImpl<cfg.symbols>{
          */
         inline void reserve(size_t bytes,size_t bytes2=0){
             this->buffer.reserve(bytes);
-            if constexpr(configs.symbols==builder_config_t::OWNED || configs.symbols==builder_config_t::COMPRESS_ALL || configs.symbols==builder_config_t::COMPRESS_LABELS)this->symbols_i.reserve(bytes2);
+            if constexpr(configs.symbols==builder_config_t::OWNED || configs.symbols==builder_config_t::COMPRESS_ALL || configs.symbols==builder_config_t::COMPRESS_LABELS)symbols.symbols.reserve(bytes2);
         }
-
-        using details::BuilderImpl<cfg.symbols>::close;
-        using details::BuilderImpl<cfg.symbols>::inject;
-
 };
 
 }

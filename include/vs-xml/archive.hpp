@@ -30,7 +30,7 @@
 
 namespace VS_XML_NS{
 
-//TODO: to fully rework after the symbol handling is split from the builder.
+//TODO: to fully rework after the symbol handling is split from the builder. This code as is will never work.
 template<builder_config_t cfg = {}>
 struct BatchBuilder : DocBuilder<cfg>{
     protected:
@@ -39,7 +39,7 @@ struct BatchBuilder : DocBuilder<cfg>{
     public:
 
     inline std::expected<void,details::BuilderBase::error_t> close(){
-        auto ret = details::BuilderImpl<cfg.symbols>::close();
+        auto ret = details::BuilderBase::close();
 
         documents.emplace_back(DocBuilder<cfg>::close());
         this->buffer.clear();   //TODO: Check if it must be resized.

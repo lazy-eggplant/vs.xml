@@ -24,7 +24,7 @@ int encode(std::filesystem::path input, std::filesystem::path output){
 
         auto tree = bld.close();
         if(!tree.has_value()){
-            std::cerr << "Error while closing the document " << tree.error() << "\n";
+            std::cerr << "Error while closing the document " << (int)tree.error() << "\n";
             return 3;
         }
 
