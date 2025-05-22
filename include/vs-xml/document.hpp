@@ -126,8 +126,8 @@ struct DocBuilder : TreeBuilder<cfg>{
             cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||
             cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||
             cfg.symbols==builder_config_t::symbols_t::OWNED 
-        )return Document(DocumentRaw(configs,std::move(this->buffer),std::move(this->symbols.symbols)));
-        else return Document(DocumentRaw(configs,std::move(this->buffer),this->symbols.symbols.data()));
+        )return Document(DocumentRaw(configs,std::exchange(this->buffer,{}),std::exchange(this->symbols.symbols,{})));
+        else return Document(DocumentRaw(configs,std::exchange(this->buffer,{}),this->symbols.symbols.data()));
     }
     
 };

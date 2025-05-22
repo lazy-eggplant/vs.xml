@@ -202,14 +202,13 @@ struct TreeBuilder : details::BuilderBase{
          * @return std::expected<Tree,error_t> a wrapped tree if successful, or an error
          */
         [[nodiscard]] inline std::expected<Tree,error_t> close(){
-            auto ret = details::BuilderBase::close();
-            if(ret!=details::BuilderBase::error_t::OK)return std::unexpected(ret);
+            if (auto ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)return std::unexpected(ret);
             if constexpr (
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||
                 cfg.symbols==builder_config_t::symbols_t::OWNED 
-            )return Tree(TreeRaw(configs,std::move(buffer),std::move(symbols.symbols)));
-            else return Tree(TreeRaw(configs,std::move(buffer),symbols.symbols.data()));
+            )return Tree(TreeRaw(configs,std::exchange(buffer,{}),std::exchange(symbols.symbols,{})));
+            else return Tree(TreeRaw(configs,std::exchange(buffer,{}),symbols.symbols.data()));
         }
 
         /**
@@ -218,11 +217,10 @@ struct TreeBuilder : details::BuilderBase{
          * @return std::expected<std::vector<uint8_t>,error_t> 
          */
         [[nodiscard]] inline std::expected<std::vector<uint8_t>,error_t> close_frame(){
-            auto ret = details::BuilderBase::close();
-            if(ret!=details::BuilderBase::error_t::OK)return std::unexpected(ret);
+            if (auto ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)return std::unexpected(ret);
             open=true;
             attribute_block=false;
-            return std::move(buffer);
+            return std::exchange(buffer, {});
         }
 
         /**

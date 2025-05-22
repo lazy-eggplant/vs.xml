@@ -21,8 +21,8 @@ int encode(std::filesystem::path input, std::filesystem::path output){
 
         xml::DocBuilder<cfg> bld;
         xml::Parser parser(xmlInput, bld);
-        auto ret = parser.parse();
-        if(!ret.has_value())throw std::runtime_error(std::string(ret.error().msg()));
+        
+        if(auto ret = parser.parse(); !ret.has_value())throw std::runtime_error(std::string(ret.error().msg()));
 
         auto tree = bld.close();
         if(!tree.has_value()){
