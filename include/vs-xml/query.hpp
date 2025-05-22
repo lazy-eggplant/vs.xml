@@ -10,14 +10,15 @@
  * 
  */
 
-#include "vs-xml/private/impl.hpp"
 #include <functional>
-#include <initializer_list>
-#include <iterator>
 #include <string_view>
 #include <variant>
 #include <vector>
 #include <vs-xml/commons.hpp>
+#include <vs-xml/private/wrp-impl.hpp>
+
+//Temporary add custom implementation here later
+#include <generator>
 
 namespace VS_XML_NS{
 
@@ -72,9 +73,21 @@ struct token_t{
         > args;
 };
 
-
-
+template<size_t N = 0>
 struct query_t{
+    //This token data structure is quite heavy.
+    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
+
+    std::array<token_t,N> tokens;
+    size_t current=0;
+
+    constexpr query_t& operator / (std::string_view){return *this;}
+    constexpr query_t& operator / (const token_t& tkn){tokens[current]=tkn;current++;return *this;}
+
+};
+
+template<>
+struct query_t<0>{
     //This token data structure is quite heavy.
     //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
 
@@ -83,19 +96,6 @@ struct query_t{
 
     query_t& operator / (std::string_view){return *this;}
     query_t& operator / (const token_t& tkn){tokens.push_back(tkn);return *this;}
-
-};
-
-template<size_t N>
-struct query2_t{
-    //This token data structure is quite heavy.
-    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
-
-    std::array<token_t,N> tokens;
-    size_t current=0;
-
-    constexpr query2_t& operator / (std::string_view){return *this;}
-    constexpr query2_t& operator / (const token_t& tkn){tokens[current]=tkn;current++;return *this;}
 
 };
 
@@ -130,6 +130,15 @@ constexpr static token_t match_all_text(token_t::single_t<token_t::MATCH_ALL_TEX
 constexpr static token_t match_all_text(token_t::attr_t<token_t::MATCH_ATTR> arg) {
     return {arg};
 }
+
+std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std::vector<token_t>::iterator begin, std::vector<token_t>::iterator end);
+
+//template<size_t N>
+inline std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, query_t<0> query) {
+    return traverse(root, query.tokens.begin(), query.tokens.end());
+}
+
+
 
 }
 //`is` generator references all nodes which are proven to complete the query

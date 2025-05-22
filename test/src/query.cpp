@@ -6,6 +6,7 @@
 
 #include <new> 
 #include <print> 
+#include "vs-xml/query.hpp"
 
 // A very simple memory pool for demonstration purposes. DON'T SHIP IN THE LIBRARY!
 struct MemoryPool {
@@ -145,11 +146,10 @@ struct v{
 };
 
 
-#include "vs-xml/query.hpp"
 
 int main() {
     auto q = xml::query::query_t{}/xml::query::accept()/xml::query::accept();
-    constexpr auto q2 = xml::query::query2_t<10>{}/xml::query::accept()/xml::query::accept();
+    constexpr auto q2 = xml::query::query_t<10>{}/xml::query::accept()/xml::query::accept();
 
 /*
     v<reserved.sliceA.begin(),reserved.sliceA.end()> A;
