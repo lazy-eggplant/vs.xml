@@ -39,7 +39,7 @@
 
 
 #ifndef VS_XML_NO_ASSERT
-#include <vs-xml/private/assert.hpp>
+#include <vs-xml/fwd/assert.hpp>
 #endif 
 
 /**

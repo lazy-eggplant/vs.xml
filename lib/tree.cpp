@@ -8,7 +8,7 @@
 #include <vs-xml/private/wrp-impl.hpp>
 #include <vs-xml/serializer.hpp>
 
-#include <vs-xml/private/format.hpp>
+#include <vs-xml/fwd/print.hpp>
 
 namespace VS_XML_NS{
 

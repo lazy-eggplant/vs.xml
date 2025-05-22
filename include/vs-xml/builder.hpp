@@ -18,7 +18,7 @@
 #include <functional>
 
 
-#include <vs-xml/private/unordered_set.hpp>
+#include <vs-xml/fwd/unordered_set.hpp>
 #include <vector>
 #include <string_view>
 

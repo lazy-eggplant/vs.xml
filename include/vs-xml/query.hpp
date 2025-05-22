@@ -10,15 +10,14 @@
  * 
  */
 
+//Temporary add custom implementation here later
+#include <generator>
 #include <functional>
 #include <string_view>
 #include <variant>
 #include <vector>
 #include <vs-xml/commons.hpp>
 #include <vs-xml/private/wrp-impl.hpp>
-
-//Temporary add custom implementation here later
-#include <generator>
 
 namespace VS_XML_NS{
 
@@ -131,11 +130,11 @@ constexpr static token_t match_all_text(token_t::attr_t<token_t::MATCH_ATTR> arg
     return {arg};
 }
 
-std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std::vector<token_t>::iterator begin, std::vector<token_t>::iterator end);
+std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std::vector<token_t>::const_iterator begin, std::vector<token_t>::const_iterator end);
 
 //template<size_t N>
-inline std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, query_t<0> query) {
-    return traverse(root, query.tokens.begin(), query.tokens.end());
+inline std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<element_t> root, const query_t<0>& query) {
+    return traverse(*(wrp::base_t<unknown_t>*)&root, query.tokens.begin(), query.tokens.end());
 }
 
 

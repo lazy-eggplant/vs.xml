@@ -1,3 +1,6 @@
+#include <vs-xml/query.hpp>
+#include <vs-xml/builder.hpp>
+
 #include <initializer_list>
 #include <iostream>
 #include <vector>
@@ -6,7 +9,7 @@
 
 #include <new> 
 #include <print> 
-#include "vs-xml/query.hpp"
+
 
 // A very simple memory pool for demonstration purposes. DON'T SHIP IN THE LIBRARY!
 struct MemoryPool {
@@ -147,9 +150,62 @@ struct v{
 
 
 
+template<xml::builder_config_t cfg>
+auto mk_tree(){
+    xml::TreeBuilder<cfg> build;
+    build.reserve(100000,100000);
+    build.begin("hello");
+        build.x("AAA",{{"N1","N2"},{"N1","N3"}},[&]{
+            build.x("BBB");
+            build.comment("ss");
+            build.comment("comment2");
+        });
+        build.x("a","AAA",{{"N1","N2"},{"N1","N3"}},[](auto& w) static{
+            w.x("BBB");
+            w.comment("ss");
+            w.comment("comment2");
+        });
+        build.attr("op3-a", "v'>&al1");
+        build.attr("op1-a-s", "val1", "w");
+        build.attr("op2-a", "va&gt;l\"1");
+        build.attr("op5-a", "va>l\"1");
+        build.attr("op6-a-s", "val1", "w");
+        build.comment("01234567890123456789Banana <hello ciao=\"worldo\" &amp; &></world>"); 
+        build.begin("hello1","s");
+        build.end();
+        build.begin("hello2","s");
+            build.text("Banana <hello ciao=\"worldo\" &amp; &></world>"); 
+        build.end();
+        build.begin("hello3","s");
+            build.comment("hello");
+            build.begin("hello5","s");
+            build.attr("op3", "val1");
+            build.attr("op2", "val11");
+            build.attr("op1", "val1");
+            build.cdata("Hello'''''&&&& world!");
+            build.end();
+        build.end();
+        build.begin("hello4","s");
+        
+        build.end();
+    build.end();
+
+    return build.close();
+}
+
 int main() {
-    auto q = xml::query::query_t{}/xml::query::accept()/xml::query::accept();
+    auto q = xml::query::query_t{}/xml::query::accept()/xml::query::accept()/xml::query::next_layer();
     constexpr auto q2 = xml::query::query_t<10>{}/xml::query::accept()/xml::query::accept();
+
+    auto tree = *mk_tree<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();
+
+    for(auto t : q.tokens){
+        std::print("{}\n",t.args.index());
+    }
+
+    for(const auto& t : xml::query::traverse(tree.root(),q)){
+        std::print("{}\n", t.name().value_or("---"));
+    }
 
 /*
     v<reserved.sliceA.begin(),reserved.sliceA.end()> A;

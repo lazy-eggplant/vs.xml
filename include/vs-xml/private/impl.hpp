@@ -24,7 +24,7 @@
 
 #include <vs-xml/commons.hpp>
 #include <vs-xml/serializer.hpp>
-#include <vs-xml/private/format.hpp>
+#include <vs-xml/fwd/format.hpp>
 
 namespace VS_XML_NS{
 
