@@ -163,9 +163,18 @@ error_t&#160;</td><td class="memItemRight" valign="bottom"><b>proc</b> (std::str
 <tr class="memitem:aa8e6e89e8b33d85c2976365655fab0d0" id="r_aa8e6e89e8b33d85c2976365655fab0d0"><td class="memItemLeft" align="right" valign="top"><a id="aa8e6e89e8b33d85c2976365655fab0d0" name="aa8e6e89e8b33d85c2976365655fab0d0"></a>
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>marker</b> (std::string_view value)</td></tr>
 <tr class="separator:aa8e6e89e8b33d85c2976365655fab0d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2fd742da45362ef4c32e3d59d5ccaab" id="r_ad2fd742da45362ef4c32e3d59d5ccaab"><td class="memItemLeft" align="right" valign="top"><a id="ad2fd742da45362ef4c32e3d59d5ccaab" name="ad2fd742da45362ef4c32e3d59d5ccaab"></a>
-std::expected&lt; <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
+<tr class="memitem:ad2fd742da45362ef4c32e3d59d5ccaab" id="r_ad2fd742da45362ef4c32e3d59d5ccaab"><td class="memItemLeft" align="right" valign="top">std::expected&lt; <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#ad2fd742da45362ef4c32e3d59d5ccaab">close</a> ()</td></tr>
+<tr class="memdesc:ad2fd742da45362ef4c32e3d59d5ccaab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final operaration when the building process is finished.  <br /></td></tr>
 <tr class="separator:ad2fd742da45362ef4c32e3d59d5ccaab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af143ebd95656a501d1c8a015b1047eef" id="r_af143ebd95656a501d1c8a015b1047eef"><td class="memItemLeft" align="right" valign="top">std::expected&lt; std::vector&lt; uint8_t &gt;, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#af143ebd95656a501d1c8a015b1047eef">close_frame</a> ()</td></tr>
+<tr class="memdesc:af143ebd95656a501d1c8a015b1047eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Special version of the closing function, only returning the generated tree but not symbols.  <br /></td></tr>
+<tr class="separator:af143ebd95656a501d1c8a015b1047eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb62a9c53ac8e1237c918020208e9b67" id="r_afb62a9c53ac8e1237c918020208e9b67"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structVS__XML__NS_1_1details_1_1Symbols.html">details::Symbols</a>&lt; configs.symbols &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#afb62a9c53ac8e1237c918020208e9b67">extract_symbols</a> ()</td></tr>
+<tr class="memdesc:afb62a9c53ac8e1237c918020208e9b67"><td class="mdescLeft">&#160;</td><td class="mdescRight">It allows to extract symbols if the builder has been closed.  <br /></td></tr>
+<tr class="separator:afb62a9c53ac8e1237c918020208e9b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bfb45cd25b753c47fce4dfc971bf29e" id="r_a5bfb45cd25b753c47fce4dfc971bf29e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a5bfb45cd25b753c47fce4dfc971bf29e">fork</a> () const</td></tr>
+<tr class="memdesc:a5bfb45cd25b753c47fce4dfc971bf29e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fork the current builder instance by cloning its current state into a new one.  <br /></td></tr>
+<tr class="separator:a5bfb45cd25b753c47fce4dfc971bf29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6df2a7aca63294fa5f7ca096d2d4d1c3" id="r_a6df2a7aca63294fa5f7ca096d2d4d1c3"><td class="memItemLeft" align="right" valign="top"><a id="a6df2a7aca63294fa5f7ca096d2d4d1c3" name="a6df2a7aca63294fa5f7ca096d2d4d1c3"></a>
 constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>x</b> (std::string_view ns, std::string_view name, const std::initializer_list&lt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">attr_t</a> &gt; &amp;attrs, const std::function&lt; void(<a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a> &amp;)&gt; &amp;items)</td></tr>
 <tr class="separator:a6df2a7aca63294fa5f7ca096d2d4d1c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,7 +188,7 @@ constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>x</b> (std:
 constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>x</b> (std::string_view name, const std::initializer_list&lt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">attr_t</a> &gt; &amp;attrs={}, const std::function&lt; void()&gt; &amp;items=[](){})</td></tr>
 <tr class="separator:a996ebe22d9407308be0da45630b7b31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a522578359330e54115c580ca304ade43" id="r_a522578359330e54115c580ca304ade43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a522578359330e54115c580ca304ade43">reserve</a> (size_t bytes, size_t bytes2=0)</td></tr>
-<tr class="memdesc:a522578359330e54115c580ca304ade43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves space for the buffer to avoid many of the initial small allocations.  <br /></td></tr>
+<tr class="memdesc:a522578359330e54115c580ca304ade43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves space for the buffer to avoid many of the initial small allocations. Ideally run just after initialization.  <br /></td></tr>
 <tr class="separator:a522578359330e54115c580ca304ade43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structVS__XML__NS_1_1details_1_1BuilderBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structVS__XML__NS_1_1details_1_1BuilderBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></td></tr>
 <tr class="memitem:aebd231986442be8bbc472c6fa1ed187e inherit pub_methods_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_aebd231986442be8bbc472c6fa1ed187e"><td class="memItemLeft" align="right" valign="top">
@@ -224,12 +233,12 @@ static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_d
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a1d5eed6e97dca4435a3645958019277e" id="r_a1d5eed6e97dca4435a3645958019277e"><td class="memItemLeft" align="right" valign="top"><a id="a1d5eed6e97dca4435a3645958019277e" name="a1d5eed6e97dca4435a3645958019277e"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>label</b> (auto a)</td></tr>
+<tr class="separator:a1d5eed6e97dca4435a3645958019277e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fc57ad8107ecc0a81810843ed3b6f53" id="r_a1fc57ad8107ecc0a81810843ed3b6f53"><td class="memItemLeft" align="right" valign="top"><a id="a1fc57ad8107ecc0a81810843ed3b6f53" name="a1fc57ad8107ecc0a81810843ed3b6f53"></a>
 auto&#160;</td><td class="memItemRight" valign="bottom"><b>symbol</b> (auto a)</td></tr>
 <tr class="separator:a1fc57ad8107ecc0a81810843ed3b6f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71d265bb56073d8c01706f2c4da2e028" id="r_a71d265bb56073d8c01706f2c4da2e028"><td class="memItemLeft" align="right" valign="top"><a id="a71d265bb56073d8c01706f2c4da2e028" name="a71d265bb56073d8c01706f2c4da2e028"></a>
-auto&#160;</td><td class="memItemRight" valign="bottom"><b>symbol_2</b> (auto a)</td></tr>
-<tr class="separator:a71d265bb56073d8c01706f2c4da2e028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dd34c7568aa108fc1c4d8e87c6b5d8b" id="r_a9dd34c7568aa108fc1c4d8e87c6b5d8b"><td class="memItemLeft" align="right" valign="top"><a id="a9dd34c7568aa108fc1c4d8e87c6b5d8b" name="a9dd34c7568aa108fc1c4d8e87c6b5d8b"></a>
 auto&#160;</td><td class="memItemRight" valign="bottom"><b>rsv</b> (auto a)</td></tr>
 <tr class="separator:a9dd34c7568aa108fc1c4d8e87c6b5d8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -257,11 +266,131 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>attribute_block</b> =
 <tr class="memitem:adc2f839b3eda9f3bc8d9092840c7b210 inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_adc2f839b3eda9f3bc8d9092840c7b210"><td class="memItemLeft" align="right" valign="top">
 std::vector&lt; std::pair&lt; ptrdiff_t, ptrdiff_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>stack</b></td></tr>
 <tr class="separator:adc2f839b3eda9f3bc8d9092840c7b210 inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a264765cc9c285e69ffe70766fccbff inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a3a264765cc9c285e69ffe70766fccbff"><td class="memItemLeft" align="right" valign="top">
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>symoffset</b> = nullptr</td></tr>
-<tr class="separator:a3a264765cc9c285e69ffe70766fccbff inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5baf75510108f570e9a0c76f649d960a inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a5baf75510108f570e9a0c76f649d960a"><td class="memItemLeft" align="right" valign="top">
+const void *&#160;</td><td class="memItemRight" valign="bottom"><b>symoffset</b> = nullptr</td></tr>
+<tr class="separator:a5baf75510108f570e9a0c76f649d960a inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad2fd742da45362ef4c32e3d59d5ccaab" name="ad2fd742da45362ef4c32e3d59d5ccaab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2fd742da45362ef4c32e3d59d5ccaab">&#9670;&#160;</a></span>close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;builder_config_t cfg = {}&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::expected&lt; <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>, error_t &gt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::close </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Final operaration when the building process is finished. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::expected&lt;Tree,error_t&gt; a wrapped tree if successful, or an error </dd></dl>
+
+</div>
+</div>
+<a id="af143ebd95656a501d1c8a015b1047eef" name="af143ebd95656a501d1c8a015b1047eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af143ebd95656a501d1c8a015b1047eef">&#9670;&#160;</a></span>close_frame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;builder_config_t cfg = {}&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::expected&lt; std::vector&lt; uint8_t &gt;, error_t &gt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::close_frame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Special version of the closing function, only returning the generated tree but not symbols. </p>
+<p>The current state for symbols is preserved, and the new tree will inherit them. </p><dl class="section return"><dt>Returns</dt><dd>std::expected&lt;std::vector&lt;uint8_t&gt;,error_t&gt; </dd></dl>
+
+</div>
+</div>
+<a id="afb62a9c53ac8e1237c918020208e9b67" name="afb62a9c53ac8e1237c918020208e9b67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb62a9c53ac8e1237c918020208e9b67">&#9670;&#160;</a></span>extract_symbols()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;builder_config_t cfg = {}&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; <a class="el" href="structVS__XML__NS_1_1details_1_1Symbols.html">details::Symbols</a>&lt; configs.symbols &gt; &gt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::extract_symbols </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>It allows to extract symbols if the builder has been closed. </p>
+<p>Not to be used with <code>close</code> only with <code>close_frame</code> </p><dl class="section return"><dt>Returns</dt><dd>std::optional&lt;details::Symbols&lt;configs.symbols&gt;&gt; </dd></dl>
+
+</div>
+</div>
+<a id="a5bfb45cd25b753c47fce4dfc971bf29e" name="a5bfb45cd25b753c47fce4dfc971bf29e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bfb45cd25b753c47fce4dfc971bf29e">&#9670;&#160;</a></span>fork()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;builder_config_t cfg = {}&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a> <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::fork </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fork the current builder instance by cloning its current state into a new one. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a> </dd></dl>
+
+</div>
+</div>
 <a id="a522578359330e54115c580ca304ade43" name="a522578359330e54115c580ca304ade43"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a522578359330e54115c580ca304ade43">&#9670;&#160;</a></span>reserve()</h2>
 
@@ -298,7 +427,7 @@ template&lt;builder_config_t cfg = {}&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Reserves space for the buffer to avoid many of the initial small allocations. </p>
+<p>Reserves space for the buffer to avoid many of the initial small allocations. Ideally run just after initialization. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">bytes</td><td></td></tr>
