@@ -7,7 +7,7 @@ var indexSectionsWithContent =
   4: "_cdefinprstv",
   5: "d",
   6: "t",
-  7: "r",
+  7: "e",
   8: "v"
 };
 
