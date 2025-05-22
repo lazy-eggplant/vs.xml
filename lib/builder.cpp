@@ -107,7 +107,7 @@ BuilderBase::error_t BuilderBase::close(){
 }
 
 
-sv Symbols<builder_config_t::symbols_t::COMPRESS_ALL>::symbol(std::string_view s){
+sv Symbols<builder_config_t::symbols_t::COMPRESS_ALL>::label(std::string_view s){
     if(s.length()==0)return {0,0};
 
     auto it = idx.find(sv(symbols.data(),s));
@@ -125,7 +125,7 @@ sv Symbols<builder_config_t::symbols_t::COMPRESS_ALL>::symbol(std::string_view s
     }
 }
 
-sv Symbols<builder_config_t::symbols_t::OWNED>::symbol(std::string_view s){
+sv Symbols<builder_config_t::symbols_t::OWNED>::label(std::string_view s){
     if(s.length()==0)return {0,0};
 
     symbols.insert(symbols.end(),s.begin(),s.end());
@@ -135,7 +135,7 @@ sv Symbols<builder_config_t::symbols_t::OWNED>::symbol(std::string_view s){
 }
 
 
-sv Symbols<builder_config_t::symbols_t::COMPRESS_LABELS>::symbol_2(std::string_view s){
+sv Symbols<builder_config_t::symbols_t::COMPRESS_LABELS>::symbol(std::string_view s){
     if(s.length()==0)return {0,0};
 
     symbols.insert(symbols.end(),s.begin(),s.end());

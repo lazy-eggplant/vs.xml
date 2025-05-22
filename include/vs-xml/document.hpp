@@ -116,7 +116,7 @@ struct DocBuilder : TreeBuilder<cfg>{
     }
 
     inline details::BuilderBase::error_t xml(){
-        return details::BuilderBase::proc(TreeBuilder<cfg>::rsv( TreeBuilder<cfg>::symbol("xml version=\"1.0\" encoding=\"UTF-8\"")));
+        return details::BuilderBase::proc(TreeBuilder<cfg>::rsv( TreeBuilder<cfg>::label("xml version=\"1.0\" encoding=\"UTF-8\"")));
     }
 
     [[nodiscard]] inline std::expected<Document,details::BuilderBase::error_t> close(){
@@ -127,7 +127,7 @@ struct DocBuilder : TreeBuilder<cfg>{
             cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||
             cfg.symbols==builder_config_t::symbols_t::OWNED 
         )return Document(DocumentRaw(configs,std::move(this->buffer),std::move(this->symbols.symbols)));
-        else return Document(DocumentRaw(configs,std::move(this->buffer),this->symbols.data()));
+        else return Document(DocumentRaw(configs,std::move(this->buffer),this->symbols.symbols.data()));
     }
     
 };

@@ -22,7 +22,7 @@ int test_vs(std::string_view xmlInput){
 
         auto tree = bld.close();
         if(!tree.has_value()){
-            std::cerr << "Error while closing the document " << tree.error() << "\n";
+            std::cerr << "Error while closing the document " << (int)tree.error() << "\n";
             return 3;
         }
 
