@@ -152,11 +152,13 @@ struct TreeBuilder : details::BuilderBase{
         
 
     public:
+        //TODO: rework to accept a configuration object with the reservations of all vectors
         TreeBuilder(std::string_view src):symbols(src){
             static_assert(cfg.symbols==builder_config_t::EXTERN_REL, "Only EXTERN_REL builders can pass the source symbol table");
             symoffset = symbols.symbols.data();
         }
 
+        //TODO: rework to accept a configuration object with the reservations of all vectors
         TreeBuilder(){
             static_assert(cfg.symbols!=builder_config_t::EXTERN_REL, "EXTERN_REL cannot build without a source symbol table");
             symoffset = symbols.symbols.data();

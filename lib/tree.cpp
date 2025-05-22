@@ -196,8 +196,6 @@ bool TreeRaw::save_binary(std::ostream& out)const{
     if(configs.symbols==builder_config_t::EXTERN_ABS)return false; //Symbols not relocatable.
 
     binary_header_t header;
-    header.format_major = format_major;
-    header.format_minor = format_minor;
     header.configs = configs;
     if(header.configs.symbols==builder_config_t::EXTERN_REL)header.configs.symbols=builder_config_t::OWNED; //Symbols are copied even if the where shared, so they are now owned.
 
@@ -241,6 +239,8 @@ std::expected<TreeRaw, TreeRaw::from_binary_error_t> TreeRaw::from_binary(std::s
         std::span<uint8_t>{region.data()+header.offset_tree, region.data()+header.offset_symbols},
         std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.offset_end}
     );
+
+    //TODO: Add checks on word size.
 }
 
 

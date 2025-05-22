@@ -16,12 +16,14 @@
 
 #include <concepts>
 
+#include <endian.h>
 #include <expected>
 
 
 #include <string>
 #include <string_view>
 
+#include <bit>
 
 #ifndef VS_XML_NS
 #define VS_XML_NS xml
@@ -29,6 +31,10 @@
 
 #ifndef VS_XML_NO_EXCEPT
 #define VS_XML_NO_EXCEPT false
+#endif
+
+#ifndef VS_XML_LAYOUT
+#define VS_XML_LAYOUT 0
 #endif
 
 
@@ -45,17 +51,19 @@ namespace VS_XML_NS{
 constexpr static inline int format_major = 0; ///Current binary format major revision. Major revisions are breaking.
 constexpr static inline int format_minor = 0; ///Current binary format minor revision. Minor revisions are not breaking, but older does not support recent.
 
+#if VS_XML_LAYOUT == 0
 typedef std::ptrdiff_t delta_ptr_t ;
 typedef size_t xml_size_t;
 typedef size_t xml_count_t;
 typedef size_t xml_enum_size_t;
 
-/*
+#elif VS_XML_LAYOUT == 1
 typedef int32_t delta_ptr_t ;
 typedef uint32_t xml_size_t;
 typedef uint16_t xml_count_t;
 typedef uint8_t xml_enum_size_t;
-*/
+
+#endif
 
 inline void xml_assert(bool condition, const char* errorMessage="") {
     #ifndef VS_XML_NO_ASSERT
@@ -98,16 +106,28 @@ struct __attribute__ ((packed)) builder_config_t{
  * @brief Data structure used to represent a tree (or document), for saving/loading
  * 
  */
+ 
 struct __attribute__ ((packed)) binary_header_t{
     const char magic[4] = {'$','X','M','L'};
-    size_t offset_tree;
-    size_t offset_symbols;
-    size_t offset_end;
-    uint8_t format_major : 8;
-    uint8_t format_minor : 8;
+    uint8_t format_major = VS_XML_NS::format_major;
+    uint8_t format_minor = VS_XML_NS::format_minor;
     builder_config_t configs;
-    uint8_t reserved_cfg [1];
-    //TODO: (?) add fields for the type data size and endianess
+    enum struct endianess_t {LITTLE,BIG} endianess : 1 = 
+        std::endian::native==std::endian::little?
+            binary_header_t::endianess_t::LITTLE:
+            binary_header_t::endianess_t::BIG;
+    uint8_t res0 : 7;
+
+    uint64_t offset_tree;
+    uint64_t offset_symbols;
+    uint64_t offset_end;
+
+    uint64_t size__delta_ptr : 6        = sizeof(delta_ptr_t);
+    uint64_t size__xml_size  : 6        = sizeof(xml_size_t);
+    uint64_t size__xml_count : 6        = sizeof(xml_count_t);
+    uint64_t size__xml_enum_size : 6    = sizeof(xml_enum_size_t);
+
+    uint8_t res[5];
 };
 
 
@@ -152,13 +172,12 @@ enum struct feature_t{
  */
 enum struct type_t : xml_enum_size_t{
     UNKNOWN,    ///Used for dynamic dispatching
-    ROOT,
     ELEMENT,
     ATTR,
     TEXT,
+    CDATA,
     COMMENT,
     PROC,
-    CDATA,
     MARKER,     ///Special type used to represent injection point or annotations.
 };
 

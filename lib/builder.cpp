@@ -35,10 +35,10 @@ template BuilderBase::error_t BuilderBase::leaf<text_t>(std::string_view value);
 template BuilderBase::error_t BuilderBase::leaf<proc_t>(std::string_view value);
 template BuilderBase::error_t BuilderBase::leaf<marker_t>(std::string_view value);
 
-
 BuilderBase::BuilderBase(){
     stack.reserve(32);
-    stack.push_back({0,-1});}
+    stack.push_back({0,-1});
+}
 
 BuilderBase::error_t BuilderBase::begin(std::string_view name, std::string_view ns){
     if(open==false)return error_t::TREE_CLOSED;
