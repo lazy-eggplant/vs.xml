@@ -122,7 +122,15 @@ struct TreeRaw{
      */
     TreeRaw clone(const element_t* ref=nullptr, bool reduce=true) const;
 
-    struct print_cfg_t{};
+    struct print_cfg_t{
+        bool use_tabs = true;      //Else spaces
+        bool use_quote = true;     //Else `
+        bool use_lf = true;        //Else CRLF
+        int spaces_in_tab = 4;
+
+        print_cfg_t() {};
+
+    };
 
     inline const element_t& root() const {return *(const element_t*)buffer.data();}
 

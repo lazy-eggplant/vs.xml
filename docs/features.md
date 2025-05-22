@@ -48,5 +48,6 @@
 - [x] `noexcept` mode
 - [x] `noassert` mode
 - [ ] no memory allocations
+    - [x] in tree/documents
 
 [^1]: Partially, no validation for them
