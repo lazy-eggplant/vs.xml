@@ -286,97 +286,95 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
 <div class="foldopen" id="foldopen00204" data-start="{" data-end="}">
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder.html#ad2fd742da45362ef4c32e3d59d5ccaab">  204</a></span>        [[nodiscard]] <span class="keyword">inline</span> std::expected&lt;Tree,error_t&gt; <a class="code hl_function" href="structVS__XML__NS_1_1TreeBuilder.html#ad2fd742da45362ef4c32e3d59d5ccaab">close</a>(){</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keyword">auto</span> ret = details::BuilderBase::close();</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <span class="keywordflow">if</span>(ret!=details::BuilderBase::error_t::OK)<span class="keywordflow">return</span> std::unexpected(ret);</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                cfg.symbols==builder_config_t::symbols_t::OWNED </div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            )<span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>(configs,std::move(buffer),std::move(symbols.symbols)));</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>(configs,std::move(buffer),symbols.symbols.data()));</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keywordflow">if</span> (<span class="keyword">auto</span> ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)<span class="keywordflow">return</span> std::unexpected(ret);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                cfg.symbols==builder_config_t::symbols_t::OWNED </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            )<span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>(configs,std::exchange(buffer,{}),std::exchange(symbols.symbols,{})));</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Tree.html">Tree</a>(<a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>(configs,std::exchange(buffer,{}),symbols.symbols.data()));</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        }</div>
 </div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="foldopen" id="foldopen00220" data-start="{" data-end="}">
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder.html#af143ebd95656a501d1c8a015b1047eef">  220</a></span>        [[nodiscard]] <span class="keyword">inline</span> std::expected&lt;std::vector&lt;uint8_t&gt;,error_t&gt; <a class="code hl_function" href="structVS__XML__NS_1_1TreeBuilder.html#af143ebd95656a501d1c8a015b1047eef">close_frame</a>(){</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            <span class="keyword">auto</span> ret = details::BuilderBase::close();</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            <span class="keywordflow">if</span>(ret!=details::BuilderBase::error_t::OK)<span class="keywordflow">return</span> std::unexpected(ret);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            open=<span class="keyword">true</span>;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            attribute_block=<span class="keyword">false</span>;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            <span class="keywordflow">return</span> std::move(buffer);</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        }</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="foldopen" id="foldopen00219" data-start="{" data-end="}">
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder.html#af143ebd95656a501d1c8a015b1047eef">  219</a></span>        [[nodiscard]] <span class="keyword">inline</span> std::expected&lt;std::vector&lt;uint8_t&gt;,error_t&gt; <a class="code hl_function" href="structVS__XML__NS_1_1TreeBuilder.html#af143ebd95656a501d1c8a015b1047eef">close_frame</a>(){</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="keywordflow">if</span> (<span class="keyword">auto</span> ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)<span class="keywordflow">return</span> std::unexpected(ret);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            open=<span class="keyword">true</span>;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            attribute_block=<span class="keyword">false</span>;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            <span class="keywordflow">return</span> std::exchange(buffer, {});</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        }</div>
 </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
-<div class="foldopen" id="foldopen00233" data-start="{" data-end="}">
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder.html#afb62a9c53ac8e1237c918020208e9b67">  233</a></span>        [[nodiscard]] <span class="keyword">inline</span> std::optional&lt;<a class="code hl_struct" href="structVS__XML__NS_1_1details_1_1Symbols.html">details::Symbols</a>&lt;configs.symbols&gt;&gt; <a class="code hl_function" href="structVS__XML__NS_1_1TreeBuilder.html#afb62a9c53ac8e1237c918020208e9b67">extract_symbols</a>(){</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            <span class="keywordflow">if</span>(open==<span class="keyword">true</span>)<span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <span class="keywordflow">else</span> <span class="keywordflow">return</span> std::move(symbols);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        }</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="foldopen" id="foldopen00231" data-start="{" data-end="}">
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder.html#afb62a9c53ac8e1237c918020208e9b67">  231</a></span>        [[nodiscard]] <span class="keyword">inline</span> std::optional&lt;<a class="code hl_struct" href="structVS__XML__NS_1_1details_1_1Symbols.html">details::Symbols</a>&lt;configs.symbols&gt;&gt; <a class="code hl_function" href="structVS__XML__NS_1_1TreeBuilder.html#afb62a9c53ac8e1237c918020208e9b67">extract_symbols</a>(){</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            <span class="keywordflow">if</span>(open==<span class="keyword">true</span>)<span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            <span class="keywordflow">else</span> <span class="keywordflow">return</span> std::move(symbols);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        }</div>
 </div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        </div>
-<div class="foldopen" id="foldopen00243" data-start="{" data-end="}">
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder.html#a5bfb45cd25b753c47fce4dfc971bf29e">  243</a></span>        [[nodiscard]] <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a> <a class="code hl_function" href="structVS__XML__NS_1_1TreeBuilder.html#a5bfb45cd25b753c47fce4dfc971bf29e">fork</a>()<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>(*<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        }</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        </div>
+<div class="foldopen" id="foldopen00241" data-start="{" data-end="}">
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder.html#a5bfb45cd25b753c47fce4dfc971bf29e">  241</a></span>        [[nodiscard]] <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a> <a class="code hl_function" href="structVS__XML__NS_1_1TreeBuilder.html#a5bfb45cd25b753c47fce4dfc971bf29e">fork</a>()<span class="keyword"> const</span>{</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        }</div>
 </div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
-<div class="foldopen" id="foldopen00247" data-start="{" data-end="};">
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">  247</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">attr_t</a>{</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            std::string_view name;</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            std::string_view value;</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            std::string_view ns;</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        };</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="foldopen" id="foldopen00245" data-start="{" data-end="};">
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">  245</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">attr_t</a>{</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>            std::string_view name;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            std::string_view value;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            std::string_view ns;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        };</div>
 </div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keyword">constexpr</span> <span class="keywordtype">void</span> x(std::string_view ns, std::string_view name, <span class="keyword">const</span> std::initializer_list&lt;attr_t&gt;&amp; attrs, <span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>&amp;)&gt;&amp; items){</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            begin(name,ns);</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; a:attrs){</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                attr(a.name,a.value,a.ns);</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>            }</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="keyword">constexpr</span> <span class="keywordtype">void</span> x(std::string_view ns, std::string_view name, <span class="keyword">const</span> std::initializer_list&lt;attr_t&gt;&amp; attrs, <span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<a class="code hl_struct" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>&amp;)&gt;&amp; items){</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            begin(name,ns);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; a:attrs){</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>                attr(a.name,a.value,a.ns);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            }</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>            items(*<span class="keyword">this</span>);</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            items(*<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            end();</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        }</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <span class="keyword">constexpr</span> <span class="keywordtype">void</span> x(std::string_view ns, std::string_view name, <span class="keyword">const</span> std::initializer_list&lt;attr_t&gt;&amp; attrs={}, <span class="keyword">const</span> std::function&lt;void()&gt;&amp; items=[](){}){</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            begin(name,ns);</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; a:attrs){</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                attr(a.name,a.value,a.ns);</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            }</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            end();</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        }</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        <span class="keyword">constexpr</span> <span class="keywordtype">void</span> x(std::string_view ns, std::string_view name, <span class="keyword">const</span> std::initializer_list&lt;attr_t&gt;&amp; attrs={}, <span class="keyword">const</span> std::function&lt;void()&gt;&amp; items=[](){}){</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            begin(name,ns);</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; a:attrs){</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                attr(a.name,a.value,a.ns);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            }</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            items();</div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            items();</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            end();</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        }</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <span class="keyword">constexpr</span> <span class="keywordtype">void</span> x(std::string_view name, <span class="keyword">const</span> std::initializer_list&lt;attr_t&gt;&amp; attrs, <span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(TreeBuilder&amp;)&gt;&amp; items){<span class="keywordflow">return</span> x(<span class="stringliteral">&quot;&quot;</span>,name,attrs,items);}</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keyword">constexpr</span> <span class="keywordtype">void</span> x(std::string_view name, <span class="keyword">const</span> std::initializer_list&lt;attr_t&gt;&amp; attrs={}, <span class="keyword">const</span> std::function&lt;void()&gt;&amp; items=[](){}){<span class="keywordflow">return</span> x(<span class="stringliteral">&quot;&quot;</span>,name,attrs,items);}</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
-<div class="foldopen" id="foldopen00286" data-start="{" data-end="}">
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder.html#a522578359330e54115c580ca304ade43">  286</a></span>        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structVS__XML__NS_1_1TreeBuilder.html#a522578359330e54115c580ca304ade43">reserve</a>(<span class="keywordtype">size_t</span> bytes,<span class="keywordtype">size_t</span> bytes2=0){</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            this-&gt;buffer.reserve(bytes);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>            <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(configs.symbols==builder_config_t::OWNED || configs.symbols==builder_config_t::COMPRESS_ALL || configs.symbols==builder_config_t::COMPRESS_LABELS){</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                symbols.symbols.reserve(bytes2);</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            }</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        }</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            end();</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        }</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keyword">constexpr</span> <span class="keywordtype">void</span> x(std::string_view name, <span class="keyword">const</span> std::initializer_list&lt;attr_t&gt;&amp; attrs, <span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(TreeBuilder&amp;)&gt;&amp; items){<span class="keywordflow">return</span> x(<span class="stringliteral">&quot;&quot;</span>,name,attrs,items);}</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        <span class="keyword">constexpr</span> <span class="keywordtype">void</span> x(std::string_view name, <span class="keyword">const</span> std::initializer_list&lt;attr_t&gt;&amp; attrs={}, <span class="keyword">const</span> std::function&lt;void()&gt;&amp; items=[](){}){<span class="keywordflow">return</span> x(<span class="stringliteral">&quot;&quot;</span>,name,attrs,items);}</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
+<div class="foldopen" id="foldopen00284" data-start="{" data-end="}">
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1TreeBuilder.html#a522578359330e54115c580ca304ade43">  284</a></span>        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structVS__XML__NS_1_1TreeBuilder.html#a522578359330e54115c580ca304ade43">reserve</a>(<span class="keywordtype">size_t</span> bytes,<span class="keywordtype">size_t</span> bytes2=0){</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            this-&gt;buffer.reserve(bytes);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>            <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(configs.symbols==builder_config_t::OWNED || configs.symbols==builder_config_t::COMPRESS_ALL || configs.symbols==builder_config_t::COMPRESS_LABELS){</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                symbols.symbols.reserve(bytes2);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>            }</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        }</div>
 </div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>};</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>};</div>
 </div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>}</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>}</div>
 <div class="ttc" id="aimpl_8hpp_html"><div class="ttname"><a href="impl_8hpp.html">impl.hpp</a></div><div class="ttdoc">Implementation of the node logic.</div></div>
 <div class="ttc" id="anamespaceVS__XML__NS_html"><div class="ttname"><a href="namespaceVS__XML__NS.html">VS_XML_NS</a></div><div class="ttdoc">The main namespace for the application. By default xml and controlled via the macro VS_XML_NS.</div><div class="ttdef"><b>Definition</b> archive.hpp:31</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">VS_XML_NS::TreeBuilder::attr_t</a></div><div class="ttdef"><b>Definition</b> builder.hpp:247</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder_1_1attr__t.html">VS_XML_NS::TreeBuilder::attr_t</a></div><div class="ttdef"><b>Definition</b> builder.hpp:245</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a></div><div class="ttdef"><b>Definition</b> builder.hpp:134</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html_a522578359330e54115c580ca304ade43"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html#a522578359330e54115c580ca304ade43">VS_XML_NS::TreeBuilder::reserve</a></div><div class="ttdeci">void reserve(size_t bytes, size_t bytes2=0)</div><div class="ttdoc">Reserves space for the buffer to avoid many of the initial small allocations. Ideally run just after ...</div><div class="ttdef"><b>Definition</b> builder.hpp:286</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html_a5bfb45cd25b753c47fce4dfc971bf29e"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html#a5bfb45cd25b753c47fce4dfc971bf29e">VS_XML_NS::TreeBuilder::fork</a></div><div class="ttdeci">TreeBuilder fork() const</div><div class="ttdoc">Fork the current builder instance by cloning its current state into a new one.</div><div class="ttdef"><b>Definition</b> builder.hpp:243</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html_a522578359330e54115c580ca304ade43"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html#a522578359330e54115c580ca304ade43">VS_XML_NS::TreeBuilder::reserve</a></div><div class="ttdeci">void reserve(size_t bytes, size_t bytes2=0)</div><div class="ttdoc">Reserves space for the buffer to avoid many of the initial small allocations. Ideally run just after ...</div><div class="ttdef"><b>Definition</b> builder.hpp:284</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html_a5bfb45cd25b753c47fce4dfc971bf29e"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html#a5bfb45cd25b753c47fce4dfc971bf29e">VS_XML_NS::TreeBuilder::fork</a></div><div class="ttdeci">TreeBuilder fork() const</div><div class="ttdoc">Fork the current builder instance by cloning its current state into a new one.</div><div class="ttdef"><b>Definition</b> builder.hpp:241</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html_ad2fd742da45362ef4c32e3d59d5ccaab"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html#ad2fd742da45362ef4c32e3d59d5ccaab">VS_XML_NS::TreeBuilder::close</a></div><div class="ttdeci">std::expected&lt; Tree, error_t &gt; close()</div><div class="ttdoc">Final operaration when the building process is finished.</div><div class="ttdef"><b>Definition</b> builder.hpp:204</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html_af143ebd95656a501d1c8a015b1047eef"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html#af143ebd95656a501d1c8a015b1047eef">VS_XML_NS::TreeBuilder::close_frame</a></div><div class="ttdeci">std::expected&lt; std::vector&lt; uint8_t &gt;, error_t &gt; close_frame()</div><div class="ttdoc">Special version of the closing function, only returning the generated tree but not symbols.</div><div class="ttdef"><b>Definition</b> builder.hpp:220</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html_afb62a9c53ac8e1237c918020208e9b67"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html#afb62a9c53ac8e1237c918020208e9b67">VS_XML_NS::TreeBuilder::extract_symbols</a></div><div class="ttdeci">std::optional&lt; details::Symbols&lt; configs.symbols &gt; &gt; extract_symbols()</div><div class="ttdoc">It allows to extract symbols if the builder has been closed.</div><div class="ttdef"><b>Definition</b> builder.hpp:233</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html_af143ebd95656a501d1c8a015b1047eef"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html#af143ebd95656a501d1c8a015b1047eef">VS_XML_NS::TreeBuilder::close_frame</a></div><div class="ttdeci">std::expected&lt; std::vector&lt; uint8_t &gt;, error_t &gt; close_frame()</div><div class="ttdoc">Special version of the closing function, only returning the generated tree but not symbols.</div><div class="ttdef"><b>Definition</b> builder.hpp:219</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html_afb62a9c53ac8e1237c918020208e9b67"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html#afb62a9c53ac8e1237c918020208e9b67">VS_XML_NS::TreeBuilder::extract_symbols</a></div><div class="ttdeci">std::optional&lt; details::Symbols&lt; configs.symbols &gt; &gt; extract_symbols()</div><div class="ttdoc">It allows to extract symbols if the builder has been closed.</div><div class="ttdef"><b>Definition</b> builder.hpp:231</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdoc">Base class for a tree.</div><div class="ttdef"><b>Definition</b> tree.hpp:35</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdoc">the tree class you should use.</div><div class="ttdef"><b>Definition</b> tree.hpp:204</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1details_1_1BuilderBase_html"><div class="ttname"><a href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></div><div class="ttdef"><b>Definition</b> builder.hpp:89</div></div>
