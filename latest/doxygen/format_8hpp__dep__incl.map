@@ -1,0 +1,16 @@
+<map id="include/vs&#45;xml/fwd/format.hpp" name="include/vs&#45;xml/fwd/format.hpp">
+<area shape="rect" id="Node000001" title="Helpers to handle format/print portably." alt="" coords="100,5,245,45"/>
+<area shape="rect" id="Node000002" href="$impl_8hpp.html" title="Implementation of the node logic." alt="" coords="89,93,257,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="175,59,175,93,170,93,170,59"/>
+<area shape="rect" id="Node000003" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="15,269,210,295"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="157,146,140,182,126,230,117,269,112,268,121,229,136,180,153,144"/>
+<area shape="rect" id="Node000006" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="150,181,318,221"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="196,143,223,180,218,183,192,146"/>
+<area shape="rect" id="Node000004" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,343,220,368"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,308,115,343,110,343,110,308"/>
+<area shape="rect" id="Node000005" href="$archive_8hpp_source.html" title=" " alt="" coords="13,416,212,441"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="115,382,115,416,110,416,110,382"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="195,231,132,271,129,267,192,227"/>
+<area shape="rect" id="Node000007" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="235,269,420,295"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="269,228,315,267,312,271,265,232"/>
+</map>

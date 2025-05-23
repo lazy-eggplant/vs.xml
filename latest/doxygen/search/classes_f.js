@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['xml_5fescape_5fseq_5ft_0',['xml_escape_seq_t',['../structVS__XML__NS_1_1serialize_1_1xml__escape__seq__t.html',1,'VS_XML_NS::serialize']]]
+  ['unescaped_5fview_0',['unescaped_view',['../classVS__XML__NS_1_1serialize_1_1unescaped__view.html',1,'VS_XML_NS::serialize']]],
+  ['unknown_5ft_1',['unknown_t',['../structVS__XML__NS_1_1unknown__t.html',1,'VS_XML_NS']]]
 ];

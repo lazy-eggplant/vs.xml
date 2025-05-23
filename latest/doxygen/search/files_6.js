@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['world_2ehpp_0',['world.hpp',['../world_8hpp.html',1,'']]]
+  ['query_2ehpp_0',['query.hpp',['../query_8hpp.html',1,'']]]
 ];

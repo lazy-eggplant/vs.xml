@@ -1,5 +1,5 @@
 <map id="VS_XML_NS::Tree" name="VS_XML_NS::Tree">
-<area shape="rect" id="Node000001" title=" " alt="" coords="19,79,154,104"/>
-<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1TreeRaw.html" title=" " alt="" coords="5,5,168,31"/>
+<area shape="rect" id="Node000001" title="the tree class you should use." alt="" coords="19,79,154,104"/>
+<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1TreeRaw.html" title="Base class for a tree." alt="" coords="5,5,168,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,44,89,79,84,79,84,44"/>
 </map>

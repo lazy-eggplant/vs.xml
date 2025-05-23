@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['tree_5froot_0',['tree_root',['../structVS__XML__NS_1_1DocumentRaw.html#a31f1ece0c2e012c0cc2c568c7f1617c7',1,'VS_XML_NS::DocumentRaw']]],
-  ['treeraw_1',['treeraw',['../structVS__XML__NS_1_1TreeRaw.html#a3ce6b6e083d9256d38d3f5b8d483c0ac',1,'VS_XML_NS::TreeRaw::TreeRaw(const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, const void *label_offset=nullptr)'],['../structVS__XML__NS_1_1TreeRaw.html#a3e685554e5aeb819dd403bb774a50d4a',1,'VS_XML_NS::TreeRaw::TreeRaw(const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, std::vector&lt; uint8_t &gt; &amp;&amp;sym)'],['../structVS__XML__NS_1_1DocumentRaw.html#a3ce6b6e083d9256d38d3f5b8d483c0ac',1,'VS_XML_NS::DocumentRaw::TreeRaw(const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, const void *label_offset=nullptr)'],['../structVS__XML__NS_1_1DocumentRaw.html#a3e685554e5aeb819dd403bb774a50d4a',1,'VS_XML_NS::DocumentRaw::TreeRaw(const builder_config_t &amp;cfg, std::vector&lt; uint8_t &gt; &amp;&amp;src, std::vector&lt; uint8_t &gt; &amp;&amp;sym)']]]
+  ['name_0',['name',['../namespaceVS__XML__NS_1_1filters.html#a5c3624b13599fa9c38562d6a2e790693',1,'VS_XML_NS::filters']]],
+  ['ns_1',['ns',['../namespaceVS__XML__NS_1_1filters.html#a413cb33b54f8c56e92554dd0f2d2512e',1,'VS_XML_NS::filters']]]
 ];

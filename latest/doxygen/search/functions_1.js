@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['inject_0',['inject',['../structVS__XML__NS_1_1TreeRaw.html#a91f5f622947b9e102ab39dc1fe6ae64b',1,'VS_XML_NS::TreeRaw']]],
-  ['is_5felement_1',['is_element',['../namespaceVS__XML__NS_1_1filters.html#a7a0c812bd61539401043875cd0314ba0',1,'VS_XML_NS::filters']]],
-  ['is_5ftext_2',['is_text',['../namespaceVS__XML__NS_1_1filters.html#a0fb2d9fa6ac6536b1cca511fd087099c',1,'VS_XML_NS::filters']]]
+  ['clone_0',['clone',['../structVS__XML__NS_1_1TreeRaw.html#a2c362df4058a9d0fd145605dc88aa347',1,'VS_XML_NS::TreeRaw']]],
+  ['close_1',['close',['../structVS__XML__NS_1_1TreeBuilder.html#ad2fd742da45362ef4c32e3d59d5ccaab',1,'VS_XML_NS::TreeBuilder']]],
+  ['close_5fframe_2',['close_frame',['../structVS__XML__NS_1_1TreeBuilder.html#af143ebd95656a501d1c8a015b1047eef',1,'VS_XML_NS::TreeBuilder']]]
 ];

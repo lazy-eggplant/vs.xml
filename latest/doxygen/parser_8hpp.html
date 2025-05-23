@@ -74,7 +74,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">parser.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -82,7 +83,6 @@ $(function() {
 <p>Implementation of the parser logic.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;span&gt;</code><br />
-<code>#include &lt;stdexcept&gt;</code><br />
 <code>#include &quot;commons.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="serializer_8hpp_source.html">serializer.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -90,46 +90,51 @@ Include dependency graph for parser.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="parser_8hpp__incl.png" border="0" usemap="#ainclude_2vs-xml_2parser_8hpp" alt=""/></div>
 <map name="ainclude_2vs-xml_2parser_8hpp" id="ainclude_2vs-xml_2parser_8hpp">
-<area shape="rect" title="Implementation of the parser logic." alt="" coords="213,5,403,31"/>
-<area shape="rect" title=" " alt="" coords="5,79,59,104"/>
-<area shape="poly" title=" " alt="" coords="264,33,73,82,71,77,263,28"/>
-<area shape="rect" title=" " alt="" coords="103,299,190,324"/>
-<area shape="poly" title=" " alt="" coords="297,33,266,63,226,108,186,164,155,226,148,256,147,285,142,285,143,256,149,224,181,161,222,105,262,59,293,29"/>
-<area shape="rect" href="commons_8hpp_source.html" title=" " alt="" coords="464,152,579,177"/>
-<area shape="poly" title=" " alt="" coords="327,29,494,142,491,146,324,33"/>
-<area shape="rect" href="serializer_8hpp.html" title="Implementation of serialization/deserialization helpers." alt="" coords="587,79,696,104"/>
-<area shape="poly" title=" " alt="" coords="362,28,575,73,574,78,361,33"/>
-<area shape="rect" title=" " alt="" coords="393,225,463,251"/>
-<area shape="poly" title=" " alt="" coords="508,179,456,219,452,215,505,175"/>
-<area shape="rect" title=" " alt="" coords="184,225,253,251"/>
-<area shape="poly" title=" " alt="" coords="472,180,268,228,266,222,471,175"/>
-<area shape="rect" title=" " alt="" coords="488,225,555,251"/>
-<area shape="poly" title=" " alt="" coords="524,178,524,212,519,212,519,178"/>
-<area shape="rect" title=" " alt="" coords="579,225,659,251"/>
-<area shape="poly" title=" " alt="" coords="539,175,593,215,590,219,535,180"/>
-<area shape="rect" title=" " alt="" coords="683,225,765,251"/>
-<area shape="poly" title=" " alt="" coords="555,175,679,218,678,223,553,180"/>
-<area shape="rect" title=" " alt="" coords="789,225,848,251"/>
-<area shape="poly" title=" " alt="" coords="574,175,777,222,775,228,573,180"/>
-<area shape="rect" title=" " alt="" coords="873,225,970,251"/>
-<area shape="poly" title=" " alt="" coords="579,173,859,223,858,228,578,179"/>
-<area shape="rect" href="assert_8hpp_source.html" title=" " alt="" coords="277,225,368,251"/>
-<area shape="poly" title=" " alt="" coords="490,180,369,223,367,218,489,175"/>
-<area shape="poly" title=" " alt="" coords="295,253,189,296,187,291,293,248"/>
-<area shape="rect" title=" " alt="" coords="261,299,385,324"/>
-<area shape="poly" title=" " alt="" coords="325,251,325,285,320,285,320,251"/>
-<area shape="poly" title=" " alt="" coords="587,104,483,122,360,150,246,185,203,206,174,227,158,255,151,286,146,285,153,253,170,224,200,201,244,180,358,145,482,117,586,98"/>
-<area shape="poly" title=" " alt="" coords="623,106,554,147,552,142,621,102"/>
-<area shape="poly" title=" " alt="" coords="604,107,453,155,263,223,261,218,451,149,602,102"/>
-<area shape="poly" title=" " alt="" coords="642,105,641,138,644,158,650,176,668,198,690,216,687,220,664,202,646,179,638,159,636,139,637,104"/>
-<area shape="poly" title=" " alt="" coords="649,103,669,138,700,175,738,201,778,220,775,224,736,206,697,179,665,141,645,106"/>
-<area shape="poly" title=" " alt="" coords="654,102,692,138,744,175,802,201,860,220,859,225,801,206,741,180,688,142,650,106"/>
-<area shape="rect" title=" " alt="" coords="755,152,829,177"/>
-<area shape="poly" title=" " alt="" coords="667,102,756,144,754,148,664,106"/>
-<area shape="rect" title=" " alt="" coords="854,152,922,177"/>
-<area shape="poly" title=" " alt="" coords="682,101,841,147,840,152,680,107"/>
-<area shape="rect" title=" " alt="" coords="947,152,1003,177"/>
-<area shape="poly" title=" " alt="" coords="697,100,803,120,934,149,932,154,802,126,696,105"/>
+<area shape="rect" title="Implementation of the parser logic." alt="" coords="618,5,809,31"/>
+<area shape="rect" title=" " alt="" coords="623,79,676,104"/>
+<area shape="poly" title=" " alt="" coords="705,33,671,70,667,67,701,29"/>
+<area shape="rect" href="commons_8hpp_source.html" title=" " alt="" coords="517,152,632,177"/>
+<area shape="poly" title=" " alt="" coords="715,32,709,67,702,87,690,106,661,131,627,149,625,144,658,127,686,102,697,85,704,65,710,31"/>
+<area shape="rect" href="serializer_8hpp.html" title="Implementation of serialization/deserialization helpers." alt="" coords="879,79,988,104"/>
+<area shape="poly" title=" " alt="" coords="749,28,886,72,884,77,748,33"/>
+<area shape="rect" title=" " alt="" coords="99,225,170,251"/>
+<area shape="poly" title=" " alt="" coords="518,176,371,196,184,228,183,223,370,191,517,171"/>
+<area shape="rect" title=" " alt="" coords="5,225,75,251"/>
+<area shape="poly" title=" " alt="" coords="518,173,331,193,89,228,88,223,330,187,517,168"/>
+<area shape="rect" title=" " alt="" coords="195,225,261,251"/>
+<area shape="poly" title=" " alt="" coords="518,179,276,228,275,222,517,174"/>
+<area shape="rect" title=" " alt="" coords="285,225,365,251"/>
+<area shape="poly" title=" " alt="" coords="535,180,380,224,378,219,534,175"/>
+<area shape="rect" title=" " alt="" coords="390,225,469,251"/>
+<area shape="poly" title=" " alt="" coords="552,180,466,222,464,217,550,175"/>
+<area shape="rect" title=" " alt="" coords="747,225,829,251"/>
+<area shape="poly" title=" " alt="" coords="610,175,741,218,740,223,608,180"/>
+<area shape="rect" title=" " alt="" coords="853,225,912,251"/>
+<area shape="poly" title=" " alt="" coords="630,175,840,222,839,228,629,180"/>
+<area shape="rect" title=" " alt="" coords="937,225,1034,251"/>
+<area shape="poly" title=" " alt="" coords="633,173,924,223,923,228,632,178"/>
+<area shape="rect" title=" " alt="" coords="493,225,531,251"/>
+<area shape="poly" title=" " alt="" coords="566,179,533,217,529,213,562,176"/>
+<area shape="rect" href="assert_8hpp.html" title="Utility for assertions." alt="" coords="555,225,722,251"/>
+<area shape="poly" title=" " alt="" coords="587,176,621,213,617,217,583,179"/>
+<area shape="rect" title=" " alt="" coords="546,299,611,324"/>
+<area shape="poly" title=" " alt="" coords="631,253,599,290,595,286,627,249"/>
+<area shape="rect" title=" " alt="" coords="935,299,1022,324"/>
+<area shape="poly" title=" " alt="" coords="694,248,922,296,921,301,693,253"/>
+<area shape="rect" title=" " alt="" coords="635,299,759,324"/>
+<area shape="poly" title=" " alt="" coords="650,249,681,287,677,290,646,253"/>
+<area shape="poly" title=" " alt="" coords="879,106,646,152,645,147,878,101"/>
+<area shape="poly" title=" " alt="" coords="879,102,548,147,322,184,89,228,88,223,321,179,547,142,878,97"/>
+<area shape="poly" title=" " alt="" coords="923,106,811,217,808,213,920,103"/>
+<area shape="poly" title=" " alt="" coords="932,105,894,213,889,212,927,104"/>
+<area shape="poly" title=" " alt="" coords="940,104,979,212,974,213,935,105"/>
+<area shape="poly" title=" " alt="" coords="950,102,1002,151,1029,185,1049,224,1053,238,1049,252,1033,275,1013,293,1009,289,1029,271,1044,250,1047,238,1044,226,1024,188,998,154,947,106"/>
+<area shape="rect" title=" " alt="" coords="1091,152,1165,177"/>
+<area shape="poly" title=" " alt="" coords="966,102,1084,145,1083,150,964,107"/>
+<area shape="rect" title=" " alt="" coords="1190,152,1258,177"/>
+<area shape="poly" title=" " alt="" coords="981,101,1177,149,1176,154,979,107"/>
+<area shape="rect" title=" " alt="" coords="1283,152,1339,177"/>
+<area shape="poly" title=" " alt="" coords="988,98,1113,118,1269,149,1268,154,1112,123,988,103"/>
 </map>
 </div>
 </div>
@@ -139,6 +144,14 @@ Include dependency graph for parser.hpp:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVS__XML__NS_1_1Parser.html">VS_XML_NS::Parser&lt; Builder_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic interface for the XML parser, responsible for filling in a builder.  <a href="classVS__XML__NS_1_1Parser.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1Parser_1_1error__t.html">VS_XML_NS::Parser&lt; Builder_t &gt;::error_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceVS__XML__NS" id="r_namespaceVS__XML__NS"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVS__XML__NS.html">VS_XML_NS</a></td></tr>
+<tr class="memdesc:namespaceVS__XML__NS"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main namespace for the application. By default <code>xml</code> and controlled via the macro <a class="el" href="namespaceVS__XML__NS.html" title="The main namespace for the application. By default xml and controlled via the macro VS_XML_NS.">VS_XML_NS</a>. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

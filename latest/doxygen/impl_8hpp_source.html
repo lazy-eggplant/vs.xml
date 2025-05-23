@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>vs.xml: include/vs-xml/impl.hpp Source File</title>
+<title>vs.xml: include/vs-xml/private/impl.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3ac7cb26f1e5e7a740f6732916dd175b.html">vs-xml</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3ac7cb26f1e5e7a740f6732916dd175b.html">vs-xml</a></li><li class="navelem"><a class="el" href="dir_5c487968aae9e6fc24d4cf51a6b7bf6a.html">private</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -95,23 +95,23 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;commons.hpp&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="serializer_8hpp.html">serializer.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;format.hpp&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &lt;vs-xml/commons.hpp&gt;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;<a class="code" href="serializer_8hpp.html">vs-xml/serializer.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;<a class="code" href="format_8hpp.html">vs-xml/fwd/format.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">namespace </span>VS_XML_NS{</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceVS__XML__NS.html">VS_XML_NS</a>{</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1base__t.html">   33</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1base__t.html">base_t</a>{</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    type_t _type = T::deftype();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_enumeration" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> _type = T::deftype();</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">typedef</span> T base;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    type_t type()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _type;};</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_enumeration" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> type()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _type;};</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    std::expected&lt;sv,feature_t&gt; ns()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(<span class="keyword">this</span>)-&gt;ns();}</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    std::expected&lt;sv,feature_t&gt; name()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(<span class="keyword">this</span>)-&gt;name();}</div>
@@ -157,10 +157,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1attr__t.html">attr_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view _ns, std::string_view _name, std::string_view _value):</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        _ns(offset,serialize::validate_xml_label(_ns)),</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1attr__t.html">attr_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view _ns, std::string_view _name, std::string_view _value) <span class="keyword">noexcept</span>(VS_XML_NO_EXCEPT):</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        _ns(offset,serialize::validate_xml_label(_ns, <span class="keyword">true</span>)),</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        _name(offset,serialize::validate_xml_label(_name)),</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        _value(offset,_value){}</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        _value(offset,_value) {} </div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keyword">inline</span> std::expected&lt;sv,feature_t&gt; ns()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _ns;}</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keyword">inline</span> std::expected&lt;sv,feature_t&gt; name()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _name;}</div>
@@ -171,9 +171,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00094" data-start="{" data-end="};">
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1element__t.html">   94</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1base__t.html">base_t</a>&lt;element_t&gt;{</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    delta_ptr_t _parent;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    delta_ptr_t _prev;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    delta_ptr_t _next;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <a class="code hl_typedef" href="namespaceVS__XML__NS.html#a63b8a25ca71a7e3d813f2ce515d9cc9b">delta_ptr_t</a> _parent;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <a class="code hl_typedef" href="namespaceVS__XML__NS.html#a63b8a25ca71a7e3d813f2ce515d9cc9b">delta_ptr_t</a> _prev;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <a class="code hl_typedef" href="namespaceVS__XML__NS.html#a63b8a25ca71a7e3d813f2ce515d9cc9b">delta_ptr_t</a> _next;</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    xml_size_t  _size;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
@@ -184,8 +184,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> _attrs[];</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>* _parent, std::string_view _ns, std::string_view _name):</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        _ns(offset,serialize::validate_xml_label(_ns)),</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, <a class="code hl_struct" href="structVS__XML__NS_1_1element__t.html">element_t</a>* _parent, std::string_view _ns, std::string_view _name) <span class="keyword">noexcept</span>(VS_XML_NO_EXCEPT):</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        _ns(offset,serialize::validate_xml_label(_ns,<span class="keyword">true</span>)),</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        _name(offset,serialize::validate_xml_label(_name))</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    {</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        set_parent(_parent);</div>
@@ -204,7 +204,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keyword">using </span>base_t::type;</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::ELEMENT;};</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_enumeration" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> deftype() {<span class="keywordflow">return</span> type_t::ELEMENT;};</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keyword">inline</span> std::expected&lt;sv,feature_t&gt; ns()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _ns;}</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">inline</span> std::expected&lt;sv,feature_t&gt; name()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _name;}</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keyword">inline</span> std::expected&lt;sv,feature_t&gt; value()<span class="keyword"> const </span>{<span class="keywordflow">return</span> std::unexpected(feature_t::NOT_SUPPORTED);}</div>
@@ -268,7 +268,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keyword">using </span>base_t::type;</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::ELEMENT;};</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_enumeration" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> deftype() {<span class="keywordflow">return</span> type_t::ELEMENT;};</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keyword">inline</span> std::expected&lt;sv,feature_t&gt; ns()<span class="keyword"> const </span>{<span class="keywordflow">return</span> std::unexpected(feature_t::NOT_SUPPORTED);}</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keyword">inline</span> std::expected&lt;sv,feature_t&gt; name()<span class="keyword"> const </span>{<span class="keywordflow">return</span> std::unexpected(feature_t::NOT_SUPPORTED);}</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keyword">inline</span> std::expected&lt;sv,feature_t&gt; value()<span class="keyword"> const </span>{<span class="keywordflow">return</span> std::unexpected(feature_t::NOT_SUPPORTED);}</div>
@@ -309,8 +309,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00228" data-start="{" data-end="};">
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1leaf__t.html">  228</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1base__t.html">base_t</a>&lt;T&gt;{</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    delta_ptr_t _parent;</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    delta_ptr_t _prev;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <a class="code hl_typedef" href="namespaceVS__XML__NS.html#a63b8a25ca71a7e3d813f2ce515d9cc9b">delta_ptr_t</a> _parent;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <a class="code hl_typedef" href="namespaceVS__XML__NS.html#a63b8a25ca71a7e3d813f2ce515d9cc9b">delta_ptr_t</a> _prev;</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="comment">//Not needed. Can be statically determined by its size and the children information of the parent.</span></div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="comment">//delta_ptr_t _next; </span></div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
@@ -356,7 +356,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00273" data-start="{" data-end="};">
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1comment__t.html">  273</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1comment__t.html">comment_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>&lt;comment_t&gt;{</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1comment__t.html">comment_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::COMMENT;};</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_enumeration" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> deftype() {<span class="keywordflow">return</span> type_t::COMMENT;};</div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <span class="keyword">inline</span> std::string path_h()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> VS_XML_NS::format(<span class="stringliteral">&quot;#comment&quot;</span>); }</div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
@@ -370,7 +370,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00285" data-start="{" data-end="};">
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1cdata__t.html">  285</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1cdata__t.html">cdata_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>&lt;cdata_t&gt;{</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1cdata__t.html">cdata_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::CDATA;};</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_enumeration" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> deftype() {<span class="keywordflow">return</span> type_t::CDATA;};</div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <span class="keyword">inline</span> std::string path_h()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> VS_XML_NS::format(<span class="stringliteral">&quot;#cdata&quot;</span>); }</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
@@ -384,7 +384,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00297" data-start="{" data-end="};">
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1text__t.html">  297</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1text__t.html">text_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>&lt;text_t&gt;{</div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1text__t.html">text_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::TEXT;};</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_enumeration" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> deftype() {<span class="keywordflow">return</span> type_t::TEXT;};</div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <span class="keyword">inline</span> std::string path_h()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> VS_XML_NS::format(<span class="stringliteral">&quot;#text&quot;</span>); }</div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    </div>
@@ -398,7 +398,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00309" data-start="{" data-end="};">
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1proc__t.html">  309</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1proc__t.html">proc_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>&lt;proc_t&gt;{</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1proc__t.html">proc_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::PROC;};</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_enumeration" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> deftype() {<span class="keywordflow">return</span> type_t::PROC;};</div>
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keyword">inline</span> std::string path_h()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> VS_XML_NS::format(<span class="stringliteral">&quot;#proc&quot;</span>); }</div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
@@ -412,7 +412,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00321" data-start="{" data-end="};">
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1marker__t.html">  321</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1marker__t.html">marker_t</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>&lt;marker_t&gt;{</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <a class="code hl_struct" href="structVS__XML__NS_1_1marker__t.html">marker_t</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* offset, std::string_view value):<a class="code hl_struct" href="structVS__XML__NS_1_1leaf__t.html">leaf_t</a>(offset, value){}</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::MARKER;};</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_enumeration" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> deftype() {<span class="keywordflow">return</span> type_t::MARKER;};</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
 <div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    <span class="keyword">inline</span> std::string path_h()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> VS_XML_NS::format(<span class="stringliteral">&quot;#leaf&quot;</span>); }</div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
@@ -457,7 +457,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span> </div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <span class="keyword">static</span> <span class="keyword">inline</span> type_t deftype() {<span class="keywordflow">return</span> type_t::UNKNOWN;};</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_enumeration" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> deftype() {<span class="keywordflow">return</span> type_t::UNKNOWN;};</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    std::expected&lt;sv,feature_t&gt; ns()<span class="keyword"> const </span>{CDISPATCH(ns());}</div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    std::expected&lt;sv,feature_t&gt; name()<span class="keyword"> const </span>{CDISPATCH(name());}</div>
@@ -620,23 +620,27 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span><span class="keyword">inline</span> <span class="keyword">auto</span> base_t&lt;T&gt;::children(<span class="keyword">auto</span> filter)<span class="keyword"> const</span>{ <span class="keywordflow">return</span> children() | filter ; }</div>
 <div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span> </div>
 <div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>}</div>
-<div class="ttc" id="aconceptVS__XML__NS_1_1thing__i_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1thing__i.html">VS_XML_NS::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:153</div></div>
+<div class="ttc" id="aconceptVS__XML__NS_1_1thing__i_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1thing__i.html">VS_XML_NS::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:187</div></div>
+<div class="ttc" id="aformat_8hpp_html"><div class="ttname"><a href="format_8hpp.html">format.hpp</a></div><div class="ttdoc">Helpers to handle format/print portably.</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_html"><div class="ttname"><a href="namespaceVS__XML__NS.html">VS_XML_NS</a></div><div class="ttdoc">The main namespace for the application. By default xml and controlled via the macro VS_XML_NS.</div><div class="ttdef"><b>Definition</b> archive.hpp:31</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_html_a63b8a25ca71a7e3d813f2ce515d9cc9b"><div class="ttname"><a href="namespaceVS__XML__NS.html#a63b8a25ca71a7e3d813f2ce515d9cc9b">VS_XML_NS::delta_ptr_t</a></div><div class="ttdeci">std::ptrdiff_t delta_ptr_t</div><div class="ttdoc">Current binary format minor revision. Minor revisions are not breaking, but older does not support re...</div><div class="ttdef"><b>Definition</b> commons.hpp:55</div></div>
+<div class="ttc" id="anamespaceVS__XML__NS_html_adf9eb912fd1a94572b3ac45fd3e0ea60"><div class="ttname"><a href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">VS_XML_NS::type_t</a></div><div class="ttdeci">type_t</div><div class="ttdoc">All types of nodes represented. Some are special values not part of XML.</div><div class="ttdef"><b>Definition</b> commons.hpp:173</div></div>
 <div class="ttc" id="aserializer_8hpp_html"><div class="ttname"><a href="serializer_8hpp.html">serializer.hpp</a></div><div class="ttdoc">Implementation of serialization/deserialization helpers.</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a></div><div class="ttdef"><b>Definition</b> builder.hpp:166</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdef"><b>Definition</b> tree.hpp:29</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeBuilder_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a></div><div class="ttdef"><b>Definition</b> builder.hpp:134</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdoc">Base class for a tree.</div><div class="ttdef"><b>Definition</b> tree.hpp:35</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1attr__iterator_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__iterator.html">VS_XML_NS::attr_iterator</a></div><div class="ttdef"><b>Definition</b> impl.hpp:434</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1attr__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1attr__t.html">VS_XML_NS::attr_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:76</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1base__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1base__t.html">VS_XML_NS::base_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:33</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1cdata__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1cdata__t.html">VS_XML_NS::cdata_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:285</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1comment__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1comment__t.html">VS_XML_NS::comment_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:273</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1details_1_1BuilderBase_html"><div class="ttname"><a href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></div><div class="ttdef"><b>Definition</b> builder.hpp:33</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1details_1_1BuilderBase_html"><div class="ttname"><a href="structVS__XML__NS_1_1details_1_1BuilderBase.html">VS_XML_NS::details::BuilderBase</a></div><div class="ttdef"><b>Definition</b> builder.hpp:89</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1element__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1element__t.html">VS_XML_NS::element_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:94</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1leaf__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1leaf__t.html">VS_XML_NS::leaf_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:228</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1marker__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1marker__t.html">VS_XML_NS::marker_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:321</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1node__iterator_html"><div class="ttname"><a href="structVS__XML__NS_1_1node__iterator.html">VS_XML_NS::node_iterator</a></div><div class="ttdef"><b>Definition</b> impl.hpp:401</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1proc__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1proc__t.html">VS_XML_NS::proc_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:309</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1root__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1root__t.html">VS_XML_NS::root_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:178</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:60</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:78</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1text__iterator_html"><div class="ttname"><a href="structVS__XML__NS_1_1text__iterator.html">VS_XML_NS::text_iterator</a></div><div class="ttdef"><b>Definition</b> impl.hpp:466</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1text__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1text__t.html">VS_XML_NS::text_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:297</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1unknown__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1unknown__t.html">VS_XML_NS::unknown_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:357</div></div>
