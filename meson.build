@@ -10,6 +10,32 @@ include_dirs = include_directories('include')
 
 add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
 
+conf = configuration_data()
+version_components = meson.project_version().split('.')
+major_version = version_components[0]
+minor_version = version_components[1]
+rev_version = version_components[2]
+
+conf = configuration_data()
+conf.set('VS_XML_VERSION_MAJOR', major_version)
+conf.set('VS_XML_VERSION_MINOR', minor_version)
+conf.set('VS_XML_VERSION_REV', rev_version)
+conf.set_quoted('VS_XML_VERSION', major_version + '.' + minor_version + '.' + rev_version)
+
+configure_file(output : 'config.h',
+  configuration : conf,
+)
+
+cfgfile = custom_target('make-config',
+  input : './build/config.h',
+  output : ['fake.txt'],
+  command : ['cp', '@INPUT0@', '../include/vs-xml/config.h'],
+  capture : true,
+  install : false,
+  build_always_stale: true
+)
+
+
 if get_option('use_fmt')
   fmt_dep = dependency('fmt')
   use_fmt = ['-D', 'VS_XML_USE_FMT']
@@ -39,6 +65,7 @@ vs_xml_lib = library(
     cpp_args: [use_fmt, use_gtl],
     install: true,
     dependencies: [fmt_dep, gtl_dep],
+    link_depends: cfgfile,
     include_directories: include_dirs,
 )
 
