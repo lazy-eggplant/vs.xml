@@ -10,7 +10,7 @@
  * 
  */
 
-#if VS_XML_USE_FMT && __has_include(<gtl/phmap.hpp>)
+#if VS_XML_USE_GLT == true && __has_include(<gtl/phmap.hpp>)
 
 #include <gtl/phmap.hpp>
 

@@ -11,7 +11,7 @@
  */
 
 
- #if USE_FMT &&  __has_include(<fmt/ostream.h>)
+ #if VS_XML_USE_FMT == true &&  __has_include(<fmt/ostream.h>)
 
  #include <fmt/ostream.h>
  

@@ -11,7 +11,7 @@
  */
 
 
- #if USE_FMT && __has_include(<fmt/core.h>)
+ #if VS_XML_USE_FMT == true && __has_include(<fmt/core.h>)
 
  #include <fmt/core.h>
  

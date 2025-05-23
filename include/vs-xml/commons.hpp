@@ -25,6 +25,10 @@
 
 #include <bit>
 
+#if __has_include("config.hpp")
+#include "config.hpp"
+#endif
+
 #ifndef VS_XML_NS
 #define VS_XML_NS xml
 #endif

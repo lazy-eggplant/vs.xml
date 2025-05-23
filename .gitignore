@@ -15,4 +15,4 @@
 /assets/*
 !/assets/pull.sh
 !/assets/local/
-/include/vs-xml/config.h
+/include/vs-xml/config.hpp

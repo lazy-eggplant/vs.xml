@@ -1,7 +1,7 @@
 project(
   'vs-xml',
   ['cpp'],
-  version: '0.2.1',
+  version: '0.2.2',
   meson_version: '>= 1.1',
   default_options: ['cpp_std=c++23'],
 )
@@ -22,35 +22,32 @@ conf.set('VS_XML_VERSION_MINOR', minor_version)
 conf.set('VS_XML_VERSION_REV', rev_version)
 conf.set_quoted('VS_XML_VERSION', major_version + '.' + minor_version + '.' + rev_version)
 
-configure_file(output : 'config.h',
-  configuration : conf,
-)
-
-cfgfile = custom_target('make-config',
-  input : './build/config.h',
-  output : ['fake.txt'],
-  command : ['cp', '@INPUT0@', '../include/vs-xml/config.h'],
-  capture : true,
-  install : false,
-  build_always_stale: true
-)
-
-
 if get_option('use_fmt')
   fmt_dep = dependency('fmt')
-  use_fmt = ['-D', 'VS_XML_USE_FMT']
+  conf.set('VS_XML_USE_FMT','true')
 else 
   fmt_dep = []
-  use_fmt = []
 endif
 
 if get_option('use_gtl')
   gtl_dep = dependency('gtl')
-  use_gtl = ['-D', 'VS_XML_USE_GTL']
+  conf.set('VS_XML_USE_GTL','true')
 else 
   gtl_dep = []
-  use_gtl = []
 endif
+
+configure_file(output : 'config.hpp',
+  configuration : conf,
+)
+
+cfgfile = custom_target('make-config',
+  input : './build/config.hpp',
+  output : ['config.hpp.fake-meson'],
+  command : ['cp', '@INPUT0@', '../include/vs-xml/config.hpp'],
+  capture : true,
+  install : false,
+  build_always_stale: true
+)
 
 vs_xml_lib = library(
     'vs-xml',
@@ -62,7 +59,7 @@ vs_xml_lib = library(
       'lib/inplace-builder.cpp',
       'lib/query.cpp'
     ],
-    cpp_args: [use_fmt, use_gtl],
+    cpp_args: [],
     install: true,
     dependencies: [fmt_dep, gtl_dep],
     link_depends: cfgfile,

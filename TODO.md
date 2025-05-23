@@ -7,5 +7,6 @@
 - [ ] Tree builder method to use injection maps when generating the tree.
 - [x] ~~Fix xml parsing bug when the file starts with `<?xml?>`~~ actually worse, we need to support a proper document which is embedding the tree
 - [ ] ~~Enable a collapse mode for the builder where DATA/CDATA after a DATA/CDATA is collapsed.~~ as an alternative, a multi span iterator over text.
+- [ ] Align symbols to make access comparisons etc faster.
 
 With these features, the library would be considered complete.

@@ -10,7 +10,7 @@
  * 
  */
 
-#if VS_XML_USE_FMT && __has_include(<gtl/phset.hpp>)
+#if VS_XML_USE_GLT == true && __has_include(<gtl/phset.hpp>)
 
 #include <gtl/phset.hpp>
 
