@@ -1,7 +1,5 @@
-<map id="include/vs&#45;xml/private/format.hpp" name="include/vs&#45;xml/private/format.hpp">
-<area shape="rect" id="Node000001" title="Helpers to handle format/print portably." alt="" coords="5,5,173,45"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="15,93,81,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,47,63,82,58,80,77,44"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="106,93,158,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="102,44,122,80,117,83,97,47"/>
+<map id="include/vs&#45;xml/fwd/format.hpp" name="include/vs&#45;xml/fwd/format.hpp">
+<area shape="rect" id="Node000001" title="Helpers to handle format/print portably." alt="" coords="5,5,151,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="45,93,111,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,46,81,79,75,79,75,46"/>
 </map>

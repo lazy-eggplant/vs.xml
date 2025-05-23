@@ -4,16 +4,16 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="263,38,131,88,129,83,261,33"/>
 <area shape="rect" id="Node000003" href="$impl_8hpp.html" title="Implementation of the node logic." alt="" coords="221,79,389,119"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="307,44,307,79,302,79,302,44"/>
-<area shape="rect" id="Node000007" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="402,167,570,207"/>
-<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="341,35,372,54,402,77,445,122,476,165,472,168,441,126,399,81,369,58,338,39"/>
-<area shape="rect" id="Node000004" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="222,255,417,280"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="230,127,203,145,183,168,176,187,183,205,197,222,215,235,255,252,253,257,212,239,193,225,178,208,171,187,178,165,200,141,227,123"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="358,122,447,164,445,169,356,127"/>
-<area shape="rect" id="Node000008" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="192,174,377,199"/>
-<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="300,133,290,174,285,173,295,131"/>
-<area shape="rect" id="Node000005" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="212,328,427,353"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="322,294,322,328,317,328,317,294"/>
-<area shape="rect" id="Node000006" href="$archive_8hpp_source.html" title=" " alt="" coords="220,401,419,427"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="322,367,322,401,317,401,317,367"/>
-<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="435,215,345,257,343,252,433,210"/>
+<area shape="rect" id="Node000007" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="342,167,510,207"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="349,34,378,52,403,77,415,99,423,123,428,166,423,167,417,125,410,101,399,80,374,56,346,39"/>
+<area shape="rect" id="Node000004" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="207,255,402,280"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="307,133,307,255,302,255,302,133"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="344,124,401,164,398,169,341,129"/>
+<area shape="rect" id="Node000005" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="197,328,412,353"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="307,294,307,328,302,328,302,294"/>
+<area shape="rect" id="Node000006" href="$archive_8hpp_source.html" title=" " alt="" coords="205,401,404,427"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="307,367,307,401,302,401,302,367"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="387,216,324,257,321,252,384,212"/>
+<area shape="rect" id="Node000008" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="427,255,612,280"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="461,214,507,252,504,256,457,218"/>
 </map>
