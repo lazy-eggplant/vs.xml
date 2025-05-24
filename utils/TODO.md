@@ -1,0 +1,2 @@
+- Expose some flags of the configuration object. We might not need all of them, but at least `raw_strings` should.
+- Support for multi-document archive once added to the library

@@ -30,6 +30,7 @@ struct token_t{
         /*Empty*/
         ACCEPT, 
         NEXT_LAYER, 
+        FORK,
         /*type_filter*/
         TYPE,
         /*Unary sv*/
@@ -47,10 +48,11 @@ struct token_t{
     template<type_t T>
     struct type_filter_t{
         uint8_t is_element:1 = true ;
-        uint8_t is_commnent:1 = true ;
+        uint8_t is_comment:1 = true ;
         uint8_t is_proc:1 = true ;
         uint8_t is_text:1 = true ;
         uint8_t is_cdata:1 = true ;
+        uint8_t is_marker:1 = true ;
     };
 
     template<type_t T>
@@ -63,6 +65,7 @@ struct token_t{
     std::variant<
         empty_t<ACCEPT>,
         empty_t<NEXT_LAYER>,
+        empty_t<FORK>,
         type_filter_t<TYPE>,
         single_t<MATCH_NS>,
         single_t<MATCH_NAME>,
