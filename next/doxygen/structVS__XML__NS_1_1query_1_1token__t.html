@@ -98,13 +98,15 @@ Public Types</h2></td></tr>
 <tr class="memitem:a0e461c135d61cf6210ae2cae9f1c3057" id="r_a0e461c135d61cf6210ae2cae9f1c3057"><td class="memItemLeft" align="right" valign="top"><a id="a0e461c135d61cf6210ae2cae9f1c3057" name="a0e461c135d61cf6210ae2cae9f1c3057"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>type_t</b> : uint8_t { <br />
 &#160;&#160;<b>ACCEPT</b>
 , <b>NEXT_LAYER</b>
+, <b>FORK</b>
 , <b>TYPE</b>
-, <b>MATCH_NS</b>
 , <br />
-&#160;&#160;<b>MATCH_NAME</b>
+&#160;&#160;<b>MATCH_NS</b>
+, <b>MATCH_NAME</b>
 , <b>MATCH_VALUE</b>
 , <b>MATCH_ALL_TEXT</b>
-, <b>MATCH_ATTR</b>
+, <br />
+&#160;&#160;<b>MATCH_ATTR</b>
 <br />
  }</td></tr>
 <tr class="separator:a0e461c135d61cf6210ae2cae9f1c3057"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,9 +116,9 @@ typedef std::variant&lt; std::monostate, std::string_view, std::function&lt; boo
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:acfe6440ac5b68869a0c99bcfccc588fd" id="r_acfe6440ac5b68869a0c99bcfccc588fd"><td class="memItemLeft" align="right" valign="top"><a id="acfe6440ac5b68869a0c99bcfccc588fd" name="acfe6440ac5b68869a0c99bcfccc588fd"></a>
-std::variant&lt; <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1empty__t.html">empty_t</a>&lt; ACCEPT &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1empty__t.html">empty_t</a>&lt; NEXT_LAYER &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1type__filter__t.html">type_filter_t</a>&lt; TYPE &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1single__t.html">single_t</a>&lt; MATCH_NS &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1single__t.html">single_t</a>&lt; MATCH_NAME &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1single__t.html">single_t</a>&lt; MATCH_VALUE &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1single__t.html">single_t</a>&lt; MATCH_ALL_TEXT &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1attr__t.html">attr_t</a>&lt; MATCH_ATTR &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>args</b></td></tr>
-<tr class="separator:acfe6440ac5b68869a0c99bcfccc588fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a728353b530e1b3ecae9dc7d50bb03519" id="r_a728353b530e1b3ecae9dc7d50bb03519"><td class="memItemLeft" align="right" valign="top"><a id="a728353b530e1b3ecae9dc7d50bb03519" name="a728353b530e1b3ecae9dc7d50bb03519"></a>
+std::variant&lt; <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1empty__t.html">empty_t</a>&lt; ACCEPT &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1empty__t.html">empty_t</a>&lt; NEXT_LAYER &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1empty__t.html">empty_t</a>&lt; FORK &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1type__filter__t.html">type_filter_t</a>&lt; TYPE &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1single__t.html">single_t</a>&lt; MATCH_NS &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1single__t.html">single_t</a>&lt; MATCH_NAME &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1single__t.html">single_t</a>&lt; MATCH_VALUE &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1single__t.html">single_t</a>&lt; MATCH_ALL_TEXT &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1attr__t.html">attr_t</a>&lt; MATCH_ATTR &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>args</b></td></tr>
+<tr class="separator:a728353b530e1b3ecae9dc7d50bb03519"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/vs-xml/<a class="el" href="query_8hpp_source.html">query.hpp</a></li>
