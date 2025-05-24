@@ -233,6 +233,7 @@ std::expected<TreeRaw, TreeRaw::from_binary_error_t> TreeRaw::from_binary(std::s
         return std::unexpected(from_binary_error_t{from_binary_error_t::TooManyDocs});
 
     //TODO: Add checks on word size.
+    //TODO: Restore bounds checks on these entries.
 
     /*
     if(region.size_bytes() < header.offset_end)

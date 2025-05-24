@@ -57,9 +57,9 @@ struct token_t{
 
     template<type_t T>
     struct attr_t{
-        operand_t ns = std::monostate{};
         operand_t name = std::monostate{};
         operand_t value = std::monostate{};
+        operand_t ns = std::monostate{};
     };
 
     std::variant<
@@ -108,9 +108,10 @@ constexpr static token_t match_all_text(token_t::single_t<token_t::MATCH_ALL_TEX
     return {arg};
 }
 
-constexpr static token_t match_all_text(token_t::attr_t<token_t::MATCH_ATTR> arg) {
+constexpr static token_t match_attr(token_t::attr_t<token_t::MATCH_ATTR> arg) {
     return {arg};
 }
+
 
 std::pair<std::string_view, std::string_view>
 static split_on_colon(std::string_view input) {
@@ -131,19 +132,28 @@ struct query_t{
     std::array<token_t,N> tokens;
     size_t current=0;
 
-    constexpr query_t& operator / (std::string_view str){
-        if(str=="*") return *this / next_layer();
-        else if(str=="**") return *this / fork();
+
+    constexpr query_t& operator * (std::string_view str){
+        if(str=="*") return *this;
+        else if(str=="**") return *this * fork();
         else{
             auto [ns,name] = split_on_colon(str);
-            if(ns=="?" && name=="?") return *this / type({.is_element=true}) / next_layer();
-            else if (ns=="?") return *this / type({.is_element=true}) / match_name({name}) / next_layer();
-            else if (name=="?") return *this / type({.is_element=true}) / match_ns({ns}) / next_layer();
-            else return *this / type({.is_element=true}) / match_ns({ns}) / match_name({name}) / next_layer();
+            if(ns=="?" && name=="?") return *this * type({.is_element=true});
+            else if (ns=="?") return *this * type({.is_element=true}) * match_name({name});
+            else if (name=="?") return *this * type({.is_element=true}) * match_ns({ns});
+            else return *this * type({.is_element=true}) * match_ns({ns}) * match_name({name});
         }
     }
-    
-    constexpr query_t& operator / (const token_t& tkn){tokens[current]=tkn;current++;return *this;}
+
+    constexpr query_t& operator * (const token_t& tkn){tokens[current]=tkn;current++;return *this;}
+
+    constexpr inline query_t& operator / (std::string_view str){
+        return *this * next_layer() * str;
+    }
+
+    constexpr inline query_t& operator / (const token_t& tkn){
+        return *this * next_layer() * tkn;
+    }
 
 };
 
@@ -154,19 +164,27 @@ struct query_t<0>{
 
     std::vector<token_t> tokens;
 
-    query_t& operator / (std::string_view str){
-        if(str=="*") return *this / next_layer();
-        else if(str=="**") return *this / fork();
+    constexpr query_t& operator * (std::string_view str){
+        if(str=="*") return *this;
+        else if(str=="**") return *this * fork();
         else{
             auto [ns,name] = split_on_colon(str);
-            if(ns=="?" && name=="?") return *this / type({.is_element=true}) / next_layer();
-            else if (ns=="?") return *this / type({.is_element=true}) / match_name({name}) / next_layer();
-            else if (name=="?") return *this / type({.is_element=true}) / match_ns({ns}) / next_layer();
-            else return *this / type({.is_element=true}) / match_ns({ns}) / match_name({name}) / next_layer();
+            if(ns=="?" && name=="?") return *this * type({.is_element=true});
+            else if (ns=="?") return *this * type({.is_element=true}) * match_name({name});
+            else if (name=="?") return *this * type({.is_element=true}) * match_ns({ns});
+            else return *this * type({.is_element=true}) * match_ns({ns}) * match_name({name});
         }
     }
 
-    query_t& operator / (const token_t& tkn){tokens.push_back(tkn);return *this;}
+    constexpr query_t& operator * (const token_t& tkn){tokens.push_back(tkn);return *this;}
+
+    constexpr inline query_t& operator / (std::string_view str){
+        return *this * next_layer() * str;
+    }
+
+    constexpr inline query_t& operator / (const token_t& tkn){
+        return *this * next_layer() * tkn;
+    }
 
 };
 

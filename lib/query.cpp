@@ -9,11 +9,12 @@ namespace query{
 
 static inline bool expr_helper(const auto& pattern, const auto& check){
     if(std::holds_alternative<std::string_view>(pattern)){
-        if(!check.has_value() || *check!=std::get<std::string_view>(pattern))return true; 
+        if(check.has_value() && *check==std::get<std::string_view>(pattern))return true; 
     }
     else if(std::holds_alternative<std::function<bool(std::string_view)>>(pattern)){
-        if(!check.has_value() || !std::get<std::function<bool(std::string_view)>>(pattern)(*check))return true;
+        if(!check.has_value() && std::get<std::function<bool(std::string_view)>>(pattern)(*check))return true;
     }
+    else return true;
     return false;
 }
 
@@ -22,6 +23,7 @@ std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std
         //Accept the current element
         if (std::holds_alternative<token_t::empty_t<token_t::ACCEPT>>(current->args)) {
             co_yield root;
+            co_return;
         }
         //Continue on children if current is element
         else if (std::holds_alternative<token_t::empty_t<token_t::NEXT_LAYER>>(current->args)) {
@@ -30,7 +32,7 @@ std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std
                     co_yield n;
                 }
             }
-            else co_return;
+            co_return;
         }
         //Continue from here on, FORK will just be consumed on the current branch AND on children if current is element, 
         else if (std::holds_alternative<token_t::empty_t<token_t::FORK>>(current->args)) {
@@ -64,23 +66,17 @@ std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std
             if(!match) co_return;   //All matches failing. Fail branch.
         }
         //Match NS
-        else if (
-            std::holds_alternative<token_t::single_t<token_t::MATCH_NS>>(current->args) && 
-            !expr_helper(std::get<token_t::single_t<token_t::MATCH_NS>>(current->args),root.ns())
-        ) co_return; 
-
+        else if ( std::holds_alternative<token_t::single_t<token_t::MATCH_NS>>(current->args) ){
+            if(!expr_helper(std::get<token_t::single_t<token_t::MATCH_NS>>(current->args),root.ns())) co_return; 
+        }
         //Match name
-        else if (
-            std::holds_alternative<token_t::single_t<token_t::MATCH_NAME>>(current->args) && 
-            !expr_helper(std::get<token_t::single_t<token_t::MATCH_NAME>>(current->args),root.name())
-        ) co_return; 
-            
+        else if ( std::holds_alternative<token_t::single_t<token_t::MATCH_NAME>>(current->args) ){
+            if(!expr_helper(std::get<token_t::single_t<token_t::MATCH_NAME>>(current->args),root.name())) co_return; 
+        }
         //Match value
-        else if (
-            std::holds_alternative<token_t::single_t<token_t::MATCH_VALUE>>(current->args) && 
-            !expr_helper(std::get<token_t::single_t<token_t::MATCH_VALUE>>(current->args),root.value())
-        ) co_return; 
-
+        else if ( std::holds_alternative<token_t::single_t<token_t::MATCH_VALUE>>(current->args) ){
+            if(!expr_helper(std::get<token_t::single_t<token_t::MATCH_VALUE>>(current->args),root.value())) co_return; 
+        }
         //Match text, not implemented as .text() is missing upstream.
         /*
         else if (
