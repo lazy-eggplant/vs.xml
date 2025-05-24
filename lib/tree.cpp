@@ -199,24 +199,27 @@ bool TreeRaw::save_binary(std::ostream& out)const{
     header.configs = configs;
     if(header.configs.symbols==builder_config_t::EXTERN_REL)header.configs.symbols=builder_config_t::OWNED; //Symbols are copied even if the where shared, so they are now owned.
 
-    header.offset_tree = sizeof(binary_header_t);
-    header.offset_symbols = sizeof(binary_header_t)+buffer.size_bytes();
-    header.offset_end = sizeof(binary_header_t)+buffer.size_bytes()+symbols.size_bytes();
-
-    out.write((const char*) &header, sizeof(header));
-    out.write((const char*)buffer.data(), buffer.size_bytes());
+    size_t align_symbols = (symbols.size_bytes()%16==0)?0:(16-symbols.size_bytes()%16);
+    header.offset_symbols = header.size();
+    binary_header_t::section_t section = {header.size()+symbols.size_bytes()+align_symbols,header.size()+symbols.size_bytes()+align_symbols+buffer.size_bytes()};
+    out.write((const char*)&header, sizeof(header));
+    out.write((const char*)&section, sizeof(binary_header_t::section_t));
     out.write((const char*)symbols.data(), symbols.size_bytes());
+    if(align_symbols!=0){
+        char tmp[16]{};
+        out.write(tmp, align_symbols);
+    }
+    out.write((const char*)buffer.data(), buffer.size_bytes());
     out.flush();
     return true;
 }
 
 std::expected<TreeRaw, TreeRaw::from_binary_error_t> TreeRaw::from_binary(std::span<uint8_t> region){
-    if(region.size_bytes() < sizeof(binary_header_t))
+    const binary_header_t& header = *(const binary_header_t*)region.data();
+
+    if(region.size_bytes() < header.size())
         return std::unexpected(from_binary_error_t{from_binary_error_t::HeaderTooSmall});
-    
-    binary_header_t header;
-    memcpy((void*)&header,region.data(),sizeof(binary_header_t));
-    
+        
     if(std::memcmp(header.magic, "$XML", 4) != 0)
         return std::unexpected(from_binary_error_t{from_binary_error_t::MagicMismatch});
     
@@ -226,6 +229,12 @@ std::expected<TreeRaw, TreeRaw::from_binary_error_t> TreeRaw::from_binary(std::s
     if(header.format_minor > format_minor)
         return std::unexpected(from_binary_error_t{from_binary_error_t::MinorVersionTooHigh});
     
+    if(header.docs_count != 1)
+        return std::unexpected(from_binary_error_t{from_binary_error_t::TooManyDocs});
+
+    //TODO: Add checks on word size.
+
+    /*
     if(region.size_bytes() < header.offset_end)
         return std::unexpected(from_binary_error_t{from_binary_error_t::TruncatedSpan});
     
@@ -234,13 +243,13 @@ std::expected<TreeRaw, TreeRaw::from_binary_error_t> TreeRaw::from_binary(std::s
     
     if(header.offset_symbols > header.offset_end)
         return std::unexpected(from_binary_error_t{from_binary_error_t::SymbolsOutOfBounds});
+    */
 
     return TreeRaw(header.configs,
-        std::span<uint8_t>{region.data()+header.offset_tree, region.data()+header.offset_symbols},
-        std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.offset_end}
+        std::span<uint8_t>{region.data()+header.region(0).start, region.data()+header.region(0).end},
+        std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.region(0).start}
     );
 
-    //TODO: Add checks on word size.
 }
 
 
@@ -258,6 +267,7 @@ std::string_view TreeRaw::from_binary_error_t::msg() {
         case TruncatedSpan:       return "Truncated span for the loaded file";
         case TreeOutOfBounds:     return "Tree for loaded file is out of bounds";
         case SymbolsOutOfBounds:  return "Symbol table for loaded file is out of bounds";
+        case TooManyDocs:         return "Too many documents in the table";
         default:                  return "Unknown error";
     }
 }

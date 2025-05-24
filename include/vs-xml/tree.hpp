@@ -53,7 +53,8 @@ struct TreeRaw{
             MinorVersionTooHigh,
             TruncatedSpan,
             TreeOutOfBounds,
-            SymbolsOutOfBounds
+            SymbolsOutOfBounds,
+            TooManyDocs
         } code;
         
         std::string_view msg();

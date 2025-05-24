@@ -132,11 +132,19 @@ struct __attribute__ ((packed)) binary_header_t{
     uint8_t res[3];
 
     uint64_t offset_symbols;
-    uint64_t offset_tree;
-    uint64_t offset_end;
 
-    inline std::span<uint8_t> region(size_t N) const{
-        throw "not implemented";
+    struct section_t{
+        uint64_t start;
+        uint64_t end;
+    } sections [];
+
+    constexpr inline section_t region(size_t n) const{
+        xml_assert(n<docs_count, "Exceeded maximum documents recorded in binary");
+        return sections[n];
+    }
+
+    constexpr inline size_t size() const {
+        return sizeof(binary_header_t)+sizeof(binary_header_t::section_t)*docs_count;
     }
 };
 
