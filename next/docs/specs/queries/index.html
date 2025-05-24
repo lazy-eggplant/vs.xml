@@ -878,28 +878,24 @@
 <h2 id="structure-of-queries">Structure of queries<a class="headerlink" href="#structure-of-queries" title="Permanent link">#</a></h2>
 <h3 id="basic-commands">Basic commands<a class="headerlink" href="#basic-commands" title="Permanent link">#</a></h3>
 <ul>
-<li><code>next()</code> to force moving to the next layer in the filters.</li>
+<li><code>fork()</code> to force splitting matching by continuing here and expanding down.</li>
 <li><code>accept()</code> to accept the current node and let the iterator go deeper.</li>
-<li><code>type&lt;T&gt;()</code> to match a node type</li>
-<li><code>attr(name, fn)</code> if a given attribute satisfies <code>fn</code>, with specialized version where <code>fn</code> is just a string. </li>
-<li><code>attr(ns, name, fn)</code> if a given attribute (with namespace) satisfies <code>fn</code>, with specialized version where <code>fn</code> is just a string. </li>
-<li><code>text(fn)</code> if the text of the current node satisfies <code>fn</code>, with specialized version where <code>fn</code> is just a string. </li>
-<li><code>match_ns(fn)</code> with specialized version where <code>fn</code> is just a string.</li>
-<li><code>match_name(fn)</code> with specialized version where <code>fn</code> is just a string.</li>
+<li><code>type({...})</code> to match a subset of node type</li>
+<li><code>attr({name, fn, ns})</code> if a given attribute (with namespace) satisfies the expressions (as string or boolean lambdas). </li>
+<li><code>match_ns({exp})</code> to match the namespace, with exp being either a string or a boolean lambda.</li>
+<li><code>match_name({exp})</code> to match the name, with exp being either a string or a boolean lambda.</li>
+<li><code>match_value({exp})</code> to match the value, with exp being either a string or a boolean lambda.</li>
+<li><code>match_all_text({exp})</code> to match the text, with exp being either a string or a boolean lambda.</li>
 </ul>
 <h3 id="string-shorthands">String shorthands<a class="headerlink" href="#string-shorthands" title="Permanent link">#</a></h3>
 <ul>
-<li><code>"{ns}:{name}"</code> equivalent to <code>type&lt;element&gt;() + match_ns(ns) + match_name(name) + accept() + next()</code></li>
-<li><code>"{ns}:*"</code> equivalent to <code>type&lt;element&gt;() + match_ns(ns) + accept() + next()</code></li>
-<li><code>"{name}"</code> equivalent to <code>type&lt;element&gt;() + match_ns("") + match_name(name) + accept() + next()</code></li>
-<li><code>*</code> equivalent to <code>accept() + next()</code></li>
-<li><code>?</code> equivalent to <code>accept() + next()</code> OR <code>next()</code>.</li>
-<li><code>**</code> equivalent to <code>accept() + next()</code> OR <code>accept()</code></li>
-<li><code>*?</code> equivalent to <code>accept() + next()</code> OR <code>accept()</code> OR <code>next()</code>.</li>
+<li><code>"{ns}:{name}"</code> matching namespace and name. Special values <code>?</code> for each to determine anything matches. Empty string is considered empty string not match all.</li>
+<li><code>*</code> to accept anything and move forward.</li>
+<li><code>**</code> to recursively fork.</li>
 </ul>
 <h3 id="composition">Composition<a class="headerlink" href="#composition" title="Permanent link">#</a></h3>
 <ul>
-<li><code>operator+</code> or <code>operator/</code> to append the right filter to the current list.</li>
+<li><code>operator*</code> to append right to the current list, or <code>operator/</code> to append a <code>next()</code> and the right filter.</li>
 </ul>
 
 
