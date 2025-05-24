@@ -195,7 +195,7 @@ auto mk_tree(){
 }
 
 int main() {
-    auto q = xml::query::query_t{}/xml::query::match_name({"hello"})/xml::query::accept()/xml::query::accept()/xml::query::next_layer();
+    auto q = xml::query::query_t{}/xml::query::match_name({"hello"})/xml::query::accept()/xml::query::accept()/xml::query::next();
     constexpr auto q2 = xml::query::query_t<10>{}*xml::query::accept()*xml::query::accept();
 
     auto query_a = xml::query::query_t{}*"hello"/"**"/"BBB"*xml::query::match_attr({"ATTR-0"})*xml::query::accept();
@@ -207,7 +207,7 @@ int main() {
         std::print("{}\n",t.args.index());
     }
     */
-    for(const auto& t : xml::query::traverse(tree.root(),query_a)){
+    for(const auto& t : xml::query::is(tree.root(),query_a)){
         std::print("{}\n", t.name().value_or("---"));
     }
 

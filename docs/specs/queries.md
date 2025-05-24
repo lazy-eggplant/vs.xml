@@ -2,25 +2,21 @@
 
 ### Basic commands
 
-- `next()` to force moving to the next layer in the filters.
+- `fork()` to force splitting matching by continuing here and expanding down.
 - `accept()` to accept the current node and let the iterator go deeper.
-- `type<T>()` to match a node type
-- `attr(name, fn)` if a given attribute satisfies `fn`, with specialized version where `fn` is just a string. 
-- `attr(ns, name, fn)` if a given attribute (with namespace) satisfies `fn`, with specialized version where `fn` is just a string. 
-- `text(fn)` if the text of the current node satisfies `fn`, with specialized version where `fn` is just a string. 
-- `match_ns(fn)` with specialized version where `fn` is just a string.
-- `match_name(fn)` with specialized version where `fn` is just a string.
+- `type({...})` to match a subset of node type
+- `attr({name, fn, ns})` if a given attribute (with namespace) satisfies the expressions (as string or boolean lambdas). 
+- `match_ns({exp})` to match the namespace, with exp being either a string or a boolean lambda.
+- `match_name({exp})` to match the name, with exp being either a string or a boolean lambda.
+- `match_value({exp})` to match the value, with exp being either a string or a boolean lambda.
+- `match_all_text({exp})` to match the text, with exp being either a string or a boolean lambda.
 
 ### String shorthands
 
-- `"{ns}:{name}"` equivalent to `type<element>() + match_ns(ns) + match_name(name) + accept() + next()`
-- `"{ns}:*"` equivalent to `type<element>() + match_ns(ns) + accept() + next()`
-- `"{name}"` equivalent to `type<element>() + match_ns("") + match_name(name) + accept() + next()`
-- `*` equivalent to `accept() + next()`
-- `?` equivalent to `accept() + next()` OR `next()`.
-- `**` equivalent to `accept() + next()` OR `accept()`
-- `*?` equivalent to `accept() + next()` OR `accept()` OR `next()`.
+- `"{ns}:{name}"` matching namespace and name. Special values `?` for each to determine anything matches. Empty string is considered empty string not match all.
+- `*` to accept anything and move forward.
+- `**` to recursively fork.
 
 ### Composition
 
-- `operator+` or `operator/` to append the right filter to the current list.
+- `operator*` to append right to the current list, or `operator/` to append a `next()` and the right filter.

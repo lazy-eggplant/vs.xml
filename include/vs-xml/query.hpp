@@ -29,7 +29,7 @@ struct token_t{
     enum type_t : uint8_t{
         /*Empty*/
         ACCEPT, 
-        NEXT_LAYER, 
+        NEXT, 
         FORK,
         /*type_filter*/
         TYPE,
@@ -62,17 +62,22 @@ struct token_t{
         operand_t ns = std::monostate{};
     };
 
-    std::variant<
-        empty_t<ACCEPT>,
-        empty_t<NEXT_LAYER>,
-        empty_t<FORK>,
-        type_filter_t<TYPE>,
-        single_t<MATCH_NS>,
-        single_t<MATCH_NAME>,
-        single_t<MATCH_VALUE>,
-        single_t<MATCH_ALL_TEXT>,
-        attr_t<MATCH_ATTR>
-        > args;
+    using args_t = 
+        std::variant<
+            empty_t<ACCEPT>,
+            empty_t<NEXT>,
+            empty_t<FORK>,
+            type_filter_t<TYPE>,
+            single_t<MATCH_NS>,
+            single_t<MATCH_NAME>,
+            single_t<MATCH_VALUE>,
+            single_t<MATCH_ALL_TEXT>,
+            attr_t<MATCH_ATTR>
+        > ;
+
+    args_t args;
+
+    constexpr token_t(const args_t& t={}):args(t){}
 };
 
 
@@ -84,8 +89,8 @@ constexpr static token_t fork() {
     return {token_t::empty_t<token_t::FORK>{}};
 }
 
-constexpr static token_t next_layer() {
-    return {token_t::empty_t<token_t::NEXT_LAYER>{}};
+constexpr static token_t next() {
+    return {token_t::empty_t<token_t::NEXT>{}};
 }
 
 constexpr static token_t type(token_t::type_filter_t<token_t::TYPE> arg) {
@@ -112,17 +117,12 @@ constexpr static token_t match_attr(token_t::attr_t<token_t::MATCH_ATTR> arg) {
     return {arg};
 }
 
-
-std::pair<std::string_view, std::string_view>
-static split_on_colon(std::string_view input) {
-    std::size_t pos = input.find(':');
-    if (pos == std::string_view::npos) {
-        // No colon found: return the whole string and an empty view.
-        return {{}, input};
-    } else {
-        return {input.substr(0, pos), input.substr(pos + 1)};
-    }
+constexpr static token_t has(token_t::attr_t<token_t::MATCH_ATTR> arg) {
+    return {arg};
 }
+
+
+extern std::pair<std::string_view, std::string_view> split_on_colon(std::string_view input);
 
 template<size_t N = 0>
 struct query_t{
@@ -148,11 +148,11 @@ struct query_t{
     constexpr query_t& operator * (const token_t& tkn){tokens[current]=tkn;current++;return *this;}
 
     constexpr inline query_t& operator / (std::string_view str){
-        return *this * next_layer() * str;
+        return *this * next() * str;
     }
 
     constexpr inline query_t& operator / (const token_t& tkn){
-        return *this * next_layer() * tkn;
+        return *this * next() * tkn;
     }
 
 };
@@ -179,27 +179,31 @@ struct query_t<0>{
     constexpr query_t& operator * (const token_t& tkn){tokens.push_back(tkn);return *this;}
 
     constexpr inline query_t& operator / (std::string_view str){
-        return *this * next_layer() * str;
+        return *this * next() * str;
     }
 
     constexpr inline query_t& operator / (const token_t& tkn){
-        return *this * next_layer() * tkn;
+        return *this * next() * tkn;
     }
 
 };
 
-std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std::vector<token_t>::const_iterator begin, std::vector<token_t>::const_iterator end);
+std::generator<wrp::base_t<unknown_t>> is(wrp::base_t<unknown_t> root, std::vector<token_t>::const_iterator begin, std::vector<token_t>::const_iterator end);
 
-//template<size_t N>
-inline std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<element_t> root, const query_t<0>& query) {
-    return traverse(*(wrp::base_t<unknown_t>*)&root, query.tokens.begin(), query.tokens.end());
+template<size_t N=0>
+inline std::generator<wrp::base_t<unknown_t>> is(wrp::base_t<element_t> root, const query_t<N>& query) {
+    return is(*(wrp::base_t<unknown_t>*)&root, query.tokens.begin(), query.tokens.end());
 }
 
-
+//TODO: not tested
+template<size_t N=0>
+inline std::generator<wrp::base_t<unknown_t>> has(std::generator<wrp::base_t<unknown_t>>&& src, const query_t<N>& query) {
+    for(auto element : src){
+        //Does this stop after the first match is found, as that is sufficient? Should we also return those matches somehow?
+        if(!is(element, query.tokens.begin(), query.tokens.end()).empty())co_yield element;
+    }
+    co_return;
+}
 
 }
-//`is` generator references all nodes which are proven to complete the query
-//`has` generator references all nodes for which sub-nodes are proven to complete their query.
-
-
 }

@@ -7,6 +7,18 @@
 namespace VS_XML_NS{
 namespace query{
 
+
+std::pair<std::string_view, std::string_view> split_on_colon(std::string_view input) {
+    std::size_t pos = input.find(':');
+    if (pos == std::string_view::npos) {
+        // No colon found: return the whole string and an empty view.
+        return {{}, input};
+    } else {
+        return {input.substr(0, pos), input.substr(pos + 1)};
+    }
+}
+    
+
 static inline bool expr_helper(const auto& pattern, const auto& check){
     if(std::holds_alternative<std::string_view>(pattern)){
         if(check.has_value() && *check==std::get<std::string_view>(pattern))return true; 
@@ -18,7 +30,7 @@ static inline bool expr_helper(const auto& pattern, const auto& check){
     return false;
 }
 
-std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std::vector<token_t>::const_iterator begin, std::vector<token_t>::const_iterator end) {
+std::generator<wrp::base_t<unknown_t>> is(wrp::base_t<unknown_t> root, std::vector<token_t>::const_iterator begin, std::vector<token_t>::const_iterator end) {
     for(auto current = begin;current!=end;current++){
         //Accept the current element
         if (std::holds_alternative<token_t::empty_t<token_t::ACCEPT>>(current->args)) {
@@ -26,9 +38,9 @@ std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std
             co_return;
         }
         //Continue on children if current is element
-        else if (std::holds_alternative<token_t::empty_t<token_t::NEXT_LAYER>>(current->args)) {
+        else if (std::holds_alternative<token_t::empty_t<token_t::NEXT>>(current->args)) {
             if(root.type()==type_t::ELEMENT) for (auto& child : root.children()) {
-                for (auto n : traverse(child, current+1, end)) {
+                for (auto n : is(child, current+1, end)) {
                     co_yield n;
                 }
             }
@@ -37,7 +49,7 @@ std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std
         //Continue from here on, FORK will just be consumed on the current branch AND on children if current is element, 
         else if (std::holds_alternative<token_t::empty_t<token_t::FORK>>(current->args)) {
             if(root.type()==type_t::ELEMENT) for (auto& child : root.children()) {
-                for (auto n : traverse(child, current, end)) {
+                for (auto n : is(child, current, end)) {
                     co_yield n;
                 }
             }
