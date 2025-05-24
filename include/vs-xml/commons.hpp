@@ -20,6 +20,7 @@
 #include <expected>
 
 
+#include <span>
 #include <string>
 #include <string_view>
 
@@ -122,16 +123,21 @@ struct __attribute__ ((packed)) binary_header_t{
             binary_header_t::endianess_t::BIG;
     uint8_t res0 : 7;
 
-    uint64_t offset_tree;
-    uint64_t offset_symbols;
-    uint64_t offset_end;
-
     uint64_t size__delta_ptr : 6        = sizeof(delta_ptr_t);
     uint64_t size__xml_size  : 6        = sizeof(xml_size_t);
     uint64_t size__xml_count : 6        = sizeof(xml_count_t);
     uint64_t size__xml_enum_size : 6    = sizeof(xml_enum_size_t);
 
-    uint8_t res[5];
+    uint16_t docs_count = 1;
+    uint8_t res[3];
+
+    uint64_t offset_symbols;
+    uint64_t offset_tree;
+    uint64_t offset_end;
+
+    inline std::span<uint8_t> region(size_t N) const{
+        throw "not implemented";
+    }
 };
 
 

@@ -47,12 +47,12 @@ struct token_t{
 
     template<type_t T>
     struct type_filter_t{
-        uint8_t is_element:1 = true ;
-        uint8_t is_comment:1 = true ;
-        uint8_t is_proc:1 = true ;
-        uint8_t is_text:1 = true ;
-        uint8_t is_cdata:1 = true ;
-        uint8_t is_marker:1 = true ;
+        uint8_t is_element:1 = false ;
+        uint8_t is_comment:1 = false ;
+        uint8_t is_proc:1 = false ;
+        uint8_t is_text:1 = false ;
+        uint8_t is_cdata:1 = false ;
+        uint8_t is_marker:1 = false ;
     };
 
     template<type_t T>
@@ -75,34 +75,13 @@ struct token_t{
         > args;
 };
 
-template<size_t N = 0>
-struct query_t{
-    //This token data structure is quite heavy.
-    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
-
-    std::array<token_t,N> tokens;
-    size_t current=0;
-
-    constexpr query_t& operator / (std::string_view){return *this;}
-    constexpr query_t& operator / (const token_t& tkn){tokens[current]=tkn;current++;return *this;}
-
-};
-
-template<>
-struct query_t<0>{
-    //This token data structure is quite heavy.
-    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
-
-    std::vector<token_t> tokens;
-
-
-    query_t& operator / (std::string_view){return *this;}
-    query_t& operator / (const token_t& tkn){tokens.push_back(tkn);return *this;}
-
-};
 
 constexpr static token_t accept() {
     return {token_t::empty_t<token_t::ACCEPT>{}};
+}
+
+constexpr static token_t fork() {
+    return {token_t::empty_t<token_t::FORK>{}};
 }
 
 constexpr static token_t next_layer() {
@@ -132,6 +111,64 @@ constexpr static token_t match_all_text(token_t::single_t<token_t::MATCH_ALL_TEX
 constexpr static token_t match_all_text(token_t::attr_t<token_t::MATCH_ATTR> arg) {
     return {arg};
 }
+
+std::pair<std::string_view, std::string_view>
+static split_on_colon(std::string_view input) {
+    std::size_t pos = input.find(':');
+    if (pos == std::string_view::npos) {
+        // No colon found: return the whole string and an empty view.
+        return {{}, input};
+    } else {
+        return {input.substr(0, pos), input.substr(pos + 1)};
+    }
+}
+
+template<size_t N = 0>
+struct query_t{
+    //This token data structure is quite heavy.
+    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
+
+    std::array<token_t,N> tokens;
+    size_t current=0;
+
+    constexpr query_t& operator / (std::string_view str){
+        if(str=="*") return *this / next_layer();
+        else if(str=="**") return *this / fork();
+        else{
+            auto [ns,name] = split_on_colon(str);
+            if(ns=="?" && name=="?") return *this / type({.is_element=true}) / next_layer();
+            else if (ns=="?") return *this / type({.is_element=true}) / match_name({name}) / next_layer();
+            else if (name=="?") return *this / type({.is_element=true}) / match_ns({ns}) / next_layer();
+            else return *this / type({.is_element=true}) / match_ns({ns}) / match_name({name}) / next_layer();
+        }
+    }
+    
+    constexpr query_t& operator / (const token_t& tkn){tokens[current]=tkn;current++;return *this;}
+
+};
+
+template<>
+struct query_t<0>{
+    //This token data structure is quite heavy.
+    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
+
+    std::vector<token_t> tokens;
+
+    query_t& operator / (std::string_view str){
+        if(str=="*") return *this / next_layer();
+        else if(str=="**") return *this / fork();
+        else{
+            auto [ns,name] = split_on_colon(str);
+            if(ns=="?" && name=="?") return *this / type({.is_element=true}) / next_layer();
+            else if (ns=="?") return *this / type({.is_element=true}) / match_name({name}) / next_layer();
+            else if (name=="?") return *this / type({.is_element=true}) / match_ns({ns}) / next_layer();
+            else return *this / type({.is_element=true}) / match_ns({ns}) / match_name({name}) / next_layer();
+        }
+    }
+
+    query_t& operator / (const token_t& tkn){tokens.push_back(tkn);return *this;}
+
+};
 
 std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std::vector<token_t>::const_iterator begin, std::vector<token_t>::const_iterator end);
 

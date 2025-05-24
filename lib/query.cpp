@@ -88,8 +88,10 @@ std::generator<wrp::base_t<unknown_t>> traverse(wrp::base_t<unknown_t> root, std
             !expr_helper(std::get<token_t::single_t<token_t::MATCH_NAME>>(current->args),root.text())
         ) co_return; 
          */
-        //Match value
-        
+
+        //TODO: right now attribute matching has k*O(n) complexity if k attributes must be tested.
+        //By looking ahead it is possible to check if there are more attributes to be tested, and perform the operation in just O(n)
+        //Match attribute
         else if (std::holds_alternative<token_t::attr_t<token_t::MATCH_ATTR>>(current->args)) {
             auto pattern = std::get<token_t::attr_t<token_t::MATCH_ATTR>>(current->args);
             bool found = false;

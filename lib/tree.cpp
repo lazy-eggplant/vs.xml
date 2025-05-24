@@ -195,7 +195,7 @@ TreeRaw TreeRaw::clone(const element_t* ref, bool reduce) const{
 bool TreeRaw::save_binary(std::ostream& out)const{
     if(configs.symbols==builder_config_t::EXTERN_ABS)return false; //Symbols not relocatable.
 
-    binary_header_t header;
+    binary_header_t header{};
     header.configs = configs;
     if(header.configs.symbols==builder_config_t::EXTERN_REL)header.configs.symbols=builder_config_t::OWNED; //Symbols are copied even if the where shared, so they are now owned.
 
