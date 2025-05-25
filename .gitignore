@@ -7,6 +7,8 @@
 !/subprojects/packagefiles/
 !/subprojects/nanobench.wrap
 !/subprojects/mio.wrap
+!/subprojects/gtl.wrap
+!/subprojects/linenoise.wrap
 !/subprojects/pugixml.wrap
 !/subprojects/fmt.wrap
 *.autogen.*

@@ -1,0 +1,7 @@
+[wrap-git]
+url = https://github.com/greg7mdp/gtl
+revision = v1.2.0
+depth = 1
+method = cmake
+[provide]
+gtl = gtl_dep

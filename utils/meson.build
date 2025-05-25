@@ -1,4 +1,5 @@
 mio_dep = dependency('mio')
+linenoise_dep = dependency('linenoise')
 
 executable(
     'vs-xml.encode',
@@ -17,5 +18,16 @@ executable(
     dependencies: [
         vs_xml_dep,
         mio_dep,
+    ],
+)
+
+executable(
+    'vs-xml.query',
+    'query.cpp',
+    install: true,
+    dependencies: [
+        vs_xml_dep,
+        mio_dep,
+        linenoise_dep,
     ],
 )
