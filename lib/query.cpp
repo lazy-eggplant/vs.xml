@@ -61,17 +61,23 @@ std::generator<wrp::base_t<unknown_t>> is(wrp::base_t<unknown_t> root, std::vect
             bool match = false;
             switch(root.type()){
                 case type_t::ELEMENT:
-                    if(type.is_element)match=true;break;
+                    if(type.is_element)match=true;
+                    break;
                 case type_t::TEXT:
-                    if(type.is_text)match=true;break;
+                    if(type.is_text)match=true;
+                    break;
                 case type_t::CDATA:
-                    if(type.is_cdata)match=true;break;
+                    if(type.is_cdata)match=true;
+                    break;
                 case type_t::COMMENT:
-                    if(type.is_comment)match=true;break;
+                    if(type.is_comment)match=true;
+                    break;
                 case type_t::PROC:
-                    if(type.is_proc)match=true;break;
+                    if(type.is_proc)match=true;
+                    break;
                 case type_t::MARKER:
-                    if(type.is_marker)match=true;break;
+                    if(type.is_marker)match=true;
+                    break;
                 default:
                     break;
             }
