@@ -1,15 +1,11 @@
 #include <vs-xml/query.hpp>
 #include <vs-xml/builder.hpp>
 
-#include <initializer_list>
-#include <iostream>
-#include <vector>
-#include <coroutine>
 #include <cstdlib>
 
-#include <new> 
 #include <print> 
 
+/*
 
 // A very simple memory pool for demonstration purposes. DON'T SHIP IN THE LIBRARY!
 struct MemoryPool {
@@ -107,46 +103,7 @@ struct Generator {
     iterator end() { return {coro, true}; }
 };
 
-struct Node {
-    int value;
-    std::vector<Node> children;
-    
-    const std::vector<Node>& getChildren() const { return children; }
-};
-
-
-#include <generator>
-
-// A coroutine-based generator to recursively traverse the tree.
-std::generator<const Node*> traverse(const Node& node, auto filter, int v) {
-
-    if (filter(node)) {
-        co_yield &node;
-    }
-    for (const auto& child : node.getChildren()) {
-        // Recursively yield from the child generator.
-        for (const Node* n : traverse(child, filter, v+1)) {
-            co_yield n;
-        }
-    }
-}
-
-struct {
-  mutable std::array<uint8_t,255> sliceA;
-} constexpr reserved{};
-
-template<std::array<uint8_t,255>::iterator BEGIN,std::array<uint8_t,255>::iterator END>
-struct v{
-    v(){
-        for(auto it=BEGIN;it!=END;it++){
-            *it = 44;
-        }
-        for(auto it=BEGIN;it!=END;it++){
-            std::print("{} ",(int)*it);
-        }
-    }
-};
-
+*/
 
 
 template<xml::builder_config_t cfg>
@@ -194,41 +151,27 @@ auto mk_tree(){
 }
 
 int main() {
+    using namespace xml::query;
+
+    auto tree = *mk_tree<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();
+
+    {
+        for(auto t : tree.root() & query_t<0>{}*accept()){
+            std::print("{}\n", t.name().value_or("---"));
+        }
+        //assert()
+    }
+
     auto q = xml::query::query_t{}/xml::query::match_name({"hello"})/xml::query::accept()/xml::query::accept()/xml::query::next();
     constexpr auto q2 = xml::query::query_t<10>{}*xml::query::accept()*xml::query::accept();
 
     auto query_a = xml::query::query_t{}*"hello"/"**"/"BBB"*xml::query::accept();
     auto query_b = xml::query::query_t{}*xml::query::match_attr({"ATTR-0"})*xml::query::accept();
 
-    auto tree = *mk_tree<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();
 
-    /*
-    for(auto t : q.tokens){
-        std::print("{}\n",t.args.index());
-    }
-    */
-    for(const auto& t : xml::query::is(tree.root(),query_a) | query_b | std::views::filter([](auto n) {return true;})){
+    for(const auto& t : tree.root() & query_a | query_b | std::views::filter([](auto n) {return true;})){
         std::print("{}\n", t.name().value_or("---"));
     }
-
-/*
-    v<reserved.sliceA.begin(),reserved.sliceA.end()> A;
-
-    Node root{0, {
-        {1, { {3, {}}, {4, {}} }},
-        {2, { {5, {}}, {6, {}} }},
-        {4, { {5, {}}, {6, {}} }}
-    }};
-
-    auto filterOdd = [](const Node& n) static { return (n.value % 2) != 0; };
-
-    std::cout << "Lazy traversal with generators: ";
-    for (const Node* n : traverse(root, filterOdd,0)) {
-        std::cout << n->value << " ";
-    }
-    std::cout << std::endl;
-
-*/
 
     return 0;
 }

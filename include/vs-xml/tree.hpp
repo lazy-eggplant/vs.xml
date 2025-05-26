@@ -133,7 +133,7 @@ struct TreeRaw{
 
     };
 
-    inline const element_t& root() const {return *(const element_t*)buffer.data();}
+    inline const unknown_t& root() const {return *(const unknown_t*)buffer.data();}
 
     inline bool print(std::ostream& out, const print_cfg_t& cfg = {})const{
         return print_h(out, cfg, (const unknown_t*)&root());
@@ -215,7 +215,7 @@ struct Tree : TreeRaw{
     inline const Tree slice(const element_t* ref=nullptr) const{return TreeRaw::slice(ref);}
     inline Tree clone(const element_t* ref=nullptr, bool reduce=true) const{return TreeRaw::clone(ref,reduce);}
 
-    wrp::base_t<element_t> root() const;
+    wrp::base_t<unknown_t> root() const;
 
     inline TreeRaw& downgrade(){return *this;}
 };

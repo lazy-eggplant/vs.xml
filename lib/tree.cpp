@@ -33,7 +33,10 @@ std::function<bool(const attr_t&, const attr_t&)> TreeRaw::def_order_attrs() con
 }
 
 bool TreeRaw::reorder(const std::function<bool(const attr_t&, const attr_t&)>& fn, const element_t* ref,  bool recursive){
-    if(ref==nullptr)ref=&root();
+    if(ref==nullptr){
+        xml_assert(root().type()==type_t::ELEMENT);
+        ref=(const element_t*)&root();
+    }
 
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size());
     xml_assert(ref->type()==type_t::ELEMENT);
@@ -160,7 +163,10 @@ const TreeRaw TreeRaw::slice(const element_t* ref) const{
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
     xml_assert(ref->type()==type_t::ELEMENT, "cannot slice something which is not a node");
 
-    if(ref==nullptr)ref=&root();
+    if(ref==nullptr){
+        xml_assert(root().type()==type_t::ELEMENT);
+        ref=(const element_t*)&root();
+    }
 
     std::span<uint8_t> tmp = {( uint8_t*)ref,ref->_size};
     return TreeRaw(configs,tmp,this->symbols);
@@ -171,7 +177,10 @@ TreeRaw TreeRaw::clone(const element_t* ref, bool reduce) const{
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
     xml_assert(ref->type()==type_t::ELEMENT, "cannot clone something which is not a node");
 
-    if(ref==nullptr)ref=&root();
+    if(ref==nullptr){
+        xml_assert(root().type()==type_t::ELEMENT);
+        ref=(const element_t*)&root();
+    }
 
     std::vector<uint8_t> buffer;
     std::vector<uint8_t> symbols;
@@ -273,6 +282,6 @@ std::string_view TreeRaw::from_binary_error_t::msg() {
     }
 }
 
-wrp::base_t<element_t> Tree::root() const{return {*this, &TreeRaw::root()};}
+wrp::base_t<unknown_t> Tree::root() const{return {*this, &TreeRaw::root()};}
 
 }

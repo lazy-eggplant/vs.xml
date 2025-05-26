@@ -11,6 +11,7 @@
  */
 
 //Temporary add custom implementation here later
+#include <cstddef>
 #include <generator>
 #include <functional>
 #include <string_view>
@@ -260,12 +261,10 @@ extern std::pair<std::string_view, std::string_view> split_on_colon(std::string_
 
 template<size_t N>
 struct query_t{
-    //This token data structure is quite heavy.
-    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
+    using container_type = std::array<token_t,N>;
 
-    std::array<token_t,N> tokens;
+    container_type tokens;
     size_t current=0;
-
 
     constexpr query_t& operator * (std::string_view str){
         if(str=="*") return *this;
@@ -293,10 +292,9 @@ struct query_t{
 
 template<>
 struct query_t<0>{
-    //This token data structure is quite heavy.
-    //Sadly, there is no way to trivially optimize its layout as is, so it will suffice for now.
+    using container_type = std::vector<token_t>;
 
-    std::vector<token_t> tokens;
+    container_type tokens;
 
     constexpr query_t& operator * (std::string_view str){
         if(str=="*") return *this;
@@ -322,46 +320,59 @@ struct query_t<0>{
 
 };
 
-result_t is(wrp::base_t<unknown_t> root, std::vector<token_t>::const_iterator begin, std::vector<token_t>::const_iterator end);
+template<size_t N>
+result_t is(wrp::base_t<unknown_t> root, typename query_t<N>::container_type::const_iterator begin, typename query_t<N>::container_type::const_iterator end);
 
 template<size_t N=0>
-inline result_t is(wrp::base_t<element_t> root, const query_t<N>& query) {
-    return is(*(wrp::base_t<unknown_t>*)&root, query.tokens.begin(), query.tokens.end());
+inline result_t is(wrp::base_t<unknown_t> root, const query_t<N>& query) {
+    return is<N>(root, query.tokens.begin(), query.tokens.end());
 }
 
+template<size_t N=0>
+inline result_t is(result_t&& src , const query_t<N>& query) {
+    for(auto element : src){
+        return is(element, query.tokens.begin(), query.tokens.end());
+    }
+}
+
+template<size_t N=0>
+inline result_t operator&(wrp::base_t<unknown_t> src, const query_t<N>& query){return is(src,query);}
+
+template<size_t N=0>
+inline result_t operator&(result_t&& src, const query_t<N>& query){return is(std::move(src),query);}
+
 //TODO: not tested
+
+template<size_t N=0>
+inline result_t has(wrp::base_t<unknown_t> root, const query_t<N>& query) {
+    auto b = false;
+    for(auto c : is<N>(root, query.tokens.begin(), query.tokens.end())){b=true;break;}
+    if(b)co_yield root;
+    co_return;
+}
+
 template<size_t N=0>
 inline result_t has(result_t&& src, const query_t<N>& query) {
     for(auto element : src){
         //Does this stop after the first match is found, as that is sufficient? Should we also return those matches somehow?
         auto b = false;
-        for(auto c : is(element, query.tokens.begin(), query.tokens.end())){b=true;break;}
+        for(auto c : is<N>(element, query.tokens.begin(), query.tokens.end())){b=true;break;}
         if(b)co_yield element;
     }
     co_return;
 }
 
-/*
-template<size_t N>
-inline result_t result_t::is(const query_t<N>& query) {
-    for(auto i: *this)
-        co_yield is(i, query.tokens.begin(), query.tokens.end());
-}
-
-template<size_t N>
-inline result_t result_t::has(const query_t<N>& query) {
-    return query::has(this,query);
-}
-*/
+template<size_t N=0>
+inline result_t operator|(wrp::base_t<unknown_t> src, const query_t<N>& query){return has(src,query);}
 
 template<size_t N=0>
 inline result_t operator|(result_t&& src, const query_t<N>& query){return has(std::move(src),query);}
-
-template<size_t N=0>
-inline result_t operator&(result_t&& src, const query_t<N>& query){return is(src,query);}
 
 }
 }
 
 template<> 
 inline constexpr bool std::ranges::enable_borrowed_range<VS_XML_NS::query::result_t> = true;
+
+
+#include <vs-xml/private/query-impl.hpp>

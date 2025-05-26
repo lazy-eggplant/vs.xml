@@ -88,7 +88,7 @@ struct Document : DocumentRaw {
     inline const Tree slice(const element_t* ref=nullptr) const{return DocumentRaw::slice(ref);}
     inline Tree clone(const element_t* ref=nullptr, bool reduce=true) const{return DocumentRaw::clone(ref,reduce);}
 
-    inline  wrp::base_t<element_t>  root() {return wrp::base_t<element_t>{*(const TreeRaw*)this, &TreeRaw::root()};}
+    inline  wrp::base_t<unknown_t>  root() {return wrp::base_t<unknown_t>{*(const TreeRaw*)this, &TreeRaw::root()};}
 
     /**
      * @brief Downgrade the current document into its base VS_XML_NS::DocumentRaw.
