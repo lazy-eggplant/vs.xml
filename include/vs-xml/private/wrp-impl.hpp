@@ -134,6 +134,13 @@ struct base_t{
     inline auto children(auto filter) const;
 
     inline auto type() const {return ptr->type();}
+
+    /*
+    template<size_t N=0>
+    inline xml::query::generator<wrp::base_t<unknown_t>> is(const xml::query::query_t<N>& query) {
+        return xml::query::is(*(wrp::base_t<unknown_t>*)this, query.tokens.begin(), query.tokens.end());
+    }
+    */
 };
 
 

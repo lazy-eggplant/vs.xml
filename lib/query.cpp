@@ -30,7 +30,7 @@ static inline bool expr_helper(const auto& pattern, const auto& check){
     return false;
 }
 
-std::generator<wrp::base_t<unknown_t>> is(wrp::base_t<unknown_t> root, std::vector<token_t>::const_iterator begin, std::vector<token_t>::const_iterator end) {
+result_t is(wrp::base_t<unknown_t> root, std::vector<token_t>::const_iterator begin, std::vector<token_t>::const_iterator end) {
     for(auto current = begin;current!=end;current++){
         //Accept the current element
         if (std::holds_alternative<token_t::empty_t<token_t::ACCEPT>>(current->args)) {
