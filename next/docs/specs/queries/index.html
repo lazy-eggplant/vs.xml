@@ -759,6 +759,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#about-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      About attributes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#string-shorthands" class="md-nav__link">
     <span class="md-ellipsis">
       String shorthands
@@ -850,6 +859,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#about-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      About attributes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#string-shorthands" class="md-nav__link">
     <span class="md-ellipsis">
       String shorthands
@@ -907,12 +925,15 @@
 <li><code>fork()</code> to force splitting matching by continuing here and expanding down.</li>
 <li><code>accept()</code> to accept the current node and let the iterator go deeper.</li>
 <li><code>type({...})</code> to match a subset of node type</li>
-<li><code>attr({name, fn, ns})</code> if a given attribute (with namespace) satisfies the expressions (as string or boolean lambdas). </li>
 <li><code>match_ns({exp})</code> to match the namespace, with exp being either a string or a boolean lambda.</li>
 <li><code>match_name({exp})</code> to match the name, with exp being either a string or a boolean lambda.</li>
 <li><code>match_value({exp})</code> to match the value, with exp being either a string or a boolean lambda.</li>
 <li><code>match_all_text({exp})</code> to match the text, with exp being either a string or a boolean lambda.</li>
+<li><code>attr({name, fn, ns})</code> if a given attribute (with namespace) satisfies the expressions (as string or boolean lambdas). </li>
 </ul>
+<h3 id="about-attributes">About attributes<a class="headerlink" href="#about-attributes" title="Permanent link">#</a></h3>
+<p>Attributes are special as it is not possible to bind them as part of a query, they can only be tested. So even in a <code>is</code> clause, <code>attr</code> entries are going to behave more like <code>has</code>.<br />
+If you need to capture attributes, you will have to do it on the elements captures by the query, <code>item.attrs() | std::filter(...)</code> for example.</p>
 <h3 id="string-shorthands">String shorthands<a class="headerlink" href="#string-shorthands" title="Permanent link">#</a></h3>
 <p>Element-access operations are also provided in the form of simplified shorthands as strings:</p>
 <ul>
