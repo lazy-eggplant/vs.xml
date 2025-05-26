@@ -30,17 +30,20 @@ struct query_t;
 
 /**
  * @brief generator-like implementation for query results.
- * @details similar to std::
+ * @details similar to std::generator, but using a custom allocation scheme
  */
-struct result_t {
+template<typename T>
+class generator {
+public:
     struct promise_type;
-    using handle_type = std::coroutine_handle<promise_type>;
-    using internal_type = wrp::base_t<unknown_t>;
 
+    using handle_type = std::coroutine_handle<promise_type>;
+    using internal_type = T;
+
+    // The promise type required by the coroutine.
     struct promise_type {
-        //No destructor called, so don't use for generic types plz.
         uint8_t buffer[sizeof(internal_type)];
-        //internal_type current_value;
+        std::exception_ptr exception;
 
         // Overload operator new to allocate from our custom memory pool.
         static void* operator new(std::size_t size) noexcept{
@@ -59,13 +62,12 @@ struct result_t {
             ::operator delete(ptr);
             //return;
         }
-
-
-        static auto get_return_object_on_allocation_failure() { return result_t{nullptr}; }
-        auto get_return_object() { return result_t{handle_type::from_promise(*this)}; }
+        
+        static auto get_return_object_on_allocation_failure() { return generator{nullptr}; }
+        auto get_return_object() { return generator{handle_type::from_promise(*this)}; }
         auto initial_suspend() { return std::suspend_always{}; }
         auto final_suspend() noexcept { return std::suspend_always{}; }
-        void unhandled_exception() { std::exit(1); }
+        void unhandled_exception() { exception = std::current_exception(); /*std::exit(1);*/ }
         auto yield_value(internal_type value) {
             new(buffer) internal_type(value);
             //current_value = value;
@@ -74,56 +76,90 @@ struct result_t {
         void return_void() {}
     };
 
-    handle_type coro;
+    // Iterator class to make the generator conform to the range concept.
+    class iterator {
+    public:
+        using coro_handle = std::coroutine_handle<promise_type>;
+        using iterator_category = std::input_iterator_tag;
+        using value_type = T;
+        using difference_type = std::ptrdiff_t;
 
-    explicit result_t(handle_type h) : coro(h) {}
-    result_t(const result_t&) = delete;
-    result_t(result_t&& rhs) : coro(rhs.coro) { rhs.coro = nullptr; }
-    ~result_t() { if(coro) coro.destroy(); }
+        iterator() noexcept : handle(nullptr) {}
 
-    // Iterator support for range-based for loops.
-    struct iterator {
-        using difference_type   = std::ptrdiff_t;
-        using value_type        = internal_type;
-
-        handle_type coro;
-        bool done;
-
-        iterator(handle_type h, bool d) : coro(h), done(d) {}
-        iterator() = default;
-        iterator(const iterator&) = default;
+        explicit iterator(coro_handle h) : handle(h) {
+            // Preload the first value: resume the coroutine.
+            move_to_next();
+        }
 
         iterator& operator++() {
-            coro.resume();
-            done = coro.done();
+            move_to_next();
             return *this;
         }
-        iterator operator++(int) { iterator tmp = *this; ++(*this); return tmp; }
+        // Postfix ++
+        iterator operator++(int) {auto t = *this; move_to_next(); return t;}
 
-        const internal_type& operator*() const { return *(internal_type*)coro.promise().buffer; }
-        //////const internal_type* operator->() { return (internal_type*)coro.promise().buffer; } //invalid
+        const T& operator*() const {
+            return *(T*)handle.promise().buffer;
+        }
+        const T* operator->() const {
+            return std::addressof(operator*());
+        }
 
-        bool operator!=(const iterator& other) const { return done != other.done; }
-        //////friend bool operator== (const iterator& a, const iterator& b) { return a.done!=b.done; }; //invalid
+        bool operator==(std::default_sentinel_t) const {
+            return !handle || handle.done();
+        }
+
+    private:
+        void move_to_next() {
+            if (handle) {
+                handle.resume();
+                if (handle.promise().exception) {
+                    std::rethrow_exception(handle.promise().exception);
+                }
+            }
+        }
+
+        coro_handle handle;
     };
 
-    static_assert(std::input_iterator<iterator>);
+    using iterator_t = iterator;
 
+    generator() noexcept : handle(nullptr) {}
+    explicit generator(std::coroutine_handle<promise_type> h) : handle(h) {}
 
-    iterator begin() const{
-        coro.resume();
-        return {coro, coro.done()};
+    // Disable copying but allow moving.
+    generator(const generator&) = delete;
+    generator(generator&& other) noexcept : handle(other.handle) {
+        other.handle = nullptr;
     }
-    iterator end() const { return {coro, true}; }
-
-    bool empty() const {return !(begin()!=end());}
-
-    template<size_t N=0>
-    inline result_t is(const query_t<N>& query);
-
-    template<size_t N=0>
-    inline result_t has(const query_t<N>& query);
+    generator& operator=(const generator&) = delete;
+    generator& operator=(generator&& other) noexcept {
+        if (this != &other) {
+            if (handle)
+                handle.destroy();
+            handle = other.handle;
+            other.handle = nullptr;
+        }
+        return *this;
+    }
+    
+    ~generator() {
+        if (handle)
+            handle.destroy();
+    }
+    
+    iterator_t begin() {
+        return iterator_t{ handle };
+    }
+    std::default_sentinel_t end() {
+        return {};
+    }
+    
+private:
+    std::coroutine_handle<promise_type> handle;
 };
+
+using result_t = generator<wrp::base_t<unknown_t>>;
 
 struct token_t{
     typedef std::variant<std::monostate,std::string_view,std::function<bool(std::string_view)>>  operand_t;
@@ -295,14 +331,17 @@ inline result_t is(wrp::base_t<element_t> root, const query_t<N>& query) {
 
 //TODO: not tested
 template<size_t N=0>
-inline result_t has(const result_t& src, const query_t<N>& query) {
+inline result_t has(result_t&& src, const query_t<N>& query) {
     for(auto element : src){
         //Does this stop after the first match is found, as that is sufficient? Should we also return those matches somehow?
-        if(!is(element, query.tokens.begin(), query.tokens.end()).empty())co_yield element;
+        auto b = false;
+        for(auto c : is(element, query.tokens.begin(), query.tokens.end())){b=true;break;}
+        if(b)co_yield element;
     }
     co_return;
 }
 
+/*
 template<size_t N>
 inline result_t result_t::is(const query_t<N>& query) {
     for(auto i: *this)
@@ -313,12 +352,16 @@ template<size_t N>
 inline result_t result_t::has(const query_t<N>& query) {
     return query::has(this,query);
 }
+*/
 
 template<size_t N=0>
-inline result_t operator|(const result_t& src, const query_t<N>& query){return has(src,query);}
+inline result_t operator|(result_t&& src, const query_t<N>& query){return has(std::move(src),query);}
 
 template<size_t N=0>
-inline result_t operator&(const result_t& src, const query_t<N>& query){return is(src,query);}
+inline result_t operator&(result_t&& src, const query_t<N>& query){return is(src,query);}
 
 }
 }
+
+template<> 
+inline constexpr bool std::ranges::enable_borrowed_range<VS_XML_NS::query::result_t> = true;

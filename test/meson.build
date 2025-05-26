@@ -44,3 +44,4 @@ test('query',executable(
         vs_xml_dep,
     ],
 ))
+

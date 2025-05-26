@@ -14,11 +14,16 @@ A query is a linear sequence of query tokens, describing single filters for matc
 - `fork()` to force splitting matching by continuing here and expanding down.
 - `accept()` to accept the current node and let the iterator go deeper.
 - `type({...})` to match a subset of node type
-- `attr({name, fn, ns})` if a given attribute (with namespace) satisfies the expressions (as string or boolean lambdas). 
 - `match_ns({exp})` to match the namespace, with exp being either a string or a boolean lambda.
 - `match_name({exp})` to match the name, with exp being either a string or a boolean lambda.
 - `match_value({exp})` to match the value, with exp being either a string or a boolean lambda.
 - `match_all_text({exp})` to match the text, with exp being either a string or a boolean lambda.
+- `attr({name, fn, ns})` if a given attribute (with namespace) satisfies the expressions (as string or boolean lambdas). 
+
+### About attributes
+
+Attributes are special as it is not possible to bind them as part of a query, they can only be tested. So even in a `is` clause, `attr` entries are going to behave more like `has`.  
+If you need to capture attributes, you will have to do it on the elements captures by the query, `item.attrs() | std::filter(...)` for example.
 
 ### String shorthands
 

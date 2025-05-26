@@ -197,8 +197,8 @@ int main() {
     auto q = xml::query::query_t{}/xml::query::match_name({"hello"})/xml::query::accept()/xml::query::accept()/xml::query::next();
     constexpr auto q2 = xml::query::query_t<10>{}*xml::query::accept()*xml::query::accept();
 
-    auto query_a = xml::query::query_t{}*"hello"/"**"/"BBB"*xml::query::match_attr({"ATTR-0"})*xml::query::accept();
-    auto query_b = xml::query::query_t{}*xml::query::accept();
+    auto query_a = xml::query::query_t{}*"hello"/"**"/"BBB"*xml::query::accept();
+    auto query_b = xml::query::query_t{}*xml::query::match_attr({"ATTR-0"})*xml::query::accept();
 
     auto tree = *mk_tree<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();
 
@@ -207,7 +207,7 @@ int main() {
         std::print("{}\n",t.args.index());
     }
     */
-    for(const auto& t : xml::query::is(tree.root(),query_a) | query_b /*| std::views::filter([](auto n) {return true;})*/){
+    for(const auto& t : xml::query::is(tree.root(),query_a) | query_b | std::views::filter([](auto n) {return true;})){
         std::print("{}\n", t.name().value_or("---"));
     }
 

@@ -110,7 +110,9 @@ result_t is(wrp::base_t<unknown_t> root, std::vector<token_t>::const_iterator be
             auto pattern = std::get<token_t::attr_t<token_t::MATCH_ATTR>>(current->args);
             bool found = false;
             for(auto& attr: root.attrs()){
-                if(expr_helper(pattern.ns,attr.ns()) && expr_helper(pattern.name,attr.name()) && expr_helper(pattern.value,attr.value())){found=true;break;}
+                if(expr_helper(pattern.ns,attr.ns()) && expr_helper(pattern.name,attr.name()) && expr_helper(pattern.value,attr.value())){
+                    found=true;break;
+                }
             }
             if(!found)co_return;
         }
