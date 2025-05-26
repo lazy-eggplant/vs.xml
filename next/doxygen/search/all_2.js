@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['base_5ft_0',['base_t',['../structVS__XML__NS_1_1wrp_1_1base__t.html',1,'VS_XML_NS::wrp::base_t&lt; T &gt;'],['../structVS__XML__NS_1_1base__t.html',1,'VS_XML_NS::base_t&lt; T &gt;']]],
+  ['base_5ft_0',['base_t',['../structVS__XML__NS_1_1base__t.html',1,'VS_XML_NS::base_t&lt; T &gt;'],['../structVS__XML__NS_1_1wrp_1_1base__t.html',1,'VS_XML_NS::wrp::base_t&lt; T &gt;']]],
   ['base_5ft_3c_20attr_5ft_20_3e_1',['base_t&lt; attr_t &gt;',['../structVS__XML__NS_1_1wrp_1_1base__t_3_01attr__t_01_4.html',1,'VS_XML_NS::wrp']]],
   ['base_5ft_3c_20cdata_5ft_20_3e_2',['base_t&lt; cdata_t &gt;',['../structVS__XML__NS_1_1base__t.html',1,'VS_XML_NS']]],
   ['base_5ft_3c_20comment_5ft_20_3e_3',['base_t&lt; comment_t &gt;',['../structVS__XML__NS_1_1base__t.html',1,'VS_XML_NS']]],
@@ -12,8 +12,7 @@ var searchData=
   ['base_5ft_3c_20unknown_5ft_20_3e_9',['base_t&lt; unknown_t &gt;',['../structVS__XML__NS_1_1base__t.html',1,'VS_XML_NS']]],
   ['base_5ft_3c_20vs_5fxml_5fns_3a_3aattr_5ft_20_3e_10',['base_t&lt; VS_XML_NS::attr_t &gt;',['../structVS__XML__NS_1_1wrp_1_1base__t.html',1,'VS_XML_NS::wrp']]],
   ['base_5ft_3c_20vs_5fxml_5fns_3a_3aunknown_5ft_20_3e_11',['base_t&lt; VS_XML_NS::unknown_t &gt;',['../structVS__XML__NS_1_1wrp_1_1base__t.html',1,'VS_XML_NS::wrp']]],
-  ['batchbuilder_12',['BatchBuilder',['../structVS__XML__NS_1_1BatchBuilder.html',1,'VS_XML_NS']]],
-  ['builder_13',['Builder',['../structVS__XML__NS_1_1Builder.html',1,'VS_XML_NS']]],
-  ['builder_2ehpp_14',['builder.hpp',['../builder_8hpp.html',1,'']]],
-  ['builderbase_15',['BuilderBase',['../structVS__XML__NS_1_1details_1_1BuilderBase.html',1,'VS_XML_NS::details']]]
+  ['builder_12',['Builder',['../structVS__XML__NS_1_1Builder.html',1,'VS_XML_NS']]],
+  ['builder_2ehpp_13',['builder.hpp',['../builder_8hpp.html',1,'']]],
+  ['builderbase_14',['BuilderBase',['../structVS__XML__NS_1_1details_1_1BuilderBase.html',1,'VS_XML_NS::details']]]
 ];

@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#structure-of-queries" class="md-skip">
+        <a href="#what-are-queries" class="md-skip">
           Skip to content
         </a>
       
@@ -731,6 +731,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#what-are-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      What are queries?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#structure-of-queries" class="md-nav__link">
     <span class="md-ellipsis">
       Structure of queries
@@ -813,6 +822,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#what-are-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      What are queries?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#structure-of-queries" class="md-nav__link">
     <span class="md-ellipsis">
       Structure of queries
@@ -875,7 +893,15 @@
 
   <h1>Queries</h1>
 
+<h2 id="what-are-queries">What are queries?<a class="headerlink" href="#what-are-queries" title="Permanent link">#</a></h2>
+<p>Queries are the main mechanism to perform searches on the binary XML files. They can be used in three different clause types:</p>
+<ul>
+<li><code>is</code> iterates over all nodes in a branch which satisfies the query criterion.</li>
+<li><code>has</code> iterates over all nodes from a container (like a past query), for which the <code>is</code> clause is tested against the query criterion. Those for which a solution is defined will be picked.</li>
+<li><code>maps</code> iterates over all nodes from a container (like a past query), and matches results for each subquery onto a map-like structure. </li>
+</ul>
 <h2 id="structure-of-queries">Structure of queries<a class="headerlink" href="#structure-of-queries" title="Permanent link">#</a></h2>
+<p>A query is a linear sequence of query tokens, describing single filters for matching. Every query should end with an <code>accept()</code>.</p>
 <h3 id="basic-commands">Basic commands<a class="headerlink" href="#basic-commands" title="Permanent link">#</a></h3>
 <ul>
 <li><code>fork()</code> to force splitting matching by continuing here and expanding down.</li>
@@ -888,14 +914,16 @@
 <li><code>match_all_text({exp})</code> to match the text, with exp being either a string or a boolean lambda.</li>
 </ul>
 <h3 id="string-shorthands">String shorthands<a class="headerlink" href="#string-shorthands" title="Permanent link">#</a></h3>
+<p>Element-access operations are also provided in the form of simplified shorthands as strings:</p>
 <ul>
 <li><code>"{ns}:{name}"</code> matching namespace and name. Special values <code>?</code> for each to determine anything matches. Empty string is considered empty string not match all.</li>
-<li><code>*</code> to accept anything and move forward.</li>
+<li><code>*</code> to accept any node and move forward.</li>
 <li><code>**</code> to recursively fork.</li>
 </ul>
 <h3 id="composition">Composition<a class="headerlink" href="#composition" title="Permanent link">#</a></h3>
 <ul>
-<li><code>operator*</code> to append right to the current list, or <code>operator/</code> to append a <code>next()</code> and the right filter.</li>
+<li><code>operator*</code> to append right to the current (left) list</li>
+<li><code>operator/</code> to append a <code>next()</code> AND right to left.</li>
 </ul>
 
 
