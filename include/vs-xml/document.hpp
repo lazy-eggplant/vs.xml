@@ -31,7 +31,6 @@ struct DocBuilder;
 struct DocumentRaw : TreeRaw {
     using TreeRaw::TreeRaw;
 
-    //TODO: add real root opposed to document root.
     inline bool print(std::ostream& out, const print_cfg_t& cfg = {})const{
         for(auto& it: TreeRaw::root().children()){
             if(!print_h(out, cfg, &it))return false;

@@ -100,7 +100,8 @@ struct __attribute__ ((packed)) builder_config_t{
         EXTERN_REL,                         //Can be saved as binary, but it requires the tree to bind a symbols table later.
         OWNED,                              //No compression of symbols, but they are owned.
         COMPRESS_LABELS,                    //Only compressing symbols which are used for tag and prop labels.
-        COMPRESS_ALL                        //It was `true` in the previous flag. Compress all symbols.
+        COMPRESS_ALL,                       //It was `true` in the previous flag. Compress all symbols.
+        COMPRESS_CUSTOM,                    //TODO: Not implement yet. Reserved for later usage, where an external implementation is provided to compress symbols. This way vsxml does not have to care about shipping expensive compression algorithms.
     } symbols : 3 = EXTERN_ABS;
     bool raw_strings :1  = false;           //If true, the string views being passed will not be de-escaped. XML serialization of the derived tree will have to escape them if they have been de-escaped.
     bool allow_comments :1 = true;          //If true, comments are allowed. Else skip.
@@ -174,7 +175,7 @@ struct Builder;
 
 struct Tree;
 struct Document;
-
+struct Archive;
 
 enum struct feature_t{
     OK,

@@ -30,11 +30,26 @@
 
 namespace VS_XML_NS{
 
-//TODO: to fully rework after the symbol handling is split from the builder. This code as is will never work.
+/**
+ * @brief Base class for an archive of documents.
+ * @warning Unless you need MAXIMUM PERFORMANCE, your are better using its derived VS_XML_NS::Archive
+ * @details This one does not wrap returned XML entities nor string views, so you are left on your own to handle them, but you might gain few points in complex pipelines.
+ */
+struct ArchiveRaw{
+
+};
+
+/**
+ * @brief the archive class you should use.
+ */
+struct Archive : ArchiveRaw{
+
+};
+
 template<builder_config_t cfg = {}>
-struct BatchBuilder : DocBuilder<cfg>{
+struct ArchiveBuilder : DocBuilder<cfg>{
     protected:
-    std::vector<std::expected<Document,details::BuilderBase::error_t>> documents;
+    std::vector<std::vector<uint8_t>> documents;
 
     public:
 
@@ -57,10 +72,10 @@ struct BatchBuilder : DocBuilder<cfg>{
 
         //Apply the latest symbol table to all of them before closing.
         for(auto& doc: documents){
-            doc->symbols = this->symbols;
+            //doc->symbols = this->symbols;
         }
 
-        return std::move(documents);
+        //return std::move(documents);
     }
 
     //TODO:

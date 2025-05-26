@@ -107,7 +107,7 @@ struct base_t{
 
     inline explicit operator const T*() const  {return ptr;}
 
-    inline ptrdiff_t portable() const{return {T::type(),ptr-base->buffer.data()};}
+    inline delta_ptr_t addr() const{return (const uint8_t*)ptr-base->buffer.data();}
 
     inline std::expected<sv,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
     inline std::expected<sv,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
@@ -160,7 +160,7 @@ struct base_t<attr_t>{
 
     inline explicit operator const attr_t*() const  {return ptr;}
 
-    inline ptrdiff_t portable() const{return (const uint8_t*)ptr-base->buffer.data();}
+    inline delta_ptr_t addr() const{return (const uint8_t*)ptr-base->buffer.data();}
 
     inline std::expected<sv,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
     inline std::expected<sv,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv{*base,*tmp};}

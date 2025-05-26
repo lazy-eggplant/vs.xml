@@ -114,7 +114,6 @@ struct Node {
     const std::vector<Node>& getChildren() const { return children; }
 };
 
-//TODO: instead of a single filter, apply one from a constexpr vector for each nesting, and stop when they are done.
 
 #include <generator>
 

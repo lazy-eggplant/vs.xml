@@ -5,7 +5,7 @@
 - [x] cdata
     - [ ] optional reduction to `text`
 - [x] text
-    - [ ] optional merging of close text blocks
+    - [ ] ~~optional merging of close text blocks~~ not gonna do that, we will have a unified iterator.
 - [x] comments 
     - [x] optional stripping
 - [x] basic entities
