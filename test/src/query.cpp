@@ -1,5 +1,8 @@
+#include "vs-xml/private/impl.hpp"
+#include <algorithm>
 #include <vs-xml/query.hpp>
 #include <vs-xml/builder.hpp>
+#include <vs-xml/filters.hpp>
 
 #include <cstdlib>
 
@@ -110,7 +113,13 @@ template<xml::builder_config_t cfg>
 auto mk_tree(){
     xml::TreeBuilder<cfg> build;
     build.reserve(100000,100000);
-    build.begin("hello");
+    build.begin("root");
+        build.x("node-a",{{"attr0","val0"},{"attr1","val1"}});
+        build.x("node-b",{{"attr0","val0"},{"attr1","val1"}});
+        build.x("node-a",{{"attr0","val0"},{"attr1","val1"}},[](auto& w) static{
+            w.x("node-a",{{"attr0","val0"},{"attr1","val1"}});
+        });
+
         build.x("AAA",{{"N1","N2"},{"N1","N3"}},[&]{
             build.x("BBB");
             build.comment("ss");
@@ -150,22 +159,51 @@ auto mk_tree(){
     return build.close();
 }
 
+template<typename Iterator, typename Sentinel>
+auto my_distance(Iterator first, Sentinel last) {
+    decltype(first) temp = first;
+    std::size_t n = 0;
+    while (!(temp == last)) {
+        temp++;
+        ++n;
+    }
+    return n;
+}
+
 int main() {
     using namespace xml::query;
 
     auto tree = *mk_tree<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();
 
     {
-        for(auto t : tree.root() & query_t<0>{}*accept()){
-            std::print("{}\n", t.name().value_or("---"));
-        }
-        //assert()
+        auto value = *(tree.root() & query_t<0>{}*accept()).begin();
+        assert(value.name().value_or("")=="root");
     }
 
-    auto q = xml::query::query_t{}/xml::query::match_name({"hello"})/xml::query::accept()/xml::query::accept()/xml::query::next();
+    {
+        auto query0 = query_t<0>{}/"node-a"*match_attr({"attr0"})*accept();
+        auto container = tree.root() & query0;
+        assert(std::ranges::distance(container)==2);
+    }
+
+    {
+        auto query0 = query_t<0>{}/"*"*match_attr({"attr0","val0"})*accept();
+        auto container = tree.root() & query0;
+        assert(std::ranges::distance(container)==3);
+    }
+
+    {
+        auto query0 = query_t<0>{}/"**"*match_attr({"attr0","val0"})*accept();
+        auto container = tree.root() & query0;
+        assert(std::ranges::distance(container)==4);
+    }
+
+    //TODO: Add more tests
+
+    auto q = xml::query::query_t{}/xml::query::match_name({"root"})/xml::query::accept()/xml::query::accept()/xml::query::next();
     constexpr auto q2 = xml::query::query_t<10>{}*xml::query::accept()*xml::query::accept();
 
-    auto query_a = xml::query::query_t{}*"hello"/"**"/"BBB"*xml::query::accept();
+    auto query_a = xml::query::query_t{}*"root"/"**"/"BBB"*xml::query::accept();
     auto query_b = xml::query::query_t{}*xml::query::match_attr({"ATTR-0"})*xml::query::accept();
 
 

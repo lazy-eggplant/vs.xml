@@ -1,19 +1,21 @@
 ## What are queries?
-Queries are the main mechanism to perform searches on the binary XML files. They can be used in three different clause types:
+Queries are the main mechanism to perform search operations on the binary XML files.  
+There are three main clause types:
 
-- `is` iterates over all nodes in a branch which satisfies the query criterion.
-- `has` iterates over all nodes from a container (like a past query), for which the `is` clause is tested against the query criterion. Those for which a solution is defined will be picked.
-- `maps` iterates over all nodes from a container (like a past query), and matches results for each subquery onto a map-like structure. 
+- `is` iterates over all nodes form a container (like a prior query) as long as all criteria are met.
+- `has` iterates over all nodes from a container (like a prior query), for which the `is` clause is tested against the query criterion. Those for which at least one solution is defined are picked.
+- ~~`maps`~~ (not implemented yet) iterates over all nodes from a container (like a prior query), and matches results for node in the query tree onto a map-like structure. 
 
 ## Structure of queries
 
-A query is a linear sequence of query tokens, describing single filters for matching. Every query should end with an `accept()`.
+A query is a linear sequence of query tokens. Most are meant to match specific features of the XML nodes, while some are used to control the "machine" running the query validation process.  
+Every complete query should end with an `accept()` token.
 
 ### Basic commands
 
 - `fork()` to force splitting matching by continuing here and expanding down.
 - `accept()` to accept the current node and let the iterator go deeper.
-- `type({...})` to match a subset of node type
+- `type({...})` to match a subset of node type.
 - `match_ns({exp})` to match the namespace, with exp being either a string or a boolean lambda.
 - `match_name({exp})` to match the name, with exp being either a string or a boolean lambda.
 - `match_value({exp})` to match the value, with exp being either a string or a boolean lambda.
@@ -22,18 +24,29 @@ A query is a linear sequence of query tokens, describing single filters for matc
 
 ### About attributes
 
-Attributes are special as it is not possible to bind them as part of a query, they can only be tested. So even in a `is` clause, `attr` entries are going to behave more like `has`.  
-If you need to capture attributes, you will have to do it on the elements captures by the query, `item.attrs() | std::filter(...)` for example.
+Attributes are handled differently compared to the rest of the XML nodes, because they are not. `attr` will exclusively test the attribute and not bind or capture it. This is true even when running `is` clauses.  
+If you must capture attributes, you will have to do that by manually iterating or filtering them, like `item.attrs() | std::views::filter(...)`.
 
 ### String shorthands
 
-Element-access operations are also provided in the form of simplified shorthands as strings:
+Several of the basic commands introduce earlier are also available in a simplified form, represented by string views:
 
-- `"{ns}:{name}"` matching namespace and name. Special values `?` for each to determine anything matches. Empty string is considered empty string not match all.
+- `"{ns}:{name}"` matching namespace and name. Special values `?` for each to determine anything matches that slot. Empty string is considered empty string, and not a generic "match all".
 - `*` to accept any node and move forward.
 - `**` to recursively fork.
 
 ### Composition
 
+Tokens of a query can be composed by any of the following operators:
+
 - `operator*` to append right to the current (left) list
 - `operator/` to append a `next()` AND right to left.
+
+## Applying queries
+
+Queries are applied either by:
+
+- Using the `is`, `has` or ~~`capture`~~ functions.
+- The operators `&` and `|` which are alias for `is` and `has` respectively.
+
+Applied queries return asynchronous generators, so they can be further piped by `std::views::filter`.

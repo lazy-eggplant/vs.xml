@@ -75,12 +75,16 @@ struct sv  {
         }
     }
 
+    friend inline bool operator==(const sv& l, const char str[]){return l==std::string_view(str);}
+
     friend inline bool operator==(std::string_view r, const sv& l){return l==r;}
 
     friend inline bool operator!=(const sv& l, const sv& r){return !(l==r);}
     friend inline bool operator!=(const sv& l, std::string_view r){return !(l==r);}
     friend inline bool operator!=(std::string_view r, const sv& l){return l!=r;}
 
+    friend inline bool operator!=(const sv& l, const char r[]){return l!=std::string_view(r);}
+    friend inline bool operator!=(const char l[], const sv& r){return std::string_view(l)!=r;}
 };
 
 template <typename T>

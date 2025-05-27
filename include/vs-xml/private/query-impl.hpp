@@ -100,6 +100,7 @@ result_t is(wrp::base_t<unknown_t> root, typename query_t<N>::container_type::co
         else if (std::holds_alternative<token_t::attr_t<token_t::MATCH_ATTR>>(current->args)) {
             auto pattern = std::get<token_t::attr_t<token_t::MATCH_ATTR>>(current->args);
             bool found = false;
+            if(root.type()!=type_t::ELEMENT)co_return;
             for(auto& attr: root.attrs()){
                 if(expr_helper(pattern.ns,attr.ns()) && expr_helper(pattern.name,attr.name()) && expr_helper(pattern.value,attr.value())){
                     found=true;break;
