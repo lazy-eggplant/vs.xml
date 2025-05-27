@@ -1,6 +1,15 @@
 mio_dep = dependency('mio')
 
 executable(
+    'readme',
+    './src/readme.cpp',
+    install: false,
+    dependencies: [
+        vs_xml_dep
+    ],
+)
+
+executable(
     'tree-building',
     './src/build-tree.cpp',
     install: false,

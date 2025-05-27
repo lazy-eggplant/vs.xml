@@ -12,6 +12,7 @@ Please, read the rest of this readme to know more about its objectives and drawb
 - Linked to the previous point, pointers/iterators based on this tree structure are random access, no need to navigate the tree to reach them.
 - Good memory locality of the tree representation, making many operations on sub-trees trivial `memcpy`.
 - Configurable memory footprint, the internal representation can decrease size for most of its fields properly run on "lesser" systems or improve cache performance.
+- An efficient engine to perform queries on a document, all based on lazy evaluation.
 - XML serialization and de-serialization.
 - Naive support for namespaces[^2].
 
@@ -19,16 +20,18 @@ Non objectives:
 
 - Support for arbitrary editing operations. This library is special-purpose, so only a small number of mutable operations will be supported to keep the rest as fast as possible.
 - Extended XML entities, base64, DTD... none of that is needed for the intended target of this library.
+- In general, being fully XML compliant.
 
-## Quick statup
+## Quick startup
 
 Just use it as any meson dependency by adding a wrap file to this repository.  
 Or installing it in your system first and using it as a system dependency.  
 
-You can easily build documents:
+Full code in the [examples folder](./examples/src/readme.cpp). You can easily build documents:
 ```cpp
 #include <vs-xml/document.hpp>
 #include <vs-xml/filters.hpp>
+#include <vs-xml/query.hpp>
 
 #include <iostream>
 #include <ranges>
@@ -54,7 +57,7 @@ Serialize them:
   document.print(std::cout, {/*serialization configuration*/});
 ```
 
-And access the tree structure:
+Access the tree structure:
 ```cpp
   //Show comments only
   for(auto& it: document.root().children() | std::views::filter([](auto it){return it.type()==xml::type_t::COMMENT;})){
@@ -64,6 +67,15 @@ And access the tree structure:
   //Example of a helper filter (defined in `vs-xml/filters.hpp`)
   for(auto& it: document.root().children() | filters::name("base-node")){
     std::print("{}\n",it.value().value_or("-- Empty node --"));
+  }
+```
+
+Perform queries:
+```cpp
+  auto query_a = xml::query::query_t{}/"base-node"/xml::query::accept();
+
+  for(const auto& t : document.root() & query_a){
+      std::print("{} @ {}\n", (int)t.type(), t.addr());
   }
 
   return 0;

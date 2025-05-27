@@ -48,6 +48,11 @@
 - [x] `noexcept` mode
 - [x] `noassert` mode
 - [ ] no memory allocations
-    - [x] in tree/documents
+    - [x] for the tree/documents binary representation
+    - [ ] in the query builder[^2]
+    - [ ] in tree building[^2]
+    - [ ] in query processing[^3]
 
 [^1]: Partially, no validation for them
+[^2]: The objective is to pass custom allocators so that arena strategies can be implemented for example.
+[^3]: Queries allocates as a stack, so specific strategies and allocator can be adopted for them.
