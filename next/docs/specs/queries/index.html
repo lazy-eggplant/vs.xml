@@ -790,6 +790,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#applying-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying queries
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -890,6 +899,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#applying-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying queries
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -912,19 +930,21 @@
   <h1>Queries</h1>
 
 <h2 id="what-are-queries">What are queries?<a class="headerlink" href="#what-are-queries" title="Permanent link">#</a></h2>
-<p>Queries are the main mechanism to perform searches on the binary XML files. They can be used in three different clause types:</p>
+<p>Queries are the main mechanism to perform search operations on the binary XML files.<br />
+There are three main clause types:</p>
 <ul>
-<li><code>is</code> iterates over all nodes in a branch which satisfies the query criterion.</li>
-<li><code>has</code> iterates over all nodes from a container (like a past query), for which the <code>is</code> clause is tested against the query criterion. Those for which a solution is defined will be picked.</li>
-<li><code>maps</code> iterates over all nodes from a container (like a past query), and matches results for each subquery onto a map-like structure. </li>
+<li><code>is</code> iterates over all nodes form a container (like a prior query) as long as all criteria are met.</li>
+<li><code>has</code> iterates over all nodes from a container (like a prior query), for which the <code>is</code> clause is tested against the query criterion. Those for which at least one solution is defined are picked.</li>
+<li><del><code>maps</code></del> (not implemented yet) iterates over all nodes from a container (like a prior query), and matches results for node in the query tree onto a map-like structure. </li>
 </ul>
 <h2 id="structure-of-queries">Structure of queries<a class="headerlink" href="#structure-of-queries" title="Permanent link">#</a></h2>
-<p>A query is a linear sequence of query tokens, describing single filters for matching. Every query should end with an <code>accept()</code>.</p>
+<p>A query is a linear sequence of query tokens. Most are meant to match specific features of the XML nodes, while some are used to control the &ldquo;machine&rdquo; running the query validation process.<br />
+Every complete query should end with an <code>accept()</code> token.</p>
 <h3 id="basic-commands">Basic commands<a class="headerlink" href="#basic-commands" title="Permanent link">#</a></h3>
 <ul>
 <li><code>fork()</code> to force splitting matching by continuing here and expanding down.</li>
 <li><code>accept()</code> to accept the current node and let the iterator go deeper.</li>
-<li><code>type({...})</code> to match a subset of node type</li>
+<li><code>type({...})</code> to match a subset of node type.</li>
 <li><code>match_ns({exp})</code> to match the namespace, with exp being either a string or a boolean lambda.</li>
 <li><code>match_name({exp})</code> to match the name, with exp being either a string or a boolean lambda.</li>
 <li><code>match_value({exp})</code> to match the value, with exp being either a string or a boolean lambda.</li>
@@ -932,20 +952,28 @@
 <li><code>attr({name, fn, ns})</code> if a given attribute (with namespace) satisfies the expressions (as string or boolean lambdas). </li>
 </ul>
 <h3 id="about-attributes">About attributes<a class="headerlink" href="#about-attributes" title="Permanent link">#</a></h3>
-<p>Attributes are special as it is not possible to bind them as part of a query, they can only be tested. So even in a <code>is</code> clause, <code>attr</code> entries are going to behave more like <code>has</code>.<br />
-If you need to capture attributes, you will have to do it on the elements captures by the query, <code>item.attrs() | std::filter(...)</code> for example.</p>
+<p>Attributes are handled differently compared to the rest of the XML nodes, because they are not. <code>attr</code> will exclusively test the attribute and not bind or capture it. This is true even when running <code>is</code> clauses.<br />
+If you must capture attributes, you will have to do that by manually iterating or filtering them, like <code>item.attrs() | std::views::filter(...)</code>.</p>
 <h3 id="string-shorthands">String shorthands<a class="headerlink" href="#string-shorthands" title="Permanent link">#</a></h3>
-<p>Element-access operations are also provided in the form of simplified shorthands as strings:</p>
+<p>Several of the basic commands introduce earlier are also available in a simplified form, represented by string views:</p>
 <ul>
-<li><code>"{ns}:{name}"</code> matching namespace and name. Special values <code>?</code> for each to determine anything matches. Empty string is considered empty string not match all.</li>
+<li><code>"{ns}:{name}"</code> matching namespace and name. Special values <code>?</code> for each to determine anything matches that slot. Empty string is considered empty string, and not a generic &ldquo;match all&rdquo;.</li>
 <li><code>*</code> to accept any node and move forward.</li>
 <li><code>**</code> to recursively fork.</li>
 </ul>
 <h3 id="composition">Composition<a class="headerlink" href="#composition" title="Permanent link">#</a></h3>
+<p>Tokens of a query can be composed by any of the following operators:</p>
 <ul>
 <li><code>operator*</code> to append right to the current (left) list</li>
 <li><code>operator/</code> to append a <code>next()</code> AND right to left.</li>
 </ul>
+<h2 id="applying-queries">Applying queries<a class="headerlink" href="#applying-queries" title="Permanent link">#</a></h2>
+<p>Queries are applied either by:</p>
+<ul>
+<li>Using the <code>is</code>, <code>has</code> or <del><code>capture</code></del> functions.</li>
+<li>The operators <code>&amp;</code> and <code>|</code> which are alias for <code>is</code> and <code>has</code> respectively.</li>
+</ul>
+<p>Applied queries return asynchronous generators, so they can be further piped by <code>std::views::filter</code>.</p>
 
 
 
