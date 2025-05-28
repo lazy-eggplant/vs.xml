@@ -45,7 +45,7 @@ struct base_t{
 
     std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {return static_cast<const T*>(this)->children_range();}
     std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return static_cast<const T*>(this)->attrs_range();}
-    std::expected<void,feature_t> text_range() const {return static_cast<const T*>(this)->attrs_range();}
+    //std::expected<void,feature_t> text_range() const {return static_cast<const T*>(this)->attrs_range();}
 
     const element_t* parent() const {return static_cast<const T*>(this)->parent();}
     const unknown_t* prev() const {return static_cast<const T*>(this)->prev();}
@@ -462,8 +462,20 @@ struct attr_iterator{
 
 static_assert(std::bidirectional_iterator<attr_iterator>);
 
+//TODO: implement
+struct text_iterator{
+    using difference_type   = std::ptrdiff_t;
+    using value_type        = const uint8_t;
+    using pointer           = const uint8_t*;
+    using reference         = const uint8_t&;
 
-struct text_iterator{}; //TODO: implement
+    private:
+    unknown_t* frame;
+    size_t frame_location;
+};
+
+//static_assert(std::input_iterator<text_iterator>);
+
 
 template <typename T>
 inline auto base_t<T>::children() const{
@@ -502,8 +514,8 @@ template <typename T>
 inline auto base_t<T>::text() const{
 
     struct self{
-        text_iterator begin() const {return (*base->text_range()).first;}
-        text_iterator end() const {return (*base->text_range()).second;}
+        text_iterator begin() const {}
+        text_iterator end() const {}
 
         self(const base_t& b):base(&b){}
 

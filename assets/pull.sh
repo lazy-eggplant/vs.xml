@@ -1,4 +1,5 @@
 #!/bin/bash
+# Run from the folder the script is in.
 # Get some datasets in XML for further usage in the and benchmarks.
 # Some are pretty heavy, but it is needed for stress testing
 

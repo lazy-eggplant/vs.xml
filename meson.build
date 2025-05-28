@@ -41,12 +41,12 @@ configure_file(output : 'config.hpp',
 )
 
 cfgfile = custom_target('make-config',
-  input : './build/config.hpp',
+  input : join_paths(meson.current_build_dir(),'config.hpp'),
   output : ['config.hpp.fake-meson'],
   command : ['cp', '@INPUT0@', '../include/vs-xml/config.hpp'],
   capture : true,
   install : false,
-  build_always_stale: true
+  build_by_default: true
 )
 
 vs_xml_lib = library(
@@ -57,7 +57,8 @@ vs_xml_lib = library(
       'lib/tree.cpp',
       'lib/builder.cpp',
       'lib/inplace-builder.cpp',
-      'lib/query.cpp'
+      'lib/query.cpp',
+      'lib/query-builder.cpp',
     ],
     cpp_args: [],
     install: true,
