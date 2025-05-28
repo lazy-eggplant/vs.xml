@@ -88,6 +88,7 @@ $(function() {
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;expected&gt;</code><br />
+<code>#include &lt;stdexcept&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
@@ -99,65 +100,66 @@ Include dependency graph for impl.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="impl_8hpp__incl.png" border="0" usemap="#ainclude_2vs-xml_2private_2impl_8hpp" alt=""/></div>
 <map name="ainclude_2vs-xml_2private_2impl_8hpp" id="ainclude_2vs-xml_2private_2impl_8hpp">
-<area shape="rect" title="Implementation of the node logic." alt="" coords="731,5,899,45"/>
-<area shape="rect" title=" " alt="" coords="5,240,76,265"/>
-<area shape="poly" title=" " alt="" coords="731,45,623,67,505,96,384,132,266,172,84,238,82,233,264,167,383,127,504,91,622,62,730,39"/>
-<area shape="rect" title=" " alt="" coords="191,240,261,265"/>
-<area shape="poly" title=" " alt="" coords="767,48,270,238,268,233,765,43"/>
-<area shape="rect" title=" " alt="" coords="101,240,167,265"/>
-<area shape="poly" title=" " alt="" coords="745,48,580,96,353,173,178,238,176,233,351,168,579,91,743,43"/>
-<area shape="rect" title=" " alt="" coords="656,93,727,119"/>
-<area shape="poly" title=" " alt="" coords="787,48,723,88,720,84,784,43"/>
-<area shape="rect" title=" " alt="" coords="825,240,907,265"/>
-<area shape="poly" title=" " alt="" coords="822,45,863,226,858,227,817,46"/>
-<area shape="rect" title=" " alt="" coords="1054,240,1113,265"/>
-<area shape="poly" title=" " alt="" coords="901,39,956,59,983,73,1008,91,1035,123,1056,159,1080,226,1075,228,1051,162,1031,126,1004,95,981,78,954,63,899,44"/>
-<area shape="rect" title=" " alt="" coords="932,240,1029,265"/>
-<area shape="poly" title=" " alt="" coords="831,44,966,227,962,230,827,47"/>
-<area shape="rect" title=" " alt="" coords="933,93,993,119"/>
-<area shape="poly" title=" " alt="" coords="852,43,931,84,928,89,850,48"/>
-<area shape="rect" href="commons_8hpp_source.html" title=" " alt="" coords="602,167,765,192"/>
-<area shape="poly" title=" " alt="" coords="802,47,740,120,705,158,702,155,736,117,798,44"/>
-<area shape="rect" href="serializer_8hpp.html" title="Implementation of serialization/deserialization helpers." alt="" coords="1069,93,1228,119"/>
-<area shape="poly" title=" " alt="" coords="896,43,1087,88,1086,93,895,48"/>
-<area shape="rect" href="format_8hpp.html" title="Helpers to handle format/print portably." alt="" coords="1329,93,1499,119"/>
-<area shape="poly" title=" " alt="" coords="900,35,1315,89,1315,94,899,40"/>
-<area shape="poly" title=" " alt="" coords="602,188,375,206,235,222,90,243,90,237,234,217,375,201,601,183"/>
-<area shape="poly" title=" " alt="" coords="602,193,454,213,275,243,274,237,453,207,602,187"/>
-<area shape="poly" title=" " alt="" coords="602,190,413,209,181,243,180,237,413,204,601,184"/>
-<area shape="poly" title=" " alt="" coords="714,190,824,232,822,237,712,195"/>
-<area shape="poly" title=" " alt="" coords="765,189,891,209,1041,237,1040,243,890,214,765,194"/>
-<area shape="poly" title=" " alt="" coords="732,189,920,234,919,239,730,195"/>
-<area shape="rect" title=" " alt="" coords="539,240,619,265"/>
-<area shape="poly" title=" " alt="" coords="668,194,609,234,606,230,665,190"/>
-<area shape="rect" title=" " alt="" coords="644,240,723,265"/>
-<area shape="poly" title=" " alt="" coords="686,192,686,226,681,226,681,192"/>
-<area shape="rect" title=" " alt="" coords="747,240,801,265"/>
-<area shape="poly" title=" " alt="" coords="700,190,750,229,747,233,696,194"/>
-<area shape="rect" title=" " alt="" coords="285,240,324,265"/>
-<area shape="poly" title=" " alt="" coords="602,193,481,212,338,242,337,237,480,206,601,188"/>
-<area shape="rect" href="assert_8hpp.html" title="Utility for assertions." alt="" coords="348,240,515,265"/>
-<area shape="poly" title=" " alt="" coords="644,195,486,239,485,234,642,189"/>
-<area shape="rect" title=" " alt="" coords="339,313,404,339"/>
-<area shape="poly" title=" " alt="" coords="423,267,392,305,388,301,419,264"/>
-<area shape="rect" title=" " alt="" coords="871,313,957,339"/>
-<area shape="poly" title=" " alt="" coords="509,263,857,314,856,319,508,268"/>
-<area shape="rect" title=" " alt="" coords="428,313,552,339"/>
-<area shape="poly" title=" " alt="" coords="443,264,474,301,470,305,439,267"/>
-<area shape="poly" title=" " alt="" coords="1069,117,814,142,590,169,441,202,275,242,273,237,440,196,590,164,814,137,1069,112"/>
-<area shape="poly" title=" " alt="" coords="1127,121,901,236,899,232,1125,116"/>
-<area shape="poly" title=" " alt="" coords="1146,120,1097,229,1092,226,1141,118"/>
-<area shape="poly" title=" " alt="" coords="1137,121,1006,233,1003,229,1133,117"/>
-<area shape="poly" title=" " alt="" coords="1074,121,772,167,772,162,1074,116"/>
-<area shape="poly" title=" " alt="" coords="1153,119,1156,148,1156,187,1148,229,1139,249,1127,267,1093,295,1052,313,1011,323,971,327,971,322,1010,317,1051,307,1090,290,1123,264,1134,247,1143,228,1151,187,1151,148,1148,119"/>
-<area shape="rect" title=" " alt="" coords="1186,167,1261,192"/>
-<area shape="poly" title=" " alt="" coords="1162,117,1203,155,1199,159,1159,121"/>
-<area shape="rect" title=" " alt="" coords="1285,167,1353,192"/>
-<area shape="poly" title=" " alt="" coords="1177,116,1280,159,1278,164,1175,121"/>
-<area shape="rect" title=" " alt="" coords="1378,167,1434,192"/>
-<area shape="poly" title=" " alt="" coords="1191,116,1365,164,1364,169,1190,121"/>
-<area shape="rect" title=" " alt="" coords="1458,167,1525,192"/>
-<area shape="poly" title=" " alt="" coords="1428,117,1470,155,1467,159,1425,121"/>
+<area shape="rect" title="Implementation of the node logic." alt="" coords="379,5,547,45"/>
+<area shape="rect" title=" " alt="" coords="38,240,109,265"/>
+<area shape="poly" title=" " alt="" coords="379,30,327,36,271,47,215,67,165,95,135,125,111,161,94,196,83,227,78,225,89,194,107,158,131,122,161,91,213,62,269,42,326,30,379,25"/>
+<area shape="rect" title=" " alt="" coords="224,240,294,265"/>
+<area shape="poly" title=" " alt="" coords="448,47,281,232,277,228,444,44"/>
+<area shape="rect" title=" " alt="" coords="134,240,200,265"/>
+<area shape="poly" title=" " alt="" coords="379,38,263,60,214,76,196,85,184,95,167,126,160,161,160,196,164,226,159,227,155,197,154,161,162,124,180,92,193,81,212,71,262,55,378,33"/>
+<area shape="rect" title=" " alt="" coords="194,93,265,119"/>
+<area shape="poly" title=" " alt="" coords="408,48,278,91,276,86,406,43"/>
+<area shape="rect" title=" " alt="" coords="318,240,400,265"/>
+<area shape="poly" title=" " alt="" coords="457,47,372,229,368,226,452,44"/>
+<area shape="rect" title=" " alt="" coords="744,313,830,339"/>
+<area shape="poly" title=" " alt="" coords="379,30,321,35,258,46,193,66,134,96,77,134,30,175,15,196,9,218,12,240,28,263,41,272,63,280,132,294,225,304,332,311,555,320,730,322,730,327,555,325,332,317,225,309,132,299,62,285,38,277,24,267,7,242,3,217,10,194,26,171,74,129,131,91,191,61,256,41,321,30,379,24"/>
+<area shape="rect" title=" " alt="" coords="1016,240,1075,265"/>
+<area shape="poly" title=" " alt="" coords="548,31,699,51,785,68,869,91,954,115,988,132,1022,165,1039,195,1046,225,1041,226,1034,197,1018,168,985,136,952,120,868,96,784,73,698,56,547,36"/>
+<area shape="rect" title=" " alt="" coords="1100,240,1197,265"/>
+<area shape="poly" title=" " alt="" coords="547,25,630,30,727,42,831,61,932,91,993,120,1048,158,1095,196,1129,228,1126,232,1092,200,1045,162,990,125,930,96,830,66,727,47,629,36,547,31"/>
+<area shape="rect" title=" " alt="" coords="796,93,856,119"/>
+<area shape="poly" title=" " alt="" coords="548,40,783,91,781,96,547,46"/>
+<area shape="rect" href="commons_8hpp_source.html" title=" " alt="" coords="492,167,655,192"/>
+<area shape="poly" title=" " alt="" coords="479,44,559,154,555,157,475,47"/>
+<area shape="rect" href="serializer_8hpp.html" title="Implementation of serialization/deserialization helpers." alt="" coords="613,93,772,119"/>
+<area shape="poly" title=" " alt="" coords="519,43,647,86,645,91,517,48"/>
+<area shape="rect" href="format_8hpp.html" title="Helpers to handle format/print portably." alt="" coords="1204,93,1375,119"/>
+<area shape="poly" title=" " alt="" coords="547,31,1186,91,1190,91,1190,96,1185,96,547,37"/>
+<area shape="poly" title=" " alt="" coords="492,192,326,211,123,243,122,237,325,206,492,186"/>
+<area shape="poly" title=" " alt="" coords="521,195,308,242,307,237,520,189"/>
+<area shape="poly" title=" " alt="" coords="493,195,366,215,214,242,213,237,365,209,492,189"/>
+<area shape="poly" title=" " alt="" coords="540,195,408,238,406,233,538,189"/>
+<area shape="poly" title=" " alt="" coords="656,186,813,205,1003,237,1002,243,812,211,655,191"/>
+<area shape="poly" title=" " alt="" coords="656,186,848,206,1086,237,1086,243,847,212,655,191"/>
+<area shape="rect" title=" " alt="" coords="424,240,504,265"/>
+<area shape="poly" title=" " alt="" coords="558,194,495,235,492,230,555,190"/>
+<area shape="rect" title=" " alt="" coords="529,240,608,265"/>
+<area shape="poly" title=" " alt="" coords="575,193,573,227,568,226,570,192"/>
+<area shape="rect" title=" " alt="" coords="632,240,686,265"/>
+<area shape="poly" title=" " alt="" coords="589,190,636,229,633,233,586,194"/>
+<area shape="rect" title=" " alt="" coords="710,240,749,265"/>
+<area shape="poly" title=" " alt="" coords="600,190,699,234,697,239,598,194"/>
+<area shape="rect" href="assert_8hpp.html" title="Utility for assertions." alt="" coords="825,240,992,265"/>
+<area shape="poly" title=" " alt="" coords="628,189,841,234,840,240,627,195"/>
+<area shape="poly" title=" " alt="" coords="890,268,820,309,817,304,888,263"/>
+<area shape="rect" title=" " alt="" coords="865,313,930,339"/>
+<area shape="poly" title=" " alt="" coords="909,266,904,300,899,299,904,265"/>
+<area shape="rect" title=" " alt="" coords="954,313,1078,339"/>
+<area shape="poly" title=" " alt="" coords="927,263,989,303,986,308,924,268"/>
+<area shape="poly" title=" " alt="" coords="624,121,533,141,435,169,357,202,292,236,290,231,355,197,433,164,532,135,623,116"/>
+<area shape="poly" title=" " alt="" coords="632,121,559,140,482,169,428,201,384,233,381,229,425,196,479,164,557,135,631,116"/>
+<area shape="poly" title=" " alt="" coords="697,118,705,152,720,191,730,205,741,214,752,224,763,239,776,269,785,299,779,300,771,271,758,241,748,227,737,218,726,208,715,193,699,154,692,120"/>
+<area shape="poly" title=" " alt="" coords="765,116,901,140,959,153,991,164,1020,194,1038,226,1034,229,1016,197,988,169,957,158,900,146,764,121"/>
+<area shape="poly" title=" " alt="" coords="772,115,911,137,975,151,1021,164,1079,195,1126,229,1123,233,1077,200,1019,169,974,156,910,143,772,121"/>
+<area shape="poly" title=" " alt="" coords="675,121,606,162,604,157,672,116"/>
+<area shape="rect" title=" " alt="" coords="730,167,804,192"/>
+<area shape="poly" title=" " alt="" coords="706,117,747,155,743,159,703,121"/>
+<area shape="rect" title=" " alt="" coords="829,167,897,192"/>
+<area shape="poly" title=" " alt="" coords="721,116,824,159,822,164,719,121"/>
+<area shape="rect" title=" " alt="" coords="922,167,978,192"/>
+<area shape="poly" title=" " alt="" coords="735,116,909,164,907,169,734,121"/>
+<area shape="rect" title=" " alt="" coords="1256,167,1323,192"/>
+<area shape="poly" title=" " alt="" coords="1292,119,1292,153,1287,153,1287,119"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -165,21 +167,23 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="impl_8hpp__dep__incl.png" border="0" usemap="#ainclude_2vs-xml_2private_2impl_8hppdep" alt=""/></div>
 <map name="ainclude_2vs-xml_2private_2impl_8hppdep" id="ainclude_2vs-xml_2private_2impl_8hppdep">
-<area shape="rect" title="Implementation of the node logic." alt="" coords="90,5,258,45"/>
-<area shape="rect" href="builder_8hpp.html" title="Tree builder classes." alt="" coords="17,181,211,207"/>
-<area shape="poly" title=" " alt="" coords="159,58,142,94,127,142,119,181,114,180,122,141,137,92,154,56"/>
-<area shape="rect" href="wrp-impl_8hpp_source.html" title=" " alt="" coords="151,93,319,133"/>
-<area shape="poly" title=" " alt="" coords="198,55,224,92,220,95,193,58"/>
-<area shape="rect" href="document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,262,220,287"/>
-<area shape="poly" title=" " alt="" coords="116,220,116,262,110,262,111,220"/>
-<area shape="rect" href="archive_8hpp_source.html" title=" " alt="" coords="13,343,212,368"/>
-<area shape="poly" title=" " alt="" coords="115,301,115,342,110,342,110,301"/>
-<area shape="poly" title=" " alt="" coords="196,143,133,183,130,179,193,139"/>
-<area shape="rect" href="query_8hpp.html" title="Queries on a tree." alt="" coords="236,181,421,207"/>
-<area shape="poly" title=" " alt="" coords="270,140,316,179,313,183,267,144"/>
-<area shape="rect" href="query-impl_8hpp_source.html" title=" " alt="" coords="245,255,413,295"/>
-<area shape="poly" title=" " alt="" coords="323,220,324,254,318,255,318,220"/>
-<area shape="poly" title=" " alt="" coords="335,241,333,207,338,207,340,241"/>
+<area shape="rect" title="Implementation of the node logic." alt="" coords="129,5,297,45"/>
+<area shape="rect" href="builder_8hpp.html" title="Tree builder classes." alt="" coords="15,189,210,214"/>
+<area shape="poly" title=" " alt="" coords="197,59,122,190,117,187,193,56"/>
+<area shape="rect" href="wrp-impl_8hpp_source.html" title=" " alt="" coords="210,93,378,133"/>
+<area shape="poly" title=" " alt="" coords="242,54,278,91,274,95,238,57"/>
+<area shape="rect" href="document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,277,220,302"/>
+<area shape="poly" title=" " alt="" coords="115,228,115,276,110,276,110,228"/>
+<area shape="rect" href="archive_8hpp_source.html" title=" " alt="" coords="13,357,212,383"/>
+<area shape="poly" title=" " alt="" coords="115,316,115,357,110,357,110,316"/>
+<area shape="poly" title=" " alt="" coords="243,142,138,191,136,186,241,137"/>
+<area shape="rect" href="query-builder_8hpp_source.html" title=" " alt="" coords="235,181,393,221"/>
+<area shape="poly" title=" " alt="" coords="304,146,312,181,307,182,299,148"/>
+<area shape="rect" href="query_8hpp.html" title="Queries on a tree." alt="" coords="417,189,603,214"/>
+<area shape="poly" title=" " alt="" coords="355,136,482,186,480,191,353,141"/>
+<area shape="rect" href="query-impl_8hpp_source.html" title=" " alt="" coords="426,269,594,309"/>
+<area shape="poly" title=" " alt="" coords="504,227,505,269,500,269,499,228"/>
+<area shape="poly" title=" " alt="" coords="516,255,514,214,519,214,521,255"/>
 </map>
 </div>
 </div>

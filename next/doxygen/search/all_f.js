@@ -1,7 +1,7 @@
 var searchData=
 [
   ['serializer_2ehpp_0',['serializer.hpp',['../serializer_8hpp.html',1,'']]],
-  ['single_5ft_1',['single_t',['../structVS__XML__NS_1_1query_1_1token__t_1_1single__t.html',1,'VS_XML_NS::query::token_t']]],
+  ['single_5ft_1',['single_t',['../structVS__XML__NS_1_1query_1_1Token_1_1single__t.html',1,'VS_XML_NS::query::Token::single_t&lt; T &gt;'],['../structVS__XML__NS_1_1query_1_1token__t_1_1single__t.html',1,'VS_XML_NS::query::token_t::single_t&lt; T &gt;']]],
   ['slice_2',['slice',['../structVS__XML__NS_1_1TreeRaw.html#a9e595271257d00b84b6b37ff92876d0d',1,'VS_XML_NS::TreeRaw']]],
   ['sv_3',['sv',['../structVS__XML__NS_1_1sv.html',1,'VS_XML_NS::sv'],['../structVS__XML__NS_1_1wrp_1_1sv.html',1,'VS_XML_NS::wrp::sv']]],
   ['symbols_4',['Symbols',['../structVS__XML__NS_1_1details_1_1Symbols.html',1,'VS_XML_NS::details']]],
