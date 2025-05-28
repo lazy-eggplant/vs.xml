@@ -169,9 +169,48 @@ auto my_distance(Iterator first, Sentinel last) {
     }
     return n;
 }
+using namespace xml::query;
+
+
+struct query_expr{
+    enum type_t{IS,HAS};
+    std::vector<std::pair<type_t,query_t<0>>> queries = {};
+
+    query_expr& operator& (const query_t<0>& expr){queries.emplace_back(IS,expr);return *this;}
+    query_expr& operator| (const query_t<0>& expr){queries.emplace_back(HAS,expr);return *this;}
+
+    query_expr(){}
+
+    inline result_t operator ()(xml::wrp::base_t<xml::unknown_t> root){
+        std::vector<result_t> tmp = {};
+        tmp.emplace_back(root & query_t<0>{}*accept());
+
+        for(auto& [type,query]:queries){
+
+            for(auto b: tmp.back()){
+                auto w = b & query;
+                for(auto c: w){
+                    co_yield c;
+                }
+            }
+            tmp.pop_back();
+        }
+
+        for(auto& [type,query]:queries){
+            for(auto b: tmp.back()){
+                auto w = b & query;
+                for(auto c: w){
+                    co_yield c;
+                }
+            }
+            tmp.emplace_back(std::move(w));
+        }
+        co_return;
+    }
+
+};
 
 int main() {
-    using namespace xml::query;
 
     auto tree = *mk_tree<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();
 
@@ -200,16 +239,23 @@ int main() {
 
     //TODO: Add more tests
 
-    auto q = xml::query::query_t{}/xml::query::match_name({"root"})/xml::query::accept()/xml::query::accept()/xml::query::next();
-    constexpr auto q2 = xml::query::query_t<10>{}*xml::query::accept()*xml::query::accept();
+    //auto q = xml::query::query_t{}/xml::query::match_name({"root"})/xml::query::accept()/xml::query::accept()/xml::query::next();
+    //constexpr auto q2 = xml::query::query_t<10>{}*xml::query::accept()*xml::query::accept();
 
     auto query_a = xml::query::query_t{}*"root"/"**"/"BBB"*xml::query::accept();
     auto query_b = xml::query::query_t{}*xml::query::match_attr({"ATTR-0"})*xml::query::accept();
+    //auto re = tree.root() & query_a & query_b;
 
+    auto qua = query_expr{} & query_a & query_b;
 
-    for(const auto& t : tree.root() & query_a | query_b | std::views::filter([](auto n) {return true;})){
-        std::print("{}\n", t.name().value_or("---"));
+    for(auto t : qua(tree.root())){
+        //std::print("{}\n", t.name().value_or("---"));
     }
 
+    /*
+    for(const auto& t : tree.root() & query_a | query_b | std::views::filter([](auto n) {return true;})){
+        //std::print("{}\n", t.name().value_or("---"));
+    }
+    */
     return 0;
 }

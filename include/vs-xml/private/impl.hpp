@@ -17,6 +17,7 @@
 #include <iterator>
 #include <expected>
 
+#include <stdexcept>
 #include <string>
 #include <string_view>
 
@@ -514,8 +515,8 @@ template <typename T>
 inline auto base_t<T>::text() const{
 
     struct self{
-        text_iterator begin() const {}
-        text_iterator end() const {}
+        text_iterator begin() const {std::runtime_error("Not implemented");}
+        text_iterator end() const {std::runtime_error("Not implemented");}
 
         self(const base_t& b):base(&b){}
 

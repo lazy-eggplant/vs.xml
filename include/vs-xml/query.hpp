@@ -320,6 +320,7 @@ struct query_t<0>{
 
 };
 
+
 template<size_t N>
 result_t is(wrp::base_t<unknown_t> root, typename query_t<N>::container_type::const_iterator begin, typename query_t<N>::container_type::const_iterator end);
 
@@ -331,8 +332,11 @@ inline result_t is(wrp::base_t<unknown_t> root, const query_t<N>& query) {
 template<size_t N=0>
 inline result_t is(result_t&& src , const query_t<N>& query) {
     for(auto element : src){
-        return is(element, query.tokens.begin(), query.tokens.end());
+        for(auto i: is<N>(element, query.tokens.begin(), query.tokens.end())){
+            co_yield i;
+        }
     }
+    co_return;
 }
 
 template<size_t N=0>
@@ -367,6 +371,7 @@ inline result_t operator|(wrp::base_t<unknown_t> src, const query_t<N>& query){r
 
 template<size_t N=0>
 inline result_t operator|(result_t&& src, const query_t<N>& query){return has(std::move(src),query);}
+
 
 }
 }
