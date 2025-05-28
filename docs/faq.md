@@ -31,3 +31,16 @@ Simple answer, laziness. A more serious reply would be that serialization and de
 The bulk of whatever computation we must perform is going to act on the binary representation, not the original text.  
 There is no trivial way to make XML parsing or serialization "parallel" without making the code involved much more complex.  
 At which point it is generally better to waste threads for other tasks if possible.
+
+> How to annotate a tree?
+
+References to XML nodes and attributes have a method `addr` to return their portable address. Keeping a hash map or a similar data structure does the trick.  
+You should be using a data structure which can be easily serialized/de-serialized, or even better which can be memory-mapped if feasible.  
+The standard C++ library is not your best option, you might want to check for alternative like [gtl](https://github.com/greg7mdp/gtl).
+
+> How to cache queries?
+
+At the moment this is not directly supported by the library and will likely never be. However, we plan to introduce features to make it easier on downstream code.  
+Right now, queries are not trivially hash-able. At some point we will add a query builder to structure query trees into linear buffers, more or less like we do with XML.  
+The evolving plans for this feature are reporte in a [specifications document](./docs/specs/query-builder.md).  
+Until then, a similar solution has to be implemented fully downstream.
