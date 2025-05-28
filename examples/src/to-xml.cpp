@@ -10,7 +10,7 @@
 #include <vs-xml/parser.hpp>
 #include <vs-xml/serializer.hpp>
 #include <vs-xml/document.hpp>
-
+/*
 #include <mio/mmap.hpp>
 
 int decode(std::filesystem::path input, std::filesystem::path output){
@@ -41,3 +41,6 @@ int main(int argc, const char* argv[]) {
     if(argc<3){std::cerr<<"Wrong usage, pass input file and output file as args.";return 1;}
     return decode(argv[1],argv[2]);
 }
+    */
+
+    int main(){}

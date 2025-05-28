@@ -40,14 +40,16 @@ configure_file(output : 'config.hpp',
   configuration : conf,
 )
 
+
 cfgfile = custom_target('make-config',
-  input : join_paths(meson.current_build_dir(),'config.hpp'),
+  input : join_paths(meson.current_build_dir(), 'config.hpp'),
   output : ['config.hpp.fake-meson'],
-  command : ['cp', '@INPUT0@', '../include/vs-xml/config.hpp'],
+  command : ['sh', '-c', 'rm -f ../include/vs-xml/config.hpp && ln -s @INPUT0@ ../include/vs-xml/config.hpp'],
   capture : true,
   install : false,
   build_by_default: true
 )
+
 
 vs_xml_lib = library(
     'vs-xml',
@@ -72,7 +74,7 @@ vs_xml_dep = declare_dependency(
   include_directories: ['include'],
 )
 
-install_subdir('include/vs-xml', install_dir : 'include', strip_directory: false )
+install_subdir('include/vs-xml', install_dir : 'include', strip_directory: false, follow_symlinks: true )
 
 if get_option('tests')
   subdir(['./test/'])
