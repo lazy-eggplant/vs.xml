@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['text_5fiterator_0',['text_iterator',['../structVS__XML__NS_1_1text__iterator.html',1,'VS_XML_NS']]],
+  ['text_5fiterator_0',['text_iterator',['../structVS__XML__NS_1_1wrp_1_1text__iterator.html',1,'VS_XML_NS::wrp']]],
   ['text_5ft_1',['text_t',['../structVS__XML__NS_1_1text__t.html',1,'VS_XML_NS']]],
   ['token_2',['Token',['../structVS__XML__NS_1_1query_1_1Token.html',1,'VS_XML_NS::query']]],
   ['token_5ft_3',['token_t',['../structVS__XML__NS_1_1query_1_1token__t.html',1,'VS_XML_NS::query']]],
