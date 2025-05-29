@@ -372,7 +372,6 @@ inline result_t operator|(wrp::base_t<unknown_t> src, const query_t<N>& query){r
 template<size_t N=0>
 inline result_t operator|(result_t&& src, const query_t<N>& query){return has(std::move(src),query);}
 
-
 }
 }
 

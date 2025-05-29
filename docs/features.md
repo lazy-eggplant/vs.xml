@@ -3,9 +3,8 @@
 ### XML parsing
 - [x] namespaces [^1]
 - [x] cdata
-    - [ ] ~~optional reduction to `text`~~ not gonna do that, we will have a unified iterator.
 - [x] text
-    - [ ] ~~optional merging of close text blocks~~ not gonna do that, we will have a unified iterator.
+    - [x] Unified iterator for text of an element, scanning all text/CDATA children.
 - [x] comments 
     - [x] optional stripping
 - [x] basic entities
