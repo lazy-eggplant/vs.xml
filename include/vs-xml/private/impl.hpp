@@ -10,6 +10,7 @@
  * 
  */
 
+#include "vs-xml/filters.hpp"
 #include <cstddef>
 #include <cassert>
 #include <cstdint>
@@ -26,6 +27,7 @@
 #include <vs-xml/commons.hpp>
 #include <vs-xml/serializer.hpp>
 #include <vs-xml/fwd/format.hpp>
+#include <vs-xml/tree.hpp>
 
 namespace VS_XML_NS{
 
@@ -65,8 +67,6 @@ struct base_t{
 
     auto children(auto filter) const;
     auto attrs(auto filter) const;
-
-    auto text() const;
 
     template<builder_config_t>
     friend struct TreeBuilder;
@@ -463,20 +463,6 @@ struct attr_iterator{
 
 static_assert(std::bidirectional_iterator<attr_iterator>);
 
-//TODO: implement
-struct text_iterator{
-    using difference_type   = std::ptrdiff_t;
-    using value_type        = const uint8_t;
-    using pointer           = const uint8_t*;
-    using reference         = const uint8_t&;
-
-    private:
-    unknown_t* frame;
-    size_t frame_location;
-};
-
-//static_assert(std::input_iterator<text_iterator>);
-
 
 template <typename T>
 inline auto base_t<T>::children() const{
@@ -510,22 +496,6 @@ inline auto base_t<T>::attrs() const{
     return self(*this);
 }
 
-//TODO: implement
-template <typename T>
-inline auto base_t<T>::text() const{
-
-    struct self{
-        text_iterator begin() const {throw std::runtime_error("Not implemented");}
-        text_iterator end() const {throw std::runtime_error("Not implemented");}
-
-        self(const base_t& b):base(&b){}
-
-        private:
-            const base_t* base;
-    };
-
-    return self(*this);
-}
 
 template <typename T>
 inline auto base_t<T>::attrs(auto filter) const{ return attrs() | filter ; }

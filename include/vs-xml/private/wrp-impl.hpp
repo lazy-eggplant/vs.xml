@@ -136,6 +136,7 @@ struct base_t{
     inline auto attrs(auto filter) const;
     inline auto children() const;
     inline auto children(auto filter) const;
+    auto text() const;
 
     inline auto type() const {return ptr->type();}
 
@@ -238,6 +239,115 @@ struct attr_iterator{
 
 static_assert(std::bidirectional_iterator<attr_iterator>);
 static_assert(std::bidirectional_iterator<node_iterator>);
+
+
+
+//TODO: implement text iterator
+
+struct text_iterator{
+    using difference_type   = std::ptrdiff_t;
+    using value_type        = const char;
+    using pointer           = const char*;
+    using reference         = const char&;
+
+    inline text_iterator() = default;
+    inline text_iterator(const text_iterator&) = default;
+
+    inline reference operator*() const { return *(tmp_sv.data()+frame_location); }
+    inline pointer operator->() { return (tmp_sv.data()+frame_location); }
+
+    text_iterator& operator++() {
+        auto guard = node->children_range()->second;
+        if(frame!=guard && frame_location+1>=tmp_sv.size()){
+            next_ok();
+
+            return *this;
+        }
+        else if(frame!=guard)frame_location++;
+        return *this; 
+    }
+
+    inline text_iterator operator++(int) { text_iterator tmp = *this; ++(*this); return tmp; }
+
+    inline friend bool operator== (const text_iterator& a, const text_iterator& b) { return a.ctx == b.ctx && a.node == b.node && a.frame == b.frame && a.frame_location == b.frame_location; };
+    inline friend bool operator!= (const text_iterator& a, const text_iterator& b) { return a.ctx != b.ctx || a.node != b.node || a.frame != b.frame || a.frame_location != b.frame_location; };  
+
+    inline static text_iterator make_begin(const TreeRaw& ctx, const unknown_t& node){
+        text_iterator tmp(ctx,node);
+        tmp.find_first_ok();
+        return tmp;
+    }
+    inline static text_iterator make_end(const TreeRaw& ctx, const unknown_t& node){
+        text_iterator tmp(ctx,node); 
+        tmp.frame=tmp.node->children_range().value_or(std::pair{nullptr,nullptr}).second;
+        return tmp;
+    }
+
+    private:
+
+    const TreeRaw*      ctx = nullptr;
+    const unknown_t*    node = nullptr;
+    const unknown_t*    frame = nullptr;
+    std::string_view    tmp_sv = "";
+    size_t              frame_location = 0;
+
+    inline text_iterator(const TreeRaw& ctx, const unknown_t& node):ctx(&ctx),node(&node){}
+
+    void next_ok(){
+        assert(ctx!=nullptr);
+        assert(node!=nullptr);
+
+        auto guard = node->children_range()->second;
+
+        const unknown_t* current = frame->next();
+            
+        while(current!=guard){
+            if(current->type()==type_t::TEXT || current->type()==type_t::CDATA){break;}
+            else current = current->next();
+        };
+
+        frame_location=0;
+        frame=current;
+        if(frame!=guard)tmp_sv=ctx->rsv(frame->value().value_or(VS_XML_NS::sv{0,0}));
+    }
+
+    void find_first_ok(){
+        assert(ctx!=nullptr);
+        assert(node!=nullptr);
+
+        auto range =node->children_range().value_or(std::pair{nullptr,nullptr});
+        frame=range.first;
+        auto guard=range.second;
+
+        const unknown_t* current = frame;
+
+        while(current!=guard){
+            if(current->type()==type_t::TEXT || current->type()==type_t::CDATA){frame_location=0;break;}
+            else current = current->next();
+        };
+
+        frame=current;
+        if(frame!=guard)tmp_sv=ctx->rsv(frame->value().value_or(VS_XML_NS::sv{0,0}));
+    }
+};
+
+static_assert(std::forward_iterator<text_iterator>);
+
+template <typename T>
+inline auto base_t<T>::text() const{
+
+    struct self{
+        text_iterator begin() const {return text_iterator::make_begin(*base.base,*base.ptr);}
+        text_iterator end() const {return text_iterator::make_end(*base.base,*base.ptr);}
+
+        self(const base_t& b):base(b){}
+
+        private:
+            base_t base;
+    };
+
+    return self(*this);
+}
 
 template <typename T>
 inline auto base_t<T>::attrs() const{

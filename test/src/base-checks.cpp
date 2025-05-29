@@ -13,6 +13,7 @@ auto mk_tree(){
     xml::TreeBuilder<cfg> build;
     build.reserve(100000,100000);
     build.begin("hello");
+        build.text("hello world");
         build.x("AAA",{{"N1","N2"},{"N1","N3"}},[&]{
             build.x("BBB");
             build.comment("ss");
@@ -46,6 +47,7 @@ auto mk_tree(){
         build.begin("hello4","s");
         
         build.end();
+        build.text("ciao mondo");
     build.end();
 
     return build.close();
@@ -93,6 +95,9 @@ auto test(){
     }
 
     std::print("\n");
+
+    for(auto& ch: root.text()){std::print("{}",ch);}
+    std::print("\n------\n");
 }
 
 
