@@ -1,0 +1,11 @@
+<map id="VS_XML_NS::TreeBuilder&lt; cfg &gt;" name="VS_XML_NS::TreeBuilder&lt; cfg &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="106,93,286,133"/>
+<area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1DocBuilder.html" title=" " alt="" coords="5,181,184,221"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,144,119,183,115,179,161,140"/>
+<area shape="rect" id="Node000004" href="$structVS__XML__NS_1_1DocBuilder.html" title="Specialized builder to construct a document." alt="" coords="208,181,387,221"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="231,140,277,179,273,183,227,144"/>
+<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="121,5,271,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,59,199,93,193,93,193,59"/>
+<area shape="rect" id="Node000005" href="$structVS__XML__NS_1_1ArchiveBuilder.html" title=" " alt="" coords="196,269,399,309"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="300,235,300,269,295,269,295,235"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="include/vs&#45;xml/private/impl.hpp" name="include/vs&#45;xml/private/impl.hpp">
+<area shape="rect" id="Node000001" title="Implementation of the node logic." alt="" coords="129,5,297,45"/>
+<area shape="rect" id="Node000002" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="15,189,210,214"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,59,122,190,117,187,193,56"/>
+<area shape="rect" id="Node000005" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="210,93,378,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="242,54,278,91,274,95,238,57"/>
+<area shape="rect" id="Node000003" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,277,220,302"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,228,115,276,110,276,110,228"/>
+<area shape="rect" id="Node000004" href="$archive_8hpp_source.html" title=" " alt="" coords="13,357,212,383"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,316,115,357,110,357,110,316"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="243,142,138,191,136,186,241,137"/>
+<area shape="rect" id="Node000006" href="$query-builder_8hpp_source.html" title=" " alt="" coords="235,181,393,221"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="304,146,312,181,307,182,299,148"/>
+<area shape="rect" id="Node000007" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="417,189,603,214"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="355,136,482,186,480,191,353,141"/>
+<area shape="rect" id="Node000008" href="$query-impl_8hpp_source.html" title=" " alt="" coords="426,269,594,309"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="504,227,505,269,500,269,499,228"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="516,255,514,214,519,214,521,255"/>
+</map>
