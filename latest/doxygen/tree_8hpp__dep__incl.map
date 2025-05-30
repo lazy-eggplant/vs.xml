@@ -1,14 +1,23 @@
 <map id="include/vs&#45;xml/tree.hpp" name="include/vs&#45;xml/tree.hpp">
-<area shape="rect" id="Node000001" title="Internal tree structure." alt="" coords="25,5,201,31"/>
-<area shape="rect" id="Node000002" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,240,220,265"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,44,87,74,75,111,69,151,74,191,87,217,103,238,99,241,83,220,69,193,64,151,70,110,82,72,97,42"/>
-<area shape="rect" id="Node000004" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="97,79,265,119"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="134,39,166,77,162,80,130,43"/>
-<area shape="rect" id="Node000003" href="$archive_8hpp_source.html" title=" " alt="" coords="13,313,212,339"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,279,115,313,110,313,110,279"/>
-<area shape="rect" id="Node000005" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="83,167,278,192"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="183,132,183,166,178,166,178,132"/>
-<area shape="rect" id="Node000006" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="303,167,488,192"/>
-<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="246,121,365,164,363,169,244,126"/>
-<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="162,204,126,242,122,238,158,200"/>
+<area shape="rect" id="Node000001" title="Internal tree structure." alt="" coords="91,5,267,31"/>
+<area shape="rect" id="Node000002" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,350,220,375"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,39,108,56,86,80,59,135,53,159,50,183,56,233,73,294,87,324,104,348,100,351,82,327,67,296,51,234,45,183,47,158,54,133,81,77,104,52,132,34"/>
+<area shape="rect" id="Node000004" href="$impl_8hpp.html" title="Implementation of the node logic." alt="" coords="95,79,263,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="182,44,182,79,177,79,177,44"/>
+<area shape="rect" id="Node000006" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="217,167,385,207"/>
+<area shape="poly" id="edge12_Node000001_Node000006" title=" " alt="" coords="223,34,252,52,277,77,290,99,297,123,303,166,298,167,292,125,285,101,273,80,249,56,220,39"/>
+<area shape="rect" id="Node000003" href="$archive_8hpp_source.html" title=" " alt="" coords="13,431,212,456"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,389,115,430,110,430,110,389"/>
+<area shape="rect" id="Node000005" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="82,262,277,287"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="182,133,182,262,177,262,177,133"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="219,124,275,164,272,169,216,129"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="164,300,124,351,120,348,160,297"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="264,217,197,264,194,260,261,213"/>
+<area shape="rect" id="Node000007" href="$query-builder_8hpp_source.html" title=" " alt="" coords="301,255,460,295"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="330,215,365,253,361,256,326,219"/>
+<area shape="rect" id="Node000008" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="484,262,669,287"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="375,208,541,259,539,265,373,213"/>
+<area shape="rect" id="Node000009" href="$query-impl_8hpp_source.html" title=" " alt="" coords="493,343,661,383"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="571,301,572,342,566,342,566,301"/>
+<area shape="poly" id="edge11_Node000009_Node000008" title=" " alt="" coords="583,329,580,288,586,287,588,328"/>
 </map>

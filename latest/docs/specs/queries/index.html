@@ -12,6 +12,8 @@
         <link rel="prev" href="../formats/">
       
       
+        <link rel="next" href="../query-builder/">
+      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
@@ -60,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#structure-of-queries" class="md-skip">
+        <a href="#what-are-queries" class="md-skip">
           Skip to content
         </a>
       
@@ -551,6 +553,74 @@
       
   
   
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Releases
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/v0.2.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -564,10 +634,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   
@@ -580,8 +650,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Specs
           </label>
@@ -663,6 +733,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#what-are-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      What are queries?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#structure-of-queries" class="md-nav__link">
     <span class="md-ellipsis">
       Structure of queries
@@ -676,6 +755,15 @@
   <a href="#basic-commands" class="md-nav__link">
     <span class="md-ellipsis">
       Basic commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#about-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      About attributes
     </span>
   </a>
   
@@ -704,10 +792,42 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#applying-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying queries
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../query-builder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Query builder
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -745,6 +865,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#what-are-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      What are queries?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#structure-of-queries" class="md-nav__link">
     <span class="md-ellipsis">
       Structure of queries
@@ -758,6 +887,15 @@
   <a href="#basic-commands" class="md-nav__link">
     <span class="md-ellipsis">
       Basic commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#about-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      About attributes
     </span>
   </a>
   
@@ -786,6 +924,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#applying-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying queries
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -807,32 +954,51 @@
 
   <h1>Queries</h1>
 
+<h2 id="what-are-queries">What are queries?<a class="headerlink" href="#what-are-queries" title="Permanent link">#</a></h2>
+<p>Queries are the main mechanism to perform search operations on the binary XML files.<br />
+There are three main clause types:</p>
+<ul>
+<li><code>is</code> iterates over all nodes form a container (like a prior query) as long as all criteria are met.</li>
+<li><code>has</code> iterates over all nodes from a container (like a prior query), for which the <code>is</code> clause is tested against the query criterion. Those for which at least one solution is defined are picked.</li>
+<li><del><code>maps</code></del> (not implemented yet) iterates over all nodes from a container (like a prior query), and matches results for node in the query tree onto a map-like structure. </li>
+</ul>
 <h2 id="structure-of-queries">Structure of queries<a class="headerlink" href="#structure-of-queries" title="Permanent link">#</a></h2>
+<p>A query is a linear sequence of query tokens. Most are meant to match specific features of the XML nodes, while some are used to control the &ldquo;machine&rdquo; running the query validation process.<br />
+Every complete query should end with an <code>accept()</code> token.</p>
 <h3 id="basic-commands">Basic commands<a class="headerlink" href="#basic-commands" title="Permanent link">#</a></h3>
 <ul>
-<li><code>next()</code> to force moving to the next layer in the filters.</li>
+<li><code>fork()</code> to force splitting matching by continuing here and expanding down.</li>
 <li><code>accept()</code> to accept the current node and let the iterator go deeper.</li>
-<li><code>type&lt;T&gt;()</code> to match a node type</li>
-<li><code>attr(name, fn)</code> if a given attribute satisfies <code>fn</code>, with specialized version where <code>fn</code> is just a string. </li>
-<li><code>attr(ns, name, fn)</code> if a given attribute (with namespace) satisfies <code>fn</code>, with specialized version where <code>fn</code> is just a string. </li>
-<li><code>text(fn)</code> if the text of the current node satisfies <code>fn</code>, with specialized version where <code>fn</code> is just a string. </li>
-<li><code>match_ns(fn)</code> with specialized version where <code>fn</code> is just a string.</li>
-<li><code>match_name(fn)</code> with specialized version where <code>fn</code> is just a string.</li>
+<li><code>type({...})</code> to match a subset of node type.</li>
+<li><code>match_ns({exp})</code> to match the namespace, with exp being either a string or a boolean lambda.</li>
+<li><code>match_name({exp})</code> to match the name, with exp being either a string or a boolean lambda.</li>
+<li><code>match_value({exp})</code> to match the value, with exp being either a string or a boolean lambda.</li>
+<li><code>match_all_text({exp})</code> to match the text, with exp being either a string or a boolean lambda.</li>
+<li><code>attr({name, fn, ns})</code> if a given attribute (with namespace) satisfies the expressions (as string or boolean lambdas). </li>
 </ul>
+<h3 id="about-attributes">About attributes<a class="headerlink" href="#about-attributes" title="Permanent link">#</a></h3>
+<p>Attributes are handled differently compared to the rest of the XML nodes, because they are not. <code>attr</code> will exclusively test the attribute and not bind or capture it. This is true even when running <code>is</code> clauses.<br />
+If you must capture attributes, you will have to do that by manually iterating or filtering them, like <code>item.attrs() | std::views::filter(...)</code>.</p>
 <h3 id="string-shorthands">String shorthands<a class="headerlink" href="#string-shorthands" title="Permanent link">#</a></h3>
+<p>Several of the basic commands introduce earlier are also available in a simplified form, represented by string views:</p>
 <ul>
-<li><code>"{ns}:{name}"</code> equivalent to <code>type&lt;element&gt;() + match_ns(ns) + match_name(name) + accept() + next()</code></li>
-<li><code>"{ns}:*"</code> equivalent to <code>type&lt;element&gt;() + match_ns(ns) + accept() + next()</code></li>
-<li><code>"{name}"</code> equivalent to <code>type&lt;element&gt;() + match_ns("") + match_name(name) + accept() + next()</code></li>
-<li><code>*</code> equivalent to <code>accept() + next()</code></li>
-<li><code>?</code> equivalent to <code>accept() + next()</code> OR <code>next()</code>.</li>
-<li><code>**</code> equivalent to <code>accept() + next()</code> OR <code>accept()</code></li>
-<li><code>*?</code> equivalent to <code>accept() + next()</code> OR <code>accept()</code> OR <code>next()</code>.</li>
+<li><code>"{ns}:{name}"</code> matching namespace and name. Special values <code>?</code> for each to determine anything matches that slot. Empty string is considered empty string, and not a generic &ldquo;match all&rdquo;.</li>
+<li><code>*</code> to accept any node and move forward.</li>
+<li><code>**</code> to recursively fork.</li>
 </ul>
 <h3 id="composition">Composition<a class="headerlink" href="#composition" title="Permanent link">#</a></h3>
+<p>Tokens of a query can be composed by any of the following operators:</p>
 <ul>
-<li><code>operator+</code> or <code>operator/</code> to append the right filter to the current list.</li>
+<li><code>operator*</code> to append right to the current (left) list</li>
+<li><code>operator/</code> to append a <code>next()</code> AND right to left.</li>
 </ul>
+<h2 id="applying-queries">Applying queries<a class="headerlink" href="#applying-queries" title="Permanent link">#</a></h2>
+<p>Queries are applied either by:</p>
+<ul>
+<li>Using the <code>is</code>, <code>has</code> or <del><code>capture</code></del> functions.</li>
+<li>The operators <code>&amp;</code> and <code>|</code> which are alias for <code>is</code> and <code>has</code> respectively.</li>
+</ul>
+<p>Applied queries return asynchronous generators, so they can be further piped by <code>std::views::filter</code>.</p>
 
 
 

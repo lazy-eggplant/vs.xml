@@ -76,6 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">query.hpp File Reference</div></div>
 </div><!--header-->
@@ -83,106 +84,139 @@ $(function() {
 
 <p>Queries on a tree.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;generator&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;generator&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;variant&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;vs-xml/commons.hpp&gt;</code><br />
 <code>#include &lt;vs-xml/private/wrp-impl.hpp&gt;</code><br />
+<code>#include &lt;vs-xml/private/query-impl.hpp&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for query.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="query_8hpp__incl.png" border="0" usemap="#ainclude_2vs-xml_2query_8hpp" alt=""/></div>
 <map name="ainclude_2vs-xml_2query_8hpp" id="ainclude_2vs-xml_2query_8hpp">
-<area shape="rect" title="Queries on a tree." alt="" coords="566,5,751,31"/>
-<area shape="rect" title=" " alt="" coords="5,86,91,111"/>
-<area shape="poly" title=" " alt="" coords="566,27,356,44,232,60,110,81,95,85,94,80,109,76,232,55,355,39,565,21"/>
-<area shape="rect" title=" " alt="" coords="369,313,455,339"/>
-<area shape="poly" title=" " alt="" coords="618,33,546,59,459,101,415,129,373,161,337,199,308,241,304,251,305,261,316,278,337,294,363,306,360,311,334,298,312,282,300,262,299,251,303,239,333,195,370,157,412,124,456,96,544,54,616,28"/>
-<area shape="rect" title=" " alt="" coords="181,387,278,412"/>
-<area shape="poly" title=" " alt="" coords="566,31,433,48,361,62,290,78,227,98,176,121,143,148,134,163,131,178,131,254,138,291,156,324,180,353,205,376,201,380,177,357,152,327,133,293,125,254,125,178,129,161,139,145,174,117,225,93,289,73,360,56,433,43,565,25"/>
-<area shape="rect" title=" " alt="" coords="1862,313,1930,339"/>
-<area shape="poly" title=" " alt="" coords="752,28,890,48,1045,76,1213,114,1343,149,1637,237,1851,306,1849,311,1635,243,1341,154,1212,119,1043,81,890,53,751,33"/>
-<area shape="rect" title=" " alt="" coords="963,313,1026,339"/>
-<area shape="poly" title=" " alt="" coords="741,28,837,50,891,68,946,90,1000,117,1050,151,1095,191,1132,239,1137,253,1132,267,1117,280,1094,292,1040,313,1038,309,1092,287,1114,275,1127,264,1131,253,1127,241,1091,195,1047,155,997,122,944,95,889,73,835,55,740,33"/>
-<area shape="rect" href="commons_8hpp_source.html" title=" " alt="" coords="1243,313,1405,339"/>
-<area shape="poly" title=" " alt="" coords="752,26,860,44,919,58,976,76,1062,109,1127,140,1188,180,1259,238,1289,269,1312,300,1307,303,1285,273,1256,242,1184,184,1125,145,1060,114,974,81,917,63,859,49,751,31"/>
-<area shape="rect" href="wrp-impl_8hpp_source.html" title=" " alt="" coords="586,79,731,119"/>
-<area shape="poly" title=" " alt="" coords="661,31,661,65,656,65,656,31"/>
-<area shape="poly" title=" " alt="" coords="1242,340,1224,341,963,356,759,360,554,366,434,375,292,389,292,384,433,369,554,361,759,354,963,351,1224,336,1242,334"/>
-<area shape="rect" title=" " alt="" coords="302,387,373,412"/>
-<area shape="poly" title=" " alt="" coords="1242,340,1224,341,736,378,387,398,386,393,736,373,1224,336,1242,334"/>
-<area shape="rect" title=" " alt="" coords="924,387,993,412"/>
-<area shape="poly" title=" " alt="" coords="1266,341,1007,391,1006,386,1265,336"/>
-<area shape="rect" title=" " alt="" coords="740,387,807,412"/>
-<area shape="poly" title=" " alt="" coords="1242,340,821,395,820,389,1242,335"/>
-<area shape="rect" title=" " alt="" coords="1380,387,1460,412"/>
-<area shape="poly" title=" " alt="" coords="1341,337,1395,376,1392,380,1338,341"/>
-<area shape="rect" title=" " alt="" coords="1485,387,1563,412"/>
-<area shape="poly" title=" " alt="" coords="1357,336,1479,379,1477,384,1355,341"/>
-<area shape="rect" title=" " alt="" coords="1081,387,1164,412"/>
-<area shape="poly" title=" " alt="" coords="1293,341,1169,385,1167,379,1291,336"/>
-<area shape="rect" title=" " alt="" coords="1651,387,1709,412"/>
-<area shape="poly" title=" " alt="" coords="1394,336,1504,356,1637,384,1636,389,1503,361,1393,341"/>
-<area shape="rect" title=" " alt="" coords="1587,387,1626,412"/>
-<area shape="poly" title=" " alt="" coords="1382,336,1469,356,1575,384,1573,389,1468,361,1380,341"/>
-<area shape="rect" href="assert_8hpp.html" title="Utility for assertions." alt="" coords="1189,387,1355,412"/>
-<area shape="poly" title=" " alt="" coords="1318,341,1291,377,1286,374,1313,337"/>
-<area shape="rect" title=" " alt="" coords="1179,460,1245,485"/>
-<area shape="poly" title=" " alt="" coords="1264,414,1233,451,1228,448,1260,411"/>
-<area shape="rect" title=" " alt="" coords="1611,460,1698,485"/>
-<area shape="poly" title=" " alt="" coords="1334,409,1598,458,1597,463,1333,415"/>
-<area shape="rect" title=" " alt="" coords="1269,460,1393,485"/>
-<area shape="poly" title=" " alt="" coords="1284,411,1315,448,1311,451,1280,414"/>
-<area shape="poly" title=" " alt="" coords="586,104,530,109,468,121,405,140,347,169,321,189,300,214,267,271,247,328,236,374,231,373,242,326,263,268,296,211,318,185,344,164,403,135,467,115,529,104,585,99"/>
-<area shape="poly" title=" " alt="" coords="732,104,832,119,957,144,1091,183,1157,208,1220,238,1267,269,1305,302,1301,306,1264,273,1217,242,1155,213,1089,188,956,149,831,124,731,110"/>
-<area shape="poly" title=" " alt="" coords="586,108,516,120,438,144,400,161,365,183,333,210,308,241,300,257,297,274,299,310,311,345,325,374,320,376,306,347,294,311,291,274,295,256,303,239,330,206,362,179,398,157,436,139,514,115,585,102"/>
-<area shape="rect" title=" " alt="" coords="318,240,389,265"/>
-<area shape="poly" title=" " alt="" coords="622,121,390,236,387,231,619,116"/>
-<area shape="rect" href="tree_8hpp.html" title="Internal tree structure." alt="" coords="596,240,721,265"/>
-<area shape="poly" title=" " alt="" coords="661,119,661,226,656,226,656,119"/>
-<area shape="rect" href="impl_8hpp.html" title="Implementation of the node logic." alt="" coords="787,167,965,192"/>
-<area shape="poly" title=" " alt="" coords="712,116,832,159,830,164,710,121"/>
-<area shape="rect" href="serializer_8hpp.html" title="Implementation of serialization/deserialization helpers." alt="" coords="1465,240,1623,265"/>
-<area shape="poly" title=" " alt="" coords="732,107,910,131,1123,164,1318,201,1480,235,1479,240,1317,206,1122,169,909,136,731,112"/>
-<area shape="poly" title=" " alt="" coords="620,268,466,312,464,307,618,263"/>
-<area shape="poly" title=" " alt="" coords="632,268,520,316,494,329,468,341,376,369,292,389,291,384,375,364,466,336,492,324,518,311,630,263"/>
-<area shape="poly" title=" " alt="" coords="713,263,950,313,949,318,712,268"/>
-<area shape="poly" title=" " alt="" coords="722,261,734,263,1003,293,1229,314,1229,319,1003,298,733,268,721,266"/>
-<area shape="poly" title=" " alt="" coords="684,263,924,378,922,383,682,268"/>
-<area shape="poly" title=" " alt="" coords="670,264,758,374,754,378,666,267"/>
-<area shape="poly" title=" " alt="" coords="696,263,1074,380,1072,385,695,268"/>
-<area shape="rect" title=" " alt="" coords="632,313,685,339"/>
-<area shape="poly" title=" " alt="" coords="661,266,661,300,656,300,656,266"/>
-<area shape="rect" title=" " alt="" coords="531,313,607,339"/>
-<area shape="poly" title=" " alt="" coords="646,267,596,307,593,302,643,263"/>
-<area shape="poly" title=" " alt="" coords="787,187,636,203,551,219,469,243,403,272,343,309,291,347,253,380,250,375,288,343,340,305,401,267,467,237,550,214,635,198,786,182"/>
-<area shape="poly" title=" " alt="" coords="966,188,1067,207,1122,221,1174,238,1242,270,1298,303,1295,308,1240,274,1172,242,1120,226,1066,212,965,194"/>
-<area shape="poly" title=" " alt="" coords="810,195,704,215,585,243,465,270,400,290,375,302,358,315,349,328,344,343,339,373,334,372,339,341,345,326,354,312,373,297,399,285,463,264,583,237,703,210,809,189"/>
-<area shape="poly" title=" " alt="" coords="883,191,952,373,947,375,878,193"/>
-<area shape="poly" title=" " alt="" coords="873,193,787,375,782,372,868,191"/>
-<area shape="poly" title=" " alt="" coords="966,187,1065,206,1105,220,1131,238,1141,254,1147,272,1150,309,1144,345,1135,375,1130,373,1139,344,1144,309,1142,273,1136,257,1127,242,1103,225,1063,211,965,193"/>
-<area shape="poly" title=" " alt="" coords="965,189,1086,209,1219,237,1341,272,1459,312,1640,379,1638,384,1458,317,1339,277,1218,243,1085,214,964,195"/>
-<area shape="poly" title=" " alt="" coords="787,193,611,213,408,243,403,244,402,238,408,237,611,208,786,187"/>
-<area shape="rect" title=" " alt="" coords="746,240,806,265"/>
-<area shape="poly" title=" " alt="" coords="861,194,805,234,802,230,858,190"/>
-<area shape="poly" title=" " alt="" coords="966,187,1451,239,1451,244,965,193"/>
-<area shape="rect" href="format_8hpp.html" title="Helpers to handle format/print portably." alt="" coords="947,240,1117,265"/>
-<area shape="poly" title=" " alt="" coords="902,190,995,232,993,237,900,194"/>
-<area shape="poly" title=" " alt="" coords="1478,268,1231,316,1181,330,1130,341,1004,358,897,366,713,370,528,371,419,377,292,389,291,384,419,371,528,366,713,364,896,361,1003,352,1129,336,1180,325,1230,311,1477,263"/>
-<area shape="poly" title=" " alt="" coords="1603,263,1843,311,1849,312,1848,317,1842,316,1602,268"/>
-<area shape="poly" title=" " alt="" coords="1509,268,1373,312,1372,307,1508,263"/>
-<area shape="poly" title=" " alt="" coords="1533,267,1485,305,1453,325,1418,341,1353,354,1240,369,1007,396,1007,390,1239,364,1352,349,1416,336,1450,320,1482,300,1530,263"/>
-<area shape="poly" title=" " alt="" coords="1546,266,1538,303,1528,324,1514,341,1486,356,1450,366,1359,378,1261,383,1178,389,1178,384,1261,378,1358,372,1449,361,1484,351,1510,337,1524,321,1533,301,1541,265"/>
-<area shape="poly" title=" " alt="" coords="1616,263,1696,282,1729,296,1750,312,1756,331,1748,350,1733,367,1714,381,1711,377,1729,363,1744,347,1751,331,1746,315,1726,300,1694,288,1615,268"/>
-<area shape="poly" title=" " alt="" coords="1624,262,1712,281,1748,295,1771,312,1781,332,1781,352,1774,372,1761,392,1725,427,1688,455,1685,450,1722,423,1757,388,1769,370,1776,351,1776,333,1767,315,1746,300,1711,286,1623,267"/>
-<area shape="rect" title=" " alt="" coords="1581,313,1656,339"/>
-<area shape="poly" title=" " alt="" coords="1558,263,1598,302,1595,306,1554,267"/>
-<area shape="rect" title=" " alt="" coords="1680,313,1736,339"/>
-<area shape="poly" title=" " alt="" coords="1571,263,1670,305,1668,310,1569,268"/>
-<area shape="rect" title=" " alt="" coords="1051,313,1117,339"/>
-<area shape="poly" title=" " alt="" coords="1043,264,1070,301,1065,304,1038,267"/>
+<area shape="rect" title="Queries on a tree." alt="" coords="403,5,588,31"/>
+<area shape="rect" title=" " alt="" coords="248,401,319,427"/>
+<area shape="poly" title=" " alt="" coords="403,22,302,25,194,35,97,52,60,65,35,81,17,102,10,123,10,178,10,261,17,296,34,324,60,348,92,367,129,381,166,392,235,405,234,411,165,398,127,386,90,371,57,352,30,328,12,298,5,262,5,178,5,122,12,99,31,77,58,60,96,47,193,29,302,20,403,17"/>
+<area shape="rect" title=" " alt="" coords="45,86,130,111"/>
+<area shape="poly" title=" " alt="" coords="412,33,288,53,149,81,136,85,135,80,148,76,287,48,411,28"/>
+<area shape="rect" title=" " alt="" coords="215,328,302,353"/>
+<area shape="poly" title=" " alt="" coords="480,33,452,54,424,80,375,143,332,209,272,316,268,314,327,207,370,140,420,77,449,50,477,29"/>
+<area shape="rect" title=" " alt="" coords="579,401,676,427"/>
+<area shape="poly" title=" " alt="" coords="472,33,377,84,319,120,264,162,217,208,200,232,188,256,181,280,181,304,188,328,204,351,228,369,264,383,310,393,361,401,470,409,565,411,565,416,470,414,361,406,309,398,263,388,225,374,200,355,184,330,176,305,176,280,183,254,195,229,213,205,260,158,316,116,375,79,470,28"/>
+<area shape="rect" title=" " alt="" coords="2256,328,2324,353"/>
+<area shape="poly" title=" " alt="" coords="588,16,846,17,1183,25,1355,32,1515,43,1652,57,1755,76,1833,100,1911,129,2058,198,2180,266,2263,318,2260,322,2177,271,2055,203,1909,134,1832,105,1754,81,1651,63,1514,48,1355,38,1183,30,846,23,588,22"/>
+<area shape="rect" title=" " alt="" coords="479,328,542,353"/>
+<area shape="poly" title=" " alt="" coords="487,33,455,75,419,138,406,173,399,209,400,245,413,279,423,293,436,305,467,323,465,327,433,309,419,296,408,281,395,246,393,209,401,172,414,135,451,72,483,29"/>
+<area shape="rect" href="commons_8hpp_source.html" title=" " alt="" coords="1356,328,1518,353"/>
+<area shape="poly" title=" " alt="" coords="589,19,742,30,940,53,1048,72,1158,96,1267,127,1371,164,1435,190,1458,208,1479,239,1484,260,1480,281,1459,319,1454,316,1475,280,1479,260,1474,241,1454,212,1432,195,1369,169,1265,132,1157,102,1047,77,939,59,742,35,588,25"/>
+<area shape="rect" href="wrp-impl_8hpp_source.html" title=" " alt="" coords="499,79,644,119"/>
+<area shape="poly" title=" " alt="" coords="509,29,546,67,542,71,505,33"/>
+<area shape="rect" href="query-impl_8hpp_source.html" title=" " alt="" coords="1892,240,2051,280"/>
+<area shape="poly" title=" " alt="" coords="589,19,1185,38,1489,55,1599,65,1664,76,1743,108,1818,150,1883,193,1934,230,1931,234,1880,197,1815,154,1741,113,1663,81,1598,70,1489,60,1185,43,588,24"/>
+<area shape="poly" title=" " alt="" coords="1355,350,333,412,333,407,1355,344"/>
+<area shape="poly" title=" " alt="" coords="1355,354,1337,356,1037,380,737,404,690,409,690,403,737,399,1037,375,1337,351,1355,349"/>
+<area shape="rect" title=" " alt="" coords="934,401,1004,427"/>
+<area shape="poly" title=" " alt="" coords="1356,355,1180,379,1017,404,1017,399,1179,374,1355,350"/>
+<area shape="rect" title=" " alt="" coords="749,401,816,427"/>
+<area shape="poly" title=" " alt="" coords="1355,354,1337,356,1087,376,977,386,837,404,829,405,829,400,836,399,977,380,1086,371,1337,351,1355,349"/>
+<area shape="rect" title=" " alt="" coords="1326,401,1406,427"/>
+<area shape="poly" title=" " alt="" coords="1427,356,1389,394,1385,390,1423,352"/>
+<area shape="rect" title=" " alt="" coords="1431,401,1510,427"/>
+<area shape="poly" title=" " alt="" coords="1445,353,1461,388,1457,390,1440,355"/>
+<area shape="rect" title=" " alt="" coords="1028,401,1110,427"/>
+<area shape="poly" title=" " alt="" coords="1375,356,1125,404,1124,398,1374,351"/>
+<area shape="rect" title=" " alt="" coords="849,401,902,427"/>
+<area shape="poly" title=" " alt="" coords="1355,354,923,404,917,405,916,400,922,399,1355,349"/>
+<area shape="rect" title=" " alt="" coords="1648,401,1706,427"/>
+<area shape="poly" title=" " alt="" coords="1476,351,1635,398,1634,403,1475,356"/>
+<area shape="rect" title=" " alt="" coords="1534,401,1572,427"/>
+<area shape="poly" title=" " alt="" coords="1457,351,1524,392,1521,396,1454,356"/>
+<area shape="rect" href="assert_8hpp.html" title="Utility for assertions." alt="" coords="1135,401,1302,427"/>
+<area shape="poly" title=" " alt="" coords="1403,356,1268,400,1266,394,1401,351"/>
+<area shape="rect" title=" " alt="" coords="1127,475,1192,500"/>
+<area shape="poly" title=" " alt="" coords="1211,429,1180,466,1176,463,1206,425"/>
+<area shape="rect" title=" " alt="" coords="1567,475,1654,500"/>
+<area shape="poly" title=" " alt="" coords="1282,424,1554,473,1553,478,1281,429"/>
+<area shape="rect" title=" " alt="" coords="1216,475,1340,500"/>
+<area shape="poly" title=" " alt="" coords="1230,425,1262,462,1258,466,1226,429"/>
+<area shape="poly" title=" " alt="" coords="504,121,428,149,343,192,302,220,264,252,231,288,205,329,202,347,210,364,227,379,247,393,244,397,223,384,206,367,197,348,200,327,227,285,260,248,299,216,341,188,426,145,502,116"/>
+<area shape="poly" title=" " alt="" coords="534,121,489,148,445,185,428,206,415,229,410,253,413,279,428,320,439,335,457,351,482,368,510,382,566,400,565,405,508,386,480,373,454,355,435,339,423,323,408,281,405,253,410,227,423,203,441,181,486,144,531,116"/>
+<area shape="poly" title=" " alt="" coords="645,97,838,102,958,109,1083,121,1204,139,1312,163,1358,179,1398,196,1431,216,1455,238,1464,257,1464,278,1453,316,1448,314,1459,277,1459,258,1451,242,1428,220,1396,201,1356,183,1310,168,1203,144,1083,126,958,115,838,107,644,102"/>
+<area shape="rect" title=" " alt="" coords="423,247,494,273"/>
+<area shape="poly" title=" " alt="" coords="560,120,477,237,472,234,556,117"/>
+<area shape="rect" href="tree_8hpp.html" title="Internal tree structure." alt="" coords="620,247,745,273"/>
+<area shape="poly" title=" " alt="" coords="587,117,669,234,664,237,582,120"/>
+<area shape="rect" href="impl_8hpp.html" title="Implementation of the node logic." alt="" coords="904,167,1082,192"/>
+<area shape="poly" title=" " alt="" coords="645,111,918,161,917,167,644,116"/>
+<area shape="rect" href="serializer_8hpp.html" title="Implementation of serialization/deserialization helpers." alt="" coords="1695,247,1854,273"/>
+<area shape="poly" title=" " alt="" coords="644,96,800,98,1013,107,1255,127,1378,143,1499,164,1565,180,1630,200,1736,240,1734,245,1628,205,1564,185,1498,169,1378,148,1255,132,1013,112,800,103,644,102"/>
+<area shape="poly" title=" " alt="" coords="621,275,315,332,314,326,620,270"/>
+<area shape="poly" title=" " alt="" coords="662,275,632,297,618,312,607,329,604,344,605,359,615,389,610,390,600,360,598,343,602,327,614,309,628,293,659,271"/>
+<area shape="poly" title=" " alt="" coords="658,275,549,325,547,320,656,270"/>
+<area shape="poly" title=" " alt="" coords="746,265,1342,327,1342,332,745,271"/>
+<area shape="poly" title=" " alt="" coords="705,270,936,392,934,397,702,275"/>
+<area shape="poly" title=" " alt="" coords="692,271,769,389,765,391,687,274"/>
+<area shape="poly" title=" " alt="" coords="713,270,854,326,1028,394,1026,399,852,330,711,275"/>
+<area shape="poly" title=" " alt="" coords="698,271,851,390,848,395,695,275"/>
+<area shape="rect" title=" " alt="" coords="618,328,694,353"/>
+<area shape="poly" title=" " alt="" coords="681,274,666,316,661,314,676,272"/>
+<area shape="poly" title=" " alt="" coords="903,189,708,209,616,224,551,242,538,251,528,260,507,282,406,348,319,397,317,392,403,343,503,278,525,256,534,247,549,238,615,218,708,203,903,184"/>
+<area shape="poly" title=" " alt="" coords="904,186,837,191,762,201,684,218,609,242,579,260,552,282,526,294,504,301,485,310,469,329,464,344,466,356,474,367,487,376,524,391,566,402,564,407,522,397,484,381,470,370,461,358,458,343,464,327,482,306,502,296,524,289,549,278,576,256,606,238,682,213,761,196,837,186,903,180"/>
+<area shape="poly" title=" " alt="" coords="1083,183,1195,200,1255,216,1313,238,1361,271,1415,317,1412,321,1358,275,1310,242,1253,221,1194,205,1082,188"/>
+<area shape="poly" title=" " alt="" coords="968,194,939,213,925,226,915,241,909,260,907,280,915,321,933,359,953,389,949,392,929,361,910,323,902,280,903,259,910,239,921,223,935,209,965,190"/>
+<area shape="poly" title=" " alt="" coords="971,194,936,215,901,242,868,279,838,320,796,390,792,388,834,317,864,276,898,238,933,210,968,190"/>
+<area shape="poly" title=" " alt="" coords="1083,185,1138,193,1194,204,1240,218,1257,228,1270,238,1275,252,1276,269,1267,307,1244,355,1224,368,1194,381,1124,402,1123,397,1192,376,1221,364,1240,352,1262,305,1271,268,1270,253,1265,242,1254,232,1238,223,1192,209,1137,198,1082,191"/>
+<area shape="poly" title=" " alt="" coords="1082,178,1208,180,1352,189,1484,207,1537,220,1576,238,1612,271,1640,311,1660,353,1673,388,1668,389,1655,355,1636,314,1608,274,1573,242,1535,225,1483,212,1352,194,1208,185,1082,183"/>
+<area shape="poly" title=" " alt="" coords="1082,182,1180,189,1288,200,1385,216,1425,226,1454,238,1504,270,1535,304,1559,346,1586,400,1599,431,1607,460,1602,462,1594,433,1581,402,1555,349,1531,308,1500,274,1452,242,1423,231,1384,221,1287,205,1180,194,1082,187"/>
+<area shape="poly" title=" " alt="" coords="904,189,722,207,617,222,513,243,501,246,500,241,512,237,616,217,722,202,903,184"/>
+<area shape="poly" title=" " alt="" coords="948,195,741,247,740,241,947,189"/>
+<area shape="rect" href="filters_8hpp_source.html" title=" " alt="" coords="925,247,1061,273"/>
+<area shape="poly" title=" " alt="" coords="996,192,996,233,990,233,990,192"/>
+<area shape="rect" title=" " alt="" coords="1382,247,1442,273"/>
+<area shape="poly" title=" " alt="" coords="1083,187,1216,206,1363,237,1372,240,1371,245,1362,243,1215,212,1082,193"/>
+<area shape="poly" title=" " alt="" coords="1083,186,1327,207,1625,237,1682,244,1681,249,1625,243,1327,213,1082,191"/>
+<area shape="rect" href="format_8hpp.html" title="Helpers to handle format/print portably." alt="" coords="1085,247,1256,273"/>
+<area shape="poly" title=" " alt="" coords="1020,190,1133,239,1131,244,1018,194"/>
+<area shape="poly" title=" " alt="" coords="966,275,669,398,667,393,964,270"/>
+<area shape="poly" title=" " alt="" coords="1040,270,1073,277,1344,323,1344,329,1072,283,1039,275"/>
+<area shape="rect" title=" " alt="" coords="1073,328,1140,353"/>
+<area shape="poly" title=" " alt="" coords="1011,271,1080,318,1077,322,1008,275"/>
+<area shape="poly" title=" " alt="" coords="1695,274,1533,297,1344,331,1294,344,1243,356,1101,376,991,386,879,392,737,404,690,409,690,403,737,399,879,387,990,381,1101,371,1242,351,1292,339,1343,325,1532,292,1694,269"/>
+<area shape="poly" title=" " alt="" coords="1836,270,1880,277,2060,299,2141,308,2243,325,2242,330,2140,314,2060,304,1879,283,1836,275"/>
+<area shape="poly" title=" " alt="" coords="1726,275,1500,327,1499,322,1725,270"/>
+<area shape="poly" title=" " alt="" coords="1752,275,1657,316,1595,338,1531,356,1455,371,1390,380,1277,385,1163,388,1096,394,1018,404,1017,399,1095,388,1162,383,1277,380,1389,374,1454,366,1530,351,1593,333,1655,311,1750,270"/>
+<area shape="poly" title=" " alt="" coords="1768,275,1732,316,1706,338,1677,356,1627,371,1563,382,1412,392,1254,396,1124,404,1124,399,1254,391,1411,387,1563,376,1626,366,1674,351,1703,334,1728,312,1764,271"/>
+<area shape="poly" title=" " alt="" coords="1771,274,1754,311,1728,355,1699,392,1695,389,1724,352,1749,308,1767,272"/>
+<area shape="poly" title=" " alt="" coords="1827,270,1908,294,1943,309,1964,326,1970,341,1964,355,1935,388,1901,416,1862,438,1821,455,1739,476,1667,486,1667,481,1738,471,1819,449,1860,433,1898,411,1932,384,1960,352,1964,341,1960,330,1940,314,1906,299,1826,275"/>
+<area shape="rect" title=" " alt="" coords="1796,328,1870,353"/>
+<area shape="poly" title=" " alt="" coords="1785,271,1818,315,1814,318,1781,274"/>
+<area shape="rect" title=" " alt="" coords="1894,328,1950,353"/>
+<area shape="poly" title=" " alt="" coords="1797,270,1889,319,1887,324,1795,275"/>
+<area shape="rect" title=" " alt="" coords="1164,328,1230,353"/>
+<area shape="poly" title=" " alt="" coords="1177,272,1191,314,1186,316,1172,274"/>
+<area shape="poly" title=" " alt="" coords="1954,242,1911,205,1847,160,1770,115,1729,96,1687,81,1623,70,1513,60,1209,43,602,24,602,19,1209,38,1514,55,1623,65,1688,76,1731,92,1773,111,1850,156,1914,201,1958,238"/>
+<area shape="poly" title=" " alt="" coords="1979,280,1980,318,1976,338,1964,355,1942,364,1898,371,1760,382,1356,396,737,404,690,408,690,403,737,399,1356,390,1759,377,1898,366,1940,359,1961,351,1971,336,1975,318,1973,280"/>
+<area shape="poly" title=" " alt="" coords="2049,277,2244,325,2242,330,2048,283"/>
+<area shape="poly" title=" " alt="" coords="1892,278,1865,283,1532,330,1531,325,1864,277,1891,273"/>
+<area shape="rect" href="print_8hpp_source.html" title=" " alt="" coords="2076,328,2232,353"/>
+<area shape="poly" title=" " alt="" coords="2016,278,2116,320,2114,325,2014,282"/>
+<area shape="rect" title=" " alt="" coords="2128,401,2180,427"/>
+<area shape="poly" title=" " alt="" coords="2157,354,2157,388,2152,388,2152,354"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="query_8hpp__dep__incl.png" border="0" usemap="#ainclude_2vs-xml_2query_8hppdep" alt=""/></div>
+<map name="ainclude_2vs-xml_2query_8hppdep" id="ainclude_2vs-xml_2query_8hppdep">
+<area shape="rect" title="Queries on a tree." alt="" coords="5,5,191,31"/>
+<area shape="rect" href="query-impl_8hpp_source.html" title=" " alt="" coords="14,79,182,119"/>
+<area shape="poly" title=" " alt="" coords="92,44,93,78,88,79,87,44"/>
+<area shape="poly" title=" " alt="" coords="104,65,102,31,107,31,110,65"/>
 </map>
 </div>
 </div>
@@ -190,6 +224,13 @@ Include dependency graph for query.hpp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">VS_XML_NS::query::generator&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">generator-like implementation for query results.  <a href="classVS__XML__NS_1_1query_1_1generator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1query_1_1generator_1_1promise__type.html">VS_XML_NS::query::generator&lt; T &gt;::promise_type</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVS__XML__NS_1_1query_1_1generator_1_1iterator.html">VS_XML_NS::query::generator&lt; T &gt;::iterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1query_1_1token__t.html">VS_XML_NS::query::token_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1query_1_1token__t_1_1empty__t.html">VS_XML_NS::query::token_t::empty_t&lt; T &gt;</a></td></tr>
@@ -211,14 +252,53 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespaceVS__XML__NS"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main namespace for the application. By default <code>xml</code> and controlled via the macro <a class="el" href="namespaceVS__XML__NS.html" title="The main namespace for the application. By default xml and controlled via the macro VS_XML_NS.">VS_XML_NS</a>. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aba9c92c2d15e595a311f77972cea554f" id="r_aba9c92c2d15e595a311f77972cea554f"><td class="memItemLeft" align="right" valign="top"><a id="aba9c92c2d15e595a311f77972cea554f" name="aba9c92c2d15e595a311f77972cea554f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::query::result_t</b> = <a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">generator</a>&lt; <a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; &gt;</td></tr>
+<tr class="separator:aba9c92c2d15e595a311f77972cea554f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac6d6ebedb7a1de91809293f0cb90f048" id="r_ac6d6ebedb7a1de91809293f0cb90f048"><td class="memItemLeft" align="right" valign="top"><a id="ac6d6ebedb7a1de91809293f0cb90f048" name="ac6d6ebedb7a1de91809293f0cb90f048"></a>
-std::generator&lt; <a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::query::traverse</b> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; root, std::vector&lt; <a class="el" href="structVS__XML__NS_1_1query_1_1token__t.html">token_t</a> &gt;::const_iterator begin, std::vector&lt; <a class="el" href="structVS__XML__NS_1_1query_1_1token__t.html">token_t</a> &gt;::const_iterator end)</td></tr>
-<tr class="separator:ac6d6ebedb7a1de91809293f0cb90f048"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5048b92f965c653d3ce3743fb0e7987" id="r_ad5048b92f965c653d3ce3743fb0e7987"><td class="memItemLeft" align="right" valign="top"><a id="ad5048b92f965c653d3ce3743fb0e7987" name="ad5048b92f965c653d3ce3743fb0e7987"></a>
-std::generator&lt; <a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::query::traverse</b> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> &gt; root, const <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; 0 &gt; &amp;query)</td></tr>
-<tr class="separator:ad5048b92f965c653d3ce3743fb0e7987"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c976ceb5bb90c7e924cc6a093decfdb" id="r_a5c976ceb5bb90c7e924cc6a093decfdb"><td class="memItemLeft" align="right" valign="top"><a id="a5c976ceb5bb90c7e924cc6a093decfdb" name="a5c976ceb5bb90c7e924cc6a093decfdb"></a>
+std::pair&lt; std::string_view, std::string_view &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>VS_XML_NS::query::split_on_colon</b> (std::string_view input)</td></tr>
+<tr class="separator:a5c976ceb5bb90c7e924cc6a093decfdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a540a510ea3ac7db82794151ca65a46ec" id="r_a540a510ea3ac7db82794151ca65a46ec"><td class="memTemplParams" colspan="2"><a id="a540a510ea3ac7db82794151ca65a46ec" name="a540a510ea3ac7db82794151ca65a46ec"></a>
+template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:a540a510ea3ac7db82794151ca65a46ec"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VS_XML_NS::query::is</b> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; root, typename <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; N &gt;::container_type::const_iterator begin, typename <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; N &gt;::container_type::const_iterator end)</td></tr>
+<tr class="separator:a540a510ea3ac7db82794151ca65a46ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75290648f31c6f63dcd31a7879af5199" id="r_a75290648f31c6f63dcd31a7879af5199"><td class="memTemplParams" colspan="2"><a id="a75290648f31c6f63dcd31a7879af5199" name="a75290648f31c6f63dcd31a7879af5199"></a>
+template&lt;size_t N = 0&gt; </td></tr>
+<tr class="memitem:a75290648f31c6f63dcd31a7879af5199"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VS_XML_NS::query::is</b> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; root, const <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; N &gt; &amp;query)</td></tr>
+<tr class="separator:a75290648f31c6f63dcd31a7879af5199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8139b83ce68d82ab35788f1e0be7ba40" id="r_a8139b83ce68d82ab35788f1e0be7ba40"><td class="memTemplParams" colspan="2"><a id="a8139b83ce68d82ab35788f1e0be7ba40" name="a8139b83ce68d82ab35788f1e0be7ba40"></a>
+template&lt;size_t N = 0&gt; </td></tr>
+<tr class="memitem:a8139b83ce68d82ab35788f1e0be7ba40"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VS_XML_NS::query::is</b> (<a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a> &amp;&amp;src, const <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; N &gt; &amp;query)</td></tr>
+<tr class="separator:a8139b83ce68d82ab35788f1e0be7ba40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0e35733005f3c2a5031091ae842bf6e" id="r_ab0e35733005f3c2a5031091ae842bf6e"><td class="memTemplParams" colspan="2"><a id="ab0e35733005f3c2a5031091ae842bf6e" name="ab0e35733005f3c2a5031091ae842bf6e"></a>
+template&lt;size_t N = 0&gt; </td></tr>
+<tr class="memitem:ab0e35733005f3c2a5031091ae842bf6e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VS_XML_NS::query::operator&amp;</b> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; src, const <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; N &gt; &amp;query)</td></tr>
+<tr class="separator:ab0e35733005f3c2a5031091ae842bf6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca0baa9c51bd4e8f6ff460eb3bb06246" id="r_aca0baa9c51bd4e8f6ff460eb3bb06246"><td class="memTemplParams" colspan="2"><a id="aca0baa9c51bd4e8f6ff460eb3bb06246" name="aca0baa9c51bd4e8f6ff460eb3bb06246"></a>
+template&lt;size_t N = 0&gt; </td></tr>
+<tr class="memitem:aca0baa9c51bd4e8f6ff460eb3bb06246"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VS_XML_NS::query::operator&amp;</b> (<a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a> &amp;&amp;src, const <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; N &gt; &amp;query)</td></tr>
+<tr class="separator:aca0baa9c51bd4e8f6ff460eb3bb06246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac256784e0c11f262b3cdb303aa1d7e30" id="r_ac256784e0c11f262b3cdb303aa1d7e30"><td class="memTemplParams" colspan="2"><a id="ac256784e0c11f262b3cdb303aa1d7e30" name="ac256784e0c11f262b3cdb303aa1d7e30"></a>
+template&lt;size_t N = 0&gt; </td></tr>
+<tr class="memitem:ac256784e0c11f262b3cdb303aa1d7e30"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VS_XML_NS::query::has</b> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; root, const <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; N &gt; &amp;query)</td></tr>
+<tr class="separator:ac256784e0c11f262b3cdb303aa1d7e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e9a06d6082b3247a554d47c195ff690" id="r_a6e9a06d6082b3247a554d47c195ff690"><td class="memTemplParams" colspan="2"><a id="a6e9a06d6082b3247a554d47c195ff690" name="a6e9a06d6082b3247a554d47c195ff690"></a>
+template&lt;size_t N = 0&gt; </td></tr>
+<tr class="memitem:a6e9a06d6082b3247a554d47c195ff690"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VS_XML_NS::query::has</b> (<a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a> &amp;&amp;src, const <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; N &gt; &amp;query)</td></tr>
+<tr class="separator:a6e9a06d6082b3247a554d47c195ff690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0998097064b99a7a20f7797bcfa3a4a4" id="r_a0998097064b99a7a20f7797bcfa3a4a4"><td class="memTemplParams" colspan="2"><a id="a0998097064b99a7a20f7797bcfa3a4a4" name="a0998097064b99a7a20f7797bcfa3a4a4"></a>
+template&lt;size_t N = 0&gt; </td></tr>
+<tr class="memitem:a0998097064b99a7a20f7797bcfa3a4a4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VS_XML_NS::query::operator|</b> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; src, const <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; N &gt; &amp;query)</td></tr>
+<tr class="separator:a0998097064b99a7a20f7797bcfa3a4a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef60b47a5e0cc3a304fc4d41655538a" id="r_acef60b47a5e0cc3a304fc4d41655538a"><td class="memTemplParams" colspan="2"><a id="acef60b47a5e0cc3a304fc4d41655538a" name="acef60b47a5e0cc3a304fc4d41655538a"></a>
+template&lt;size_t N = 0&gt; </td></tr>
+<tr class="memitem:acef60b47a5e0cc3a304fc4d41655538a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VS_XML_NS::query::operator|</b> (<a class="el" href="classVS__XML__NS_1_1query_1_1generator.html">result_t</a> &amp;&amp;src, const <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a>&lt; N &gt; &amp;query)</td></tr>
+<tr class="separator:acef60b47a5e0cc3a304fc4d41655538a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Queries on a tree. </p>

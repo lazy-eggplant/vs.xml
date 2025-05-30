@@ -694,7 +694,7 @@
   
   
   <span class="md-ellipsis">
-    Specs
+    Releases
     
   </span>
   
@@ -704,6 +704,74 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Releases
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releases/v0.2.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Specs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Specs
           </label>
@@ -745,6 +813,29 @@
   
   <span class="md-ellipsis">
     Queries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/query-builder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Query builder
     
   </span>
   
@@ -895,12 +986,9 @@
 <h3 id="xml-parsing">XML parsing<a class="headerlink" href="#xml-parsing" title="Permanent link">#</a></h3>
 <ul class="task-list">
 <li class="task-list-item"><input type="checkbox" disabled checked/> namespaces <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> cdata<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> optional reduction to <code>text</code></li>
-</ul>
-</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> cdata</li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> text<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> optional merging of close text blocks</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> Unified iterator for text of an element, scanning all text/CDATA children.</li>
 </ul>
 </li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> comments <ul class="task-list">
@@ -952,7 +1040,10 @@
 <li class="task-list-item"><input type="checkbox" disabled checked/> <code>noexcept</code> mode</li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> <code>noassert</code> mode</li>
 <li class="task-list-item"><input type="checkbox" disabled/> no memory allocations<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> in tree/documents</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> for the tree/documents binary representation</li>
+<li class="task-list-item"><input type="checkbox" disabled/> in the query builder<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
+<li class="task-list-item"><input type="checkbox" disabled/> in tree building<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
+<li class="task-list-item"><input type="checkbox" disabled/> in query processing<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></li>
 </ul>
 </li>
 </ul>
@@ -961,6 +1052,12 @@
 <ol>
 <li id="fn:1">
 <p>Partially, no validation for them&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>The objective is to pass custom allocators so that arena strategies can be implemented for example.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Queries allocates as a stack, so specific strategies and allocator can be adopted for them.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
