@@ -87,9 +87,21 @@ result_t is(wrp::base_t<unknown_t> root, typename query_t<N>::container_type::co
             if(!expr_helper(std::get<token_t::single_t<token_t::MATCH_VALUE>>(current->args),root.value())) co_return; 
         }
         //Match text, not implemented as .text() is missing upstream.
+        /*
         else if ( std::holds_alternative<token_t::single_t<token_t::MATCH_ALL_TEXT>>(current->args) ){ 
-            if(!expr_helper(std::get<token_t::single_t<token_t::MATCH_ALL_TEXT>>(current->args),root.text())) co_return; 
+            auto pattern = std::get<token_t::single_t<token_t::MATCH_VALUE>>(current->args);
+            auto check = root.text();
+            if(std::holds_alternative<std::string_view>(pattern)){
+                if(check==std::get<std::string_view>(pattern));
+                else co_return;
+            }
+            else if(std::holds_alternative<std::function<bool(std::string_view)>>(pattern)){
+                if(std::get<std::function<bool(std::string_view)>>(pattern)(check));
+                else co_return;
+            }
+            else co_return;
         }
+        */
         //TODO: right now attribute matching has k*O(n) complexity if k attributes must be tested.
         //By looking ahead it is possible to check if there are more attributes to be tested, and perform the operation in just O(n)
         //Match attribute

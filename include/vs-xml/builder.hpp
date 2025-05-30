@@ -248,7 +248,7 @@ struct TreeBuilder : details::BuilderBase{
             std::string_view ns;
         };
 
-        constexpr void x(std::string_view ns, std::string_view name, const std::initializer_list<attr_t>& attrs, const std::function<void(TreeBuilder&)>& items){
+        constexpr void x(std::string_view ns, std::string_view name, const std::initializer_list<attr_t>& attrs, void(*items)(TreeBuilder&)){
             begin(name,ns);
 
             for(auto& a:attrs){
@@ -272,7 +272,7 @@ struct TreeBuilder : details::BuilderBase{
             end();
         }
 
-        constexpr void x(std::string_view name, const std::initializer_list<attr_t>& attrs, const std::function<void(TreeBuilder&)>& items){return x("",name,attrs,items);}
+        constexpr void x(std::string_view name, const std::initializer_list<attr_t>& attrs, void(*items)(TreeBuilder&)){return x("",name,attrs,items);}
         constexpr void x(std::string_view name, const std::initializer_list<attr_t>& attrs={}, const std::function<void()>& items=[](){}){return x("",name,attrs,items);}
 
 
