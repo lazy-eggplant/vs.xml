@@ -1,30 +1,36 @@
 ## Installing
 
-Use it as a meson dependency, be it a subproject of after installing it on your system.  
+This library is meant to be use either as a system dependency, or as a meson subproject.  
+The second option will grant you more flexibility in case you need control over the memory layout or other configuration flags.  
 
-The process is basically as usual:
+To our knowledge, this library is not distributed by any distribution. To install it on your system you will probably want to write something like:
 
 ```sh
-meson setup build           #Add more flags to setup release, lto optimizations etc based on your needs
-meson install -C build      #You might have to define DESTDIR to perform a dry run or if you have a strange location
+meson setup build           #You might want to introduce more flags to setup the build type to release, lto optimizations et cetera.
+meson install -C build      #You might want to define DESTDIR before to perform a semi-dry run.
 ```
 
-A simplified makefile is made available, which has some reasonable defaults.  
+A simplified makefile is made available, which has some reasonable defaults, but uses meson under the hood.  
 
 Tarballs will also be offered for some distributions as part of future releases.  
 
-## Usage
+## As a dependency
 
-TBW
+Feel free to use this as baseline for your wrap file:
 
-## Configuration
-Read [this](./configuration.md).
+```meson
+[wrap-git]
+url = https://github.com/lazy-eggplant/vs.xml
+revision = v0.2.5   #Make sure to use the latest
+depth = 1
+method = meson
+[provide]
+vs_xml = vs_xml_dep
+```
 
-## Integration examples
+### Configuration
+Read [this](./configuration.md) document about configuration.
 
+## Examples
 
-### External index
-
-### Containers & ranges
-
-### Performing queries
+Please, refer to the `examples` folder to see this library in action.

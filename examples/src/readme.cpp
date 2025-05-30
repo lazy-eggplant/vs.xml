@@ -1,3 +1,13 @@
+/**
+ * @file readme.cpp
+ * @author karurochar
+ * @brief Directly taken from the README.md
+ * @date 2025-05-30
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include <vs-xml/document.hpp>
 #include <vs-xml/filters.hpp>
 #include <vs-xml/query.hpp>

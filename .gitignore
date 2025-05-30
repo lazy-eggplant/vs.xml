@@ -1,7 +1,7 @@
-/.cache
-/.clangd
-/.venv
-/build/ 
+/.cache/
+/.clangd/
+/.venv/
+/build/
 /build.*/
 /subprojects/*
 !/subprojects/packagefiles/

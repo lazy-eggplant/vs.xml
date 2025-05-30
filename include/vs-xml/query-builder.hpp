@@ -91,7 +91,7 @@ struct QueryBuilder{
 
     error_t inject(const Query query);
 
-    std::expected<Query,error_t> close();
+    [[nodiscard]] std::expected<Query,error_t> close();
 
     private:
         size_t next_capture = 0;
