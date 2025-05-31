@@ -10,7 +10,7 @@
 #include <vs-xml/parser.hpp>
 #include <vs-xml/serializer.hpp>
 #include <vs-xml/document.hpp>
-/*
+
 #include <mio/mmap.hpp>
 
 template<xml::builder_config_t cfg>
@@ -26,11 +26,11 @@ int encode(std::filesystem::path input, std::filesystem::path output){
 
         auto tree = bld.close();
         if(!tree.has_value()){
-            std::cerr << "Error while closing the document " << tree.error() << "\n";
+            std::cerr << "Error while closing the document " << (int)tree.error() << "\n";
             return 3;
         }
 
-        //tree->print(std::cout);
+        tree->print(std::cout);
 
         std::ofstream file(output,std::ios::binary|std::ios::out);
         if(!file.is_open()){
@@ -54,6 +54,3 @@ int main(int argc, const char* argv[]) {
     if(argc<3){std::cerr<<"Wrong usage, pass input file and output file as args.";return 1;}
     return encode<{.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true}>(argv[1],argv[2]);
 }
-    */
-
-    int main(){}

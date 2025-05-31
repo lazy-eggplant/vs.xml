@@ -32,7 +32,8 @@ executable(
     './src/from-xml.cpp',
     install: false,
     dependencies: [
-        vs_xml_dep
+        vs_xml_dep,
+        mio_dep
     ],
 )
 
@@ -41,7 +42,8 @@ executable(
     './src/to-xml.cpp',
     install: false,
     dependencies: [
-        vs_xml_dep
+        vs_xml_dep,
+        mio_dep
     ],
 )
 
@@ -50,6 +52,7 @@ executable(
     './src/mmap.cpp',
     install: false,
     dependencies: [
-        vs_xml_dep
+        vs_xml_dep,
+        mio_dep
     ],
 )

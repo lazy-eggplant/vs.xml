@@ -10,7 +10,7 @@
 #include <vs-xml/parser.hpp>
 #include <vs-xml/serializer.hpp>
 #include <vs-xml/document.hpp>
-/*
+
 #include <mio/mmap.hpp>
 
 int decode(std::filesystem::path input, std::filesystem::path output){
@@ -25,7 +25,12 @@ int decode(std::filesystem::path input, std::filesystem::path output){
             return 4;
         }
 
-        if(!tree.print(file)){
+        if(!tree.has_value()){
+            std::cerr << "Tree is not valid\n";
+            return 6;
+        }
+
+        if(!tree->print(file)){
             std::cerr << "Error in serialization to XML\n";
             return 5;
         }
@@ -41,6 +46,3 @@ int main(int argc, const char* argv[]) {
     if(argc<3){std::cerr<<"Wrong usage, pass input file and output file as args.";return 1;}
     return decode(argv[1],argv[2]);
 }
-    */
-
-    int main(){}

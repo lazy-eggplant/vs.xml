@@ -2,6 +2,10 @@
 #include <vs-xml/document.hpp>
 using namespace xml;
 
+/*
+    How to build a simple tree:
+*/
+
 int main(){
     //Initialize a tree builder. It is going to manage its own memory.
     //Right now there is no variant operating on externally owned buffers will be provided, but it might be added at some point.
@@ -23,6 +27,7 @@ int main(){
         bld.comment("This is a comment! <escape> sequences will be handled.");
         bld.text("This is some text! <escape> sequences will be handled.");
         bld.cdata("This is some cdata! <escape> sequences will be handled.");
+        bld.proc("php");
         //Feel free to rewrite this cycle as a map lambda in modern C++
         for(auto& txt: texts){
             bld.begin("child");
