@@ -73,6 +73,11 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="structVS__XML__NS_1_1ArchiveRaw-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">VS_XML_NS::ArchiveRaw Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -91,6 +96,33 @@ Inheritance diagram for VS_XML_NS::ArchiveRaw:</div>
 <area shape="poly" title=" " alt="" coords="100,44,100,79,95,79,95,44"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1ArchiveRaw_1_1from__binary__error__t.html">from_binary_error_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af5b4f90b7fe2e8cf60aeff11b743f194" id="r_af5b4f90b7fe2e8cf60aeff11b743f194"><td class="memItemLeft" align="right" valign="top"><a id="af5b4f90b7fe2e8cf60aeff11b743f194" name="af5b4f90b7fe2e8cf60aeff11b743f194"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>save_binary</b> (std::ostream &amp;out) const</td></tr>
+<tr class="separator:af5b4f90b7fe2e8cf60aeff11b743f194"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acffabaac5b3cacf31d23c77d0cb93baa" id="r_acffabaac5b3cacf31d23c77d0cb93baa"><td class="memItemLeft" align="right" valign="top"><a id="acffabaac5b3cacf31d23c77d0cb93baa" name="acffabaac5b3cacf31d23c77d0cb93baa"></a>
+std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>rsv</b> (<a class="el" href="structVS__XML__NS_1_1sv.html">sv</a> s) const</td></tr>
+<tr class="separator:acffabaac5b3cacf31d23c77d0cb93baa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2ac73a176129102739576e609e1d828" id="r_ab2ac73a176129102739576e609e1d828"><td class="memItemLeft" align="right" valign="top"><a id="ab2ac73a176129102739576e609e1d828" name="ab2ac73a176129102739576e609e1d828"></a>
+std::optional&lt; <a class="el" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (size_t idx)</td></tr>
+<tr class="separator:ab2ac73a176129102739576e609e1d828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a54491b3bec52383870b815b4c870fc64" id="r_a54491b3bec52383870b815b4c870fc64"><td class="memItemLeft" align="right" valign="top"><a id="a54491b3bec52383870b815b4c870fc64" name="a54491b3bec52383870b815b4c870fc64"></a>
+static std::expected&lt; <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>, <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1from__binary__error__t.html">TreeRaw::from_binary_error_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>from_binary</b> (std::span&lt; uint8_t &gt; region)</td></tr>
+<tr class="separator:a54491b3bec52383870b815b4c870fc64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02dca47b3397cf79e1f9304372bb49ff" id="r_a02dca47b3397cf79e1f9304372bb49ff"><td class="memItemLeft" align="right" valign="top"><a id="a02dca47b3397cf79e1f9304372bb49ff" name="a02dca47b3397cf79e1f9304372bb49ff"></a>
+static std::expected&lt; const <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>, <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1from__binary__error__t.html">TreeRaw::from_binary_error_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>from_binary</b> (std::string_view region)</td></tr>
+<tr class="separator:a02dca47b3397cf79e1f9304372bb49ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for an archive of documents. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Unless you need MAXIMUM PERFORMANCE, your are better using its derived <a class="el" href="structVS__XML__NS_1_1Archive.html" title="the archive class you should use.">VS_XML_NS::Archive</a></dd></dl>
