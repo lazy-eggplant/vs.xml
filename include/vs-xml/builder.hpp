@@ -38,6 +38,8 @@ namespace details{
     struct Symbols<builder_config_t::symbols_t::EXTERN_ABS>{
         std::string_view symbols = {nullptr,std::span<uint8_t>::extent};
 
+        using sv_t = std::string_view;
+
         inline std::string_view rsv(std::string_view s){return s;}
         inline std::string_view label(std::string_view s){return s;}
         inline std::string_view symbol(std::string_view s){return s;}
@@ -46,6 +48,8 @@ namespace details{
     template <>
     struct Symbols<builder_config_t::symbols_t::EXTERN_REL>{
         std::string_view symbols;
+
+        using sv_t = sv;
 
         //TODO: Add checks?
         inline std::string_view rsv(sv s){return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);}
@@ -60,6 +64,8 @@ namespace details{
     template <>
     struct Symbols<builder_config_t::symbols_t::OWNED>{
         std::vector<uint8_t> symbols;
+
+        using sv_t = sv;
 
         sv label(std::string_view s);
         inline sv symbol(std::string_view s){return label(s);}
@@ -216,13 +222,13 @@ struct TreeBuilder : details::BuilderBase{
          * @details The current state for symbols is preserved, and the new tree will inherit them.
          * @return std::expected<std::vector<uint8_t>,error_t> 
          */
-        [[nodiscard]] std::expected<std::vector<uint8_t>,error_t> close_frame(std::string_view name=""){
+        [[nodiscard]] std::expected<std::pair<std::string_view,std::vector<uint8_t>>,error_t> close_frame(std::string_view name=""){
             //Record a symbol for the frame name, so that the name string_view can be returned.
             auto sv_name = rsv(label(name));
             if (auto ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)return std::unexpected(ret);
             open=true;
             attribute_block=false;
-            return std::exchange(buffer, {});
+            return {sv_name,std::exchange(buffer, {})};
         }
 
         /**

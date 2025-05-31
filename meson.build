@@ -95,7 +95,7 @@ endif
 pconf = import('pkgconfig')
 pconf.generate(
   vs_xml_lib,
-  description: 'XML parser and tree builder for limited mutability scenarios',
+  description: 'High performance XML parser, tree builder an query system for trees with limited mutability',
   url: 'https://github.com/lazy-eggplant/vs-xml',
   version: meson.project_version(),
 )

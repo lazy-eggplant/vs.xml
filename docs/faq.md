@@ -42,5 +42,15 @@ The standard C++ library is not your best option, you might want to check for al
 
 At the moment this is not directly supported by the library and will likely never be. However, we plan to introduce features to make it easier on downstream code.  
 Right now, queries are not trivially hash-able. At some point we will add a query builder to structure query trees into linear buffers, more or less like we do with XML.  
-The evolving plans for this feature are reporte in a [specifications document](./docs/specs/query-builder.md).  
+The evolving plans for this feature are reported in a [specifications document](./docs/specs/query-builder.md).  
 Until then, a similar solution has to be implemented fully downstream.
+
+> How to serialize/deserialize attributes of text fields into a different data type, like integers or floating point numbers?
+
+XML has no intrinsic concept of "serialized data". All attributes and text values are string_views.  
+We have schema languages built on top of XML, like RelaxNG. They usually allow annotating types for fields, but it has nothing to do with XML; hence, this library will not handle that.  
+However, there are some intended workarounds:
+- The symbol table can pretty much fit whatever the user's want. String views are not null terminated.  
+  So, building a tree with `.raw_strings=true` would allow for arbitrary data, as long as no attempt is made to serialize the tree to XML from its binary representation.
+- It is possible to represent the de-serialized values as annotations over tree nodes, and store them into a map-like container.  
+  Those could either be saved alongside the original file (good if the serialization/de-serialization process is complex), or just generated when needed just to be cached for a faster retrieval.

@@ -48,21 +48,7 @@ int main() {
     builder2.end();
     auto tree2 = builder2.close();
 
-    {
-        std::ofstream file("./assets/local/demo-0.bin",std::ios::binary|std::ios::out);
-            tree.save_binary(file);
-        file.close();
-    }
 
-    std::print("\n~~~~\n");
-
-    {
-        mio::mmap_source mmap("./assets/local/demo-0.bin");
-        auto tmp = xml::TreeRaw::from_binary(std::span((uint8_t*)mmap.data(),mmap.size()));
-        tmp->print(std::cout,{});
-    }
-
-    std::print("\n~~~~\n");
 
     return 0;
 }

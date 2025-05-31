@@ -1,4 +1,5 @@
 mio_dep = dependency('mio')
+gtl_dep = dependency('gtl')
 
 executable(
     'readme',
@@ -54,5 +55,16 @@ executable(
     dependencies: [
         vs_xml_dep,
         mio_dep
+    ],
+)
+
+executable(
+    'annotations',
+    './src/annotations.cpp',
+    install: false,
+    dependencies: [
+        vs_xml_dep,
+        mio_dep,
+        gtl_dep
     ],
 )
