@@ -39,7 +39,7 @@ int main() {
     auto tree = *builder.close();
     tree.print(std::cout,{});
 
-    mio::mmap_source mmap("./assets/local/demo-0.xml");
+    mio::mmap_source mmap("./assets/local/demo-0.xml"); //TODO: test failing due to file location when running as testsuite I guess.
     std::span<char> w((char*)mmap.data(),mmap.size());
 
     xml::TreeBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> builder2;

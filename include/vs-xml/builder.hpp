@@ -222,13 +222,13 @@ struct TreeBuilder : details::BuilderBase{
          * @details The current state for symbols is preserved, and the new tree will inherit them.
          * @return std::expected<std::vector<uint8_t>,error_t> 
          */
-        [[nodiscard]] std::expected<std::pair<std::string_view,std::vector<uint8_t>>,error_t> close_frame(std::string_view name=""){
+        [[nodiscard]] std::expected<std::pair<sv,std::vector<uint8_t>>,error_t> close_frame(std::string_view name=""){
             //Record a symbol for the frame name, so that the name string_view can be returned.
-            auto sv_name = rsv(label(name));
+            auto sv_name = label(name);
             if (auto ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)return std::unexpected(ret);
             open=true;
             attribute_block=false;
-            return {sv_name,std::exchange(buffer, {})};
+            return std::pair{sv_name,std::exchange(buffer, {})};
         }
 
         /**

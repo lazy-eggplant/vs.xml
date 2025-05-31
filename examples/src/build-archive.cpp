@@ -19,7 +19,7 @@ int main(){
 
     constexpr std::string_view texts[] = {"Text 0", "Text 1", "Text 2"};
 
-    std::vector<std::pair<std::string_view,std::vector<uint8_t>>> fragments;
+    std::vector<std::pair<sv,std::vector<uint8_t>>> fragments;
     fragments.reserve(sizeof(texts)/sizeof(std::string_view));
 
     for(auto text : texts){

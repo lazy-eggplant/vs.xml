@@ -210,7 +210,7 @@ bool TreeRaw::save_binary(std::ostream& out)const{
 
     size_t align_symbols = (symbols.size_bytes()%16==0)?0:(16-symbols.size_bytes()%16);
     header.offset_symbols = header.size();
-    binary_header_t::section_t section = {header.size()+symbols.size_bytes()+align_symbols,header.size()+symbols.size_bytes()+align_symbols+buffer.size_bytes()};
+    binary_header_t::section_t section = {{0,0},header.size()+symbols.size_bytes()+align_symbols,header.size()+symbols.size_bytes()+align_symbols+buffer.size_bytes()};
     out.write((const char*)&header, sizeof(header));
     out.write((const char*)&section, sizeof(binary_header_t::section_t));
     out.write((const char*)symbols.data(), symbols.size_bytes());
@@ -241,25 +241,22 @@ std::expected<TreeRaw, TreeRaw::from_binary_error_t> TreeRaw::from_binary(std::s
     if(header.docs_count != 1)
         return std::unexpected(from_binary_error_t{from_binary_error_t::TooManyDocs});
 
-    //TODO: Add checks on word size.
-    //TODO: Restore bounds checks on these entries.
+    if  (
+            header.size__delta_ptr!=sizeof(delta_ptr_t) || 
+            header.size__xml_count!=sizeof(xml_count_t) ||
+            header.size__xml_enum_size!=sizeof(xml_enum_size_t) ||
+            header.size__xml_size!=sizeof(xml_size_t)
+        ) return std::unexpected(from_binary_error_t{from_binary_error_t::TypeMismatch});
 
-    /*
-    if(region.size_bytes() < header.offset_end)
-        return std::unexpected(from_binary_error_t{from_binary_error_t::TruncatedSpan});
-    
-    if(header.offset_tree > header.offset_symbols)
-        return std::unexpected(from_binary_error_t{from_binary_error_t::TreeOutOfBounds});
-    
-    if(header.offset_symbols > header.offset_end)
-        return std::unexpected(from_binary_error_t{from_binary_error_t::SymbolsOutOfBounds});
-    */
+    auto endianess = std::endian::native==std::endian::little?binary_header_t::endianess_t::LITTLE:binary_header_t::endianess_t::BIG;
+    if(header.endianess!=endianess) return std::unexpected(from_binary_error_t{from_binary_error_t::TypeMismatch});
+
+    //TODO: Restore bounds checks (?) on sections?
 
     return TreeRaw(header.configs,
         std::span<uint8_t>{region.data()+header.region(0).start, region.data()+header.region(0).end},
         std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.region(0).start}
     );
-
 }
 
 
@@ -278,6 +275,7 @@ std::string_view TreeRaw::from_binary_error_t::msg() {
         case TreeOutOfBounds:     return "Tree for loaded file is out of bounds";
         case SymbolsOutOfBounds:  return "Symbol table for loaded file is out of bounds";
         case TooManyDocs:         return "Too many documents in the table";
+        case TypeMismatch:        return "Mismatch of types between the compiled library and the binary";
         default:                  return "Unknown error";
     }
 }

@@ -10,6 +10,7 @@
  * 
  */
 
+#include <string_view>
 #include  <vs-xml/commons.hpp>
 #include  <vs-xml/document.hpp>
 
@@ -22,33 +23,19 @@ namespace VS_XML_NS{
  */
 struct ArchiveRaw{
     private:
-        std::vector<std::vector<uint8_t>> documents;
+        std::vector<std::pair<sv,std::vector<uint8_t>>> documents;
         std::vector<uint8_t> symbols_i;
         std::span<uint8_t> symbols;
         builder_config_t configs;
 
     public:
 
-    struct from_binary_error_t {
-        enum Code {
-            OK = 0,
-            HeaderTooSmall,
-            MagicMismatch,
-            MajorVersionMismatch,
-            MinorVersionTooHigh,
-            TruncatedSpan,
-            TreeOutOfBounds,
-            SymbolsOutOfBounds,
-            TooManyDocs
-        } code;
-        
-        std::string_view msg();
-    };
+    using from_binary_error_t = TreeRaw::from_binary_error_t;
 
     bool save_binary(std::ostream& out)const;
 
-    [[nodiscard]] static std::expected<TreeRaw, TreeRaw::from_binary_error_t> from_binary(std::span<uint8_t> region);
-    [[nodiscard]] static std::expected<const TreeRaw , TreeRaw::from_binary_error_t> from_binary(std::string_view region);
+    [[nodiscard]] static std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> from_binary(std::span<uint8_t> region);
+    [[nodiscard]] static std::expected<const ArchiveRaw , ArchiveRaw::from_binary_error_t> from_binary(std::string_view region);
 
     inline std::string_view rsv(sv s) const{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
@@ -58,7 +45,7 @@ struct ArchiveRaw{
         //xml_assert(documents.size()>idx, "Out of bounds document selected");
         if(idx>documents.size())return {};
         auto v = documents.at(idx);
-        return DocumentRaw(configs,std::span{v.begin(),v.end()},std::span{symbols.begin(),symbols.end()});
+        return DocumentRaw(configs,std::span{v.second.begin(),v.second.end()},std::span{symbols.begin(),symbols.end()});
     }
 };
 

@@ -54,7 +54,8 @@ struct TreeRaw{
             TruncatedSpan,
             TreeOutOfBounds,
             SymbolsOutOfBounds,
-            TooManyDocs
+            TooManyDocs,
+            TypeMismatch
         } code;
         
         std::string_view msg();

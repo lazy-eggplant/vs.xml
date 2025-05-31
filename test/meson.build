@@ -45,3 +45,15 @@ test('query',executable(
     ],
 ))
 
+
+test('binary-format',executable(
+    'binary-format',
+    './src/binary-format.cpp',
+    install: false,
+    cpp_args: [],
+    link_args: [],
+    dependencies: [
+        vs_xml_dep,
+    ],
+))
+

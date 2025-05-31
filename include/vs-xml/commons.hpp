@@ -88,6 +88,7 @@ struct sv{
     inline sv(const void* offset, std::string_view v){base=((uint8_t*)v.data()-(uint8_t*)offset);length=v.length();}
 
     inline sv() = default;
+    inline sv(const sv& s) = default;
 };
 
 /**
@@ -114,7 +115,7 @@ struct __attribute__ ((packed)) builder_config_t{
  */
  
 struct __attribute__ ((packed)) binary_header_t{
-    const char magic[4] = {'$','X','M','L'};
+    const uint8_t magic[4] = {'$','X','M','L'};
     uint8_t format_major = VS_XML_NS::format_major;
     uint8_t format_minor = VS_XML_NS::format_minor;
     builder_config_t configs;
@@ -135,8 +136,13 @@ struct __attribute__ ((packed)) binary_header_t{
     uint64_t offset_symbols;
 
     struct section_t{
-        uint64_t start;
-        uint64_t end;
+        //Cannot use sv because not POD.
+        struct{
+            delta_ptr_t  base;
+            xml_count_t  length;
+        } name;
+        uint64_t     start;
+        uint64_t     end;
     } sections [];
 
     constexpr inline section_t region(size_t n) const{

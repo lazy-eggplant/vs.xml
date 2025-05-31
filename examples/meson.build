@@ -28,6 +28,16 @@ executable(
     ],
 )
 
+
+executable(
+    'archive-building',
+    './src/build-archive.cpp',
+    install: false,
+    dependencies: [
+        vs_xml_dep
+    ],
+)
+
 executable(
     'from-xml',
     './src/from-xml.cpp',
