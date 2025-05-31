@@ -201,7 +201,7 @@ struct TreeBuilder : details::BuilderBase{
          * 
          * @return std::expected<Tree,error_t> a wrapped tree if successful, or an error
          */
-        [[nodiscard]] inline std::expected<Tree,error_t> close(){
+        [[nodiscard]] std::expected<Tree,error_t> close(){
             if (auto ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)return std::unexpected(ret);
             if constexpr (
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||
@@ -216,7 +216,9 @@ struct TreeBuilder : details::BuilderBase{
          * @details The current state for symbols is preserved, and the new tree will inherit them.
          * @return std::expected<std::vector<uint8_t>,error_t> 
          */
-        [[nodiscard]] inline std::expected<std::vector<uint8_t>,error_t> close_frame(){
+        [[nodiscard]] std::expected<std::vector<uint8_t>,error_t> close_frame(std::string_view name=""){
+            //Record a symbol for the frame name, so that the name string_view can be returned.
+            auto sv_name = rsv(label(name));
             if (auto ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)return std::unexpected(ret);
             open=true;
             attribute_block=false;
@@ -228,7 +230,7 @@ struct TreeBuilder : details::BuilderBase{
          * @details Not to be used with `close` only with `close_frame`
          * @return std::optional<details::Symbols<configs.symbols>> 
          */
-        [[nodiscard]] inline std::optional<details::Symbols<configs.symbols>> extract_symbols(){
+        [[nodiscard]] std::optional<details::Symbols<configs.symbols>> extract_symbols(){
             if(open==true)return {};
             else return std::move(symbols);
         }

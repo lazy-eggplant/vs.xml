@@ -195,6 +195,8 @@ struct TreeRaw{
 
     template <typename T>
     friend struct wrp::base_t;
+
+    friend struct ArchiveRaw;
 };
 
 
