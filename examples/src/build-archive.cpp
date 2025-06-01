@@ -131,6 +131,10 @@ int main(){
     std::vector<std::pair<sv,std::vector<uint8_t>>> fragments;
     fragments.reserve(sizeof(texts)/sizeof(std::string_view));
 
+
+    //Here we constructs multiple documents but we preserve the table of symbols.
+    //Please notice the usage of `close_frame` and the final `extract_symbols` in place of the "normal" `close`.
+
     std::print("Constructing frames.\n");
 
     for(auto text : texts){
@@ -141,6 +145,7 @@ int main(){
             bld.text(text);
         bld.end();
 
+        //Register the current frame in a vector for later usage.
         if(auto t = bld.close_frame(text); t.has_value())fragments.emplace_back(*t);
         else{
             std::print(std::cerr,"Unable to complete construction of the tree {}",(int)t.error());
@@ -149,57 +154,52 @@ int main(){
 
     }
 
+    //Extract symbols once all documents have been built.
     std::print("Extracting symbols.\n");
-
     auto symbols = bld.extract_symbols();
     if(!symbols.has_value()){
         std::print(std::cerr,"Unable to complete construction of the tree; failure to handle symbols.");
         exit(1);
     }
 
+
+    //We now serialize the archive after creation onto a stream, just for demonstrative purposes.
+    std::print("Creating archive.\n");
     std::stringstream memstream;
 
-    std::print("Creating archive.\n");
-
-    //TODO: class not implemented yet, missing serialization.
     Archive archive({.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true},std::move(fragments),std::move(*symbols));
 
     std::print("Saving as binary.\n");
-
     if(!archive.save_binary(memstream)){
         std::print(std::cerr, "Failed to properly save the binary file\n");
         exit(1);
     }
-    //For this demo, we are just going to show the serialized version of this document on the standard output.
-    //archive->print(std::cout);
-
+  
     memstream.flush();
+    
     std::print("Loading from binary.\n");
     
     auto tmp_str = memstream.str();
 
-    std::print("Size {}\n",tmp_str.size());
-
+    //Building an archive this way makes it weak, make sure the buffer lifetime exceeds the one of the archive.
     auto archive_back = Archive::from_binary(tmp_str);
 
-    std::print("Serializing document to XML.\n");
-    
+    //Just some fancy display to show its binary form.    
     printSpan(std::span<const uint8_t>(reinterpret_cast<const uint8_t*>(tmp_str.data()), tmp_str.size()));
 
     if(!archive_back.has_value()){
         std::print(std::cerr,"{}",archive_back.error().msg());
         exit(3);
     }
-    auto doc0 = archive_back->get(0);
-    if(!doc0.has_value()){exit(1);}
 
-    std::print("Serializing document to XML.\n");
+    std::print("Serializing documents to XML.\n");
 
-    //for(auto doc: archive_back->)
     for(size_t i=0;i<archive_back->items();i++){
         archive_back->get(i)->print(std::cout);
         std::print("\n----\n");
     }
+
+    //If a name was given to the document, it is possible to search for it in place of of using an index via `get`.
 
     return 0;
 }
