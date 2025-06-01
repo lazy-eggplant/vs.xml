@@ -13,7 +13,12 @@
 namespace VS_XML_NS{
 
 std::function<bool(const unknown_t&, const unknown_t&)> TreeRaw::def_order_node() const{
-    throw "Not implemented";
+    #if VS_XML_NO_EXCEPT != true
+        throw std::runtime_error("Not implemented");
+    #else
+        //TODO: tidy logic
+        exit(1);
+    #endif
 }
 
 std::function<bool(const attr_t&, const attr_t&)> TreeRaw::def_order_attrs() const{

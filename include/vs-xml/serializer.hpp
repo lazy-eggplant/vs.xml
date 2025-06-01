@@ -12,10 +12,10 @@
 
 #include <cassert>
 
+#include <charconv>
 #include <expected>
 
 #include <optional>
-#include <stdexcept>
 #include <variant>
 #include <string>
 #include <string_view>
@@ -262,9 +262,8 @@ public:
                 return { 0, 0 };
             std::string numberStr(sv.substr(startDigits, pos - startDigits));
             unsigned long value = 0;
-            try {
-                value = std::stoul(numberStr, nullptr, isHex ? 16 : 10);
-            } catch (...) {
+            auto [ptr, ec] = std::from_chars(numberStr.data(), numberStr.data()+ numberStr.size(), value, isHex ? 16 : 10);
+            if (ec != std::errc{}) {
                 return { 0, 0 };
             }
             if (value > 0xFF)

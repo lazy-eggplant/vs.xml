@@ -153,7 +153,14 @@ BuilderBase::error_t BuilderBase::inject(const TreeRaw& tree, const unknown_t* b
     //If not, and the Builder has no symbols compression ongoing, the injection will be rejected.
     //If symbol compression is ongoing, the tree content will be "parsed" and added via fast bytecode operations.
 
-    throw "Not implemented";
+    {
+        #if VS_XML_NO_EXCEPT != true
+            throw std::runtime_error("Not implemented");
+        #else
+            //TODO: tidy logic
+            exit(1);
+        #endif
+    }
 }
 
 }

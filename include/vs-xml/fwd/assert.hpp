@@ -36,7 +36,7 @@ namespace VS_XML_NS{
             std::cerr << frame << std::endl;
 #endif
 */
-        #if not VS_XML_NO_EXCEPT
+        #if VS_XML_NO_EXCEPT != true
         throw std::runtime_error(errorMessage);
         #else
         std::exit(1);

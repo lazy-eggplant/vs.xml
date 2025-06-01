@@ -2,7 +2,7 @@ project(
   'vs-xml',
   ['cpp'],
   version: '0.2.6',
-  meson_version: '>= 1.1',
+  meson_version: '>= 1.3',
   default_options: ['cpp_std=c++23'],
 )
 
@@ -21,6 +21,13 @@ conf.set('VS_XML_VERSION_MAJOR', major_version)
 conf.set('VS_XML_VERSION_MINOR', minor_version)
 conf.set('VS_XML_VERSION_REV', rev_version)
 conf.set_quoted('VS_XML_VERSION', major_version + '.' + minor_version + '.' + rev_version)
+if get_option('noexcept')
+  conf.set('VS_XML_NO_EXCEPT', 'true')
+  #TODO: explicit check for other flags to notify they are incompatible with noexcept
+  if get_option('utils') or get_option('benchmarks') or get_option('tests') or get_option('examples')
+    error('Only the base library can be built if using `noexcept` set true')
+  endif
+endif
 
 if get_option('use_fmt')
   fmt_dep = dependency('fmt')
@@ -44,7 +51,8 @@ configure_file(output : 'config.hpp',
 cfgfile = custom_target('make-config',
   input : join_paths(meson.current_build_dir(), 'config.hpp'),
   output : ['config.hpp.fake-meson'],
-  command : ['sh', '-c', 'rm -f ../include/vs-xml/config.hpp && ln -s @INPUT0@ ../include/vs-xml/config.hpp'],
+  #This will not work with more than a single build directory (the last one is going to be applied).
+  command : ['sh', '-c', 'rm -f @CURRENT_SOURCE_DIR@/include/vs-xml/config.hpp && ln -s @INPUT0@ @CURRENT_SOURCE_DIR@/include/vs-xml/config.hpp'],
   capture : true,
   install : false,
   build_by_default: true
@@ -77,20 +85,25 @@ vs_xml_dep = declare_dependency(
 
 install_subdir('include/vs-xml', install_dir : 'include', strip_directory: false, follow_symlinks: true )
 
-if get_option('tests')
-  subdir(['./test/'])
-endif
+# Ignore these targets if not the root project
+if meson.is_subproject() == false
 
-if get_option('benchmarks')
-  subdir(['./benchmark/'])
-endif
+  if get_option('tests')
+    subdir(['./test/'])
+  endif
 
-if get_option('examples')
-  subdir(['./examples/'])
-endif
+  if get_option('benchmarks')
+    subdir(['./benchmark/'])
+  endif
 
-if get_option('utils')
-  subdir(['./utils/'])
+  if get_option('examples')
+    subdir(['./examples/'])
+  endif
+
+  if get_option('utils')
+    subdir(['./utils/'])
+  endif
+
 endif
 
 pconf = import('pkgconfig')
