@@ -101,7 +101,7 @@ public:
             }
             // When expanding an escape sequence, return the proper character.
             if (inEscapeExpansion())
-                return currentEscape().at(escapePos_);
+                return currentEscape()[escapePos_];
             else {
                 char c = parent_->sv_[pos_];
                 std::string_view esc = entities_map(c);

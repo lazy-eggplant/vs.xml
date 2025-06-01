@@ -1,7 +1,7 @@
 #include <iostream>
 #include <print>
 #include <string_view>
-#include <vs-xml/document.hpp>
+#include <vs-xml/archive.hpp>
 using namespace xml;
 
 /*
@@ -45,12 +45,12 @@ int main(){
     }
 
     //TODO: class not implemented yet, missing serialization.
-    /*Archive archive;
-
+    Archive archive(std::move(fragments),std::move(*symbols));
+    archive.save_binary(std::cout);
     //For this demo, we are just going to show the serialized version of this document on the standard output.
-    archive->print(std::cout);
+    //archive->print(std::cout);
     std::cout<<"\n";
-    */
+    
 
     return 0;
 }

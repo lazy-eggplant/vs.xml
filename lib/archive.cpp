@@ -40,9 +40,12 @@ bool ArchiveRaw::save_binary(std::ostream& out)const{
     return true;
 }
 
-/*
+
 std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_binary(std::span<uint8_t> region){
-   const binary_header_t& header = *(const binary_header_t*)region.data();
+    std::vector<std::pair<sv,std::span<uint8_t>>> documents;
+    std::span<uint8_t> symbols;
+
+    const binary_header_t& header = *(const binary_header_t*)region.data();
 
     if(region.size_bytes() < header.size())
         return std::unexpected(from_binary_error_t{from_binary_error_t::HeaderTooSmall});
@@ -69,17 +72,24 @@ std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_bina
     auto endianess = std::endian::native==std::endian::little?binary_header_t::endianess_t::LITTLE:binary_header_t::endianess_t::BIG;
     if(header.endianess!=endianess) return std::unexpected(from_binary_error_t{from_binary_error_t::TypeMismatch});
 
-    //TODO: Restore bounds checks (?) on sections?
+    documents.reserve(header.docs_count);
 
-    return TreeRaw(header.configs,
-        std::span<uint8_t>{region.data()+header.region(0).start, region.data()+header.region(0).end},
-        std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.region(0).start}
-    );
+    for(size_t i=0;i<header.docs_count;i++){
+        auto& section = header.sections[i];
+        documents.emplace_back(
+            sv{section.name.base,section.name.length},
+            std::span<uint8_t>{region.data()+header.region(0).start, region.data()+header.region(0).end}
+        );
+    }
+
+    symbols=std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.region(0).start};
+
+    return ArchiveRaw(std::move(documents),symbols);
 }
-*/
 
 
-std::expected<const TreeRaw, TreeRaw::from_binary_error_t>  TreeRaw::from_binary(std::string_view region){
+
+std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_binary(std::string_view region){
     return from_binary(std::span<uint8_t>{(uint8_t*)region.begin(),(uint8_t*)region.end()});
 }
 

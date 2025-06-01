@@ -54,6 +54,7 @@ cfgfile = custom_target('make-config',
 vs_xml_lib = library(
     'vs-xml',
     [
+      'lib/archive.cpp',
       'lib/parser.cpp',
       'lib/serializer.cpp',
       'lib/tree.cpp',

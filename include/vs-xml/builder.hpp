@@ -36,7 +36,7 @@ namespace details{
 
     template <>
     struct Symbols<builder_config_t::symbols_t::EXTERN_ABS>{
-        std::string_view symbols = {nullptr,std::span<uint8_t>::extent};
+        std::span<const uint8_t> symbols = {(const uint8_t*)nullptr,std::span<uint8_t>::extent};
 
         using sv_t = std::string_view;
 
@@ -236,9 +236,9 @@ struct TreeBuilder : details::BuilderBase{
          * @details Not to be used with `close` only with `close_frame`
          * @return std::optional<details::Symbols<configs.symbols>> 
          */
-        [[nodiscard]] std::optional<details::Symbols<configs.symbols>> extract_symbols(){
+        [[nodiscard]] std::optional<std::vector<uint8_t>> extract_symbols(){
             if(open==true)return {};
-            else return std::move(symbols);
+            else return std::move(symbols.symbols);
         }
         
         /**

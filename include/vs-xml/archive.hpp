@@ -10,6 +10,7 @@
  * 
  */
 
+#include <cstdint>
 #include <string_view>
 #include  <vs-xml/commons.hpp>
 #include  <vs-xml/document.hpp>
@@ -23,7 +24,16 @@ namespace VS_XML_NS{
  */
 struct ArchiveRaw{
     private:
-        std::vector<std::pair<sv,std::vector<uint8_t>>> documents;
+        //TODO: In theory this memory allocation could be skipped for memory mapped archives, as the "vector" is already in memory. 
+        //But it is mildly annoying to do so, for now the vector stays. This is how it will be organized later on.
+        /*enum storage_t{OWNING,EXTERNAL} storage_mode;
+        union{
+            std::vector<std::pair<sv,std::vector<uint8_t>>> documents_owning;
+            std::span<binary_header_t::section_t> documents_extern;
+        };*/
+
+        std::vector<std::pair<sv,std::vector<uint8_t>>> documents_i;
+        std::vector<std::pair<sv,std::span<uint8_t>>> documents;    
         std::vector<uint8_t> symbols_i;
         std::span<uint8_t> symbols;
         builder_config_t configs;
@@ -35,7 +45,7 @@ struct ArchiveRaw{
     bool save_binary(std::ostream& out)const;
 
     [[nodiscard]] static std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> from_binary(std::span<uint8_t> region);
-    [[nodiscard]] static std::expected<const ArchiveRaw , ArchiveRaw::from_binary_error_t> from_binary(std::string_view region);
+    [[nodiscard]] static std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> from_binary(std::string_view region);
 
     inline std::string_view rsv(sv s) const{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
@@ -44,20 +54,80 @@ struct ArchiveRaw{
     inline std::optional<DocumentRaw> get(size_t idx){
         //xml_assert(documents.size()>idx, "Out of bounds document selected");
         if(idx>documents.size())return {};
-        auto v = documents.at(idx);
+        auto v = documents[idx];
         return DocumentRaw(configs,std::span{v.second.begin(),v.second.end()},std::span{symbols.begin(),symbols.end()});
     }
+
+    inline std::optional<const DocumentRaw> get(size_t idx) const{
+        //xml_assert(documents.size()>idx, "Out of bounds document selected");
+        if(idx>documents.size())return {};
+        auto v = documents[idx];
+        return DocumentRaw(configs,std::span{v.second.begin(),v.second.end()},std::span{symbols.begin(),symbols.end()});
+    }
+
+    //TODO
+    inline std::optional<DocumentRaw> get(std::string_view name){
+        for(auto& doc: documents){
+            if(rsv(doc.first)==name)return DocumentRaw(configs,std::span{doc.second.begin(),doc.second.end()},std::span{symbols.begin(),symbols.end()});
+        }
+        return {};
+    }
+
+    inline std::optional<const DocumentRaw> get(std::string_view name) const{
+        for(auto& doc: documents){
+            if(rsv(doc.first)==name)return DocumentRaw(configs,doc.second,symbols);
+        }
+        return {};
+    }
+
+    ArchiveRaw(std::vector<std::pair<sv,std::vector<uint8_t>>>&& docs, std::vector<uint8_t>&& syms):documents_i(docs),symbols_i(syms){
+        auto items = documents_i.size();
+        documents.reserve(items);
+        for(size_t i=0;i<items;i++){
+            auto& entry = documents_i[i];
+            documents[i]={entry.first,entry.second};
+        }
+        symbols=symbols_i;
+    }
+    inline ArchiveRaw(std::vector<std::pair<sv,std::span<uint8_t>>>&& docs, std::span<uint8_t> syms):documents(docs),symbols(syms){}
+    
+    //TODO: convert from const to ...
+    //inline ArchiveRaw(std::vector<std::pair<sv,std::string_view>>&& docs, std::string_view syms){}
+
+    //ArchiveRaw(const ArchiveRaw&) = default;
+    private:
+        ArchiveRaw(){};
 };
 
 /**
  * @brief the archive class you should use.
  */
 struct Archive : ArchiveRaw{
-    inline std::optional<DocumentRaw> get(size_t idx){
+    inline std::optional<Document> get(size_t idx){
         auto tmp = ArchiveRaw::get(idx);
         if(tmp.has_value())return Document(std::move(*tmp));
         else return {};
     }
+
+    inline std::optional<const Document> get(size_t idx) const{
+        auto tmp = ArchiveRaw::get(idx);
+        if(tmp.has_value())return Document(std::move(*tmp));
+        else return {};
+    }
+
+    inline std::optional<const Document> get(std::string_view name) const{
+        auto tmp = ArchiveRaw::get(name);
+        if(tmp.has_value())return Document(std::move(*tmp));
+        else return {};
+    }
+
+    inline std::optional<Document> get(std::string_view name){
+        auto tmp = ArchiveRaw::get(name);
+        if(tmp.has_value())return Document(std::move(*tmp));
+        else return {};
+    }
+
+    using ArchiveRaw::ArchiveRaw;
 };
 
 }

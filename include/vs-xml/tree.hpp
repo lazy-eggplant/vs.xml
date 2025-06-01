@@ -177,8 +177,8 @@ struct TreeRaw{
     TreeRaw(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym):
         buffer(src),symbols(sym),configs(cfg){}
 
-    TreeRaw(const builder_config_t& cfg, std::string_view src, std::string_view sym):
-        buffer((uint8_t*)src.data(),src.length()),symbols((uint8_t*)sym.data(),sym.length()),configs(cfg){
+    TreeRaw(const builder_config_t& cfg, std::span<const uint8_t> src, std::span<const uint8_t> sym):
+        buffer((uint8_t*)src.data(),src.size_bytes()),symbols((uint8_t*)sym.data(),sym.size_bytes()),configs(cfg){
     }
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
