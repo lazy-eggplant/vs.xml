@@ -1,3 +1,6 @@
+This release could not be postponed as the previous changes to the `meson.build` made the library not usable as a sub-dependency.  
+Hopefully this fixes that, but it means some other features are a bit under-baked or not tested.
+
 ## New features
 
 We now have full support for `ArchiveRaw` and `Archive`.  
@@ -12,6 +15,7 @@ We are almost ready to reach `v0.3.x`. In that new minor branch I will be refact
 ### Other minor features
 
 - Additional checks for word sizes and endianess when reading binaries, to ensure binary compatibility.
+- Work in the background to make the library more compatible with embedded targets and offloading.
 
 ## Breaking
 

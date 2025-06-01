@@ -10,6 +10,7 @@ A single application will have to build and link different versions of this libr
 - `utils` defaults to true. Change to compile the extra system utilities.
 - `use_fmt` defaults to true. Disable it if you want to force using `std::print`/`std::format` instead, but be mindful [they are much slower](https://github.com/lazy-eggplant/vs.xml/issues/8).
 - `use_gtl` defaults to false. Enable it to use alternative STL-like containers with better performance and memory-mappability (is that even a word?).
+- `noexcept` defaults to false. Used to disable exceptions from the build. Often needed for embedded or offloaded targets.
 
 ## Defines
 
