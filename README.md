@@ -90,11 +90,15 @@ Doxygen and the generated documentation can be found in the [github pages](https
 ## Supported platforms
 
 This library is mostly standalone, but it requires support for the C standard library and a modern version of the C++ standard library.  
-As such, it might not be the best option for embedded systems, but the current codebase could be adapted to be.  
-Other dependencies are only used for the test-suite and benchmarks, they are not needed to build and install `vs.xml` to your system.
-
-Also, a modern version of C++ should be used.  
 I am working with C++23 for development, and I don't really plan on directly supporting older revisions of the language at the expense of code simplicity.  
+Other dependencies are only used for the test-suite and benchmarks, they are not needed to build and install `vs.xml` to your system.  
+
+Still, many of its features can be replaced by alternative libraries which are more suitable for embedded systems.  
+You can track our efforts for embedded support in the [dedicated page](./docs/embedded.md) and [tracker](https://github.com/lazy-eggplant/vs.xml/issues/9).  
+
+We also try our best to ensure this library (or a subset of it) can properly work on offloaded targets like GPUs via [OpenMP](https://www.openmp.org/).  
+To use `vs.xml` to its fullest extent, make sure you have a kernel image with unified memory access, and GPUs capable of that.  
+We have a [dedicated page](./docs/offloading.md) and [tracker](https://github.com/lazy-eggplant/vs.xml/issues/15).  
 
 ## Typical applications
 
