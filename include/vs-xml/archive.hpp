@@ -80,21 +80,23 @@ struct ArchiveRaw{
         return {};
     }
 
-    ArchiveRaw(std::vector<std::pair<sv,std::vector<uint8_t>>>&& docs, std::vector<uint8_t>&& syms):documents_i(docs),symbols_i(syms){
+    ArchiveRaw(const builder_config_t& cfg, std::vector<std::pair<sv,std::vector<uint8_t>>>&& docs, std::vector<uint8_t>&& syms):documents_i(docs),symbols_i(syms),configs(cfg){
         auto items = documents_i.size();
         documents.reserve(items);
-        for(size_t i=0;i<items;i++){
-            auto& entry = documents_i[i];
-            documents[i]={entry.first,entry.second};
+        for(auto& doc : documents_i){
+            documents.emplace_back(doc.first,doc.second);
         }
         symbols=symbols_i;
     }
-    inline ArchiveRaw(std::vector<std::pair<sv,std::span<uint8_t>>>&& docs, std::span<uint8_t> syms):documents(docs),symbols(syms){}
+    inline ArchiveRaw(const builder_config_t& cfg, std::vector<std::pair<sv,std::span<uint8_t>>>&& docs, std::span<uint8_t> syms):documents(docs),symbols(syms),configs(cfg){}
     
     //TODO: convert from const to ...
     //inline ArchiveRaw(std::vector<std::pair<sv,std::string_view>>&& docs, std::string_view syms){}
 
     //ArchiveRaw(const ArchiveRaw&) = default;
+
+    inline size_t items() const{return documents.size();}
+
     private:
         ArchiveRaw(){};
 };
@@ -126,6 +128,23 @@ struct Archive : ArchiveRaw{
         if(tmp.has_value())return Document(std::move(*tmp));
         else return {};
     }
+
+    [[nodiscard]] static inline std::expected<Archive, ArchiveRaw::from_binary_error_t> from_binary(std::span<uint8_t> region){
+        auto tmp = ArchiveRaw::from_binary(region);
+        if(tmp.has_value())return Archive(std::move(*tmp));
+        else return tmp;
+    }
+    
+    [[nodiscard]] static inline std::expected<Archive, ArchiveRaw::from_binary_error_t> from_binary(std::string_view region){
+        auto tmp = ArchiveRaw::from_binary(region);
+        if(tmp.has_value())return Archive(std::move(*tmp));
+        else return tmp;
+    }
+
+    inline Archive(ArchiveRaw&& ref):ArchiveRaw(std::move(ref)){}
+    inline Archive(const ArchiveRaw&& ref):ArchiveRaw(std::move(ref)){}
+
+    inline ArchiveRaw& downgrade(){return *this;}
 
     using ArchiveRaw::ArchiveRaw;
 };

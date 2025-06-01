@@ -1,3 +1,4 @@
+#include <expected>
 #include <vs-xml/archive.hpp>
 
 namespace VS_XML_NS{
@@ -13,16 +14,19 @@ bool ArchiveRaw::save_binary(std::ostream& out)const{
 
     size_t align_symbols = (symbols.size_bytes()%16==0)?0:(16-symbols.size_bytes()%16);
     header.offset_symbols = header.size();
+    header.docs_count = documents.size();
 
     out.write((const char*)&header, sizeof(header));
 
+    size_t current=0;
     for(auto& document: this->documents){
         binary_header_t::section_t section = {
             {document.first.base,document.first.length},
-            header.size()+symbols.size_bytes()+align_symbols,
-            header.size()+symbols.size_bytes()+align_symbols+document.second.size()
+            header.size()+symbols.size_bytes()+align_symbols+current,
+            header.size()+symbols.size_bytes()+align_symbols+current+document.second.size()
         };
         out.write((const char*)&section, sizeof(binary_header_t::section_t));
+        current+=document.second.size();
     }
 
     out.write((const char*)symbols.data(), symbols.size_bytes());
@@ -58,9 +62,6 @@ std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_bina
     
     if(header.format_minor > format_minor)
         return std::unexpected(from_binary_error_t{from_binary_error_t::MinorVersionTooHigh});
-    
-    if(header.docs_count != 1)
-        return std::unexpected(from_binary_error_t{from_binary_error_t::TooManyDocs});
 
     if  (
             header.size__delta_ptr!=sizeof(delta_ptr_t) || 
@@ -78,13 +79,13 @@ std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_bina
         auto& section = header.sections[i];
         documents.emplace_back(
             sv{section.name.base,section.name.length},
-            std::span<uint8_t>{region.data()+header.region(0).start, region.data()+header.region(0).end}
+            std::span<uint8_t>{region.data()+header.region(i).start, region.data()+header.region(i).end}
         );
     }
 
-    symbols=std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.region(0).start};
+    symbols=std::span<uint8_t>{region.data()+header.size(), region.data()+header.offset_symbols};
 
-    return ArchiveRaw(std::move(documents),symbols);
+    return ArchiveRaw(header.configs,std::move(documents),symbols);
 }
 
 

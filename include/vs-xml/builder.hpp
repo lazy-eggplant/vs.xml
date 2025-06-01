@@ -228,6 +228,7 @@ struct TreeBuilder : details::BuilderBase{
             if (auto ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)return std::unexpected(ret);
             open=true;
             attribute_block=false;
+            stack.push_back({0,-1});
             return std::pair{sv_name,std::exchange(buffer, {})};
         }
 
@@ -237,8 +238,8 @@ struct TreeBuilder : details::BuilderBase{
          * @return std::optional<details::Symbols<configs.symbols>> 
          */
         [[nodiscard]] std::optional<std::vector<uint8_t>> extract_symbols(){
-            if(open==true)return {};
-            else return std::move(symbols.symbols);
+            details::BuilderBase::close();
+            return std::move(symbols.symbols);
         }
         
         /**

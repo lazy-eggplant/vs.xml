@@ -125,13 +125,14 @@ struct __attribute__ ((packed)) binary_header_t{
             binary_header_t::endianess_t::BIG;
     uint8_t res0 : 7;
 
-    uint64_t size__delta_ptr : 6        = sizeof(delta_ptr_t);
-    uint64_t size__xml_size  : 6        = sizeof(xml_size_t);
-    uint64_t size__xml_count : 6        = sizeof(xml_count_t);
-    uint64_t size__xml_enum_size : 6    = sizeof(xml_enum_size_t);
+    uint32_t size__delta_ptr : 6        = sizeof(delta_ptr_t);
+    uint32_t size__xml_size  : 6        = sizeof(xml_size_t);
+    uint32_t size__xml_count : 6        = sizeof(xml_count_t);
+    uint32_t size__xml_enum_size : 6    = sizeof(xml_enum_size_t);
+    uint32_t res1: 32-24;
 
     uint16_t docs_count = 1;
-    uint8_t res[3];
+    uint8_t res[2];
 
     uint64_t offset_symbols;
 
