@@ -9,3 +9,4 @@ option('use_gtl', type: 'boolean', value: false)
 #TODO: Add replacement outside stdlib for charconv
 
 option('noexcept', type: 'boolean', value: false)
+option('noassert', type: 'boolean', value: false)

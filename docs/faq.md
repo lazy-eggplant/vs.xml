@@ -42,7 +42,7 @@ The standard C++ library is not your best option, you might want to check for al
 
 At the moment this is not directly supported by the library and will likely never be. However, we plan to introduce features to make it easier on downstream code.  
 Right now, queries are not trivially hash-able. At some point we will add a query builder to structure query trees into linear buffers, more or less like we do with XML.  
-The evolving plans for this feature are reported in a [specifications document](./docs/specs/query-builder.md).  
+The evolving plans for this feature are reported in a [specifications document](./specs/query-builder.md).  
 Until then, a similar solution has to be implemented fully downstream.
 
 > How to serialize/deserialize attributes of text fields into a different data type, like integers or floating point numbers?

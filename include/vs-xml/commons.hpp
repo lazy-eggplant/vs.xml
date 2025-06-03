@@ -26,8 +26,8 @@
 
 #include <bit>
 
-#if __has_include("config.hpp")
-#include "config.hpp"
+#if __has_include(<vs-xml/config.hpp>)
+#include <vs-xml/config.hpp>
 #endif
 
 #ifndef VS_XML_NS

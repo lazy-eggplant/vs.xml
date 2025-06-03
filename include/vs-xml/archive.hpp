@@ -12,8 +12,8 @@
 
 #include <cstdint>
 #include <string_view>
-#include  <vs-xml/commons.hpp>
-#include  <vs-xml/document.hpp>
+#include <vs-xml/commons.hpp>
+#include <vs-xml/document.hpp>
 
 namespace VS_XML_NS{
 

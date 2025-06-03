@@ -1,9 +1,9 @@
 #pragma once
 
 /**
- * @file format.hpp
+ * @file unordered_set.hpp
  * @author karurochari
- * @brief Helpers to handle unordered_map portably
+ * @brief Helpers to handle unordered_set portably
  * @date 2025-05-17
  * 
  * @copyright Copyright (c) 2025

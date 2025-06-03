@@ -1,7 +1,7 @@
 project(
   'vs-xml',
   ['cpp'],
-  version: '0.2.7',
+  version: '0.2.8',
   meson_version: '>= 1.3',
   default_options: ['cpp_std=c++23'],
 )
@@ -16,48 +16,7 @@ major_version = version_components[0]
 minor_version = version_components[1]
 rev_version = version_components[2]
 
-conf = configuration_data()
-conf.set('VS_XML_VERSION_MAJOR', major_version)
-conf.set('VS_XML_VERSION_MINOR', minor_version)
-conf.set('VS_XML_VERSION_REV', rev_version)
-conf.set_quoted('VS_XML_VERSION', major_version + '.' + minor_version + '.' + rev_version)
-if get_option('noexcept')
-  conf.set('VS_XML_NO_EXCEPT', 'true')
-  #TODO: explicit check for other flags to notify they are incompatible with noexcept
-  if get_option('utils') or get_option('benchmarks') or get_option('tests') or get_option('examples')
-    error('Only the base library can be built if using `noexcept` set true')
-  endif
-endif
-
-if get_option('use_fmt')
-  fmt_dep = dependency('fmt')
-  conf.set('VS_XML_USE_FMT','true')
-else 
-  fmt_dep = []
-endif
-
-if get_option('use_gtl')
-  gtl_dep = dependency('gtl')
-  conf.set('VS_XML_USE_GTL','true')
-else 
-  gtl_dep = []
-endif
-
-configure_file(output : 'config.hpp',
-  configuration : conf,
-)
-
-
-cfgfile = custom_target('make-config',
-  input : join_paths(meson.current_build_dir(), 'config.hpp'),
-  output : ['config.hpp.fake-meson'],
-  #This will not work with more than a single build directory (the last one is going to be applied).
-  command : ['sh', '-c', 'rm -f @CURRENT_SOURCE_DIR@/include/vs-xml/config.hpp && ln -s @INPUT0@ @CURRENT_SOURCE_DIR@/include/vs-xml/config.hpp'],
-  capture : true,
-  install : false,
-  build_by_default: true
-)
-
+subdir('./include/vs-xml')
 
 vs_xml_lib = library(
     'vs-xml',
@@ -74,7 +33,6 @@ vs_xml_lib = library(
     cpp_args: [],
     install: true,
     dependencies: [fmt_dep, gtl_dep],
-    link_depends: cfgfile,
     include_directories: include_dirs,
 )
 
@@ -82,8 +40,6 @@ vs_xml_dep = declare_dependency(
   link_with: vs_xml_lib,
   include_directories: ['include'],
 )
-
-install_subdir('include/vs-xml', install_dir : 'include', strip_directory: false, follow_symlinks: true )
 
 # Ignore these targets if not the root project
 if meson.is_subproject() == false
