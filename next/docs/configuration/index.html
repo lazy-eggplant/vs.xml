@@ -1071,23 +1071,26 @@ A single application will have to build and link different versions of this libr
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have very specific needs for a compact memory layout, probably more suitable for embedded applications, you will have to manually override parts of this code and possibly work with bit-fields.
-This goes beyond the configurability granted via macros, and forking this library is likely the best solution.</p>
+This goes beyond the configurability granted via macros, and forking this library is likely the best option.</p>
 </div>
 <h2 id="builder">Builder<a class="headerlink" href="#builder" title="Permanent link">#</a></h2>
 <p>Builders are parametrized by a configuration structure and initialized in ways which defines its behaviour and ownership of data.</p>
 <h3 id="configuration-fields">Configuration fields<a class="headerlink" href="#configuration-fields" title="Permanent link">#</a></h3>
 <ul>
-<li><code>allow_comments</code> if true allows comments to be appended in the tree, else they are silently skipped (but can still throw exceptions for validation)</li>
-<li><code>allow_procs</code> if true allows processing directives to be appended in the tree, else they are silently skipped (but can still throw exceptions for validation)</li>
+<li><code>allow_comments</code> if true allows comments to be appended in the tree, else they are silently skipped (but can still return errors for validation)</li>
+<li><code>allow_procs</code> if true allows processing directives to be appended in the tree, else they are silently skipped (but can still return errors for validation)</li>
 <li><code>symbols</code>:<ul>
 <li><code>EXTERN_ABS</code> using full memory in absolute position; the generated tree cannot be saved as binary.</li>
 <li><code>EXTERN_REL</code> can be saved as binary, but it requires the tree to bind a symbol table later when constructed.</li>
 <li><code>OWNED</code> no compression of symbols, but they are owned.</li>
 <li><code>COMPRESS_LABELS</code> only compressing symbols which are used for tag and prop labels (and namespaces).</li>
 <li><code>COMPRESS_ALL</code> all symbols are compressed.</li>
+<li><del><code>COMPRESS_CUSTOM</code></del> not implemented yet. Used to determine the usage of a custom compression algorithm, offloading it from the library.<br />
+    Useful to specify your own for embedded systems or to implement more expensive but compressed representations.</li>
 </ul>
 </li>
-<li><code>raw_strings</code> if true, strings are assumed to be kept as is when serialized or deserialized from XML. Make sure you manually escape those used in comparisons or to append further data.</li>
+<li><code>raw_strings</code> if true, strings are assumed to be preserved as is when serialized or deserialized from XML.<br />
+  Make sure you are manually escaping when building the tree. Comparisons on the other hand will handle the conversion automatically when not using the <code>xxxRaw</code> versions of the library classes.</li>
 </ul>
 
 

@@ -297,10 +297,32 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="keyword">template</span>&lt;ProperBuilder Builder_t&gt;</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="keyword">class </span>Parser;</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>}</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1StorageFor.html">  241</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1StorageFor.html">StorageFor</a>;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00244" data-start="{" data-end="}">
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno"><a class="line" href="conceptVS__XML__NS_1_1IStorable.html">  244</a></span><span class="keyword">concept </span><a class="code hl_concept" href="conceptVS__XML__NS_1_1IStorable.html">IStorable</a> = <span class="keyword">requires</span>(<span class="keyword">const</span> StorageFor&lt;T&gt;&amp; v, Args... args){</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>   {StorageFor&lt;T&gt;::bind(v,args...)} -&gt; std::same_as&lt;T&gt;;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>};</div>
+</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00249" data-start="{" data-end="};">
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1Stored.html">  249</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1Stored.html">Stored</a> : <span class="keyword">private</span> <a class="code hl_struct" href="structVS__XML__NS_1_1StorageFor.html">StorageFor</a>&lt;T&gt;, T{</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structVS__XML__NS_1_1Stored.html">Stored</a>(<span class="keyword">auto</span>&amp;&amp;... args):</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <a class="code hl_struct" href="structVS__XML__NS_1_1StorageFor.html">StorageFor&lt;T&gt;</a>(std::forward&lt;<span class="keyword">decltype</span>(args)&gt;(args)...),</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        T(<a class="code hl_struct" href="structVS__XML__NS_1_1StorageFor.html">StorageFor&lt;T&gt;::bind</a>(*<span class="keyword">this</span>,std::forward&lt;<span class="keyword">decltype</span>(args)&gt;(args)...))</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    {</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        <span class="comment">//static_assert(IStorable&lt;T,decltype(args)...&gt;);</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    }</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>};</div>
+</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>}</div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div><div class="ttdoc">Utility for assertions.</div></div>
+<div class="ttc" id="aconceptVS__XML__NS_1_1IStorable_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1IStorable.html">VS_XML_NS::IStorable</a></div><div class="ttdef"><b>Definition</b> commons.hpp:244</div></div>
 <div class="ttc" id="aconceptVS__XML__NS_1_1ProperBuilder_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1ProperBuilder.html">VS_XML_NS::ProperBuilder</a></div><div class="ttdef"><b>Definition</b> commons.hpp:235</div></div>
 <div class="ttc" id="aconceptVS__XML__NS_1_1thing__i_html"><div class="ttname"><a href="conceptVS__XML__NS_1_1thing__i.html">VS_XML_NS::thing_i</a></div><div class="ttdef"><b>Definition</b> commons.hpp:212</div></div>
 <div class="ttc" id="anamespaceVS__XML__NS_1_1filters_html_a5c3624b13599fa9c38562d6a2e790693"><div class="ttname"><a href="namespaceVS__XML__NS_1_1filters.html#a5c3624b13599fa9c38562d6a2e790693">VS_XML_NS::filters::name</a></div><div class="ttdeci">constexpr auto name(std::string_view sv)</div><div class="ttdoc">Only pick nodes for which the name is set to sv</div><div class="ttdef"><b>Definition</b> filters.hpp:42</div></div>
@@ -312,7 +334,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructVS__XML__NS_1_1Archive_html"><div class="ttname"><a href="structVS__XML__NS_1_1Archive.html">VS_XML_NS::Archive</a></div><div class="ttdoc">the archive class you should use.</div><div class="ttdef"><b>Definition</b> archive.hpp:107</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Builder_html"><div class="ttname"><a href="structVS__XML__NS_1_1Builder.html">VS_XML_NS::Builder</a></div><div class="ttdef"><b>Definition</b> commons.hpp:180</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1Document_html"><div class="ttname"><a href="structVS__XML__NS_1_1Document.html">VS_XML_NS::Document</a></div><div class="ttdoc">The suggested-to-use Document class.</div><div class="ttdef"><b>Definition</b> document.hpp:77</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdoc">the tree class you should use.</div><div class="ttdef"><b>Definition</b> tree.hpp:208</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1StorageFor_html"><div class="ttname"><a href="structVS__XML__NS_1_1StorageFor.html">VS_XML_NS::StorageFor</a></div><div class="ttdef"><b>Definition</b> commons.hpp:241</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Stored_html"><div class="ttname"><a href="structVS__XML__NS_1_1Stored.html">VS_XML_NS::Stored</a></div><div class="ttdef"><b>Definition</b> commons.hpp:249</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdoc">the tree class you should use.</div><div class="ttdef"><b>Definition</b> tree.hpp:186</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1sv_html"><div class="ttname"><a href="structVS__XML__NS_1_1sv.html">VS_XML_NS::sv</a></div><div class="ttdoc">Compact position-free string_view.</div><div class="ttdef"><b>Definition</b> commons.hpp:83</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
