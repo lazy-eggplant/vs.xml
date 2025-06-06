@@ -237,6 +237,23 @@ concept ProperBuilder =  true;
 template<ProperBuilder Builder_t>
 class Parser;
 
+template<typename T>
+struct StorageFor;
+
+template <typename T, typename... Args>
+concept IStorable = requires(const StorageFor<T>& v, Args... args){
+   {StorageFor<T>::bind(v,args...)} -> std::same_as<T>;
+};
+
+template<typename T>
+struct Stored : private StorageFor<T>, T{
+    inline Stored(auto&&... args):
+        StorageFor<T>(std::forward(args)...),
+        T(StorageFor<T>::bind(*this,std::forward(args)...))
+    {
+        static_assert(IStorable<T,decltype(args)...>);
+    }
+};
 
 
 }

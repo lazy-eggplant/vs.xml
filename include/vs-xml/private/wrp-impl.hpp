@@ -45,7 +45,7 @@ struct sv  {
 
         if(l.tree->configs.raw_strings && r.tree->configs.raw_strings){
             auto ll = xml::serialize::unescaped_view((std::string_view)l);
-            auto rr = xml::serialize::unescaped_view((std::string_view)l);
+            auto rr = xml::serialize::unescaped_view((std::string_view)r);
             return std::equal(ll.begin(),ll.end(),rr.begin(),rr.end());
         }
         else if(!l.tree->configs.raw_strings && !r.tree->configs.raw_strings){

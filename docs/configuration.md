@@ -41,7 +41,7 @@ The structure of the various nodes is based on the size of three data types:
 
 > [!NOTE]  
 > If you have very specific needs for a compact memory layout, probably more suitable for embedded applications, you will have to manually override parts of this code and possibly work with bit-fields.
-> This goes beyond the configurability granted via macros, and forking this library is likely the best solution.
+> This goes beyond the configurability granted via macros, and forking this library is likely the best option.
 
 
 ## Builder
@@ -50,12 +50,15 @@ Builders are parametrized by a configuration structure and initialized in ways w
 
 ### Configuration fields
 
-- `allow_comments` if true allows comments to be appended in the tree, else they are silently skipped (but can still throw exceptions for validation)
-- `allow_procs` if true allows processing directives to be appended in the tree, else they are silently skipped (but can still throw exceptions for validation)
+- `allow_comments` if true allows comments to be appended in the tree, else they are silently skipped (but can still return errors for validation)
+- `allow_procs` if true allows processing directives to be appended in the tree, else they are silently skipped (but can still return errors for validation)
 - `symbols`:
     - `EXTERN_ABS` using full memory in absolute position; the generated tree cannot be saved as binary.
     - `EXTERN_REL` can be saved as binary, but it requires the tree to bind a symbol table later when constructed.
     - `OWNED` no compression of symbols, but they are owned.
     - `COMPRESS_LABELS` only compressing symbols which are used for tag and prop labels (and namespaces).
     - `COMPRESS_ALL` all symbols are compressed.
-- `raw_strings` if true, strings are assumed to be kept as is when serialized or deserialized from XML. Make sure you manually escape those used in comparisons or to append further data.
+    - ~~`COMPRESS_CUSTOM`~~ not implemented yet. Used to determine the usage of a custom compression algorithm, offloading it from the library.  
+      Useful to specify your own for embedded systems or to implement more expensive but compressed representations.
+- `raw_strings` if true, strings are assumed to be preserved as is when serialized or deserialized from XML.  
+  Make sure you are manually escaping when building the tree. Comparisons on the other hand will handle the conversion automatically when not using the `xxxRaw` versions of the library classes.

@@ -149,6 +149,14 @@ struct TreeRaw{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
     }
 
+    //Weak, used when loading from disk or creatung slices
+    TreeRaw(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym={(uint8_t*)nullptr, std::span<uint8_t>::extent}):
+        buffer(src),symbols(sym),configs(cfg){}
+
+    TreeRaw(const builder_config_t& cfg, std::span<const uint8_t> src, std::span<const uint8_t> sym={(const uint8_t*)nullptr, std::span<uint8_t>::extent}):
+        buffer((uint8_t*)src.data(),src.size_bytes()),symbols((uint8_t*)sym.data(),sym.size_bytes()),configs(cfg){
+    }
+
     protected:
 
     /**
@@ -173,13 +181,6 @@ struct TreeRaw{
         buffer(src),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent){}
     */
 
-    //Weak, used when loading from disk or creatung slices
-    TreeRaw(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym):
-        buffer(src),symbols(sym),configs(cfg){}
-
-    TreeRaw(const builder_config_t& cfg, std::span<const uint8_t> src, std::span<const uint8_t> sym):
-        buffer((uint8_t*)src.data(),src.size_bytes()),symbols((uint8_t*)sym.data(),sym.size_bytes()),configs(cfg){
-    }
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
 
@@ -189,15 +190,18 @@ struct TreeRaw{
         bool recursive = true
     );
 
-    template<builder_config_t>
-    friend struct TreeBuilder;
-    friend struct details::BuilderBase;
-    friend wrp::sv;
-
     template <typename T>
     friend struct wrp::base_t;
 
+    friend struct details::BuilderBase;
+
+    template<builder_config_t>
+    friend struct TreeBuilder;
+
+    friend wrp::sv;
+
     friend struct ArchiveRaw;
+    
 };
 
 
@@ -223,5 +227,35 @@ struct Tree : TreeRaw{
     inline TreeRaw& downgrade(){return *this;}
 };
 
+template<>
+struct StorageFor<TreeRaw>{
+    std::vector<uint8_t> buffer_i;
+    std::vector<uint8_t> symbols_i;
+
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):buffer_i(buf),symbols_i(sym){}
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(buf){}
+
+    static TreeRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym)  {return TreeRaw(cfg,storage.buffer_i,storage.symbols_i);}
+    static TreeRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return TreeRaw(cfg,storage.buffer_i);}
+
+};
+
+template<>
+struct StorageFor<Tree>{
+    std::vector<uint8_t> buffer_i;
+    std::vector<uint8_t> symbols_i;
+
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):buffer_i(buf),symbols_i(sym){}
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(buf){}
+
+    static Tree bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym)  {return Tree(TreeRaw(cfg,storage.buffer_i,storage.symbols_i));}
+    static Tree bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return Tree(TreeRaw(cfg,storage.buffer_i));}
+
+};
+
+namespace stored{
+    using TreeRaw = Stored<TreeRaw>;
+    using Tree = Stored<Tree>;
+}
 
 }
