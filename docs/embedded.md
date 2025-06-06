@@ -18,13 +18,13 @@ It is important to enable the `noexcept` flag and disable `utils` alongside any 
 
 ## Features
 
-### Features optimized for embedded
+### 🟢 Features optimized for embedded
 - `TreeRaw`/`Tree` general usage
 - `DocumentRaw`/`Document` general usage
 - The XML parser when `.raw_strings=true`, however wraps builders which are not fully optimized yet.
 - Memos/notes/indices can all be implemented externally, as long as you have a proper library for containers `vs.xml` will not get in your way.
 
-### Features planned for embedded
+### 🟠 Features planned for embedded
 - `ArchiveRaw`/`Archive` are currently using the heap to store a redundant vector just to keep the code simple. But it is first on list for removal.
 - `TreeBuilder` & `DocumentBuilder`. Right now they own their storage, unable to just work on externally defined ones.  
   It is possible to reserve space limiting allocations, but they cannot be fully removed.
@@ -32,6 +32,6 @@ It is important to enable the `noexcept` flag and disable `utils` alongside any 
 - The `QueryBuilder`, same notes as for the other builders.
 - Queries. Right now they are not good due to the high number of dynamic allocations needed. They could be trivially removed for the most part, but the whole system is being refactored to be stack-based and consume less memory overall.
 
-### Features not planned
+### 🔴 Features not planned for embedded
 - The utilities shipped alongside this library are not meant for embedded usage.
 - Most of the test-suite. Embedded will feature its own subset of tests and benchmarks.
