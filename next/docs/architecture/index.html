@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../faq/">
+        <link rel="prev" href="..">
       
       
-        <link rel="next" href="../offloading/">
+        <link rel="next" href="../configuration/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Features - vs.xml</title>
+        <title>Architecture - vs.xml</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#standard-compatibility" class="md-skip">
+        <a href="#storageforstored" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Features
+              Architecture
             
           </span>
         </div>
@@ -237,10 +237,30 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -251,6 +271,96 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#storageforstored" class="md-nav__link">
+    <span class="md-ellipsis">
+      StorageFor/Stored
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trees-documents-archives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trees, Documents, Archives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-vs-classraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class vs ClassRaw
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#builders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Builders
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parser
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serialization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Queries
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#binary-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binary formats
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -325,30 +435,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Features
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../features/" class="md-nav__link">
         
   
   
@@ -359,108 +449,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#standard-compatibility" class="md-nav__link">
-    <span class="md-ellipsis">
-      Standard compatibility
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Standard compatibility">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#xml-parsing" class="md-nav__link">
-    <span class="md-ellipsis">
-      XML parsing
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#xml-serialization" class="md-nav__link">
-    <span class="md-ellipsis">
-      XML serialization
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#library-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      Library features
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Library features">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tree-builder" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tree builder
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#algorithms" class="md-nav__link">
-    <span class="md-ellipsis">
-      Algorithms
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#queries" class="md-nav__link">
-    <span class="md-ellipsis">
-      Queries
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#portability" class="md-nav__link">
-    <span class="md-ellipsis">
-      Portability
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1013,67 +1001,60 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#standard-compatibility" class="md-nav__link">
+  <a href="#storageforstored" class="md-nav__link">
     <span class="md-ellipsis">
-      Standard compatibility
+      StorageFor/Stored
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Standard compatibility">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#xml-parsing" class="md-nav__link">
-    <span class="md-ellipsis">
-      XML parsing
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#xml-serialization" class="md-nav__link">
-    <span class="md-ellipsis">
-      XML serialization
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#library-features" class="md-nav__link">
+  <a href="#trees-documents-archives" class="md-nav__link">
     <span class="md-ellipsis">
-      Library features
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Library features">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tree-builder" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tree builder
+      Trees, Documents, Archives
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#algorithms" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#class-vs-classraw" class="md-nav__link">
     <span class="md-ellipsis">
-      Algorithms
+      Class vs ClassRaw
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
+  <a href="#builders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Builders
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parser
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serialization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#queries" class="md-nav__link">
     <span class="md-ellipsis">
       Queries
@@ -1081,16 +1062,11 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#portability" class="md-nav__link">
+  <a href="#binary-formats" class="md-nav__link">
     <span class="md-ellipsis">
-      Portability
+      Binary formats
     </span>
   </a>
   
@@ -1115,87 +1091,19 @@
   
 
 
-  <h1>Features</h1>
+  <h1>Architecture</h1>
 
-<h2 id="standard-compatibility">Standard compatibility<a class="headerlink" href="#standard-compatibility" title="Permanent link">#</a></h2>
-<h3 id="xml-parsing">XML parsing<a class="headerlink" href="#xml-parsing" title="Permanent link">#</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> namespaces <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> cdata</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> text<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> Unified iterator for text of an element, scanning all text/CDATA children.</li>
-</ul>
-</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> comments <ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> optional stripping</li>
-</ul>
-</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> basic entities</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> complex entities</li>
-</ul>
-<h3 id="xml-serialization">XML serialization<a class="headerlink" href="#xml-serialization" title="Permanent link">#</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> namespaces</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> processing</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> cdata</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> text</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> comments</li>
-<li class="task-list-item"><input type="checkbox" disabled/> output configurability<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> indentation</li>
-<li class="task-list-item"><input type="checkbox" disabled/> newline style</li>
-<li class="task-list-item"><input type="checkbox" disabled/> other linting</li>
-</ul>
-</li>
-</ul>
-<h2 id="library-features">Library features<a class="headerlink" href="#library-features" title="Permanent link">#</a></h2>
-<h3 id="tree-builder">Tree builder<a class="headerlink" href="#tree-builder" title="Permanent link">#</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> namespaces</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> processing</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> cdata</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> text</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> comments</li>
-</ul>
-<h3 id="algorithms">Algorithms<a class="headerlink" href="#algorithms" title="Permanent link">#</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> iterators for nodes</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> iterators for attributes</li>
-<li class="task-list-item"><input type="checkbox" disabled/> tree/sub-tree cloning<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> Basic copy</li>
-<li class="task-list-item"><input type="checkbox" disabled/> String compression</li>
-</ul>
-</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> attributes reordering</li>
-<li class="task-list-item"><input type="checkbox" disabled/> node injection</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> simplified tree wrapper to avoid xml::sv-&gt;string_view conversions.</li>
-</ul>
-<h3 id="queries">Queries<a class="headerlink" href="#queries" title="Permanent link">#</a></h3>
-<h2 id="portability">Portability<a class="headerlink" href="#portability" title="Permanent link">#</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> <code>noexcept</code> mode</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> <code>noassert</code> mode</li>
-<li class="task-list-item"><input type="checkbox" disabled/> no memory allocations<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> for the tree/documents binary representation</li>
-<li class="task-list-item"><input type="checkbox" disabled/> in the query builder<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
-<li class="task-list-item"><input type="checkbox" disabled/> in tree building<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
-<li class="task-list-item"><input type="checkbox" disabled/> in query processing<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></li>
-</ul>
-</li>
-</ul>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>Partially, no validation for them&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-<li id="fn:2">
-<p>The objective is to pass custom allocators so that arena strategies can be implemented for example.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-<li id="fn:3">
-<p>Queries allocates as a stack, so specific strategies and allocator can be adopted for them.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
+<h2 id="storageforstored"><code>StorageFor</code>/<code>Stored</code><a class="headerlink" href="#storageforstored" title="Permanent link">#</a></h2>
+<h2 id="trees-documents-archives">Trees, Documents, Archives<a class="headerlink" href="#trees-documents-archives" title="Permanent link">#</a></h2>
+<h2 id="class-vs-classraw"><code>Class</code> vs <code>ClassRaw</code><a class="headerlink" href="#class-vs-classraw" title="Permanent link">#</a></h2>
+<p><code>Class</code> is a wrapper for <code>ClassRaw</code>.<br />
+In exchange for some performance and fatter objects on the stack, it keeps better track of contextual information, simplifying the usage of string views and navigation of the tree structure.<br />
+In practice, you can just use <code>Class</code> over <code>ClassRaw</code> for virtually all scenarios, but if those nice extras are not needed, sticking to the raw base class will free a bit of space.</p>
+<h2 id="builders">Builders<a class="headerlink" href="#builders" title="Permanent link">#</a></h2>
+<h2 id="parser">Parser<a class="headerlink" href="#parser" title="Permanent link">#</a></h2>
+<h2 id="serialization">Serialization<a class="headerlink" href="#serialization" title="Permanent link">#</a></h2>
+<h2 id="queries">Queries<a class="headerlink" href="#queries" title="Permanent link">#</a></h2>
+<h2 id="binary-formats">Binary formats<a class="headerlink" href="#binary-formats" title="Permanent link">#</a></h2>
 
 
 
