@@ -45,7 +45,7 @@ struct ArchiveRaw{
     bool save_binary(std::ostream& out)const;
 
     [[nodiscard]] static std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> from_binary(std::span<uint8_t> region);
-    [[nodiscard]] static std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> from_binary(std::string_view region);
+    [[nodiscard]] static std::expected<const ArchiveRaw, ArchiveRaw::from_binary_error_t> from_binary(std::span<const uint8_t> region);
 
     inline std::string_view rsv(sv s) const{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
@@ -135,7 +135,7 @@ struct Archive : ArchiveRaw{
         else return tmp;
     }
     
-    [[nodiscard]] static inline std::expected<Archive, ArchiveRaw::from_binary_error_t> from_binary(std::string_view region){
+    [[nodiscard]] static inline std::expected<const Archive, ArchiveRaw::from_binary_error_t> from_binary(std::span<const uint8_t> region){
         auto tmp = ArchiveRaw::from_binary(region);
         if(tmp.has_value())return Archive(std::move(*tmp));
         else return tmp;

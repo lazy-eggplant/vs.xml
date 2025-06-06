@@ -207,14 +207,14 @@ struct TreeBuilder : details::BuilderBase{
          * 
          * @return std::expected<Tree,error_t> a wrapped tree if successful, or an error
          */
-        [[nodiscard]] std::expected<Tree,error_t> close(){
+        [[nodiscard]] std::expected<stored::Tree,error_t> close(){
             if (auto ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)return std::unexpected(ret);
             if constexpr (
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||
                 cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||
                 cfg.symbols==builder_config_t::symbols_t::OWNED 
-            )return Tree(TreeRaw(configs,std::exchange(buffer,{}),std::exchange(symbols.symbols,{})));
-            else return Tree(TreeRaw(configs,std::exchange(buffer,{}),symbols.symbols.data()));
+            )return stored::Tree(configs,std::exchange(buffer,{}),std::exchange(symbols.symbols,{}));
+            else return stored::Tree(configs,std::exchange(buffer,{}),symbols.symbols.data());
         }
 
         /**

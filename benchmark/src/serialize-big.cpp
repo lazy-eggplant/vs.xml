@@ -42,7 +42,7 @@ int test_vs(std::string_view xmlInput){
 int test_vs2(std::string_view binInput){
     try{
         mio::mmap_source mmap("./assets/nasa_10_f_bs.xml.bin");
-        std::string_view binInput(mmap.data(),mmap.size());
+        std::span<const uint8_t> binInput((const uint8_t*)mmap.data(),mmap.size());
 
         
         auto tree =xml::Document::from_binary(binInput);

@@ -34,9 +34,6 @@ namespace VS_XML_NS{
  */
 struct TreeRaw{
     protected:
-        std::vector<uint8_t> buffer_i;
-        std::vector<uint8_t> symbols_i;
-
         std::span<uint8_t> buffer;      //Overlay of buffer_i, or external
         std::span<uint8_t> symbols;     //Overlay of symbols_i, or external
 
@@ -143,7 +140,7 @@ struct TreeRaw{
     bool save_binary(std::ostream& out)const;
 
     [[nodiscard]] static std::expected<TreeRaw, TreeRaw::from_binary_error_t> from_binary(std::span<uint8_t> region);
-    [[nodiscard]] static std::expected<const TreeRaw , TreeRaw::from_binary_error_t> from_binary(std::string_view region);
+    [[nodiscard]] static std::expected<const TreeRaw , TreeRaw::from_binary_error_t> from_binary(std::span<const uint8_t> region);
 
     inline std::string_view rsv(sv s) const{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
@@ -158,29 +155,6 @@ struct TreeRaw{
     }
 
     protected:
-
-    /**
-     * @brief Construct a new Tree object, with the list of strings being external. Make sure its lifetime contains the one of the Tree.
-     */
-    TreeRaw(const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr):
-        buffer_i(src),symbols_i({}),
-        buffer(buffer_i),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent),
-        configs(cfg){}
-
-    /**
-     * @brief Construct a new Tree object, owning its own table of strings
-     */
-    TreeRaw(const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym):
-        buffer_i(src),symbols_i(sym),
-        buffer(buffer_i),symbols(symbols_i),
-        configs(cfg){}
- 
-    /*
-    //Weak, used when loading from disk
-    Tree(std::span<uint8_t> src, void* label_offset):
-        buffer(src),symbols((uint8_t*)label_offset, std::span<uint8_t>::extent){}
-    */
-
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
 

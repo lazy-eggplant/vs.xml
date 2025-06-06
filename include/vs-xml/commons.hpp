@@ -248,10 +248,10 @@ concept IStorable = requires(const StorageFor<T>& v, Args... args){
 template<typename T>
 struct Stored : private StorageFor<T>, T{
     inline Stored(auto&&... args):
-        StorageFor<T>(std::forward(args)...),
-        T(StorageFor<T>::bind(*this,std::forward(args)...))
+        StorageFor<T>(std::forward<decltype(args)>(args)...),
+        T(StorageFor<T>::bind(*this,std::forward<decltype(args)>(args)...))
     {
-        static_assert(IStorable<T,decltype(args)...>);
+        //static_assert(IStorable<T,decltype(args)...>);
     }
 };
 

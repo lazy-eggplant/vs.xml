@@ -1,23 +1,5 @@
-This release could not be postponed as the previous changes to the `meson.build` made the library not usable as a sub-dependency.  
-Hopefully this fixes that, but it means some other features are a bit under-baked or not tested.
+## Breaking changes
 
-## New features
-
-We now have full support for `ArchiveRaw` and `Archive`.  
-This means that multiple XML documents can share the same symbol table and be distributed as a single archive file.  
-Each file can be addressed with a name. Right now no checks are performed about uniqueness.  
-
-Also, reading or writing binary files is not hardened against attacks, and they will not be for quite a while.  
-If you want to send PR about that they are welcome.  
-
-We are almost ready to reach `v0.3.x`. In that new minor branch I will be refactoring the query system as outlined in https://github.com/lazy-eggplant/vs.xml/issues/4 and in the prior release notices.
-
-### Other minor features
-
-- Additional checks for word sizes and endianess when reading binaries, to ensure binary compatibility.
-- Work in the background to make the library more compatible with embedded targets and offloading.
-
-## Breaking
-
-- The binary format is changing. Yet again. At this point it must be some kind of running joke.  
-  But really, with archives being done, I don't expect any further major revision in the nearby future.
+- The `close` function for Tree(Raw) and Document(Raw) changed signature to return the new `Stored<T>` objects, so that storage is separate from the base classes to better use code in embedded and offloaded contexts. 
+- Other minor differences might be present due to the changes discussed prior, it is too hard to spot and report all of them.
+- Fixed signatures for `from_binary` removing string_views in place of `std::span<const uint8_t>`, and fixed some return types which were not set to `const`.

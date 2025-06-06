@@ -178,6 +178,9 @@ const TreeRaw TreeRaw::slice(const element_t* ref) const{
 };
 
 TreeRaw TreeRaw::clone(const element_t* ref, bool reduce) const{
+    xml_assert(false, "Not implemented, a change of store will be needed");
+    exit(1);
+    /*
     //TODO: Move to std::expected
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
     xml_assert(ref->type()==type_t::ELEMENT, "cannot clone something which is not a node");
@@ -203,6 +206,7 @@ TreeRaw TreeRaw::clone(const element_t* ref, bool reduce) const{
     }
 
     return TreeRaw(configs,std::move(buffer),std::move(symbols));
+    */
 }
 
 
@@ -265,8 +269,8 @@ std::expected<TreeRaw, TreeRaw::from_binary_error_t> TreeRaw::from_binary(std::s
 }
 
 
-std::expected<const TreeRaw, TreeRaw::from_binary_error_t>  TreeRaw::from_binary(std::string_view region){
-    return from_binary(std::span<uint8_t>{(uint8_t*)region.begin(),(uint8_t*)region.end()});
+std::expected<const TreeRaw, TreeRaw::from_binary_error_t>  TreeRaw::from_binary(std::span<const uint8_t> region){
+    return from_binary(std::span<uint8_t>{(uint8_t*)region.data(),(uint8_t*)region.data()+region.size_bytes()});
 }
 
 std::string_view TreeRaw::from_binary_error_t::msg() {

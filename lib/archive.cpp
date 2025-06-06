@@ -90,8 +90,8 @@ std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_bina
 
 
 
-std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_binary(std::string_view region){
-    return from_binary(std::span<uint8_t>{(uint8_t*)region.begin(),(uint8_t*)region.end()});
+std::expected<const ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_binary(std::span<const uint8_t> region){
+    return from_binary(std::span<uint8_t>{(uint8_t*)region.data(),(uint8_t*)region.data()+region.size_bytes()});
 }
 
 

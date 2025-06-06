@@ -55,7 +55,7 @@ struct DocumentRaw : TreeRaw {
         if(!t.has_value())return std::unexpected(t.error()); 
         else return DocumentRaw(std::move(*t));
     }
-    [[nodiscard]] static inline const std::expected<DocumentRaw,TreeRaw::from_binary_error_t> from_binary(std::string_view region){
+    [[nodiscard]] static inline const std::expected<const DocumentRaw,TreeRaw::from_binary_error_t> from_binary(std::span<const uint8_t> region){
         std::expected<const TreeRaw, TreeRaw::from_binary_error_t> t = TreeRaw::from_binary(region); 
         if(!t.has_value())return std::unexpected(t.error()); 
         else return DocumentRaw(std::move(*t));
@@ -64,9 +64,9 @@ struct DocumentRaw : TreeRaw {
     template<builder_config_t cfg>
     friend struct DocBuilder;
 
-    protected:
-        DocumentRaw(TreeRaw&& src):TreeRaw(src){}
-        DocumentRaw(const TreeRaw&& src):TreeRaw(src){}
+    //TODO: Replace with proper prototypes, and incapsulate the mv mechanism away as it is an implementation detail, not semantically correct.
+    DocumentRaw(TreeRaw&& src):TreeRaw(src){}
+    DocumentRaw(const TreeRaw&& src):TreeRaw(src){}
 
 };
 
@@ -98,6 +98,38 @@ struct Document : DocumentRaw {
     inline DocumentRaw& downgrade(){return *this;}
 };
 
+
+template<>
+struct StorageFor<DocumentRaw>{
+    std::vector<uint8_t> buffer_i;
+    std::vector<uint8_t> symbols_i;
+
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):buffer_i(buf),symbols_i(sym){}
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(buf){}
+
+    static TreeRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym)  {return DocumentRaw(cfg,storage.buffer_i,storage.symbols_i);}
+    static TreeRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return DocumentRaw(cfg,storage.buffer_i);}
+
+};
+
+template<>
+struct StorageFor<Document>{
+    std::vector<uint8_t> buffer_i;
+    std::vector<uint8_t> symbols_i;
+
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):buffer_i(buf),symbols_i(sym){}
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(buf){}
+
+    static Tree bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym)  {return Document(DocumentRaw(cfg,storage.buffer_i,storage.symbols_i));}
+    static Tree bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return Document(DocumentRaw(cfg,storage.buffer_i));}
+
+};
+
+namespace stored{
+    using DocumentRaw = Stored<DocumentRaw>;
+    using Document = Stored<Document>;
+}
+
 /**
  * @brief Specialized builder to construct a document.
 */
@@ -118,15 +150,15 @@ struct DocBuilder : TreeBuilder<cfg>{
         return details::BuilderBase::proc(TreeBuilder<cfg>::rsv( TreeBuilder<cfg>::label("xml version=\"1.0\" encoding=\"UTF-8\"")));
     }
 
-    [[nodiscard]] inline std::expected<Document,details::BuilderBase::error_t> close(){
+    [[nodiscard]] inline std::expected<stored::Document,details::BuilderBase::error_t> close(){
         this->end();
         details::BuilderBase::close();
         if constexpr (
             cfg.symbols==builder_config_t::symbols_t::COMPRESS_ALL ||
             cfg.symbols==builder_config_t::symbols_t::COMPRESS_LABELS ||
             cfg.symbols==builder_config_t::symbols_t::OWNED 
-        )return Document(DocumentRaw(configs,std::exchange(this->buffer,{}),std::exchange(this->symbols.symbols,{})));
-        else return Document(DocumentRaw(configs,std::exchange(this->buffer,{}),this->symbols.symbols.data()));
+        )return stored::Document(configs,std::exchange(this->buffer,{}),std::exchange(this->symbols.symbols,{}));
+        else return stored::Document(configs,std::exchange(this->buffer,{}),this->symbols.symbols.data());
     }
 
     [[nodiscard]] std::expected<std::pair<sv,std::vector<uint8_t>>,details::BuilderBase::error_t> close_frame(std::string_view name=""){
@@ -142,6 +174,7 @@ struct DocBuilder : TreeBuilder<cfg>{
         return TreeBuilder<configs>::extract_symbols();
     }
 };
+
 
 
 }
