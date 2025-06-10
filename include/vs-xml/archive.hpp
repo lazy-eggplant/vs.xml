@@ -149,4 +149,38 @@ struct Archive : ArchiveRaw{
     using ArchiveRaw::ArchiveRaw;
 };
 
+
+template<>
+struct StorageFor<ArchiveRaw>{
+    std::vector<binary_header_t::section_t> index_i;
+    std::vector<uint8_t> buffer_i;
+    std::vector<uint8_t> symbols_i;
+
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):buffer_i(buf),symbols_i(sym){}
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(buf){}
+
+    static ArchiveRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym)  {return ArchiveRaw(cfg,storage.buffer_i,storage.symbols_i);}
+    static ArchiveRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return ArchiveRaw(cfg,storage.buffer_i);}
+
+};
+
+template<>
+struct StorageFor<Archive>{
+    std::vector<binary_header_t::section_t> index_i;
+    std::vector<uint8_t> buffer_i;
+    std::vector<uint8_t> symbols_i;
+
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):buffer_i(buf),symbols_i(sym){}
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(buf){}
+
+    static Archive bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym)  {return Archive(ArchiveRaw(cfg,storage.buffer_i,storage.symbols_i));}
+    static Archive bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return Archive(ArchiveRaw(cfg,storage.buffer_i));}
+
+};
+
+namespace stored{
+    using ArchiveRaw = Stored<ArchiveRaw>;
+    using Archive = Stored<Archive>;
+}
+
 }
