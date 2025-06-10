@@ -1,3 +1,5 @@
+#include "vs-xml/commons.hpp"
+#include "vs-xml/warn-suppress.h"
 #include <expected>
 #include <vs-xml/archive.hpp>
 
@@ -14,19 +16,19 @@ bool ArchiveRaw::save_binary(std::ostream& out)const{
 
     size_t align_symbols = (symbols.size_bytes()%16==0)?0:(16-symbols.size_bytes()%16);
     header.offset_symbols = header.size();
-    header.docs_count = documents.size();
+    header.docs_count = index.size();
 
     out.write((const char*)&header, sizeof(header));
 
     size_t current=0;
-    for(auto& document: this->documents){
+    for(auto& document: this->index){
         binary_header_t::section_t section = {
-            {document.first.base,document.first.length},
+            {document.name.base,document.name.length},
             header.size()+symbols.size_bytes()+align_symbols+current,
-            header.size()+symbols.size_bytes()+align_symbols+current+document.second.size()
+            header.size()+symbols.size_bytes()+align_symbols+current+document.length
         };
         out.write((const char*)&section, sizeof(binary_header_t::section_t));
-        current+=document.second.size();
+        current+=document.length;
     }
 
     out.write((const char*)symbols.data(), symbols.size_bytes());
@@ -36,8 +38,8 @@ bool ArchiveRaw::save_binary(std::ostream& out)const{
         out.write(tmp, align_symbols);
     }
 
-    for(auto& document: this->documents){
-        out.write((const char*)document.second.data(), document.second.size());
+    for(auto& document: this->index){
+        out.write((const char*)this->buffer.data()+document.base, document.length);
     }
     
     out.flush();
@@ -46,7 +48,6 @@ bool ArchiveRaw::save_binary(std::ostream& out)const{
 
 
 std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_binary(std::span<uint8_t> region){
-    std::vector<std::pair<sv,std::span<uint8_t>>> documents;
     std::span<uint8_t> symbols;
 
     const binary_header_t& header = *(const binary_header_t*)region.data();
@@ -73,19 +74,13 @@ std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_bina
     auto endianess = std::endian::native==std::endian::little?binary_header_t::endianess_t::LITTLE:binary_header_t::endianess_t::BIG;
     if(header.endianess!=endianess) return std::unexpected(from_binary_error_t{from_binary_error_t::TypeMismatch});
 
-    documents.reserve(header.docs_count);
-
-    for(size_t i=0;i<header.docs_count;i++){
-        auto& section = header.sections[i];
-        documents.emplace_back(
-            sv{section.name.base,section.name.length},
-            std::span<uint8_t>{region.data()+header.region(i).start, region.data()+header.region(i).end}
-        );
-    }
-
     symbols=std::span<uint8_t>{region.data()+header.size(), region.data()+header.offset_symbols};
 
-    return ArchiveRaw(header.configs,std::move(documents),symbols);
+    WARN_PUSH;
+    WARN_IGNORE("-Waddress-of-packed-member");
+    //`sections` alignment is safe since as it is being guarded by a separate static_assert to be 64bit aligned.
+    return ArchiveRaw(header.configs,{header.sections,header.docs_count},{region.data()+header.offset_symbols,region.data()+region.size_bytes()},symbols);
+    WARN_POP;
 }
 
 

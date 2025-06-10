@@ -25,6 +25,7 @@
 #include <string_view>
 
 #include <bit>
+#include <type_traits>
 
 #if __has_include(<vs-xml/config.hpp>)
 #include <vs-xml/config.hpp>
@@ -142,8 +143,8 @@ struct __attribute__ ((packed)) binary_header_t{
             delta_ptr_t  base;
             xml_count_t  length;
         } name;
-        uint64_t     start;
-        uint64_t     end;
+        uint64_t     base;
+        uint64_t     length;
     } sections [];
 
     constexpr inline section_t region(size_t n) const{
@@ -155,6 +156,7 @@ struct __attribute__ ((packed)) binary_header_t{
         return sizeof(binary_header_t)+sizeof(binary_header_t::section_t)*docs_count;
     }
 };
+static_assert(offsetof(binary_header_t,sections)%sizeof(uint64_t)==0,"Misaligned section_t in header");
 
 
 struct element_t;

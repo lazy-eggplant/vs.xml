@@ -263,8 +263,8 @@ std::expected<TreeRaw, TreeRaw::from_binary_error_t> TreeRaw::from_binary(std::s
     //TODO: Restore bounds checks (?) on sections?
 
     return TreeRaw(header.configs,
-        std::span<uint8_t>{region.data()+header.region(0).start, region.data()+header.region(0).end},
-        std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.region(0).start}
+        std::span<uint8_t>{region.data()+header.region(0).base, header.region(0).length},
+        std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.region(0).base}
     );
 }
 
