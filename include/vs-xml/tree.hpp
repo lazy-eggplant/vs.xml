@@ -210,7 +210,7 @@ struct StorageFor<TreeRaw>{
     StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(buf){}
 
     static TreeRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym)  {return TreeRaw(cfg,storage.buffer_i,storage.symbols_i);}
-    static TreeRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return TreeRaw(cfg,storage.buffer_i);}
+    static TreeRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return TreeRaw(cfg,storage.buffer_i, {(uint8_t*)label_offset,std::span<uint8_t>::extent});}
 
 };
 
@@ -223,7 +223,7 @@ struct StorageFor<Tree>{
     StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(buf){}
 
     static Tree bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym)  {return Tree(TreeRaw(cfg,storage.buffer_i,storage.symbols_i));}
-    static Tree bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return Tree(TreeRaw(cfg,storage.buffer_i));}
+    static Tree bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return Tree(TreeRaw(cfg,storage.buffer_i, {(uint8_t*)label_offset,std::span<uint8_t>::extent}));}
 
 };
 
