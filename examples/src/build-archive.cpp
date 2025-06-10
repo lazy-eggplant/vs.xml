@@ -167,7 +167,7 @@ int main(){
     std::print("Creating archive.\n");
     std::stringstream memstream;
 
-    Archive archive({.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true},std::move(fragments),std::move(*symbols));
+    stored::Archive archive({.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true},std::move(fragments),std::move(*symbols));
 
     std::print("Saving as binary.\n");
     if(!archive.save_binary(memstream)){
@@ -182,7 +182,7 @@ int main(){
     auto tmp_str = memstream.str();
 
     //Building an archive this way makes it weak, make sure the buffer lifetime exceeds the one of the archive.
-    auto archive_back = Archive::from_binary(tmp_str);
+    auto archive_back = Archive::from_binary({(const uint8_t*)tmp_str.data(),(const uint8_t*)tmp_str.data()+tmp_str.length()});
 
     //Just some fancy display to show its binary form.    
     printSpan(std::span<const uint8_t>(reinterpret_cast<const uint8_t*>(tmp_str.data()), tmp_str.size()));
