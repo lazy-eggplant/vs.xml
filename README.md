@@ -93,7 +93,7 @@ This library is mostly standalone, but it requires support for the C standard li
 I am working with C++23 for development, and I don't really plan on directly supporting older revisions of the language at the expense of code simplicity.  
 Other dependencies are only used for the test-suite and benchmarks, they are not needed to build and install `vs.xml` to your system.  
 
-Still, many of its features can be replaced by alternative libraries which are more suitable for embedded systems.  
+Still, many of the standard library features can be replaced by alternatives which are more suitable for embedded systems.  
 You can track our efforts for embedded support in the [dedicated page](./docs/embedded.md) and [tracker](https://github.com/lazy-eggplant/vs.xml/issues/9).  
 
 We also try our best to ensure this library (or a subset of it) can properly work on offloaded targets like GPUs via [OpenMP](https://www.openmp.org/).  
