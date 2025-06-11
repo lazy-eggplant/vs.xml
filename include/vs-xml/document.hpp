@@ -161,17 +161,17 @@ struct DocBuilder : TreeBuilder<cfg>{
         else return stored::Document(configs,std::exchange(this->buffer,{}),this->symbols.symbols.data());
     }
 
-    [[nodiscard]] std::expected<std::pair<sv,std::vector<uint8_t>>,details::BuilderBase::error_t> close_frame(std::string_view name=""){
+    [[nodiscard]] std::expected<binary_header_t::section_t,details::BuilderBase::error_t> close_frame(std::string_view name=""){
         this->end();
         auto tmp = TreeBuilder<configs>::close_frame(name);
         this->begin("ROOT");
         return tmp;
     }
     
-    [[nodiscard]] std::optional<std::vector<uint8_t>> extract_symbols(){
+    [[nodiscard]] std::optional<std::pair<std::vector<uint8_t>,std::vector<uint8_t>>> extract(){
         this->end();
         details::BuilderBase::close();
-        return TreeBuilder<configs>::extract_symbols();
+        return TreeBuilder<configs>::extract();
     }
 };
 

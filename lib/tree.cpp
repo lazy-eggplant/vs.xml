@@ -218,8 +218,8 @@ bool TreeRaw::save_binary(std::ostream& out)const{
     if(header.configs.symbols==builder_config_t::EXTERN_REL)header.configs.symbols=builder_config_t::OWNED; //Symbols are copied even if the where shared, so they are now owned.
 
     size_t align_symbols = (symbols.size_bytes()%16==0)?0:(16-symbols.size_bytes()%16);
-    header.offset_symbols = header.size();
-    binary_header_t::section_t section = {{0,0},header.size()+symbols.size_bytes()+align_symbols,header.size()+symbols.size_bytes()+align_symbols+buffer.size_bytes()};
+    header.length_of_symbols = symbols.size_bytes();
+    binary_header_t::section_t section = {{0,0},0,buffer.size_bytes()};
     out.write((const char*)&header, sizeof(header));
     out.write((const char*)&section, sizeof(binary_header_t::section_t));
     out.write((const char*)symbols.data(), symbols.size_bytes());
@@ -263,8 +263,8 @@ std::expected<TreeRaw, TreeRaw::from_binary_error_t> TreeRaw::from_binary(std::s
     //TODO: Restore bounds checks (?) on sections?
 
     return TreeRaw(header.configs,
-        std::span<uint8_t>{region.data()+header.region(0).base, header.region(0).length},
-        std::span<uint8_t>{region.data()+header.offset_symbols, region.data()+header.region(0).base}
+        std::span<uint8_t>{region.data()+header.start_data()+header.region(0).base, header.region(0).length},
+        std::span<uint8_t>{region.data()+header.size(), header.length_of_symbols}
     );
 }
 
