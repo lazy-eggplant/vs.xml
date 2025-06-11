@@ -217,7 +217,7 @@ bool TreeRaw::save_binary(std::ostream& out)const{
     header.configs = configs;
     if(header.configs.symbols==builder_config_t::EXTERN_REL)header.configs.symbols=builder_config_t::OWNED; //Symbols are copied even if the where shared, so they are now owned.
 
-    size_t align_symbols = (symbols.size_bytes()%16==0)?0:(16-symbols.size_bytes()%16);
+    size_t align_symbols = (header.size()+symbols.size_bytes()%16==0)?0:(16-(header.size()+symbols.size_bytes())%16);
     header.length_of_symbols = symbols.size_bytes();
     binary_header_t::section_t section = {{0,0},0,buffer.size_bytes()};
     out.write((const char*)&header, sizeof(header));

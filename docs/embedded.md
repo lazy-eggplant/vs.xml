@@ -21,12 +21,12 @@ It is important to enable the `noexcept` flag and disable `utils` alongside any 
 ### 🟢 Features optimized for embedded
 - `TreeRaw`/`Tree` general usage
 - `DocumentRaw`/`Document` general usage
+- `ArchiveRaw`/`Archive` general usage
 - The XML parser when `.raw_strings=true`, however wraps builders which are not fully optimized yet.
 - Memos/notes/indices can all be implemented externally, as long as you have a proper library for containers `vs.xml` will not get in your way.
 
 ### 🟠 Features planned for embedded
-- `ArchiveRaw`/`Archive` are currently using the heap to store a redundant vector just to keep the code simple. But it is first on list for removal.
-- `TreeBuilder` & `DocumentBuilder`. Right now they own their storage, unable to just work on externally defined ones.  
+- `TreeBuilder` & `DocumentBuilder`. Right now they own their storage, unable to just work on externally defined ones and memory allocations are needed to build archives.  
   It is possible to reserve space limiting allocations, but they cannot be fully removed.
 - The XML serializer when `.raw_strings=true`, it is still using functions which are not optimized, but their replacement has been implemented already. It also assumes to operate on a stream which is not great.
 - The `QueryBuilder`, same notes as for the other builders.
