@@ -35,3 +35,8 @@ It is important to enable the `noexcept` flag and disable `utils` alongside any 
 ### 🔴 Features not planned for embedded
 - The utilities shipped alongside this library are not meant for embedded usage.
 - Most of the test-suite. Embedded will feature its own subset of tests and benchmarks.
+
+## Storage handling
+
+If you want to avoid memory allocations, please make use of the original Tree/Document/Archive in place of their wrappers in `xml::stored` as you might see suggested in several examples.  
+The originals don't own their memory, so you can externally manage it as you prefer.
