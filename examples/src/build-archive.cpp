@@ -37,7 +37,7 @@ const char* getColorForOffset(size_t offset) {
     else if (offset >= 8 && offset <= 11)   return colors::cyan;            // bitfields for sizes (4 bytes)
     else if (offset >= 12 && offset <= 13)  return colors::white;           // docs_count (2 bytes)
     else if (offset >= 14 && offset <= 15)  return colors::brightYellow;    // res[2]
-    else if (offset >= 16 && offset <= 23)  return colors::brightMagenta;   // offset_symbols (8 bytes)
+    else if (offset >= 16 && offset <= 23)  return colors::brightMagenta;   // length_of_symbols (8 bytes)
     else                                    return colors::reset;           // sections & others
 }
 
@@ -128,7 +128,7 @@ int main(){
 
     constexpr std::string_view texts[] = {"Text 0", "Text 1", "Text 2"};
 
-    std::vector<std::pair<sv,std::vector<uint8_t>>> fragments;
+    std::vector<binary_header_t::section_t> fragments;
     fragments.reserve(sizeof(texts)/sizeof(std::string_view));
 
 
@@ -156,18 +156,19 @@ int main(){
 
     //Extract symbols once all documents have been built.
     std::print("Extracting symbols.\n");
-    auto symbols = bld.extract_symbols();
-    if(!symbols.has_value()){
+    auto [buffer,symbols] = *bld.extract();
+
+    /*if(!symbols.has_value()){
         std::print(std::cerr,"Unable to complete construction of the tree; failure to handle symbols.");
         exit(1);
-    }
+    }*/
 
 
     //We now serialize the archive after creation onto a stream, just for demonstrative purposes.
     std::print("Creating archive.\n");
     std::stringstream memstream;
 
-    stored::Archive archive({.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true},std::move(fragments),std::move(*symbols));
+    stored::Archive archive(builder_config_t{.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true},std::move(fragments),std::move(buffer),std::move(symbols));
 
     std::print("Saving as binary.\n");
     if(!archive.save_binary(memstream)){

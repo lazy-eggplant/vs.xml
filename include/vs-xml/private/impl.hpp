@@ -351,7 +351,7 @@ else if (type() == type_t::PROC) return ((const proc_t*)this)-> X;\
 else if (type() == type_t::CDATA) return ((const cdata_t*)this)-> X;\
 else if (type() == type_t::MARKER) return ((const marker_t*)this)-> X;\
 else{\
-    xml_assert(false,"Invalid XML thing type");\
+    xml_assert(false,std::format("Invalid XML thing type {}",(int)type()).c_str());\
     std::unreachable();\
 }
 

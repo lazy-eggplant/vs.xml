@@ -14,18 +14,18 @@ bool ArchiveRaw::save_binary(std::ostream& out)const{
     header.configs = configs;
     if(header.configs.symbols==builder_config_t::EXTERN_REL)header.configs.symbols=builder_config_t::OWNED; //Symbols are copied even if the where shared, so they are now owned.
 
-    size_t align_symbols = (symbols.size_bytes()%16==0)?0:(16-symbols.size_bytes()%16);
-    header.offset_symbols = header.size();
+    size_t align_symbols = (header.size()+symbols.size_bytes()%16==0)?0:(16-(header.size()+symbols.size_bytes())%16);
+    header.length_of_symbols = symbols.size_bytes();
     header.docs_count = index.size();
 
     out.write((const char*)&header, sizeof(header));
 
-    size_t current=0;
+    delta_ptr_t current=0;
     for(auto& document: this->index){
         binary_header_t::section_t section = {
             {document.name.base,document.name.length},
-            header.size()+symbols.size_bytes()+align_symbols+current,
-            header.size()+symbols.size_bytes()+align_symbols+current+document.length
+            current,
+            document.length
         };
         out.write((const char*)&section, sizeof(binary_header_t::section_t));
         current+=document.length;
@@ -34,6 +34,7 @@ bool ArchiveRaw::save_binary(std::ostream& out)const{
     out.write((const char*)symbols.data(), symbols.size_bytes());
 
     if(align_symbols!=0){
+        //std::printf("----Align %d %d\n", align_symbols,symbols.size_bytes());
         char tmp[16]{};
         out.write(tmp, align_symbols);
     }
@@ -74,12 +75,12 @@ std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_bina
     auto endianess = std::endian::native==std::endian::little?binary_header_t::endianess_t::LITTLE:binary_header_t::endianess_t::BIG;
     if(header.endianess!=endianess) return std::unexpected(from_binary_error_t{from_binary_error_t::TypeMismatch});
 
-    symbols=std::span<uint8_t>{region.data()+header.size(), region.data()+header.offset_symbols};
+    symbols=std::span<uint8_t>{region.data()+header.size(), header.length_of_symbols};
 
     WARN_PUSH;
     WARN_IGNORE("-Waddress-of-packed-member");
     //`sections` alignment is safe since as it is being guarded by a separate static_assert to be 64bit aligned.
-    return ArchiveRaw(header.configs,{header.sections,header.docs_count},{region.data()+header.offset_symbols,region.data()+region.size_bytes()},symbols);
+    return ArchiveRaw(header.configs,{header.sections,header.docs_count},{region.data()+header.start_data(),region.data()+region.size_bytes()},symbols);
     WARN_POP;
 }
 

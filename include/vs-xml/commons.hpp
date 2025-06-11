@@ -135,16 +135,16 @@ struct __attribute__ ((packed)) binary_header_t{
     uint16_t docs_count = 1;
     uint8_t res[2];
 
-    uint64_t offset_symbols;
+    xml_count_t length_of_symbols; //(excluding padding)
 
-    struct section_t{
+    struct __attribute__ ((packed)) section_t{
         //Cannot use sv because not POD.
-        struct{
-            delta_ptr_t  base;
-            xml_count_t  length;
+        struct __attribute__ ((packed)){
+            delta_ptr_t  base;      //Aligned to size() (symbol start)
+            xml_count_t  length;    //Aligned to base
         } name;
-        uint64_t     base;
-        uint64_t     length;
+        delta_ptr_t     base;      //Aligned to start_data
+        xml_count_t     length;    //Relative to base
     } sections [];
 
     constexpr inline section_t region(size_t n) const{
@@ -154,6 +154,11 @@ struct __attribute__ ((packed)) binary_header_t{
 
     constexpr inline size_t size() const {
         return sizeof(binary_header_t)+sizeof(binary_header_t::section_t)*docs_count;
+    }
+
+    constexpr inline size_t start_data() const {
+        auto padding = (size()+length_of_symbols%16==0)?0:(16-(size()+length_of_symbols)%16);
+        return size()+length_of_symbols+padding;
     }
 };
 static_assert(offsetof(binary_header_t,sections)%sizeof(uint64_t)==0,"Misaligned section_t in header");

@@ -111,6 +111,8 @@ namespace details{
 
             const void* symoffset = nullptr;
 
+            delta_ptr_t last_offset = 0;
+
             template<typename T>
             error_t leaf(std::string_view value);
 
@@ -222,26 +224,28 @@ struct TreeBuilder : details::BuilderBase{
          * @details The current state for symbols is preserved, and the new tree will inherit them.
          * @return std::expected<std::vector<uint8_t>,error_t> 
          */
-        [[nodiscard]] std::expected<std::pair<sv,std::vector<uint8_t>>,error_t> close_frame(std::string_view name=""){
+        [[nodiscard]] std::expected<binary_header_t::section_t,error_t> close_frame(std::string_view name=""){
             //Record a symbol for the frame name, so that the name string_view can be returned.
             auto sv_name = label(name);
             if (auto ret = details::BuilderBase::close(); ret != details::BuilderBase::error_t::OK)return std::unexpected(ret);
             open=true;
             attribute_block=false;
             stack.push_back({0,-1});
-            return std::pair{sv_name,std::exchange(buffer, {})};
+            delta_ptr_t cpy_offset = last_offset;
+            last_offset=buffer.size();
+            return binary_header_t::section_t{{sv_name.base,sv_name.length},cpy_offset,buffer.size()-cpy_offset};
         }
 
         /**
          * @brief It allows to extract symbols if the builder has been closed.
          * @details Not to be used with `close` only with `close_frame`
          * @return std::optional<details::Symbols<configs.symbols>> 
-         */
-        [[nodiscard]] std::optional<std::vector<uint8_t>> extract_symbols(){
+         */     
+        [[nodiscard]] std::optional<std::pair<std::vector<uint8_t>,std::vector<uint8_t>>> extract(){
             details::BuilderBase::close();
-            return std::move(symbols.symbols);
+            return std::pair{std::move(buffer),std::move(symbols.symbols)};
         }
-        
+
         /**
          * @brief Fork the current builder instance by cloning its current state into a new one.
          * 
