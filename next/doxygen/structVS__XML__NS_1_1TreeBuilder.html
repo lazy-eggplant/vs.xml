@@ -164,12 +164,12 @@ error_t&#160;</td><td class="memItemRight" valign="bottom"><b>marker</b> (std::s
 <tr class="memitem:a1da31f58bb8553414f435ebb7cbb5f77" id="r_a1da31f58bb8553414f435ebb7cbb5f77"><td class="memItemLeft" align="right" valign="top">std::expected&lt; <a class="el" href="structVS__XML__NS_1_1Stored.html">stored::Tree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a1da31f58bb8553414f435ebb7cbb5f77">close</a> ()</td></tr>
 <tr class="memdesc:a1da31f58bb8553414f435ebb7cbb5f77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final operaration when the building process is finished.  <br /></td></tr>
 <tr class="separator:a1da31f58bb8553414f435ebb7cbb5f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac500291140f5825094e423a4c06f50a8" id="r_ac500291140f5825094e423a4c06f50a8"><td class="memItemLeft" align="right" valign="top">std::expected&lt; std::pair&lt; <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>, std::vector&lt; uint8_t &gt; &gt;, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#ac500291140f5825094e423a4c06f50a8">close_frame</a> (std::string_view name=&quot;&quot;)</td></tr>
-<tr class="memdesc:ac500291140f5825094e423a4c06f50a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Special version of the closing function, only returning the generated tree but not symbols.  <br /></td></tr>
-<tr class="separator:ac500291140f5825094e423a4c06f50a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bb18f102e32eb05bf79d5e40af84289" id="r_a3bb18f102e32eb05bf79d5e40af84289"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::vector&lt; uint8_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a3bb18f102e32eb05bf79d5e40af84289">extract_symbols</a> ()</td></tr>
-<tr class="memdesc:a3bb18f102e32eb05bf79d5e40af84289"><td class="mdescLeft">&#160;</td><td class="mdescRight">It allows to extract symbols if the builder has been closed.  <br /></td></tr>
-<tr class="separator:a3bb18f102e32eb05bf79d5e40af84289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fea2984fcf3d361de1d3f5e6a6e60c2" id="r_a1fea2984fcf3d361de1d3f5e6a6e60c2"><td class="memItemLeft" align="right" valign="top">std::expected&lt; binary_header_t::section_t, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a1fea2984fcf3d361de1d3f5e6a6e60c2">close_frame</a> (std::string_view name=&quot;&quot;)</td></tr>
+<tr class="memdesc:a1fea2984fcf3d361de1d3f5e6a6e60c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Special version of the closing function, only returning the generated tree but not symbols.  <br /></td></tr>
+<tr class="separator:a1fea2984fcf3d361de1d3f5e6a6e60c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6afec2166c44708d6e47ed4d45950fb" id="r_ae6afec2166c44708d6e47ed4d45950fb"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::pair&lt; std::vector&lt; uint8_t &gt;, std::vector&lt; uint8_t &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#ae6afec2166c44708d6e47ed4d45950fb">extract</a> ()</td></tr>
+<tr class="memdesc:ae6afec2166c44708d6e47ed4d45950fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">It allows to extract symbols if the builder has been closed.  <br /></td></tr>
+<tr class="separator:ae6afec2166c44708d6e47ed4d45950fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bfb45cd25b753c47fce4dfc971bf29e" id="r_a5bfb45cd25b753c47fce4dfc971bf29e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a5bfb45cd25b753c47fce4dfc971bf29e">fork</a> () const</td></tr>
 <tr class="memdesc:a5bfb45cd25b753c47fce4dfc971bf29e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fork the current builder instance by cloning its current state into a new one.  <br /></td></tr>
 <tr class="separator:a5bfb45cd25b753c47fce4dfc971bf29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -267,6 +267,9 @@ std::vector&lt; std::pair&lt; ptrdiff_t, ptrdiff_t &gt; &gt;&#160;</td><td class
 <tr class="memitem:a5baf75510108f570e9a0c76f649d960a inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a5baf75510108f570e9a0c76f649d960a"><td class="memItemLeft" align="right" valign="top">
 const void *&#160;</td><td class="memItemRight" valign="bottom"><b>symoffset</b> = nullptr</td></tr>
 <tr class="separator:a5baf75510108f570e9a0c76f649d960a inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bf53cdeb0a420fd60cb45decffcd39f inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase" id="r_a9bf53cdeb0a420fd60cb45decffcd39f"><td class="memItemLeft" align="right" valign="top">
+<a class="el" href="namespaceVS__XML__NS.html#a63b8a25ca71a7e3d813f2ce515d9cc9b">delta_ptr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>last_offset</b> = 0</td></tr>
+<tr class="separator:a9bf53cdeb0a420fd60cb45decffcd39f inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1da31f58bb8553414f435ebb7cbb5f77" name="a1da31f58bb8553414f435ebb7cbb5f77"></a>
@@ -299,8 +302,8 @@ template&lt;builder_config_t cfg = {}&gt; </div>
 
 </div>
 </div>
-<a id="ac500291140f5825094e423a4c06f50a8" name="ac500291140f5825094e423a4c06f50a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac500291140f5825094e423a4c06f50a8">&#9670;&#160;</a></span>close_frame()</h2>
+<a id="a1fea2984fcf3d361de1d3f5e6a6e60c2" name="a1fea2984fcf3d361de1d3f5e6a6e60c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fea2984fcf3d361de1d3f5e6a6e60c2">&#9670;&#160;</a></span>close_frame()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -311,7 +314,7 @@ template&lt;builder_config_t cfg = {}&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; std::pair&lt; <a class="el" href="structVS__XML__NS_1_1sv.html">sv</a>, std::vector&lt; uint8_t &gt; &gt;, error_t &gt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::close_frame </td>
+          <td class="memname">std::expected&lt; binary_header_t::section_t, error_t &gt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::close_frame </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>name</em> = <code>&quot;&quot;</code></td><td>)</td>
@@ -330,8 +333,8 @@ template&lt;builder_config_t cfg = {}&gt; </div>
 
 </div>
 </div>
-<a id="a3bb18f102e32eb05bf79d5e40af84289" name="a3bb18f102e32eb05bf79d5e40af84289"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3bb18f102e32eb05bf79d5e40af84289">&#9670;&#160;</a></span>extract_symbols()</h2>
+<a id="ae6afec2166c44708d6e47ed4d45950fb" name="ae6afec2166c44708d6e47ed4d45950fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6afec2166c44708d6e47ed4d45950fb">&#9670;&#160;</a></span>extract()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -342,7 +345,7 @@ template&lt;builder_config_t cfg = {}&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; std::vector&lt; uint8_t &gt; &gt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::extract_symbols </td>
+          <td class="memname">std::optional&lt; std::pair&lt; std::vector&lt; uint8_t &gt;, std::vector&lt; uint8_t &gt; &gt; &gt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::extract </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
