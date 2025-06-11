@@ -380,6 +380,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#storage-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage handling
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -834,6 +843,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releases/v0.2.9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1030,6 +1062,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#storage-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage handling
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1086,6 +1127,9 @@ This usually implies:</p>
 <li>The utilities shipped alongside this library are not meant for embedded usage.</li>
 <li>Most of the test-suite. Embedded will feature its own subset of tests and benchmarks.</li>
 </ul>
+<h2 id="storage-handling">Storage handling<a class="headerlink" href="#storage-handling" title="Permanent link">#</a></h2>
+<p>If you want to avoid memory allocations, please make use of the original Tree/Document/Archive in place of their wrappers in <code>xml::stored</code> as you might see suggested in several examples.<br />
+The originals don&rsquo;t own their memory, so you can externally manage it as you prefer.</p>
 
 
 
