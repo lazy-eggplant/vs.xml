@@ -1,7 +1,7 @@
 project(
   'vs-xml',
   ['cpp'],
-  version: '0.2.9',
+  version: '0.2.10',
   meson_version: '>= 1.3',
   default_options: ['cpp_std=c++23'],
 )
@@ -65,7 +65,7 @@ endif
 pconf = import('pkgconfig')
 pconf.generate(
   vs_xml_lib,
-  description: 'High performance XML parser, tree builder an query system for trees with limited mutability',
+  description: 'High performance XML parser, tree builder an query system for (huge) trees with limited mutability',
   url: 'https://github.com/lazy-eggplant/vs-xml',
   version: meson.project_version(),
 )

@@ -1,12 +1,13 @@
 ## Standard compatibility
 
+General compatibility with the XML 1.0 specs
+
 ### XML parsing
 - [x] namespaces [^1]
 - [x] cdata
 - [x] text
-    - [x] Unified iterator for text of an element, scanning all text/CDATA children.
-- [x] comments 
-    - [x] optional stripping
+- [x] comments (with optional stripping)
+- [x] processing directives (with optional stripping)
 - [x] basic entities
 - [x] complex entities
 
@@ -16,7 +17,7 @@
 - [x] cdata
 - [x] text
 - [x] comments
-- [ ] output configurability
+- [ ] output prettifycation
     - [ ] indentation
     - [ ] newline style
     - [ ] other linting
@@ -33,21 +34,25 @@
 ### Algorithms
 - [x] iterators for nodes
 - [x] iterators for attributes
+- [x] Unified iterator for text of an element, scanning all text/CDATA children in a single element.
 - [ ] tree/sub-tree cloning
     - [x] Basic copy
     - [ ] String compression
 - [x] attributes reordering
 - [ ] node injection
 - [x] simplified tree wrapper to avoid xml::sv->string_view conversions.
-
+- [x] documents
+- [x] archives
 ### Queries
 
 ## Portability
 
+Issues concerning usage in [embedded](embedded.md) and [offloaded](offloading.md) contexts. Mode details in the respective pages.
+
 - [x] `noexcept` mode
 - [x] `noassert` mode
 - [ ] no memory allocations
-    - [x] for the tree/documents binary representation
+    - [x] for the tree/document/archive binary representation
     - [ ] in the query builder[^2]
     - [ ] in tree building[^2]
     - [ ] in query processing[^3]
