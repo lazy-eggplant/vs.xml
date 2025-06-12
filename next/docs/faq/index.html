@@ -932,14 +932,15 @@
 <blockquote>
 <p>Why the binary serialization of the XML is bigger compared to the base file?</p>
 </blockquote>
-<p>That is to be expected. XML has very little overhead, with very little in terms of extra symbols and markers.<br />
-By comparison, this library represents nodes by storing contextual information about their neighbours to speed up navigation.<br />
-This additional pre-computed information explains the bigger memory footprint. Even when compressed via gzip, the source XML retains a meaningful edge.  </p>
+<p>That is to be expected. XML has very little overhead, with not much in terms of extra symbols and markers.<br />
+In contrast, this library represents nodes by storing contextual information about their neighbours to speed up navigation.<br />
+This additional pre-computed information explains the bigger memory footprint.<br />
+Even when compressed via gzip, the source XML retains a meaningful edge.  </p>
 <blockquote>
 <p>So, why should I save the binary serialization?</p>
 </blockquote>
-<p>Because you don&rsquo;t need to parse the original file again. You just need to memory-map it and use it as is.<br />
-This lowers start-up time quite to zero if using <code>mmap</code>, and will only load pages for the content you need, regardless of the original file size.<br />
+<p>Because you will not have to parse the original file again. You can just memory-map it and use it as is.<br />
+This lowers start-up time to virtually zero if using <code>mmap</code>, as only the pages of content needed are going to be loaded from disk, regardless of the original file size.<br />
 Such approach can massively boot real world performance on huge files, but also positively impact smaller ones as it operates lazily.</p>
 <blockquote>
 <p>What is the point of a representation which is not mutable? Why cannot I edit the tree?</p>
