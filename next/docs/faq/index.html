@@ -933,7 +933,7 @@
 <p>Why the binary serialization of the XML is bigger compared to the base file?</p>
 </blockquote>
 <p>That is to be expected. XML has very little overhead, with not much in terms of extra symbols and markers.<br />
-In contrast, this library represents nodes by storing contextual information about their neighbours to speed up navigation.<br />
+By contrast, this library represents nodes by storing contextual information about their neighbours to speed up navigation.<br />
 This additional pre-computed information explains the bigger memory footprint.<br />
 Even when compressed via gzip, the source XML retains a meaningful edge.  </p>
 <blockquote>
@@ -945,11 +945,11 @@ Such approach can massively boot real world performance on huge files, but also 
 <blockquote>
 <p>What is the point of a representation which is not mutable? Why cannot I edit the tree?</p>
 </blockquote>
-<p>Technically it is not immutable; however some types of mutations would be very expensive, almost like rebuilding the entire tree from scratch.<br />
+<p>Technically they are not immutable; however some types of mutations would be very expensive, almost like rebuilding the entire tree from scratch.<br />
 Still, there are some operations which are quite fast, like reordering attributes in-place, changing strings with symbols already stored in memory, or adding annotations to the original document.<br />
-Some of these operations are implemented by this library, others could be in a nearby future or delegated to downstream integrations.  </p>
+Some of these operations are implemented by this library, and the rest is either planned for future releases or delegated to downstream integrations.  </p>
 <p>As for why, there is plenty of applications where mutability of the tree structure is only needed during construction, and only for the next token to append.<br />
-This library tries to optimize such cases without introducing features which could compromise their performance.</p>
+This library tries to optimize such cases without introducing features which could compromise performance for the rest of the operations.</p>
 <blockquote>
 <p>Why pointers are internally represented as relative to a base?</p>
 </blockquote>
@@ -960,15 +960,15 @@ Also, results of complex queries are fully portable and easy to share.</p>
 <p>Why is XML serialization/de-serialization single threaded?</p>
 </blockquote>
 <p>Simple answer, laziness. A more serious reply would be that serialization and de-serialization are meant to be just one-off operations.<br />
-The bulk of whatever computation we must perform is going to act on the binary representation, not the original text.<br />
+The bulk of whatever computation we must perform is going to act on the binary representation, not its textual form.<br />
 There is no trivial way to make XML parsing or serialization &ldquo;parallel&rdquo; without making the code involved much more complex.<br />
 At which point it is generally better to waste threads for other tasks if possible.</p>
 <blockquote>
 <p>How to annotate a tree?</p>
 </blockquote>
 <p>References to XML nodes and attributes have a method <code>addr</code> to return their portable address. Keeping a hash map or a similar data structure does the trick.<br />
-You should be using a data structure which can be easily serialized/de-serialized, or even better which can be memory-mapped if feasible.<br />
-The standard C++ library is not your best option, you might want to check for alternative like <a href="https://github.com/greg7mdp/gtl">gtl</a>.</p>
+You should be using a data structure which can be easily serialized/de-serialized, or even better which can be memory-mapped with no further steps.<br />
+The standard C++ library is not your best option, you might want to check for alternatives like <a href="https://github.com/greg7mdp/gtl">gtl</a>.</p>
 <blockquote>
 <p>How to cache queries?</p>
 </blockquote>
