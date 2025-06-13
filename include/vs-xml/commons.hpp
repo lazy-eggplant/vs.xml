@@ -135,7 +135,7 @@ struct __attribute__ ((packed)) binary_header_t{
     uint16_t docs_count = 1;
     uint8_t res[2];
 
-    xml_count_t length_of_symbols; //(excluding padding)
+    uint64_t length_of_symbols; //(excluding padding)
 
     struct __attribute__ ((packed)) section_t{
         //Cannot use sv because not POD.

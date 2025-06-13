@@ -1,4 +1,5 @@
-Not implemented yet, just basic specs to sketch a new feature built on top of queries (and to build queries).
+> [!WARNING]  
+> Not implemented yet, just basic specs to sketch a new feature built on top of queries (and to build queries).
 
 Queries as they are right now are flexible, but not optimal for all applications:
 
