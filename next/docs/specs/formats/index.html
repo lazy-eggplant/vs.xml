@@ -988,6 +988,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1111,7 +1134,43 @@
 <h2 id="binary-serialization">Binary serialization<a class="headerlink" href="#binary-serialization" title="Permanent link">#</a></h2>
 <p>Except for a small header, the binary serialization of a tree is identical to its representation in memory.</p>
 <h3 id="header-format">Header format<a class="headerlink" href="#header-format" title="Permanent link">#</a></h3>
-<p>TBW.</p>
+<pre><code class="language-mermaid">packet-beta
+    title Binary Header (Start)
+    0-7: &quot;$&quot;
+    8-15: &quot;X&quot;
+    16-23: &quot;M&quot;
+    24-31: &quot;L&quot;
+    32-39: &quot;Format Major&quot;
+    40-47: &quot;Format Minor&quot;
+    48-55: &quot;Configs&quot;
+    56-57: &quot;Endian&quot;
+    58-63: &quot;reserved-0&quot;
+    64-69: &quot;size (bits) delta_ptr_t&quot;
+    70-75: &quot;size (bits) xml_size_t&quot;
+    76-81: &quot;size (bits) xml_count_t&quot;
+    82-87: &quot;size (bits) xml_enum_size_t&quot;
+    88-95: &quot;reserved-1&quot;
+    96-111: &quot;documents count&quot;
+    112-127: &quot;reserved-2&quot;
+    128-191: &quot;symbols size&quot;
+</code></pre>
+<p>An array of sections follows. The definition of a section depends on the data types of the build:</p>
+<pre><code class="language-c++">struct __attribute__ ((packed)) section_t{
+    struct __attribute__ ((packed)){
+        delta_ptr_t  base;      //Aligned to the beginning of the symbols table.
+        xml_count_t  length;    //Aligned to base
+    } name;
+    delta_ptr_t     base;      //Aligned to start_data() (after symbols)
+    xml_count_t     length;    //Relative to base
+}
+</code></pre>
+<pre><code class="language-mermaid">packet-beta
+    title Configs
+    0-2: &quot;Symbols&quot;
+    3-4: &quot;raw_strings&quot;
+    5-6: &quot;allow_comments&quot;
+    7-8: &quot;allow_procs&quot;
+</code></pre>
 <h3 id="multi-doc-archives">Multi-doc archives<a class="headerlink" href="#multi-doc-archives" title="Permanent link">#</a></h3>
 <p>TBW.</p>
 <h2 id="indices">Indices<a class="headerlink" href="#indices" title="Permanent link">#</a></h2>
