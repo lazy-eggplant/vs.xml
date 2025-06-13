@@ -1086,7 +1086,8 @@ The second option will grant you more flexibility in case you need control over 
 <div class="highlight"><pre><span></span><code>meson<span class="w"> </span>setup<span class="w"> </span>build<span class="w">           </span><span class="c1">#You might want to introduce more flags to setup the build type to release, lto optimizations et cetera.</span>
 meson<span class="w"> </span>install<span class="w"> </span>-C<span class="w"> </span>build<span class="w">      </span><span class="c1">#You might want to define DESTDIR before to perform a semi-dry run.</span>
 </code></pre></div>
-<p>A simplified makefile is made available, which has some reasonable defaults, but uses meson under the hood.  </p>
+<p>A simplified makefile is available, which sets some reasonable defaults, but uses meson under the hood.  </p>
+<p>There is also a CMake file (with reduce capabilities), but it is not really used by any of my downstream applications and might end up being broken due to its limited testing.  </p>
 <p>Tarballs will also be offered for some distributions as part of future releases.  </p>
 <h2 id="as-a-dependency">As a dependency<a class="headerlink" href="#as-a-dependency" title="Permanent link">#</a></h2>
 <p>Feel free to use this as baseline for your wrap file:</p>
