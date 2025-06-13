@@ -10,7 +10,9 @@ meson setup build           #You might want to introduce more flags to setup the
 meson install -C build      #You might want to define DESTDIR before to perform a semi-dry run.
 ```
 
-A simplified makefile is made available, which has some reasonable defaults, but uses meson under the hood.  
+A simplified makefile is available, which sets some reasonable defaults, but uses meson under the hood.  
+
+There is also a CMake file (with reduce capabilities), but it is not really used by any of my downstream applications and might end up being broken due to its limited testing.  
 
 Tarballs will also be offered for some distributions as part of future releases.  
 

@@ -34,4 +34,4 @@ cfgfile = configure_file(output : 'config.hpp',
 )
 
 install_headers(cfgfile, subdir:'vs-xml')
-install_subdir('.', install_dir : 'include/vs-xml', strip_directory: false, follow_symlinks: true, exclude_files: ['meson.build'] )
+install_subdir('.', install_dir : 'include/vs-xml', strip_directory: false, follow_symlinks: true, exclude_files: ['meson.build','config.hpp.in'] )

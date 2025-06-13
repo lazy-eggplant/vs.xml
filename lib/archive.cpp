@@ -2,6 +2,7 @@
 #include "vs-xml/utils/warn-suppress.h"
 #include <expected>
 #include <vs-xml/archive.hpp>
+#include <cstring>
 
 namespace VS_XML_NS{
 
