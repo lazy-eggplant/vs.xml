@@ -25,7 +25,7 @@ vs_xml_lib = library(
       'lib/parser.cpp',
       'lib/serializer.cpp',
       'lib/tree.cpp',
-      'lib/builder.cpp',
+      'lib/tree-builder.cpp',
       'lib/inplace-builder.cpp',
       'lib/query.cpp',
       'lib/query-builder.cpp',

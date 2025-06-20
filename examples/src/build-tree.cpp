@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vs-xml/document.hpp>
+#include <vs-xml/document-builder.hpp>
 using namespace xml;
 
 /*

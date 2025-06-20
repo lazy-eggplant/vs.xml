@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @file builder.hpp
+ * @file tree-builder.hpp
  * @author karurochari
  * @brief Tree builder classes
  * @date 2025-05-01

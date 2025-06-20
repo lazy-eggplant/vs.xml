@@ -1,10 +1,13 @@
 module xml {
-    header "builder.hpp"
     header "commons.hpp"
+    header "tree-builder.hpp"
+    header "document-builder.hpp"
+    header "archive-builder.hpp"
     header "parser.hpp"
     header "serializer.hpp"
     header "tree.hpp"
     header "document.hpp"
+    header "archive.hpp"
     header "filters.hpp"
     export *
 }

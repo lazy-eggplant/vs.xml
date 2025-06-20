@@ -29,7 +29,7 @@ Or installing it in your system first and using it as a system dependency.
 
 Full code in the [examples folder](./examples/src/readme.cpp). You can easily build documents:
 ```cpp
-#include <vs-xml/document.hpp>
+#include <vs-xml/document-builder.hpp>
 #include <vs-xml/filters.hpp>
 #include <vs-xml/query.hpp>
 

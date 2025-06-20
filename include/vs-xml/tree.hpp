@@ -198,7 +198,12 @@ struct Tree : TreeRaw{
 
     wrp::base_t<unknown_t> root() const;
 
+    //Cast this tree as a raw tree
     inline TreeRaw& downgrade(){return *this;}
+    
+    //Cast this const tree as a const raw tree
+    inline const TreeRaw& downgrade() const{return *this;}
+
 };
 
 template<>

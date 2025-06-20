@@ -16,7 +16,7 @@
 int decode(std::filesystem::path input, std::filesystem::path output){
     try{
         mio::mmap_source mmap(input.c_str());
-        std::string_view binaryInput(mmap.data(),mmap.size());
+        std::span<const uint8_t> binaryInput((const uint8_t*)mmap.data(),mmap.size());
         auto tree = xml::Document::from_binary(binaryInput);
 
         std::ofstream file(output,std::ios::binary|std::ios::out);

@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <vs-xml/parser.hpp>
 #include <vs-xml/serializer.hpp>
-#include <vs-xml/builder.hpp>
+#include <vs-xml/tree-builder.hpp>
 
 #include <mio/mmap.hpp>
 

@@ -1,9 +1,9 @@
 #pragma once
 
 /**
- * @file folder.hpp
+ * @file archive.hpp
  * @author karurochari
- * @brief A collection of multiple documents, stored as a single tree. They use shared symbols and a common address space.
+ * @brief A collection of multiple documents, stored in a single data structure. Archives will use shared symbols but split address space for each document.
  * @date 2025-05-21
  * 
  * @copyright Copyright (c) 2025
@@ -33,31 +33,39 @@ struct ArchiveRaw{
 
     using from_binary_error_t = TreeRaw::from_binary_error_t;
 
+    ///Save a binary representation for this raw archive to an output stream.
     bool save_binary(std::ostream& out)const;
 
+    ///Load this raw archive with data from a memory region, and return it unless failure.
     [[nodiscard]] static std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> from_binary(std::span<uint8_t> region);
+
+    ///Load this raw archive with data from a memory region, and return it unless failure.
     [[nodiscard]] static std::expected<const ArchiveRaw, ArchiveRaw::from_binary_error_t> from_binary(std::span<const uint8_t> region);
 
-    inline std::string_view rsv(sv s) const{
+    ///Resolve a string view referred to the current symbol table to an absolute string view.
+    [[nodiscard]] inline std::string_view rsv(sv s) const{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
     }
 
-    inline std::optional<DocumentRaw> get(size_t idx){
+    ///Get the raw document in position idx if available
+    [[nodiscard]] inline std::optional<DocumentRaw> get(size_t idx){
         //xml_assert(documents.size()>idx, "Out of bounds document selected");
         if(idx>index.size())return {};
         auto v = index[idx];
         return DocumentRaw(configs,std::span{buffer.data()+v.base,v.length},std::span{symbols.begin(),symbols.end()});
     }
 
-    inline std::optional<const DocumentRaw> get(size_t idx) const{
+    ///Get a constant raw document in position idx if available
+    [[nodiscard]] inline std::optional<const DocumentRaw> get(size_t idx) const{
         //xml_assert(documents.size()>idx, "Out of bounds document selected");
         if(idx>index.size())return {};
         auto v = index[idx];
         return DocumentRaw(configs,std::span{buffer.data()+v.base,v.length},std::span{symbols.begin(),symbols.end()});
     }
 
-    //TODO ordered index?
-    inline std::optional<DocumentRaw> get(std::string_view name){
+    ///Get the raw document with a given name if it exists
+    [[nodiscard]] inline std::optional<DocumentRaw> get(std::string_view name){
+        //TODO introduce support for an ordered index?
         for(auto& doc: index){
             if(rsv({doc.name.base, doc.name.length})==name){
                 return DocumentRaw(configs,std::span{buffer.data()+doc.base,doc.length},std::span{symbols.begin(),symbols.end()});
@@ -66,6 +74,7 @@ struct ArchiveRaw{
         return {};
     }
 
+    ///Get the const raw document with a given name if it exists
     inline std::optional<const DocumentRaw> get(std::string_view name) const{
         for(auto& doc: index){
             if(rsv({doc.name.base, doc.name.length})==name){
@@ -86,13 +95,8 @@ struct ArchiveRaw{
         configs(cfg)
     {}
 
-
-    //TODO: convert from const to ...
-    //inline ArchiveRaw(std::vector<std::pair<sv,std::string_view>>&& docs, std::string_view syms){}
-
-    //ArchiveRaw(const ArchiveRaw&) = default;
-
-    inline size_t items() const{return index.size();}
+    ///The number of items present in this archive
+    [[nodiscard]] inline size_t items() const{return index.size();}
 
     private:
         ArchiveRaw(){};
@@ -102,36 +106,42 @@ struct ArchiveRaw{
  * @brief the archive class you should use.
  */
 struct Archive : ArchiveRaw{
-    inline std::optional<Document> get(size_t idx){
+    ///Get the document in position idx if available
+    [[nodiscard]] inline std::optional<Document> get(size_t idx){
         auto tmp = ArchiveRaw::get(idx);
         if(tmp.has_value())return Document(std::move(*tmp));
         else return {};
     }
 
-    inline std::optional<const Document> get(size_t idx) const{
+    ///Get a constant document in position idx if available
+    [[nodiscard]] inline std::optional<const Document> get(size_t idx) const{
         auto tmp = ArchiveRaw::get(idx);
         if(tmp.has_value())return Document(std::move(*tmp));
         else return {};
     }
 
-    inline std::optional<const Document> get(std::string_view name) const{
+    ///Get the document with a given name if it exists
+    [[nodiscard]] inline std::optional<Document> get(std::string_view name){
         auto tmp = ArchiveRaw::get(name);
         if(tmp.has_value())return Document(std::move(*tmp));
         else return {};
     }
 
-    inline std::optional<Document> get(std::string_view name){
+    ///Get the const document with a given name if it exists
+    [[nodiscard]] inline std::optional<const Document> get(std::string_view name) const{
         auto tmp = ArchiveRaw::get(name);
         if(tmp.has_value())return Document(std::move(*tmp));
         else return {};
     }
 
+    ///Load this archive with data from a memory region, and return it unless failure.
     [[nodiscard]] static inline std::expected<Archive, ArchiveRaw::from_binary_error_t> from_binary(std::span<uint8_t> region){
         auto tmp = ArchiveRaw::from_binary(region);
         if(tmp.has_value())return Archive(std::move(*tmp));
         else return tmp;
     }
     
+    ///Load this const archive with const data from a memory region, and return it unless failure.
     [[nodiscard]] static inline std::expected<const Archive, ArchiveRaw::from_binary_error_t> from_binary(std::span<const uint8_t> region){
         auto tmp = ArchiveRaw::from_binary(region);
         if(tmp.has_value())return Archive(std::move(*tmp));
@@ -141,11 +151,14 @@ struct Archive : ArchiveRaw{
     inline Archive(ArchiveRaw&& ref):ArchiveRaw(std::move(ref)){}
     inline Archive(const ArchiveRaw&& ref):ArchiveRaw(std::move(ref)){}
 
-    inline ArchiveRaw& downgrade(){return *this;}
+    ///Reinterprete this archive as a raw archive.
+    [[nodiscard]] inline ArchiveRaw& downgrade(){return *this;}
+
+    ///Reinterprete this const archive as a const raw archive.
+    [[nodiscard]] inline const ArchiveRaw& downgrade() const{return *this;}
 
     using ArchiveRaw::ArchiveRaw;
 };
-
 
 template<>
 struct StorageFor<ArchiveRaw>{

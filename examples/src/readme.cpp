@@ -8,7 +8,7 @@
  * 
  */
 
-#include <vs-xml/document.hpp>
+#include <vs-xml/document-builder.hpp>
 #include <vs-xml/filters.hpp>
 #include <vs-xml/query.hpp>
 

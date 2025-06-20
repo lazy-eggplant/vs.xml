@@ -7,7 +7,7 @@
 #include <vs-xml/commons.hpp>
 #include <vs-xml/parser.hpp>
 #include <vs-xml/serializer.hpp>
-#include <vs-xml/document.hpp>
+#include <vs-xml/document-builder.hpp>
 
 #include <mio/mmap.hpp>
 

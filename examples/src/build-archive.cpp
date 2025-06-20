@@ -3,6 +3,8 @@
 #include <string_view>
 #include <sstream>
 #include <vs-xml/archive.hpp>
+//#include <vs-xml/archive-builder.hpp>
+#include <vs-xml/document-builder.hpp>
 #include <vs-xml/utils/pretty-header.hpp>
 using namespace xml;
 
