@@ -1139,20 +1139,19 @@ This usually implies:</p>
 </ul>
 <h3 id="features-planned-for-embedded">🟠 Features planned for embedded<a class="headerlink" href="#features-planned-for-embedded" title="Permanent link">#</a></h3>
 <ul>
-<li><code>TreeBuilder</code> &amp; <code>DocumentBuilder</code>. Right now they own their storage, unable to just work on externally defined ones and memory allocations are needed to build archives.<br />
-  It is possible to reserve space limiting allocations, but they cannot be fully removed.</li>
+<li><code>TreeBuilder</code>, <code>DocumentBuilder</code>, <code>ArchiveBuilder</code> &amp; <code>QueryBuilder</code>. Right now they encapsulate their own storage, unable to just work on externally defined containers, so we cannot externally handle memory allocations.<br />
+  It is possible to reserve space and so limiting the number of allocations, but they cannot be fully removed as it is.</li>
 <li>The XML serializer when <code>.raw_strings=true</code>, it is still using functions which are not optimized, but their replacement has been implemented already. It also assumes to operate on a stream which is not great.</li>
-<li>The <code>QueryBuilder</code>, same notes as for the other builders.</li>
 <li>Queries. Right now they are not good due to the high number of dynamic allocations needed. They could be trivially removed for the most part, but the whole system is being refactored to be stack-based and consume less memory overall.</li>
 </ul>
 <h3 id="features-not-planned-for-embedded">🔴 Features not planned for embedded<a class="headerlink" href="#features-not-planned-for-embedded" title="Permanent link">#</a></h3>
 <ul>
 <li>The utilities shipped alongside this library are not meant for embedded usage.</li>
-<li>Most of the test-suite. Embedded will feature its own subset of tests and benchmarks.</li>
+<li>Most of the test-suite. Embedded targets will feature their own subset of tests and benchmarks as the coding style is quite different.</li>
 </ul>
 <h2 id="storage-handling">Storage handling<a class="headerlink" href="#storage-handling" title="Permanent link">#</a></h2>
 <p>If you want to avoid memory allocations, please make use of the original Tree/Document/Archive in place of their wrappers in <code>xml::stored</code> as you might see suggested in several examples.<br />
-The originals don&rsquo;t own their memory, so you can externally manage it as you prefer.</p>
+The originals don&rsquo;t own their memory, so you can externally manage it yourself as desired.</p>
 
 
 
