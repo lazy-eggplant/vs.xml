@@ -18,11 +18,11 @@ on:
       - "!**.md"
 
 jobs:
-  build-all:
+  build-all-meson:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04] #[ubuntu-24.04, ubuntu-24.04-arm, macos-14, windows-latest] 
+        os: [ubuntu-24.04,ubuntu-24.04-arm] #[ubuntu-24.04, ubuntu-24.04-arm, macos-14, windows-latest] 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 8
     steps:
@@ -45,3 +45,24 @@ jobs:
           name: ubuntu-meson-logs
           path: |
             build/meson-logs/**/*
+  build-cmake:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04,ubuntu-24.04-arm] #[ubuntu-24.04, ubuntu-24.04-arm, macos-14, windows-latest] 
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          python3 -m venv .venv
+          source .venv/bin/activate
+          python3 -m pip install cmake
+      - name: Configure and build
+        run: |
+          source .venv/bin/activate
+          mkdir build
+          cd build
+          CXX=g++-14 CC=gcc-14 cmake ..
+          make all -j

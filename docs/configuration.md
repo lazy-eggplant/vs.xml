@@ -69,7 +69,7 @@ These can be set at compile-time for each instance as a template argument.
     - `OWNED` no compression of symbols, but they are owned.
     - `COMPRESS_LABELS` only compressing symbols which are used for tag and prop labels (and namespaces).
     - `COMPRESS_ALL` all symbols are compressed.
-    - ~~`COMPRESS_CUSTOM`~~ not implemented yet. Used to determine the usage of a custom compression algorithm, offloading it from the library.  
+    - ~~`COMPRESS_CUSTOM`~~ not implemented yet. Used to determine the usage of a custom compression algorithm, not part of this library's code.
       Useful to specify your own for embedded systems or to implement more expensive but compressed representations.
 - `raw_strings` if true, strings are assumed to be preserved as they are when serialized or deserialized from XML.  
    Make sure you are manually escaping when building the tree. Comparisons on the other hand will handle the conversion automatically when not using the `TreeRaw`/`DocumentRaw`/`ArchiveRaw`.
