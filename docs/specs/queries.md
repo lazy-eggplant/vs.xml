@@ -2,14 +2,19 @@
 Queries are the main mechanism to perform search operations on the binary XML files.  
 There are three main clause types:
 
-- `is` iterates over all nodes form a container (like a prior query) as long as all criteria are met.
-- `has` iterates over all nodes from a container (like a prior query), for which the `is` clause is tested against the query criterion. Those for which at least one solution is defined are picked.
-- ~~`maps`~~ (not implemented yet) iterates over all nodes from a container (like a prior query), and matches results for node in the query tree onto a map-like structure. 
+- `any-is` iterates over all nodes form a container (like a prior query) as long as all criteria are met.
+- `this-is` checks if a specific node satisfies requirements recursively navigating the parents list. In some sense it is a local version of `any-is` since any element satisfying `any-is` will satisfy `this-is` and the converse is true as well.
+- `any-has` iterates over all nodes from a container (like a prior query), for which the `is` clause is tested against the query criterion. Those for which at least one solution is defined are picked.
+
+All queries are designed to be capturing. For each token, you can pass two arguments:
+- A label pattern
+- A function (lambda) to register such pattern
+This allows to record a map of captures for each valid match of the query.
 
 ## Structure of queries
 
-A query is a linear sequence of query tokens. Most are meant to match specific features of the XML nodes, while some are used to control the "machine" running the query validation process.  
-Every complete query should end with an `accept()` token.
+A query is a linear sequence of query tokens. Most are meant to match specific features of the XML nodes, while some are used to control the "machine" running the validation process.  
+Every complete query must end with an `accept()` token.
 
 ### Basic commands
 
@@ -24,12 +29,12 @@ Every complete query should end with an `accept()` token.
 
 ### About attributes
 
-Attributes are handled differently compared to the rest of the XML nodes, because they are not. `attr` will exclusively test the attribute and not bind or capture it. This is true even when running `is` clauses.  
-If you must capture attributes, you will have to do that by manually iterating or filtering them, like `item.attrs() | std::views::filter(...)`.
+Attributes are handled differently compared to the rest of the XML nodes, because they are not. `attr` even in `is` queries will behave like a `has`. The presence of the attribute is being tested, but it will not be considered as the node to return. Still, they can be used as captures for a query.  
+If you must match and return attributes directly, you will have to do that by manually iterating or filtering them, like `item.attrs() | std::views::filter(...)`.
 
 ### String shorthands
 
-Several of the basic commands introduce earlier are also available in a simplified form, represented by string views:
+Several of the basic commands introduce earlier also have a simplified form based off string views:
 
 - `"{ns}:{name}"` matching namespace and name. Special values `?` for each to determine anything matches that slot. Empty string is considered empty string, and not a generic "match all".
 - `*` to accept any node and move forward.
@@ -46,7 +51,7 @@ Tokens of a query can be composed by any of the following operators:
 
 Queries are applied either by:
 
-- Using the `is`, `has` or ~~`capture`~~ functions.
-- The operators `&` and `|` which are alias for `is` and `has` respectively.
+- Using the `is`, `has` or ~~`check`~~ functions.
+- The operators `&`, `|` or ~~`==`~~ which are their respective alias.
 
 Applied queries return asynchronous generators, so they can be further piped by `std::views::filter`.
