@@ -1,9 +1,12 @@
 <map id="include/vs&#45;xml/fwd/unordered_set.hpp" name="include/vs&#45;xml/fwd/unordered_set.hpp">
-<area shape="rect" id="Node000001" title="Helpers to handle unordered_set portably." alt="" coords="39,5,186,45"/>
-<area shape="rect" id="Node000002" href="$builder_8hpp.html" title="Tree builder classes." alt="" coords="15,93,210,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,59,115,93,110,93,110,59"/>
-<area shape="rect" id="Node000003" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="5,167,220,192"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,132,115,167,110,167,110,132"/>
-<area shape="rect" id="Node000004" href="$archive_8hpp_source.html" title=" " alt="" coords="13,240,212,265"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,206,115,240,110,240,110,206"/>
+<area shape="rect" id="Node000001" title="Helpers to handle unordered_set portably." alt="" coords="97,5,244,45"/>
+<area shape="rect" id="Node000002" href="$tree-builder_8hpp.html" title="Tree builder classes." alt="" coords="97,93,245,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,59,173,93,168,93,168,59"/>
+<area shape="rect" id="Node000003" href="$document-builder_8hpp.html" title="Document builder wrapper implementation for tree builder." alt="" coords="5,255,192,295"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="150,146,128,182,114,221,105,255,100,254,109,219,123,180,145,143"/>
+<area shape="rect" id="Node000004" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="137,181,351,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="200,142,235,179,231,183,196,145"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="212,216,135,257,132,252,209,211"/>
+<area shape="rect" id="Node000005" href="$archive_8hpp.html" title="A collection of multiple documents, stored in a single data structure. Archives will use shared symbo..." alt="" coords="217,262,415,287"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="266,215,307,260,303,264,262,219"/>
 </map>

@@ -126,9 +126,14 @@ const <a class="el" href="structVS__XML__NS_1_1Tree.html">Tree</a>&#160;</td><td
 <tr class="memitem:ab6f57b3afe982fb94a3f8167b5c7eab8" id="r_ab6f57b3afe982fb94a3f8167b5c7eab8"><td class="memItemLeft" align="right" valign="top"><a id="ab6f57b3afe982fb94a3f8167b5c7eab8" name="ab6f57b3afe982fb94a3f8167b5c7eab8"></a>
 <a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>root</b> ()</td></tr>
 <tr class="separator:ab6f57b3afe982fb94a3f8167b5c7eab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30172060819962baf8ea4687878b8296" id="r_a30172060819962baf8ea4687878b8296"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1Document.html#a30172060819962baf8ea4687878b8296">downgrade</a> ()</td></tr>
-<tr class="memdesc:a30172060819962baf8ea4687878b8296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Downgrade the current document into its base <a class="el" href="structVS__XML__NS_1_1DocumentRaw.html" title="Base class for an XML document.">VS_XML_NS::DocumentRaw</a>.  <br /></td></tr>
+<tr class="memitem:a30172060819962baf8ea4687878b8296" id="r_a30172060819962baf8ea4687878b8296"><td class="memItemLeft" align="right" valign="top"><a id="a30172060819962baf8ea4687878b8296" name="a30172060819962baf8ea4687878b8296"></a>
+<a class="el" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>downgrade</b> ()</td></tr>
+<tr class="memdesc:a30172060819962baf8ea4687878b8296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast this document as a raw document. <br /></td></tr>
 <tr class="separator:a30172060819962baf8ea4687878b8296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeac6e6f0bd3d704cca254ae6cfdf421d" id="r_aeac6e6f0bd3d704cca254ae6cfdf421d"><td class="memItemLeft" align="right" valign="top"><a id="aeac6e6f0bd3d704cca254ae6cfdf421d" name="aeac6e6f0bd3d704cca254ae6cfdf421d"></a>
+const <a class="el" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>downgrade</b> () const</td></tr>
+<tr class="memdesc:aeac6e6f0bd3d704cca254ae6cfdf421d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast this const document as a const raw tree. <br /></td></tr>
+<tr class="separator:aeac6e6f0bd3d704cca254ae6cfdf421d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structVS__XML__NS_1_1DocumentRaw"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structVS__XML__NS_1_1DocumentRaw')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structVS__XML__NS_1_1DocumentRaw.html">VS_XML_NS::DocumentRaw</a></td></tr>
 <tr class="memitem:a5dd6e661a56340d6c40760de762178ba inherit pub_methods_structVS__XML__NS_1_1DocumentRaw" id="r_a5dd6e661a56340d6c40760de762178ba"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}) const</td></tr>
@@ -234,36 +239,7 @@ builder_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>configs</
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The suggested-to-use <a class="el" href="structVS__XML__NS_1_1Document.html" title="The suggested-to-use Document class.">Document</a> class. </p>
 <p>In general, not to be used directly. Either load a binary file or generate it via a builder. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a30172060819962baf8ea4687878b8296" name="a30172060819962baf8ea4687878b8296"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30172060819962baf8ea4687878b8296">&#9670;&#160;</a></span>downgrade()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> &amp; VS_XML_NS::Document::downgrade </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Downgrade the current document into its base <a class="el" href="structVS__XML__NS_1_1DocumentRaw.html" title="Base class for an XML document.">VS_XML_NS::DocumentRaw</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structVS__XML__NS_1_1DocumentRaw.html" title="Base class for an XML document.">DocumentRaw</a>&amp; </dd></dl>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/vs-xml/<a class="el" href="document_8hpp_source.html">document.hpp</a></li>
 </ul>
 </div><!-- contents -->

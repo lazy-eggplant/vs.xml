@@ -13,6 +13,5 @@ var searchData=
   ['base_5ft_3c_20vs_5fxml_5fns_3a_3aattr_5ft_20_3e_10',['base_t&lt; VS_XML_NS::attr_t &gt;',['../structVS__XML__NS_1_1wrp_1_1base__t.html',1,'VS_XML_NS::wrp']]],
   ['base_5ft_3c_20vs_5fxml_5fns_3a_3aunknown_5ft_20_3e_11',['base_t&lt; VS_XML_NS::unknown_t &gt;',['../structVS__XML__NS_1_1wrp_1_1base__t.html',1,'VS_XML_NS::wrp']]],
   ['builder_12',['Builder',['../structVS__XML__NS_1_1Builder.html',1,'VS_XML_NS']]],
-  ['builder_2ehpp_13',['builder.hpp',['../builder_8hpp.html',1,'']]],
-  ['builderbase_14',['BuilderBase',['../structVS__XML__NS_1_1details_1_1BuilderBase.html',1,'VS_XML_NS::details']]]
+  ['builderbase_13',['BuilderBase',['../structVS__XML__NS_1_1details_1_1BuilderBase.html',1,'VS_XML_NS::details']]]
 ];

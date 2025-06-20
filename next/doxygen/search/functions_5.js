@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['inject_0',['inject',['../structVS__XML__NS_1_1TreeRaw.html#a91f5f622947b9e102ab39dc1fe6ae64b',1,'VS_XML_NS::TreeRaw']]],
-  ['is_5felement_1',['is_element',['../namespaceVS__XML__NS_1_1filters.html#a7a0c812bd61539401043875cd0314ba0',1,'VS_XML_NS::filters']]],
-  ['is_5ftext_2',['is_text',['../namespaceVS__XML__NS_1_1filters.html#a0fb2d9fa6ac6536b1cca511fd087099c',1,'VS_XML_NS::filters']]]
+  ['get_0',['get',['../structVS__XML__NS_1_1ArchiveRaw.html#ab2ac73a176129102739576e609e1d828',1,'VS_XML_NS::ArchiveRaw::get(size_t idx)'],['../structVS__XML__NS_1_1ArchiveRaw.html#abe2eb0d7c1b2f9d77446996d9d6ba4ec',1,'VS_XML_NS::ArchiveRaw::get(size_t idx) const'],['../structVS__XML__NS_1_1ArchiveRaw.html#ab5b93a0741cd20bdb3010a520d3657f9',1,'VS_XML_NS::ArchiveRaw::get(std::string_view name)'],['../structVS__XML__NS_1_1ArchiveRaw.html#a82affba38dd8a6016b6f0ab5940ed7da',1,'VS_XML_NS::ArchiveRaw::get(std::string_view name) const'],['../structVS__XML__NS_1_1Archive.html#a1f6fcf1c06aeb589b68ba28201070016',1,'VS_XML_NS::Archive::get(size_t idx)'],['../structVS__XML__NS_1_1Archive.html#a6e72355311d3e99714186a710dee6ffd',1,'VS_XML_NS::Archive::get(size_t idx) const'],['../structVS__XML__NS_1_1Archive.html#abf0d44f3974493a3c5089f4f953c7d99',1,'VS_XML_NS::Archive::get(std::string_view name)'],['../structVS__XML__NS_1_1Archive.html#aa21ad32a05048cd7b6797661b20466d3',1,'VS_XML_NS::Archive::get(std::string_view name) const']]]
 ];

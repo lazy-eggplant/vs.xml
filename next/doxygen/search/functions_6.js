@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['name_0',['name',['../namespaceVS__XML__NS_1_1filters.html#a5c3624b13599fa9c38562d6a2e790693',1,'VS_XML_NS::filters']]],
-  ['ns_1',['ns',['../namespaceVS__XML__NS_1_1filters.html#a413cb33b54f8c56e92554dd0f2d2512e',1,'VS_XML_NS::filters']]]
+  ['inject_0',['inject',['../structVS__XML__NS_1_1TreeRaw.html#a91f5f622947b9e102ab39dc1fe6ae64b',1,'VS_XML_NS::TreeRaw']]],
+  ['is_5felement_1',['is_element',['../namespaceVS__XML__NS_1_1filters.html#a7a0c812bd61539401043875cd0314ba0',1,'VS_XML_NS::filters']]],
+  ['is_5ftext_2',['is_text',['../namespaceVS__XML__NS_1_1filters.html#a0fb2d9fa6ac6536b1cca511fd087099c',1,'VS_XML_NS::filters']]],
+  ['items_3',['items',['../structVS__XML__NS_1_1ArchiveRaw.html#a301505e0234d178f6d2671e096922b79',1,'VS_XML_NS::ArchiveRaw']]]
 ];
