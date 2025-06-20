@@ -24,8 +24,10 @@ list(GET _ver_components 2 PROJECT_VERSION_PATCH)
 
 option(VS_XML_NOEXCEPT "Build library with noexcept everywhere" OFF)
 option(VS_XML_NO_ASSERT "Disable asserts in vs-xml" OFF)
-option(VS_XML_USE_FMT    "Find and use fmt library"     OFF)
-option(VS_XML_USE_GTL    "Find and use gtl library"     OFF)
+option(VS_XML_USE_FMT   "Find and use fmt library"     OFF)
+option(VS_XML_USE_GTL   "Find and use gtl library"     OFF)
+option(VS_XML_NS        "Custom namespace name"     "xml")
+option(VS_XML_LAYOUT    "Memory layout"     0)
 
 # dependencies
 if(VS_XML_USE_FMT)

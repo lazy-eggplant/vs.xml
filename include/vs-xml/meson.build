@@ -15,6 +15,9 @@ if get_option('noassert')
   conf.set('VS_XML_NO_ASSERT', 'true')
 endif
 
+conf.set('VS_XML_NS', get_option('ns'))
+conf.set('VS_XML_LAYOUT', get_option('binlayout'))
+
 if get_option('use_fmt')
   fmt_dep = dependency('fmt')
   conf.set('VS_XML_USE_FMT','true')

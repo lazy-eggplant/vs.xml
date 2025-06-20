@@ -1,8 +1,9 @@
 
-For performance reasons, most configuration flags are defined at compile-time.  
-A single application will have to build and link different versions of this library if they want different configurations, but that scenario is extremely unlikely.
+For performance reasons, most of the configuration flags are defined at build-time.  
+A single application will have to build and link different versions of this library if they want different configurations, but that scenario is extremely unlikely. Still, if needed, the entire namespace of this library is scoped with a macro. 
 
-## Meson project
+## Meson options
+These are options which can be configured via meson during the initial setup:
 
 - `tests` defaults to false. Change to enable test-suite.
 - `benchmarks` defaults to false. Change to enable benchmarks.
@@ -11,8 +12,16 @@ A single application will have to build and link different versions of this libr
 - `use_fmt` defaults to true. Disable it if you want to force using `std::print`/`std::format` instead, but be mindful [they are much slower](https://github.com/lazy-eggplant/vs.xml/issues/8).
 - `use_gtl` defaults to false. Enable it to use alternative STL-like containers with better performance and memory-mappability (is that even a word?).
 - `noexcept` defaults to false. Used to disable exceptions from the build. Often needed for embedded or offloaded targets.
+- `noassert` defaults to false. Used to remove assertions from the build. Can improve performance when things are working, but it is very much unsafe.
+- `ns` defaults to `xml`. Change the namespace if needed, to avoid collisions.
+- `binlayout`:
+    - `0` Normal/aligned (default)
+    - `1` Compact (mostly compatible with real world documents, less cache-misses, less space taken on disk)
 
-## Defines
+## Macros / CMake options
+
+Since they can be set as meson options, there is no need to change them directly.  
+However, they share the same name as the CMake options, so use them as such if working with CMake.
 
 - `VS_XML_NS` defaults to `xml`. Changes the namespace if needed, to avoid collisions.
 - `VS_XML_NO_ASSERT` to remove assertions from this library.
@@ -50,6 +59,8 @@ Builders are parametrized by a configuration structure and initialized in ways w
 
 ### Configuration fields
 
+These can be set at compile-time for each instance as a template argument. 
+
 - `allow_comments` if true allows comments to be appended in the tree, else they are silently skipped (but can still return errors for validation)
 - `allow_procs` if true allows processing directives to be appended in the tree, else they are silently skipped (but can still return errors for validation)
 - `symbols`:
@@ -60,5 +71,5 @@ Builders are parametrized by a configuration structure and initialized in ways w
     - `COMPRESS_ALL` all symbols are compressed.
     - ~~`COMPRESS_CUSTOM`~~ not implemented yet. Used to determine the usage of a custom compression algorithm, offloading it from the library.  
       Useful to specify your own for embedded systems or to implement more expensive but compressed representations.
-- `raw_strings` if true, strings are assumed to be preserved as is when serialized or deserialized from XML.  
-  Make sure you are manually escaping when building the tree. Comparisons on the other hand will handle the conversion automatically when not using the `xxxRaw` versions of the library classes.
+- `raw_strings` if true, strings are assumed to be preserved as they are when serialized or deserialized from XML.  
+   Make sure you are manually escaping when building the tree. Comparisons on the other hand will handle the conversion automatically when not using the `TreeRaw`/`DocumentRaw`/`ArchiveRaw`.

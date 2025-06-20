@@ -10,3 +10,6 @@ option('use_gtl', type: 'boolean', value: false)
 
 option('noexcept', type: 'boolean', value: false)
 option('noassert', type: 'boolean', value: false)
+
+option('ns', type: 'string', value: 'xml')
+option('binlayout', type: 'integer', value: 0)
