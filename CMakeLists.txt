@@ -3,16 +3,16 @@ cmake_minimum_required(VERSION 3.16)
 # Generated via LLM and just manually corrected as I don't use CMake myself.
 # It only exposes a subset of the meson build script, basically what is needed to generate the library itself an nothing more.
 
-if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+#if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
   message(WARNING "
   ================================================================================
-  WARNING: You are using the CMake build wrapper for vs-xml
+  WARNING: You are using the CMake build script for vs-xml
            The primary build system for this project is Meson.
            This CMake script exists only for wider compatibility,
            is less fully featured, and is not regularly tested!
   ================================================================================
   ")
-endif()
+#endif()
 
 # Read version string from file
 file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/VERSION" _version_lines)
@@ -26,8 +26,10 @@ option(VS_XML_NOEXCEPT "Build library with noexcept everywhere" OFF)
 option(VS_XML_NO_ASSERT "Disable asserts in vs-xml" OFF)
 option(VS_XML_USE_FMT   "Find and use fmt library"     OFF)
 option(VS_XML_USE_GTL   "Find and use gtl library"     OFF)
-option(VS_XML_NS        "Custom namespace name"     "xml")
-option(VS_XML_LAYOUT    "Memory layout"     0)
+
+set(VS_XML_NS "xml" CACHE STRING "Custom namespace name")
+set(VS_XML_LAYOUT "0" CACHE STRING "Memory layout")
+
 
 # dependencies
 if(VS_XML_USE_FMT)
@@ -80,7 +82,7 @@ set(VS_XML_SOURCES
   lib/parser.cpp
   lib/serializer.cpp
   lib/tree.cpp
-  lib/builder.cpp
+  lib/tree-builder.cpp
   lib/inplace-builder.cpp
   lib/query.cpp
   lib/query-builder.cpp

@@ -9,5 +9,5 @@
 #cmakedefine01 VS_XML_NO_ASSERT
 #cmakedefine01 VS_XML_USE_FMT
 #cmakedefine01 VS_XML_USE_GTL
-#cmakedefine01 VS_XML_LAYOUT
-#cmakedefine01 VS_XML_NS
+#cmakedefine   VS_XML_NS        @VS_XML_NS@
+#cmakedefine   VS_XML_LAYOUT    @VS_XML_LAYOUT@

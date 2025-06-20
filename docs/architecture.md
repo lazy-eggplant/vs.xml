@@ -41,6 +41,9 @@ In practice, you can just use `Class` over `ClassRaw` for virtually any scenario
 
 ## Builders
 
+`Tree`, `Document`, `Archive` all come with their respective builders. They are classes providing an interface to construct the relative object piece by piece.  
+To make use of them, include `vs-xml/xxx-builder.hpp`.
+
 ## Parser
 
 ## Serialization

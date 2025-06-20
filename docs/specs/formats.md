@@ -50,9 +50,10 @@ packet-beta
     7-8: "allow_procs"
 ```
 
-### Multi-doc archives
+### Multi-document archives
 
-TBW.
+Multi-document archives are based on the binary format introduced before.  
+The document count will just not be 1, multiple sections are going to be present, whose names are stored in the shared table of symbols. 
 
 ## Indices
 

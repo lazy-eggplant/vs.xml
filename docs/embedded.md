@@ -26,17 +26,16 @@ It is important to enable the `noexcept` flag and disable `utils` alongside any 
 - Memos/notes/indices can all be implemented externally, as long as you have a proper library for containers `vs.xml` will not get in your way.
 
 ### 🟠 Features planned for embedded
-- `TreeBuilder` & `DocumentBuilder`. Right now they own their storage, unable to just work on externally defined ones and memory allocations are needed to build archives.  
-  It is possible to reserve space limiting allocations, but they cannot be fully removed.
+- `TreeBuilder`, `DocumentBuilder`, `ArchiveBuilder` & `QueryBuilder`. Right now they encapsulate their own storage, unable to just work on externally defined containers, so we cannot externally handle memory allocations.  
+  It is possible to reserve space and so limiting the number of allocations, but they cannot be fully removed as it is.
 - The XML serializer when `.raw_strings=true`, it is still using functions which are not optimized, but their replacement has been implemented already. It also assumes to operate on a stream which is not great.
-- The `QueryBuilder`, same notes as for the other builders.
 - Queries. Right now they are not good due to the high number of dynamic allocations needed. They could be trivially removed for the most part, but the whole system is being refactored to be stack-based and consume less memory overall.
 
 ### 🔴 Features not planned for embedded
 - The utilities shipped alongside this library are not meant for embedded usage.
-- Most of the test-suite. Embedded will feature its own subset of tests and benchmarks.
+- Most of the test-suite. Embedded targets will feature their own subset of tests and benchmarks as the coding style is quite different.
 
 ## Storage handling
 
 If you want to avoid memory allocations, please make use of the original Tree/Document/Archive in place of their wrappers in `xml::stored` as you might see suggested in several examples.  
-The originals don't own their memory, so you can externally manage it as you prefer.
+The originals don't own their memory, so you can externally manage it yourself as desired.
