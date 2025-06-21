@@ -8,4 +8,5 @@ Still, this one improves the documentation, and refactors several bad architectu
 
 ## Breaking
 
-Splitting builders into separate files to have a clean separation between embeddable and not embeddable code.
+- Splitting builders into separate files to have a clean separation between embeddable and not embeddable code.
+- `reserve` for the builders changed interface to ensure more fields can be added with descriptive label.

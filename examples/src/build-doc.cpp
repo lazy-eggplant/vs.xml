@@ -13,7 +13,7 @@ int main(){
     DocBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
 
     //Optionally, you can reserve space for the containers used by the builder. This way you can cut down on allocations.
-    bld.reserve(1024*4,1024*4);
+    bld.reserve({1024*4,1024*4});
 
     //These will later be expanded in nodes.
     std::string_view texts[] = {"Text 0", "Text 1", "Text 2"};

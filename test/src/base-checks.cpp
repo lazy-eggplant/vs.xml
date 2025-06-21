@@ -11,7 +11,7 @@
 template<xml::builder_config_t cfg>
 auto mk_tree(){
     xml::TreeBuilder<cfg> build;
-    build.reserve(100000,100000);
+    build.reserve({100000,100000});
     build.begin("hello");
         build.text("hello world");
         build.x("AAA",{{"N1","N2"},{"N1","N3"}},[&]{

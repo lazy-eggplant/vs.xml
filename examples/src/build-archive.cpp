@@ -1,9 +1,10 @@
+#include "vs-xml/tree-builder.hpp"
 #include <iostream>
 #include <print>
 #include <string_view>
 #include <sstream>
 #include <vs-xml/archive.hpp>
-//#include <vs-xml/archive-builder.hpp>
+#include <vs-xml/archive-builder.hpp>
 #include <vs-xml/document-builder.hpp>
 #include <vs-xml/utils/pretty-header.hpp>
 using namespace xml;
@@ -15,56 +16,37 @@ using namespace xml;
     - Profit.
 */
 
-int main(){
-    DocBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true}> bld;
 
-    //Optionally, you can reserve space for the containers used by the builder. This way you can cut down on allocations.
-    bld.reserve(1024*4,1024*4);
+int main(){
+    ArchiveBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true}> bld;
+    bld.reserve({1024*4,1024*4});
 
     constexpr std::string_view texts[] = {"Text 0", "Text 11", "Text 222"};
-
-    std::vector<binary_header_t::section_t> fragments;
-    fragments.reserve(sizeof(texts)/sizeof(std::string_view));
-
-
-    //Here we constructs multiple documents but we preserve the table of symbols.
-    //Please notice the usage of `close_frame` and the final `extract_symbols` in place of the "normal" `close`.
 
     std::print("Constructing frames.\n");
 
     for(auto text : texts){
-        std::print("Building {}\n",text);
-        bld.xml();
-        bld.begin("tag-root");
-            bld.attr("doc","document-value");
-            if(text=="Text 0")bld.attr("doc2","document-value2");
-            bld.text(text);
-        bld.end();
-
-        //Register the current frame in a vector for later usage.
-        if(auto t = bld.close_frame(text); t.has_value())fragments.emplace_back(*t);
-        else{
-            std::print(std::cerr,"Unable to complete construction of the tree {}",(int)t.error());
+        if(auto t = bld.document(text, [&](auto& bld){
+            bld.xml();
+            bld.begin("tag-root");
+                bld.attr("doc","document-value");
+                if(text=="Text 0")bld.attr("doc2","document-value2");
+                bld.text(text);
+            bld.end();
+        });t!=decltype(t)::OK){
+            std::print(std::cerr,"Unable to complete construction of the tree {}",(int)t);
             exit(1);
         }
-
     }
 
-    //Extract symbols once all documents have been built.
-    std::print("Extracting symbols.\n");
-    auto [buffer,symbols] = *bld.extract();
+    std::print("Creating archive.\n");
 
-    /*if(!symbols.has_value()){
-        std::print(std::cerr,"Unable to complete construction of the tree; failure to handle symbols.");
-        exit(1);
-    }*/
-
+    stored::Archive archive = *bld.close();
+    //TODO: Handle here if not created properly.
 
     //We now serialize the archive after creation onto a stream, just for demonstrative purposes.
-    std::print("Creating archive.\n");
     std::stringstream memstream;
 
-    stored::Archive archive(builder_config_t{.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true},std::move(fragments),std::move(buffer),std::move(symbols));
 
     std::print("Saving as binary.\n");
     if(!archive.save_binary(memstream)){
