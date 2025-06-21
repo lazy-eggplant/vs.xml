@@ -100,6 +100,7 @@ namespace details{
             TREE_ATTR_CLOSED,
             STACK_EMPTY,
             MISFORMED,
+            FRAME_ERROR,
         };
     
         protected:
@@ -160,13 +161,11 @@ struct TreeBuilder : details::BuilderBase{
         
 
     public:
-        //TODO: rework to accept a configuration object with the reservations of all vectors
         TreeBuilder(std::string_view src):symbols(src){
             static_assert(cfg.symbols==builder_config_t::EXTERN_REL, "Only EXTERN_REL builders can pass the source symbol table");
             symoffset = symbols.symbols.data();
         }
 
-        //TODO: rework to accept a configuration object with the reservations of all vectors
         TreeBuilder(){
             static_assert(cfg.symbols!=builder_config_t::EXTERN_REL, "EXTERN_REL cannot build without a source symbol table");
             symoffset = symbols.symbols.data();
@@ -261,43 +260,45 @@ struct TreeBuilder : details::BuilderBase{
             std::string_view ns;
         };
 
-        constexpr void x(std::string_view ns, std::string_view name, const std::initializer_list<attr_t>& attrs, void(*items)(TreeBuilder&)){
+        constexpr inline void x(std::string_view ns, std::string_view name, const std::initializer_list<attr_t>& attrs, void(*items)(TreeBuilder&)){
             begin(name,ns);
-
             for(auto& a:attrs){
                 attr(a.name,a.value,a.ns);
             }
-
             items(*this);
-
             end();
         }
 
         constexpr void x(std::string_view ns, std::string_view name, const std::initializer_list<attr_t>& attrs={}, const std::function<void()>& items=[](){}){
             begin(name,ns);
-
             for(auto& a:attrs){
                 attr(a.name,a.value,a.ns);
             }
-
             items();
-
             end();
         }
+
 
         constexpr void x(std::string_view name, const std::initializer_list<attr_t>& attrs, void(*items)(TreeBuilder&)){return x("",name,attrs,items);}
         constexpr void x(std::string_view name, const std::initializer_list<attr_t>& attrs={}, const std::function<void()>& items=[](){}){return x("",name,attrs,items);}
 
+        struct reserve_t{
+            size_t buffer;
+            size_t symbols;
+            size_t symbols_index;
+        };
 
         /**
          * @brief Reserves space for the buffer to avoid many of the initial small allocations. Ideally run just after initialization.
-         * 
-         * @param bytes 
          */
-        inline void reserve(size_t bytes,size_t bytes2=0){
-            this->buffer.reserve(bytes);
+        inline void reserve(reserve_t sizes){
+            this->buffer.reserve(sizes.buffer);
             if constexpr(configs.symbols==builder_config_t::OWNED || configs.symbols==builder_config_t::COMPRESS_ALL || configs.symbols==builder_config_t::COMPRESS_LABELS){
-                symbols.symbols.reserve(bytes2);
+                symbols.symbols.reserve(sizes.symbols);
+            }
+            if constexpr(configs.symbols==builder_config_t::COMPRESS_ALL || configs.symbols==builder_config_t::COMPRESS_LABELS){
+                symbols.symbols.reserve(sizes.symbols);
+                symbols.idx.reserve(sizes.symbols_index);
             }
         }
 };

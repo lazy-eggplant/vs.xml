@@ -112,7 +112,7 @@ struct Generator {
 template<xml::builder_config_t cfg>
 auto mk_tree(){
     xml::TreeBuilder<cfg> build;
-    build.reserve(100000,100000);
+    build.reserve({100000,100000});
     build.begin("root");
         build.x("node-a",{{"attr0","val0"},{"attr1","val1"}});
         build.x("node-b",{{"attr0","val0"},{"attr1","val1"}});

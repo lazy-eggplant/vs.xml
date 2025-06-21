@@ -154,6 +154,51 @@ struct TreeRaw{
         buffer((uint8_t*)src.data(),src.size_bytes()),symbols((uint8_t*)sym.data(),sym.size_bytes()),configs(cfg){
     }
 
+    struct iterator{
+        using iterator_category = std::forward_iterator_tag;
+        using difference_type   = std::ptrdiff_t;
+        using value_type        = const unknown_t;
+        using pointer           = const value_type*;
+        using reference         = const value_type&;
+    
+        inline iterator(const TreeRaw& tree):tree(&tree){node = &tree.root(); }
+    
+        inline iterator(pointer ptr) : node(ptr) {}
+        inline iterator(reference r) : node(&r) {}
+        inline iterator() = default;
+        inline iterator(const iterator&) = default;
+    
+        inline reference operator*() const { return *node; }
+        inline pointer operator->() { return node; }
+    
+        iterator& operator++();
+        inline iterator operator++(int) { iterator tmp = *this; ++(*this); return tmp; }
+    
+        inline friend bool operator== (const iterator& a, const iterator& b) { return a.node == b.node; };
+        inline friend bool operator!= (const iterator& a, const iterator& b) { return a.node != b.node; };  
+    
+        private:
+            const TreeRaw* tree;
+            const unknown_t* node = nullptr;
+            bool children_visited = false;
+    };
+    
+
+    inline auto visitor() const{
+    
+        struct self{
+            iterator begin() const {return iterator(*base);}
+            iterator end() const {return iterator(nullptr);}
+    
+            self(const TreeRaw& b):base(&b){}
+    
+            private:
+                const TreeRaw* base;
+        };
+    
+        return self(*this);
+    }
+
     protected:
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
@@ -179,6 +224,9 @@ struct TreeRaw{
 };
 
 
+static_assert(std::forward_iterator<TreeRaw::iterator>);
+
+
 /**
  * @brief the tree class you should use.
  * @warning make sure you also check VS_XML_NS::Document as you are more likely going to use that one
@@ -198,10 +246,10 @@ struct Tree : TreeRaw{
 
     wrp::base_t<unknown_t> root() const;
 
-    //Cast this tree as a raw tree
+    ///Cast this tree as a raw tree
     inline TreeRaw& downgrade(){return *this;}
-    
-    //Cast this const tree as a const raw tree
+
+    ///Cast this const tree as a const raw tree
     inline const TreeRaw& downgrade() const{return *this;}
 
 };

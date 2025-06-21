@@ -83,7 +83,6 @@ set(VS_XML_SOURCES
   lib/serializer.cpp
   lib/tree.cpp
   lib/tree-builder.cpp
-  lib/inplace-builder.cpp
   lib/query.cpp
   lib/query-builder.cpp
 )

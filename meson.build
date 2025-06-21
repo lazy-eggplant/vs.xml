@@ -21,12 +21,11 @@ subdir('./include/vs-xml')
 vs_xml_lib = library(
     'vs-xml',
     [
-      'lib/archive.cpp',
       'lib/parser.cpp',
       'lib/serializer.cpp',
+      'lib/archive.cpp',
       'lib/tree.cpp',
       'lib/tree-builder.cpp',
-      'lib/inplace-builder.cpp',
       'lib/query.cpp',
       'lib/query-builder.cpp',
     ],

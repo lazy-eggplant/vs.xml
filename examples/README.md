@@ -1,14 +1,16 @@
 
-## Building a tree
+## [Building a tree](./src/build-tree.cpp)
 
-## Building a document
+## [Building a document](./src/build-doc.cpp)
 
-## Building an archive
+## [Building an archive](./src/build-archive.cpp)
 
-## From and to XML
+## [From XML](./src/from-xml.cpp)
 
-## Memory mapping files
+## [To XML](./src/to-xml.cpp)
 
-## Custom queries
+## [Memory mapping files](./src/mmap.cpp)
 
-## Annotations & custom indices
+## [Custom queries](./src/queries.cpp)
+
+## [Annotations & custom indices](./src/annotations.cpp)

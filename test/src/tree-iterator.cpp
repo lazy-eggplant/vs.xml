@@ -55,53 +55,10 @@ auto mk_tree(){
 
 
 
-
-template<xml::builder_config_t cfg>
-auto test(){
-    auto tree = *mk_tree<cfg>();
-    tree.print(std::cout,{});
-    std::print("\n---\n");
-    tree.reorder();
-    tree.print(std::cout,{});
-    std::print("\n---\n");
-    xml::Tree wrp_tree(std::move(tree));
-    wrp_tree.print(std::cout,{});
-    std::print("\n---\n");
-    
-    auto root = wrp_tree.root();
-    
-    for(auto& element:root.children()){
-        std::print("{}\n",element.name().value_or("--"));
-    }
-
-    for(auto& element:root.attrs()){
-        std::print("{}\n",element.name().value_or("--"));
-    }
-    
-    std::print("\nNS\n");
-
-    for(auto& element: root.attrs() | xml::filters::ns("w") ){
-        std::print("{}\n",element.name().value_or("--"));
-    }
-
-    for(auto& element: root.attrs(std::views::filter([](auto& it)static{it.type();return true;})) ){
-        std::print("{}\n",element.name().value_or("--"));
-    }
- 
-    std::print("\n === \n");
-
-    for(auto& element: root.attrs(xml::filters::value("va>l\"1")) ){
-        std::print("{}\n",element.name().value_or("--"));
-    }
-
-    std::print("\n");
-
-    for(auto& ch: root.text()){std::print("{}",ch);}
-    std::print("\n------\n");
-}
-
-
 int main(){
-    test<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();    
+    auto tree = *mk_tree<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();
+    for(auto& it: tree.visitor()){
+        std::print(">{}\n",(int)it.type());
+    }
     return 0;
 }

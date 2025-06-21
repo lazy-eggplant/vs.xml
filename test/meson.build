@@ -59,5 +59,15 @@ if get_option('noexcept') == false
         ],
     ))
 
+    test('tree-iterator',executable(
+        'tree-iterator',
+        './src/tree-iterator.cpp',
+        install: false,
+        cpp_args: [],
+        link_args: [],
+        dependencies: [
+            vs_xml_dep,
+        ],
+    ))
 endif
 
