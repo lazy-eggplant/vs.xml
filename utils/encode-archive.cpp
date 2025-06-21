@@ -246,7 +246,7 @@ int main(int argc, char* argv[]) {
 
         for (size_t i = 0; i < RCOUNT; ++i) {
             auto r     = static_cast<ProcessResult::Value>(i);
-            auto cnt   = counters[i].load();
+            //auto cnt   = counters[i].load();
             auto name  = ProcessResult::to_string(r);
             auto color = ProcessResult::color_for(r);
             std::print("{}{:<16}{} : {}\n",
