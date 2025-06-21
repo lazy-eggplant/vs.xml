@@ -28,7 +28,6 @@ executable(
     ],
 )
 
-
 executable(
     'archive-building',
     './src/build-archive.cpp',

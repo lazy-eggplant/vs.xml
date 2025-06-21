@@ -6,8 +6,6 @@
 
 namespace VS_XML_NS{
 
-
-
 bool ArchiveRaw::save_binary(std::ostream& out)const{
     if(configs.symbols==builder_config_t::EXTERN_ABS)return false; //Symbols not relocatable.
 
@@ -48,7 +46,6 @@ bool ArchiveRaw::save_binary(std::ostream& out)const{
     return true;
 }
 
-
 std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_binary(std::span<uint8_t> region){
     std::span<uint8_t> symbols;
 
@@ -85,11 +82,8 @@ std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_bina
     WARN_POP;
 }
 
-
-
 std::expected<const ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_binary(std::span<const uint8_t> region){
     return from_binary(std::span<uint8_t>{(uint8_t*)region.data(),(uint8_t*)region.data()+region.size_bytes()});
 }
-
 
 }
