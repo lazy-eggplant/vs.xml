@@ -262,5 +262,7 @@ struct Stored : private StorageFor<T>, T{
     }
 };
 
+///Namespace hosting wrapped versions for most structures with internal data ownership (no good for embedded).
+namespace stored{}
 
 }
