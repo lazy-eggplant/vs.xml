@@ -3,7 +3,8 @@ Still, this one improves the documentation, and refactors several bad architectu
 
 ## New features
 
-~~A new builder for Archive, avoiding the need of boilerplate.~~
+- A new builder for Archive, avoiding the need of boilerplate.
+- `TreeIterator` to replace the current queries based on generators.
 ~~New CLI tools to generate a binary archive from a folder and the reverse operation.~~
 
 ## Breaking

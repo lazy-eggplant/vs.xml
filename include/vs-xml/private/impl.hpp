@@ -54,6 +54,7 @@ struct base_t{
     const unknown_t* prev() const {return static_cast<const T*>(this)->prev();}
     const unknown_t* next() const {return static_cast<const T*>(this)->next();}
 
+    bool has_children() const {return static_cast<const T*>(this)->has_children();}
     bool has_parent() const {return static_cast<const T*>(this)->has_parent();}
     bool has_prev() const {return static_cast<const T*>(this)->has_prev();}
     bool has_next() const {return static_cast<const T*>(this)->has_next();}
@@ -159,6 +160,7 @@ struct element_t : base_t<element_t>{
         return (const unknown_t*)((const uint8_t*)this+_next);
     }
 
+    inline bool has_children() const {return (const unknown_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count)!=(const unknown_t*)((const uint8_t*)this+_size);}
     inline bool has_parent() const {return _parent!=0;}
     inline bool has_prev() const {return _prev!=0;}
     inline bool has_next() const {return _next!=0;}
@@ -207,6 +209,7 @@ struct root_t : base_t<root_t>{
     inline const unknown_t* prev() const {return nullptr;}
     inline const unknown_t* next() const {return nullptr;}
 
+    inline bool has_children() const {return (const unknown_t*)((const uint8_t*)this+sizeof(root_t))!=(const unknown_t*)((const uint8_t*)this+_size);}
     inline bool has_parent() const {return false;}
     inline bool has_prev() const {return false;}
     inline bool has_next() const {return false;}
@@ -260,6 +263,7 @@ struct leaf_t : base_t<T>{
     inline const unknown_t*prev() const {return (const unknown_t*)((const uint8_t*)this+_prev);}
     inline const unknown_t* next() const {return (const unknown_t*)((const uint8_t*)this+sizeof(leaf_t));}
 
+    inline bool has_children() const {return false;}
     inline bool has_parent() const {return _parent!=0;}
     inline bool has_prev() const {return _prev!=0;}
     inline bool has_next() const {return has_parent() && (next()<(parent()->children_range())->second)!=0;}   //TODO:check
@@ -378,6 +382,7 @@ struct unknown_t : base_t<unknown_t>{
     const unknown_t* prev() const {CDISPATCH(prev());}
     const unknown_t* next() const {CDISPATCH(next());}
 
+    inline bool has_children() const {CDISPATCH(has_children());}
     inline bool has_parent() const {CDISPATCH(has_parent());}
     inline bool has_prev() const {CDISPATCH(has_prev());}
     inline bool has_next() const {CDISPATCH(has_next());}

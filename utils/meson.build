@@ -32,6 +32,16 @@ executable(
 )
 
 executable(
+    'vs-xml.decode-archive',
+    'decode-archive.cpp',
+    install: true,
+    dependencies: [
+        vs_xml_dep,
+        mio_dep,
+    ],
+)
+
+executable(
     'vs-xml.query',
     'query.cpp',
     install: true,
