@@ -105,6 +105,7 @@ struct base_t{
 
         friend struct node_iterator;
         friend struct attr_iterator;
+        friend struct visitor_iterator;
     public:
     
     base_t(const base_t& ) = default;
@@ -136,6 +137,8 @@ struct base_t{
     inline auto attrs(auto filter) const;
     inline auto children() const;
     inline auto children(auto filter) const;
+    inline auto visitor() const;
+    inline auto visitor(auto filter) const;
     auto text() const;
 
     inline auto type() const {return ptr->type();}
@@ -237,9 +240,34 @@ struct attr_iterator{
     base_t<attr_t> m_ptr;
 };
 
+struct visitor_iterator{
+    using iterator_category = std::forward_iterator_tag;
+    using difference_type   = std::ptrdiff_t;
+    using value_type        = base_t<unknown_t>;
+    using pointer           = base_t<unknown_t>;
+    using reference         = base_t<unknown_t>;
+
+    inline visitor_iterator(base_t<unknown_t> ptr) : m_ptr(ptr) {}
+    inline visitor_iterator() = default;
+    inline visitor_iterator(const visitor_iterator&) = default;
+
+    inline reference operator*() const { return m_ptr; }
+    inline pointer operator->() { return m_ptr; }
+
+    visitor_iterator& operator++();
+    inline visitor_iterator operator++(int) { visitor_iterator tmp = *this; ++(*this); return tmp; }
+
+    inline friend bool operator== (const visitor_iterator& a, const visitor_iterator& b) { return (a.m_ptr.base == b.m_ptr.base) && (a.m_ptr.ptr == b.m_ptr.ptr); };
+    inline friend bool operator!= (const visitor_iterator& a, const visitor_iterator& b) { return (a.m_ptr.base != b.m_ptr.base) || (a.m_ptr.ptr != b.m_ptr.ptr); }; 
+
+    private:
+    base_t<unknown_t> m_ptr;
+};
+
+
 static_assert(std::bidirectional_iterator<attr_iterator>);
 static_assert(std::bidirectional_iterator<node_iterator>);
-
+static_assert(std::forward_iterator<visitor_iterator>);
 
 
 //TODO: implement text iterator
@@ -381,10 +409,29 @@ inline auto base_t<T>::children() const{
 }
 
 template <typename T>
+inline auto base_t<T>::visitor() const{
+    
+    struct self{
+        visitor_iterator begin() const {return visitor_iterator(base);}
+        visitor_iterator end() const {return base_t<unknown_t>{*base.base,(unknown_t*)(base.has_parent()?base.parent().ptr:nullptr)};}
+        self(const base_t& b):base(b){}
+
+        private:
+            base_t base;
+    };
+
+    return self(*this);
+}
+
+
+template <typename T>
 inline auto base_t<T>::attrs(auto filter) const{ return attrs() | filter ; }
 
 template <typename T>
 inline auto base_t<T>::children(auto filter) const{ return children() | filter ; }
+
+template <typename T>
+inline auto base_t<T>::visitor(auto filter) const{ return visitor() | filter ; }
 
 
 }

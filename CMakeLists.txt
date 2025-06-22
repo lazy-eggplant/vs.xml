@@ -78,6 +78,8 @@ include_directories(
 # Library target
 #
 set(VS_XML_SOURCES
+  lib/private/impl.cpp
+  lib/private/wrp-impl.cpp
   lib/archive.cpp
   lib/parser.cpp
   lib/serializer.cpp

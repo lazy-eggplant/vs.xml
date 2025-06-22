@@ -13,12 +13,12 @@ auto mk_tree(){
     xml::TreeBuilder<cfg> build;
     build.reserve({100000,100000});
     build.begin("hello");
-        build.text("hello world");
         build.x("AAA",{{"N1","N2"},{"N1","N3"}},[&]{
             build.x("BBB");
             build.comment("ss");
             build.comment("comment2");
         });
+        build.text("hello world");
         build.x("a","AAA",{{"N1","N2"},{"N1","N3"}},[](auto& w) static{
             w.x("BBB");
             w.comment("ss");
@@ -57,7 +57,7 @@ auto mk_tree(){
 
 int main(){
     auto tree = *mk_tree<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();
-    for(auto& it: tree.visitor()){
+    for(auto it: tree.root().visitor()){
         std::print(">{}\n",(int)it.type());
     }
     return 0;
