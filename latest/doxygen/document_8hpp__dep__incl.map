@@ -1,5 +1,10 @@
 <map id="include/vs&#45;xml/document.hpp" name="include/vs&#45;xml/document.hpp">
-<area shape="rect" id="Node000001" title="Document wrapper for a tree." alt="" coords="5,5,220,31"/>
-<area shape="rect" id="Node000002" href="$archive_8hpp_source.html" title=" " alt="" coords="13,79,212,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,44,115,79,110,79,110,44"/>
+<area shape="rect" id="Node000001" title="Document wrapper for a tree." alt="" coords="105,5,320,31"/>
+<area shape="rect" id="Node000002" href="$archive_8hpp.html" title="A collection of multiple documents, stored in a single data structure. Archives will use shared symbo..." alt="" coords="5,86,204,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,41,122,88,119,84,184,37"/>
+<area shape="rect" id="Node000004" href="$document-builder_8hpp.html" title="Document builder wrapper implementation for tree builder." alt="" coords="229,79,415,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="241,36,297,76,294,81,238,41"/>
+<area shape="rect" id="Node000003" href="$archive-builder_8hpp.html" title="Archive builder wrapper implementation for tree builder." alt="" coords="127,167,298,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="132,118,190,164,187,169,128,122"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="289,129,239,169,235,164,285,125"/>
 </map>

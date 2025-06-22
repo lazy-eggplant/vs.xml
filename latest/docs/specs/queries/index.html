@@ -729,6 +729,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../releases/v0.2.11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.11
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../releases/v0.2.5/" class="md-nav__link">
         
   
@@ -991,6 +1014,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1116,13 +1162,17 @@
 <p>Queries are the main mechanism to perform search operations on the binary XML files.<br />
 There are three main clause types:</p>
 <ul>
-<li><code>is</code> iterates over all nodes form a container (like a prior query) as long as all criteria are met.</li>
-<li><code>has</code> iterates over all nodes from a container (like a prior query), for which the <code>is</code> clause is tested against the query criterion. Those for which at least one solution is defined are picked.</li>
-<li><del><code>maps</code></del> (not implemented yet) iterates over all nodes from a container (like a prior query), and matches results for node in the query tree onto a map-like structure. </li>
+<li><code>any-is</code> iterates over all nodes form a container (like a prior query) as long as all criteria are met.</li>
+<li><code>this-is</code> checks if a specific node satisfies requirements recursively navigating the parents list. In some sense it is a local version of <code>any-is</code> since any element satisfying <code>any-is</code> will satisfy <code>this-is</code> and the converse is true as well.</li>
+<li><code>any-has</code> iterates over all nodes from a container (like a prior query), for which the <code>is</code> clause is tested against the query criterion. Those for which at least one solution is defined are picked.</li>
 </ul>
+<p>All queries are designed to be capturing. For each token, you can pass two arguments:
+- A label pattern
+- A function (lambda) to register such pattern
+This allows to record a map of captures for each valid match of the query.</p>
 <h2 id="structure-of-queries">Structure of queries<a class="headerlink" href="#structure-of-queries" title="Permanent link">#</a></h2>
-<p>A query is a linear sequence of query tokens. Most are meant to match specific features of the XML nodes, while some are used to control the &ldquo;machine&rdquo; running the query validation process.<br />
-Every complete query should end with an <code>accept()</code> token.</p>
+<p>A query is a linear sequence of query tokens. Most are meant to match specific features of the XML nodes, while some are used to control the &ldquo;machine&rdquo; running the validation process.<br />
+Every complete query must end with an <code>accept()</code> token.</p>
 <h3 id="basic-commands">Basic commands<a class="headerlink" href="#basic-commands" title="Permanent link">#</a></h3>
 <ul>
 <li><code>fork()</code> to force splitting matching by continuing here and expanding down.</li>
@@ -1135,10 +1185,10 @@ Every complete query should end with an <code>accept()</code> token.</p>
 <li><code>attr({name, fn, ns})</code> if a given attribute (with namespace) satisfies the expressions (as string or boolean lambdas). </li>
 </ul>
 <h3 id="about-attributes">About attributes<a class="headerlink" href="#about-attributes" title="Permanent link">#</a></h3>
-<p>Attributes are handled differently compared to the rest of the XML nodes, because they are not. <code>attr</code> will exclusively test the attribute and not bind or capture it. This is true even when running <code>is</code> clauses.<br />
-If you must capture attributes, you will have to do that by manually iterating or filtering them, like <code>item.attrs() | std::views::filter(...)</code>.</p>
+<p>Attributes are handled differently compared to the rest of the XML nodes, because they are not. <code>attr</code> even in <code>is</code> queries will behave like a <code>has</code>. The presence of the attribute is being tested, but it will not be considered as the node to return. Still, they can be used as captures for a query.<br />
+If you must match and return attributes directly, you will have to do that by manually iterating or filtering them, like <code>item.attrs() | std::views::filter(...)</code>.</p>
 <h3 id="string-shorthands">String shorthands<a class="headerlink" href="#string-shorthands" title="Permanent link">#</a></h3>
-<p>Several of the basic commands introduce earlier are also available in a simplified form, represented by string views:</p>
+<p>Several of the basic commands introduce earlier also have a simplified form based off string views:</p>
 <ul>
 <li><code>"{ns}:{name}"</code> matching namespace and name. Special values <code>?</code> for each to determine anything matches that slot. Empty string is considered empty string, and not a generic &ldquo;match all&rdquo;.</li>
 <li><code>*</code> to accept any node and move forward.</li>
@@ -1153,8 +1203,8 @@ If you must capture attributes, you will have to do that by manually iterating o
 <h2 id="applying-queries">Applying queries<a class="headerlink" href="#applying-queries" title="Permanent link">#</a></h2>
 <p>Queries are applied either by:</p>
 <ul>
-<li>Using the <code>is</code>, <code>has</code> or <del><code>capture</code></del> functions.</li>
-<li>The operators <code>&amp;</code> and <code>|</code> which are alias for <code>is</code> and <code>has</code> respectively.</li>
+<li>Using the <code>is</code>, <code>has</code> or <del><code>check</code></del> functions.</li>
+<li>The operators <code>&amp;</code>, <code>|</code> or <del><code>==</code></del> which are their respective alias.</li>
 </ul>
 <p>Applied queries return asynchronous generators, so they can be further piped by <code>std::views::filter</code>.</p>
 

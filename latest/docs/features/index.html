@@ -851,6 +851,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../releases/v0.2.11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.11
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../releases/v0.2.5/" class="md-nav__link">
         
   
@@ -1004,6 +1027,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1141,18 +1187,14 @@
   <h1>Features</h1>
 
 <h2 id="standard-compatibility">Standard compatibility<a class="headerlink" href="#standard-compatibility" title="Permanent link">#</a></h2>
+<p>General compatibility with the XML 1.0 specs</p>
 <h3 id="xml-parsing">XML parsing<a class="headerlink" href="#xml-parsing" title="Permanent link">#</a></h3>
 <ul class="task-list">
 <li class="task-list-item"><input type="checkbox" disabled checked/> namespaces <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> cdata</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> text<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> Unified iterator for text of an element, scanning all text/CDATA children.</li>
-</ul>
-</li>
-<li class="task-list-item"><input type="checkbox" disabled checked/> comments <ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> optional stripping</li>
-</ul>
-</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> text</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> comments (with optional stripping)</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> processing directives (with optional stripping)</li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> basic entities</li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> complex entities</li>
 </ul>
@@ -1163,7 +1205,7 @@
 <li class="task-list-item"><input type="checkbox" disabled checked/> cdata</li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> text</li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> comments</li>
-<li class="task-list-item"><input type="checkbox" disabled/> output configurability<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> output prettifycation<ul class="task-list">
 <li class="task-list-item"><input type="checkbox" disabled/> indentation</li>
 <li class="task-list-item"><input type="checkbox" disabled/> newline style</li>
 <li class="task-list-item"><input type="checkbox" disabled/> other linting</li>
@@ -1183,6 +1225,7 @@
 <ul class="task-list">
 <li class="task-list-item"><input type="checkbox" disabled checked/> iterators for nodes</li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> iterators for attributes</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> Unified iterator for text of an element, scanning all text/CDATA children in a single element.</li>
 <li class="task-list-item"><input type="checkbox" disabled/> tree/sub-tree cloning<ul class="task-list">
 <li class="task-list-item"><input type="checkbox" disabled checked/> Basic copy</li>
 <li class="task-list-item"><input type="checkbox" disabled/> String compression</li>
@@ -1191,14 +1234,17 @@
 <li class="task-list-item"><input type="checkbox" disabled checked/> attributes reordering</li>
 <li class="task-list-item"><input type="checkbox" disabled/> node injection</li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> simplified tree wrapper to avoid xml::sv-&gt;string_view conversions.</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> documents</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> archives</li>
 </ul>
 <h3 id="queries">Queries<a class="headerlink" href="#queries" title="Permanent link">#</a></h3>
 <h2 id="portability">Portability<a class="headerlink" href="#portability" title="Permanent link">#</a></h2>
+<p>Issues concerning usage in <a href="../embedded/">embedded</a> and <a href="../offloading/">offloaded</a> contexts. Mode details in the respective pages.</p>
 <ul class="task-list">
 <li class="task-list-item"><input type="checkbox" disabled checked/> <code>noexcept</code> mode</li>
 <li class="task-list-item"><input type="checkbox" disabled checked/> <code>noassert</code> mode</li>
 <li class="task-list-item"><input type="checkbox" disabled/> no memory allocations<ul class="task-list">
-<li class="task-list-item"><input type="checkbox" disabled checked/> for the tree/documents binary representation</li>
+<li class="task-list-item"><input type="checkbox" disabled checked/> for the tree/document/archive binary representation</li>
 <li class="task-list-item"><input type="checkbox" disabled/> in the query builder<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
 <li class="task-list-item"><input type="checkbox" disabled/> in tree building<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
 <li class="task-list-item"><input type="checkbox" disabled/> in query processing<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></li>

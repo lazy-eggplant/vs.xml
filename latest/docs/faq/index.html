@@ -732,6 +732,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../releases/v0.2.11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.11
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../releases/v0.2.5/" class="md-nav__link">
         
   
@@ -885,6 +908,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -932,23 +978,24 @@
 <blockquote>
 <p>Why the binary serialization of the XML is bigger compared to the base file?</p>
 </blockquote>
-<p>That is to be expected. XML has very little overhead, with very little in terms of extra symbols and markers.<br />
-By comparison, this library represents nodes by storing contextual information about their neighbours to speed up navigation.<br />
-This additional pre-computed information explains the bigger memory footprint. Even when compressed via gzip, the source XML retains a meaningful edge.  </p>
+<p>That is to be expected. XML has very little overhead, with not much in terms of extra symbols and markers.<br />
+By contrast, this library represents nodes by storing contextual information about their neighbours to speed up navigation.<br />
+This additional pre-computed information explains the bigger memory footprint.<br />
+Even when compressed via gzip, the source XML retains a meaningful edge.  </p>
 <blockquote>
 <p>So, why should I save the binary serialization?</p>
 </blockquote>
-<p>Because you don&rsquo;t need to parse the original file again. You just need to memory-map it and use it as is.<br />
-This lowers start-up time quite to zero if using <code>mmap</code>, and will only load pages for the content you need, regardless of the original file size.<br />
+<p>Because you will not have to parse the original file again. You can just memory-map it and use it as is.<br />
+This lowers start-up time to virtually zero if using <code>mmap</code>, as only the pages of content needed are going to be loaded from disk, regardless of the original file size.<br />
 Such approach can massively boot real world performance on huge files, but also positively impact smaller ones as it operates lazily.</p>
 <blockquote>
 <p>What is the point of a representation which is not mutable? Why cannot I edit the tree?</p>
 </blockquote>
-<p>Technically it is not immutable; however some types of mutations would be very expensive, almost like rebuilding the entire tree from scratch.<br />
+<p>Technically they are not immutable; however some types of mutations would be very expensive, almost like rebuilding the entire tree from scratch.<br />
 Still, there are some operations which are quite fast, like reordering attributes in-place, changing strings with symbols already stored in memory, or adding annotations to the original document.<br />
-Some of these operations are implemented by this library, others could be in a nearby future or delegated to downstream integrations.  </p>
+Some of these operations are implemented by this library, and the rest is either planned for future releases or delegated to downstream integrations.  </p>
 <p>As for why, there is plenty of applications where mutability of the tree structure is only needed during construction, and only for the next token to append.<br />
-This library tries to optimize such cases without introducing features which could compromise their performance.</p>
+This library tries to optimize such cases without introducing features which could compromise performance for the rest of the operations.</p>
 <blockquote>
 <p>Why pointers are internally represented as relative to a base?</p>
 </blockquote>
@@ -959,19 +1006,19 @@ Also, results of complex queries are fully portable and easy to share.</p>
 <p>Why is XML serialization/de-serialization single threaded?</p>
 </blockquote>
 <p>Simple answer, laziness. A more serious reply would be that serialization and de-serialization are meant to be just one-off operations.<br />
-The bulk of whatever computation we must perform is going to act on the binary representation, not the original text.<br />
+The bulk of whatever computation we must perform is going to act on the binary representation, not its textual form.<br />
 There is no trivial way to make XML parsing or serialization &ldquo;parallel&rdquo; without making the code involved much more complex.<br />
 At which point it is generally better to waste threads for other tasks if possible.</p>
 <blockquote>
 <p>How to annotate a tree?</p>
 </blockquote>
 <p>References to XML nodes and attributes have a method <code>addr</code> to return their portable address. Keeping a hash map or a similar data structure does the trick.<br />
-You should be using a data structure which can be easily serialized/de-serialized, or even better which can be memory-mapped if feasible.<br />
-The standard C++ library is not your best option, you might want to check for alternative like <a href="https://github.com/greg7mdp/gtl">gtl</a>.</p>
+You should be using a data structure which can be easily serialized/de-serialized, or even better which can be memory-mapped with no further steps.<br />
+The standard C++ library is not your best option, you might want to check for alternatives like <a href="https://github.com/greg7mdp/gtl">gtl</a>.</p>
 <blockquote>
 <p>How to cache queries?</p>
 </blockquote>
-<p>At the moment this is not directly supported by the library and will likely never be. However, we plan to introduce features to make it easier on downstream code.<br />
+<p>At the moment, this is not directly supported by the library and will likely never be. However, we plan to introduce features to make it easier on downstream code.<br />
 Right now, queries are not trivially hash-able. At some point we will add a query builder to structure query trees into linear buffers, more or less like we do with XML.<br />
 The evolving plans for this feature are reported in a <a href="../specs/query-builder/">specifications document</a>.<br />
 Until then, a similar solution has to be implemented fully downstream.</p>

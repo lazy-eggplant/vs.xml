@@ -12,6 +12,8 @@
         <link rel="prev" href="../queries/">
       
       
+        <link rel="next" href="../tables/">
+      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
@@ -722,6 +724,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../releases/v0.2.11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.11
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../releases/v0.2.5/" class="md-nav__link">
         
   
@@ -885,6 +910,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -929,7 +977,10 @@
 
   <h1>Query builder</h1>
 
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>Not implemented yet, just basic specs to sketch a new feature built on top of queries (and to build queries).</p>
+</div>
 <p>Queries as they are right now are flexible, but not optimal for all applications:</p>
 <ul>
 <li>They cannot be easily serialized and de-serialized as they involve <code>std::function</code> in the variadic.</li>
@@ -943,7 +994,7 @@ Also, aside for alignment purposes, there is no good reason to leave strings in 
 So having a split structural and symbol table might not be as beneficial.  </p>
 <p>Still, a layout of fully regular cells seems quite a good idea to me.</p>
 <p>Sketching layout or something.</p>
-<pre><code>BEGIN(3) OP OP OP 
+<p><div class="highlight"><pre><span></span><code>BEGIN(3) OP OP OP 
     BEGIN(0)
         BEGIN(1) OP
         END
@@ -956,13 +1007,12 @@ So having a split structural and symbol table might not be as beneficial.  </p>
     END
 END
 EOQ #end of query
-
-</code></pre>
-<p>Extra operation <code>END</code> used to mark end of branch and trace back.</p>
+</code></pre></div>
+Extra operation <code>END</code> used to mark end of branch and trace back.</p>
 <p>Operands are only string_views, details about their interpretation is left to the BEGIN block.
 END blocks only cover an offset to the parent, to ensure navigation back is possible. 
 Fully linear structures can avoid storing end tags, as they will never be used.</p>
-<pre><code>struct token_base{
+<div class="highlight"><pre><span></span><code>struct token_base{
     operation_t op;     //5 bits
     size_t operands;    //~~4~~ 3 bits
 
@@ -975,8 +1025,7 @@ struct operand_t{
     data_kind_t kind;
     std::string_view data;
 }
-
-</code></pre>
+</code></pre></div>
 
 
 

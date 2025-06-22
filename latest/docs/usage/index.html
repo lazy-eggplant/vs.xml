@@ -809,6 +809,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../releases/v0.2.11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.11
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../releases/v0.2.5/" class="md-nav__link">
         
   
@@ -962,6 +985,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1060,21 +1106,22 @@
 <p>This library is meant to be use either as a system dependency, or as a meson subproject.<br />
 The second option will grant you more flexibility in case you need control over the memory layout or other configuration flags.  </p>
 <p>To our knowledge, this library is not distributed by any distribution. To install it on your system you will probably want to write something like:</p>
-<pre><code class="language-sh">meson setup build           #You might want to introduce more flags to setup the build type to release, lto optimizations et cetera.
-meson install -C build      #You might want to define DESTDIR before to perform a semi-dry run.
-</code></pre>
-<p>A simplified makefile is made available, which has some reasonable defaults, but uses meson under the hood.  </p>
+<div class="highlight"><pre><span></span><code>meson<span class="w"> </span>setup<span class="w"> </span>build<span class="w">           </span><span class="c1">#You might want to introduce more flags to setup the build type to release, lto optimizations et cetera.</span>
+meson<span class="w"> </span>install<span class="w"> </span>-C<span class="w"> </span>build<span class="w">      </span><span class="c1">#You might want to define DESTDIR before to perform a semi-dry run.</span>
+</code></pre></div>
+<p>A simplified makefile is available, which sets some reasonable defaults, but uses meson under the hood.  </p>
+<p>There is also a CMake file (with reduce capabilities), but it is not really used by any of my downstream applications and might end up being broken due to its limited testing.  </p>
 <p>Tarballs will also be offered for some distributions as part of future releases.  </p>
 <h2 id="as-a-dependency">As a dependency<a class="headerlink" href="#as-a-dependency" title="Permanent link">#</a></h2>
 <p>Feel free to use this as baseline for your wrap file:</p>
-<pre><code class="language-meson">[wrap-git]
-url = https://github.com/lazy-eggplant/vs.xml
-revision = v0.2.5   #Make sure to use the latest
-depth = 1
-method = meson
-[provide]
-vs_xml = vs_xml_dep
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">wrap</span><span class="o">-</span><span class="n">git</span><span class="p">]</span>
+<span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="err">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="err">/</span><span class="n">lazy</span><span class="o">-</span><span class="n">eggplant</span><span class="err">/</span><span class="n">vs</span><span class="p">.</span><span class="n">xml</span>
+<span class="n">revision</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v0</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="w">   </span><span class="c">#Make sure to use the latest</span>
+<span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vm">meson</span>
+<span class="p">[</span><span class="n">provide</span><span class="p">]</span>
+<span class="n">vs_xml</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vs_xml_dep</span>
+</code></pre></div>
 <h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">#</a></h3>
 <p>Read <a href="../configuration/">this</a> document about configuration.</p>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">#</a></h2>

@@ -729,6 +729,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../releases/v0.2.11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.11
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../releases/v0.2.5/" class="md-nav__link">
         
   
@@ -911,9 +934,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#multi-doc-archives" class="md-nav__link">
+  <a href="#multi-document-archives" class="md-nav__link">
     <span class="md-ellipsis">
-      Multi-doc archives
+      Multi-document archives
     </span>
   </a>
   
@@ -978,6 +1001,29 @@
   
   <span class="md-ellipsis">
     Query builder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tables
     
   </span>
   
@@ -1063,9 +1109,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#multi-doc-archives" class="md-nav__link">
+  <a href="#multi-document-archives" class="md-nav__link">
     <span class="md-ellipsis">
-      Multi-doc archives
+      Multi-document archives
     </span>
   </a>
   
@@ -1111,9 +1157,44 @@
 <h2 id="binary-serialization">Binary serialization<a class="headerlink" href="#binary-serialization" title="Permanent link">#</a></h2>
 <p>Except for a small header, the binary serialization of a tree is identical to its representation in memory.</p>
 <h3 id="header-format">Header format<a class="headerlink" href="#header-format" title="Permanent link">#</a></h3>
-<p>TBW.</p>
-<h3 id="multi-doc-archives">Multi-doc archives<a class="headerlink" href="#multi-doc-archives" title="Permanent link">#</a></h3>
-<p>TBW.</p>
+<p><pre class="mermaid"><code>packet-beta
+    title Binary Header (Start)
+    0-7: "$"
+    8-15: "X"
+    16-23: "M"
+    24-31: "L"
+    32-39: "Format Major"
+    40-47: "Format Minor"
+    48-55: "Configs"
+    56-57: "Endian"
+    58-63: "reserved-0"
+    64-69: "size (bits) delta_ptr_t"
+    70-75: "size (bits) xml_size_t"
+    76-81: "size (bits) xml_count_t"
+    82-87: "size (bits) xml_enum_size_t"
+    88-95: "reserved-1"
+    96-111: "documents count"
+    112-127: "reserved-2"
+    128-191: "symbols size"</code></pre>
+An array of sections follows. The definition of a section depends on the data types of the build:
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">__attribute__</span><span class="w"> </span><span class="p">((</span><span class="n">packed</span><span class="p">))</span><span class="w"> </span><span class="n">section_t</span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">__attribute__</span><span class="w"> </span><span class="p">((</span><span class="n">packed</span><span class="p">)){</span>
+<span class="w">        </span><span class="n">delta_ptr_t</span><span class="w">  </span><span class="n">base</span><span class="p">;</span><span class="w">      </span><span class="c1">//Aligned to the beginning of the symbols table.</span>
+<span class="w">        </span><span class="n">xml_count_t</span><span class="w">  </span><span class="n">length</span><span class="p">;</span><span class="w">    </span><span class="c1">//Aligned to base</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="n">delta_ptr_t</span><span class="w">     </span><span class="n">base</span><span class="p">;</span><span class="w">      </span><span class="c1">//Aligned to start_data() (after symbols)</span>
+<span class="w">    </span><span class="n">xml_count_t</span><span class="w">     </span><span class="n">length</span><span class="p">;</span><span class="w">    </span><span class="c1">//Relative to base</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<pre class="mermaid"><code>packet-beta
+    title Configs
+    0-2: "Symbols"
+    3-4: "raw_strings"
+    5-6: "allow_comments"
+    7-8: "allow_procs"</code></pre>
+<h3 id="multi-document-archives">Multi-document archives<a class="headerlink" href="#multi-document-archives" title="Permanent link">#</a></h3>
+<p>Multi-document archives are based on the binary format introduced before.<br />
+The document count will just not be 1, multiple sections are going to be present, whose names are stored in the shared table of symbols. </p>
 <h2 id="indices">Indices<a class="headerlink" href="#indices" title="Permanent link">#</a></h2>
 <p>TBW.</p>
 

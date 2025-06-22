@@ -827,6 +827,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../releases/v0.2.11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.11
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../releases/v0.2.5/" class="md-nav__link">
         
   
@@ -980,6 +1003,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1102,8 +1148,8 @@ This usually implies:</p>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h2>
 <p>A basic build could look like this:</p>
-<pre><code class="language-bash">meson setup build-emb --native-file=./platforms/gcc-embedded.ini -Dnoexcept=true -Dutils=false
-</code></pre>
+<div class="highlight"><pre><span></span><code>meson<span class="w"> </span>setup<span class="w"> </span>build-emb<span class="w"> </span>--native-file<span class="o">=</span>./platforms/gcc-embedded.ini<span class="w"> </span>-Dnoexcept<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-Dutils<span class="o">=</span><span class="nb">false</span>
+</code></pre></div>
 <p>It is important to enable the <code>noexcept</code> flag and disable <code>utils</code> alongside any other optional module. </p>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">#</a></h2>
 <h3 id="features-optimized-for-embedded">🟢 Features optimized for embedded<a class="headerlink" href="#features-optimized-for-embedded" title="Permanent link">#</a></h3>
@@ -1116,20 +1162,19 @@ This usually implies:</p>
 </ul>
 <h3 id="features-planned-for-embedded">🟠 Features planned for embedded<a class="headerlink" href="#features-planned-for-embedded" title="Permanent link">#</a></h3>
 <ul>
-<li><code>TreeBuilder</code> &amp; <code>DocumentBuilder</code>. Right now they own their storage, unable to just work on externally defined ones and memory allocations are needed to build archives.<br />
-  It is possible to reserve space limiting allocations, but they cannot be fully removed.</li>
+<li><code>TreeBuilder</code>, <code>DocumentBuilder</code>, <code>ArchiveBuilder</code> &amp; <code>QueryBuilder</code>. Right now they encapsulate their own storage, unable to just work on externally defined containers, so we cannot externally handle memory allocations.<br />
+  It is possible to reserve space and so limiting the number of allocations, but they cannot be fully removed as it is.</li>
 <li>The XML serializer when <code>.raw_strings=true</code>, it is still using functions which are not optimized, but their replacement has been implemented already. It also assumes to operate on a stream which is not great.</li>
-<li>The <code>QueryBuilder</code>, same notes as for the other builders.</li>
 <li>Queries. Right now they are not good due to the high number of dynamic allocations needed. They could be trivially removed for the most part, but the whole system is being refactored to be stack-based and consume less memory overall.</li>
 </ul>
 <h3 id="features-not-planned-for-embedded">🔴 Features not planned for embedded<a class="headerlink" href="#features-not-planned-for-embedded" title="Permanent link">#</a></h3>
 <ul>
 <li>The utilities shipped alongside this library are not meant for embedded usage.</li>
-<li>Most of the test-suite. Embedded will feature its own subset of tests and benchmarks.</li>
+<li>Most of the test-suite. Embedded targets will feature their own subset of tests and benchmarks as the coding style is quite different.</li>
 </ul>
 <h2 id="storage-handling">Storage handling<a class="headerlink" href="#storage-handling" title="Permanent link">#</a></h2>
 <p>If you want to avoid memory allocations, please make use of the original Tree/Document/Archive in place of their wrappers in <code>xml::stored</code> as you might see suggested in several examples.<br />
-The originals don&rsquo;t own their memory, so you can externally manage it as you prefer.</p>
+The originals don&rsquo;t own their memory, so you can externally manage it yourself as desired.</p>
 
 
 

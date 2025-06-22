@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#meson-project" class="md-skip">
+        <a href="#meson-options" class="md-skip">
           Skip to content
         </a>
       
@@ -308,18 +308,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#meson-project" class="md-nav__link">
+  <a href="#meson-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Meson project
+      Meson options
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#defines" class="md-nav__link">
+  <a href="#macros-cmake-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Defines
+      Macros / CMake options
     </span>
   </a>
   
@@ -818,6 +818,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../releases/v0.2.11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.11
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../releases/v0.2.5/" class="md-nav__link">
         
   
@@ -971,6 +994,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1003,18 +1049,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#meson-project" class="md-nav__link">
+  <a href="#meson-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Meson project
+      Meson options
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#defines" class="md-nav__link">
+  <a href="#macros-cmake-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Defines
+      Macros / CMake options
     </span>
   </a>
   
@@ -1074,9 +1120,10 @@
 
   <h1>Configuration</h1>
 
-<p>For performance reasons, most configuration flags are defined at compile-time.<br />
-A single application will have to build and link different versions of this library if they want different configurations, but that scenario is extremely unlikely.</p>
-<h2 id="meson-project">Meson project<a class="headerlink" href="#meson-project" title="Permanent link">#</a></h2>
+<p>For performance reasons, most of the configuration flags are defined at build-time.<br />
+A single application will have to build and link different versions of this library if they want different configurations, but that scenario is extremely unlikely. Still, if needed, the entire namespace of this library is scoped with a macro. </p>
+<h2 id="meson-options">Meson options<a class="headerlink" href="#meson-options" title="Permanent link">#</a></h2>
+<p>These are options which can be configured via meson during the initial setup:</p>
 <ul>
 <li><code>tests</code> defaults to false. Change to enable test-suite.</li>
 <li><code>benchmarks</code> defaults to false. Change to enable benchmarks.</li>
@@ -1085,8 +1132,17 @@ A single application will have to build and link different versions of this libr
 <li><code>use_fmt</code> defaults to true. Disable it if you want to force using <code>std::print</code>/<code>std::format</code> instead, but be mindful <a href="https://github.com/lazy-eggplant/vs.xml/issues/8">they are much slower</a>.</li>
 <li><code>use_gtl</code> defaults to false. Enable it to use alternative STL-like containers with better performance and memory-mappability (is that even a word?).</li>
 <li><code>noexcept</code> defaults to false. Used to disable exceptions from the build. Often needed for embedded or offloaded targets.</li>
+<li><code>noassert</code> defaults to false. Used to remove assertions from the build. Can improve performance when things are working, but it is very much unsafe.</li>
+<li><code>ns</code> defaults to <code>xml</code>. Change the namespace if needed, to avoid collisions.</li>
+<li><code>binlayout</code>:<ul>
+<li><code>0</code> Normal/aligned (default)</li>
+<li><code>1</code> Compact (mostly compatible with real world documents, less cache-misses, less space taken on disk)</li>
 </ul>
-<h2 id="defines">Defines<a class="headerlink" href="#defines" title="Permanent link">#</a></h2>
+</li>
+</ul>
+<h2 id="macros-cmake-options">Macros / CMake options<a class="headerlink" href="#macros-cmake-options" title="Permanent link">#</a></h2>
+<p>Since they can be set as meson options, there is no need to change them directly.<br />
+However, they share the same name as the CMake options, so use them as such if working with CMake.</p>
 <ul>
 <li><code>VS_XML_NS</code> defaults to <code>xml</code>. Changes the namespace if needed, to avoid collisions.</li>
 <li><code>VS_XML_NO_ASSERT</code> to remove assertions from this library.</li>
@@ -1121,6 +1177,7 @@ This goes beyond the configurability granted via macros, and forking this librar
 <h2 id="builder">Builder<a class="headerlink" href="#builder" title="Permanent link">#</a></h2>
 <p>Builders are parametrized by a configuration structure and initialized in ways which defines its behaviour and ownership of data.</p>
 <h3 id="configuration-fields">Configuration fields<a class="headerlink" href="#configuration-fields" title="Permanent link">#</a></h3>
+<p>These can be set at compile-time for each instance as a template argument. </p>
 <ul>
 <li><code>allow_comments</code> if true allows comments to be appended in the tree, else they are silently skipped (but can still return errors for validation)</li>
 <li><code>allow_procs</code> if true allows processing directives to be appended in the tree, else they are silently skipped (but can still return errors for validation)</li>
@@ -1130,12 +1187,12 @@ This goes beyond the configurability granted via macros, and forking this librar
 <li><code>OWNED</code> no compression of symbols, but they are owned.</li>
 <li><code>COMPRESS_LABELS</code> only compressing symbols which are used for tag and prop labels (and namespaces).</li>
 <li><code>COMPRESS_ALL</code> all symbols are compressed.</li>
-<li><del><code>COMPRESS_CUSTOM</code></del> not implemented yet. Used to determine the usage of a custom compression algorithm, offloading it from the library.<br />
+<li><del><code>COMPRESS_CUSTOM</code></del> not implemented yet. Used to determine the usage of a custom compression algorithm, not part of this library&rsquo;s code.
     Useful to specify your own for embedded systems or to implement more expensive but compressed representations.</li>
 </ul>
 </li>
-<li><code>raw_strings</code> if true, strings are assumed to be preserved as is when serialized or deserialized from XML.<br />
-  Make sure you are manually escaping when building the tree. Comparisons on the other hand will handle the conversion automatically when not using the <code>xxxRaw</code> versions of the library classes.</li>
+<li><code>raw_strings</code> if true, strings are assumed to be preserved as they are when serialized or deserialized from XML.<br />
+   Make sure you are manually escaping when building the tree. Comparisons on the other hand will handle the conversion automatically when not using the <code>TreeRaw</code>/<code>DocumentRaw</code>/<code>ArchiveRaw</code>.</li>
 </ul>
 
 
