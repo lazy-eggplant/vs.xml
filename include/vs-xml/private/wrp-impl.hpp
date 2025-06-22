@@ -212,6 +212,8 @@ struct node_iterator{
     base_t<unknown_t> m_ptr;
 };
 
+static_assert(std::bidirectional_iterator<node_iterator>);
+
 //TODO: it should be  std::random_access_iterator_tag;
 struct attr_iterator{
     using iterator_category = std::bidirectional_iterator_tag; 
@@ -240,6 +242,8 @@ struct attr_iterator{
     base_t<attr_t> m_ptr;
 };
 
+static_assert(std::bidirectional_iterator<attr_iterator>);
+
 struct visitor_iterator{
     using iterator_category = std::forward_iterator_tag;
     using difference_type   = std::ptrdiff_t;
@@ -264,13 +268,7 @@ struct visitor_iterator{
     base_t<unknown_t> m_ptr;
 };
 
-
-static_assert(std::bidirectional_iterator<attr_iterator>);
-static_assert(std::bidirectional_iterator<node_iterator>);
 static_assert(std::forward_iterator<visitor_iterator>);
-
-
-//TODO: implement text iterator
 
 struct text_iterator{
     using difference_type   = std::ptrdiff_t;
