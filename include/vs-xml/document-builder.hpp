@@ -22,7 +22,7 @@ namespace VS_XML_NS{
  * @brief Specialized builder to construct a document.
 */
 template<builder_config_t cfg = {}>
-struct DocBuilder : TreeBuilder<cfg>{
+struct DocumentBuilder : TreeBuilder<cfg>{
     protected:
         using TreeBuilder<cfg>::close;
         
@@ -30,7 +30,7 @@ struct DocBuilder : TreeBuilder<cfg>{
     constexpr static inline builder_config_t configs = cfg;
     constexpr static inline bool is_document = true;
 
-    DocBuilder(auto ... a):TreeBuilder<cfg>(a...){
+    DocumentBuilder(auto ... a):TreeBuilder<cfg>(a...){
         this->begin("ROOT");
     }
 

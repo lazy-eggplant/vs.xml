@@ -16,7 +16,7 @@
 
 int test_vs(std::string_view xmlInput){
     try{
-        xml::DocBuilder<{.symbols=xml::builder_config_t::EXTERN_REL,.raw_strings=true}> bld(xmlInput);
+        xml::DocumentBuilder<{.symbols=xml::builder_config_t::EXTERN_REL,.raw_strings=true}> bld(xmlInput);
         xml::Parser parser(xmlInput, bld);
         std::ignore = parser.parse();
 

@@ -19,7 +19,7 @@ int encode(std::filesystem::path input, std::filesystem::path output){
         mio::mmap_source mmap(input.c_str());
         std::string_view xmlInput(mmap.data(),mmap.size());
 
-        xml::DocBuilder<cfg> bld;
+        xml::DocumentBuilder<cfg> bld;
         xml::Parser parser(xmlInput, bld);
         
         if(auto ret = parser.parse(); !ret.has_value())throw std::runtime_error(std::string(ret.error().msg()));

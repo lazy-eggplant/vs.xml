@@ -1,17 +1,3 @@
-This one is just an intermediate release, don't expect much in terms of fancy new features!  
-The new queries are still cooking in the background.  
-Still, this one improves documentation coverage, adds some quality of life features and refactors several bad architectural choices which have been dragging since the very start of this project.
-
-## New features
-
-- a new builder for Archive, avoiding most of the boilerplate needed before;
-- `TreeIterator` to replace the current queries based on generators.
-
-CLI utils for archives have been postponed to `v0.2.13` due to parallelization concerns.
-
 ## Breaking
 
-- Builder have been split into separate files, so to have a clean separation between *embeddable* and *not embeddable* code.
-- `reserve` for builders has been changed to be more extensible and descriptive.
-- Constructor for leaf elements update to accept parent node.
-- Binary files generated on `v0.2.9` are not fully compatible as a bug was found in the tree builder. They are missing references to parent on leaf nodes, which prevents navigation. Binary files must be regenerated even if the binary format itself has been kept stable.
+- `DocBuilder` renamed as `DocumentBuilder` to be more consistent in naming.
