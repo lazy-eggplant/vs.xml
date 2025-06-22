@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['reorder_0',['reorder',['../structVS__XML__NS_1_1TreeRaw.html#ad9809d693c60165dc1d484cbabe26d5c',1,'VS_XML_NS::TreeRaw']]],
+  ['reorder_5fchildren_1',['reorder_children',['../structVS__XML__NS_1_1TreeRaw.html#acc2e584536c98165451234b8f5d30f5d',1,'VS_XML_NS::TreeRaw']]],
+  ['reserve_2',['reserve',['../structVS__XML__NS_1_1TreeBuilder.html#a0a1c4ba8a8557600bfa278c397ccd5d0',1,'VS_XML_NS::TreeBuilder']]],
+  ['rsv_3',['rsv',['../structVS__XML__NS_1_1ArchiveRaw.html#acffabaac5b3cacf31d23c77d0cb93baa',1,'VS_XML_NS::ArchiveRaw']]]
+];
