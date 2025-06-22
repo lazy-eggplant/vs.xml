@@ -119,6 +119,7 @@ struct __attribute__ ((packed)) binary_header_t{
     const uint8_t magic[4] = {'$','X','M','L'};
     uint8_t format_major = VS_XML_NS::format_major;
     uint8_t format_minor = VS_XML_NS::format_minor;
+    //TODO: add additional format version for the the software release which generated it. To avoid problems like https://github.com/lazy-eggplant/vs.xml/commit/707b3f0a3ba0e3ec7fab0c508b9cb37c7308b26c
     builder_config_t configs;
     enum struct endianess_t {LITTLE,BIG} endianess : 1 = 
         std::endian::native==std::endian::little?
