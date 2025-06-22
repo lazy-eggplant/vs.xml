@@ -1,9 +1,13 @@
 <map id="VS_XML_NS::details::BuilderBase" name="VS_XML_NS::details::BuilderBase">
-<area shape="rect" id="Node000001" title=" " alt="" coords="121,5,272,45"/>
-<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="5,93,185,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,56,119,95,116,91,162,52"/>
-<area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="209,93,389,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,52,278,91,275,95,228,56"/>
-<area shape="rect" id="Node000004" href="$structVS__XML__NS_1_1DocBuilder.html" title="Specialized builder to construct a document." alt="" coords="210,181,389,221"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="302,147,302,181,297,181,297,147"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,69,156,109"/>
+<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="204,5,384,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,63,226,43,228,48,162,68"/>
+<area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="204,69,384,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="170,87,204,87,204,92,170,92"/>
+<area shape="rect" id="Node000005" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="204,133,384,173"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="162,111,228,131,226,136,161,116"/>
+<area shape="rect" id="Node000004" href="$structVS__XML__NS_1_1DocBuilder.html" title=" " alt="" coords="432,69,611,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="397,87,432,87,432,92,397,92"/>
+<area shape="rect" id="Node000006" href="$structVS__XML__NS_1_1DocBuilder.html" title="Specialized builder to construct a document." alt="" coords="432,133,611,173"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="397,151,432,151,432,156,397,156"/>
 </map>
