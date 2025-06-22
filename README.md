@@ -40,7 +40,7 @@ Full code in the [examples folder](./examples/src/readme.cpp). You can easily bu
 using namespace xml;
 
 int main(){
-  DocBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
+  DocumentBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
   bld.xml();
   bld.comment("This is a comment!");
   bld.begin("base-node");

@@ -19,7 +19,7 @@
 using namespace xml;
 
 int main(){
-  DocBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
+  DocumentBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
   bld.xml();
   bld.comment("This is a comment!");
   bld.begin("base-node");

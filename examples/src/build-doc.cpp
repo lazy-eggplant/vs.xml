@@ -10,7 +10,7 @@ int main(){
     //Initialize a document builder. It is going to manage its own memory.
     //Right now there is no variant operating on externally owned buffers will be provided, but it might be added at some point.
     //Builders require you to define a configuration structure as a template argument.
-    DocBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
+    DocumentBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
 
     //Optionally, you can reserve space for the containers used by the builder. This way you can cut down on allocations.
     bld.reserve({1024*4,1024*4});

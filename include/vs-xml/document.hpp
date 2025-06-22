@@ -20,7 +20,7 @@ namespace VS_XML_NS{
 //TODO: Implemented but very lass on constraints. No wrapping nor checks which are needed to store a valid XML.
 
 template<builder_config_t cfg>
-struct DocBuilder;
+struct DocumentBuilder;
 
 /**
  * @brief Base class for an XML document. 
@@ -62,7 +62,7 @@ struct DocumentRaw : TreeRaw {
     }
 
     template<builder_config_t cfg>
-    friend struct DocBuilder;
+    friend struct DocumentBuilder;
 
     //TODO: Replace with proper prototypes, and incapsulate the mv mechanism away as it is an implementation detail, not semantically correct.
     DocumentRaw(TreeRaw&& src):TreeRaw(src){}

@@ -21,7 +21,7 @@ namespace VS_XML_NS{
 template<builder_config_t cfg = {}>
 struct ArchiveBuilder{
     private:
-        DocBuilder<cfg> builder;
+        DocumentBuilder<cfg> builder;
         std::vector<binary_header_t::section_t> fragments;
 
     public:
@@ -37,7 +37,7 @@ struct ArchiveBuilder{
     
     /*
     template<typename... Args>
-    [[nodiscard]] constexpr inline details::BuilderBase::error_t document(std::string_view docname, void(*items)(DocBuilder<cfg>&, Args&&... args), Args... args){
+    [[nodiscard]] constexpr inline details::BuilderBase::error_t document(std::string_view docname, void(*items)(DocumentBuilder<cfg>&, Args&&... args), Args... args){
         items(builder,std::forward<decltype(args)>(args)...); //TODO: maybe return values should be handled.
         //Register the current frame in a vector for later usage.
         if(auto t = builder.close_frame(docname); t.has_value())fragments.emplace_back(*t);
@@ -46,7 +46,7 @@ struct ArchiveBuilder{
     }
     */
     
-    [[nodiscard]] constexpr inline details::BuilderBase::error_t document(std::string_view docname, const std::function<void(DocBuilder<cfg>&)>& items){
+    [[nodiscard]] constexpr inline details::BuilderBase::error_t document(std::string_view docname, const std::function<void(DocumentBuilder<cfg>&)>& items){
         items(builder); //TODO: maybe return values should be handled.
         //Register the current frame in a vector for later usage.
         if(auto t = builder.close_frame(docname); t.has_value())fragments.emplace_back(*t);

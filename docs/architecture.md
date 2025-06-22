@@ -1,6 +1,36 @@
 
 ## Trees, Documents, Archives
 
+```mermaid
+flowchart LR
+  %% Inheritance (derived) relationships - solid lines
+  Tree        --> TreeRaw
+  Document    --> DocumentRaw
+  Archive     --> ArchiveRaw
+
+  %% Builder (“can build”) relationships - dashed lines
+  TreeBuilder -.-> Tree
+  DocumentBuilder -.-> Document
+  ArchiveBuilder  -.-> Archive
+  QueryBuilder    -.-> Query
+
+  %% “wraps” relationships - colored (blue) arrows
+  DocumentRaw      -- wraps --> TreeRaw
+  Document         -- wraps --> Tree
+  DocumentBuilder  -- wraps --> TreeBuilder
+  ArchiveRaw       -- wraps --> DocumentRaw
+  Archive          -- wraps --> Document
+  ArchiveBuilder   -- wraps --> TreeBuilder
+
+  %% Styling
+  classDef derived stroke-width:2px,stroke:#333;
+  classDef build   stroke-dasharray: 5,5, stroke:#666;
+
+  class Tree,TreeRaw,Document,DocumentRaw,Archive,ArchiveRaw derived;
+  class TreeBuilder,DocumentBuilder,ArchiveBuilder,QueryBuilder build;
+```
+
+
 ### Tree
 A tree is defined by a single root node. There are several types of nodes, reflecting those we have in XML files:
 
