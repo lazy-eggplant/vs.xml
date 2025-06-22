@@ -16,9 +16,10 @@ BuilderBase::error_t BuilderBase::leaf(std::string_view value){
 
     auto& old_ctx = stack.back();
 
+    element_t* parent = (element_t*)(buffer.data()+old_ctx.first);
     unknown_t* prev = old_ctx.second!=-1?(unknown_t*)(buffer.data()+old_ctx.second):nullptr;
 
-    T* tmp_node = new ((element_t*) & (uint8_t&) *( buffer.end()-sizeof(T) )) T(symoffset,value);
+    T* tmp_node = new ((element_t*) & (uint8_t&) *( buffer.end()-sizeof(T) )) T(symoffset,parent,value);
 
     if(prev!=nullptr){
         prev->set_next((unknown_t*)tmp_node);

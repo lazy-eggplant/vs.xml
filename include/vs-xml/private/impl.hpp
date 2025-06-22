@@ -65,9 +65,11 @@ struct base_t{
 
     auto children() const;
     auto attrs() const;
+    auto visitor() const;
 
     auto children(auto filter) const;
     auto attrs(auto filter) const;
+    auto visitor(auto filter) const;
 
     template<builder_config_t>
     friend struct TreeBuilder;
@@ -245,7 +247,7 @@ struct leaf_t : base_t<T>{
 
     protected:
     
-    leaf_t(const void* offset, std::string_view value):_value(offset,value){}
+    leaf_t(const void* offset, element_t* _parent, std::string_view value):_value(offset,value){set_parent(_parent);}
 
     public:
 
@@ -260,7 +262,7 @@ struct leaf_t : base_t<T>{
     inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
     inline const element_t* parent() const {return (const element_t*)((const uint8_t*)this+_parent);}
-    inline const unknown_t*prev() const {return (const unknown_t*)((const uint8_t*)this+_prev);}
+    inline const unknown_t* prev() const {return (const unknown_t*)((const uint8_t*)this+_prev);}
     inline const unknown_t* next() const {return (const unknown_t*)((const uint8_t*)this+sizeof(leaf_t));}
 
     inline bool has_children() const {return false;}
@@ -276,7 +278,7 @@ struct leaf_t : base_t<T>{
 };
 
 struct comment_t : leaf_t<comment_t>{
-    comment_t(const void* offset, std::string_view value):leaf_t(offset, value){}
+    comment_t(const void* offset, element_t* parent, std::string_view value):leaf_t(offset, parent, value){}
     static inline type_t deftype() {return type_t::COMMENT;};
 
     inline std::string path_h() const { return VS_XML_NS::format("#comment"); }
@@ -288,7 +290,7 @@ struct comment_t : leaf_t<comment_t>{
 };
 
 struct cdata_t : leaf_t<cdata_t>{
-    cdata_t(const void* offset, std::string_view value):leaf_t(offset, value){}
+    cdata_t(const void* offset, element_t* parent, std::string_view value):leaf_t(offset, parent, value){}
     static inline type_t deftype() {return type_t::CDATA;};
 
     inline std::string path_h() const { return VS_XML_NS::format("#cdata"); }
@@ -300,7 +302,7 @@ struct cdata_t : leaf_t<cdata_t>{
 };
 
 struct text_t : leaf_t<text_t>{
-    text_t(const void* offset, std::string_view value):leaf_t(offset, value){}
+    text_t(const void* offset, element_t* parent, std::string_view value):leaf_t(offset, parent, value){}
     static inline type_t deftype() {return type_t::TEXT;};
 
     inline std::string path_h() const { return VS_XML_NS::format("#text"); }
@@ -312,7 +314,7 @@ struct text_t : leaf_t<text_t>{
 };
 
 struct proc_t : leaf_t<proc_t>{
-    proc_t(const void* offset, std::string_view value):leaf_t(offset, value){}
+    proc_t(const void* offset, element_t* parent, std::string_view value):leaf_t(offset, parent, value){}
     static inline type_t deftype() {return type_t::PROC;};
 
     inline std::string path_h() const { return VS_XML_NS::format("#proc"); }
@@ -324,7 +326,7 @@ struct proc_t : leaf_t<proc_t>{
 };
 
 struct marker_t : leaf_t<marker_t>{
-    marker_t(const void* offset, std::string_view value):leaf_t(offset, value){}
+    marker_t(const void* offset, element_t* parent, std::string_view value):leaf_t(offset, parent, value){}
     static inline type_t deftype() {return type_t::MARKER;};
 
     inline std::string path_h() const { return VS_XML_NS::format("#leaf"); }
@@ -469,6 +471,34 @@ struct attr_iterator{
 static_assert(std::bidirectional_iterator<attr_iterator>);
 
 
+struct visitor_iterator{
+    using iterator_category = std::forward_iterator_tag;
+    using difference_type   = std::ptrdiff_t;
+    using value_type        = const unknown_t;
+    using pointer           = const value_type*;
+    using reference         = const value_type&;
+
+    inline visitor_iterator(pointer ptr) : node(ptr) {}
+    inline visitor_iterator(reference r) : node(&r) {}
+    inline visitor_iterator() = default;
+    inline visitor_iterator(const visitor_iterator&) = default;
+
+    inline reference operator*() const { return *node; }
+    inline pointer operator->() { return node; }
+
+    visitor_iterator& operator++();
+    inline visitor_iterator operator++(int) { visitor_iterator tmp = *this; ++(*this); return tmp; }
+
+    inline friend bool operator== (const visitor_iterator& a, const visitor_iterator& b) { return a.node == b.node; };
+    inline friend bool operator!= (const visitor_iterator& a, const visitor_iterator& b) { return a.node != b.node; };  
+
+    private:
+        const unknown_t* node = nullptr;
+};
+
+static_assert(std::forward_iterator<visitor_iterator>);
+
+
 template <typename T>
 inline auto base_t<T>::children() const{
 
@@ -493,6 +523,22 @@ inline auto base_t<T>::attrs() const{
         attr_iterator end() const {return (*base->attrs_range()).second;}
 
         self(const base_t& b):base(&b){}
+
+        private:
+            const base_t* base;
+    };
+
+    return self(*this);
+}
+
+template <typename T>
+inline auto base_t<T>::visitor() const{
+    
+    struct self{
+        visitor_iterator begin() const {return visitor_iterator(base);}
+        visitor_iterator end() const {return visitor_iterator(base->has_parent()?base->parent():nullptr);}
+
+        self(const TreeRaw& b):base(&b){}
 
         private:
             const base_t* base;

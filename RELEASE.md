@@ -1,13 +1,14 @@
-Intermediate release, there will not be much in terms of fancy features.  
-Still, this one improves the documentation, and refactors several bad architectural choices which were dragging since the start of this project.
+This one is just an intermediate release, don't expect much in terms of fancy new features! The new queries are still cooking in the background.  
+Still, this one improves documentation coverage, adds some quality of life features and refactors several bad architectural choices which were dragging since the very start of this project.
 
 ## New features
 
-- A new builder for Archive, avoiding the need of boilerplate.
+- a new builder for Archive, avoiding most of the boilerplate needed before;
+- a new CLI utility to generate a binary archive from a folder
+- and its inverse operation;
 - `TreeIterator` to replace the current queries based on generators.
-~~New CLI tools to generate a binary archive from a folder and the reverse operation.~~
 
 ## Breaking
 
-- Splitting builders into separate files to have a clean separation between embeddable and not embeddable code.
-- `reserve` for the builders changed interface to ensure more fields can be added with descriptive label.
+- Builder have been split into separate files, so to have a clean separation between *embeddable* and *not embeddable* code.
+- `reserve` for builders has been changed to be more extensible and descriptive.
