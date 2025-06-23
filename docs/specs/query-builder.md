@@ -41,20 +41,3 @@ Operands are only string_views, details about their interpretation is left to th
 END blocks only cover an offset to the parent, to ensure navigation back is possible. 
 Fully linear structures can avoid storing end tags, as they will never be used.
 
-
-```
-struct token_base{
-    operation_t op;     //5 bits
-    size_t operands;    //~~4~~ 3 bits
-
-    operands type = 8 * 2 bit = 16bit.
-
-    payload/alignment   //WORD-8bit
-};
-
-struct operand_t{
-    data_kind_t kind;
-    std::string_view data;
-}
-
-```
