@@ -48,6 +48,17 @@ if get_option('noexcept') == false
         ],
     ))
 
+    test('query-builder',executable(
+        'query-builder',
+        './src/query-builder.cpp',
+        install: false,
+        cpp_args: [],
+        link_args: [],
+        dependencies: [
+            vs_xml_dep,
+        ],
+    ))
+
     test('binary-format',executable(
         'binary-format',
         './src/binary-format.cpp',
