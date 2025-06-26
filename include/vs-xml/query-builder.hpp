@@ -10,7 +10,6 @@
 
 #include <expected>
 
-
 #include <string_view>
 #include <vs-xml/commons.hpp>
 #include <vs-xml/private/wrp-impl.hpp>
@@ -82,10 +81,18 @@ struct Query;
 struct QueryResult;
 
 struct QueryBuilder{
-    struct Error;
-    enum Type {IS, HAS};
+    enum struct error_t{
+        NOT_IMPLEMENTED
+    };
 
-    error_t begin_frame(Type type); //, void(*capturer)(std::string_view, xml_size_t, void*)=nullptr
+
+    enum Type {
+        CHILD_IS,   //From a root, select all children fulfilling the query conditions.
+        IS,         //Pick the current node if it is child of a parent for which it fulfills all conditions
+        HAS         //Pick the current node if it has children fulfilling all conditions.
+    };
+
+    error_t begin_frame(std::string_view name, Type type); //, void(*capturer)(std::string_view, xml_size_t, void*)=nullptr
     error_t end_frame();//Implicit accept
 
     error_t any(std::string_view capture = {});
@@ -110,8 +117,15 @@ struct QueryBuilder{
     [[nodiscard]] std::expected<Query,error_t> close();
 
     private:
-        std::vector<Token>  tokens;
-        std::vector<char>   symbols;
+        struct section_t{
+            sv name;
+            size_t offset;
+            size_t length;
+        };
+
+        std::vector<section_t>   sections;
+        std::vector<Token>       tokens;
+        std::vector<char>        symbols;
 };
 
 /*
