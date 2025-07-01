@@ -291,6 +291,123 @@ std::string_view TreeRaw::from_binary_error_t::msg() {
 
 wrp::base_t<unknown_t> Tree::root() const{return {*this, &TreeRaw::root()};}
 
+//TODO: these four functions and the two for iterators in *-impl.cpp are pretty much the same. I hate I need to copy/paste so much code around.
 
+void TreeRaw::visit(const unknown_t* node, bool(*fn)(const unknown_t*)){
+    while(true){
+        if(node==nullptr)break;
+        
+        bool children_visited = !fn(node);
+        for(;;){
+            if(node->has_children() && !children_visited){
+                auto [l,r] =*node->children_range();
+                node=l;
+                children_visited = false;
+                break;
+            }
+            if(node->has_next()){
+                node=node->next();
+                children_visited = false;
+                break;
+            }
+            if(node->has_parent()){
+                node = (const unknown_t*)node->parent();
+                children_visited = true;
+            }
+            else{
+                node = nullptr;
+                break;
+            }
+        }   
+    }
+}
+
+void TreeRaw::visit(const unknown_t* node, std::function<bool(const unknown_t*)>&& fn){
+    while(true){
+        if(node==nullptr)break;
+        
+        bool children_visited = !fn(node);
+        for(;;){
+            if(node->has_children() && !children_visited){
+                auto [l,r] =*node->children_range();
+                node=l;
+                children_visited = false;
+                break;
+            }
+            if(node->has_next()){
+                node=node->next();
+                children_visited = false;
+                break;
+            }
+            if(node->has_parent()){
+                node = (const unknown_t*)node->parent();
+                children_visited = true;
+            }
+            else{
+                node = nullptr;
+                break;
+            }
+        }
+    }
+}
+
+
+void Tree::visit(wrp::base_t<unknown_t> node, bool(*fn)(wrp::base_t<unknown_t>)){
+    while(true){
+        if(node.ptr==nullptr)break;
+        
+        bool children_visited = !fn(node);
+        for(;;){
+            if(node.ptr->has_children() && !children_visited){
+                auto [l,r] =*node.children_range();
+                node=l;
+                children_visited = false;
+                break;
+            }
+            if(node.ptr->has_next()){
+                node=node.next();
+                children_visited = false;
+                break;
+            }
+            if(node.ptr->has_parent()){
+                node.ptr = (const unknown_t*) node.parent().ptr;
+                children_visited = true;
+            }
+            else{
+                node.ptr = nullptr;
+                break;
+            }
+        }
+    }
+}
+
+void Tree::visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& fn){
+    while(true){
+        if(node.ptr==nullptr)break;
+        
+        bool children_visited = !fn(node);
+        for(;;){
+            if(node.ptr->has_children() && !children_visited){
+                auto [l,r] =*node.children_range();
+                node=l;
+                children_visited = false;
+                break;
+            }
+            if(node.ptr->has_next()){
+                node=node.next();
+                children_visited = false;
+                break;
+            }
+            if(node.ptr->has_parent()){
+                node.ptr = (const unknown_t*) node.parent().ptr;
+                children_visited = true;
+            }
+            else{
+                node.ptr = nullptr;
+                break;
+            }
+        }
+    }
+}
 
 }
