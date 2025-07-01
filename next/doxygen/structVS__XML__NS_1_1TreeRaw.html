@@ -169,6 +169,12 @@ static std::expected&lt; <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">
 <tr class="memitem:aa9b2fa15db1c17032f659540bc1835dd" id="r_aa9b2fa15db1c17032f659540bc1835dd"><td class="memItemLeft" align="right" valign="top"><a id="aa9b2fa15db1c17032f659540bc1835dd" name="aa9b2fa15db1c17032f659540bc1835dd"></a>
 static std::expected&lt; const <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>, <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1from__binary__error__t.html">TreeRaw::from_binary_error_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>from_binary</b> (std::span&lt; const uint8_t &gt; region)</td></tr>
 <tr class="separator:aa9b2fa15db1c17032f659540bc1835dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3008af09d14141ed33bd945b492a1ddc" id="r_a3008af09d14141ed33bd945b492a1ddc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeRaw.html#a3008af09d14141ed33bd945b492a1ddc">visit</a> (const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *node, bool(*fn)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *))</td></tr>
+<tr class="memdesc:a3008af09d14141ed33bd945b492a1ddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn.  <br /></td></tr>
+<tr class="separator:a3008af09d14141ed33bd945b492a1ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af459755826ff066f0b80683e13073820" id="r_af459755826ff066f0b80683e13073820"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeRaw.html#af459755826ff066f0b80683e13073820">visit</a> (const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *node, std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;fn)</td></tr>
+<tr class="memdesc:af459755826ff066f0b80683e13073820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn.  <br /></td></tr>
+<tr class="separator:af459755826ff066f0b80683e13073820"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -410,6 +416,96 @@ false </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>const <a class="el" href="structVS__XML__NS_1_1Tree.html" title="the tree class you should use.">Tree</a> </dd></dl>
+
+</div>
+</div>
+<a id="a3008af09d14141ed33bd945b492a1ddc" name="a3008af09d14141ed33bd945b492a1ddc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3008af09d14141ed33bd945b492a1ddc">&#9670;&#160;</a></span>visit() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void VS_XML_NS::TreeRaw::visit </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool(*)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&#160;</td>
+          <td class="paramname"><em>fn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>the starting node </td></tr>
+    <tr><td class="paramname">fn</td><td>the function covering side-effects and returning if children should be visited as well. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af459755826ff066f0b80683e13073820" name="af459755826ff066f0b80683e13073820"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af459755826ff066f0b80683e13073820">&#9670;&#160;</a></span>visit() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void VS_XML_NS::TreeRaw::visit </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>fn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>the starting node </td></tr>
+    <tr><td class="paramname">fn</td><td>the function covering side-effects and returning if children should be visited as well. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

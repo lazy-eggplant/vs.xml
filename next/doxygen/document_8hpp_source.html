@@ -93,7 +93,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//TODO: Implemented but very lass on constraints. No wrapping nor checks which are needed to store a valid XML.</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">template</span>&lt;builder_config_t cfg&gt;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">struct </span>DocBuilder;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">struct </span>DocumentBuilder;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structVS__XML__NS_1_1DocumentRaw.html">   31</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVS__XML__NS_1_1DocumentRaw.html">DocumentRaw</a> : <a class="code hl_struct" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a> {</div>
@@ -127,7 +127,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">template</span>&lt;builder_config_t cfg&gt;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">friend</span> <span class="keyword">struct </span>DocBuilder;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">friend</span> <span class="keyword">struct </span>DocumentBuilder;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="comment">//TODO: Replace with proper prototypes, and incapsulate the mv mechanism away as it is an implementation detail, not semantically correct.</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    DocumentRaw(TreeRaw&amp;&amp; src):TreeRaw(src){}</div>
@@ -209,7 +209,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></div><div class="ttdoc">Base class for a tree.</div><div class="ttdef"><b>Definition</b> tree.hpp:35</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html_a2c362df4058a9d0fd145605dc88aa347"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html#a2c362df4058a9d0fd145605dc88aa347">VS_XML_NS::TreeRaw::clone</a></div><div class="ttdeci">TreeRaw clone(const element_t *ref=nullptr, bool reduce=true) const</div><div class="ttdoc">Return a perfect deep copy of the current tree structure.</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1TreeRaw_html_a9e595271257d00b84b6b37ff92876d0d"><div class="ttname"><a href="structVS__XML__NS_1_1TreeRaw.html#a9e595271257d00b84b6b37ff92876d0d">VS_XML_NS::TreeRaw::slice</a></div><div class="ttdeci">const TreeRaw slice(const element_t *ref=nullptr) const</div><div class="ttdoc">Obtain a weak slice of a specific subtree.</div></div>
-<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdoc">the tree class you should use.</div><div class="ttdef"><b>Definition</b> tree.hpp:188</div></div>
+<div class="ttc" id="astructVS__XML__NS_1_1Tree_html"><div class="ttname"><a href="structVS__XML__NS_1_1Tree.html">VS_XML_NS::Tree</a></div><div class="ttdoc">the tree class you should use.</div><div class="ttdef"><b>Definition</b> tree.hpp:204</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1element__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1element__t.html">VS_XML_NS::element_t</a></div><div class="ttdef"><b>Definition</b> impl.hpp:98</div></div>
 <div class="ttc" id="astructVS__XML__NS_1_1wrp_1_1base__t_html"><div class="ttname"><a href="structVS__XML__NS_1_1wrp_1_1base__t.html">VS_XML_NS::wrp::base_t</a></div><div class="ttdef"><b>Definition</b> wrp-impl.hpp:91</div></div>
 <div class="ttc" id="atree-builder_8hpp_html"><div class="ttname"><a href="tree-builder_8hpp.html">tree-builder.hpp</a></div><div class="ttdoc">Tree builder classes.</div></div>

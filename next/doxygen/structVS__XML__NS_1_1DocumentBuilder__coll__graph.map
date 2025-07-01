@@ -1,5 +1,5 @@
-<map id="VS_XML_NS::DocBuilder&lt; cfg &gt;" name="VS_XML_NS::DocBuilder&lt; cfg &gt;">
-<area shape="rect" id="Node000001" title="Specialized builder to construct a document." alt="" coords="90,197,269,237"/>
+<map id="VS_XML_NS::DocumentBuilder&lt; cfg &gt;" name="VS_XML_NS::DocumentBuilder&lt; cfg &gt;">
+<area shape="rect" id="Node000001" title="Specialized builder to construct a document." alt="" coords="69,197,289,237"/>
 <area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="89,108,269,148"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,162,182,197,177,197,177,162"/>
 <area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="5,5,156,45"/>

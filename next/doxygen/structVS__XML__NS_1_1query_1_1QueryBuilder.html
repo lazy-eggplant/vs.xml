@@ -74,6 +74,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="structVS__XML__NS_1_1query_1_1QueryBuilder-members.html">List of all members</a>  </div>
@@ -83,25 +84,50 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a3f2e337564f1a8b89fa02bb69d667f75" id="r_a3f2e337564f1a8b89fa02bb69d667f75"><td class="memItemLeft" align="right" valign="top"><a id="a3f2e337564f1a8b89fa02bb69d667f75" name="a3f2e337564f1a8b89fa02bb69d667f75"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> { <b>IS</b>
+<tr class="memitem:a36ec0ad4d6a10639c8b20caf344728d1" id="r_a36ec0ad4d6a10639c8b20caf344728d1"><td class="memItemLeft" align="right" valign="top"><a id="a36ec0ad4d6a10639c8b20caf344728d1" name="a36ec0ad4d6a10639c8b20caf344728d1"></a>enum struct &#160;</td><td class="memItemRight" valign="bottom"><b>error_t</b> { <b>NOT_IMPLEMENTED</b>
+ }</td></tr>
+<tr class="separator:a36ec0ad4d6a10639c8b20caf344728d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2e337564f1a8b89fa02bb69d667f75" id="r_a3f2e337564f1a8b89fa02bb69d667f75"><td class="memItemLeft" align="right" valign="top"><a id="a3f2e337564f1a8b89fa02bb69d667f75" name="a3f2e337564f1a8b89fa02bb69d667f75"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> { <b>CHILD_IS</b>
+, <b>IS</b>
 , <b>HAS</b>
  }</td></tr>
 <tr class="separator:a3f2e337564f1a8b89fa02bb69d667f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4d690f7a62e7a3f9643702ead869632f" id="r_a4d690f7a62e7a3f9643702ead869632f"><td class="memItemLeft" align="right" valign="top"><a id="a4d690f7a62e7a3f9643702ead869632f" name="a4d690f7a62e7a3f9643702ead869632f"></a>
-error_t&#160;</td><td class="memItemRight" valign="bottom"><b>begin_frame</b> (Type type)</td></tr>
-<tr class="separator:a4d690f7a62e7a3f9643702ead869632f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab259e804b5974f8682c580f51fab711a" id="r_ab259e804b5974f8682c580f51fab711a"><td class="memItemLeft" align="right" valign="top"><a id="ab259e804b5974f8682c580f51fab711a" name="ab259e804b5974f8682c580f51fab711a"></a>
+error_t&#160;</td><td class="memItemRight" valign="bottom"><b>begin_frame</b> (std::string_view name, Type type)</td></tr>
+<tr class="separator:ab259e804b5974f8682c580f51fab711a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafd3d40da00a09d9e25812d1f5148632" id="r_aafd3d40da00a09d9e25812d1f5148632"><td class="memItemLeft" align="right" valign="top"><a id="aafd3d40da00a09d9e25812d1f5148632" name="aafd3d40da00a09d9e25812d1f5148632"></a>
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>end_frame</b> ()</td></tr>
 <tr class="separator:aafd3d40da00a09d9e25812d1f5148632"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a723814181c7059ecfc7c25b68c2ee0" id="r_a3a723814181c7059ecfc7c25b68c2ee0"><td class="memItemLeft" align="right" valign="top"><a id="a3a723814181c7059ecfc7c25b68c2ee0" name="a3a723814181c7059ecfc7c25b68c2ee0"></a>
-error_t&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1Token.html">Token</a> token, size_t capture_ref=0)</td></tr>
-<tr class="separator:a3a723814181c7059ecfc7c25b68c2ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3db7007490a35a691eb0949c6ddb68c9" id="r_a3db7007490a35a691eb0949c6ddb68c9"><td class="memItemLeft" align="right" valign="top"><a id="a3db7007490a35a691eb0949c6ddb68c9" name="a3db7007490a35a691eb0949c6ddb68c9"></a>
+error_t&#160;</td><td class="memItemRight" valign="bottom"><b>any</b> (std::string_view capture={})</td></tr>
+<tr class="separator:a3db7007490a35a691eb0949c6ddb68c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14bce172db3a6b6b0fbee2859e5d4dbb" id="r_a14bce172db3a6b6b0fbee2859e5d4dbb"><td class="memItemLeft" align="right" valign="top"><a id="a14bce172db3a6b6b0fbee2859e5d4dbb" name="a14bce172db3a6b6b0fbee2859e5d4dbb"></a>
+error_t&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (std::string_view capture={})</td></tr>
+<tr class="separator:a14bce172db3a6b6b0fbee2859e5d4dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae60a4bc849675d5ebbfa8999312f66b0" id="r_ae60a4bc849675d5ebbfa8999312f66b0"><td class="memItemLeft" align="right" valign="top"><a id="ae60a4bc849675d5ebbfa8999312f66b0" name="ae60a4bc849675d5ebbfa8999312f66b0"></a>
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="separator:ae60a4bc849675d5ebbfa8999312f66b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a5a1ade8fce50f3dd015ca0c47072d" id="r_ab9a5a1ade8fce50f3dd015ca0c47072d"><td class="memItemLeft" align="right" valign="top"><a id="ab9a5a1ade8fce50f3dd015ca0c47072d" name="ab9a5a1ade8fce50f3dd015ca0c47072d"></a>
+error_t&#160;</td><td class="memItemRight" valign="bottom"><b>match_type</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1type__filter__t.html">Token::type_filter_t</a>&lt; Token::type_t::MATCH_TYPE &gt;)</td></tr>
+<tr class="separator:ab9a5a1ade8fce50f3dd015ca0c47072d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6124dcf117e46351888853c97d305a2" id="r_ac6124dcf117e46351888853c97d305a2"><td class="memItemLeft" align="right" valign="top"><a id="ac6124dcf117e46351888853c97d305a2" name="ac6124dcf117e46351888853c97d305a2"></a>
+error_t&#160;</td><td class="memItemRight" valign="bottom"><b>match_ns</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">Token::single_t</a>&lt; Token::type_t::MATCH_NS &gt;)</td></tr>
+<tr class="separator:ac6124dcf117e46351888853c97d305a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb99c008a094904b27d9d209a071bcc" id="r_a0cb99c008a094904b27d9d209a071bcc"><td class="memItemLeft" align="right" valign="top"><a id="a0cb99c008a094904b27d9d209a071bcc" name="a0cb99c008a094904b27d9d209a071bcc"></a>
+error_t&#160;</td><td class="memItemRight" valign="bottom"><b>match_name</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">Token::single_t</a>&lt; Token::type_t::MATCH_NAME &gt;)</td></tr>
+<tr class="separator:a0cb99c008a094904b27d9d209a071bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8c714031865ba39a00ea4386c1d8a32" id="r_ab8c714031865ba39a00ea4386c1d8a32"><td class="memItemLeft" align="right" valign="top"><a id="ab8c714031865ba39a00ea4386c1d8a32" name="ab8c714031865ba39a00ea4386c1d8a32"></a>
+error_t&#160;</td><td class="memItemRight" valign="bottom"><b>match_value</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">Token::single_t</a>&lt; Token::type_t::MATCH_VALUE &gt;)</td></tr>
+<tr class="separator:ab8c714031865ba39a00ea4386c1d8a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20aef4ba78a73b5d97ef75bd82cbb94e" id="r_a20aef4ba78a73b5d97ef75bd82cbb94e"><td class="memItemLeft" align="right" valign="top"><a id="a20aef4ba78a73b5d97ef75bd82cbb94e" name="a20aef4ba78a73b5d97ef75bd82cbb94e"></a>
+error_t&#160;</td><td class="memItemRight" valign="bottom"><b>match_all_text</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">Token::single_t</a>&lt; Token::type_t::MATCH_ALL_TEXT &gt;)</td></tr>
+<tr class="separator:a20aef4ba78a73b5d97ef75bd82cbb94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a676d927250ec6df9eef4de1271f15021" id="r_a676d927250ec6df9eef4de1271f15021"><td class="memItemLeft" align="right" valign="top"><a id="a676d927250ec6df9eef4de1271f15021" name="a676d927250ec6df9eef4de1271f15021"></a>
+error_t&#160;</td><td class="memItemRight" valign="bottom"><b>match_attr</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1attr__t.html">Token::attr_t</a>&lt; Token::type_t::MATCH_ATTR &gt;, std::string_view capture={})</td></tr>
+<tr class="separator:a676d927250ec6df9eef4de1271f15021"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2648c8fd530417da4dbf7874ab6f6509" id="r_a2648c8fd530417da4dbf7874ab6f6509"><td class="memItemLeft" align="right" valign="top"><a id="a2648c8fd530417da4dbf7874ab6f6509" name="a2648c8fd530417da4dbf7874ab6f6509"></a>
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>inject</b> (const Query query)</td></tr>
 <tr class="separator:a2648c8fd530417da4dbf7874ab6f6509"><td class="memSeparator" colspan="2">&#160;</td></tr>
