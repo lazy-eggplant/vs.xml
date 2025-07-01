@@ -41,7 +41,7 @@ bool ArchiveRaw::save_binary(std::ostream& out)const{
     for(auto& document: this->index){
         out.write((const char*)this->buffer.data()+document.base, document.length);
     }
-    
+
     out.flush();
     return true;
 }
@@ -53,18 +53,18 @@ std::expected<ArchiveRaw, ArchiveRaw::from_binary_error_t> ArchiveRaw::from_bina
 
     if(region.size_bytes() < header.size())
         return std::unexpected(from_binary_error_t{from_binary_error_t::HeaderTooSmall});
-        
+
     if(std::memcmp(header.magic, "$XML", 4) != 0)
         return std::unexpected(from_binary_error_t{from_binary_error_t::MagicMismatch});
-    
+
     if(header.format_major != format_major)
         return std::unexpected(from_binary_error_t{from_binary_error_t::MajorVersionMismatch});
-    
+
     if(header.format_minor > format_minor)
         return std::unexpected(from_binary_error_t{from_binary_error_t::MinorVersionTooHigh});
 
     if  (
-            header.size__delta_ptr!=sizeof(delta_ptr_t) || 
+            header.size__delta_ptr!=sizeof(delta_ptr_t) ||
             header.size__xml_count!=sizeof(xml_count_t) ||
             header.size__xml_enum_size!=sizeof(xml_enum_size_t) ||
             header.size__xml_size!=sizeof(xml_size_t)

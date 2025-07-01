@@ -146,6 +146,22 @@ struct TreeRaw{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
     }
 
+    /**
+     * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
+     * 
+     * @param node the starting node
+     * @param fn the function covering side-effects and returning if children should be visited as well.
+     */
+    static void visit(const unknown_t* node, bool(*fn)(const unknown_t*));
+
+    /**
+     * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
+     * 
+     * @param node the starting node
+     * @param fn the function covering side-effects and returning if children should be visited as well.
+     */
+    static void visit(const unknown_t* node, std::function<bool(const unknown_t*)>&& fn);
+
     //Weak, used when loading from disk or creatung slices
     TreeRaw(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym={(uint8_t*)nullptr, std::span<uint8_t>::extent}):
         buffer(src),symbols(sym),configs(cfg){}
@@ -205,6 +221,22 @@ struct Tree : TreeRaw{
 
     ///Cast this const tree as a const raw tree
     inline const TreeRaw& downgrade() const{return *this;}
+
+    /**
+     * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
+     * 
+     * @param node the starting node
+     * @param fn the function covering side-effects and returning if children should be visited as well.
+     */
+    static void visit(wrp::base_t<unknown_t> node, bool(*fn)(wrp::base_t<unknown_t>));
+
+    /**
+     * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
+     * 
+     * @param node the starting node
+     * @param fn the function covering side-effects and returning if children should be visited as well.
+     */
+    static void visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& fn);
 
 };
 
