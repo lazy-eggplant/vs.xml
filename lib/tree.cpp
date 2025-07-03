@@ -66,6 +66,126 @@ bool TreeRaw::reorder_h(const std::function<bool(const attr_t&, const attr_t&)>&
     return true;
 };
 
+bool TreeRaw::print_h_before(std::ostream& out, const print_cfg_t& cfg, const unknown_t* ptr) const{
+    //TODO: at some point, convert it not to be recursive.
+    if(ptr->type()==type_t::ELEMENT){
+        if(ptr->children_range()->first==ptr->children_range()->second){
+            VS_XML_NS::print(out,"<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
+            for(auto& i : ptr->attrs()){
+                if(!configs.raw_strings){
+                    auto t = serialize::to_xml_attr_2(rsv(*i.value()));
+                    if(!t.has_value()){/*TODO: Error*/}
+                    auto tt = t.value_or(std::string_view(""));
+                    std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+                    VS_XML_NS::print(out," {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), sv);
+                }
+                else{
+                    VS_XML_NS::print(out," {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), rsv(*i.value()));
+                }
+            }
+            out << "/>";
+        }
+        else{
+            VS_XML_NS::print(out,"<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
+            for(auto& i : ptr->attrs()){
+                if(!configs.raw_strings){
+                    auto t = serialize::to_xml_attr_2(rsv(*i.value()));
+                    if(!t.has_value()){/*TODO: Error*/}
+                    auto tt = t.value_or(std::string_view(""));
+                    std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+                    VS_XML_NS::print(out," {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), sv);
+                }
+                else{
+                    VS_XML_NS::print(out," {}{}{}=\"{}\"", rsv(*i.ns()), rsv(*i.ns())==""?"":":", rsv(*i.name()), rsv(*i.value()));
+                }
+            }
+            out << ">";
+        }
+    }
+    else if(ptr->type()==type_t::CDATA){
+        if(!configs.raw_strings){
+            auto t = serialize::to_xml_cdata(rsv(*ptr->value()));
+            if(!t.has_value()){/*TODO: Error*/}
+            auto tt = t.value_or(std::string_view(""));
+            std::string_view sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+            VS_XML_NS::print(out,"<![CDATA[{}]]>",sv);
+        }
+        else{
+            VS_XML_NS::print(out,"<![CDATA[{}]]>",rsv(*ptr->value()));
+        }
+    }
+    else if(ptr->type()==type_t::COMMENT){
+        if(!configs.raw_strings){
+            auto t = serialize::to_xml_comment(rsv(*ptr->value()));
+            if(!t.has_value()){/*TODO: Error*/}
+            auto tt = t.value_or(std::string_view(""));
+            std::string_view sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+            VS_XML_NS::print(out,"<!--{}-->",sv);
+        }
+        else{
+            VS_XML_NS::print(out,"<!--{}-->",rsv(*ptr->value()));
+        }
+    }
+    else if(ptr->type()==type_t::TEXT){
+        if(!configs.raw_strings){
+            auto t = serialize::to_xml_text(rsv(*ptr->value()));
+            if(!t.has_value()){/*TODO: Error*/}
+            auto tt = t.value_or(std::string_view(""));
+            std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+            VS_XML_NS::print(out,"{}",sv);
+        }
+        else{
+            VS_XML_NS::print(out,"{}",rsv(*ptr->value()));
+        }
+    }
+    else if(ptr->type()==type_t::PROC){
+        if(!configs.raw_strings){
+            auto t = serialize::to_xml_proc(rsv(*ptr->value()));
+            if(!t.has_value()){/*TODO: Error*/}
+            auto tt = t.value_or(std::string_view(""));
+            std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+            VS_XML_NS::print(out,"<?{}?>",sv);
+        }
+        else{
+            VS_XML_NS::print(out,"<?{}?>",rsv(*ptr->value()));
+        }
+    }
+    else if(ptr->type()==type_t::MARKER){
+        //Skip, marker points are not XML, they are only internally used.
+        //or emit something in a special namespace? not sure
+    }
+    else{return false;}
+    return true;
+};
+
+
+bool TreeRaw::print_h_after(std::ostream& out, const print_cfg_t& cfg, const unknown_t* ptr) const{
+    //TODO: at some point, convert it not to be recursive.
+    if(ptr->type()==type_t::ELEMENT){
+        if(ptr->children_range()->first==ptr->children_range()->second){
+        }
+        else{
+            VS_XML_NS::print(out,"</{}{}{}>", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
+        }
+    }
+    else if(ptr->type()==type_t::CDATA){
+    }
+    else if(ptr->type()==type_t::COMMENT){
+    }
+    else if(ptr->type()==type_t::TEXT){
+    }
+    else if(ptr->type()==type_t::PROC){
+    }
+    else if(ptr->type()==type_t::MARKER){
+        //Skip, marker points are not XML, they are only internally used.
+        //or emit something in a special namespace? not sure
+    }
+    else{return false;}
+    return true;
+};
+
+
+
 
 bool TreeRaw::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* ptr) const{
     //TODO: at some point, convert it not to be recursive.
@@ -291,13 +411,15 @@ std::string_view TreeRaw::from_binary_error_t::msg() {
 
 wrp::base_t<unknown_t> Tree::root() const{return {*this, &TreeRaw::root()};}
 
-//TODO: these four functions and the two for iterators in *-impl.cpp are pretty much the same. I hate I need to copy/paste so much code around.
+//TODO: these four functions and the two for iterators in *-impl.cpp are pretty much the same. I hate I have to copy/paste so much code around.
+//But they are not 100% the same, so, short of removing the ones without std::function, I don't really have much of an option.
 
-void TreeRaw::visit(const unknown_t* node, bool(*fn)(const unknown_t*)){
+void TreeRaw::visit(const unknown_t* node, bool(*test)(const unknown_t*), void(*before)(const unknown_t*), void(*after)(const unknown_t*)){
     while(true){
         if(node==nullptr)break;
-        
-        bool children_visited = !fn(node);
+        if(before!=nullptr)before(node);
+
+        bool children_visited = !test(node);
         for(;;){
             if(node->has_children() && !children_visited){
                 auto [l,r] =*node->children_range();
@@ -306,15 +428,18 @@ void TreeRaw::visit(const unknown_t* node, bool(*fn)(const unknown_t*)){
                 break;
             }
             if(node->has_next()){
+                if(after!=nullptr)after(node);
                 node=node->next();
                 children_visited = false;
                 break;
             }
             if(node->has_parent()){
+                if(after!=nullptr)after(node);
                 node = (const unknown_t*)node->parent();
                 children_visited = true;
             }
             else{
+                if(after!=nullptr)after(node);
                 node = nullptr;
                 break;
             }
@@ -322,11 +447,13 @@ void TreeRaw::visit(const unknown_t* node, bool(*fn)(const unknown_t*)){
     }
 }
 
-void TreeRaw::visit(const unknown_t* node, std::function<bool(const unknown_t*)>&& fn){
+void TreeRaw::visit(const unknown_t* node, std::function<bool(const unknown_t*)>&& test, std::function<void(const unknown_t*)>&& before, std::function<void(const unknown_t*)>&& after){
     while(true){
         if(node==nullptr)break;
         
-        bool children_visited = !fn(node);
+        bool children_visited = !test(node);
+        if(before!=nullptr)before(node);
+
         for(;;){
             if(node->has_children() && !children_visited){
                 auto [l,r] =*node->children_range();
@@ -335,15 +462,18 @@ void TreeRaw::visit(const unknown_t* node, std::function<bool(const unknown_t*)>
                 break;
             }
             if(node->has_next()){
+                if(after!=nullptr)after(node);
                 node=node->next();
                 children_visited = false;
                 break;
             }
             if(node->has_parent()){
+                if(after!=nullptr)after(node);
                 node = (const unknown_t*)node->parent();
                 children_visited = true;
             }
             else{
+                if(after!=nullptr)after(node);
                 node = nullptr;
                 break;
             }
@@ -352,11 +482,13 @@ void TreeRaw::visit(const unknown_t* node, std::function<bool(const unknown_t*)>
 }
 
 
-void Tree::visit(wrp::base_t<unknown_t> node, bool(*fn)(wrp::base_t<unknown_t>)){
+void Tree::visit(wrp::base_t<unknown_t> node, bool(*test)(wrp::base_t<unknown_t>), void(*before)(wrp::base_t<unknown_t>), void(*after)(wrp::base_t<unknown_t>)){
     while(true){
         if(node.ptr==nullptr)break;
         
-        bool children_visited = !fn(node);
+        bool children_visited = !test(node);
+        if(before!=nullptr)before(node);
+
         for(;;){
             if(node.ptr->has_children() && !children_visited){
                 auto [l,r] =*node.children_range();
@@ -365,15 +497,18 @@ void Tree::visit(wrp::base_t<unknown_t> node, bool(*fn)(wrp::base_t<unknown_t>))
                 break;
             }
             if(node.ptr->has_next()){
+                if(after!=nullptr)after(node);
                 node=node.next();
                 children_visited = false;
                 break;
             }
             if(node.ptr->has_parent()){
+                if(after!=nullptr)after(node);
                 node.ptr = (const unknown_t*) node.parent().ptr;
                 children_visited = true;
             }
             else{
+                if(after!=nullptr)after(node);
                 node.ptr = nullptr;
                 break;
             }
@@ -381,11 +516,13 @@ void Tree::visit(wrp::base_t<unknown_t> node, bool(*fn)(wrp::base_t<unknown_t>))
     }
 }
 
-void Tree::visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& fn){
+void Tree::visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& test, std::function<void(wrp::base_t<unknown_t>)>&& before, std::function<void(wrp::base_t<unknown_t>)>&& after){
     while(true){
         if(node.ptr==nullptr)break;
         
-        bool children_visited = !fn(node);
+        bool children_visited = !test(node);
+        if(before!=nullptr)before(node);
+
         for(;;){
             if(node.ptr->has_children() && !children_visited){
                 auto [l,r] =*node.children_range();
@@ -394,15 +531,18 @@ void Tree::visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unk
                 break;
             }
             if(node.ptr->has_next()){
+                if(after!=nullptr)after(node);
                 node=node.next();
                 children_visited = false;
                 break;
             }
             if(node.ptr->has_parent()){
+                if(after!=nullptr)after(node);
                 node.ptr = (const unknown_t*) node.parent().ptr;
                 children_visited = true;
             }
             else{
+                if(after!=nullptr)after(node);
                 node.ptr = nullptr;
                 break;
             }

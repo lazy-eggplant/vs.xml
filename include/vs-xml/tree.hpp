@@ -137,6 +137,16 @@ struct TreeRaw{
         return print_h(out, cfg, (const unknown_t*)&root());
     }
 
+    inline bool print2(std::ostream& out, const print_cfg_t& cfg = {})const{
+        auto node = (const unknown_t*)&root();
+        auto test = +[](const unknown_t* n){return true;};
+        auto before = [&out, &cfg, this](const unknown_t* n){print_h_before(out,cfg,n);};
+        auto after = [&out, &cfg, this](const unknown_t* n){print_h_after(out,cfg,n);};
+        visit(node,test,before,after);
+        return true;
+    }
+
+
     bool save_binary(std::ostream& out)const;
 
     [[nodiscard]] static std::expected<TreeRaw, TreeRaw::from_binary_error_t> from_binary(std::span<uint8_t> region);
@@ -150,17 +160,22 @@ struct TreeRaw{
      * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
      * 
      * @param node the starting node
-     * @param fn the function covering side-effects and returning if children should be visited as well.
+     * @param test the function checking if children should be explored for this node (can have side-effects).
+     * @param before the function with side-effects run when entering a node.
+     * @param after the function with side-effects when exiting a node.
+
      */
-    static void visit(const unknown_t* node, bool(*fn)(const unknown_t*));
+    static void visit(const unknown_t* node, bool(*test)(const unknown_t*), void(*before)(const unknown_t*)={}, void(*after)(const unknown_t*)={});
 
     /**
      * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
      * 
      * @param node the starting node
-     * @param fn the function covering side-effects and returning if children should be visited as well.
+     * @param test the function checking if children should be explored for this node (can have side-effects).
+     * @param before the function with side-effects run when entering a node.
+     * @param after the function with side-effects when exiting a node.
      */
-    static void visit(const unknown_t* node, std::function<bool(const unknown_t*)>&& fn);
+    static void visit(const unknown_t* node, std::function<bool(const unknown_t*)>&& test, std::function<void(const unknown_t*)>&& before={}, std::function<void(const unknown_t*)>&& after={});
 
     //Weak, used when loading from disk or creatung slices
     TreeRaw(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym={(uint8_t*)nullptr, std::span<uint8_t>::extent}):
@@ -173,6 +188,8 @@ struct TreeRaw{
     protected:
 
     bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
+    bool print_h_before(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
+    bool print_h_after(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
 
     bool reorder_h(
         const std::function<bool(const attr_t&, const attr_t&)>& fn,
@@ -226,17 +243,21 @@ struct Tree : TreeRaw{
      * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
      * 
      * @param node the starting node
-     * @param fn the function covering side-effects and returning if children should be visited as well.
+     * @param test the function checking if children should be explored for this node (can have side-effects).
+     * @param before the function with side-effects run when entering a node.
+     * @param after the function with side-effects when exiting a node.
      */
-    static void visit(wrp::base_t<unknown_t> node, bool(*fn)(wrp::base_t<unknown_t>));
+    static void visit(wrp::base_t<unknown_t> node, bool(*test)(wrp::base_t<unknown_t>), void(*before)(wrp::base_t<unknown_t>)={}, void(*after)(wrp::base_t<unknown_t>)={});
 
     /**
      * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
      * 
      * @param node the starting node
-     * @param fn the function covering side-effects and returning if children should be visited as well.
+     * @param test the function checking if children should be explored for this node (can have side-effects).
+     * @param before the function with side-effects run when entering a node.
+     * @param after the function with side-effects when exiting a node.
      */
-    static void visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& fn);
+    static void visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& test={}, std::function<void(wrp::base_t<unknown_t>)>&& before={},std::function<void(wrp::base_t<unknown_t>)>&& after={});
 
 };
 

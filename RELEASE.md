@@ -5,4 +5,5 @@
 ## Features
 
 Introduced `Tree::visit` and `TreeRaw::visit` to implement a slightly different visitor pattern compared to the recently added iterators.  
-It will be used to refactor `print/print_h` used for serialization and Queries.
+Introduced a new `print2` function for trees and derived siblings, to provide a not recursive variant of `print` which does not grow on stack based on the depth of the tree.  
+Not tested yet, but it will deprecate `print`.
