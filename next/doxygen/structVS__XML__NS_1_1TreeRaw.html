@@ -148,6 +148,9 @@ const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &a
 <tr class="memitem:a28c792d01428226039a304bc57b46618" id="r_a28c792d01428226039a304bc57b46618"><td class="memItemLeft" align="right" valign="top"><a id="a28c792d01428226039a304bc57b46618" name="a28c792d01428226039a304bc57b46618"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}) const</td></tr>
 <tr class="separator:a28c792d01428226039a304bc57b46618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c5d77b816373f38ca1a661165816d5c" id="r_a5c5d77b816373f38ca1a661165816d5c"><td class="memItemLeft" align="right" valign="top"><a id="a5c5d77b816373f38ca1a661165816d5c" name="a5c5d77b816373f38ca1a661165816d5c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>print2</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}) const</td></tr>
+<tr class="separator:a5c5d77b816373f38ca1a661165816d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a975c2d315f3932f74b982c39e3c82bca" id="r_a975c2d315f3932f74b982c39e3c82bca"><td class="memItemLeft" align="right" valign="top"><a id="a975c2d315f3932f74b982c39e3c82bca" name="a975c2d315f3932f74b982c39e3c82bca"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>save_binary</b> (std::ostream &amp;out) const</td></tr>
 <tr class="separator:a975c2d315f3932f74b982c39e3c82bca"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,18 +172,24 @@ static std::expected&lt; <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">
 <tr class="memitem:aa9b2fa15db1c17032f659540bc1835dd" id="r_aa9b2fa15db1c17032f659540bc1835dd"><td class="memItemLeft" align="right" valign="top"><a id="aa9b2fa15db1c17032f659540bc1835dd" name="aa9b2fa15db1c17032f659540bc1835dd"></a>
 static std::expected&lt; const <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>, <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1from__binary__error__t.html">TreeRaw::from_binary_error_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>from_binary</b> (std::span&lt; const uint8_t &gt; region)</td></tr>
 <tr class="separator:aa9b2fa15db1c17032f659540bc1835dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3008af09d14141ed33bd945b492a1ddc" id="r_a3008af09d14141ed33bd945b492a1ddc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeRaw.html#a3008af09d14141ed33bd945b492a1ddc">visit</a> (const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *node, bool(*fn)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *))</td></tr>
-<tr class="memdesc:a3008af09d14141ed33bd945b492a1ddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn.  <br /></td></tr>
-<tr class="separator:a3008af09d14141ed33bd945b492a1ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af459755826ff066f0b80683e13073820" id="r_af459755826ff066f0b80683e13073820"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeRaw.html#af459755826ff066f0b80683e13073820">visit</a> (const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *node, std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;fn)</td></tr>
-<tr class="memdesc:af459755826ff066f0b80683e13073820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn.  <br /></td></tr>
-<tr class="separator:af459755826ff066f0b80683e13073820"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a358d2cd31fe9901d4d450a0e806d062b" id="r_a358d2cd31fe9901d4d450a0e806d062b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeRaw.html#a358d2cd31fe9901d4d450a0e806d062b">visit</a> (const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *node, bool(*test)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *), void(*before)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)={}, void(*after)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)={})</td></tr>
+<tr class="memdesc:a358d2cd31fe9901d4d450a0e806d062b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn.  <br /></td></tr>
+<tr class="separator:a358d2cd31fe9901d4d450a0e806d062b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17913e2c3c3f321b080776a5df4ca775" id="r_a17913e2c3c3f321b080776a5df4ca775"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeRaw.html#a17913e2c3c3f321b080776a5df4ca775">visit</a> (const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *node, std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;test, std::function&lt; void(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;before={}, std::function&lt; void(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;after={})</td></tr>
+<tr class="memdesc:a17913e2c3c3f321b080776a5df4ca775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn.  <br /></td></tr>
+<tr class="separator:a17913e2c3c3f321b080776a5df4ca775"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:abd08ea935ee2a5c2d16bf10e0e312cfc" id="r_abd08ea935ee2a5c2d16bf10e0e312cfc"><td class="memItemLeft" align="right" valign="top"><a id="abd08ea935ee2a5c2d16bf10e0e312cfc" name="abd08ea935ee2a5c2d16bf10e0e312cfc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>print_h</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *ptr=nullptr) const</td></tr>
 <tr class="separator:abd08ea935ee2a5c2d16bf10e0e312cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74641364a924a37295675da5be491828" id="r_a74641364a924a37295675da5be491828"><td class="memItemLeft" align="right" valign="top"><a id="a74641364a924a37295675da5be491828" name="a74641364a924a37295675da5be491828"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>print_h_before</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *ptr=nullptr) const</td></tr>
+<tr class="separator:a74641364a924a37295675da5be491828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95adf42da9b100cbb31ed1038c70db26" id="r_a95adf42da9b100cbb31ed1038c70db26"><td class="memItemLeft" align="right" valign="top"><a id="a95adf42da9b100cbb31ed1038c70db26" name="a95adf42da9b100cbb31ed1038c70db26"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>print_h_after</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *ptr=nullptr) const</td></tr>
+<tr class="separator:a95adf42da9b100cbb31ed1038c70db26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a382d5590502c3135e6ad9f9e77fed8de" id="r_a382d5590502c3135e6ad9f9e77fed8de"><td class="memItemLeft" align="right" valign="top"><a id="a382d5590502c3135e6ad9f9e77fed8de" name="a382d5590502c3135e6ad9f9e77fed8de"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>reorder_h</b> (const std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;)&gt; &amp;fn, const <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> *ref, bool recursive=true)</td></tr>
 <tr class="separator:a382d5590502c3135e6ad9f9e77fed8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -419,8 +428,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a3008af09d14141ed33bd945b492a1ddc" name="a3008af09d14141ed33bd945b492a1ddc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3008af09d14141ed33bd945b492a1ddc">&#9670;&#160;</a></span>visit() <span class="overload">[1/2]</span></h2>
+<a id="a358d2cd31fe9901d4d450a0e806d062b" name="a358d2cd31fe9901d4d450a0e806d062b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a358d2cd31fe9901d4d450a0e806d062b">&#9670;&#160;</a></span>visit() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -438,7 +447,19 @@ false </dd></dl>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool(*)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&#160;</td>
-          <td class="paramname"><em>fn</em>&#160;</td>
+          <td class="paramname"><em>test</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&#160;</td>
+          <td class="paramname"><em>before</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&#160;</td>
+          <td class="paramname"><em>after</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -457,15 +478,17 @@ false </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">node</td><td>the starting node </td></tr>
-    <tr><td class="paramname">fn</td><td>the function covering side-effects and returning if children should be visited as well. </td></tr>
+    <tr><td class="paramname">test</td><td>the function checking if children should be explored for this node (can have side-effects). </td></tr>
+    <tr><td class="paramname">before</td><td>the function with side-effects run when entering a node. </td></tr>
+    <tr><td class="paramname">after</td><td>the function with side-effects when exiting a node. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="af459755826ff066f0b80683e13073820" name="af459755826ff066f0b80683e13073820"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af459755826ff066f0b80683e13073820">&#9670;&#160;</a></span>visit() <span class="overload">[2/2]</span></h2>
+<a id="a17913e2c3c3f321b080776a5df4ca775" name="a17913e2c3c3f321b080776a5df4ca775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17913e2c3c3f321b080776a5df4ca775">&#9670;&#160;</a></span>visit() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -483,7 +506,19 @@ false </dd></dl>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>fn</em>&#160;</td>
+          <td class="paramname"><em>test</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>before</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>after</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -502,7 +537,9 @@ false </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">node</td><td>the starting node </td></tr>
-    <tr><td class="paramname">fn</td><td>the function covering side-effects and returning if children should be visited as well. </td></tr>
+    <tr><td class="paramname">test</td><td>the function checking if children should be explored for this node (can have side-effects). </td></tr>
+    <tr><td class="paramname">before</td><td>the function with side-effects run when entering a node. </td></tr>
+    <tr><td class="paramname">after</td><td>the function with side-effects when exiting a node. </td></tr>
   </table>
   </dd>
 </dl>
