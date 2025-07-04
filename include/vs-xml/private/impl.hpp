@@ -10,7 +10,6 @@
  * 
  */
 
-#include "vs-xml/filters.hpp"
 #include <cstddef>
 #include <cassert>
 #include <cstdint>
@@ -18,7 +17,6 @@
 #include <iterator>
 #include <expected>
 
-#include <stdexcept>
 #include <string>
 #include <string_view>
 
@@ -27,7 +25,7 @@
 #include <vs-xml/commons.hpp>
 #include <vs-xml/serializer.hpp>
 #include <vs-xml/fwd/format.hpp>
-#include <vs-xml/tree.hpp>
+//#include <vs-xml/tree.hpp>
 
 namespace VS_XML_NS{
 
@@ -357,7 +355,7 @@ else if (type() == type_t::PROC) return ((const proc_t*)this)-> X;\
 else if (type() == type_t::CDATA) return ((const cdata_t*)this)-> X;\
 else if (type() == type_t::MARKER) return ((const marker_t*)this)-> X;\
 else{\
-    xml_assert(false,std::format("Invalid XML thing type {}",(int)type()).c_str());\
+    xml_assert(false,xml::format("Invalid XML thing type {}",(int)type()).c_str());\
     std::unreachable();\
 }
 
@@ -533,12 +531,11 @@ inline auto base_t<T>::attrs() const{
 
 template <typename T>
 inline auto base_t<T>::visitor() const{
-    
     struct self{
-        visitor_iterator begin() const {return visitor_iterator(base);}
-        visitor_iterator end() const {return visitor_iterator(base->has_parent()?base->parent():nullptr);}
+        visitor_iterator begin() const {return visitor_iterator((const unknown_t*)base);}
+        visitor_iterator end() const {return visitor_iterator(base->has_parent()?(const unknown_t*)base->parent():nullptr);}
 
-        self(const TreeRaw& b):base(&b){}
+        self(const base_t& b):base(&b){}
 
         private:
             const base_t* base;

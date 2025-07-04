@@ -156,6 +156,8 @@ struct TreeRaw{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
     }
 
+    void visit_t(const unknown_t* node, bool(*test)(const unknown_t*), void(*before)(const unknown_t*), void(*after)(const unknown_t*));
+
     /**
      * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
      * 
@@ -292,4 +294,42 @@ namespace stored{
     using Tree = Stored<Tree>;
 }
 
+}
+
+#include <vs-xml/private/impl.hpp>
+
+namespace VS_XML_NS{
+
+    inline void TreeRaw::visit_t(const unknown_t* node, bool(*test)(const unknown_t*), void(*before)(const unknown_t*), void(*after)(const unknown_t*)){
+        while(true){
+            if(node==nullptr)break;
+            if(before!=nullptr)before(node);
+    
+            bool children_visited = !test(node);
+            for(;;){
+                if(node->has_children() && !children_visited){
+                    auto [l,r] =*node->children_range();
+                    node=l;
+                    children_visited = false;
+                    break;
+                }
+                if(node->has_next()){
+                    if(after!=nullptr)after(node);
+                    node=node->next();
+                    children_visited = false;
+                    break;
+                }
+                if(node->has_parent()){
+                    if(after!=nullptr)after(node);
+                    node = (const unknown_t*)node->parent();
+                    children_visited = true;
+                }
+                else{
+                    if(after!=nullptr)after(node);
+                    node = nullptr;
+                    break;
+                }
+            }   
+        }
+    }
 }
