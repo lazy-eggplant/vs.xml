@@ -61,6 +61,10 @@ int main(){
         std::print(">{}\n",(int)it.type());
     }
 
+    for(auto it: tree.downgrade().root().visitor()){
+        std::print(">{}\n",(int)it.type());
+    }
+
     std::print("\n\n");
 
     xml::TreeRaw::visit(&tree.downgrade().root(),+[](const xml::unknown_t*){return true;});

@@ -11,20 +11,24 @@
  */
 
 
- #if VS_XML_USE_FMT == true && __has_include(<fmt/core.h>)
+#if VS_XML_USE_FMT == true && __has_include(<fmt/core.h>)
 
- #include <fmt/core.h>
- 
- namespace xml{
-     using fmt::format;
- }
- 
- #else
- 
- #include <format>
- 
- namespace xml{
-     using std::format;
- }
- 
- #endif
+#include <fmt/core.h>
+
+namespace xml{
+    using fmt::format;
+}
+
+#else
+
+#if VS_XML_USE_FMT == true && !__has_include(<fmt/core.h>)
+    #warning "Unable to use fmt, header missing"
+#endif
+
+#include <format>
+
+namespace xml{
+    using std::format;
+}
+
+#endif
