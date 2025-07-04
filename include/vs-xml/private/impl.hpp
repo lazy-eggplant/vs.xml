@@ -24,6 +24,7 @@
 
 #include <vs-xml/commons.hpp>
 #include <vs-xml/serializer.hpp>
+
 #include <vs-xml/fwd/format.hpp>
 //#include <vs-xml/tree.hpp>
 

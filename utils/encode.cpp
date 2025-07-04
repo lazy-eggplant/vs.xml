@@ -11,14 +11,14 @@
 
 #include <mio/mmap.hpp>
 
-template<xml::builder_config_t cfg>
+template<VS_XML_NS::builder_config_t cfg>
 int encode(std::filesystem::path input, std::filesystem::path output){
     try{
         mio::mmap_source mmap(input.c_str());
         std::string_view xmlInput(mmap.data(),mmap.size());
 
-        xml::DocumentBuilder<cfg> bld;
-        xml::Parser parser(xmlInput, bld);
+        VS_XML_NS::DocumentBuilder<cfg> bld;
+        VS_XML_NS::Parser parser(xmlInput, bld);
         if(auto ret = parser.parse(); !ret.has_value())throw std::runtime_error(std::string(ret.error().msg()));
 
         auto tree = bld.close();
@@ -49,5 +49,5 @@ int encode(std::filesystem::path input, std::filesystem::path output){
 
 int main(int argc, const char* argv[]) {
     if(argc<3){std::cerr<<"Wrong usage, pass input file and output file as args.";return 1;}
-    return encode<{.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true}>(argv[1],argv[2]);
+    return encode<{.symbols=VS_XML_NS::builder_config_t::COMPRESS_ALL,.raw_strings=true}>(argv[1],argv[2]);
 }

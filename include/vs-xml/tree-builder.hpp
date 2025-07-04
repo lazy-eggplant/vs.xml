@@ -76,7 +76,7 @@ namespace details{
 
     template <>
     struct Symbols<builder_config_t::symbols_t::COMPRESS_ALL> : Symbols<builder_config_t::symbols_t::OWNED>{
-        xml::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx;
+        VS_XML_NS::unordered_set<sv, std::function<uint64_t(sv)>,std::function<bool(sv, sv)>> idx;
 
         sv label(std::string_view s);
         inline sv symbol(std::string_view s){return label(s);}

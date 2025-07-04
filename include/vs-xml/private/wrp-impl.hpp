@@ -44,21 +44,21 @@ struct sv  {
         else if(r.tree==nullptr) return std::string_view(r) == l;
 
         if(l.tree->configs.raw_strings && r.tree->configs.raw_strings){
-            auto ll = xml::serialize::unescaped_view((std::string_view)l);
-            auto rr = xml::serialize::unescaped_view((std::string_view)r);
+            auto ll = VS_XML_NS::serialize::unescaped_view((std::string_view)l);
+            auto rr = VS_XML_NS::serialize::unescaped_view((std::string_view)r);
             return std::equal(ll.begin(),ll.end(),rr.begin(),rr.end());
         }
         else if(!l.tree->configs.raw_strings && !r.tree->configs.raw_strings){
             return (std::string_view)l == (std::string_view)r;
         }
         if(l.tree->configs.raw_strings){
-            auto ll = xml::serialize::unescaped_view((std::string_view)l);
+            auto ll = VS_XML_NS::serialize::unescaped_view((std::string_view)l);
             auto rr = (std::string_view)r;
             return std::equal(ll.begin(),ll.end(),rr.begin(),rr.end());
         }
         else{
             auto ll = (std::string_view)l;
-            auto rr = xml::serialize::unescaped_view((std::string_view)r);
+            auto rr = VS_XML_NS::serialize::unescaped_view((std::string_view)r);
             return std::equal(ll.begin(),ll.end(),rr.begin(),rr.end());
         }
     }
@@ -66,7 +66,7 @@ struct sv  {
 
     friend inline bool operator==(const sv& l, std::string_view r){
         if(l.tree!=nullptr && l.tree->configs.raw_strings){
-            auto ll = xml::serialize::unescaped_view((std::string_view)l);
+            auto ll = VS_XML_NS::serialize::unescaped_view((std::string_view)l);
             auto rr= r;
             return std::equal(ll.begin(),ll.end(),rr.begin(),rr.end());
         }
@@ -145,8 +145,8 @@ struct base_t{
 
     /*
     template<size_t N=0>
-    inline xml::query::generator<wrp::base_t<unknown_t>> is(const xml::query::query_t<N>& query) {
-        return xml::query::is(*(wrp::base_t<unknown_t>*)this, query.tokens.begin(), query.tokens.end());
+    inline VS_XML_NS::query::generator<wrp::base_t<unknown_t>> is(const VS_XML_NS::query::query_t<N>& query) {
+        return VS_XML_NS::query::is(*(wrp::base_t<unknown_t>*)this, query.tokens.begin(), query.tokens.end());
     }
     */
 };
