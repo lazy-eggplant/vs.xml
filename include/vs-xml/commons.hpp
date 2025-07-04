@@ -21,7 +21,6 @@
 
 
 #include <span>
-#include <string>
 #include <string_view>
 
 #include <bit>
@@ -234,8 +233,6 @@ concept thing_i = requires(T self){
     {self.has_parent()} -> std::same_as<bool>;
     {self.has_prev()} -> std::same_as<bool>;
     {self.has_next()} -> std::same_as<bool>;
-
-    {self.path()} -> std::same_as<std::string>;
 };
 
 //TODO: specialization of Builder_t or just remove it?
