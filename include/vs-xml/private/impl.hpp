@@ -17,7 +17,6 @@
 #include <iterator>
 #include <expected>
 
-#include <string>
 #include <string_view>
 
 #include <utility>
@@ -57,10 +56,6 @@ struct base_t{
     bool has_parent() const {return static_cast<const T*>(this)->has_parent();}
     bool has_prev() const {return static_cast<const T*>(this)->has_prev();}
     bool has_next() const {return static_cast<const T*>(this)->has_next();}
-
-    std::string path() const {
-        return VS_XML_NS::format("{}/{}",parent()!=nullptr?parent()->path():"",static_cast<const T*>(this)->path_h());
-    }
 
     auto children() const;
     auto attrs() const;
@@ -166,11 +161,6 @@ struct element_t : base_t<element_t>{
     inline bool has_prev() const {return _prev!=0;}
     inline bool has_next() const {return _next!=0;}
 
-    /*
-    inline std::string path_h() const {
-        return std::format("{}{}{}", _ns, _ns==""?"":":", _name);
-    }
-    */
     template<builder_config_t>
     friend struct TreeBuilder;
     friend struct details::BuilderBase;
@@ -214,12 +204,6 @@ struct root_t : base_t<root_t>{
     inline bool has_parent() const {return false;}
     inline bool has_prev() const {return false;}
     inline bool has_next() const {return false;}
-
-    /*
-    inline std::string path_h() const {
-        return std::format("{}{}{}", _ns, _ns==""?"":":", _name);
-    }
-    */
     
     template<builder_config_t>
     friend struct TreeBuilder;
@@ -280,8 +264,6 @@ struct comment_t : leaf_t<comment_t>{
     comment_t(const void* offset, element_t* parent, std::string_view value):leaf_t(offset, parent, value){}
     static inline type_t deftype() {return type_t::COMMENT;};
 
-    inline std::string path_h() const { return VS_XML_NS::format("#comment"); }
-
     template<builder_config_t>
     friend struct TreeBuilder;
     friend struct details::BuilderBase;
@@ -292,8 +274,6 @@ struct cdata_t : leaf_t<cdata_t>{
     cdata_t(const void* offset, element_t* parent, std::string_view value):leaf_t(offset, parent, value){}
     static inline type_t deftype() {return type_t::CDATA;};
 
-    inline std::string path_h() const { return VS_XML_NS::format("#cdata"); }
-
     template<builder_config_t>
     friend struct TreeBuilder;
     friend struct details::BuilderBase;
@@ -303,8 +283,6 @@ struct cdata_t : leaf_t<cdata_t>{
 struct text_t : leaf_t<text_t>{
     text_t(const void* offset, element_t* parent, std::string_view value):leaf_t(offset, parent, value){}
     static inline type_t deftype() {return type_t::TEXT;};
-
-    inline std::string path_h() const { return VS_XML_NS::format("#text"); }
     
     template<builder_config_t>
     friend struct TreeBuilder;
@@ -316,8 +294,6 @@ struct proc_t : leaf_t<proc_t>{
     proc_t(const void* offset, element_t* parent, std::string_view value):leaf_t(offset, parent, value){}
     static inline type_t deftype() {return type_t::PROC;};
 
-    inline std::string path_h() const { return VS_XML_NS::format("#proc"); }
-
     template<builder_config_t>
     friend struct TreeBuilder;
     friend struct details::BuilderBase;
@@ -327,8 +303,6 @@ struct proc_t : leaf_t<proc_t>{
 struct marker_t : leaf_t<marker_t>{
     marker_t(const void* offset, element_t* parent, std::string_view value):leaf_t(offset, parent, value){}
     static inline type_t deftype() {return type_t::MARKER;};
-
-    inline std::string path_h() const { return VS_XML_NS::format("#leaf"); }
 
     template<builder_config_t>
     friend struct TreeBuilder;
@@ -356,7 +330,7 @@ else if (type() == type_t::PROC) return ((const proc_t*)this)-> X;\
 else if (type() == type_t::CDATA) return ((const cdata_t*)this)-> X;\
 else if (type() == type_t::MARKER) return ((const marker_t*)this)-> X;\
 else{\
-    xml_assert(false,xml::format("Invalid XML thing type {}",(int)type()).c_str());\
+    xml_assert(false,VS_XML_NS::format("Invalid XML thing type {}",(int)type()).c_str());\
     std::unreachable();\
 }
 
