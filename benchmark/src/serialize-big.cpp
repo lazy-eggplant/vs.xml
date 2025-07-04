@@ -16,8 +16,8 @@
 
 int test_vs(std::string_view xmlInput){
     try{
-        xml::DocumentBuilder<{.symbols=xml::builder_config_t::EXTERN_REL,.raw_strings=true}> bld(xmlInput);
-        xml::Parser parser(xmlInput, bld);
+        VS_XML_NS::DocumentBuilder<{.symbols=VS_XML_NS::builder_config_t::EXTERN_REL,.raw_strings=true}> bld(xmlInput);
+        VS_XML_NS::Parser parser(xmlInput, bld);
         std::ignore = parser.parse();
 
         auto tree = bld.close();
@@ -45,7 +45,7 @@ int test_vs2(std::string_view binInput){
         std::span<const uint8_t> binInput((const uint8_t*)mmap.data(),mmap.size());
 
         
-        auto tree =xml::Document::from_binary(binInput);
+        auto tree =VS_XML_NS::Document::from_binary(binInput);
 
         std::string str;
         std::stringstream file(str);
