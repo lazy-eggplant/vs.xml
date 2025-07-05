@@ -63,6 +63,8 @@ auto test(){
     std::print("\n---\n");
     tree.print2(std::cout,{});
     std::print("\n---\n");
+    tree.print3(std::cout,{});
+    std::print("\n---\n");
     tree.reorder();
     tree.print(std::cout,{});
     std::print("\n---\n");
