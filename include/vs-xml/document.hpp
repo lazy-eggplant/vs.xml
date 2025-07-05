@@ -33,7 +33,7 @@ struct DocumentRaw : TreeRaw {
 
     inline bool print(std::ostream& out, const print_cfg_t& cfg = {})const{
         for(auto& it: TreeRaw::root().children()){
-            if(!print_h(out, cfg, &it))return false;
+            if(!TreeRaw::print(out, cfg, &it))return false;
         }
         return true;
     }
@@ -43,7 +43,7 @@ struct DocumentRaw : TreeRaw {
      * 
      * @return std::optional<node_iterator> 
      */
-    inline std::optional<node_iterator> tree_root() const{
+    [[nodiscard]] inline std::optional<node_iterator> tree_root() const{
         auto c  = TreeRaw::root().children();
         auto it = std::ranges::find_if(c,[](auto e)static{return e.type()==type_t::ELEMENT;});
         if(it!=c.end()) return it;

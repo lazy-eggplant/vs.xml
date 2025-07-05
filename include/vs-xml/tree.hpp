@@ -131,15 +131,19 @@ struct TreeRaw{
 
     };
 
-    inline const unknown_t& root() const {return *(const unknown_t*)buffer.data();}
+    [[nodiscard]] inline const unknown_t& root() const {return *(const unknown_t*)buffer.data();}
 
-    inline bool print(std::ostream& out, const print_cfg_t& cfg = {})const{
-        return print_h(out, cfg, (const unknown_t*)&root());
-    }
+    /**
+     * @brief Stream the serialized version of the document onto an output stream.
+     * 
+     * @param out Output stream.
+     * @param cfg Configuration for the formatting.
+     * @return true if no error was met
+     * @return false else
+     */
+    bool print(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* node = nullptr)const;
 
-    bool print2(std::ostream& out, const print_cfg_t& cfg = {})const;
-    bool print3(std::ostream& out, const print_cfg_t& cfg = {})const;
-
+    bool print2(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* node = nullptr)const;
 
     bool save_binary(std::ostream& out)const;
 
@@ -181,7 +185,6 @@ struct TreeRaw{
     
     protected:
 
-    bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
     bool print_h_before(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
     bool print_h_after(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
 
@@ -222,16 +225,16 @@ struct Tree : TreeRaw{
     inline Tree(TreeRaw&& ref):TreeRaw(std::move(ref)){}
     inline Tree(const TreeRaw&& ref):TreeRaw(std::move(ref)){}
 
-    inline const Tree slice(const element_t* ref=nullptr) const{return TreeRaw::slice(ref);}
-    inline Tree clone(const element_t* ref=nullptr, bool reduce=true) const{return TreeRaw::clone(ref,reduce);}
+    [[nodiscard]] inline const Tree slice(const element_t* ref=nullptr) const{return TreeRaw::slice(ref);}
+    [[nodiscard]] inline Tree clone(const element_t* ref=nullptr, bool reduce=true) const{return TreeRaw::clone(ref,reduce);}
 
-    wrp::base_t<unknown_t> root() const;
+    [[nodiscard]] wrp::base_t<unknown_t> root() const;
 
     ///Cast this tree as a raw tree
-    inline TreeRaw& downgrade(){return *this;}
+    [[nodiscard]] inline TreeRaw& downgrade(){return *this;}
 
     ///Cast this const tree as a const raw tree
-    inline const TreeRaw& downgrade() const{return *this;}
+    [[nodiscard]] inline const TreeRaw& downgrade() const{return *this;}
 
     /**
      * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
