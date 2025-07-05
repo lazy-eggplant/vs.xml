@@ -78,15 +78,16 @@ include_directories(
 # Library target
 #
 set(VS_XML_SOURCES
-  lib/private/impl.cpp
-  lib/private/wrp-impl.cpp
   lib/archive.cpp
   lib/parser.cpp
   lib/serializer.cpp
   lib/tree.cpp
+  lib/document.cpp
   lib/tree-builder.cpp
   lib/query.cpp
   lib/query-builder.cpp
+  lib/node.cpp
+  lib/wrp-node.cpp
 )
 
 add_library(vs-xml

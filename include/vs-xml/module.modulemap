@@ -1,5 +1,7 @@
 module xml {
     header "commons.hpp"
+    header "node.hpp"
+    header "wrp-node.hpp"
     header "tree-builder.hpp"
     header "document-builder.hpp"
     header "archive-builder.hpp"

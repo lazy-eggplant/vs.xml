@@ -10,7 +10,6 @@
  * 
  */
 
-
 #if VS_XML_USE_FMT == true && __has_include(<fmt/core.h>)
 
 #include <fmt/core.h>

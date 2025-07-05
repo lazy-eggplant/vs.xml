@@ -1,7 +1,10 @@
-#include <vs-xml/private/impl.hpp>
+#include <vs-xml/wrp-node.hpp>
 
 namespace VS_XML_NS{
+namespace wrp{
+
 visitor_iterator& visitor_iterator::operator++(){
+    auto& node = m_ptr.ptr;
     xml_assert(node!=nullptr, "Reached end of tree");
     bool children_visited = false;
     for(;;){
@@ -28,4 +31,5 @@ visitor_iterator& visitor_iterator::operator++(){
     return *this;
 }  
 
+}
 }

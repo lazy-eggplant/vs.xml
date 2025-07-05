@@ -1,4 +1,3 @@
-#include "vs-xml/private/impl.hpp"
 #include <algorithm>
 #include <vs-xml/query.hpp>
 #include <vs-xml/tree-builder.hpp>

@@ -1,0 +1,1 @@
+Forwards to decide which libraries are used internally by `vs.xml`. Not to be used externally, unless the respective libraries are also linked.

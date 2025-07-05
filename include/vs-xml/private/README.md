@@ -1,0 +1,1 @@
+These files are not meant to be accessed from outside the vs-xml package. They are only to appear in its c/cpp files and leveraged as part of the library.
