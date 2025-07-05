@@ -8,16 +8,10 @@ project(
 
 add_project_arguments(['-Wno-c23-extensions'], language: 'cpp')
 
-conf = configuration_data()
-version_components = meson.project_version().split('.')
-major_version = version_components[0]
-minor_version = version_components[1]
-rev_version = version_components[2]
-
 subdir('./include/vs-xml')
 
 if get_option('use_fmt')
-  fmt_dep = dependency('fmt') #default_options : ['header-only=true']
+  fmt_dep = dependency('fmt')
 else 
   fmt_dep = []
 endif
@@ -28,6 +22,7 @@ else
   gtl_dep = []
 endif
 
+incdir = [include_directories('include')]
 
 vs_xml_lib = library(
     'vs-xml',
@@ -46,12 +41,12 @@ vs_xml_lib = library(
     cpp_args: [],
     install: true,
     dependencies: [fmt_dep, gtl_dep],
-    include_directories: ['include'],
+    include_directories: incdir,
 )
 
 vs_xml_dep = declare_dependency(
   link_with: vs_xml_lib,
-  include_directories: ['include'],
+  include_directories: incdir,
 )
 
 # Ignore these targets if not the root project
