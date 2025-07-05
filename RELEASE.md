@@ -6,5 +6,7 @@
 ## Features
 
 Introduced `Tree::visit` and `TreeRaw::visit` to implement a slightly different and more flexible visitor pattern compared to the one recently added as iterator.  
+They are both based on `private/(wrp-)visit.hpp`, which is not publicly exposed but if one cares about getting maximum performance out of a visitor they are to be used.  
+
 Introduced a new `print2` function for trees and derived siblings, to provide a not recursive variant of `print` which does not grow on stack based on the depth of the tree.  
 Not tested yet, but it will deprecate `print`.

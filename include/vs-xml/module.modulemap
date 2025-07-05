@@ -9,6 +9,5 @@ module xml {
     header "document.hpp"
     header "archive.hpp"
     header "filters.hpp"
-    header "visit.hpp"
     export *
 }

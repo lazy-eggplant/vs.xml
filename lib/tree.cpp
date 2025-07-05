@@ -9,6 +9,8 @@
 #include <vs-xml/serializer.hpp>
 
 #include <vs-xml/fwd/print.hpp>
+#include <vs-xml/private/visit.hpp>
+#include <vs-xml/private/wrp-visit.hpp>
 
 namespace VS_XML_NS{
 
@@ -411,143 +413,56 @@ std::string_view TreeRaw::from_binary_error_t::msg() {
 
 wrp::base_t<unknown_t> Tree::root() const{return {*this, &TreeRaw::root()};}
 
-//TODO: these four functions and the two for iterators in *-impl.cpp are pretty much the same. I hate I have to copy/paste so much code around.
-//But they are not 100% the same, so, short of removing the ones without std::function, I don't really have much of an option.
-
-void TreeRaw::visit(const unknown_t* node, bool(*test)(const unknown_t*), void(*before)(const unknown_t*), void(*after)(const unknown_t*)){
-    while(true){
-        if(node==nullptr)break;
-        if(before!=nullptr)before(node);
-
-        bool children_visited = !test(node);
-        for(;;){
-            if(node->has_children() && !children_visited){
-                auto [l,r] =*node->children_range();
-                node=l;
-                children_visited = false;
-                break;
-            }
-            if(node->has_next()){
-                if(after!=nullptr)after(node);
-                node=node->next();
-                children_visited = false;
-                break;
-            }
-            if(node->has_parent()){
-                if(after!=nullptr)after(node);
-                node = (const unknown_t*)node->parent();
-                children_visited = true;
-            }
-            else{
-                if(after!=nullptr)after(node);
-                node = nullptr;
-                break;
-            }
-        }   
-    }
+void TreeRaw::visit(const unknown_t* node, bool(*test)(const unknown_t*, void* ctx), void(*before)(const unknown_t*, void* ctx), void(*after)(const unknown_t*, void* ctx), void* ctx){
+    VS_XML_NS::visit<>(node,test,before,after,ctx);
 }
 
 void TreeRaw::visit(const unknown_t* node, std::function<bool(const unknown_t*)>&& test, std::function<void(const unknown_t*)>&& before, std::function<void(const unknown_t*)>&& after){
-    while(true){
-        if(node==nullptr)break;
-        
-        bool children_visited = !test(node);
-        if(before!=nullptr)before(node);
-
-        for(;;){
-            if(node->has_children() && !children_visited){
-                auto [l,r] =*node->children_range();
-                node=l;
-                children_visited = false;
-                break;
-            }
-            if(node->has_next()){
-                if(after!=nullptr)after(node);
-                node=node->next();
-                children_visited = false;
-                break;
-            }
-            if(node->has_parent()){
-                if(after!=nullptr)after(node);
-                node = (const unknown_t*)node->parent();
-                children_visited = true;
-            }
-            else{
-                if(after!=nullptr)after(node);
-                node = nullptr;
-                break;
-            }
-        }
-    }
+    VS_XML_NS::visit<>(node,test,before,after);
 }
 
-
-void Tree::visit(wrp::base_t<unknown_t> node, bool(*test)(wrp::base_t<unknown_t>), void(*before)(wrp::base_t<unknown_t>), void(*after)(wrp::base_t<unknown_t>)){
-    while(true){
-        if(node.ptr==nullptr)break;
-        
-        bool children_visited = !test(node);
-        if(before!=nullptr)before(node);
-
-        for(;;){
-            if(node.ptr->has_children() && !children_visited){
-                auto [l,r] =*node.children_range();
-                node=l;
-                children_visited = false;
-                break;
-            }
-            if(node.ptr->has_next()){
-                if(after!=nullptr)after(node);
-                node=node.next();
-                children_visited = false;
-                break;
-            }
-            if(node.ptr->has_parent()){
-                if(after!=nullptr)after(node);
-                node.ptr = (const unknown_t*) node.parent().ptr;
-                children_visited = true;
-            }
-            else{
-                if(after!=nullptr)after(node);
-                node.ptr = nullptr;
-                break;
-            }
-        }
-    }
+void Tree::visit(wrp::base_t<unknown_t> node, bool(*test)(wrp::base_t<unknown_t>, void* ctx), void(*before)(wrp::base_t<unknown_t>, void* ctx), void(*after)(wrp::base_t<unknown_t>, void* ctx), void* ctx){
+    VS_XML_NS::wrp::visit<>(node,test,before,after,ctx);
 }
 
 void Tree::visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& test, std::function<void(wrp::base_t<unknown_t>)>&& before, std::function<void(wrp::base_t<unknown_t>)>&& after){
-    while(true){
-        if(node.ptr==nullptr)break;
-        
-        bool children_visited = !test(node);
-        if(before!=nullptr)before(node);
-
-        for(;;){
-            if(node.ptr->has_children() && !children_visited){
-                auto [l,r] =*node.children_range();
-                node=l;
-                children_visited = false;
-                break;
-            }
-            if(node.ptr->has_next()){
-                if(after!=nullptr)after(node);
-                node=node.next();
-                children_visited = false;
-                break;
-            }
-            if(node.ptr->has_parent()){
-                if(after!=nullptr)after(node);
-                node.ptr = (const unknown_t*) node.parent().ptr;
-                children_visited = true;
-            }
-            else{
-                if(after!=nullptr)after(node);
-                node.ptr = nullptr;
-                break;
-            }
-        }
-    }
+    VS_XML_NS::wrp::visit<>(node,test,before,after);
 }
+
+bool TreeRaw::print2(std::ostream& out, const print_cfg_t& cfg)const{
+    auto node = (const unknown_t*)&root();
+    auto test = +[](const unknown_t* n, void* _ctx)static{return true;};
+    struct ctx_t{
+        const TreeRaw* that;
+        const print_cfg_t cfg;
+        std::ostream& out;
+    };
+    ctx_t ctx{this,cfg,out};
+    auto before = +[](const unknown_t* n, void* _ctx)static{
+        ctx_t& ctx = *(ctx_t*)_ctx;
+        ctx.that->print_h_before(ctx.out,ctx.cfg,n);
+    };
+    auto after = +[](const unknown_t* n, void* _ctx)static{
+        ctx_t& ctx = *(ctx_t*)_ctx;
+        ctx.that->print_h_after(ctx.out,ctx.cfg,n);
+    };
+    VS_XML_NS::visit<>(node,test,before,after,(void*)&ctx);
+    return true;
+}
+
+bool TreeRaw::print3(std::ostream& out, const print_cfg_t& cfg)const{
+    auto node = (const unknown_t*)&root();
+    auto test = +[](const unknown_t* n, std::ostream& out, const print_cfg_t& cfg, const TreeRaw* that)static{return true;};
+
+    auto before = +[](const unknown_t* n, std::ostream& out, const print_cfg_t& cfg, const TreeRaw* that)static{
+        that->print_h_before(out,cfg,n);
+    };
+    auto after = +[](const unknown_t* n, std::ostream& out, const print_cfg_t& cfg, const TreeRaw* that)static{
+        that->print_h_after(out,cfg,n);
+    };
+    VS_XML_NS::visit<>(node,test,before,after,out,cfg,this);
+    return true;
+}
+
 
 }

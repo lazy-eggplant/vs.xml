@@ -137,14 +137,8 @@ struct TreeRaw{
         return print_h(out, cfg, (const unknown_t*)&root());
     }
 
-    inline bool print2(std::ostream& out, const print_cfg_t& cfg = {})const{
-        auto node = (const unknown_t*)&root();
-        auto test = +[](const unknown_t* n){return true;};
-        auto before = [&out, &cfg, this](const unknown_t* n){print_h_before(out,cfg,n);};
-        auto after = [&out, &cfg, this](const unknown_t* n){print_h_after(out,cfg,n);};
-        visit(node,test,before,after);
-        return true;
-    }
+    bool print2(std::ostream& out, const print_cfg_t& cfg = {})const;
+    bool print3(std::ostream& out, const print_cfg_t& cfg = {})const;
 
 
     bool save_binary(std::ostream& out)const;
@@ -156,8 +150,6 @@ struct TreeRaw{
         return std::string_view(s.base+(char*)symbols.data(),s.base+(char*)symbols.data()+s.length);
     }
 
-    void visit_t(const unknown_t* node, bool(*test)(const unknown_t*), void(*before)(const unknown_t*), void(*after)(const unknown_t*));
-
     /**
      * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
      * 
@@ -167,7 +159,7 @@ struct TreeRaw{
      * @param after the function with side-effects when exiting a node.
 
      */
-    static void visit(const unknown_t* node, bool(*test)(const unknown_t*), void(*before)(const unknown_t*)={}, void(*after)(const unknown_t*)={});
+    static void visit(const unknown_t* node, bool(*test)(const unknown_t*, void* ctx), void(*before)(const unknown_t*, void* ctx)={}, void(*after)(const unknown_t*, void* ctx)={}, void* ctx=nullptr);
 
     /**
      * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
@@ -249,7 +241,7 @@ struct Tree : TreeRaw{
      * @param before the function with side-effects run when entering a node.
      * @param after the function with side-effects when exiting a node.
      */
-    static void visit(wrp::base_t<unknown_t> node, bool(*test)(wrp::base_t<unknown_t>), void(*before)(wrp::base_t<unknown_t>)={}, void(*after)(wrp::base_t<unknown_t>)={});
+    static void visit(wrp::base_t<unknown_t> node, bool(*test)(wrp::base_t<unknown_t>, void* ctx), void(*before)(wrp::base_t<unknown_t>, void* ctx)={}, void(*after)(wrp::base_t<unknown_t>, void* ctx)={}, void* ctx=nullptr);
 
     /**
      * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
@@ -259,7 +251,7 @@ struct Tree : TreeRaw{
      * @param before the function with side-effects run when entering a node.
      * @param after the function with side-effects when exiting a node.
      */
-    static void visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& test={}, std::function<void(wrp::base_t<unknown_t>)>&& before={},std::function<void(wrp::base_t<unknown_t>)>&& after={});
+    static void visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& test, std::function<void(wrp::base_t<unknown_t>)>&& before={},std::function<void(wrp::base_t<unknown_t>)>&& after={});
 
 };
 

@@ -13,6 +13,10 @@ namespace VS_XML_NS{
 
 namespace wrp{
 
+//TODO: forced forward declaration here to make it friend with base_t. This must be relocated at some point.
+template<typename T1, typename T2>
+void visit(wrp::base_t<unknown_t> node, T1&& test={}, T2&& before = {}, T2&& after = {}, auto&&... args);
+
 struct node_iterator;
 struct attr_iterator;
 
@@ -106,6 +110,9 @@ struct base_t{
         friend struct node_iterator;
         friend struct attr_iterator;
         friend struct visitor_iterator;
+
+        template<typename T1, typename T2>
+        friend void visit(wrp::base_t<unknown_t> node, T1&& test, T2&& before, T2&& after, auto&&... args);
     public:
     
     base_t(const base_t& ) = default;
