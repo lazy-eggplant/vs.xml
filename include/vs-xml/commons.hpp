@@ -174,10 +174,20 @@ struct marker_t;
 struct root_t;
 struct unknown_t;
 
+struct node_iterator;
+struct attr_iterator;
+struct text_iterator;
+struct visitor_iterator;
+
 namespace wrp{
     template <typename T>
     struct base_t;
     struct sv;
+
+    struct node_iterator;
+    struct attr_iterator;
+    struct text_iterator;
+    struct visitor_iterator;
 }
 
 namespace details{

@@ -10,10 +10,12 @@
  * 
  */
 
-#include  <expected>
-#include  <vs-xml/commons.hpp>
-#include  <vs-xml/tree.hpp>
-#include  <vs-xml/tree-builder.hpp>
+#include <expected>
+
+#include <vs-xml/commons.hpp>
+#include <vs-xml/tree.hpp>
+#include <vs-xml/tree-builder.hpp>
+#include <vs-xml/node.hpp>
 
 namespace VS_XML_NS{
 
@@ -31,42 +33,24 @@ struct DocumentBuilder;
 struct DocumentRaw : TreeRaw {
     using TreeRaw::TreeRaw;
 
-    inline bool print(std::ostream& out, const print_cfg_t& cfg = {})const{
-        for(auto& it: TreeRaw::root().children()){
-            if(!TreeRaw::print(out, cfg, &it))return false;
-        }
-        return true;
-    }
+    bool print(std::ostream& out, const print_cfg_t& cfg = {})const;
 
     /**
      * @brief Return the root of the proper tree inside the document (if present)
      * 
      * @return std::optional<node_iterator> 
      */
-    [[nodiscard]] inline std::optional<node_iterator> tree_root() const{
-        auto c  = TreeRaw::root().children();
-        auto it = std::ranges::find_if(c,[](auto e)static{return e.type()==type_t::ELEMENT;});
-        if(it!=c.end()) return it;
-        return {};
-    }
+    [[nodiscard]] std::optional<node_iterator> tree_root() const;
 
-    [[nodiscard]] static inline std::expected<DocumentRaw,TreeRaw::from_binary_error_t> from_binary(std::span<uint8_t> region){
-        std::expected<TreeRaw, TreeRaw::from_binary_error_t> t = TreeRaw::from_binary(region); 
-        if(!t.has_value())return std::unexpected(t.error()); 
-        else return DocumentRaw(std::move(*t));
-    }
-    [[nodiscard]] static inline const std::expected<const DocumentRaw,TreeRaw::from_binary_error_t> from_binary(std::span<const uint8_t> region){
-        std::expected<const TreeRaw, TreeRaw::from_binary_error_t> t = TreeRaw::from_binary(region); 
-        if(!t.has_value())return std::unexpected(t.error()); 
-        else return DocumentRaw(std::move(*t));
-    }
+    [[nodiscard]] static std::expected<DocumentRaw,TreeRaw::from_binary_error_t> from_binary(std::span<uint8_t> region);
+    [[nodiscard]] static const std::expected<const DocumentRaw,TreeRaw::from_binary_error_t> from_binary(std::span<const uint8_t> region);
 
     template<builder_config_t cfg>
     friend struct DocumentBuilder;
 
     //TODO: Replace with proper prototypes, and incapsulate the mv mechanism away as it is an implementation detail, not semantically correct.
-    DocumentRaw(TreeRaw&& src):TreeRaw(src){}
-    DocumentRaw(const TreeRaw&& src):TreeRaw(src){}
+    DocumentRaw(TreeRaw&& src);
+    DocumentRaw(const TreeRaw&& src);
 
 };
 
@@ -82,19 +66,19 @@ struct Document : DocumentRaw {
 
 
     public:
-    inline Document(DocumentRaw&& ref):DocumentRaw(std::move(ref)){}
-    inline Document(const DocumentRaw&& ref):DocumentRaw(std::move(ref)){}
+    Document(DocumentRaw&& ref);
+    Document(const DocumentRaw&& ref);
 
-    inline const Tree slice(const element_t* ref=nullptr) const{return DocumentRaw::slice(ref);}
-    inline Tree clone(const element_t* ref=nullptr, bool reduce=true) const{return DocumentRaw::clone(ref,reduce);}
+    const Tree slice(const element_t* ref=nullptr) const;
+    Tree clone(const element_t* ref=nullptr, bool reduce=true) const;
 
-    inline  wrp::base_t<unknown_t>  root() {return wrp::base_t<unknown_t>{*(const TreeRaw*)this, &TreeRaw::root()};}
+    wrp::base_t<unknown_t>  root();
 
     ///Cast this document as a raw document
-    inline DocumentRaw& downgrade(){return *this;}
+    DocumentRaw& downgrade();
 
     ///Cast this const document as a const raw tree
-    inline const DocumentRaw& downgrade() const{return *this;}
+    const DocumentRaw& downgrade() const;
 };
 
 

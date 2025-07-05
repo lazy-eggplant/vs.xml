@@ -19,17 +19,11 @@ conf.set('VS_XML_NS', get_option('ns'))
 conf.set('VS_XML_LAYOUT', get_option('binlayout'))
 
 if get_option('use_fmt')
-  fmt_dep = dependency('fmt')
   conf.set('VS_XML_USE_FMT','true')
-else 
-  fmt_dep = []
 endif
 
 if get_option('use_gtl')
-  gtl_dep = dependency('gtl')
   conf.set('VS_XML_USE_GTL','true')
-else 
-  gtl_dep = []
 endif
 
 cfgfile = configure_file(output : 'config.hpp',

@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @file impl.hpp
+ * @file node.hpp
  * @author karurochari
  * @brief Implementation of the node logic
  * @date 2025-05-01
@@ -24,8 +24,6 @@
 #include <vs-xml/commons.hpp>
 #include <vs-xml/serializer.hpp>
 
-#include <vs-xml/fwd/format.hpp>
-//#include <vs-xml/tree.hpp>
 
 namespace VS_XML_NS{
 
@@ -310,57 +308,33 @@ struct marker_t : leaf_t<marker_t>{
     friend struct TreeRaw;
 };
 
-#define DISPATCH(X) \
-if (type() == type_t::ELEMENT) return ((element_t*)this) -> X;\
-else if (type() == type_t::TEXT) return ((text_t*)this)-> X;\
-else if (type() == type_t::COMMENT) return ((comment_t*)this)-> X;\
-else if (type() == type_t::PROC) return ((proc_t*)this)-> X;\
-else if (type() == type_t::CDATA) return ((cdata_t*)this)-> X;\
-else if (type() == type_t::MARKER) return ((marker_t*)this)-> X;\
-else{\
-    xml_assert(false,"Invalid XML thing type");\
-    std::unreachable();\
-}
-
-#define CDISPATCH(X) \
-if (type() == type_t::ELEMENT) return ((const element_t*)this) -> X;\
-else if (type() == type_t::TEXT) return ((const text_t*)this)-> X;\
-else if (type() == type_t::COMMENT) return ((const comment_t*)this)-> X;\
-else if (type() == type_t::PROC) return ((const proc_t*)this)-> X;\
-else if (type() == type_t::CDATA) return ((const cdata_t*)this)-> X;\
-else if (type() == type_t::MARKER) return ((const marker_t*)this)-> X;\
-else{\
-    xml_assert(false,VS_XML_NS::format("Invalid XML thing type {}",(int)type()).c_str());\
-    std::unreachable();\
-}
-
 struct unknown_t : base_t<unknown_t>{
     private:
 
-    void set_parent(element_t* parent){DISPATCH(set_parent(parent));}
-    void set_prev(unknown_t* prev){DISPATCH(set_prev(prev));}
-    void set_next(unknown_t* next){DISPATCH(set_next(next));}
+    void set_parent(element_t* parent);
+    void set_prev(unknown_t* prev);
+    void set_next(unknown_t* next);
 
     public:
 
     static inline type_t deftype() {return type_t::UNKNOWN;};
 
-    std::expected<sv,feature_t> ns() const {CDISPATCH(ns());}
-    std::expected<sv,feature_t> name() const {CDISPATCH(name());}
-    std::expected<sv,feature_t> value() const {CDISPATCH(value());}
-    std::expected<void,feature_t> text_range() const {CDISPATCH(text_range());}
+    std::expected<sv,feature_t> ns() const;
+    std::expected<sv,feature_t> name() const;
+    std::expected<sv,feature_t> value() const;
+    std::expected<void,feature_t> text_range() const;
 
-    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {CDISPATCH(children_range());}
-    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {CDISPATCH(attrs_range());}
+    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const;
+    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const;
 
-    const element_t* parent() const {CDISPATCH(parent());}
-    const unknown_t* prev() const {CDISPATCH(prev());}
-    const unknown_t* next() const {CDISPATCH(next());}
+    const element_t* parent() const;
+    const unknown_t* prev() const;
+    const unknown_t* next() const;
 
-    inline bool has_children() const {CDISPATCH(has_children());}
-    inline bool has_parent() const {CDISPATCH(has_parent());}
-    inline bool has_prev() const {CDISPATCH(has_prev());}
-    inline bool has_next() const {CDISPATCH(has_next());}
+    bool has_children() const;
+    bool has_parent() const;
+    bool has_prev() const;
+    bool has_next() const;
 
     template<builder_config_t>
     friend struct TreeBuilder;
@@ -368,8 +342,7 @@ struct unknown_t : base_t<unknown_t>{
     friend struct TreeRaw;
 };
 
-#undef DISPATCH
-#undef CDISPATCH
+
 
 static_assert(thing_i<element_t>);
 static_assert(thing_i<comment_t>);

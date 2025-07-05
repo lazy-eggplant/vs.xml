@@ -4,8 +4,8 @@
 
 #include <vs-xml/commons.hpp>
 #include <vs-xml/tree.hpp>
-#include <vs-xml/private/impl.hpp>
-#include <vs-xml/private/wrp-impl.hpp>
+#include <vs-xml/node.hpp>
+#include <vs-xml/wrp-node.hpp>
 #include <vs-xml/serializer.hpp>
 
 #include <vs-xml/fwd/print.hpp>

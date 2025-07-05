@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @file visit.hpp
+ * @file wrp-visit.hpp
  * @author karurochari
  * @brief Visitor patterns for trees and derived
  * @date 2025-07-05
@@ -10,7 +10,7 @@
  */
 
 #include <vs-xml/commons.hpp>
-#include <vs-xml/private/wrp-impl.hpp>
+#include <vs-xml/wrp-node.hpp>
 
 namespace VS_XML_NS {
 namespace wrp{

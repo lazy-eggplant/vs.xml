@@ -10,7 +10,7 @@ if get_option('noexcept') == false
         cpp_args: [],
         link_args: [],
         dependencies: [
-            vs_xml_dep
+            vs_xml_dep,
         ],
     ))
 

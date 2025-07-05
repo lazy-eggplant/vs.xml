@@ -16,15 +16,16 @@
 
 #include <expected>
 #include <functional>
-
+#include <utility>
 
 #include <vs-xml/fwd/unordered_set.hpp>
 #include <vector>
 #include <string_view>
 
 #include <vs-xml/commons.hpp>
-#include <vs-xml/private/impl.hpp>
-#include <vs-xml/private/wrp-impl.hpp>
+#include <vs-xml/tree.hpp>
+#include <vs-xml/node.hpp>
+#include <vs-xml/wrp-node.hpp>
 
 namespace VS_XML_NS{
 

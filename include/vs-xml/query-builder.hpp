@@ -12,7 +12,7 @@
 
 #include <string_view>
 #include <vs-xml/commons.hpp>
-#include <vs-xml/private/wrp-impl.hpp>
+#include <vs-xml/wrp-node.hpp>
 
 namespace VS_XML_NS{
 namespace query{
