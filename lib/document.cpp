@@ -9,6 +9,13 @@ bool DocumentRaw::print(std::ostream& out, const print_cfg_t& cfg)const{
     return true;
 }
 
+bool DocumentRaw::print_fast(std::ostream& out, const print_cfg_t& cfg)const{
+    for(auto& it: TreeRaw::root().children()){
+        if(!TreeRaw::print_fast(out, cfg, &it))return false;
+    }
+    return true;
+}
+
 /**
     * @brief Return the root of the proper tree inside the document (if present)
     * 

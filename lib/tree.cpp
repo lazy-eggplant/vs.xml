@@ -186,6 +186,105 @@ bool TreeRaw::print_h_after(std::ostream& out, const print_cfg_t& cfg, const unk
     return true;
 };
 
+bool TreeRaw::print_h(std::ostream& out, const print_cfg_t& cfg, const unknown_t* ptr) const{
+    //TODO: at some point, convert it not to be recursive.
+    if(ptr->type()==type_t::ELEMENT){
+        if(ptr->children_range()->first==ptr->children_range()->second){
+            out<<"<"<<rsv(*ptr->ns())<<(rsv(*ptr->ns())==""?"":":")<<rsv(*ptr->name());
+            for(auto& i : ptr->attrs()){
+                if(!configs.raw_strings){
+                    auto t = serialize::to_xml_attr_2(rsv(*i.value()));
+                    if(!t.has_value()){/*TODO: Error*/}
+                    auto tt = t.value_or(std::string_view(""));
+                    std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+                    out<<" "<<rsv(*i.ns())<<(rsv(*i.ns())==""?"":":")<<rsv(*i.name())<<"=\""<<sv<<"\"";
+                }
+                else{
+                    out<<" "<<rsv(*i.ns())<<(rsv(*i.ns())==""?"":":")<<rsv(*i.name())<<"=\""<<rsv(*i.value())<<"\"";
+                }
+            }
+            out << "/>";
+        }
+        else{
+            VS_XML_NS::print(out,"<{}{}{}", rsv(*ptr->ns()), rsv(*ptr->ns())==""?"":":", rsv(*ptr->name()));
+            for(auto& i : ptr->attrs()){
+                if(!configs.raw_strings){
+                    auto t = serialize::to_xml_attr_2(rsv(*i.value()));
+                    if(!t.has_value()){/*TODO: Error*/}
+                    auto tt = t.value_or(std::string_view(""));
+                    std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+                    out<<" "<<rsv(*i.ns())<<(rsv(*i.ns())==""?"":":")<<rsv(*i.name())<<"=\""<<sv<<"\"";
+                }
+                else{
+                    out<<" "<<rsv(*i.ns())<<(rsv(*i.ns())==""?"":":")<<rsv(*i.name())<<"=\""<<rsv(*i.value())<<"\"";
+                }
+            }
+            out << ">";
+            for(auto& i : ptr->children()){
+                print_h(out,cfg,&i);
+            }
+            out<<"</"<<rsv(*ptr->ns())<<(rsv(*ptr->ns())==""?"":":")<<rsv(*ptr->name())<<">";
+
+        }
+    }
+    else if(ptr->type()==type_t::CDATA){
+        if(!configs.raw_strings){
+            auto t = serialize::to_xml_cdata(rsv(*ptr->value()));
+            if(!t.has_value()){/*TODO: Error*/}
+            auto tt = t.value_or(std::string_view(""));
+            std::string_view sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+            out<<"<![CDATA["<<sv<<"]]>";
+        }
+        else{
+            out<<"<![CDATA["<<rsv(*ptr->value())<<"]]>";
+        }
+    }
+    else if(ptr->type()==type_t::COMMENT){
+        if(!configs.raw_strings){
+            auto t = serialize::to_xml_comment(rsv(*ptr->value()));
+            if(!t.has_value()){/*TODO: Error*/}
+            auto tt = t.value_or(std::string_view(""));
+            std::string_view sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+            out<<"<!--"<<sv<<"-->";
+        }
+        else{
+            out<<"<!--"<<rsv(*ptr->value())<<"-->";
+        }
+    }
+    else if(ptr->type()==type_t::TEXT){
+        if(!configs.raw_strings){
+            auto t = serialize::to_xml_text(rsv(*ptr->value()));
+            if(!t.has_value()){/*TODO: Error*/}
+            auto tt = t.value_or(std::string_view(""));
+            std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+            out<<sv;
+        }
+        else{
+            out<<rsv(*ptr->value());
+        }
+    }
+    else if(ptr->type()==type_t::PROC){
+        if(!configs.raw_strings){
+            auto t = serialize::to_xml_proc(rsv(*ptr->value()));
+            if(!t.has_value()){/*TODO: Error*/}
+            auto tt = t.value_or(std::string_view(""));
+            std::string_view  sv = std::holds_alternative<std::string>(tt)?std::get<std::string>(tt):std::get<std::string_view>(tt);
+            out<<"<?"<<sv<<"?>";
+        }
+        else{
+            out<<"<?"<<rsv(*ptr->value())<<"?>";
+            
+        }
+    }
+    else if(ptr->type()==type_t::MARKER){
+        //Skip, marker points are not XML, they are only internally used.
+        //or emit something in a special namespace? not sure
+    }
+    else{return false;}
+    return true;
+};
+
+
 const TreeRaw TreeRaw::slice(const element_t* ref) const{
     //TODO: Move to std::expected
     xml_assert((uint8_t*)ref>=(uint8_t*)buffer.data() && (uint8_t*)ref<(uint8_t*)buffer.data()+buffer.size(), "out of bounds node pointer");
@@ -330,20 +429,22 @@ void Tree::visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unk
     VS_XML_NS::wrp::visit<>(node,test,before,after);
 }
 
-bool TreeRaw::print2(std::ostream& out, const print_cfg_t& cfg, const unknown_t* node)const{
+bool TreeRaw::print(std::ostream& out, const print_cfg_t& cfg, const unknown_t* node)const{
     if(node==nullptr)node = (const unknown_t*)&root();
-    auto test = +[](const unknown_t* n, void* _ctx)static{return true;};
     struct ctx_t{
         const TreeRaw* that;
         const print_cfg_t cfg;
         std::ostream& out;
     };
     ctx_t ctx{this,cfg,out};
-    auto before = +[](const unknown_t* n, void* _ctx)static{
+    static constexpr auto test = +[](const unknown_t* n, void* _ctx)static{
+        return true;
+    };
+    static constexpr auto before = +[](const unknown_t* n, void* _ctx)static{
         ctx_t& ctx = *(ctx_t*)_ctx;
         ctx.that->print_h_before(ctx.out,ctx.cfg,n);
     };
-    auto after = +[](const unknown_t* n, void* _ctx)static{
+    static constexpr auto after = +[](const unknown_t* n, void* _ctx)static{
         ctx_t& ctx = *(ctx_t*)_ctx;
         ctx.that->print_h_after(ctx.out,ctx.cfg,n);
     };
@@ -351,7 +452,8 @@ bool TreeRaw::print2(std::ostream& out, const print_cfg_t& cfg, const unknown_t*
     return true;
 }
 
-bool TreeRaw::print(std::ostream& out, const print_cfg_t& cfg, const unknown_t* node)const{
+/*
+bool TreeRaw::print2(std::ostream& out, const print_cfg_t& cfg, const unknown_t* node)const{
     if(node==nullptr)node = (const unknown_t*)&root();
     auto test = +[](const unknown_t* n, std::ostream& out, const print_cfg_t& cfg, const TreeRaw* that)static{return true;};
 
@@ -364,6 +466,13 @@ bool TreeRaw::print(std::ostream& out, const print_cfg_t& cfg, const unknown_t* 
     VS_XML_NS::visit<>(node,test,before,after,out,cfg,this);
     return true;
 }
+*/
+
+bool TreeRaw::print_fast(std::ostream& out, const print_cfg_t& cfg, const unknown_t* node)const{
+    if(node==nullptr)node = (const unknown_t*)&root();
+    return print_h(out,cfg,node);
+}
+    
 
 
 }

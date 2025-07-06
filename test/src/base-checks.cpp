@@ -60,7 +60,7 @@ auto test(){
     auto tree = *mk_tree<cfg>();
     tree.print(std::cout,{});
     std::print("\n---\n");
-    tree.print2(std::cout,{});
+    tree.print_fast(std::cout,{});
     std::print("\n---\n");
     tree.reorder();
     tree.print(std::cout,{});

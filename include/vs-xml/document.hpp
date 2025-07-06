@@ -34,6 +34,7 @@ struct DocumentRaw : TreeRaw {
     using TreeRaw::TreeRaw;
 
     bool print(std::ostream& out, const print_cfg_t& cfg = {})const;
+    bool print_fast(std::ostream& out, const print_cfg_t& cfg = {})const;
 
     /**
      * @brief Return the root of the proper tree inside the document (if present)
