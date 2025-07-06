@@ -29,7 +29,7 @@ int test_vs(std::string_view xmlInput){
         std::string str;
         std::stringstream file(str);
 
-        tree->print(file);
+        tree->print_fast(file);
 
     }catch (const std::exception &ex) {
         std::cerr << "Error while testing: " << ex.what() << "\n";
@@ -51,7 +51,7 @@ int test_vs2(std::string_view binInput){
         std::stringstream file(str);
 
         //tree.print(file);
-        tree->save_binary(file);
+        tree->print_fast(file);
 
     }catch (const std::exception &ex) {
         std::cerr << "Error while testing: " << ex.what() << "\n";

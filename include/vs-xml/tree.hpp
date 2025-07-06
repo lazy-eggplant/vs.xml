@@ -143,7 +143,7 @@ struct TreeRaw{
      */
     bool print(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* node = nullptr)const;
 
-    bool print2(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* node = nullptr)const;
+    bool print_fast(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* node = nullptr)const;
 
     bool save_binary(std::ostream& out)const;
 
@@ -185,6 +185,7 @@ struct TreeRaw{
     
     protected:
 
+    bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
     bool print_h_before(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
     bool print_h_after(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
 
