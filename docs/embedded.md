@@ -22,13 +22,13 @@ It is important to enable the `noexcept` flag and disable `utils` alongside any 
 - `TreeRaw`/`Tree` general usage
 - `DocumentRaw`/`Document` general usage
 - `ArchiveRaw`/`Archive` general usage
-- The XML parser when `.raw_strings=true`, however wraps builders which are not fully optimized yet.
+- The XML parser when `.raw_strings=true`, however it wraps builders which are not fully optimized yet.
+- The XML serializer when `.raw_strings=true`.
 - Memos/notes/indices can all be implemented externally, as long as you have a proper library for containers `vs.xml` will not get in your way.
 
 ### 🟠 Features planned for embedded
 - `TreeBuilder`, `DocumentBuilder`, `ArchiveBuilder` & `QueryBuilder`. Right now they encapsulate their own storage, unable to just work on externally defined containers, so we cannot externally handle memory allocations.  
   It is possible to reserve space and so limiting the number of allocations, but they cannot be fully removed as it is.
-- The XML serializer when `.raw_strings=true`, it is still using functions which are not optimized, but their replacement has been implemented already. It also assumes to operate on a stream which is not great.
 - Queries. Right now they are not good due to the high number of dynamic allocations needed. They could be trivially removed for the most part, but the whole system is being refactored to be stack-based and consume less memory overall.
 
 ### 🔴 Features not planned for embedded

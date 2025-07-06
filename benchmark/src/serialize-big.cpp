@@ -92,7 +92,6 @@ int main(int argc, const char* argv[]) {
 
     mio::mmap_source mmap3("./assets/nasa_10_f_bs.xml.bin");
     std::string_view binInput(mmap3.data(),mmap3.size());
-
     for(int i = 0; i<3; i++){
         std::vector<decltype(std::chrono::system_clock::now())> ticks;
         ticks.push_back(std::chrono::system_clock::now());
