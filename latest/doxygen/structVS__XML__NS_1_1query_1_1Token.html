@@ -100,7 +100,7 @@ Public Types</h2></td></tr>
 &#160;&#160;<b>ACCEPT</b>
 , <b>NEXT</b>
 , <b>FORK</b>
-, <b>TYPE</b>
+, <b>MATCH_TYPE</b>
 , <br />
 &#160;&#160;<b>MATCH_NS</b>
 , <b>MATCH_NAME</b>
@@ -114,9 +114,9 @@ Public Types</h2></td></tr>
 <tr class="memitem:ac9cf1da8a94121de0c2596276cfa5c77" id="r_ac9cf1da8a94121de0c2596276cfa5c77"><td class="memItemLeft" align="right" valign="top"><a id="ac9cf1da8a94121de0c2596276cfa5c77" name="ac9cf1da8a94121de0c2596276cfa5c77"></a>
 typedef std::variant&lt; std::monostate, std::string_view, std::function&lt; bool(std::string_view)&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operand_t</b></td></tr>
 <tr class="separator:ac9cf1da8a94121de0c2596276cfa5c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa73f768d0d981199916c43d0fbce7b31" id="r_aa73f768d0d981199916c43d0fbce7b31"><td class="memItemLeft" align="right" valign="top"><a id="aa73f768d0d981199916c43d0fbce7b31" name="aa73f768d0d981199916c43d0fbce7b31"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>args_t</b> = std::variant&lt; <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1empty__t.html">empty_t</a>&lt; ACCEPT &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1empty__t.html">empty_t</a>&lt; NEXT &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1empty__t.html">empty_t</a>&lt; FORK &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1type__filter__t.html">type_filter_t</a>&lt; TYPE &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">single_t</a>&lt; MATCH_NS &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">single_t</a>&lt; MATCH_NAME &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">single_t</a>&lt; MATCH_VALUE &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">single_t</a>&lt; MATCH_ALL_TEXT &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1attr__t.html">attr_t</a>&lt; MATCH_ATTR &gt; &gt;</td></tr>
-<tr class="separator:aa73f768d0d981199916c43d0fbce7b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac59d33885e6bd417a6b2408c6cb2b11" id="r_aac59d33885e6bd417a6b2408c6cb2b11"><td class="memItemLeft" align="right" valign="top"><a id="aac59d33885e6bd417a6b2408c6cb2b11" name="aac59d33885e6bd417a6b2408c6cb2b11"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>args_t</b> = std::variant&lt; <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1empty__t.html">empty_t</a>&lt; ACCEPT &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1empty__t.html">empty_t</a>&lt; NEXT &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1empty__t.html">empty_t</a>&lt; FORK &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1type__filter__t.html">type_filter_t</a>&lt; MATCH_TYPE &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">single_t</a>&lt; MATCH_NS &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">single_t</a>&lt; MATCH_NAME &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">single_t</a>&lt; MATCH_VALUE &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1single__t.html">single_t</a>&lt; MATCH_ALL_TEXT &gt;, <a class="el" href="structVS__XML__NS_1_1query_1_1Token_1_1attr__t.html">attr_t</a>&lt; MATCH_ATTR &gt; &gt;</td></tr>
+<tr class="separator:aac59d33885e6bd417a6b2408c6cb2b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -129,6 +129,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a8aefb8d3a25c4fe6e7480263fc6fed00" id="r_a8aefb8d3a25c4fe6e7480263fc6fed00"><td class="memItemLeft" align="right" valign="top"><a id="a8aefb8d3a25c4fe6e7480263fc6fed00" name="a8aefb8d3a25c4fe6e7480263fc6fed00"></a>
 args_t&#160;</td><td class="memItemRight" valign="bottom"><b>args</b></td></tr>
 <tr class="separator:a8aefb8d3a25c4fe6e7480263fc6fed00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae00e356bd103ce2a11330ab636be9860" id="r_ae00e356bd103ce2a11330ab636be9860"><td class="memItemLeft" align="right" valign="top"><a id="ae00e356bd103ce2a11330ab636be9860" name="ae00e356bd103ce2a11330ab636be9860"></a>
+std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>capture_name</b> = {}</td></tr>
+<tr class="separator:ae00e356bd103ce2a11330ab636be9860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/vs-xml/<a class="el" href="query-builder_8hpp_source.html">query-builder.hpp</a></li>

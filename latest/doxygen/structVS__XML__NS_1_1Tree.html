@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="structVS__XML__NS_1_1Tree-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">VS_XML_NS::Tree Struct Reference</div></div>
 </div><!--header-->
@@ -163,9 +164,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>inject_after</b> (con
 <tr class="memitem:a1b62bf4f87966a53a3e978c51d9e3cb2 inherit pub_methods_structVS__XML__NS_1_1TreeRaw" id="r_a1b62bf4f87966a53a3e978c51d9e3cb2"><td class="memItemLeft" align="right" valign="top">
 const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>root</b> () const</td></tr>
 <tr class="separator:a1b62bf4f87966a53a3e978c51d9e3cb2 inherit pub_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28c792d01428226039a304bc57b46618 inherit pub_methods_structVS__XML__NS_1_1TreeRaw" id="r_a28c792d01428226039a304bc57b46618"><td class="memItemLeft" align="right" valign="top">
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}) const</td></tr>
-<tr class="separator:a28c792d01428226039a304bc57b46618 inherit pub_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7c3960844e8cf9ec92acfe3002b7ce8 inherit pub_methods_structVS__XML__NS_1_1TreeRaw" id="r_ac7c3960844e8cf9ec92acfe3002b7ce8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeRaw.html#ac7c3960844e8cf9ec92acfe3002b7ce8">print</a> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *node=nullptr) const</td></tr>
+<tr class="memdesc:ac7c3960844e8cf9ec92acfe3002b7ce8 inherit pub_methods_structVS__XML__NS_1_1TreeRaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream the serialized version of the document onto an output stream.  <br /></td></tr>
+<tr class="separator:ac7c3960844e8cf9ec92acfe3002b7ce8 inherit pub_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13754cd8388c45ff2ae8e7d90c276b05 inherit pub_methods_structVS__XML__NS_1_1TreeRaw" id="r_a13754cd8388c45ff2ae8e7d90c276b05"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>print_fast</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *node=nullptr) const</td></tr>
+<tr class="separator:a13754cd8388c45ff2ae8e7d90c276b05 inherit pub_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a975c2d315f3932f74b982c39e3c82bca inherit pub_methods_structVS__XML__NS_1_1TreeRaw" id="r_a975c2d315f3932f74b982c39e3c82bca"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>save_binary</b> (std::ostream &amp;out) const</td></tr>
 <tr class="separator:a975c2d315f3932f74b982c39e3c82bca inherit pub_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,8 +183,14 @@ std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>rsv</b> (
 &#160;</td><td class="memItemRight" valign="bottom"><b>TreeRaw</b> (const builder_config_t &amp;cfg, std::span&lt; const uint8_t &gt; src, std::span&lt; const uint8_t &gt; sym={(const uint8_t *) nullptr, std::span&lt; uint8_t &gt;::extent})</td></tr>
 <tr class="separator:ad91eeccb3bda9306e0f1e4f59a44b871 inherit pub_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:abde465ecca4b0f443ec1ae1c76097439" id="r_abde465ecca4b0f443ec1ae1c76097439"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1Tree.html#abde465ecca4b0f443ec1ae1c76097439">visit</a> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; node, bool(*test)(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;, void *ctx), void(*before)(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;, void *ctx)={}, void(*after)(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;, void *ctx)={}, void *ctx=nullptr)</td></tr>
+<tr class="memdesc:abde465ecca4b0f443ec1ae1c76097439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn.  <br /></td></tr>
+<tr class="separator:abde465ecca4b0f443ec1ae1c76097439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada76bde31c1d26f4163a740f17788491" id="r_ada76bde31c1d26f4163a740f17788491"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1Tree.html#ada76bde31c1d26f4163a740f17788491">visit</a> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt; node, std::function&lt; bool(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;)&gt; &amp;&amp;test, std::function&lt; void(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;)&gt; &amp;&amp;before={}, std::function&lt; void(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;)&gt; &amp;&amp;after={})</td></tr>
+<tr class="memdesc:ada76bde31c1d26f4163a740f17788491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn.  <br /></td></tr>
+<tr class="separator:ada76bde31c1d26f4163a740f17788491"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_structVS__XML__NS_1_1TreeRaw"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_structVS__XML__NS_1_1TreeRaw')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></td></tr>
 <tr class="memitem:aa595dcf942e9081589910d9346000618 inherit pub_static_methods_structVS__XML__NS_1_1TreeRaw" id="r_aa595dcf942e9081589910d9346000618"><td class="memItemLeft" align="right" valign="top">
 static std::expected&lt; <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>, <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1from__binary__error__t.html">TreeRaw::from_binary_error_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>from_binary</b> (std::span&lt; uint8_t &gt; region)</td></tr>
@@ -188,10 +198,25 @@ static std::expected&lt; <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">
 <tr class="memitem:aa9b2fa15db1c17032f659540bc1835dd inherit pub_static_methods_structVS__XML__NS_1_1TreeRaw" id="r_aa9b2fa15db1c17032f659540bc1835dd"><td class="memItemLeft" align="right" valign="top">
 static std::expected&lt; const <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a>, <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1from__binary__error__t.html">TreeRaw::from_binary_error_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>from_binary</b> (std::span&lt; const uint8_t &gt; region)</td></tr>
 <tr class="separator:aa9b2fa15db1c17032f659540bc1835dd inherit pub_static_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10948d7ed270f3820c8406f7f91867f9 inherit pub_static_methods_structVS__XML__NS_1_1TreeRaw" id="r_a10948d7ed270f3820c8406f7f91867f9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeRaw.html#a10948d7ed270f3820c8406f7f91867f9">visit</a> (const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *node, bool(*test)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *, void *ctx), void(*before)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *, void *ctx)={}, void(*after)(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *, void *ctx)={}, void *ctx=nullptr)</td></tr>
+<tr class="memdesc:a10948d7ed270f3820c8406f7f91867f9 inherit pub_static_methods_structVS__XML__NS_1_1TreeRaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn.  <br /></td></tr>
+<tr class="separator:a10948d7ed270f3820c8406f7f91867f9 inherit pub_static_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17913e2c3c3f321b080776a5df4ca775 inherit pub_static_methods_structVS__XML__NS_1_1TreeRaw" id="r_a17913e2c3c3f321b080776a5df4ca775"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeRaw.html#a17913e2c3c3f321b080776a5df4ca775">visit</a> (const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *node, std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;test, std::function&lt; void(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;before={}, std::function&lt; void(const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *)&gt; &amp;&amp;after={})</td></tr>
+<tr class="memdesc:a17913e2c3c3f321b080776a5df4ca775 inherit pub_static_methods_structVS__XML__NS_1_1TreeRaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn.  <br /></td></tr>
+<tr class="separator:a17913e2c3c3f321b080776a5df4ca775 inherit pub_static_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_structVS__XML__NS_1_1TreeRaw"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_structVS__XML__NS_1_1TreeRaw')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">VS_XML_NS::TreeRaw</a></td></tr>
 <tr class="memitem:abd08ea935ee2a5c2d16bf10e0e312cfc inherit pro_methods_structVS__XML__NS_1_1TreeRaw" id="r_abd08ea935ee2a5c2d16bf10e0e312cfc"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>print_h</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *ptr=nullptr) const</td></tr>
 <tr class="separator:abd08ea935ee2a5c2d16bf10e0e312cfc inherit pro_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74641364a924a37295675da5be491828 inherit pro_methods_structVS__XML__NS_1_1TreeRaw" id="r_a74641364a924a37295675da5be491828"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>print_h_before</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *ptr=nullptr) const</td></tr>
+<tr class="separator:a74641364a924a37295675da5be491828 inherit pro_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95adf42da9b100cbb31ed1038c70db26 inherit pro_methods_structVS__XML__NS_1_1TreeRaw" id="r_a95adf42da9b100cbb31ed1038c70db26"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>print_h_after</b> (std::ostream &amp;out, const <a class="el" href="structVS__XML__NS_1_1TreeRaw_1_1print__cfg__t.html">print_cfg_t</a> &amp;cfg={}, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *ptr=nullptr) const</td></tr>
+<tr class="separator:a95adf42da9b100cbb31ed1038c70db26 inherit pro_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a382d5590502c3135e6ad9f9e77fed8de inherit pro_methods_structVS__XML__NS_1_1TreeRaw" id="r_a382d5590502c3135e6ad9f9e77fed8de"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>reorder_h</b> (const std::function&lt; bool(const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;, const <a class="el" href="structVS__XML__NS_1_1attr__t.html">attr_t</a> &amp;)&gt; &amp;fn, const <a class="el" href="structVS__XML__NS_1_1element__t.html">element_t</a> *ref, bool recursive=true)</td></tr>
 <tr class="separator:a382d5590502c3135e6ad9f9e77fed8de inherit pro_methods_structVS__XML__NS_1_1TreeRaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -209,7 +234,132 @@ builder_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>configs</
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>the tree class you should use. </p>
 <dl class="section warning"><dt>Warning</dt><dd>make sure you also check <a class="el" href="structVS__XML__NS_1_1Document.html" title="The suggested-to-use Document class.">VS_XML_NS::Document</a> as you are more likely going to use that one </dd></dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="abde465ecca4b0f443ec1ae1c76097439" name="abde465ecca4b0f443ec1ae1c76097439"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abde465ecca4b0f443ec1ae1c76097439">&#9670;&#160;</a></span>visit() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void VS_XML_NS::Tree::visit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool(*)(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;, void *ctx)&#160;</td>
+          <td class="paramname"><em>test</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;, void *ctx)&#160;</td>
+          <td class="paramname"><em>before</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;, void *ctx)&#160;</td>
+          <td class="paramname"><em>after</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ctx</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>the starting node </td></tr>
+    <tr><td class="paramname">test</td><td>the function checking if children should be explored for this node (can have side-effects). </td></tr>
+    <tr><td class="paramname">before</td><td>the function with side-effects run when entering a node. </td></tr>
+    <tr><td class="paramname">after</td><td>the function with side-effects when exiting a node. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ada76bde31c1d26f4163a740f17788491" name="ada76bde31c1d26f4163a740f17788491"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada76bde31c1d26f4163a740f17788491">&#9670;&#160;</a></span>visit() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void VS_XML_NS::Tree::visit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; bool(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;)&gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>test</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;)&gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>before</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">wrp::base_t</a>&lt; <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> &gt;)&gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>after</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>the starting node </td></tr>
+    <tr><td class="paramname">test</td><td>the function checking if children should be explored for this node (can have side-effects). </td></tr>
+    <tr><td class="paramname">before</td><td>the function with side-effects run when entering a node. </td></tr>
+    <tr><td class="paramname">after</td><td>the function with side-effects when exiting a node. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/vs-xml/<a class="el" href="tree_8hpp_source.html">tree.hpp</a></li>
 </ul>
 </div><!-- contents -->

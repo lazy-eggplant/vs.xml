@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
@@ -850,6 +850,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../releases/v0.2.13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    V0.2.13
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../releases/v0.2.5/" class="md-nav__link">
         
   
@@ -1157,14 +1180,14 @@ This usually implies:</p>
 <li><code>TreeRaw</code>/<code>Tree</code> general usage</li>
 <li><code>DocumentRaw</code>/<code>Document</code> general usage</li>
 <li><code>ArchiveRaw</code>/<code>Archive</code> general usage</li>
-<li>The XML parser when <code>.raw_strings=true</code>, however wraps builders which are not fully optimized yet.</li>
+<li>The XML parser when <code>.raw_strings=true</code>, however it wraps builders which are not fully optimized yet.</li>
+<li>The XML serializer when <code>.raw_strings=true</code>.</li>
 <li>Memos/notes/indices can all be implemented externally, as long as you have a proper library for containers <code>vs.xml</code> will not get in your way.</li>
 </ul>
 <h3 id="features-planned-for-embedded">🟠 Features planned for embedded<a class="headerlink" href="#features-planned-for-embedded" title="Permanent link">#</a></h3>
 <ul>
 <li><code>TreeBuilder</code>, <code>DocumentBuilder</code>, <code>ArchiveBuilder</code> &amp; <code>QueryBuilder</code>. Right now they encapsulate their own storage, unable to just work on externally defined containers, so we cannot externally handle memory allocations.<br />
   It is possible to reserve space and so limiting the number of allocations, but they cannot be fully removed as it is.</li>
-<li>The XML serializer when <code>.raw_strings=true</code>, it is still using functions which are not optimized, but their replacement has been implemented already. It also assumes to operate on a stream which is not great.</li>
 <li>Queries. Right now they are not good due to the high number of dynamic allocations needed. They could be trivially removed for the most part, but the whole system is being refactored to be stack-based and consume less memory overall.</li>
 </ul>
 <h3 id="features-not-planned-for-embedded">🔴 Features not planned for embedded<a class="headerlink" href="#features-not-planned-for-embedded" title="Permanent link">#</a></h3>
@@ -1226,7 +1249,7 @@ The originals don&rsquo;t own their memory, so you can externally manage it your
       <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
     
   </body>

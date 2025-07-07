@@ -1,0 +1,28 @@
+<map id="include/vs&#45;xml/node.hpp" name="include/vs&#45;xml/node.hpp">
+<area shape="rect" id="Node000001" title="Implementation of the node logic." alt="" coords="288,5,471,31"/>
+<area shape="rect" id="Node000002" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="103,255,317,280"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="290,37,254,54,225,80,213,102,205,125,200,175,203,221,210,254,204,255,198,222,194,175,200,124,208,99,221,77,251,50,288,32"/>
+<area shape="rect" id="Node000006" href="$visit_8hpp.html" title="Visitor patterns for trees and derived." alt="" coords="235,79,403,119"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="364,43,336,80,332,77,360,40"/>
+<area shape="rect" id="Node000007" href="$tree-builder_8hpp.html" title="Tree builder classes." alt="" coords="291,167,439,207"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="399,41,418,78,422,99,418,120,404,146,387,168,382,165,400,143,413,118,417,99,413,80,395,43"/>
+<area shape="rect" id="Node000008" href="$wrp-node_8hpp_source.html" title=" " alt="" coords="478,79,625,119"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="418,34,511,76,509,81,415,39"/>
+<area shape="rect" id="Node000003" href="$archive_8hpp.html" title="A collection of multiple documents, stored in a single data structure. Archives will use shared symbo..." alt="" coords="5,335,204,361"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="185,290,122,337,119,333,182,286"/>
+<area shape="rect" id="Node000005" href="$document-builder_8hpp.html" title="Document builder wrapper implementation for tree builder." alt="" coords="229,328,415,368"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="239,286,297,326,293,330,236,290"/>
+<area shape="rect" id="Node000004" href="$archive-builder_8hpp.html" title="Archive builder wrapper implementation for tree builder." alt="" coords="237,416,407,456"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="148,363,275,413,273,418,146,368"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="325,382,325,416,319,416,319,382"/>
+<area shape="poly" id="edge10_Node000007_Node000002" title=" " alt="" coords="317,215,234,257,232,252,314,210"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="392,216,413,248,432,287,440,329,437,349,430,369,405,398,374,418,371,414,401,394,425,367,432,348,434,329,427,289,409,251,387,219"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="359,221,330,329,324,327,353,219"/>
+<area shape="poly" id="edge15_Node000008_Node000007" title=" " alt="" coords="499,127,407,169,404,164,497,122"/>
+<area shape="rect" id="Node000009" href="$wrp-visit_8hpp.html" title="Visitor patterns for trees and derived." alt="" coords="463,167,631,207"/>
+<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="552,133,551,167,546,166,547,132"/>
+<area shape="rect" id="Node000010" href="$query-builder_8hpp_source.html" title=" " alt="" coords="656,167,815,207"/>
+<area shape="poly" id="edge13_Node000008_Node000010" title=" " alt="" coords="605,122,696,164,694,169,603,127"/>
+<area shape="rect" id="Node000011" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="839,174,1024,199"/>
+<area shape="poly" id="edge14_Node000008_Node000011" title=" " alt="" coords="639,117,881,171,880,176,638,122"/>
+</map>

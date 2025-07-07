@@ -1,31 +1,33 @@
 <map id="include/vs&#45;xml/serializer.hpp" name="include/vs&#45;xml/serializer.hpp">
-<area shape="rect" id="Node000001" title="Implementation of serialization/deserialization helpers." alt="" coords="211,5,420,31"/>
-<area shape="rect" id="Node000002" href="$parser_8hpp.html" title="Implementation of the parser logic." alt="" coords="87,86,277,111"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="285,40,203,88,200,83,283,35"/>
-<area shape="rect" id="Node000003" href="$impl_8hpp.html" title="Implementation of the node logic." alt="" coords="353,79,521,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="346,36,409,76,406,81,343,41"/>
-<area shape="rect" id="Node000004" href="$wrp-impl_8hpp_source.html" title=" " alt="" coords="231,167,399,207"/>
-<area shape="poly" id="edge17_Node000001_Node000004" title=" " alt="" coords="318,44,318,166,313,166,313,44"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="400,129,344,169,341,164,397,124"/>
-<area shape="rect" id="Node000008" href="$tree-builder_8hpp.html" title="Tree builder classes." alt="" coords="397,255,545,295"/>
-<area shape="poly" id="edge16_Node000003_Node000008" title=" " alt="" coords="446,132,470,254,465,255,441,133"/>
-<area shape="rect" id="Node000005" href="$query-builder_8hpp_source.html" title=" " alt="" coords="5,255,164,295"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="253,214,136,257,134,252,251,209"/>
-<area shape="rect" id="Node000006" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="188,262,373,287"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="305,221,288,263,283,261,300,219"/>
-<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="363,211,438,252,436,257,360,216"/>
-<area shape="rect" id="Node000007" href="$query-impl_8hpp_source.html" title=" " alt="" coords="197,343,365,383"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="275,301,276,342,270,342,270,301"/>
-<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="287,329,284,288,290,287,292,328"/>
-<area shape="rect" id="Node000009" href="$archive-builder_8hpp.html" title="Archive builder wrapper implementation for tree builder." alt="" coords="457,519,627,559"/>
-<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="457,308,441,343,430,385,427,428,431,449,439,469,463,497,493,516,490,521,459,501,434,472,426,451,422,429,425,384,436,341,452,306"/>
-<area shape="rect" id="Node000010" href="$document-builder_8hpp.html" title="Document builder wrapper implementation for tree builder." alt="" coords="449,431,635,471"/>
-<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="479,308,487,344,500,382,529,429,525,432,496,384,482,345,474,309"/>
-<area shape="rect" id="Node000011" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="509,350,724,375"/>
-<area shape="poly" id="edge12_Node000008_Node000011" title=" " alt="" coords="516,299,599,348,596,352,514,304"/>
-<area shape="poly" id="edge11_Node000010_Node000009" title=" " alt="" coords="545,485,545,518,539,518,539,485"/>
-<area shape="poly" id="edge15_Node000011_Node000010" title=" " alt="" coords="599,388,561,432,557,428,595,384"/>
-<area shape="rect" id="Node000012" href="$archive_8hpp.html" title="A collection of multiple documents, stored in a single data structure. Archives will use shared symbo..." alt="" coords="660,438,859,463"/>
-<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="649,380,741,435,739,440,646,385"/>
-<area shape="poly" id="edge14_Node000012_Node000009" title=" " alt="" coords="718,471,591,521,589,516,716,466"/>
+<area shape="rect" id="Node000001" title="Implementation of serialization/deserialization helpers." alt="" coords="447,5,656,31"/>
+<area shape="rect" id="Node000002" href="$node_8hpp.html" title="Implementation of the node logic." alt="" coords="331,79,513,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="520,40,444,81,442,76,517,35"/>
+<area shape="rect" id="Node000009" href="$wrp-node_8hpp_source.html" title=" " alt="" coords="478,152,625,192"/>
+<area shape="poly" id="edge18_Node000001_Node000009" title=" " alt="" coords="554,44,554,152,549,152,549,44"/>
+<area shape="rect" id="Node000013" href="$parser_8hpp.html" title="Implementation of the parser logic." alt="" coords="589,79,780,104"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="586,35,664,76,662,81,583,39"/>
+<area shape="rect" id="Node000003" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="103,328,317,353"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="318,103,267,121,244,135,225,154,213,175,204,198,199,248,203,294,209,327,204,328,197,294,193,248,199,197,208,172,221,150,241,131,265,116,316,98"/>
+<area shape="rect" id="Node000007" href="$visit_8hpp.html" title="Visitor patterns for trees and derived." alt="" coords="235,152,403,192"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="398,114,346,154,342,150,395,110"/>
+<area shape="rect" id="Node000008" href="$tree-builder_8hpp.html" title="Tree builder classes." alt="" coords="291,240,439,280"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="427,118,426,154,418,193,404,219,386,241,382,238,399,216,413,191,421,153,422,118"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="454,109,522,150,519,154,451,114"/>
+<area shape="rect" id="Node000004" href="$archive_8hpp.html" title="A collection of multiple documents, stored in a single data structure. Archives will use shared symbo..." alt="" coords="5,409,204,434"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="185,364,122,411,119,406,182,359"/>
+<area shape="rect" id="Node000006" href="$document-builder_8hpp.html" title="Document builder wrapper implementation for tree builder." alt="" coords="229,401,415,441"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="239,359,297,399,293,403,236,363"/>
+<area shape="rect" id="Node000005" href="$archive-builder_8hpp.html" title="Archive builder wrapper implementation for tree builder." alt="" coords="237,489,407,529"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="148,437,275,487,273,492,146,442"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="325,455,325,489,319,489,319,455"/>
+<area shape="poly" id="edge11_Node000008_Node000003" title=" " alt="" coords="317,289,234,330,232,325,314,284"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="392,290,413,322,432,360,440,402,437,423,430,443,405,471,374,491,371,487,401,467,425,440,432,421,434,402,427,362,409,324,387,292"/>
+<area shape="poly" id="edge10_Node000008_Node000006" title=" " alt="" coords="359,294,330,402,324,401,353,293"/>
+<area shape="poly" id="edge16_Node000009_Node000008" title=" " alt="" coords="499,200,407,242,404,238,497,195"/>
+<area shape="rect" id="Node000010" href="$wrp-visit_8hpp.html" title="Visitor patterns for trees and derived." alt="" coords="463,240,631,280"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="552,206,551,240,546,240,547,206"/>
+<area shape="rect" id="Node000011" href="$query-builder_8hpp_source.html" title=" " alt="" coords="656,240,815,280"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="605,195,696,238,694,242,603,200"/>
+<area shape="rect" id="Node000012" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="839,247,1024,273"/>
+<area shape="poly" id="edge15_Node000009_Node000012" title=" " alt="" coords="639,190,881,245,880,250,638,195"/>
 </map>
