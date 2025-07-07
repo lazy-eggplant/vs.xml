@@ -74,7 +74,7 @@ BuilderBase::error_t BuilderBase::end(){
 
     auto& ctx = stack.back();
     element_t* parent = (element_t*)(buffer.data()+ctx.first);
-    parent->_size=buffer.size()-ctx.first;
+    parent->_next=buffer.size()-ctx.first;
 
     stack.pop_back();
 
