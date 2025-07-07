@@ -1,0 +1,33 @@
+<map id="include/vs&#45;xml/serializer.hpp" name="include/vs&#45;xml/serializer.hpp">
+<area shape="rect" id="Node000001" title="Implementation of serialization/deserialization helpers." alt="" coords="447,5,656,31"/>
+<area shape="rect" id="Node000002" href="$node_8hpp.html" title="Implementation of the node logic." alt="" coords="331,79,513,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="520,40,444,81,442,76,517,35"/>
+<area shape="rect" id="Node000009" href="$wrp-node_8hpp_source.html" title=" " alt="" coords="478,152,625,192"/>
+<area shape="poly" id="edge18_Node000001_Node000009" title=" " alt="" coords="554,44,554,152,549,152,549,44"/>
+<area shape="rect" id="Node000013" href="$parser_8hpp.html" title="Implementation of the parser logic." alt="" coords="589,79,780,104"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="586,35,664,76,662,81,583,39"/>
+<area shape="rect" id="Node000003" href="$document_8hpp.html" title="Document wrapper for a tree." alt="" coords="103,328,317,353"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="318,103,267,121,244,135,225,154,213,175,204,198,199,248,203,294,209,327,204,328,197,294,193,248,199,197,208,172,221,150,241,131,265,116,316,98"/>
+<area shape="rect" id="Node000007" href="$visit_8hpp.html" title="Visitor patterns for trees and derived." alt="" coords="235,152,403,192"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="398,114,346,154,342,150,395,110"/>
+<area shape="rect" id="Node000008" href="$tree-builder_8hpp.html" title="Tree builder classes." alt="" coords="291,240,439,280"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="427,118,426,154,418,193,404,219,386,241,382,238,399,216,413,191,421,153,422,118"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="454,109,522,150,519,154,451,114"/>
+<area shape="rect" id="Node000004" href="$archive_8hpp.html" title="A collection of multiple documents, stored in a single data structure. Archives will use shared symbo..." alt="" coords="5,409,204,434"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="185,364,122,411,119,406,182,359"/>
+<area shape="rect" id="Node000006" href="$document-builder_8hpp.html" title="Document builder wrapper implementation for tree builder." alt="" coords="229,401,415,441"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="239,359,297,399,293,403,236,363"/>
+<area shape="rect" id="Node000005" href="$archive-builder_8hpp.html" title="Archive builder wrapper implementation for tree builder." alt="" coords="237,489,407,529"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="148,437,275,487,273,492,146,442"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="325,455,325,489,319,489,319,455"/>
+<area shape="poly" id="edge11_Node000008_Node000003" title=" " alt="" coords="317,289,234,330,232,325,314,284"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="392,290,413,322,432,360,440,402,437,423,430,443,405,471,374,491,371,487,401,467,425,440,432,421,434,402,427,362,409,324,387,292"/>
+<area shape="poly" id="edge10_Node000008_Node000006" title=" " alt="" coords="359,294,330,402,324,401,353,293"/>
+<area shape="poly" id="edge16_Node000009_Node000008" title=" " alt="" coords="499,200,407,242,404,238,497,195"/>
+<area shape="rect" id="Node000010" href="$wrp-visit_8hpp.html" title="Visitor patterns for trees and derived." alt="" coords="463,240,631,280"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="552,206,551,240,546,240,547,206"/>
+<area shape="rect" id="Node000011" href="$query-builder_8hpp_source.html" title=" " alt="" coords="656,240,815,280"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="605,195,696,238,694,242,603,200"/>
+<area shape="rect" id="Node000012" href="$query_8hpp.html" title="Queries on a tree." alt="" coords="839,247,1024,273"/>
+<area shape="poly" id="edge15_Node000009_Node000012" title=" " alt="" coords="639,190,881,245,880,250,638,195"/>
+</map>

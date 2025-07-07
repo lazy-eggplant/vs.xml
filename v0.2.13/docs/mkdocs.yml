@@ -1,0 +1,29 @@
+site_name: vs.xml
+repo_url: https://github.com/lazy-eggplant/vs.xml
+site_dir: ../website/docs
+docs_dir: ../../docs
+
+theme:
+  name: material
+  custom_dir: ./
+  logo:
+markdown_extensions:
+  - footnotes
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.tilde
+  - pymdownx.tasklist
+  - mdx_truly_sane_lists
+  - sane_lists
+  - smarty
+  - toc:
+      permalink: "#"
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+plugins:
+  - search
+  - gh-admonitions

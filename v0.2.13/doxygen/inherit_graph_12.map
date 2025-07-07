@@ -1,0 +1,25 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$structVS__XML__NS_1_1base__t.html" title=" " alt="" coords="5,173,193,198"/>
+<area shape="rect" id="Node000001" href="$structVS__XML__NS_1_1leaf__t.html" title=" " alt="" coords="255,5,410,45"/>
+<area shape="poly" id="edge7_Node000000_Node000001" title=" " alt="" coords="118,161,170,108,204,80,240,55,264,43,266,48,243,60,207,84,174,112,122,164"/>
+<area shape="rect" id="Node000003" href="$structVS__XML__NS_1_1leaf__t.html" title=" " alt="" coords="255,69,410,109"/>
+<area shape="poly" id="edge9_Node000000_Node000003" title=" " alt="" coords="138,164,240,119,272,107,273,112,242,124,140,169"/>
+<area shape="rect" id="Node000005" href="$structVS__XML__NS_1_1leaf__t.html" title=" " alt="" coords="255,133,410,173"/>
+<area shape="poly" id="edge11_Node000000_Node000005" title=" " alt="" coords="205,168,255,161,255,167,206,173"/>
+<area shape="rect" id="Node000007" href="$structVS__XML__NS_1_1leaf__t.html" title=" " alt="" coords="255,197,410,237"/>
+<area shape="poly" id="edge13_Node000000_Node000007" title=" " alt="" coords="206,197,255,204,255,209,205,203"/>
+<area shape="rect" id="Node000009" href="$structVS__XML__NS_1_1leaf__t.html" title=" " alt="" coords="255,261,410,301"/>
+<area shape="poly" id="edge15_Node000000_Node000009" title=" " alt="" coords="140,201,242,247,273,259,272,264,240,252,138,206"/>
+<area shape="rect" id="Node000011" href="$structVS__XML__NS_1_1leaf__t.html" title=" " alt="" coords="241,326,424,351"/>
+<area shape="poly" id="edge17_Node000000_Node000011" title=" " alt="" coords="122,207,173,259,207,287,243,311,272,323,270,328,240,316,203,292,170,263,118,211"/>
+<area shape="rect" id="Node000002" href="$structVS__XML__NS_1_1cdata__t.html" title=" " alt="" coords="485,13,640,38"/>
+<area shape="poly" id="edge8_Node000001_Node000002" title=" " alt="" coords="424,23,485,23,485,28,424,28"/>
+<area shape="rect" id="Node000004" href="$structVS__XML__NS_1_1comment__t.html" title=" " alt="" coords="472,77,653,102"/>
+<area shape="poly" id="edge10_Node000003_Node000004" title=" " alt="" coords="424,87,472,87,472,92,424,92"/>
+<area shape="rect" id="Node000006" href="$structVS__XML__NS_1_1marker__t.html" title=" " alt="" coords="480,141,645,166"/>
+<area shape="poly" id="edge12_Node000005_Node000006" title=" " alt="" coords="424,151,480,151,480,156,424,156"/>
+<area shape="rect" id="Node000008" href="$structVS__XML__NS_1_1proc__t.html" title=" " alt="" coords="489,205,636,230"/>
+<area shape="poly" id="edge14_Node000007_Node000008" title=" " alt="" coords="424,215,489,215,489,220,424,220"/>
+<area shape="rect" id="Node000010" href="$structVS__XML__NS_1_1text__t.html" title=" " alt="" coords="490,269,635,294"/>
+<area shape="poly" id="edge16_Node000009_Node000010" title=" " alt="" coords="424,279,490,279,490,284,424,284"/>
+</map>
