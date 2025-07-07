@@ -295,7 +295,7 @@ const TreeRaw TreeRaw::slice(const element_t* ref) const{
         ref=(const element_t*)&root();
     }
 
-    std::span<uint8_t> tmp = {( uint8_t*)ref,ref->_size};
+    std::span<uint8_t> tmp = {( uint8_t*)ref,(size_t)ref->_next};
     return TreeRaw(configs,tmp,this->symbols);
 };
 

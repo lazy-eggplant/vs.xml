@@ -31,7 +31,11 @@ namespace VS_XML_NS{
 template <typename T>
 struct base_t{
     protected:
-    type_t _type = T::deftype();
+    type_t _type : 4 = T::deftype();
+    uint8_t _bit0 : 1;
+    uint8_t _bit1 : 1;
+    uint8_t _bit2 : 1;
+    uint8_t _bit3 : 1;
 
     public:
     typedef T base;
@@ -93,7 +97,8 @@ struct element_t : base_t<element_t>{
     delta_ptr_t _prev;
     delta_ptr_t _next;
 
-    xml_size_t  _size;
+    //bool  _has_next;
+    //_has_next=_bit0;
 
     xml_count_t  attrs_count;
 
@@ -107,13 +112,13 @@ struct element_t : base_t<element_t>{
         _name(offset,serialize::validate_xml_label(_name))
     {
         set_parent(_parent);
-        _size=0;
+        _bit0=false;
         attrs_count=0;
     }
 
     inline void set_parent(element_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp, "Loss of precision");}
     inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp, "Loss of precision");}
-    inline void set_next(unknown_t* next){auto tmp=(uint8_t*)next-(uint8_t*)this;_next=tmp;xml_assert((std::ptrdiff_t)_next==tmp, "Loss of precision");}
+    inline void set_next(unknown_t* next){auto tmp=(uint8_t*)next-(uint8_t*)this;_next=tmp;_bit0=true;xml_assert((std::ptrdiff_t)_next==tmp, "Loss of precision");}
 
     //Unsafe, not boundary checked.
     inline attr_t& get_attr(xml_count_t a) const{return (attr_t&)_attrs[a];}
@@ -131,7 +136,7 @@ struct element_t : base_t<element_t>{
     inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {
         return std::pair{
             (const unknown_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count),
-            (const unknown_t*)((const uint8_t*)this+_size)
+            (const unknown_t*)((const uint8_t*)this+_next)
         };
     }
     inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {
@@ -150,14 +155,14 @@ struct element_t : base_t<element_t>{
         return (const unknown_t*)((const uint8_t*)this+_prev);
     }
     inline const unknown_t* next() const {
-        if(_next==0)return (const unknown_t*) (parent()->_size+_parent+(const uint8_t*)this); 
+        if(_next==0)return nullptr;
         return (const unknown_t*)((const uint8_t*)this+_next);
     }
 
-    inline bool has_children() const {return (const unknown_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count)!=(const unknown_t*)((const uint8_t*)this+_size);}
+    inline bool has_children() const {return (const unknown_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count)!=(const unknown_t*)((const uint8_t*)this+_next);}
     inline bool has_parent() const {return _parent!=0;}
     inline bool has_prev() const {return _prev!=0;}
-    inline bool has_next() const {return _next!=0;}
+    inline bool has_next() const {return _bit0;}
 
     template<builder_config_t>
     friend struct TreeBuilder;
