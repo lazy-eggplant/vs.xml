@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#general-questions" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -308,6 +313,19 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Faq
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -319,6 +337,41 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#general-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      General questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -979,6 +1032,32 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#general-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      General questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -998,6 +1077,17 @@
 
   <h1>Faq</h1>
 
+<h2 id="general-questions">General questions<a class="headerlink" href="#general-questions" title="Permanent link">#</a></h2>
+<blockquote>
+<p>Is this library validating?</p>
+</blockquote>
+<p>Short answer, no. The main reason to drop validation is just speed, simplicity, and the understanding that we already have good validating tools.  </p>
+<p>Some of the original code was designed with validation in mind, but it was quickly decided not to commit in that direction; hence:</p>
+<ul>
+<li>A non-conformant XML input will result in undefined behaviour, gracefully failing or degrading the behaviour of the library.</li>
+<li>Builders can be abused to generate trees cannot be serialized in proper XML (but they can be saved and read in their binary format).</li>
+</ul>
+<p>Any conformant XML input is expected to lead to conformant XML output; if not it is a bug.  </p>
 <blockquote>
 <p>Why the binary serialization of the XML is bigger compared to the base file?</p>
 </blockquote>
@@ -1030,8 +1120,9 @@ Also, results of complex queries are fully portable and easy to share.</p>
 </blockquote>
 <p>Simple answer, laziness. A more serious reply would be that serialization and de-serialization are meant to be just one-off operations.<br />
 The bulk of whatever computation we must perform is going to act on the binary representation, not its textual form.<br />
-There is no trivial way to make XML parsing or serialization &ldquo;parallel&rdquo; without making the code involved much more complex.<br />
-At which point it is generally better to waste threads for other tasks if possible.</p>
+There is no trivial way to make XML parsing or serialization &ldquo;parallel&rdquo; without making the code involved much more complex, and even then its scalability would degrade for certain types of documents.<br />
+At which point, it is just better to waste threads for split tasks if possible.</p>
+<h2 id="how-to">How to?<a class="headerlink" href="#how-to" title="Permanent link">#</a></h2>
 <blockquote>
 <p>How to annotate a tree?</p>
 </blockquote>
@@ -1055,6 +1146,12 @@ However, there are some intended workarounds:
   So, building a tree with <code>.raw_strings=true</code> would allow for arbitrary data, as long as no attempt is made to serialize the tree to XML from its binary representation.
 - It is possible to represent the de-serialized values as annotations over tree nodes, and store them into a map-like container.<br />
   Those could either be saved alongside the original file (good if the serialization/de-serialization process is complex), or just generated when needed just to be cached for a faster retrieval.</p>
+<blockquote>
+<p>Basically all answers in this <em>how to</em> section are telling, »Sorry we don&rsquo;t do that here!«. Why?</p>
+</blockquote>
+<p>This library is trying very hard to limit its scope and the subsequent feature creep by delegating opinionated implementations downstream.<br />
+At least, to the extent this makes sense in a practical sense: feature like queries are so important that even if they could be split, they will not.<br />
+Once this library gets into a stable state, the general plan is to design an <em>official</em> companion library which implements all the above cases, and probably several other utilities.  </p>
 
 
 
