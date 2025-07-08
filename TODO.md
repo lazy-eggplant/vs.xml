@@ -1,7 +1,6 @@
 - [ ] Deprecate this file plz.
 - [ ] Random access to attributes for the iterator.
 - [ ] Tree builder method to use injection maps when generating the tree.
-- [ ] External visitor interface to Tree/TreeRaw. This allows for more flexibility and templating.
 
 ## Query redesign
 

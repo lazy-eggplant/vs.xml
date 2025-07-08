@@ -1,3 +1,16 @@
+## General questions
+
+> Is this library validating?
+
+Short answer, no. The main reason to drop validation is just speed, simplicity, and the understanding that we already have good validating tools.  
+
+Some of the original code was designed with validation in mind, but it was quickly decided not to commit in that direction; hence:
+
+- A non-conformant XML input will result in undefined behaviour, gracefully failing or degrading the behaviour of the library.
+- Builders can be abused to generate trees cannot be serialized in proper XML (but they can be saved and read in their binary format).
+
+Any conformant XML input is expected to lead to conformant XML output; if not it is a bug.  
+
 > Why the binary serialization of the XML is bigger compared to the base file?
 
 That is to be expected. XML has very little overhead, with not much in terms of extra symbols and markers.  
@@ -30,8 +43,10 @@ Also, results of complex queries are fully portable and easy to share.
 
 Simple answer, laziness. A more serious reply would be that serialization and de-serialization are meant to be just one-off operations.  
 The bulk of whatever computation we must perform is going to act on the binary representation, not its textual form.  
-There is no trivial way to make XML parsing or serialization "parallel" without making the code involved much more complex.  
-At which point it is generally better to waste threads for other tasks if possible.
+There is no trivial way to make XML parsing or serialization "parallel" without making the code involved much more complex, and even then its scalability would degrade for certain types of documents.  
+At which point, it is just better to waste threads for split tasks if possible.
+
+## How to?
 
 > How to annotate a tree?
 
@@ -55,3 +70,9 @@ However, there are some intended workarounds:
   So, building a tree with `.raw_strings=true` would allow for arbitrary data, as long as no attempt is made to serialize the tree to XML from its binary representation.
 - It is possible to represent the de-serialized values as annotations over tree nodes, and store them into a map-like container.  
   Those could either be saved alongside the original file (good if the serialization/de-serialization process is complex), or just generated when needed just to be cached for a faster retrieval.
+
+> Basically all answers in this *how to* section are telling, »Sorry we don't do that here!«. Why?
+
+This library is trying very hard to limit its scope and the subsequent feature creep by delegating opinionated implementations downstream.  
+At least, to the extent this makes sense in a practical sense: feature like queries are so important that even if they could be split, they will not.  
+Once this library gets into a stable state, the general plan is to design an *official* companion library which implements all the above cases, and probably several other utilities.  
