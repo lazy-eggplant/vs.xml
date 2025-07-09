@@ -65,6 +65,7 @@ struct Document : DocumentRaw {
     using DocumentRaw::clone;
     using DocumentRaw::root;
 
+    using DocumentRaw::visit;
 
     public:
     Document(DocumentRaw&& ref);
@@ -80,6 +81,28 @@ struct Document : DocumentRaw {
 
     ///Cast this const document as a const raw tree
     const DocumentRaw& downgrade() const;
+
+
+    /**
+     * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
+     * 
+     * @param node the starting node
+     * @param test the function checking if children should be explored for this node (can have side-effects).
+     * @param before the function with side-effects run when entering a node.
+     * @param after the function with side-effects when exiting a node.
+     */
+     static void visit(wrp::base_t<unknown_t> node, bool(*test)(wrp::base_t<unknown_t>, void* ctx), void(*before)(wrp::base_t<unknown_t>, void* ctx)={}, void(*after)(wrp::base_t<unknown_t>, void* ctx)={}, void* ctx=nullptr);
+
+     /**
+      * @brief Visit all nodes starting from node. Evaluate if children should be considered by evaluating fn
+      * 
+      * @param node the starting node
+      * @param test the function checking if children should be explored for this node (can have side-effects).
+      * @param before the function with side-effects run when entering a node.
+      * @param after the function with side-effects when exiting a node.
+      */
+     static void visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& test, std::function<void(wrp::base_t<unknown_t>)>&& before={},std::function<void(wrp::base_t<unknown_t>)>&& after={});
+ 
 };
 
 

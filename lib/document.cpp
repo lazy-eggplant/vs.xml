@@ -59,4 +59,13 @@ DocumentRaw& Document::downgrade(){return *this;}
 ///Cast this const document as a const raw tree
 const DocumentRaw& Document::downgrade() const{return *this;}
 
+
+void Document::visit(wrp::base_t<unknown_t> node, bool(*test)(wrp::base_t<unknown_t>, void* ctx), void(*before)(wrp::base_t<unknown_t>, void* ctx), void(*after)(wrp::base_t<unknown_t>, void* ctx), void* ctx){
+    VS_XML_NS::wrp::visit<>(node,test,before,after,ctx);
+}
+
+void Document::visit(wrp::base_t<unknown_t> node, std::function<bool(wrp::base_t<unknown_t>)>&& test, std::function<void(wrp::base_t<unknown_t>)>&& before, std::function<void(wrp::base_t<unknown_t>)>&& after){
+    VS_XML_NS::wrp::visit<>(node,test,before,after);
+}
+
 }

@@ -222,6 +222,8 @@ struct Tree : TreeRaw{
     using TreeRaw::clone;
     using TreeRaw::root;
 
+    using TreeRaw::visit;
+
     public:
     inline Tree(TreeRaw&& ref):TreeRaw(std::move(ref)){}
     inline Tree(const TreeRaw&& ref):TreeRaw(std::move(ref)){}
