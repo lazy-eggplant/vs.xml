@@ -5,7 +5,7 @@
 #define VS_XML_VERSION_REV   @PROJECT_VERSION_PATCH@
 #define VS_XML_VERSION       "@PROJECT_VERSION@"
 
-#cmakedefine01 VS_XML_NOEXCEPT
+#cmakedefine01 VS_XML_NO_EXCEPT
 #cmakedefine01 VS_XML_NO_ASSERT
 #cmakedefine01 VS_XML_USE_FMT
 #cmakedefine01 VS_XML_USE_GTL

@@ -22,7 +22,7 @@ list(GET _ver_components 0 PROJECT_VERSION_MAJOR)
 list(GET _ver_components 1 PROJECT_VERSION_MINOR)
 list(GET _ver_components 2 PROJECT_VERSION_PATCH)
 
-option(VS_XML_NOEXCEPT "Build library with noexcept everywhere" OFF)
+option(VS_XML_NO_EXCEPT "Build library with noexcept everywhere" OFF)
 option(VS_XML_NO_ASSERT "Disable asserts in vs-xml" OFF)
 option(VS_XML_USE_FMT   "Find and use fmt library"     OFF)
 option(VS_XML_USE_GTL   "Find and use gtl library"     OFF)
