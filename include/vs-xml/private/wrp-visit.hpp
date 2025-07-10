@@ -30,8 +30,15 @@ namespace wrp{
  */
 template<typename T1, typename T2>
 void visit(wrp::base_t<unknown_t> node, T1&& test, T2&& before, T2&& after, auto&&... args){
+    if(node.ptr==nullptr)return;
+
+    auto initial = 
+        node.has_next()?
+            node.next().ptr:
+            (const unknown_t*)node.parent().ptr;
+
     while(true){
-        if(node.ptr==nullptr)break;
+        if(node.ptr==initial)break;
         
         bool children_visited = test?!test(node, std::forward<decltype(args)>(args)...):true;
         if(before!=nullptr)before(node,std::forward<decltype(args)>(args)...);
@@ -53,10 +60,11 @@ void visit(wrp::base_t<unknown_t> node, T1&& test, T2&& before, T2&& after, auto
                 if(after!=nullptr)after(node,std::forward<decltype(args)>(args)...);
                 node.ptr = (const unknown_t*) node.parent().ptr;
                 children_visited = true;
+                if(node.ptr==initial)break;
             }
             else{
                 if(after!=nullptr)after(node,std::forward<decltype(args)>(args)...);
-                node.ptr = nullptr;
+                node.ptr = initial;
                 break;
             }
         }

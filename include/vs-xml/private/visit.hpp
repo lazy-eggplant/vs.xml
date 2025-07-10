@@ -29,8 +29,15 @@ namespace VS_XML_NS {
  */
 template<typename T1, typename T2>
 void visit(const unknown_t *node, T1&& test={}, T2&& before = {}, T2&& after = {}, auto&&... args){
+    if(node==nullptr)return;
+
+    auto initial=
+        node->has_next()?
+            (const unknown_t *)node->next():
+            (const unknown_t *)node->parent();
+            
     while(true){
-        if(node==nullptr)break;
+        if(node==initial)break;
         if(before!=nullptr)before(node, std::forward<decltype(args)>(args)...);
 
         bool children_visited = test?!test(node, std::forward<decltype(args)>(args)...):true;
@@ -51,10 +58,11 @@ void visit(const unknown_t *node, T1&& test={}, T2&& before = {}, T2&& after = {
                 if(after!=nullptr)after(node,std::forward<decltype(args)>(args)...);
                 node = (const unknown_t*)node->parent();
                 children_visited = true;
+                if(node==initial)break;
             }
             else{
                 if(after!=nullptr)after(node,std::forward<decltype(args)>(args)...);
-                node = nullptr;
+                node = initial;
                 break;
             }
         }   
