@@ -33,6 +33,7 @@ bool DocumentRaw::print_fast(std::ostream& out, const print_cfg_t& cfg)const{
     if(!t.has_value())return std::unexpected(t.error()); 
     else return DocumentRaw(std::move(*t));
 }
+
 [[nodiscard]] const std::expected<const DocumentRaw,TreeRaw::from_binary_error_t>  DocumentRaw::from_binary(std::span<const uint8_t> region){
     std::expected<const TreeRaw, TreeRaw::from_binary_error_t> t = TreeRaw::from_binary(region); 
     if(!t.has_value())return std::unexpected(t.error()); 
