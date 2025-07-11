@@ -1,3 +1,14 @@
+test('tree-builder',executable(
+    'tree-builder',
+    './src/tree-builder.cpp',
+    install: false,
+    cpp_args: [],
+    link_args: [],
+    dependencies: [
+        vs_xml_dep,
+    ],
+))
+
 # Ignore these these tests if noexcept is set.
 if get_option('noexcept') == false
 
