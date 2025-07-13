@@ -106,6 +106,7 @@ namespace details{
     
         protected:
             std::vector<uint8_t> buffer;
+            std::vector<delta_ptr_t> children_index;
 
             bool open = true;               //True if the tree is still open to append things.
             bool attribute_block = false;   //True after a begin to add attributes. It is automatically closed when any other command is triggered.
@@ -287,6 +288,7 @@ struct TreeBuilder : details::BuilderBase{
             size_t buffer;
             size_t symbols;
             size_t symbols_index;
+            size_t children_index;
         };
 
         /**
@@ -300,6 +302,9 @@ struct TreeBuilder : details::BuilderBase{
             if constexpr(configs.symbols==builder_config_t::COMPRESS_ALL || configs.symbols==builder_config_t::COMPRESS_LABELS){
                 symbols.symbols.reserve(sizes.symbols);
                 symbols.idx.reserve(sizes.symbols_index);
+            }
+            if constexpr(configs.inline_index){
+                children_index.reserve(sizes.children_index);
             }
         }
 };

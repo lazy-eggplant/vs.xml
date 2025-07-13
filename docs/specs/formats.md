@@ -44,10 +44,12 @@ struct __attribute__ ((packed)) section_t{
 ```mermaid
 packet-beta
     title Configs
-    0-2: "Symbols"
-    3-4: "raw_strings"
-    5-6: "allow_comments"
-    7-8: "allow_procs"
+    0-1: "Symbols"
+    2-2: "raw_strings"
+    3-3: "allow_comments"
+    4-4: "allow_procs"
+    5-5: "inline_index"
+    6-7: "res"
 ```
 
 ### Multi-document archives

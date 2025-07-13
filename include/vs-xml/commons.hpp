@@ -107,6 +107,7 @@ struct __attribute__ ((packed)) builder_config_t{
     bool raw_strings :1  = false;           //If true, the string views being passed will not be de-escaped. XML serialization of the derived tree will have to escape them if they have been de-escaped.
     bool allow_comments :1 = true;          //If true, comments are allowed. Else skip.
     bool allow_procs :1  = true;            //If true, processing nodes are allowed. Else skip.
+    bool inline_index :1  = false;          //If true, each node has an inline index of all children appended at the very end, to allow randon-access at O(1) to the n-th child. Not practical for HUGE trees.
 };
 
 /**

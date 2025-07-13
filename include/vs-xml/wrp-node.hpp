@@ -33,10 +33,10 @@ struct sv  {
 
     public:
 
-    inline sv(const TreeRaw& tree, std::string_view v):tree(&tree),body({tree.symbols.data(),v}){}
-    inline sv(const TreeRaw& tree, VS_XML_NS::sv v):tree(&tree),body({v}){}
-    inline sv(std::string_view v):tree(nullptr){body.alt = v;}
-    inline sv(const char v[]):tree(nullptr){body.alt = v;}
+    sv(const TreeRaw& tree, std::string_view v):tree(&tree),body({tree.symbols.data(),v}){}
+    sv(const TreeRaw& tree, VS_XML_NS::sv v):tree(&tree),body({v}){}
+    sv(std::string_view v):tree(nullptr){body.alt = v;}
+    sv(const char v[]):tree(nullptr){body.alt = v;}
 
     operator std::string_view() const {if(tree!=nullptr)return tree->rsv(body.main);else return body.alt;}
 
@@ -117,28 +117,28 @@ struct base_t{
     
     base_t(const base_t& ) = default;
 
-    inline explicit operator const T*() const  {return ptr;}
+    explicit operator const T*() const  {return ptr;}
 
-    inline delta_ptr_t addr() const{return (const uint8_t*)ptr-base->buffer.data();}
+    delta_ptr_t addr() const{return (const uint8_t*)ptr-base->buffer.data();}
 
-    inline std::expected<sv,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
-    inline std::expected<sv,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
-    inline std::expected<sv,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
+    std::expected<sv,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
+    std::expected<sv,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
+    std::expected<sv,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
 
-    inline std::expected<std::pair<base_t<unknown_t>, base_t<unknown_t>>,feature_t> children_range() const{
+    std::expected<std::pair<base_t<unknown_t>, base_t<unknown_t>>,feature_t> children_range() const{
         auto tmp = ptr->children_range();
         if(!tmp.has_value())return std::unexpected{tmp.error()};
         else return std::pair{base_t<unknown_t>(*base,tmp->first), base_t<unknown_t>(*base,tmp->second)};
     }
-    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const{return ptr->attrs_range();}
+    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const{return ptr->attrs_range();}
 
-    inline base_t<element_t> parent() const {return {*base,ptr->parent()};}
-    inline base_t<unknown_t> prev() const {return {*base,ptr->prev()};}
-    inline base_t<unknown_t> next() const {return {*base,ptr->next()};}
+    base_t<element_t> parent() const {return {*base,ptr->parent()};}
+    base_t<unknown_t> prev() const {return {*base,ptr->prev()};}
+    base_t<unknown_t> next() const {return {*base,ptr->next()};}
 
-    inline bool has_parent() const{return ptr->has_parent();}
-    inline bool has_prev() const{return ptr->has_prev();}
-    inline bool has_next() const{return ptr->has_next();}
+    bool has_parent() const{return ptr->has_parent();}
+    bool has_prev() const{return ptr->has_prev();}
+    bool has_next() const{return ptr->has_next();}
 
     inline auto attrs() const;
     inline auto attrs(auto filter) const;
@@ -146,9 +146,9 @@ struct base_t{
     inline auto children(auto filter) const;
     inline auto visitor() const;
     inline auto visitor(auto filter) const;
-    auto text() const;
+    inline auto text() const;
 
-    inline auto type() const {return ptr->type();}
+    auto type() const {return ptr->type();}
 
     /*
     template<size_t N=0>
@@ -180,15 +180,15 @@ struct base_t<attr_t>{
 
     base_t(const base_t&) = default;
 
-    inline explicit operator const attr_t*() const  {return ptr;}
+    explicit operator const attr_t*() const  {return ptr;}
 
-    inline delta_ptr_t addr() const{return (const uint8_t*)ptr-base->buffer.data();}
+    delta_ptr_t addr() const{return (const uint8_t*)ptr-base->buffer.data();}
 
-    inline std::expected<sv,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
-    inline std::expected<sv,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv{*base,*tmp};}
-    inline std::expected<sv,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv{*base,*tmp};}
+    std::expected<sv,feature_t> ns() const{auto tmp = ptr->ns(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv(*base,*tmp);}
+    std::expected<sv,feature_t> name() const{auto tmp = ptr->name(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv{*base,*tmp};}
+    std::expected<sv,feature_t> value() const{auto tmp = ptr->value(); if(!tmp.has_value())return std::unexpected{tmp.error()}; else return sv{*base,*tmp};}
 
-    inline auto type() const {return type_t::ATTR;}
+    auto type() const {return type_t::ATTR;}
 };
 
 
@@ -199,18 +199,18 @@ struct node_iterator{
     using pointer           = base_t<unknown_t>;
     using reference         = base_t<unknown_t>;
 
-    inline node_iterator(base_t<unknown_t> ptr) : m_ptr(ptr) {}
-    inline node_iterator() = default;
-    inline node_iterator(const node_iterator&) = default;
+    node_iterator(base_t<unknown_t> ptr) : m_ptr(ptr) {}
+    node_iterator() = default;
+    node_iterator(const node_iterator&) = default;
 
-    inline const base_t<unknown_t>& operator*() const { return m_ptr; }
-    inline const unknown_t* operator->() { return m_ptr.ptr; }
+    const base_t<unknown_t>& operator*() const { return m_ptr; }
+    const unknown_t* operator->() { return m_ptr.ptr; }
 
-    inline node_iterator& operator++() { m_ptr.ptr = m_ptr.ptr->next(); return *this; }  
-    inline node_iterator& operator--() { m_ptr.ptr = m_ptr.ptr->prev(); return *this; }  
+    node_iterator& operator++() { m_ptr.ptr = m_ptr.ptr->next(); return *this; }  
+    node_iterator& operator--() { m_ptr.ptr = m_ptr.ptr->prev(); return *this; }  
 
-    inline node_iterator operator++(int) { node_iterator tmp = *this; ++(*this); return tmp; }
-    inline node_iterator operator--(int) { node_iterator tmp = *this; --(*this); return tmp; }
+    node_iterator operator++(int) { node_iterator tmp = *this; ++(*this); return tmp; }
+    node_iterator operator--(int) { node_iterator tmp = *this; --(*this); return tmp; }
 
     inline friend bool operator== (const node_iterator& a, const node_iterator& b) { return (a.m_ptr.base == b.m_ptr.base) && (a.m_ptr.ptr == b.m_ptr.ptr); };
     inline friend bool operator!= (const node_iterator& a, const node_iterator& b) { return (a.m_ptr.base != b.m_ptr.base) || (a.m_ptr.ptr != b.m_ptr.ptr); };  
@@ -229,18 +229,18 @@ struct attr_iterator{
     using pointer           = base_t<attr_t>;
     using reference         = base_t<attr_t>;
 
-    inline attr_iterator(base_t<attr_t> ptr) : m_ptr(ptr) {}
-    inline attr_iterator() = default;
-    inline attr_iterator(const attr_iterator&) = default;
+    attr_iterator(base_t<attr_t> ptr) : m_ptr(ptr) {}
+    attr_iterator() = default;
+    attr_iterator(const attr_iterator&) = default;
 
-    inline const base_t<attr_t>& operator*() const { return m_ptr; }
-    inline const attr_t* operator->() { return m_ptr.ptr; }
+    const base_t<attr_t>& operator*() const { return m_ptr; }
+    const attr_t* operator->() { return m_ptr.ptr; }
 
-    inline attr_iterator& operator++() { m_ptr.ptr++; return *this; }  
-    inline attr_iterator& operator--() { m_ptr.ptr--; return *this; }  
+    attr_iterator& operator++() { m_ptr.ptr++; return *this; }  
+    attr_iterator& operator--() { m_ptr.ptr--; return *this; }  
 
-    inline attr_iterator operator++(int) { attr_iterator tmp = *this; ++(*this); return tmp; }
-    inline attr_iterator operator--(int) { attr_iterator tmp = *this; --(*this); return tmp; }
+    attr_iterator operator++(int) { attr_iterator tmp = *this; ++(*this); return tmp; }
+    attr_iterator operator--(int) { attr_iterator tmp = *this; --(*this); return tmp; }
 
     inline friend bool operator== (const attr_iterator& a, const attr_iterator& b) { return (a.m_ptr.base == b.m_ptr.base) && (a.m_ptr.ptr == b.m_ptr.ptr); };
     inline friend bool operator!= (const attr_iterator& a, const attr_iterator& b) { return (a.m_ptr.base != b.m_ptr.base) || (a.m_ptr.ptr != b.m_ptr.ptr); }; 
@@ -258,15 +258,15 @@ struct visitor_iterator{
     using pointer           = base_t<unknown_t>;
     using reference         = base_t<unknown_t>;
 
-    inline visitor_iterator(base_t<unknown_t> ptr) : m_ptr(ptr) {}
-    inline visitor_iterator() = default;
-    inline visitor_iterator(const visitor_iterator&) = default;
+    visitor_iterator(base_t<unknown_t> ptr) : m_ptr(ptr) {}
+    visitor_iterator() = default;
+    visitor_iterator(const visitor_iterator&) = default;
 
-    inline reference operator*() const { return m_ptr; }
-    inline pointer operator->() { return m_ptr; }
+    reference operator*() const { return m_ptr; }
+    pointer operator->() { return m_ptr; }
 
     visitor_iterator& operator++();
-    inline visitor_iterator operator++(int) { visitor_iterator tmp = *this; ++(*this); return tmp; }
+    visitor_iterator operator++(int) { visitor_iterator tmp = *this; ++(*this); return tmp; }
 
     inline friend bool operator== (const visitor_iterator& a, const visitor_iterator& b) { return (a.m_ptr.base == b.m_ptr.base) && (a.m_ptr.ptr == b.m_ptr.ptr); };
     inline friend bool operator!= (const visitor_iterator& a, const visitor_iterator& b) { return (a.m_ptr.base != b.m_ptr.base) || (a.m_ptr.ptr != b.m_ptr.ptr); }; 
@@ -283,11 +283,11 @@ struct text_iterator{
     using pointer           = const char*;
     using reference         = const char&;
 
-    inline text_iterator() = default;
-    inline text_iterator(const text_iterator&) = default;
+    text_iterator() = default;
+    text_iterator(const text_iterator&) = default;
 
-    inline reference operator*() const { return *(tmp_sv.data()+frame_location); }
-    inline pointer operator->() { return (tmp_sv.data()+frame_location); }
+    reference operator*() const { return *(tmp_sv.data()+frame_location); }
+    pointer operator->() { return (tmp_sv.data()+frame_location); }
 
     text_iterator& operator++() {
         auto guard = node->children_range()->second;
@@ -300,7 +300,7 @@ struct text_iterator{
         return *this; 
     }
 
-    inline text_iterator operator++(int) { text_iterator tmp = *this; ++(*this); return tmp; }
+    text_iterator operator++(int) { text_iterator tmp = *this; ++(*this); return tmp; }
 
     inline friend bool operator== (const text_iterator& a, const text_iterator& b) { return a.ctx == b.ctx && a.node == b.node && a.frame == b.frame && a.frame_location == b.frame_location; };
     inline friend bool operator!= (const text_iterator& a, const text_iterator& b) { return a.ctx != b.ctx || a.node != b.node || a.frame != b.frame || a.frame_location != b.frame_location; };  
@@ -324,7 +324,7 @@ struct text_iterator{
     std::string_view    tmp_sv = "";
     size_t              frame_location = 0;
 
-    inline text_iterator(const TreeRaw& ctx, const unknown_t& node):ctx(&ctx),node(&node){}
+    text_iterator(const TreeRaw& ctx, const unknown_t& node):ctx(&ctx),node(&node){}
 
     void next_ok(){
         assert(ctx!=nullptr);
