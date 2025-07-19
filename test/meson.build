@@ -91,5 +91,16 @@ if get_option('noexcept') == false
             vs_xml_dep,
         ],
     ))
+
+    test('random-access',executable(
+        'random-access',
+        './src/random-access.cpp',
+        install: false,
+        cpp_args: [],
+        link_args: [],
+        dependencies: [
+            vs_xml_dep,
+        ],
+    ))
 endif
 

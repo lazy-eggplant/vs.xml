@@ -162,6 +162,7 @@ struct element_t : base_t<element_t>{
         return (const unknown_t*)((const uint8_t*)this+_next);
     }
 
+    const delta_ptr_t rel_offset() const {return -_parent;}
     bool has_children() const {return (const unknown_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count)!=(const unknown_t*)((const uint8_t*)this+_next);}
     bool has_parent() const {return _parent!=0;}
     bool has_prev() const {return _prev!=0;}
@@ -202,6 +203,7 @@ struct root_t : base_t<root_t>{
     }
     std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
+    const delta_ptr_t rel_offset() const {return 0;}
     const element_t* parent() const {return nullptr;}
     const unknown_t* prev() const {return nullptr;}
     const unknown_t* next() const {return nullptr;}
@@ -250,6 +252,7 @@ struct leaf_t : base_t<T>{
     std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
     std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
+    const delta_ptr_t rel_offset() const {return -_parent;}
     const element_t* parent() const {return (const element_t*)((const uint8_t*)this+_parent);}
     const unknown_t* prev() const {return (const unknown_t*)((const uint8_t*)this+_prev);}
     const unknown_t* next() const {return (const unknown_t*)((const uint8_t*)this+sizeof(leaf_t));}
@@ -335,6 +338,7 @@ struct unknown_t : base_t<unknown_t>{
     std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const;
     std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const;
 
+    const delta_ptr_t rel_offset() const;
     const element_t* parent() const;
     const unknown_t* prev() const;
     const unknown_t* next() const;
