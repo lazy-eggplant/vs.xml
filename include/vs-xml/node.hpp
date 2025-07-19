@@ -59,8 +59,8 @@ struct base_t{
     bool has_prev() const {return static_cast<const T*>(this)->has_prev();}
     bool has_next() const {return static_cast<const T*>(this)->has_next();}
 
-    size_t child_count() const {return static_cast<const T*>(this)->child_count();}
-    const unknown_t* child_at() const {return static_cast<const T*>(this)->child_at();}
+    //size_t child_count() const {return static_cast<const T*>(this)->child_count();}
+    //const unknown_t* child_at(size_t idx) const {return static_cast<const T*>(this)->child_at(idx);}
 
     auto children() const;
     auto attrs() const;
@@ -166,9 +166,6 @@ struct element_t : base_t<element_t>{
     bool has_parent() const {return _parent!=0;}
     bool has_prev() const {return _prev!=0;}
     bool has_next() const {return _bit0;}
-
-    size_t count_children() const {/*TODO:*/}
-    const unknown_t* child_at() const {/*TODO:*/}
 
     template<builder_config_t>
     friend struct TreeBuilder;

@@ -48,8 +48,7 @@ packet-beta
     2-2: "raw_strings"
     3-3: "allow_comments"
     4-4: "allow_procs"
-    5-5: "inline_index"
-    6-7: "res"
+    5-7: "res"
 ```
 
 ### Multi-document archives

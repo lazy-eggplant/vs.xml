@@ -73,5 +73,3 @@ These can be set at compile-time for each instance as a template argument.
       Useful to specify your own for embedded systems or to implement more expensive but compressed representations.
 - `raw_strings` if true, strings are assumed to be preserved as they are when serialized or deserialized from XML.  
    Make sure you are manually escaping when building the tree. Comparisons on the other hand will handle the conversion automatically when not using the `TreeRaw`/`DocumentRaw`/`ArchiveRaw`.
-- ~~`inline_index`~~ not implemenrte yet. If true, each node has an inline index of all children appended at the very end;  
-  this allows randon-access at O(1) to the n-th child at the expense of memory usage and cache misses, not suggested for huge trees.

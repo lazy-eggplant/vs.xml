@@ -288,7 +288,6 @@ struct TreeBuilder : details::BuilderBase{
             size_t buffer;
             size_t symbols;
             size_t symbols_index;
-            size_t children_index;
         };
 
         /**
@@ -302,9 +301,6 @@ struct TreeBuilder : details::BuilderBase{
             if constexpr(configs.symbols==builder_config_t::COMPRESS_ALL || configs.symbols==builder_config_t::COMPRESS_LABELS){
                 symbols.symbols.reserve(sizes.symbols);
                 symbols.idx.reserve(sizes.symbols_index);
-            }
-            if constexpr(configs.inline_index){
-                children_index.reserve(sizes.children_index);
             }
         }
 };

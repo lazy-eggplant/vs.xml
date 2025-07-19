@@ -107,7 +107,6 @@ struct __attribute__ ((packed)) builder_config_t{
     bool raw_strings :1  = false;           //If true, the string views being passed will not be de-escaped. XML serialization of the derived tree will have to escape them if they have been de-escaped.
     bool allow_comments :1 = true;          //If true, comments are allowed. Else skip.
     bool allow_procs :1  = true;            //If true, processing nodes are allowed. Else skip.
-    bool inline_index :1  = false;          //If true, each node has an inline index of all children appended at the very end, to allow randon-access at O(1) to the n-th child. Not practical for HUGE trees.
 };
 
 /**
@@ -227,7 +226,7 @@ enum struct type_t : xml_enum_size_t{
 //TODO: At the moment not really used. Either remove this or fix it to do something. Anything.
 
 template<typename T>
-concept thing_i = requires(T self){
+concept thing_i = requires(T self, size_t idx){
     {self.type()} -> std::same_as<type_t>;
     {self.ns()} -> std::same_as<std::expected<sv,feature_t>>;
     {self.name()} -> std::same_as<std::expected<sv,feature_t>>;
@@ -244,6 +243,9 @@ concept thing_i = requires(T self){
     {self.has_parent()} -> std::same_as<bool>;
     {self.has_prev()} -> std::same_as<bool>;
     {self.has_next()} -> std::same_as<bool>;
+
+    //{self.child_count()} -> std::same_as<size_t>;
+    //{self.child_at(idx)} -> std::same_as<const unknown_t*>;
 };
 
 //TODO: specialization of Builder_t or just remove it?
