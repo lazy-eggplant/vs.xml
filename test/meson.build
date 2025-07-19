@@ -1,3 +1,14 @@
+test('tree-builder',executable(
+    'tree-builder',
+    './src/tree-builder.cpp',
+    install: false,
+    cpp_args: [],
+    link_args: [],
+    dependencies: [
+        vs_xml_dep,
+    ],
+))
+
 # Ignore these these tests if noexcept is set.
 if get_option('noexcept') == false
 
@@ -73,6 +84,17 @@ if get_option('noexcept') == false
     test('tree-iterator',executable(
         'tree-iterator',
         './src/tree-iterator.cpp',
+        install: false,
+        cpp_args: [],
+        link_args: [],
+        dependencies: [
+            vs_xml_dep,
+        ],
+    ))
+
+    test('random-access',executable(
+        'random-access',
+        './src/random-access.cpp',
         install: false,
         cpp_args: [],
         link_args: [],

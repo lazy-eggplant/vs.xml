@@ -106,6 +106,7 @@ namespace details{
     
         protected:
             std::vector<uint8_t> buffer;
+            std::vector<delta_ptr_t> children_index;
 
             bool open = true;               //True if the tree is still open to append things.
             bool attribute_block = false;   //True after a begin to add attributes. It is automatically closed when any other command is triggered.
