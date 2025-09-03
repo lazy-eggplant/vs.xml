@@ -59,6 +59,9 @@ struct base_t{
     bool has_prev() const {return static_cast<const T*>(this)->has_prev();}
     bool has_next() const {return static_cast<const T*>(this)->has_next();}
 
+    //size_t child_count() const {return static_cast<const T*>(this)->child_count();}
+    //const unknown_t* child_at(size_t idx) const {return static_cast<const T*>(this)->child_at(idx);}
+
     auto children() const;
     auto attrs() const;
     auto visitor() const;
@@ -81,14 +84,14 @@ struct attr_t{
 
     public:
 
-    inline attr_t(const void* offset, std::string_view _ns, std::string_view _name, std::string_view _value) noexcept(VS_XML_NO_EXCEPT):
+    attr_t(const void* offset, std::string_view _ns, std::string_view _name, std::string_view _value) noexcept(VS_XML_NO_EXCEPT):
         _ns(offset,serialize::validate_xml_label(_ns, true)),
         _name(offset,serialize::validate_xml_label(_name)),
         _value(offset,_value) {} 
 
-    inline std::expected<sv,feature_t> ns() const {return _ns;}
-    inline std::expected<sv,feature_t> name() const {return _name;}
-    inline std::expected<sv,feature_t> value() const {return _value;}
+    std::expected<sv,feature_t> ns() const {return _ns;}
+    std::expected<sv,feature_t> name() const {return _name;}
+    std::expected<sv,feature_t> value() const {return _value;}
 };
 
 struct element_t : base_t<element_t>{
@@ -107,7 +110,7 @@ struct element_t : base_t<element_t>{
 
     attr_t _attrs[];
 
-    inline element_t(const void* offset, element_t* _parent, std::string_view _ns, std::string_view _name) noexcept(VS_XML_NO_EXCEPT):
+    element_t(const void* offset, element_t* _parent, std::string_view _ns, std::string_view _name) noexcept(VS_XML_NO_EXCEPT):
         _ns(offset,serialize::validate_xml_label(_ns,true)),
         _name(offset,serialize::validate_xml_label(_name))
     {
@@ -116,53 +119,54 @@ struct element_t : base_t<element_t>{
         attrs_count=0;
     }
 
-    inline void set_parent(element_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp, "Loss of precision");}
-    inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp, "Loss of precision");}
-    inline void set_next(unknown_t* next){auto tmp=(uint8_t*)next-(uint8_t*)this;_next=tmp;_bit0=true;xml_assert((std::ptrdiff_t)_next==tmp, "Loss of precision");}
+    void set_parent(element_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp, "Loss of precision");}
+    void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp, "Loss of precision");}
+    void set_next(unknown_t* next){auto tmp=(uint8_t*)next-(uint8_t*)this;_next=tmp;_bit0=true;xml_assert((std::ptrdiff_t)_next==tmp, "Loss of precision");}
 
     //Unsafe, not boundary checked.
-    inline attr_t& get_attr(xml_count_t a) const{return (attr_t&)_attrs[a];}
+    attr_t& get_attr(xml_count_t a) const{return (attr_t&)_attrs[a];}
 
     public:
 
     using base_t::type;
     
     static inline type_t deftype() {return type_t::ELEMENT;};
-    inline std::expected<sv,feature_t> ns() const {return _ns;}
-    inline std::expected<sv,feature_t> name() const {return _name;}
-    inline std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    inline std::expected<void,feature_t> text_range() const {return std::unexpected(feature_t::NOT_IMPLEMENTED);}
+    std::expected<sv,feature_t> ns() const {return _ns;}
+    std::expected<sv,feature_t> name() const {return _name;}
+    std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    std::expected<void,feature_t> text_range() const {return std::unexpected(feature_t::NOT_IMPLEMENTED);}
 
-    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {
+    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {
         return std::pair{
             (const unknown_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count),
             (const unknown_t*)((const uint8_t*)this+_next)
         };
     }
-    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {
+    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {
         return std::pair{
             (const attr_t*)((const uint8_t*)this+sizeof(element_t)),
             (const attr_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count)
         };
     }
 
-    inline const element_t* parent() const {
+    const element_t* parent() const {
         if(_parent==0)return nullptr;
         return (const element_t*)((const uint8_t*)this+_parent);
     }
-    inline const unknown_t* prev() const {
+    const unknown_t* prev() const {
         if(_prev==0)return nullptr;  //TODO: check this one
         return (const unknown_t*)((const uint8_t*)this+_prev);
     }
-    inline const unknown_t* next() const {
+    const unknown_t* next() const {
         if(_next==0)return nullptr;
         return (const unknown_t*)((const uint8_t*)this+_next);
     }
 
-    inline bool has_children() const {return (const unknown_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count)!=(const unknown_t*)((const uint8_t*)this+_next);}
-    inline bool has_parent() const {return _parent!=0;}
-    inline bool has_prev() const {return _prev!=0;}
-    inline bool has_next() const {return _bit0;}
+    const delta_ptr_t rel_offset() const {return -_parent;}
+    bool has_children() const {return (const unknown_t*)((const uint8_t*)this+sizeof(element_t)+sizeof(attr_t)*attrs_count)!=(const unknown_t*)((const uint8_t*)this+_next);}
+    bool has_parent() const {return _parent!=0;}
+    bool has_prev() const {return _prev!=0;}
+    bool has_next() const {return _bit0;}
 
     template<builder_config_t>
     friend struct TreeBuilder;
@@ -186,27 +190,28 @@ struct root_t : base_t<root_t>{
     using base_t::type;
     
     static inline type_t deftype() {return type_t::ELEMENT;};
-    inline std::expected<sv,feature_t> ns() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    inline std::expected<sv,feature_t> name() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    inline std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    inline std::expected<void,feature_t> text_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    std::expected<sv,feature_t> ns() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    std::expected<sv,feature_t> name() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    std::expected<sv,feature_t> value() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    std::expected<void,feature_t> text_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
-    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {
+    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {
         return std::pair{
             (const unknown_t*)((const uint8_t*)this+sizeof(root_t)),
             (const unknown_t*)((const uint8_t*)this+_size)
         };
     }
-    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
-    inline const element_t* parent() const {return nullptr;}
-    inline const unknown_t* prev() const {return nullptr;}
-    inline const unknown_t* next() const {return nullptr;}
+    const delta_ptr_t rel_offset() const {return 0;}
+    const element_t* parent() const {return nullptr;}
+    const unknown_t* prev() const {return nullptr;}
+    const unknown_t* next() const {return nullptr;}
 
-    inline bool has_children() const {return (const unknown_t*)((const uint8_t*)this+sizeof(root_t))!=(const unknown_t*)((const uint8_t*)this+_size);}
-    inline bool has_parent() const {return false;}
-    inline bool has_prev() const {return false;}
-    inline bool has_next() const {return false;}
+    bool has_children() const {return (const unknown_t*)((const uint8_t*)this+sizeof(root_t))!=(const unknown_t*)((const uint8_t*)this+_size);}
+    bool has_parent() const {return false;}
+    bool has_prev() const {return false;}
+    bool has_next() const {return false;}
     
     template<builder_config_t>
     friend struct TreeBuilder;
@@ -226,9 +231,9 @@ struct leaf_t : base_t<T>{
 
     sv _value;
 
-    inline void set_parent(element_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
-    inline void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
-    inline void set_next(unknown_t* next){/*not needed*/}
+    void set_parent(element_t* parent){auto tmp=(uint8_t*)parent-(uint8_t*)this;_parent=tmp;xml_assert((std::ptrdiff_t)_parent==tmp);}
+    void set_prev(unknown_t* prev){auto tmp=(uint8_t*)prev-(uint8_t*)this;_prev=tmp;xml_assert((std::ptrdiff_t)_prev==tmp);}
+    void set_next(unknown_t* next){/*not needed*/}
 
 
     protected:
@@ -239,22 +244,23 @@ struct leaf_t : base_t<T>{
 
     using base_t<T>::type;
 
-    inline std::expected<sv,feature_t> ns() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    inline std::expected<sv,feature_t> name() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    inline std::expected<sv,feature_t> value() const {return _value;}
-    inline std::expected<void,feature_t> text_range() const {return std::unexpected(feature_t::NOT_IMPLEMENTED);}
+    std::expected<sv,feature_t> ns() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    std::expected<sv,feature_t> name() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    std::expected<sv,feature_t> value() const {return _value;}
+    std::expected<void,feature_t> text_range() const {return std::unexpected(feature_t::NOT_IMPLEMENTED);}
 
-    inline std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
-    inline std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
+    std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const {return std::unexpected(feature_t::NOT_SUPPORTED);}
 
-    inline const element_t* parent() const {return (const element_t*)((const uint8_t*)this+_parent);}
-    inline const unknown_t* prev() const {return (const unknown_t*)((const uint8_t*)this+_prev);}
-    inline const unknown_t* next() const {return (const unknown_t*)((const uint8_t*)this+sizeof(leaf_t));}
+    const delta_ptr_t rel_offset() const {return -_parent;}
+    const element_t* parent() const {return (const element_t*)((const uint8_t*)this+_parent);}
+    const unknown_t* prev() const {return (const unknown_t*)((const uint8_t*)this+_prev);}
+    const unknown_t* next() const {return (const unknown_t*)((const uint8_t*)this+sizeof(leaf_t));}
 
-    inline bool has_children() const {return false;}
-    inline bool has_parent() const {return _parent!=0;}
-    inline bool has_prev() const {return _prev!=0;}
-    inline bool has_next() const {return has_parent() && (next()<(parent()->children_range())->second)!=0;}   //TODO:check
+    bool has_children() const {return false;}
+    bool has_parent() const {return _parent!=0;}
+    bool has_prev() const {return _prev!=0;}
+    bool has_next() const {return has_parent() && (next()<(parent()->children_range())->second)!=0;}   //TODO:check
 
     template<builder_config_t>
     friend struct TreeBuilder;
@@ -332,6 +338,7 @@ struct unknown_t : base_t<unknown_t>{
     std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> children_range() const;
     std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> attrs_range() const;
 
+    const delta_ptr_t rel_offset() const;
     const element_t* parent() const;
     const unknown_t* prev() const;
     const unknown_t* next() const;
@@ -364,19 +371,19 @@ struct node_iterator{
     using pointer           = const value_type*;
     using reference         = const value_type&;
 
-    inline node_iterator(pointer ptr) : m_ptr(ptr) {}
-    inline node_iterator(reference r) : m_ptr(&r) {}
-    inline node_iterator() = default;
-    inline node_iterator(const node_iterator&) = default;
+    node_iterator(pointer ptr) : m_ptr(ptr) {}
+    node_iterator(reference r) : m_ptr(&r) {}
+    node_iterator() = default;
+    node_iterator(const node_iterator&) = default;
 
-    inline reference operator*() const { return *m_ptr; }
-    inline pointer operator->() { return m_ptr; }
+    reference operator*() const { return *m_ptr; }
+    pointer operator->() { return m_ptr; }
 
-    inline node_iterator& operator++() { m_ptr=m_ptr->next(); return *this; }  
-    inline node_iterator& operator--() { m_ptr=m_ptr->prev(); return *this; }  
+    node_iterator& operator++() { m_ptr=m_ptr->next(); return *this; }  
+    node_iterator& operator--() { m_ptr=m_ptr->prev(); return *this; }  
 
-    inline node_iterator operator++(int) { node_iterator tmp = *this; ++(*this); return tmp; }
-    inline node_iterator operator--(int) { node_iterator tmp = *this; --(*this); return tmp; }
+    node_iterator operator++(int) { node_iterator tmp = *this; ++(*this); return tmp; }
+    node_iterator operator--(int) { node_iterator tmp = *this; --(*this); return tmp; }
 
     inline friend bool operator== (const node_iterator& a, const node_iterator& b) { return a.m_ptr == b.m_ptr; };
     inline friend bool operator!= (const node_iterator& a, const node_iterator& b) { return a.m_ptr != b.m_ptr; };  
@@ -397,19 +404,19 @@ struct attr_iterator{
     using pointer           = const value_type*;
     using reference         = const value_type&;
 
-    inline attr_iterator(pointer ptr) : m_ptr(ptr) {}
-    inline attr_iterator(reference r) : m_ptr(&r) {}
-    inline attr_iterator() = default;
-    inline attr_iterator(const attr_iterator&) = default;
+    attr_iterator(pointer ptr) : m_ptr(ptr) {}
+    attr_iterator(reference r) : m_ptr(&r) {}
+    attr_iterator() = default;
+    attr_iterator(const attr_iterator&) = default;
 
-    inline reference operator*() const { return *m_ptr; }
-    inline pointer operator->() { return m_ptr; }
+    reference operator*() const { return *m_ptr; }
+    pointer operator->() { return m_ptr; }
 
-    inline attr_iterator& operator++() { m_ptr++; return *this; }  
-    inline attr_iterator& operator--() { m_ptr--; return *this; }  
+    attr_iterator& operator++() { m_ptr++; return *this; }  
+    attr_iterator& operator--() { m_ptr--; return *this; }  
 
-    inline attr_iterator operator++(int) { attr_iterator tmp = *this; ++(*this); return tmp; }
-    inline attr_iterator operator--(int) { attr_iterator tmp = *this; --(*this); return tmp; }
+    attr_iterator operator++(int) { attr_iterator tmp = *this; ++(*this); return tmp; }
+    attr_iterator operator--(int) { attr_iterator tmp = *this; --(*this); return tmp; }
 
     inline friend bool operator== (const attr_iterator& a, const attr_iterator& b) { return a.m_ptr == b.m_ptr; };
     inline friend bool operator!= (const attr_iterator& a, const attr_iterator& b) { return a.m_ptr != b.m_ptr; };  
@@ -429,16 +436,16 @@ struct visitor_iterator{
     using pointer           = const value_type*;
     using reference         = const value_type&;
 
-    inline visitor_iterator(pointer ptr) : node(ptr) {}
-    inline visitor_iterator(reference r) : node(&r) {}
-    inline visitor_iterator() = default;
-    inline visitor_iterator(const visitor_iterator&) = default;
+    visitor_iterator(pointer ptr) : node(ptr) {}
+    visitor_iterator(reference r) : node(&r) {}
+    visitor_iterator() = default;
+    visitor_iterator(const visitor_iterator&) = default;
 
-    inline reference operator*() const { return *node; }
-    inline pointer operator->() { return node; }
+    reference operator*() const { return *node; }
+    pointer operator->() { return node; }
 
     visitor_iterator& operator++();
-    inline visitor_iterator operator++(int) { visitor_iterator tmp = *this; ++(*this); return tmp; }
+    visitor_iterator operator++(int) { visitor_iterator tmp = *this; ++(*this); return tmp; }
 
     inline friend bool operator== (const visitor_iterator& a, const visitor_iterator& b) { return a.node == b.node; };
     inline friend bool operator!= (const visitor_iterator& a, const visitor_iterator& b) { return a.node != b.node; };  

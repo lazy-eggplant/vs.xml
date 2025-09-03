@@ -36,6 +36,12 @@ public:
         static_assert(Builder_t::configs.raw_strings, "Cannot pass immutable buffer if the input strings might need mutation");
     }
 
+    Parser(std::span<const char> data, Builder_t &builder)
+    : data_(data.data(),data.size()), pos_(0), builder_(builder)
+    {
+        static_assert(Builder_t::configs.raw_strings, "Cannot pass immutable buffer if the input strings might need mutation");
+    }
+
     struct error_t{
         enum ErrorCode {
             OK = 0,

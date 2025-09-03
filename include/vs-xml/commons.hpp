@@ -226,7 +226,7 @@ enum struct type_t : xml_enum_size_t{
 //TODO: At the moment not really used. Either remove this or fix it to do something. Anything.
 
 template<typename T>
-concept thing_i = requires(T self){
+concept thing_i = requires(T self, size_t idx){
     {self.type()} -> std::same_as<type_t>;
     {self.ns()} -> std::same_as<std::expected<sv,feature_t>>;
     {self.name()} -> std::same_as<std::expected<sv,feature_t>>;
@@ -243,6 +243,9 @@ concept thing_i = requires(T self){
     {self.has_parent()} -> std::same_as<bool>;
     {self.has_prev()} -> std::same_as<bool>;
     {self.has_next()} -> std::same_as<bool>;
+
+    //{self.child_count()} -> std::same_as<size_t>;
+    //{self.child_at(idx)} -> std::same_as<const unknown_t*>;
 };
 
 //TODO: specialization of Builder_t or just remove it?
