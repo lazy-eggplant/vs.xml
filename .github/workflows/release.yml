@@ -14,7 +14,7 @@ jobs:
   build-checks:
     uses: ./.github/workflows/build.yml
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}
-  release-source:
+  release-packages:
     needs: [build-checks]
     name: release
     runs-on: ubuntu-24.04
@@ -22,19 +22,20 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v5
-      - name: Install dependencies
+      - uses: actions/checkout@v6
+      - name: Setup xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+      - name: Build packages
         run: |
-          python3 -m pip install meson ninja
-      - name: Configure and build
-        run: |
-          meson setup build
-          meson dist -C build/ --allow-dirty --no-tests --include-subprojects
+          xmake f -m release -y
+          xmake package -y
       - name: Add artifact
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            ./build/meson-dist/**/*
+            ./build/packages/**/*
   docs:
     uses: ./.github/workflows/docs.yml
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}

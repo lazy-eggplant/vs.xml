@@ -1,7 +1,7 @@
 #include <filesystem>
 #include <iostream>
 #include <ostream>
-#include <print>
+#include <vs-xml/fwd/print.hpp>
 #include <sstream>
 
 #include <string_view>
@@ -102,9 +102,9 @@ int main(int argc, const char* argv[]) {
         test_pugi(xmlInput2);
         ticks.push_back(std::chrono::system_clock::now());
         
-        std::print("vs   :   {}\n",  (ticks[1]-ticks[0]).count());
-        std::print("vs2  :   {}\n",  (ticks[2]-ticks[1]).count());
-        std::print("pugi :   {}\n",  (ticks[3]-ticks[2]).count());
+        fmt::print("vs   :   {}\n",  (ticks[1]-ticks[0]).count());
+        fmt::print("vs2  :   {}\n",  (ticks[2]-ticks[1]).count());
+        fmt::print("pugi :   {}\n",  (ticks[3]-ticks[2]).count());
     }
     
 

@@ -1,5 +1,7 @@
 > [!WARNING]  
-> Not implemented yet, just basic specs to sketch a new feature built on top of queries (and to build queries).
+> Not implemented yet. This is a proposal for a *serializable* query
+> representation, kept for future work. The canonical, implemented query API is
+> the explicit builder documented in [queries.md](./queries.md).
 
 Queries as they are right now are flexible, but not optimal for all applications:
 

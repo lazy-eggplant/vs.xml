@@ -10,11 +10,13 @@
  * 
  */
 
-#if VS_XML_USE_GLT == true && __has_include(<gtl/vector.hpp>)
+#include <vs-xml/commons.hpp>
+
+#if VS_XML_USE_GTL == true && __has_include(<gtl/vector.hpp>)
 
 #include <gtl/vector.hpp>
 
-namespace xml{
+namespace VS_XML_NS{
     template<typename... args>
     using vector = gtl::vector<args...>;
 }
@@ -23,7 +25,7 @@ namespace xml{
 
 #include <vector>
 
-namespace xml{
+namespace VS_XML_NS{
     template<typename... args>
     using vector = std::vector<args...>;
 }

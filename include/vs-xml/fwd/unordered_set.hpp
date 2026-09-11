@@ -10,11 +10,13 @@
  * 
  */
 
-#if VS_XML_USE_GLT == true && __has_include(<gtl/phset.hpp>)
+#include <vs-xml/commons.hpp>
+
+#if VS_XML_USE_GTL == true && __has_include(<gtl/phset.hpp>)
 
 #include <gtl/phset.hpp>
 
-namespace xml{
+namespace VS_XML_NS{
     template<typename... args>
     using unordered_set = gtl::flat_hash_set<args...>;
 }
@@ -23,7 +25,7 @@ namespace xml{
 
 #include <unordered_set>
 
-namespace xml{
+namespace VS_XML_NS{
     template<typename... args>
     using unordered_set = std::unordered_set<args...>;
 }

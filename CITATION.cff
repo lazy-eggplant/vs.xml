@@ -12,7 +12,7 @@ authors:
 repository-code: 'https://github.com/lazy-eggplant/vs.xml'
 url: 'https://lazy-eggplant.github.io/vs.xml/'
 abstract: >-
-  XML parser and tree builder for mostly static and
+  XML parser, tree builder and query engine for mostly static and
   relocatable schema-less documents.
 keywords:
   - xml

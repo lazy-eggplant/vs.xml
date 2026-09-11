@@ -149,19 +149,13 @@ sv Symbols<builder_config_t::symbols_t::COMPRESS_LABELS>::symbol(std::string_vie
 //TODO: Add symbol2 for COMPRESS_ALL which does not compress it.
 
 BuilderBase::error_t BuilderBase::inject(const TreeRaw& tree, const unknown_t* base, bool include_root){
-    if(base==nullptr)base=(const unknown_t*)&tree.root();
-    //If the symbol offset for tree and BuilderBase is the same, we are good and memcopy is possible.
-    //If not, and the Builder has no symbols compression ongoing, the injection will be rejected.
-    //If symbol compression is ongoing, the tree content will be "parsed" and added via fast bytecode operations.
-
-    {
-        #if VS_XML_NO_EXCEPT != true
-            throw std::runtime_error("Not implemented");
-        #else
-            //TODO: tidy logic
-            exit(1);
-        #endif
-    }
+    //The generic implementation lives in TreeBuilder, where the symbols table is available
+    //and labels can be re-encoded. This base fallback is only reachable if a builder is
+    //used through BuilderBase directly.
+    (void)tree;
+    (void)base;
+    (void)include_root;
+    return error_t::FRAME_ERROR;
 }
 
 }

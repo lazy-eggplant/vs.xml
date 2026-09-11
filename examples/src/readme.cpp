@@ -14,12 +14,12 @@
 
 #include <iostream>
 #include <ranges>
-#include <print>
+#include <vs-xml/fwd/print.hpp>
 
 using namespace xml;
 
 int main(){
-  DocumentBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
+  DocumentBuilder<builder_config_t{.symbols=xml::builder_config_t::COMPRESS_ALL}> bld;
   bld.xml();
   bld.comment("This is a comment!");
   bld.begin("base-node");
@@ -34,18 +34,19 @@ int main(){
 
   //Show comments only
   for(auto& it: document.root().children() | std::views::filter([](auto it){return it.type()==xml::type_t::COMMENT;})){
-    std::print("{}\n",it.value().value_or("-- Empty node --"));
+    fmt::print("{}\n",it.value().value_or("-- Empty node --"));
   }
 
   //Example of a helper filter (defined in `vs-xml/filters.hpp`)
   for(auto& it: document.root().children() | filters::name("base-node")){
-    std::print("{}\n",it.value().value_or("-- Empty node --"));
+    fmt::print("{}\n",it.value().value_or("-- Empty node --"));
   }
 
-  auto query_a = xml::query::query_t{}/"base-node"/xml::query::accept();
+  xml::query::query_t query_a;
+  query_a.child().element("base-node").accept();
 
-  for(const auto& t : document.root() & query_a){
-    std::print("{} @ {}\n", (int)t.type(), t.addr());
+  for(const auto& t : query_a.collect(document.root())){
+    fmt::print("{} @ {}\n", (int)t.type(), t.addr());
   }
 
   return 0;

@@ -18,51 +18,35 @@ on:
       - "!**.md"
 
 jobs:
-  build-all-meson:
+  build-all:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04,ubuntu-24.04-arm] #[ubuntu-24.04, ubuntu-24.04-arm, macos-14, windows-latest] 
+        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-15]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 8
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
-      - name: Install dependencies
-        run: |
-          python3 -m venv .venv
-          source .venv/bin/activate
-          python3 -m pip install meson ninja
-      - name: Configure and build
-        run: |
-          source .venv/bin/activate
-          meson setup build/ --native-file=platforms/gcc-14.ini
-          meson compile -C build/ 
-          meson test -C build/ --suite=vs-xml
-      - name: Archive production artifacts
-        if: failure()
-        uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v6
+      - name: Setup xmake
+        uses: xmake-io/github-action-setup-xmake@v1
         with:
-          name: ubuntu-meson-logs
-          path: |
-            build/meson-logs/**/*
-  build-cmake:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-24.04,ubuntu-24.04-arm] #[ubuntu-24.04, ubuntu-24.04-arm, macos-14, windows-latest] 
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 8
+          xmake-version: latest
+      - name: Configure and test
+        run: |
+          xmake f -m release --with_tests=y -y
+          xmake -y
+          xmake test -y
+
+  build-noexcept:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
-      - name: Install dependencies
+      - uses: actions/checkout@v6
+      - name: Setup xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+      - name: Build with exceptions disabled
         run: |
-          python3 -m venv .venv
-          source .venv/bin/activate
-          python3 -m pip install cmake
-      - name: Configure and build
-        run: |
-          source .venv/bin/activate
-          mkdir build
-          cd build
-          CXX=g++-14 CC=gcc-14 cmake ..
-          make all -j
+          xmake f -m release --no_except=y -y
+          xmake -y

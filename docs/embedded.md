@@ -11,10 +11,12 @@ This usually implies:
 A basic build could look like this:
 
 ```bash
-meson setup build-emb --native-file=./platforms/gcc-embedded.ini -Dnoexcept=true -Dutils=false
+xmake f -m release --no_except=y -y
+xmake -y
 ```
 
-It is important to enable the `noexcept` flag and disable `utils` alongside any other optional module. 
+It is important to enable the `--no_except` flag and avoid the optional targets
+(tools, examples, benchmarks, tests).
 
 ## Features
 
@@ -27,9 +29,9 @@ It is important to enable the `noexcept` flag and disable `utils` alongside any 
 - Memos/notes/indices can all be implemented externally, as long as you have a proper library for containers `vs.xml` will not get in your way.
 
 ### 🟠 Features planned for embedded
-- `TreeBuilder`, `DocumentBuilder`, `ArchiveBuilder` & `QueryBuilder`. Right now they encapsulate their own storage, unable to just work on externally defined containers, so we cannot externally handle memory allocations.  
+- `TreeBuilder`, `DocumentBuilder`, `ArchiveBuilder`. Right now they encapsulate their own storage, unable to just work on externally defined containers, so we cannot externally handle memory allocations.  
   It is possible to reserve space and so limiting the number of allocations, but they cannot be fully removed as it is.
-- Queries. Right now they are not good due to the high number of dynamic allocations needed. They could be trivially removed for the most part, but the whole system is being refactored to be stack-based and consume less memory overall.
+- Queries. The explicit builder still allocates its step list and result containers; these could be made arena-based to remove the remaining allocations.
 
 ### 🔴 Features not planned for embedded
 - The utilities shipped alongside this library are not meant for embedded usage.

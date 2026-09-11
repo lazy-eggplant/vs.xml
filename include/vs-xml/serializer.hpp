@@ -33,6 +33,9 @@ typedef std::optional<std::variant<std::string,std::string_view>> ret_t;
 
 std::string_view validate_xml_label(std::string_view str, bool optional=false);
 
+///Non-throwing label check. Returns true if `str` is a valid XML name (or empty when `optional`).
+bool is_valid_xml_label(std::string_view str, bool optional=false) noexcept;
+
 ret_t to_xml_attr_1(std::string_view str);
 ret_t to_xml_attr_2(std::string_view str);
 
@@ -42,7 +45,7 @@ ret_t to_xml_comment(std::string_view str);
 ret_t to_xml_proc(std::string_view str);
 
 std::string_view inplace_unescape_xml(std::string_view sv); //It should be a span. String views are assumed immutable.
-constexpr std::string escape_xml(std::string_view sv); //TODO: Implement
+std::string escape_xml(std::string_view sv);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //TODO: move impl out in the C file to keep this reasonable.
@@ -260,13 +263,9 @@ public:
                 pos++;
             if (pos >= sv.size() || sv[pos] != ';')
                 return { 0, 0 };
-            std::string numberStr(sv.substr(startDigits, pos - startDigits));
             unsigned long value = 0;
-            auto [ptr, ec] = std::from_chars(numberStr.data(), numberStr.data()+ numberStr.size(), value, isHex ? 16 : 10);
-            if (ec != std::errc{}) {
-                return { 0, 0 };
-            }
-            if (value > 0xFF)
+            auto [ptr, ec] = std::from_chars(sv.data()+startDigits, sv.data()+pos, value, isHex ? 16 : 10);
+            if (ec != std::errc{} || value < 1 || value > 0xFF)
                 return { 0, 0 };
             return { static_cast<char>(value), pos + 1 };
         }

@@ -3,31 +3,17 @@
 /**
  * @file format.hpp
  * @author karurochari
- * @brief Helpers to handle format/print portably
+ * @brief fmt-based formatting helpers.
  * @date 2025-05-17
- * 
+ *
  * @copyright Copyright (c) 2025
- * 
+ *
  */
 
-#if VS_XML_USE_FMT == true && __has_include(<fmt/core.h>)
+#include <vs-xml/commons.hpp>
 
-#include <fmt/core.h>
+#include <fmt/format.h>
 
-namespace xml{
+namespace VS_XML_NS{
     using fmt::format;
 }
-
-#else
-
-#if VS_XML_USE_FMT == true && !__has_include(<fmt/core.h>)
-    #warning "Unable to use fmt, header missing"
-#endif
-
-#include <format>
-
-namespace xml{
-    using std::format;
-}
-
-#endif
