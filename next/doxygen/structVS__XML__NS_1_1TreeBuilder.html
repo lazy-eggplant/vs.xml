@@ -101,11 +101,11 @@ Collaboration diagram for VS_XML_NS::TreeBuilder&lt; cfg &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="structVS__XML__NS_1_1TreeBuilder__coll__graph.png" border="0" usemap="#aVS__XML__NS_1_1TreeBuilder_3_01cfg_01_4_coll__map" alt="Collaboration graph"/></div>
 <map name="aVS__XML__NS_1_1TreeBuilder_3_01cfg_01_4_coll__map" id="aVS__XML__NS_1_1TreeBuilder_3_01cfg_01_4_coll__map">
-<area shape="rect" title=" " alt="" coords="89,108,269,148"/>
-<area shape="rect" href="structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="5,5,156,45"/>
-<area shape="poly" title=" " alt="" coords="111,54,163,106,159,110,107,57"/>
-<area shape="rect" href="structVS__XML__NS_1_1details_1_1Symbols.html" title=" " alt="" coords="181,5,375,45"/>
-<area shape="poly" title=" " alt="" coords="252,57,200,110,196,106,248,54"/>
+<area shape="rect" title=" " alt="" coords="305,41,485,81"/>
+<area shape="rect" href="structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="26,5,177,45"/>
+<area shape="poly" title=" " alt="" coords="191,34,305,48,304,53,190,39"/>
+<area shape="rect" href="structVS__XML__NS_1_1details_1_1Symbols.html" title=" " alt="" coords="5,70,197,125"/>
+<area shape="poly" title=" " alt="" coords="211,81,305,70,305,75,212,87"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -164,7 +164,10 @@ error_t&#160;</td><td class="memItemRight" valign="bottom"><b>proc</b> (std::str
 <tr class="memitem:aa8e6e89e8b33d85c2976365655fab0d0" id="r_aa8e6e89e8b33d85c2976365655fab0d0"><td class="memItemLeft" align="right" valign="top"><a id="aa8e6e89e8b33d85c2976365655fab0d0" name="aa8e6e89e8b33d85c2976365655fab0d0"></a>
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>marker</b> (std::string_view value)</td></tr>
 <tr class="separator:aa8e6e89e8b33d85c2976365655fab0d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1da31f58bb8553414f435ebb7cbb5f77" id="r_a1da31f58bb8553414f435ebb7cbb5f77"><td class="memItemLeft" align="right" valign="top">std::expected&lt; <a class="el" href="structVS__XML__NS_1_1Stored.html">stored::Tree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a1da31f58bb8553414f435ebb7cbb5f77">close</a> ()</td></tr>
+<tr class="memitem:a424527258cb05375c47a2a6e5ca31c38" id="r_a424527258cb05375c47a2a6e5ca31c38"><td class="memItemLeft" align="right" valign="top">error_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a424527258cb05375c47a2a6e5ca31c38">inject</a> (const <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a> &amp;tree, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *base=nullptr, bool include_root=false)</td></tr>
+<tr class="memdesc:a424527258cb05375c47a2a6e5ca31c38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inject a subtree coming from another tree into this builder.  <br /></td></tr>
+<tr class="separator:a424527258cb05375c47a2a6e5ca31c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1da31f58bb8553414f435ebb7cbb5f77" id="r_a1da31f58bb8553414f435ebb7cbb5f77"><td class="memItemLeft" align="right" valign="top">std::expected&lt; stored::Tree, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a1da31f58bb8553414f435ebb7cbb5f77">close</a> ()</td></tr>
 <tr class="memdesc:a1da31f58bb8553414f435ebb7cbb5f77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final operaration when the building process is finished.  <br /></td></tr>
 <tr class="separator:a1da31f58bb8553414f435ebb7cbb5f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fea2984fcf3d361de1d3f5e6a6e60c2" id="r_a1fea2984fcf3d361de1d3f5e6a6e60c2"><td class="memItemLeft" align="right" valign="top">std::expected&lt; binary_header_t::section_t, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a1fea2984fcf3d361de1d3f5e6a6e60c2">close_frame</a> (std::string_view name=&quot;&quot;)</td></tr>
@@ -282,13 +285,13 @@ const void *&#160;</td><td class="memItemRight" valign="bottom"><b>symoffset</b>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;builder_config_t cfg = {}&gt; </div>
+template&lt;builder_config_t cfg = builder_config_t{}&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; <a class="el" href="structVS__XML__NS_1_1Stored.html">stored::Tree</a>, error_t &gt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::close </td>
+          <td class="memname">std::expected&lt; stored::Tree, error_t &gt; <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::close </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -312,7 +315,7 @@ template&lt;builder_config_t cfg = {}&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;builder_config_t cfg = {}&gt; </div>
+template&lt;builder_config_t cfg = builder_config_t{}&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -343,7 +346,7 @@ template&lt;builder_config_t cfg = {}&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;builder_config_t cfg = {}&gt; </div>
+template&lt;builder_config_t cfg = builder_config_t{}&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -373,7 +376,7 @@ template&lt;builder_config_t cfg = {}&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;builder_config_t cfg = {}&gt; </div>
+template&lt;builder_config_t cfg = builder_config_t{}&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -394,6 +397,61 @@ template&lt;builder_config_t cfg = {}&gt; </div>
 
 <p>Fork the current builder instance by cloning its current state into a new one. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">TreeBuilder</a> </dd></dl>
+
+</div>
+</div>
+<a id="a424527258cb05375c47a2a6e5ca31c38" name="a424527258cb05375c47a2a6e5ca31c38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a424527258cb05375c47a2a6e5ca31c38">&#9670;&#160;</a></span>inject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;builder_config_t cfg = builder_config_t{}&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">error_t <a class="el" href="structVS__XML__NS_1_1TreeBuilder.html">VS_XML_NS::TreeBuilder</a>&lt; cfg &gt;::inject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a> &amp;&#160;</td>
+          <td class="paramname"><em>tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *&#160;</td>
+          <td class="paramname"><em>base</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>include_root</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inject a subtree coming from another tree into this builder. </p>
+<p>Every label and value is fed back through this builder's own symbol table, so source and destination trees may use unrelated symbol spaces. Source and destination are expected to agree on the <code>raw_strings</code> encoding of values.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tree</td><td>the tree to read from </td></tr>
+    <tr><td class="paramname">base</td><td>the node to start from (defaults to the tree root) </td></tr>
+    <tr><td class="paramname">include_root</td><td>if true, emit <code>base</code> itself, otherwise only its children </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

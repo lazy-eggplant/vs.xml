@@ -1,0 +1,7 @@
+<map id="include/vs&#45;xml/fwd/vector.hpp" name="include/vs&#45;xml/fwd/vector.hpp">
+<area shape="rect" id="Node000001" title="Helpers to handle vector portably." alt="" coords="121,5,267,45"/>
+<area shape="rect" id="Node000002" href="$query_8hpp.html" title="Tree queries." alt="" coords="5,101,191,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,57,113,102,109,98,161,53"/>
+<area shape="rect" id="Node000003" href="$rand-access_8hpp.html" title="Utility class to enable an external index used to provide random access to children information." alt="" coords="215,93,365,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,53,271,91,267,95,224,57"/>
+</map>

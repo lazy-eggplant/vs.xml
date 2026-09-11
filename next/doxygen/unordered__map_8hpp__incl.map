@@ -1,5 +1,33 @@
 <map id="include/vs&#45;xml/fwd/unordered_map.hpp" name="include/vs&#45;xml/fwd/unordered_map.hpp">
-<area shape="rect" id="Node000001" title="Helpers to handle unordered_map portably." alt="" coords="5,5,161,45"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="21,93,145,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,46,86,79,81,79,81,46"/>
+<area shape="rect" id="Node000001" title="Helpers to handle unordered_map portably." alt="" coords="481,5,637,45"/>
+<area shape="rect" id="Node000002" href="$commons_8hpp_source.html" title=" " alt="" coords="394,93,557,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="541,48,500,86,496,82,537,44"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="581,93,705,119"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="581,44,623,82,619,86,578,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,76,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="394,121,256,141,90,169,89,164,255,135,394,115"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="101,167,170,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="416,121,185,169,183,164,415,116"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="194,167,261,192"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="436,121,274,167,273,162,435,116"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="285,167,365,192"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="452,121,363,163,361,158,450,116"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="389,167,471,192"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="470,120,447,157,442,154,466,118"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="495,167,549,192"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="485,118,509,154,505,157,481,120"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="573,167,671,192"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="500,116,587,158,585,163,498,121"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="695,167,733,192"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="519,116,682,164,681,169,517,121"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="757,167,849,192"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="529,116,744,163,743,168,527,121"/>
+<area shape="rect" id="Node000012" href="$assert_8hpp.html" title="Utility for assertions." alt="" coords="873,167,1040,192"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="553,116,866,162,865,167,552,121"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="824,240,889,265"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="942,194,886,234,883,230,939,190"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="913,240,1000,265"/>
+<area shape="poly" id="edge13_Node000012_Node000014" title=" " alt="" coords="959,192,959,226,954,226,954,192"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="1024,240,1148,265"/>
+<area shape="poly" id="edge14_Node000012_Node000015" title=" " alt="" coords="979,190,1054,231,1051,235,976,194"/>
 </map>

@@ -102,13 +102,13 @@ Collaboration diagram for VS_XML_NS::DocumentBuilder&lt; cfg &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="structVS__XML__NS_1_1DocumentBuilder__coll__graph.png" border="0" usemap="#aVS__XML__NS_1_1DocumentBuilder_3_01cfg_01_4_coll__map" alt="Collaboration graph"/></div>
 <map name="aVS__XML__NS_1_1DocumentBuilder_3_01cfg_01_4_coll__map" id="aVS__XML__NS_1_1DocumentBuilder_3_01cfg_01_4_coll__map">
-<area shape="rect" title="Specialized builder to construct a document." alt="" coords="69,197,289,237"/>
-<area shape="rect" href="structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="89,108,269,148"/>
-<area shape="poly" title=" " alt="" coords="182,162,182,197,177,197,177,162"/>
-<area shape="rect" href="structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="5,5,156,45"/>
-<area shape="poly" title=" " alt="" coords="111,54,163,106,159,110,107,57"/>
-<area shape="rect" href="structVS__XML__NS_1_1details_1_1Symbols.html" title=" " alt="" coords="181,5,375,45"/>
-<area shape="poly" title=" " alt="" coords="252,57,200,110,196,106,248,54"/>
+<area shape="rect" title="Specialized builder to construct a document." alt="" coords="535,41,755,81"/>
+<area shape="rect" href="structVS__XML__NS_1_1TreeBuilder.html" title=" " alt="" coords="305,41,485,81"/>
+<area shape="poly" title=" " alt="" coords="499,59,534,59,534,64,499,64"/>
+<area shape="rect" href="structVS__XML__NS_1_1details_1_1BuilderBase.html" title=" " alt="" coords="26,5,177,45"/>
+<area shape="poly" title=" " alt="" coords="191,34,305,48,304,53,190,39"/>
+<area shape="rect" href="structVS__XML__NS_1_1details_1_1Symbols.html" title=" " alt="" coords="5,70,197,125"/>
+<area shape="poly" title=" " alt="" coords="211,81,305,70,305,75,212,87"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -121,7 +121,7 @@ Public Member Functions</h2></td></tr>
 details::BuilderBase::error_t&#160;</td><td class="memItemRight" valign="bottom"><b>xml</b> ()</td></tr>
 <tr class="separator:a06f5b508970c9edd1e1d71719888f11f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77f51ea09e9ffddec11495d4e9a15ebb" id="r_a77f51ea09e9ffddec11495d4e9a15ebb"><td class="memItemLeft" align="right" valign="top"><a id="a77f51ea09e9ffddec11495d4e9a15ebb" name="a77f51ea09e9ffddec11495d4e9a15ebb"></a>
-std::expected&lt; <a class="el" href="structVS__XML__NS_1_1Stored.html">stored::Document</a>, details::BuilderBase::error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
+std::expected&lt; stored::Document, details::BuilderBase::error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
 <tr class="separator:a77f51ea09e9ffddec11495d4e9a15ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb4fc67e838f6dc25503eede790e8ee2" id="r_abb4fc67e838f6dc25503eede790e8ee2"><td class="memItemLeft" align="right" valign="top"><a id="abb4fc67e838f6dc25503eede790e8ee2" name="abb4fc67e838f6dc25503eede790e8ee2"></a>
 std::expected&lt; binary_header_t::section_t, details::BuilderBase::error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>close_frame</b> (std::string_view name=&quot;&quot;)</td></tr>
@@ -157,7 +157,10 @@ error_t&#160;</td><td class="memItemRight" valign="bottom"><b>proc</b> (std::str
 <tr class="memitem:aa8e6e89e8b33d85c2976365655fab0d0 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_aa8e6e89e8b33d85c2976365655fab0d0"><td class="memItemLeft" align="right" valign="top">
 error_t&#160;</td><td class="memItemRight" valign="bottom"><b>marker</b> (std::string_view value)</td></tr>
 <tr class="separator:aa8e6e89e8b33d85c2976365655fab0d0 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1da31f58bb8553414f435ebb7cbb5f77 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_a1da31f58bb8553414f435ebb7cbb5f77"><td class="memItemLeft" align="right" valign="top">std::expected&lt; <a class="el" href="structVS__XML__NS_1_1Stored.html">stored::Tree</a>, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a1da31f58bb8553414f435ebb7cbb5f77">close</a> ()</td></tr>
+<tr class="memitem:a424527258cb05375c47a2a6e5ca31c38 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_a424527258cb05375c47a2a6e5ca31c38"><td class="memItemLeft" align="right" valign="top">error_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a424527258cb05375c47a2a6e5ca31c38">inject</a> (const <a class="el" href="structVS__XML__NS_1_1TreeRaw.html">TreeRaw</a> &amp;tree, const <a class="el" href="structVS__XML__NS_1_1unknown__t.html">unknown_t</a> *base=nullptr, bool include_root=false)</td></tr>
+<tr class="memdesc:a424527258cb05375c47a2a6e5ca31c38 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inject a subtree coming from another tree into this builder.  <br /></td></tr>
+<tr class="separator:a424527258cb05375c47a2a6e5ca31c38 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1da31f58bb8553414f435ebb7cbb5f77 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_a1da31f58bb8553414f435ebb7cbb5f77"><td class="memItemLeft" align="right" valign="top">std::expected&lt; stored::Tree, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a1da31f58bb8553414f435ebb7cbb5f77">close</a> ()</td></tr>
 <tr class="memdesc:a1da31f58bb8553414f435ebb7cbb5f77 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final operaration when the building process is finished.  <br /></td></tr>
 <tr class="separator:a1da31f58bb8553414f435ebb7cbb5f77 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fea2984fcf3d361de1d3f5e6a6e60c2 inherit pub_methods_structVS__XML__NS_1_1TreeBuilder" id="r_a1fea2984fcf3d361de1d3f5e6a6e60c2"><td class="memItemLeft" align="right" valign="top">std::expected&lt; binary_header_t::section_t, error_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1TreeBuilder.html#a1fea2984fcf3d361de1d3f5e6a6e60c2">close_frame</a> (std::string_view name=&quot;&quot;)</td></tr>
@@ -292,7 +295,7 @@ const void *&#160;</td><td class="memItemRight" valign="bottom"><b>symoffset</b>
 <tr class="separator:a9bf53cdeb0a420fd60cb45decffcd39f inherit pro_attribs_structVS__XML__NS_1_1details_1_1BuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;builder_config_t cfg = {}&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;builder_config_t cfg = builder_config_t{}&gt;<br />
 struct VS_XML_NS::DocumentBuilder&lt; cfg &gt;</div><p>Specialized builder to construct a document. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/vs-xml/<a class="el" href="document-builder_8hpp_source.html">document-builder.hpp</a></li>

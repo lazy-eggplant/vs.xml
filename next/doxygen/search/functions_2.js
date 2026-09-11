@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['downgrade_0',['downgrade',['../structVS__XML__NS_1_1Archive.html#ae369b96dc0d08f946744a65e9a705d4c',1,'VS_XML_NS::Archive::downgrade()'],['../structVS__XML__NS_1_1Archive.html#a7d6d818934f8c62a4b2e788b8e4e23c2',1,'VS_XML_NS::Archive::downgrade() const'],['../structVS__XML__NS_1_1Document.html#a30172060819962baf8ea4687878b8296',1,'VS_XML_NS::Document::downgrade()'],['../structVS__XML__NS_1_1Document.html#aeac6e6f0bd3d704cca254ae6cfdf421d',1,'VS_XML_NS::Document::downgrade() const'],['../structVS__XML__NS_1_1Tree.html#a0285eccb709afbd8385df05c5b1bb1a8',1,'VS_XML_NS::Tree::downgrade()'],['../structVS__XML__NS_1_1Tree.html#a20f728add4d323aa140955cadf939f68',1,'VS_XML_NS::Tree::downgrade() const']]]
+  ['clone_0',['clone',['../structVS__XML__NS_1_1TreeRaw.html#a2c362df4058a9d0fd145605dc88aa347',1,'VS_XML_NS::TreeRaw']]],
+  ['close_1',['close',['../structVS__XML__NS_1_1TreeBuilder.html#a1da31f58bb8553414f435ebb7cbb5f77',1,'VS_XML_NS::TreeBuilder']]],
+  ['close_5fframe_2',['close_frame',['../structVS__XML__NS_1_1TreeBuilder.html#a1fea2984fcf3d361de1d3f5e6a6e60c2',1,'VS_XML_NS::TreeBuilder']]],
+  ['collect_3',['collect',['../structVS__XML__NS_1_1query_1_1query__t.html#a38171342e4e73eae7c935a00b0b60662',1,'VS_XML_NS::query::query_t']]]
 ];
