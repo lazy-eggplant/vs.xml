@@ -37,7 +37,7 @@ namespace details{
 
     template <>
     struct Symbols<builder_config_t::symbols_t::EXTERN_ABS>{
-        std::span<const uint8_t> symbols = {(const uint8_t*)nullptr,std::span<uint8_t>::extent};
+        std::span<const uint8_t> symbols = {};
 
         using sv_t = std::string_view;
 
@@ -140,7 +140,7 @@ namespace details{
     
 }
 
-template<builder_config_t cfg = {}>
+template<builder_config_t cfg = builder_config_t{}>
 struct TreeBuilder : details::BuilderBase{
     using error_t = details::BuilderBase::error_t;
 
@@ -204,6 +204,74 @@ struct TreeBuilder : details::BuilderBase{
             return details::BuilderBase::marker(rsv( symbol(value)));
         }
 
+        /**
+         * @brief Inject a subtree coming from another tree into this builder.
+         * @details Every label and value is fed back through this builder's own
+         *          symbol table, so source and destination trees may use unrelated
+         *          symbol spaces. Source and destination are expected to agree on
+         *          the `raw_strings` encoding of values.
+         *
+         * @param tree the tree to read from
+         * @param base the node to start from (defaults to the tree root)
+         * @param include_root if true, emit `base` itself, otherwise only its children
+         */
+        error_t inject(const TreeRaw& tree, const unknown_t* base = nullptr, bool include_root = false){
+            const unknown_t* start = base ? base : &tree.root();
+            if(include_root && start != &tree.root())return inject_node(tree, start);
+
+            auto range = start->children_range();
+            if(!range.has_value())return error_t::MISFORMED;
+            for(const unknown_t* c = range->first; c != range->second; c = c->next()){
+                if(auto e = inject_node(tree, c); e != error_t::OK)return e;
+            }
+            return error_t::OK;
+        }
+
+    private:
+        error_t inject_node(const TreeRaw& tree, const unknown_t* node){
+            switch(node->type()){
+                case type_t::ELEMENT: {
+                    auto name = node->name();
+                    if(!name.has_value())return error_t::MISFORMED;
+                    auto ns = node->ns();
+                    if(auto e = this->begin(
+                        tree.rsv(name.value()),
+                        ns.has_value() ? tree.rsv(ns.value()) : std::string_view{}
+                    ); e != error_t::OK)return e;
+
+                    auto arange = node->attrs_range();
+                    if(arange.has_value()){
+                        for(const VS_XML_NS::attr_t* a = arange->first; a != arange->second; ++a){
+                            auto an = a->name();
+                            auto av = a->value();
+                            auto ans = a->ns();
+                            if(!an.has_value() || !av.has_value())continue;
+                            if(auto e = this->attr(
+                                tree.rsv(an.value()),
+                                tree.rsv(av.value()),
+                                ans.has_value() ? tree.rsv(ans.value()) : std::string_view{}
+                            ); e != error_t::OK)return e;
+                        }
+                    }
+
+                    auto crange = node->children_range();
+                    if(crange.has_value()){
+                        for(const unknown_t* c = crange->first; c != crange->second; c = c->next()){
+                            if(auto e = inject_node(tree, c); e != error_t::OK)return e;
+                        }
+                    }
+                    return this->end();
+                }
+                case type_t::TEXT:    return this->text(tree.rsv(node->value().value_or(VS_XML_NS::sv{0,0})));
+                case type_t::CDATA:   return this->cdata(tree.rsv(node->value().value_or(VS_XML_NS::sv{0,0})));
+                case type_t::COMMENT: return this->comment(tree.rsv(node->value().value_or(VS_XML_NS::sv{0,0})));
+                case type_t::PROC:    return this->proc(tree.rsv(node->value().value_or(VS_XML_NS::sv{0,0})));
+                case type_t::MARKER:  return this->marker(tree.rsv(node->value().value_or(VS_XML_NS::sv{0,0})));
+                default: return error_t::OK;
+            }
+        }
+
+    public:
         /**
          * @brief Final operaration when the building process is finished.
          * 

@@ -1,3 +1,4 @@
+#include "vs-xml/commons.hpp"
 #include <vs-xml/node.hpp>
 #include <vs-xml/fwd/format.hpp>
 
@@ -38,6 +39,7 @@ namespace VS_XML_NS {
     std::expected<std::pair<const unknown_t*, const unknown_t*>,feature_t> unknown_t::children_range() const {CDISPATCH(children_range());}
     std::expected<std::pair<const attr_t*, const attr_t*>,feature_t> unknown_t::attrs_range() const {CDISPATCH(attrs_range());}
 
+    const delta_ptr_t unknown_t::rel_offset() const {CDISPATCH(rel_offset());}
     const element_t* unknown_t::parent() const {CDISPATCH(parent());}
     const unknown_t* unknown_t::prev() const {CDISPATCH(prev());}
     const unknown_t* unknown_t::next() const {CDISPATCH(next());}

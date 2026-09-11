@@ -2,26 +2,27 @@
 For performance reasons, most of the configuration flags are defined at build-time.  
 A single application will have to build and link different versions of this library if they want different configurations, but that scenario is extremely unlikely. Still, if needed, the entire namespace of this library is scoped with a macro. 
 
-## Meson options
-These are options which can be configured via meson during the initial setup:
+## xmake options
+These are options which can be configured via xmake during the initial setup:
 
-- `tests` defaults to false. Change to enable test-suite.
-- `benchmarks` defaults to false. Change to enable benchmarks.
-- `examples` defaults to false. Change to enable examples.
-- `utils` defaults to true. Change to compile the extra system utilities.
-- `use_fmt` defaults to true. Disable it if you want to force using `std::print`/`std::format` instead, but be mindful [they are much slower](https://github.com/lazy-eggplant/vs.xml/issues/8).
+- `with_tests` defaults to false. Change to enable the test-suite.
+- `with_benchmarks` defaults to false. Change to enable benchmarks.
+- `with_examples` defaults to false. Change to enable examples.
+- `with_tools` defaults to false. Change to compile the extra system utilities.
 - `use_gtl` defaults to false. Enable it to use alternative STL-like containers with better performance and memory-mappability (is that even a word?).
-- `noexcept` defaults to false. Used to disable exceptions from the build. Often needed for embedded or offloaded targets.
-- `noassert` defaults to false. Used to remove assertions from the build. Can improve performance when things are working, but it is very much unsafe.
+- `no_except` defaults to false. Used to disable exceptions from the build. Often needed for embedded or offloaded targets.
+- `no_assert` defaults to false. Used to remove assertions from the build. Can improve performance when things are working, but it is very much unsafe.
 - `ns` defaults to `xml`. Change the namespace if needed, to avoid collisions.
 - `binlayout`:
     - `0` Normal/aligned (default)
     - `1` Compact (mostly compatible with real world documents, less cache-misses, less space taken on disk)
 
-## Macros / CMake options
+`fmt` is a required dependency and is used instead of `std::format`/`std::print`.
 
-Since they can be set as meson options, there is no need to change them directly.  
-However, they share the same name as the CMake options, so use them as such if working with CMake.
+## Macros
+
+The macros below are generated into `include/vs-xml/config.hpp` during the build
+from the options above; there is normally no need to set them directly.
 
 - `VS_XML_NS` defaults to `xml`. Changes the namespace if needed, to avoid collisions.
 - `VS_XML_NO_ASSERT` to remove assertions from this library.

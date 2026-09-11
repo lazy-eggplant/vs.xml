@@ -1,4 +1,4 @@
-#include <print>
+#include <vs-xml/fwd/print.hpp>
 #include <iostream>
 #include <ranges>
 
@@ -55,21 +55,21 @@ auto mk_tree(){
 
 
 int main(){
-    auto tree = *mk_tree<{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();
+    auto tree = *mk_tree<xml::builder_config_t{.symbols=xml::builder_config_t::OWNED, .raw_strings=true}>();
     for(auto it: tree.root().visitor()){
-        std::print(">{}\n",(int)it.type());
+        fmt::print(">{}\n",(int)it.type());
     }
 
     for(auto it: tree.downgrade().root().visitor()){
-        std::print(">{}\n",(int)it.type());
+        fmt::print(">{}\n",(int)it.type());
     }
 
-    std::print("\n\n");
+    fmt::print("\n\n");
 
     xml::TreeRaw::visit(&tree.downgrade().root(),+[](const xml::unknown_t*){return true;});
     xml::Tree::visit(tree.root(),[&](auto node){
         if(node.type()==xml::type_t::ELEMENT && node.name()=="AAA")return false;
-        std::print(">{}\n",(int)node.type());
+        fmt::print(">{}\n",(int)node.type());
         return true;
     });
     return 0;

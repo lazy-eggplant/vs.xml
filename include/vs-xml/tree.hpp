@@ -52,18 +52,22 @@ struct TreeRaw{
             TreeOutOfBounds,
             SymbolsOutOfBounds,
             TooManyDocs,
-            TypeMismatch
+            TypeMismatch,
+            MisalignedRegion
         } code;
         
         std::string_view msg();
     };
     
 
-    std::function<bool(const unknown_t&, const unknown_t&)> def_order_node() const;
     std::function<bool(const attr_t&, const attr_t&)> def_order_attrs() const;
+
+    ///Default ordering criterion for child nodes.
+    std::function<bool(const unknown_t&, const unknown_t&)> def_order_node() const;
 
     /**
         * @brief Reorder (in-place) children of a node based on a custom ordering criterion.
+        * @note TODO: not implemented yet.
         * 
         * @param ref Node whose children are to be ordered
         * @param fn Criterion to determine the order of nodes.
@@ -92,20 +96,6 @@ struct TreeRaw{
     }
 
     /**
-        * @brief 
-        * 
-        * @param ref The node/leaf where to expand.
-        * @param start 
-        * @param end 
-        * @return true 
-        * @return false 
-        */
-    bool inject(const unknown_t* ref, const unknown_t* start, const unknown_t* end);
-
-    bool inject_before(const unknown_t* ref, const unknown_t* start, const unknown_t* end);
-    bool inject_after(const unknown_t* ref, const unknown_t* start, const unknown_t* end);
-
-    /**
      * @brief Obtain a weak slice of a specific subtree.
      * 
      * @param ref the node where to start slicing.
@@ -114,10 +104,20 @@ struct TreeRaw{
     const TreeRaw slice(const element_t* ref=nullptr) const;
 
     /**
-     * @brief Return a perfect deep copy of the current tree structure.
-     * @param ref the node where to start cloning.
-     * @param reduce if true, a new 
-     * @return Tree 
+     * @brief Move a range of nodes into this tree (in-place).
+     * @note TODO: not implemented yet.
+     */
+    bool inject(const unknown_t* ref, const unknown_t* start, const unknown_t* end);
+
+    ///@note TODO: not implemented yet.
+    bool inject_before(const unknown_t* ref, const unknown_t* start, const unknown_t* end);
+
+    ///@note TODO: not implemented yet.
+    bool inject_after(const unknown_t* ref, const unknown_t* start, const unknown_t* end);
+
+    /**
+     * @brief Deep copy of a subtree.
+     * @note TODO: not implemented yet; needs a return type that can own the copy.
      */
     TreeRaw clone(const element_t* ref=nullptr, bool reduce=true) const;
 
@@ -176,18 +176,17 @@ struct TreeRaw{
     static void visit(const unknown_t* node, std::function<bool(const unknown_t*)>&& test, std::function<void(const unknown_t*)>&& before={}, std::function<void(const unknown_t*)>&& after={});
 
     //Weak, used when loading from disk or creatung slices
-    TreeRaw(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym={(uint8_t*)nullptr, std::span<uint8_t>::extent}):
+    TreeRaw(const builder_config_t& cfg, std::span<uint8_t> src, std::span<uint8_t> sym={}):
         buffer(src),symbols(sym),configs(cfg){}
 
-    TreeRaw(const builder_config_t& cfg, std::span<const uint8_t> src, std::span<const uint8_t> sym={(const uint8_t*)nullptr, std::span<uint8_t>::extent}):
+    TreeRaw(const builder_config_t& cfg, std::span<const uint8_t> src, std::span<const uint8_t> sym={}):
         buffer((uint8_t*)src.data(),src.size_bytes()),symbols((uint8_t*)sym.data(),sym.size_bytes()),configs(cfg){
     }
     
     protected:
 
-    bool print_h(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
-    bool print_h_before(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
-    bool print_h_after(std::ostream& out, const print_cfg_t& cfg = {}, const unknown_t* ptr=nullptr) const;
+    //Recursive XML emitter. `depth` is the current indentation level.
+    void print_node(std::ostream& out, const print_cfg_t& cfg, const unknown_t* ptr, int depth) const;
 
     bool reorder_h(
         const std::function<bool(const attr_t&, const attr_t&)>& fn,
@@ -266,8 +265,8 @@ struct StorageFor<TreeRaw>{
     std::vector<uint8_t> buffer_i;
     std::vector<uint8_t> symbols_i;
 
-    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):buffer_i(buf),symbols_i(sym){}
-    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(buf){}
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):buffer_i(std::move(buf)),symbols_i(std::move(sym)){}
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(std::move(buf)){}
 
     static TreeRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym)  {return TreeRaw(cfg,storage.buffer_i,storage.symbols_i);}
     static TreeRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return TreeRaw(cfg,storage.buffer_i, {(uint8_t*)label_offset,std::span<uint8_t>::extent});}
@@ -279,8 +278,8 @@ struct StorageFor<Tree>{
     std::vector<uint8_t> buffer_i;
     std::vector<uint8_t> symbols_i;
 
-    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):buffer_i(buf),symbols_i(sym){}
-    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(buf){}
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):buffer_i(std::move(buf)),symbols_i(std::move(sym)){}
+    StorageFor(const builder_config_t& cfg, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):buffer_i(std::move(buf)){}
 
     static Tree bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, std::vector<uint8_t>&& sym)  {return Tree(TreeRaw(cfg,storage.buffer_i,storage.symbols_i));}
     static Tree bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<uint8_t>&& src, const void* label_offset=nullptr)  {return Tree(TreeRaw(cfg,storage.buffer_i, {(uint8_t*)label_offset,std::span<uint8_t>::extent}));}

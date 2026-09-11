@@ -13,7 +13,7 @@ Or continue with this documentation which offers a more in-depth description of 
 - Linked to the previous point, pointers/iterators based on this tree structure are random access, no need to navigate the tree to reach them.
 - Good memory locality of the tree representation, making many operations on sub-trees trivial `memcpy`.
 - Configurable memory footprint, the internal representation can decrease size for most of its fields properly run on "lesser" systems or improve cache performance.
-- An efficient engine to perform queries on a document, all based on lazy evaluation.
+- An efficient query engine with an explicit builder API.
 - XML serialization and de-serialization.
 - Naive support for namespaces[^2].
 

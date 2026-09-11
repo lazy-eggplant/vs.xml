@@ -21,7 +21,7 @@ namespace VS_XML_NS{
 /**
  * @brief Specialized builder to construct a document.
 */
-template<builder_config_t cfg = {}>
+template<builder_config_t cfg = builder_config_t{}>
 struct DocumentBuilder : TreeBuilder<cfg>{
     protected:
         using TreeBuilder<cfg>::close;

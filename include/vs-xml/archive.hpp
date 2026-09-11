@@ -50,17 +50,17 @@ struct ArchiveRaw{
     ///Get the raw document in position idx if available
     [[nodiscard]] inline std::optional<DocumentRaw> get(size_t idx){
         //xml_assert(documents.size()>idx, "Out of bounds document selected");
-        if(idx>index.size())return {};
+        if(idx>=index.size())return {};
         auto v = index[idx];
-        return DocumentRaw(configs,std::span{buffer.data()+v.base,v.length},std::span{symbols.begin(),symbols.end()});
+        return DocumentRaw(configs,std::span{buffer.data()+v.base,v.length},symbols);
     }
 
     ///Get a constant raw document in position idx if available
     [[nodiscard]] inline std::optional<const DocumentRaw> get(size_t idx) const{
         //xml_assert(documents.size()>idx, "Out of bounds document selected");
-        if(idx>index.size())return {};
+        if(idx>=index.size())return {};
         auto v = index[idx];
-        return DocumentRaw(configs,std::span{buffer.data()+v.base,v.length},std::span{symbols.begin(),symbols.end()});
+        return DocumentRaw(configs,std::span{buffer.data()+v.base,v.length},symbols);
     }
 
     ///Get the raw document with a given name if it exists
@@ -84,11 +84,11 @@ struct ArchiveRaw{
         return {};
     }
 
-    inline ArchiveRaw(const builder_config_t& cfg, std::span<binary_header_t::section_t> docs, std::span<uint8_t> buff, std::span<uint8_t> syms = {(uint8_t*)nullptr, std::span<uint8_t>::extent}):
+    inline ArchiveRaw(const builder_config_t& cfg, std::span<binary_header_t::section_t> docs, std::span<uint8_t> buff, std::span<uint8_t> syms = {}):
         index(docs),buffer(buff),symbols(syms),configs(cfg)
     {}
 
-    inline ArchiveRaw(const builder_config_t& cfg, std::span<const binary_header_t::section_t> docs, std::span<const uint8_t> buff, std::span<const uint8_t> syms = {(const uint8_t*)nullptr, std::span<uint8_t>::extent}):
+    inline ArchiveRaw(const builder_config_t& cfg, std::span<const binary_header_t::section_t> docs, std::span<const uint8_t> buff, std::span<const uint8_t> syms = {}):
         index((binary_header_t::section_t*)docs.data(),docs.size()),
         buffer((uint8_t*)buff.data(),buff.size()),
         symbols((uint8_t*)syms.data(),syms.size()),
@@ -166,8 +166,8 @@ struct StorageFor<ArchiveRaw>{
     std::vector<uint8_t> buffer_i;
     std::vector<uint8_t> symbols_i;
 
-    StorageFor(const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& index, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):index_i(index),buffer_i(buf),symbols_i(sym){}
-    StorageFor(const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& index, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):index_i(index),buffer_i(buf){}
+    StorageFor(const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& index, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):index_i(std::move(index)),buffer_i(std::move(buf)),symbols_i(std::move(sym)){}
+    StorageFor(const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& index, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):index_i(std::move(index)),buffer_i(std::move(buf)){}
 
     static ArchiveRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& idx, std::vector<uint8_t>&& buff, std::vector<uint8_t>&& sym)  {return ArchiveRaw(cfg,storage.index_i,storage.buffer_i,storage.symbols_i);}
     static ArchiveRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& idx, std::vector<uint8_t>&& buff, const void* label_offset=nullptr)  {return ArchiveRaw(cfg,storage.index_i,storage.buffer_i, {(uint8_t*)label_offset,std::span<uint8_t>::extent});}
@@ -180,8 +180,8 @@ struct StorageFor<Archive>{
     std::vector<uint8_t> buffer_i;
     std::vector<uint8_t> symbols_i;
 
-    StorageFor(const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& index, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):index_i(index),buffer_i(buf),symbols_i(sym){}
-    StorageFor(const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& index, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):index_i(index),buffer_i(buf){}
+    StorageFor(const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& index, std::vector<uint8_t>&& buf, std::vector<uint8_t>&& sym):index_i(std::move(index)),buffer_i(std::move(buf)),symbols_i(std::move(sym)){}
+    StorageFor(const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& index, std::vector<uint8_t>&& buf, const void* label_offset=nullptr):index_i(std::move(index)),buffer_i(std::move(buf)){}
 
     static ArchiveRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& idx, std::vector<uint8_t>&& buff, std::vector<uint8_t>&& sym)  {return Archive(ArchiveRaw(cfg,storage.index_i,storage.buffer_i,storage.symbols_i));}
     static ArchiveRaw bind(const StorageFor& storage, const builder_config_t& cfg, std::vector<binary_header_t::section_t>&& idx, std::vector<uint8_t>&& buff, const void* label_offset=nullptr)  {return Archive(ArchiveRaw(cfg,storage.index_i,storage.buffer_i, {(uint8_t*)label_offset,std::span<uint8_t>::extent}));}

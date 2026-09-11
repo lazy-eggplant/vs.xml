@@ -18,7 +18,7 @@
 
 namespace VS_XML_NS{
 
-template<builder_config_t cfg = {}>
+template<builder_config_t cfg = builder_config_t{}>
 struct ArchiveBuilder{
     private:
         DocumentBuilder<cfg> builder;

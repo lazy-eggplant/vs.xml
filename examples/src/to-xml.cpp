@@ -1,10 +1,8 @@
-//TODO: Adapt in a simple form, removing mio and using stream for the example.
-
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <ostream>
-#include <print>
+#include <vs-xml/fwd/print.hpp>
 
 #include <vs-xml/commons.hpp>
 #include <vs-xml/parser.hpp>

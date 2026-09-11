@@ -12,7 +12,7 @@ Please, read the rest of this readme to know more about its objectives and drawb
 - Linked to the previous point, pointers/iterators based on this tree structure are random access, no need to navigate the tree to reach them.
 - Good memory locality of the tree representation, making many operations on sub-trees trivial `memcpy`.
 - Configurable memory footprint, the internal representation can decrease size for most of its fields properly run on "lesser" systems or improve cache performance.
-- An efficient engine to perform queries on a document, all based on lazy evaluation.
+- An efficient query engine with an explicit builder API.
 - XML serialization and de-serialization.
 - Naive support for namespaces[^2].
 
@@ -24,18 +24,17 @@ Non objectives:
 
 ## Quick startup
 
-Just use it as any meson dependency by adding a wrap file to this repository.  
-Or installing it in your system first and using it as a system dependency.  
+Add it to your project as an [xmake](https://xmake.io) dependency, or install it and use it as a system dependency.
 
 Full code in the [examples folder](./examples/src/readme.cpp). You can easily build documents:
 ```cpp
 #include <vs-xml/document-builder.hpp>
 #include <vs-xml/filters.hpp>
 #include <vs-xml/query.hpp>
+#include <vs-xml/fwd/print.hpp>
 
 #include <iostream>
 #include <ranges>
-#include <print>
 
 using namespace xml;
 
@@ -61,21 +60,22 @@ Access the tree structure:
 ```cpp
   //Show comments only
   for(auto& it: document.root().children() | std::views::filter([](auto it){return it.type()==xml::type_t::COMMENT;})){
-    std::print("{}\n",it.value().value_or("-- Empty node --"));
+    fmt::print("{}\n",it.value().value_or("-- Empty node --"));
   }
 
   //Example of a helper filter (defined in `vs-xml/filters.hpp`)
   for(auto& it: document.root().children() | filters::name("base-node")){
-    std::print("{}\n",it.value().value_or("-- Empty node --"));
+    fmt::print("{}\n",it.value().value_or("-- Empty node --"));
   }
 ```
 
 Perform queries:
 ```cpp
-  auto query_a = xml::query::query_t{}/"base-node"/xml::query::accept();
+  xml::query::query_t query_a;
+  query_a.child().element("base-node").accept();
 
-  for(const auto& t : document.root() & query_a){
-      std::print("{} @ {}\n", (int)t.type(), t.addr());
+  for(const auto& t : query_a.collect(document.root())){
+      fmt::print("{} @ {}\n", (int)t.type(), t.addr());
   }
 
   return 0;
@@ -85,6 +85,30 @@ Perform queries:
 And more, like reading and saving them from binary files (usually memory mapped).  
 Learn more by checking the [examples](./examples/src/).  
 Doxygen and the generated documentation can be found in the [github pages](https://lazy-eggplant.github.io/vs.xml/next/) of this project.
+
+## C bindings
+
+A single-header C API is available as `<vs-xml/c.h>`. If you are not including
+the C++ library, compile `lib/c.cpp` (or define `VSXML_CXX_IMPL` and include the
+header from one C++ translation unit) and link against the library:
+
+```c
+#include <vs-xml/c.h>
+
+vsxml_error_t err = vsxml_Ok;
+vsxml_document* doc = vsxml_parse(xml, xml_len, &err);
+if(doc != NULL){
+    vsxml_node_t root = vsxml_document_root(doc);
+    vsxml_query* q = vsxml_query_create(&err);
+    vsxml_query_child(q);
+    vsxml_query_match_name(q, "item");
+    size_t n = vsxml_query_count(q, root);
+    vsxml_query_destroy(q);
+    vsxml_document_destroy(doc);
+}
+```
+
+See `test/c-interface.c` for a complete example.
 
 
 ## Supported platforms
@@ -133,7 +157,7 @@ However, examples, tests, optional utilities and benchmarks have some dependenci
 - [pugixml](https://pugixml.org/) since it is the one I am testing against in benchmarks; these two libraries are very different in scope, so comparative benchmarks can only be marginal and not very useful.
 
 Also, parts of the standard library can be replaced to gain some sweet benchmarking numbers (or to gain additional functionality):
-- [fmt](https://github.com/fmtlib/fmt) as an optional replacement of `std::format` and `std::print`, as their performance by comparison are [trash](https://github.com/lazy-eggplant/vs.xml/issues/8).
+- [fmt](https://github.com/fmtlib/fmt) is a required dependency and is used instead of `std::format`/`std::print`.
 - [gtl](https://github.com/greg7mdp/gtl) as an optional replacement for some containers in the standard C++ library, with focus on performance and a serializable memory representation.
 
 ## Licence

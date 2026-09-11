@@ -1,14 +1,12 @@
 #include <fstream>
 #include <iostream>
 #include <ostream>
-#include <print>
+#include <vs-xml/fwd/print.hpp>
 
 #include <stdexcept>
 #include <vs-xml/parser.hpp>
 #include <vs-xml/serializer.hpp>
 #include <vs-xml/tree-builder.hpp>
-
-#include <mio/mmap.hpp>
 
 //-----------------------------------------------------
 // Example main (for testing purposes)
@@ -28,7 +26,7 @@ int main() {
 </ns1:hello>
 )";
 
-    xml::TreeBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> builder;
+    xml::TreeBuilder<xml::builder_config_t{.symbols=xml::builder_config_t::COMPRESS_ALL}> builder;
     try {
         xml::Parser parser(std::span<char>(xmlData), builder);
         auto ret = parser.parse();
@@ -39,16 +37,12 @@ int main() {
     auto tree = *builder.close();
     tree.print(std::cout,{});
 
-    mio::mmap_source mmap("./assets/local/demo-0.xml"); //TODO: test failing due to file location when running as testsuite I guess.
-    std::span<char> w((char*)mmap.data(),mmap.size());
-
-    xml::TreeBuilder<{.symbols=xml::builder_config_t::COMPRESS_ALL}> builder2;
-    builder.begin("wrapper");
+    xml::TreeBuilder<xml::builder_config_t{.symbols=xml::builder_config_t::COMPRESS_ALL}> builder2;
+    builder2.begin("wrapper");
         builder2.inject(tree);
     builder2.end();
     auto tree2 = builder2.close();
-
-
+    if(tree2.has_value())tree2->print(std::cout,{});
 
     return 0;
 }

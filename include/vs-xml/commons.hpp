@@ -16,7 +16,6 @@
 
 #include <concepts>
 
-#include <endian.h>
 #include <expected>
 
 
@@ -53,7 +52,7 @@
  */
 namespace VS_XML_NS{
 
-constexpr static inline int format_major = 0; ///Current binary format major revision. Major revisions are breaking.
+constexpr static inline int format_major = 1; ///Current binary format major revision. Major revisions are breaking.
 constexpr static inline int format_minor = 0; ///Current binary format minor revision. Minor revisions are not breaking, but older does not support recent.
 
 #if VS_XML_LAYOUT == 0
@@ -157,8 +156,9 @@ struct __attribute__ ((packed)) binary_header_t{
     }
 
     constexpr inline size_t start_data() const {
-        auto padding = (size()+length_of_symbols%16==0)?0:(16-(size()+length_of_symbols)%16);
-        return size()+length_of_symbols+padding;
+        const size_t total = size() + length_of_symbols;
+        const size_t padding = (total % 16 == 0)?0:(16 - total % 16);
+        return total + padding;
     }
 };
 static_assert(offsetof(binary_header_t,sections)%sizeof(uint64_t)==0,"Misaligned section_t in header");
@@ -226,7 +226,7 @@ enum struct type_t : xml_enum_size_t{
 //TODO: At the moment not really used. Either remove this or fix it to do something. Anything.
 
 template<typename T>
-concept thing_i = requires(T self){
+concept thing_i = requires(T self, size_t idx){
     {self.type()} -> std::same_as<type_t>;
     {self.ns()} -> std::same_as<std::expected<sv,feature_t>>;
     {self.name()} -> std::same_as<std::expected<sv,feature_t>>;
@@ -243,6 +243,9 @@ concept thing_i = requires(T self){
     {self.has_parent()} -> std::same_as<bool>;
     {self.has_prev()} -> std::same_as<bool>;
     {self.has_next()} -> std::same_as<bool>;
+
+    //{self.child_count()} -> std::same_as<size_t>;
+    //{self.child_at(idx)} -> std::same_as<const unknown_t*>;
 };
 
 //TODO: specialization of Builder_t or just remove it?
@@ -268,6 +271,15 @@ struct Stored : private StorageFor<T>, T{
     {
         //static_assert(IStorable<T,decltype(args)...>);
     }
+
+    //Owning views must not be copied: the view spans alias the storage vectors,
+    //so a copy would dangle. Move transfers the storage and keeps the spans valid.
+    Stored(const Stored&) = delete;
+    Stored(Stored&) = delete;
+    Stored& operator=(const Stored&) = delete;
+    Stored& operator=(Stored&) = delete;
+    Stored(Stored&&) = default;
+    Stored& operator=(Stored&&) = default;
 };
 
 ///Namespace hosting wrapped versions for most structures with internal data ownership (no good for embedded).

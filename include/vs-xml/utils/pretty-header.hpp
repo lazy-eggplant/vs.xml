@@ -12,8 +12,9 @@
 
 #include "vs-xml/commons.hpp"
 #include <cstdint>
+#include <cctype>
 #include <span>
-#include <print>
+#include <vs-xml/fwd/print.hpp>
 
 // ANSI escape code definitions for colors
 namespace colors {
@@ -50,7 +51,7 @@ void print_header_colors(std::span<const uint8_t> data) {
 
     for (size_t offset = 0; offset < data.size(); offset += groupSize) {
         // Print the offset (address) header
-        std::print("{:04x}: ", offset);
+        fmt::print("{:04x}: ", offset);
 
         // Determine how many bytes are in this group.
         size_t bytesInGroup = std::min(groupSize, data.size() - offset);
@@ -61,23 +62,23 @@ void print_header_colors(std::span<const uint8_t> data) {
                 size_t byte_offset = offset + i;
                 const char* color = getColorForOffset(byte_offset);
                 // Print the colored two-digit hex and then reset color after each byte.
-                std::print("{}{:02x}{} ", color, data[byte_offset], colors::reset);
+                fmt::print("{}{:02x}{} ", color, data[byte_offset], colors::reset);
             } else {
                 // Add spacing if no data.
-                std::print("   ");
+                fmt::print("   ");
             }
         }
 
         // Print ASCII representation
-        std::print(" | ");
+        fmt::print(" | ");
         for (size_t i = 0; i < bytesInGroup; ++i) {
             uint8_t byte = data[offset + i];
             char ch = std::isprint(byte) ? static_cast<char>(byte) : '.';
             // Use same color as the hex part.
             const char* color = getColorForOffset(offset + i);
-            std::print("{}{}{}", color, ch, colors::reset);
+            fmt::print("{}{}{}", color, ch, colors::reset);
         }
-        std::print("\n");
+        fmt::print("\n");
     }
 }
 
@@ -87,7 +88,7 @@ void print_header(std::span<const uint8_t> data) {
 
     for (size_t offset = 0; offset < data.size(); offset += groupSize) {
         // Print the offset for the current line.
-        std::print("{:04x}: ", offset);
+        fmt::print("{:04x}: ", offset);
 
         // Determine how many bytes are in this group.
         size_t bytesInGroup = std::min(groupSize, data.size() - offset);
@@ -96,28 +97,28 @@ void print_header(std::span<const uint8_t> data) {
         for (size_t i = 0; i < groupSize; ++i) {
             if (i < bytesInGroup) {
                 // Print two-digit hex
-                std::print("{:02x} ", data[offset + i]);
+                fmt::print("{:02x} ", data[offset + i]);
             } else {
                 // Maintain spacing for alignment when group is incomplete.
-                std::print("   ");
+                fmt::print("   ");
             }
         }
 
         // Append a separator before printing the ASCII characters.
-        std::print(" | ");
+        fmt::print(" | ");
 
         // Print the ASCII representation.
         for (size_t i = 0; i < bytesInGroup; ++i) {
             uint8_t byte = data[offset + i];
             // Use std::isprint to check if the byte is a printable ASCII character.
             if (std::isprint(byte)) {
-                std::print("{}", static_cast<char>(byte));
+                fmt::print("{}", static_cast<char>(byte));
             } else {
-                std::print(".");
+                fmt::print(".");
             }
         }
 
         // End the line.
-        std::print("\n");
+        fmt::print("\n");
     }
 }

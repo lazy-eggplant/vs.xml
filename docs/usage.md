@@ -1,34 +1,29 @@
 ## Installing
 
-This library is meant to be use either as a system dependency, or as a meson subproject.  
-The second option will grant you more flexibility in case you need control over the memory layout or other configuration flags.  
+This library is meant to be used either as a system dependency, or built as an xmake subproject/package.  
+The second option grants more flexibility if you need control over the memory layout or other configuration flags.  
 
 To our knowledge, this library is not distributed by any distribution. To install it on your system you will probably want to write something like:
 
 ```sh
-meson setup build           #You might want to introduce more flags to setup the build type to release, lto optimizations et cetera.
-meson install -C build      #You might want to define DESTDIR before to perform a semi-dry run.
+xmake f -m release          #Add flags such as --with_tools=y to build the command line utilities.
+xmake
+xmake install -o /usr/local #Set the desired prefix.
 ```
 
-A simplified makefile is available, which sets some reasonable defaults, but uses meson under the hood.  
-
-There is also a CMake file (with reduce capabilities), but it is not really used by any of my downstream applications and might end up being broken due to its limited testing.  
+A simplified makefile is available, which sets some reasonable defaults and wraps xmake.
 
 Tarballs will also be offered for some distributions as part of future releases.  
 
 ## As a dependency
 
-Feel free to use this as baseline for your wrap file:
+With [xmake](https://xmake.io):
 
-```meson
-[wrap-git]
-url = https://github.com/lazy-eggplant/vs.xml
-revision = v0.2.5   #Make sure to use the latest
-depth = 1
-method = meson
-[provide]
-vs_xml = vs_xml_dep
+```lua
+add_requires("vs.xml")
 ```
+
+Or, from a local checkout, point xmake at the project directly.
 
 ### Configuration
 Read [this](./configuration.md) document about configuration.

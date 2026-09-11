@@ -1,15 +1,30 @@
-- [ ] Deprecate this file plz.
+# Milestones
+
+## `v0.3.1`
+
+- [x] Harden binary loading (bounds, sections, symbols, alignment).
+- [x] Ownership fixes (`StorageFor` moves, `Stored` move-only).
+- [x] Parser correctness (error propagation, end-tag matching, depth limit, whitespace, invalid names).
+- [x] Serializer consolidation + pretty-printing.
+- [x] Query redesign: explicit builder (`xml::query::query_t`).
+- [x] C bindings (`vs-xml/c.h`).
+- [x] xmake build and `vs-xml/` include layout.
+- [ ] Documentation coverage.
+
+## Query engine
+
+- [x] Explicit builder API replacing the earlier generator.
+- [x] Single canonical query API (the competing `QueryBuilder`/`query-new` drafts were removed).
+- [ ] Serializable queries with simple hashing.
 - [ ] Random access to attributes for the iterator.
-- [ ] Tree builder method to use injection maps when generating the tree.
+- [ ] Capturing tree-queries.
 
-## Query redesign
+## Later
 
-The first implementation of queries was functional but also extremely bad to work with.  
-It is plagued by issues with objects lifetime, coroutines in C++ are nice to use but quite bad in terms of memory footprint for this application.  
-And we don't have properly serializable queries with simple hashing...  
-
-So it is time to decide what was good about this first implementation and what to do so that the experience of the next is going to be better.  
-
-- Design queries to work with the query builder, not as an afterthought but since the very beginning. The design work being done in [here](docs/specs/query-builder.md) must be extended.
-- Drop co-routines. They were good to sketch a quick working solution, they are awful to harden against memory allocations and when handling issues related to their memory footprint.
-- Keep the high level syntax the same, it is actually quite good I think.
+- [ ] `validate_xml_label` performance / disable flag.
+- [ ] Remove recursive calls in `Parser` and `print`.
+- [ ] Remove the stack from `TreeBuilder`.
+- [ ] Archive: order documents by name, and CLI compress/decompress.
+- [ ] Replace the packed header / flexible array with a standard layout (next format major).
+- [ ] Abstract `std` containers consistently via the `fwd/` aliases.
+- [ ] Embedded-friendly and offloading trackers.

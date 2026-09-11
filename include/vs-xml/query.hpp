@@ -3,501 +3,225 @@
 /**
  * @file query.hpp
  * @author karurochari
- * @brief Queries on a tree.
+ * @brief Tree queries.
  * @date 2025-05-18
- * 
+ *
  * @copyright Copyright (c) 2025
- * 
+ *
+ * @details
+ * The query API is an explicit, handle-free builder: steps are appended with
+ * plain method calls and evaluated iteratively, with a predictable and bounded
+ * memory footprint.
+ *
+ * Steps, in order:
+ *   - accept()   : emit the current node and stop the branch.
+ *   - child()    : move to the children of the current element.
+ *   - descend()  : move to every descendant of the current element.
+ *   - fork()     : stay on the current node and every descendant.
+ *   - match_type/match_ns/match_name/match_value/match_text/match_attr:
+ *                  filter the current node; the branch is pruned on no match.
+ *
+ * A branch that reaches the end of the steps is emitted implicitly.
  */
 
-//Temporary add custom implementation here later
 #include <cstddef>
-#include <generator>
+#include <cstdint>
 #include <functional>
+#include <string>
 #include <string_view>
 #include <variant>
 #include <vector>
+
 #include <vs-xml/commons.hpp>
+#include <vs-xml/fwd/vector.hpp>
 #include <vs-xml/wrp-node.hpp>
 
 namespace VS_XML_NS{
 namespace query{
 
-template<size_t N = 0>
-struct query_t;
-
-//TODO: Hide it somewhere 
-//TODO: after it is verified working, move to the custom allocator plz.
+using node_t = wrp::base_t<unknown_t>;
 
 /**
- * @brief generator-like implementation for query results.
- * @details similar to std::generator, but using a custom allocation scheme
+ * @brief A single string filter: wildcard, exact match or predicate.
  */
-template<typename T>
-class generator {
-public:
-    struct promise_type;
+struct filter_t{
+    using predicate_t = std::move_only_function<bool(std::string_view) const>;
 
-    using handle_type = std::coroutine_handle<promise_type>;
-    using internal_type = T;
+    std::variant<std::monostate, std::string_view, predicate_t> value;
 
-    // The promise type required by the coroutine.
-    struct promise_type {
-        uint8_t buffer[sizeof(internal_type)];
-        std::exception_ptr exception;
+    filter_t() = default;
+    filter_t(std::string_view s):value(s){}
+    filter_t(const char* s):value(std::string_view(s)){}
+    explicit filter_t(predicate_t f):value(std::move(f)){}
 
-        // Overload operator new to allocate from our custom memory pool.
-        static void* operator new(std::size_t size) noexcept{
-            //if (void* ptr = globalPool.allocate(size)) {
-            //    return ptr;
-            //}
-            // Fall back to global new if pool is exhausted.
-            return ::operator new(size);
-            //return nullptr;
-        }
-
-        // Matching delete operator.
-        static void operator delete(void* ptr, std::size_t size) {
-            //globalPool.deallocate();
-            // In this demo we are not reclaiming memory from the pool.
-            ::operator delete(ptr);
-            //return;
-        }
-        
-        static auto get_return_object_on_allocation_failure() { return generator{nullptr}; }
-        auto get_return_object() { return generator{handle_type::from_promise(*this)}; }
-        auto initial_suspend() { return std::suspend_always{}; }
-        auto final_suspend() noexcept { return std::suspend_always{}; }
-        void unhandled_exception() { exception = std::current_exception(); /*std::exit(1);*/ }
-        auto yield_value(internal_type value) {
-            new(buffer) internal_type(value);
-            //current_value = value;
-            return std::suspend_always{};
-        }
-        void return_void() {}
-    };
-
-    // Iterator class to make the generator conform to the range concept.
-    class iterator {
-    public:
-        using coro_handle = std::coroutine_handle<promise_type>;
-        using iterator_category = std::input_iterator_tag;
-        using value_type = T;
-        using difference_type = std::ptrdiff_t;
-
-        iterator() noexcept : handle(nullptr) {}
-
-        explicit iterator(coro_handle h) : handle(h) {
-            // Preload the first value: resume the coroutine.
-            move_to_next();
-        }
-
-        iterator& operator++() {
-            move_to_next();
-            return *this;
-        }
-        // Postfix ++
-        iterator operator++(int) {auto t = *this; move_to_next(); return t;}
-
-        const T& operator*() const {
-            return *(T*)handle.promise().buffer;
-        }
-        const T* operator->() const {
-            return std::addressof(operator*());
-        }
-
-        bool operator==(std::default_sentinel_t) const {
-            return !handle || handle.done();
-        }
-
-    private:
-        void move_to_next() {
-            if (handle) {
-                handle.resume();
-                if (handle.promise().exception) {
-                    std::rethrow_exception(handle.promise().exception);
-                }
-            }
-        }
-
-        coro_handle handle;
-    };
-
-    using iterator_t = iterator;
-
-    generator() noexcept : handle(nullptr) {}
-    explicit generator(std::coroutine_handle<promise_type> h) : handle(h) {}
-
-    // Disable copying but allow moving.
-    generator(const generator&) = delete;
-    generator(generator&& other) noexcept : handle(other.handle) {
-        other.handle = nullptr;
+    bool match(std::string_view got) const{
+        if(std::holds_alternative<std::monostate>(value))return true;
+        if(std::holds_alternative<std::string_view>(value))return std::get<std::string_view>(value)==got;
+        return std::get<predicate_t>(value)(got);
     }
-    generator& operator=(const generator&) = delete;
-    generator& operator=(generator&& other) noexcept {
-        if (this != &other) {
-            if (handle)
-                handle.destroy();
-            handle = other.handle;
-            other.handle = nullptr;
-        }
+};
+
+///Wildcard filter, matching any value.
+inline filter_t any(){return filter_t{};}
+///Exact-match filter.
+inline filter_t eq(std::string_view s){return filter_t{s};}
+
+/**
+ * @brief A compiled path query.
+ */
+struct query_t{
+    enum class op : uint8_t{
+        ACCEPT, CHILD, DESCEND, FORK,
+        TYPE, MATCH_NS, MATCH_NAME, MATCH_VALUE, MATCH_TEXT, MATCH_ATTR
+    };
+
+    struct step_t{
+        op code;
+        type_t type = type_t::UNKNOWN;
+        filter_t ns{}, name{}, value{};
+    };
+
+    vector<step_t> steps;
+
+    query_t& accept(){steps.push_back({op::ACCEPT});return *this;}
+    query_t& child(){steps.push_back({op::CHILD});return *this;}
+    query_t& descend(){steps.push_back({op::DESCEND});return *this;}
+    query_t& fork(){steps.push_back({op::FORK});return *this;}
+
+    query_t& match_type(type_t t){steps.push_back({op::TYPE,t});return *this;}
+    query_t& match_ns(filter_t f){
+        steps.push_back({op::MATCH_NS,type_t::UNKNOWN,std::move(f)});
         return *this;
     }
-    
-    ~generator() {
-        if (handle)
-            handle.destroy();
+    query_t& match_name(filter_t f){
+        steps.push_back({op::MATCH_NAME,type_t::UNKNOWN,{},std::move(f)});
+        return *this;
     }
-    
-    iterator_t begin() {
-        return iterator_t{ handle };
+    query_t& match_value(filter_t f){
+        steps.push_back({op::MATCH_VALUE,type_t::UNKNOWN,{},std::move(f)});
+        return *this;
     }
-    std::default_sentinel_t end() {
-        return {};
+    query_t& match_text(filter_t f){
+        steps.push_back({op::MATCH_TEXT,type_t::UNKNOWN,{},std::move(f)});
+        return *this;
     }
-    
+    query_t& match_attr(filter_t ns, filter_t name, filter_t value){
+        steps.push_back({op::MATCH_ATTR,type_t::UNKNOWN,std::move(ns),std::move(name),std::move(value)});
+        return *this;
+    }
+
+    ///Convenience for matching an element by local name, in any namespace.
+    query_t& element(filter_t name = {}){
+        match_type(type_t::ELEMENT);
+        return match_name(std::move(name));
+    }
+
+    /**
+     * @brief Run the query over a subtree, invoking `fn` for every accepted node.
+     */
+    template<typename Fn>
+    void for_each(node_t root, Fn&& fn) const{
+        auto f = [&](node_t n) -> bool { fn(n); return true; };
+        run(root, 0, f);
+    }
+
+    /**
+     * @brief Like for_each, but `fn` returns false to stop the traversal early.
+     * @return true if the traversal completed, false if it was stopped.
+     */
+    template<typename Fn>
+    bool for_each_while(node_t root, Fn&& fn) const{
+        auto f = std::forward<Fn>(fn);
+        return run(root, 0, f);
+    }
+
+    ///Collect all accepted nodes, in document order.
+    [[nodiscard]] vector<node_t> collect(node_t root) const{
+        vector<node_t> out;
+        for_each(root,[&](node_t n){out.push_back(n);});
+        return out;
+    }
+
+    ///True if at least one node is accepted.
+    [[nodiscard]] bool has(node_t root) const{
+        bool found = false;
+        for_each_while(root,[&](node_t){found = true; return false;});
+        return found;
+    }
+
 private:
-    std::coroutine_handle<promise_type> handle;
-};
-
-using result_t = generator<wrp::base_t<unknown_t>>;
-
-struct token_t{
-    typedef std::variant<std::monostate,std::string_view,std::function<bool(std::string_view)>>  operand_t;
-
-    enum type_t : uint8_t{
-        /*Empty*/
-        ACCEPT, 
-        NEXT, 
-        FORK,
-        /*type_filter*/
-        TYPE,
-        /*Unary sv*/
-        MATCH_NS, MATCH_NAME, MATCH_VALUE, MATCH_ALL_TEXT,
-        /*Attr*/
-        MATCH_ATTR
-    };
-    
-    template<type_t T>
-    struct empty_t{};
-
-    template<type_t T>
-    struct single_t : operand_t{};
-
-    template<type_t T>
-    struct type_filter_t{
-        uint8_t is_element:1 = false ;
-        uint8_t is_comment:1 = false ;
-        uint8_t is_proc:1 = false ;
-        uint8_t is_text:1 = false ;
-        uint8_t is_cdata:1 = false ;
-        uint8_t is_marker:1 = false ;
-    };
-
-    template<type_t T>
-    struct attr_t{
-        operand_t name = std::monostate{};
-        operand_t value = std::monostate{};
-        operand_t ns = std::monostate{};
-    };
-
-    using args_t = 
-        std::variant<
-            empty_t<ACCEPT>,
-            empty_t<NEXT>,
-            empty_t<FORK>,
-            type_filter_t<TYPE>,
-            single_t<MATCH_NS>,
-            single_t<MATCH_NAME>,
-            single_t<MATCH_VALUE>,
-            single_t<MATCH_ALL_TEXT>,
-            attr_t<MATCH_ATTR>
-        > ;
-
-    args_t args;
-
-    constexpr token_t(const args_t& t={}):args(t){}
-};
-
-
-constexpr static token_t accept() {
-    return {token_t::empty_t<token_t::ACCEPT>{}};
-}
-
-constexpr static token_t fork() {
-    return {token_t::empty_t<token_t::FORK>{}};
-}
-
-constexpr static token_t next() {
-    return {token_t::empty_t<token_t::NEXT>{}};
-}
-
-constexpr static token_t type(token_t::type_filter_t<token_t::TYPE> arg) {
-    return {arg};
-}
-
-constexpr static token_t match_ns(token_t::single_t<token_t::MATCH_NS> arg) {
-    return {arg};
-}
-
-constexpr static token_t match_name(token_t::single_t<token_t::MATCH_NAME> arg) {
-    return {arg};
-}
-
-constexpr static token_t match_value(token_t::single_t<token_t::MATCH_VALUE> arg) {
-    return {arg};
-}
-
-constexpr static token_t match_all_text(token_t::single_t<token_t::MATCH_ALL_TEXT> arg) {
-    return {arg};
-}
-
-constexpr static token_t match_attr(token_t::attr_t<token_t::MATCH_ATTR> arg) {
-    return {arg};
-}
-
-
-extern std::pair<std::string_view, std::string_view> split_on_colon(std::string_view input);
-
-template<size_t N>
-struct query_t{
-    using container_type = std::array<token_t,N>;
-
-    container_type tokens;
-    size_t current=0;
-
-    constexpr query_t& operator * (std::string_view str){
-        if(str=="*") return *this;
-        else if(str=="**") return *this * fork();
-        else{
-            auto [ns,name] = split_on_colon(str);
-            if(ns=="?" && name=="?") return *this * type({.is_element=true});
-            else if (ns=="?") return *this * type({.is_element=true}) * match_name({name});
-            else if (name=="?") return *this * type({.is_element=true}) * match_ns({ns});
-            else return *this * type({.is_element=true}) * match_ns({ns}) * match_name({name});
+    template<typename Fn>
+    bool run(node_t node, size_t idx, Fn& fn) const{
+        for(size_t i=idx;i<steps.size();i++){
+            const step_t& s = steps[i];
+            switch(s.code){
+                case op::ACCEPT:
+                    return fn(node);
+                case op::CHILD:
+                    if(node.type()==type_t::ELEMENT)
+                        for(auto& c : node.children()) if(!run(c, i+1, fn))return false;
+                    return true;
+                case op::DESCEND:
+                    if(node.type()==type_t::ELEMENT)
+                        for(auto& c : node.children()) if(!subtree(c, true, i+1, fn))return false;
+                    return true;
+                case op::FORK:
+                    if(!run(node, i+1, fn))return false;
+                    if(node.type()==type_t::ELEMENT)
+                        for(auto& c : node.children()) if(!subtree(c, true, i+1, fn))return false;
+                    return true;
+                case op::TYPE:
+                    if(node.type()!=s.type)return true;
+                    break;
+                case op::MATCH_NS:
+                    if(!optional_match(s.ns, node.ns()))return true;
+                    break;
+                case op::MATCH_NAME:
+                    if(!optional_match(s.name, node.name()))return true;
+                    break;
+                case op::MATCH_VALUE:
+                    if(!optional_match(s.value, node.value()))return true;
+                    break;
+                case op::MATCH_TEXT:
+                    if(!s.value.match(node_text(node)))return true;
+                    break;
+                case op::MATCH_ATTR:
+                    if(!match_attr_node(node, s))return true;
+                    break;
+            }
         }
+        return fn(node); //Implicit accept at the end of the query.
     }
 
-    constexpr query_t& operator * (const token_t& tkn){tokens[current]=tkn;current++;return *this;}
-
-    constexpr inline query_t& operator / (std::string_view str){
-        return *this * next() * str;
+    template<typename Fn>
+    bool subtree(node_t node, bool include, size_t idx, Fn& fn) const{
+        if(include && !run(node, idx, fn))return false;
+        if(node.type()==type_t::ELEMENT)
+            for(auto& c : node.children()) if(!subtree(c, true, idx, fn))return false;
+        return true;
     }
 
-    constexpr inline query_t& operator / (const token_t& tkn){
-        return *this * next() * tkn;
+    template<typename Exp>
+    static bool optional_match(const filter_t& f, const Exp& e){
+        if(!e.has_value())return std::holds_alternative<std::monostate>(f.value);
+        return f.match(std::string_view(*e));
     }
 
-};
-
-template<>
-struct query_t<0>{
-    using container_type = std::vector<token_t>;
-
-    container_type tokens;
-
-    constexpr query_t& operator * (std::string_view str){
-        if(str=="*") return *this;
-        else if(str=="**") return *this * fork();
-        else{
-            auto [ns,name] = split_on_colon(str);
-            if(ns=="?" && name=="?") return *this * type({.is_element=true});
-            else if (ns=="?") return *this * type({.is_element=true}) * match_name({name});
-            else if (name=="?") return *this * type({.is_element=true}) * match_ns({ns});
-            else return *this * type({.is_element=true}) * match_ns({ns}) * match_name({name});
+    static bool match_attr_node(node_t node, const step_t& s){
+        if(node.type()!=type_t::ELEMENT)return false;
+        for(auto& a : node.attrs()){
+            if(optional_match(s.ns,a.ns()) && optional_match(s.name,a.name()) && optional_match(s.value,a.value()))
+                return true;
         }
-    }
-
-    constexpr query_t& operator * (const token_t& tkn){tokens.push_back(tkn);return *this;}
-
-    constexpr inline query_t& operator / (std::string_view str){
-        return *this * next() * str;
-    }
-
-    constexpr inline query_t& operator / (const token_t& tkn){
-        return *this * next() * tkn;
-    }
-
-};
-
-
-template<size_t N>
-result_t is(wrp::base_t<unknown_t> root, typename query_t<N>::container_type::const_iterator begin, typename query_t<N>::container_type::const_iterator end);
-
-template<size_t N=0>
-inline result_t is(wrp::base_t<unknown_t> root, const query_t<N>& query) {
-    return is<N>(root, query.tokens.begin(), query.tokens.end());
-}
-
-template<size_t N=0>
-inline result_t is(result_t&& src , const query_t<N>& query) {
-    for(auto element : src){
-        for(auto i: is<N>(element, query.tokens.begin(), query.tokens.end())){
-            co_yield i;
-        }
-    }
-    co_return;
-}
-
-template<size_t N=0>
-inline result_t operator&(wrp::base_t<unknown_t> src, const query_t<N>& query){return is(src,query);}
-
-template<size_t N=0>
-inline result_t operator&(result_t&& src, const query_t<N>& query){return is(std::move(src),query);}
-
-//TODO: not tested
-
-template<size_t N=0>
-inline result_t has(wrp::base_t<unknown_t> root, const query_t<N>& query) {
-    auto b = false;
-    for(auto c : is<N>(root, query.tokens.begin(), query.tokens.end())){b=true;break;}
-    if(b)co_yield root;
-    co_return;
-}
-
-template<size_t N=0>
-inline result_t has(result_t&& src, const query_t<N>& query) {
-    for(auto element : src){
-        //Does this stop after the first match is found, as that is sufficient? Should we also return those matches somehow?
-        auto b = false;
-        for(auto c : is<N>(element, query.tokens.begin(), query.tokens.end())){b=true;break;}
-        if(b)co_yield element;
-    }
-    co_return;
-}
-
-template<size_t N=0>
-inline result_t operator|(wrp::base_t<unknown_t> src, const query_t<N>& query){return has(src,query);}
-
-template<size_t N=0>
-inline result_t operator|(result_t&& src, const query_t<N>& query){return has(std::move(src),query);}
-
-}
-}
-
-template<> 
-inline constexpr bool std::ranges::enable_borrowed_range<VS_XML_NS::query::result_t> = true;
-
-
-
-namespace VS_XML_NS{
-    namespace query{
-    
-    static inline bool expr_helper(const auto& pattern, const auto& check){
-        if(std::holds_alternative<std::string_view>(pattern)){
-            if(check.has_value() && *check==std::get<std::string_view>(pattern))return true; 
-        }
-        else if(std::holds_alternative<std::function<bool(std::string_view)>>(pattern)){
-            if(!check.has_value() && std::get<std::function<bool(std::string_view)>>(pattern)(*check))return true;
-        }
-        else return true;
         return false;
     }
-    
-    template<size_t N>
-    result_t is(wrp::base_t<unknown_t> root, typename query_t<N>::container_type::const_iterator begin, typename query_t<N>::container_type::const_iterator end) {
-        for(auto current = begin;current!=end;current++){
-            //Accept the current element
-            if (std::holds_alternative<token_t::empty_t<token_t::ACCEPT>>(current->args)) {
-                co_yield root;
-                co_return;
-            }
-            //Continue on children if current is element
-            else if (std::holds_alternative<token_t::empty_t<token_t::NEXT>>(current->args)) {
-                if(root.type()==type_t::ELEMENT) for (auto& child : root.children()) {
-                    for (auto n : is<N>(child, current+1, end)) {
-                        co_yield n;
-                    }
-                }
-                co_return;
-            }
-            //Continue from here on, FORK will just be consumed on the current branch AND on children if current is element, 
-            else if (std::holds_alternative<token_t::empty_t<token_t::FORK>>(current->args)) {
-                if(root.type()==type_t::ELEMENT){
-                    for (auto& child : root.children()) {
-                        for (auto n : is<N>(child, current, end)) {
-                            co_yield n;
-                        }
-                    }
-                }
-                else co_return;
-            }
-            //Filter based on type
-            else if (std::holds_alternative<token_t::type_filter_t<token_t::TYPE>>(current->args)) {
-                auto type = std::get<token_t::type_filter_t<token_t::TYPE>>(current->args);
-                bool match = false;
-                switch(root.type()){
-                    case type_t::ELEMENT:
-                        if(type.is_element)match=true;
-                        break;
-                    case type_t::TEXT:
-                        if(type.is_text)match=true;
-                        break;
-                    case type_t::CDATA:
-                        if(type.is_cdata)match=true;
-                        break;
-                    case type_t::COMMENT:
-                        if(type.is_comment)match=true;
-                        break;
-                    case type_t::PROC:
-                        if(type.is_proc)match=true;
-                        break;
-                    case type_t::MARKER:
-                        if(type.is_marker)match=true;
-                        break;
-                    default:
-                        break;
-                }
-                if(!match) co_return;   //All matches failing. Fail branch.
-            }
-            //Match NS
-            else if ( std::holds_alternative<token_t::single_t<token_t::MATCH_NS>>(current->args) ){
-                if(!expr_helper(std::get<token_t::single_t<token_t::MATCH_NS>>(current->args),root.ns())) co_return; 
-            }
-            //Match name
-            else if ( std::holds_alternative<token_t::single_t<token_t::MATCH_NAME>>(current->args) ){
-                if(!expr_helper(std::get<token_t::single_t<token_t::MATCH_NAME>>(current->args),root.name())) co_return; 
-            }
-            //Match value
-            else if ( std::holds_alternative<token_t::single_t<token_t::MATCH_VALUE>>(current->args) ){
-                if(!expr_helper(std::get<token_t::single_t<token_t::MATCH_VALUE>>(current->args),root.value())) co_return; 
-            }
-            //Match text, not implemented as .text() is missing upstream.
-            /*
-            else if ( std::holds_alternative<token_t::single_t<token_t::MATCH_ALL_TEXT>>(current->args) ){ 
-                auto pattern = std::get<token_t::single_t<token_t::MATCH_VALUE>>(current->args);
-                auto check = root.text();
-                if(std::holds_alternative<std::string_view>(pattern)){
-                    if(check==std::get<std::string_view>(pattern));
-                    else co_return;
-                }
-                else if(std::holds_alternative<std::function<bool(std::string_view)>>(pattern)){
-                    if(std::get<std::function<bool(std::string_view)>>(pattern)(check));
-                    else co_return;
-                }
-                else co_return;
-            }
-            */
-            //TODO: right now attribute matching has k*O(n) complexity if k attributes must be tested.
-            //By looking ahead it is possible to check if there are more attributes to be tested, and perform the operation in just O(n)
-            //Match attribute
-            else if (std::holds_alternative<token_t::attr_t<token_t::MATCH_ATTR>>(current->args)) {
-                auto pattern = std::get<token_t::attr_t<token_t::MATCH_ATTR>>(current->args);
-                bool found = false;
-                if(root.type()!=type_t::ELEMENT)co_return;
-                for(auto& attr: root.attrs()){
-                    if(expr_helper(pattern.ns,attr.ns()) && expr_helper(pattern.name,attr.name()) && expr_helper(pattern.value,attr.value())){
-                        found=true;break;
-                    }
-                }
-                if(!found)co_return;
-            }
-            else{
-                //Failed commands will prevent propagation.
-                co_return;
-            }
-        }
+
+    static std::string node_text(node_t node){
+        std::string out;
+        for(char c : node.text()) out.push_back(c);
+        return out;
     }
-    
+};
+
 }
 }

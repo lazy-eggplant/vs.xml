@@ -1,10 +1,8 @@
-//TODO: Adapt in a simple form, removing mio and using stream for the example.
-
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <ostream>
-#include <print>
+#include <vs-xml/fwd/print.hpp>
 
 #include <vs-xml/commons.hpp>
 #include <vs-xml/parser.hpp>
@@ -52,5 +50,5 @@ int encode(std::filesystem::path input, std::filesystem::path output){
 
 int main(int argc, const char* argv[]) {
     if(argc<3){std::cerr<<"Wrong usage, pass input file and output file as args.";return 1;}
-    return encode<{.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true}>(argv[1],argv[2]);
+    return encode<xml::builder_config_t{.symbols=xml::builder_config_t::COMPRESS_ALL,.raw_strings=true}>(argv[1],argv[2]);
 }

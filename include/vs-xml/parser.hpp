@@ -36,6 +36,12 @@ public:
         static_assert(Builder_t::configs.raw_strings, "Cannot pass immutable buffer if the input strings might need mutation");
     }
 
+    Parser(std::span<const char> data, Builder_t &builder)
+    : data_(data.data(),data.size()), pos_(0), builder_(builder)
+    {
+        static_assert(Builder_t::configs.raw_strings, "Cannot pass immutable buffer if the input strings might need mutation");
+    }
+
     struct error_t{
         enum ErrorCode {
             OK = 0,
@@ -49,7 +55,10 @@ public:
             MISSING_GT_AFTER_TAG,   // "Expected '>' after tag name and attributes."
             MISSING_GT_IN_END_TAG,  // "Expected '>' in closing tag."
             UNEXPECTED_EOF,         // "Unexpected end of XML content."
-            NODE_NOT_ALLOWED_ROOT   // "Node type not allowed in the document root."
+            NODE_NOT_ALLOWED_ROOT,  // "Node type not allowed in the document root."
+            MISMATCHED_END_TAG,     // "Closing tag does not match the open element."
+            DEPTH_EXCEEDED,         // "Maximum element nesting depth exceeded."
+            INVALID_NAME            // "Invalid XML name for an element or attribute."
         } code;
         size_t ctx; // current position in the data
         
@@ -67,6 +76,9 @@ public:
                 case MISSING_GT_IN_END_TAG:     return "Expected '>' in closing tag.";
                 case UNEXPECTED_EOF:            return "Unexpected end of XML content.";
                 case NODE_NOT_ALLOWED_ROOT:     return "Node type not allowed in the document root.";
+                case MISMATCHED_END_TAG:        return "Closing tag does not match the open element.";
+                case DEPTH_EXCEEDED:            return "Maximum element nesting depth exceeded.";
+                case INVALID_NAME:              return "Invalid XML name for an element or attribute.";
                 default:                        return "Unknown error.";
             }
         }
@@ -74,20 +86,21 @@ public:
 
     // Start parsing from the beginning of the XML document.
     // Throws an exception on error.
-    [[nodiscard("Don't discard the return value for parsing!")]] std::expected<void, error_t> parse() noexcept{
+    [[nodiscard("Don't discard the return value for parsing!")]] std::expected<void, error_t> parse() {
         if constexpr(!Builder_t::is_document) {
             skip_whitespace();
             // Expecting the first tag to begin with '<'
             if (!consume('<'))
                 return std::unexpected(error_t{error_t::MISSING_LT_BEGIN, pos_});
-            parseElement<Builder_t::is_document>();
+            if(auto ret = parseElement<Builder_t::is_document>(); !ret.has_value())return ret;
         }
         else {
             while (pos_ < data_.size()) {
                 skip_whitespace();
+                if (pos_ >= data_.size()) break;
                 if (!consume('<'))
                     return std::unexpected(error_t{error_t::MISSING_LT_BEGIN, pos_});
-                parseElement<Builder_t::is_document>();
+                if(auto ret = parseElement<Builder_t::is_document>(); !ret.has_value())return ret;
             }
         }
         return {};
@@ -98,6 +111,10 @@ private:
     std::string_view data_;
     size_t pos_;
     Builder_t &builder_;
+
+    //Guard against pathological nesting that would overflow the stack.
+    static constexpr size_t max_depth_ = 1024;
+    size_t depth_ = 0;
 
     //-----------------------------------------------------
     // Helper: Split a qualified name "prefix:local" into namespace and local name.
@@ -152,7 +169,15 @@ private:
 
     // Main element parser. It assumes that a '<' has already been consumed.
     template<bool ROOT=false>
-    std::expected<void, error_t> parseElement() noexcept{
+    std::expected<void, error_t> parseElement() {
+        if(depth_ >= max_depth_)
+            return std::unexpected(error_t{error_t::DEPTH_EXCEEDED, pos_});
+        struct depth_guard_t{
+            size_t& d;
+            depth_guard_t(size_t& d):d(d){++d;}
+            ~depth_guard_t(){--d;}
+        } depth_guard{depth_};
+
         skip_whitespace();
         if (pos_ >= data_.size())
             return {};
@@ -197,22 +222,23 @@ private:
                 pos_ = cdataEnd + 3;
                 return {};
             } 
-            else if(!ROOT){
-                // Other declarations - skip until '>'
+            else {
+                // Other declarations (DOCTYPE, etc.) - skipped until '>'.
                 get_until('>');
                 consume('>');
                 return {};
             } 
-            else return std::unexpected(error_t{error_t::NODE_NOT_ALLOWED_ROOT, pos_});
-      
+
         }
 
         // Standard element:
         // Parse element qualified name. Allowed characters: alphanumeric, '_', ':', '-'
         auto qualifiedName = get_while([](char c) {
-            return std::isalnum(static_cast<unsigned char>(c)) || c == '_' || c == ':' || c == '-';
+            return std::isalnum(static_cast<unsigned char>(c)) || c == '_' || c == ':' || c == '-' || c == '.';
         });
         auto [localName, ns] = split_namespace(qualifiedName);
+        if(!serialize::is_valid_xml_label(localName) || (!ns.empty() && !serialize::is_valid_xml_label(ns)))
+            return std::unexpected(error_t{error_t::INVALID_NAME, pos_});
         
         builder_.begin(localName, ns);
 
@@ -225,9 +251,11 @@ private:
 
             // Parse attribute qualified name.
             auto attrQualified = get_while([](char c) {
-                return std::isalnum(static_cast<unsigned char>(c)) || c == '_' || c == ':' || c == '-';
+                return std::isalnum(static_cast<unsigned char>(c)) || c == '_' || c == ':' || c == '-' || c == '.';
             });
             auto [attrLocal, attrNs] = split_namespace(attrQualified);
+            if(!serialize::is_valid_xml_label(attrLocal) || (!attrNs.empty() && !serialize::is_valid_xml_label(attrNs)))
+                return std::unexpected(error_t{error_t::INVALID_NAME, pos_});
             
             skip_whitespace();
             if (!consume('='))return std::unexpected(error_t{error_t::MISSING_ATTR_EQUALS, pos_}); 
@@ -264,42 +292,39 @@ private:
         if (!consume('>')) return std::unexpected(error_t{error_t::MISSING_GT_AFTER_TAG, pos_}); 
 
         // Parse content within the element until encountering a matching end tag.
+        bool closed = false;
         while (pos_ < data_.size()) {
-            skip_whitespace();
-            if (pos_ >= data_.size()) return std::unexpected(error_t{error_t::UNEXPECTED_EOF, pos_}); 
-
             if (peek('<')) {
                 // Check for closing tag.
                 if (data_.substr(pos_, 2) == "</") {
                     pos_ += 2; // skip "</"
-                    // Skip the qualified name inside end tag.
-                    get_until('>');
+                    // Read and match the qualified name inside the end tag.
+                    auto endName = get_until('>');
                     if (!consume('>')) return std::unexpected(error_t{error_t::MISSING_GT_IN_END_TAG, pos_});
+                    if (endName != qualifiedName) return std::unexpected(error_t{error_t::MISMATCHED_END_TAG, pos_});
                     builder_.end();
+                    closed = true;
                     break;
                 } else {
                     // Child element or special node.
                     ++pos_; // skip '<'
-                    parseElement(); // recursive call
+                    if(auto ret = parseElement(); !ret.has_value()) return ret;
                 }
             } else {
-                // Process text content until next '<'
+                // Read character data up to the next '<'. It is preserved as-is,
+                // except when it is entirely whitespace (ignorable formatting).
                 size_t textStart = pos_;
                 while (pos_ < data_.size() && data_[pos_] != '<')
                     ++pos_;
                 auto textContent = data_.substr(textStart, pos_ - textStart);
-                std::string_view unescapedText;
 
-                if constexpr (Builder_t::configs.raw_strings )unescapedText=textContent;
-                else unescapedText = serialize::inplace_unescape_xml(textContent);
-
-                if (!unescapedText.empty() &&
-                    unescapedText.find_first_not_of(" \t\r\n") != std::string::npos)
-                {
-                    builder_.text(unescapedText);
+                if (textContent.find_first_not_of(" \t\r\n") != std::string_view::npos) {
+                    if constexpr (Builder_t::configs.raw_strings) builder_.text(textContent);
+                    else builder_.text(serialize::inplace_unescape_xml(textContent));
                 }
             }
         }
+        if(!closed) return std::unexpected(error_t{error_t::UNEXPECTED_EOF, pos_});
 
         return {};
     }

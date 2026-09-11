@@ -3,17 +3,19 @@
 namespace VS_XML_NS{
 
 bool DocumentRaw::print(std::ostream& out, const print_cfg_t& cfg)const{
+    if(buffer.empty())return true;
+    const char* nl = cfg.use_lf ? "\n" : "\r\n";
+    bool first = true;
     for(auto& it: TreeRaw::root().children()){
-        if(!TreeRaw::print(out, cfg, &it))return false;
+        if(!first)out << nl;
+        first = false;
+        print_node(out,cfg,&it,0);
     }
-    return true;
+    return (bool)out;
 }
 
 bool DocumentRaw::print_fast(std::ostream& out, const print_cfg_t& cfg)const{
-    for(auto& it: TreeRaw::root().children()){
-        if(!TreeRaw::print_fast(out, cfg, &it))return false;
-    }
-    return true;
+    return print(out,cfg);
 }
 
 /**
@@ -33,6 +35,7 @@ bool DocumentRaw::print_fast(std::ostream& out, const print_cfg_t& cfg)const{
     if(!t.has_value())return std::unexpected(t.error()); 
     else return DocumentRaw(std::move(*t));
 }
+
 [[nodiscard]] const std::expected<const DocumentRaw,TreeRaw::from_binary_error_t>  DocumentRaw::from_binary(std::span<const uint8_t> region){
     std::expected<const TreeRaw, TreeRaw::from_binary_error_t> t = TreeRaw::from_binary(region); 
     if(!t.has_value())return std::unexpected(t.error()); 
@@ -41,15 +44,14 @@ bool DocumentRaw::print_fast(std::ostream& out, const print_cfg_t& cfg)const{
 
 
 //TODO: Replace with proper prototypes, and incapsulate the mv mechanism away as it is an implementation detail, not semantically correct.
-DocumentRaw::DocumentRaw(TreeRaw&& src):TreeRaw(src){}
-DocumentRaw::DocumentRaw(const TreeRaw&& src):TreeRaw(src){}
+DocumentRaw::DocumentRaw(TreeRaw&& src):TreeRaw(std::move(src)){}
+DocumentRaw::DocumentRaw(const TreeRaw&& src):TreeRaw(std::move(const_cast<TreeRaw&>(src))){}
 
 
 Document::Document(DocumentRaw&& ref):DocumentRaw(std::move(ref)){}
 Document::Document(const DocumentRaw&& ref):DocumentRaw(std::move(ref)){}
 
 const Tree Document::slice(const element_t* ref) const{return DocumentRaw::slice(ref);}
-Tree Document::clone(const element_t* ref, bool reduce) const{return DocumentRaw::clone(ref,reduce);}
 
 wrp::base_t<unknown_t> Document::root() {return wrp::base_t<unknown_t>{*(const TreeRaw*)this, &TreeRaw::root()};}
 

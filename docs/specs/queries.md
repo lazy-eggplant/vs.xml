@@ -1,57 +1,54 @@
-## What are queries?
-Queries are the main mechanism to perform search operations on the binary XML files.  
-There are three main clause types:
+# Queries
 
-- `any-is` iterates over all nodes form a container (like a prior query) as long as all criteria are met.
-- `this-is` checks if a specific node satisfies requirements recursively navigating the parents list. In some sense it is a local version of `any-is` since any element satisfying `any-is` will satisfy `this-is` and the converse is true as well.
-- `any-has` iterates over all nodes from a container (like a prior query), for which the `is` clause is tested against the query criterion. Those for which at least one solution is defined are picked.
+Queries search a subtree of a document. They are built with an explicit builder
+and evaluated iteratively, so the memory footprint is
+predictable and bounded by the tree depth.
 
-All queries are designed to be capturing. For each token, you can pass two arguments:
-- A label pattern
-- A function (lambda) to register such pattern
-This allows to record a map of captures for each valid match of the query.
+## Building
 
-## Structure of queries
+Start from `xml::query::query_t` and append steps:
 
-A query is a linear sequence of query tokens. Most are meant to match specific features of the XML nodes, while some are used to control the "machine" running the validation process.  
-Every complete query must end with an `accept()` token.
+- `accept()`: emit the current node and stop the branch.
+- `child()`: move to the children of the current element.
+- `descend()`: move to every descendant of the current element.
+- `fork()`: stay on the current node and every descendant (descendant-or-self).
+- `match_type(type_t)`: keep only nodes of a given type.
+- `match_ns(filter)`, `match_name(filter)`, `match_value(filter)`, `match_text(filter)`:
+  keep only nodes whose namespace, name, value, or direct text matches.
+- `match_attr(ns, name, value)`: keep elements carrying an attribute that matches
+  all three filters.
 
-### Basic commands
+A `filter_t` is a wildcard (`query::any()`), an exact string (`query::eq("x")` or
+a bare `const char*`), or a predicate stored as
+`std::move_only_function<bool(std::string_view) const>`.
 
-- `fork()` to force splitting matching by continuing here and expanding down.
-- `accept()` to accept the current node and let the iterator go deeper.
-- `type({...})` to match a subset of node type.
-- `match_ns({exp})` to match the namespace, with exp being either a string or a boolean lambda.
-- `match_name({exp})` to match the name, with exp being either a string or a boolean lambda.
-- `match_value({exp})` to match the value, with exp being either a string or a boolean lambda.
-- `match_all_text({exp})` to match the text, with exp being either a string or a boolean lambda.
-- `attr({name, fn, ns})` if a given attribute (with namespace) satisfies the expressions (as string or boolean lambdas). 
+A branch that reaches the end of the steps is emitted implicitly; `accept()` is
+only needed to stop a branch early or to accept an intermediate step.
 
-### About attributes
+Because predicates are move-only, `query_t` is move-only: construct a named
+query and append steps to it.
 
-Attributes are handled differently compared to the rest of the XML nodes, because they are not. `attr` even in `is` queries will behave like a `has`. The presence of the attribute is being tested, but it will not be considered as the node to return. Still, they can be used as captures for a query.  
-If you must match and return attributes directly, you will have to do that by manually iterating or filtering them, like `item.attrs() | std::views::filter(...)`.
+## Evaluating
 
-### String shorthands
+- `for_each(node, fn)`: call `fn` for every accepted node.
+- `for_each_while(node, fn)`: like `for_each`, but stop when `fn` returns false.
+- `collect(node)`: return a vector of accepted nodes, in document order.
+- `has(node)`: true if at least one node is accepted.
 
-Several of the basic commands introduce earlier also have a simplified form based off string views:
+## Example
 
-- `"{ns}:{name}"` matching namespace and name. Special values `?` for each to determine anything matches that slot. Empty string is considered empty string, and not a generic "match all".
-- `*` to accept any node and move forward.
-- `**` to recursively fork.
+```cpp
+xml::query::query_t q;
+q.child().element("item")
+ .match_attr(query::any(), query::eq("id"), query::any())
+ .accept();
 
-### Composition
+for(auto node : q.collect(document.root())){
+    // ... use node ...
+}
+```
 
-Tokens of a query can be composed by any of the following operators:
+## C bindings
 
-- `operator*` to append right to the current (left) list
-- `operator/` to append a `next()` AND right to left.
-
-## Applying queries
-
-Queries are applied either by:
-
-- Using the `is`, `has` or ~~`check`~~ functions.
-- The operators `&`, `|` or ~~`==`~~ which are their respective alias.
-
-Applied queries return asynchronous generators, so they can be further piped by `std::views::filter`.
+The same builder is exposed through `vsxml_query_*` in `<vs-xml/c.h>`. See
+`test/c-interface.c` for a complete example.

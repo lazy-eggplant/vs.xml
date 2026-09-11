@@ -11,12 +11,12 @@
 //TODO: Adapt it to work with archives
 
 #include <functional>
-#include <print>
+#include <vs-xml/fwd/print.hpp>
 #include <atomic>
 #include <condition_variable>
 #include <filesystem>
 #include <fstream>
-#include <format>
+#include <vs-xml/fwd/format.hpp>
 #include <iostream>
 #include <mutex>
 #include <optional>
@@ -163,7 +163,7 @@ std::optional<Config> parse_args(int argc, char* argv[]) {
             cfg.want_report = true;
         }
         else {
-            std::print(stderr, "Unknown option: '{}'\n", a);
+            fmt::print(stderr, "Unknown option: '{}'\n", a);
             return std::nullopt;
         }
     }
@@ -176,14 +176,14 @@ std::optional<Config> parse_args(int argc, char* argv[]) {
 int main(int argc, char* argv[]) {
     auto cfg_opt = parse_args(argc, argv);
     if (!cfg_opt) {
-        std::print("Usage: {} <source_dir> [--log <path>] [--threads N] [--report]\n", argv[0]);
+        fmt::print("Usage: {} <source_dir> [--log <path>] [--threads N] [--report]\n", argv[0]);
         return 1;
     }
     auto const& cfg = *cfg_opt;
 
     if (!std::filesystem::exists(cfg.source) ||
         !std::filesystem::is_directory(cfg.source)) {
-        std::print(stderr, "Error: '{}' is not a directory\n", cfg.source.string());
+        fmt::print(stderr, "Error: '{}' is not a directory\n", cfg.source.string());
         return 2;
     }
 
@@ -192,7 +192,7 @@ int main(int argc, char* argv[]) {
     if (cfg.log_path) {
         log_stream.emplace(cfg.log_path->c_str(), std::ios::out);
         if (!*log_stream) {
-            std::print(stderr, "Error: cannot open log file '{}'\n", cfg.log_path->string());
+            fmt::print(stderr, "Error: cannot open log file '{}'\n", cfg.log_path->string());
             return 3;
         }
     }
@@ -206,7 +206,7 @@ int main(int argc, char* argv[]) {
         }
     }
     catch (std::exception const& ex) {
-        std::print(stderr, "Error scanning '{}': {}\n", cfg.source.string(), ex.what());
+        fmt::print(stderr, "Error scanning '{}': {}\n", cfg.source.string(), ex.what());
         return 4;
     }
 
@@ -227,7 +227,7 @@ int main(int argc, char* argv[]) {
 
             // **Extended log**: only record failures (res != SUCCESS)
             if (log_stream && res != ProcessResult::SUCCESS) {
-                std::print(*log_stream, "{} => {}\n",
+                fmt::print(*log_stream, "{} => {}\n",
                            path.string(), ProcessResult::to_string(res));
             }
         });
@@ -239,17 +239,17 @@ int main(int argc, char* argv[]) {
         size_t total = 0;
         for (auto& c : counters) total += c.load();
 
-        std::print("=== Processing Report ===\n");
-        std::print("Source dir: {}\n", cfg.source.string());
-        std::print("Total files processed: {}\n\n", total);
-        std::print("Result breakdown:\n");
+        fmt::print("=== Processing Report ===\n");
+        fmt::print("Source dir: {}\n", cfg.source.string());
+        fmt::print("Total files processed: {}\n\n", total);
+        fmt::print("Result breakdown:\n");
 
         for (size_t i = 0; i < RCOUNT; ++i) {
             auto r     = static_cast<ProcessResult::Value>(i);
             //auto cnt   = counters[i].load();
             auto name  = ProcessResult::to_string(r);
             auto color = ProcessResult::color_for(r);
-            std::print("{}{:<16}{} : {}\n",
+            fmt::print("{}{:<16}{} : {}\n",
                 color, name, ProcessResult::COLOR_RESET,
                 counters[static_cast<size_t>(r)].load());
         }
