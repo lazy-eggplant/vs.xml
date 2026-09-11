@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['save_5fbinary_0',['save_binary',['../structVS__XML__NS_1_1ArchiveRaw.html#af5b4f90b7fe2e8cf60aeff11b743f194',1,'VS_XML_NS::ArchiveRaw']]],
-  ['slice_1',['slice',['../structVS__XML__NS_1_1TreeRaw.html#a9e595271257d00b84b6b37ff92876d0d',1,'VS_XML_NS::TreeRaw']]]
+  ['prefix_0',['prefix',['../namespaceVS__XML__NS_1_1filters.html#a868d5264adcdfca37c68aaf8d7c81f93',1,'VS_XML_NS::filters']]],
+  ['print_1',['print',['../structVS__XML__NS_1_1TreeRaw.html#ac7c3960844e8cf9ec92acfe3002b7ce8',1,'VS_XML_NS::TreeRaw']]]
 ];

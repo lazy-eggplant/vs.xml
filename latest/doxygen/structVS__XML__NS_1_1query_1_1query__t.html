@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>vs.xml: VS_XML_NS::query::query_t&lt; N &gt; Struct Template Reference</title>
+<title>vs.xml: VS_XML_NS::query::query_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,44 +74,148 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structVS__XML__NS_1_1query_1_1query__t-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">VS_XML_NS::query::query_t&lt; N &gt; Struct Template Reference</div></div>
+  <div class="headertitle"><div class="title">VS_XML_NS::query::query_t Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A compiled path query.  
+ <a href="structVS__XML__NS_1_1query_1_1query__t.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="query_8hpp_source.html">query.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1query_1_1query__t_1_1step__t.html">step_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ac89c0fadafe29e0575ee628de7bee614" id="r_ac89c0fadafe29e0575ee628de7bee614"><td class="memItemLeft" align="right" valign="top"><a id="ac89c0fadafe29e0575ee628de7bee614" name="ac89c0fadafe29e0575ee628de7bee614"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>container_type</b> = std::array&lt; <a class="el" href="structVS__XML__NS_1_1query_1_1token__t.html">token_t</a>, N &gt;</td></tr>
-<tr class="separator:ac89c0fadafe29e0575ee628de7bee614"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c82403992ccf59701319263437b5366" id="r_a4c82403992ccf59701319263437b5366"><td class="memItemLeft" align="right" valign="top"><a id="a4c82403992ccf59701319263437b5366" name="a4c82403992ccf59701319263437b5366"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>op</b> : uint8_t { <br />
+&#160;&#160;<b>ACCEPT</b>
+, <b>CHILD</b>
+, <b>DESCEND</b>
+, <b>FORK</b>
+, <br />
+&#160;&#160;<b>TYPE</b>
+, <b>MATCH_NS</b>
+, <b>MATCH_NAME</b>
+, <b>MATCH_VALUE</b>
+, <br />
+&#160;&#160;<b>MATCH_TEXT</b>
+, <b>MATCH_ATTR</b>
+<br />
+ }</td></tr>
+<tr class="separator:a4c82403992ccf59701319263437b5366"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1c59e5a614710575ee30007d81f03b72" id="r_a1c59e5a614710575ee30007d81f03b72"><td class="memItemLeft" align="right" valign="top"><a id="a1c59e5a614710575ee30007d81f03b72" name="a1c59e5a614710575ee30007d81f03b72"></a>
-constexpr <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (std::string_view str)</td></tr>
-<tr class="separator:a1c59e5a614710575ee30007d81f03b72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6199526943c69830a6643fd7fcc1c15" id="r_ad6199526943c69830a6643fd7fcc1c15"><td class="memItemLeft" align="right" valign="top"><a id="ad6199526943c69830a6643fd7fcc1c15" name="ad6199526943c69830a6643fd7fcc1c15"></a>
-constexpr <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (const <a class="el" href="structVS__XML__NS_1_1query_1_1token__t.html">token_t</a> &amp;tkn)</td></tr>
-<tr class="separator:ad6199526943c69830a6643fd7fcc1c15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83c017e8c7140f687bb1df309c972b85" id="r_a83c017e8c7140f687bb1df309c972b85"><td class="memItemLeft" align="right" valign="top"><a id="a83c017e8c7140f687bb1df309c972b85" name="a83c017e8c7140f687bb1df309c972b85"></a>
-constexpr <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator/</b> (std::string_view str)</td></tr>
-<tr class="separator:a83c017e8c7140f687bb1df309c972b85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9b57e47b530cd27ef0031908152a81e" id="r_ac9b57e47b530cd27ef0031908152a81e"><td class="memItemLeft" align="right" valign="top"><a id="ac9b57e47b530cd27ef0031908152a81e" name="ac9b57e47b530cd27ef0031908152a81e"></a>
-constexpr <a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator/</b> (const <a class="el" href="structVS__XML__NS_1_1query_1_1token__t.html">token_t</a> &amp;tkn)</td></tr>
-<tr class="separator:ac9b57e47b530cd27ef0031908152a81e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52435992c8fddd541d673977893d11ff" id="r_a52435992c8fddd541d673977893d11ff"><td class="memItemLeft" align="right" valign="top"><a id="a52435992c8fddd541d673977893d11ff" name="a52435992c8fddd541d673977893d11ff"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>accept</b> ()</td></tr>
+<tr class="separator:a52435992c8fddd541d673977893d11ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ae81fc8154a0e3e8146b63f0f5e87d8" id="r_a1ae81fc8154a0e3e8146b63f0f5e87d8"><td class="memItemLeft" align="right" valign="top"><a id="a1ae81fc8154a0e3e8146b63f0f5e87d8" name="a1ae81fc8154a0e3e8146b63f0f5e87d8"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>child</b> ()</td></tr>
+<tr class="separator:a1ae81fc8154a0e3e8146b63f0f5e87d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40cf9a50e340cd5258d48f3606265d06" id="r_a40cf9a50e340cd5258d48f3606265d06"><td class="memItemLeft" align="right" valign="top"><a id="a40cf9a50e340cd5258d48f3606265d06" name="a40cf9a50e340cd5258d48f3606265d06"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>descend</b> ()</td></tr>
+<tr class="separator:a40cf9a50e340cd5258d48f3606265d06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab23c42d140ddaa441ba4b3105a88a697" id="r_ab23c42d140ddaa441ba4b3105a88a697"><td class="memItemLeft" align="right" valign="top"><a id="ab23c42d140ddaa441ba4b3105a88a697" name="ab23c42d140ddaa441ba4b3105a88a697"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>fork</b> ()</td></tr>
+<tr class="separator:ab23c42d140ddaa441ba4b3105a88a697"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3839baee196d099b0db100afb795506" id="r_ac3839baee196d099b0db100afb795506"><td class="memItemLeft" align="right" valign="top"><a id="ac3839baee196d099b0db100afb795506" name="ac3839baee196d099b0db100afb795506"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>match_type</b> (<a class="el" href="namespaceVS__XML__NS.html#adf9eb912fd1a94572b3ac45fd3e0ea60">type_t</a> t)</td></tr>
+<tr class="separator:ac3839baee196d099b0db100afb795506"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cdb61236ef5e6d3fa2dd9b552fdffd1" id="r_a7cdb61236ef5e6d3fa2dd9b552fdffd1"><td class="memItemLeft" align="right" valign="top"><a id="a7cdb61236ef5e6d3fa2dd9b552fdffd1" name="a7cdb61236ef5e6d3fa2dd9b552fdffd1"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>match_ns</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1filter__t.html">filter_t</a> f)</td></tr>
+<tr class="separator:a7cdb61236ef5e6d3fa2dd9b552fdffd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b23c10bc3d0d854a7af24983b9f4455" id="r_a1b23c10bc3d0d854a7af24983b9f4455"><td class="memItemLeft" align="right" valign="top"><a id="a1b23c10bc3d0d854a7af24983b9f4455" name="a1b23c10bc3d0d854a7af24983b9f4455"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>match_name</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1filter__t.html">filter_t</a> f)</td></tr>
+<tr class="separator:a1b23c10bc3d0d854a7af24983b9f4455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaed5437ff86c97966ddae1f572407f28" id="r_aaed5437ff86c97966ddae1f572407f28"><td class="memItemLeft" align="right" valign="top"><a id="aaed5437ff86c97966ddae1f572407f28" name="aaed5437ff86c97966ddae1f572407f28"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>match_value</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1filter__t.html">filter_t</a> f)</td></tr>
+<tr class="separator:aaed5437ff86c97966ddae1f572407f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add97aeb99d351aa34fad913d8aec408e" id="r_add97aeb99d351aa34fad913d8aec408e"><td class="memItemLeft" align="right" valign="top"><a id="add97aeb99d351aa34fad913d8aec408e" name="add97aeb99d351aa34fad913d8aec408e"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>match_text</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1filter__t.html">filter_t</a> f)</td></tr>
+<tr class="separator:add97aeb99d351aa34fad913d8aec408e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fe45b651c7e1705ef2b0011b0b7e8f8" id="r_a5fe45b651c7e1705ef2b0011b0b7e8f8"><td class="memItemLeft" align="right" valign="top"><a id="a5fe45b651c7e1705ef2b0011b0b7e8f8" name="a5fe45b651c7e1705ef2b0011b0b7e8f8"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>match_attr</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1filter__t.html">filter_t</a> ns, <a class="el" href="structVS__XML__NS_1_1query_1_1filter__t.html">filter_t</a> name, <a class="el" href="structVS__XML__NS_1_1query_1_1filter__t.html">filter_t</a> value)</td></tr>
+<tr class="separator:a5fe45b651c7e1705ef2b0011b0b7e8f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2f4a04c0157ed82b8ed91c5d53aad4" id="r_a4b2f4a04c0157ed82b8ed91c5d53aad4"><td class="memItemLeft" align="right" valign="top"><a id="a4b2f4a04c0157ed82b8ed91c5d53aad4" name="a4b2f4a04c0157ed82b8ed91c5d53aad4"></a>
+<a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html">query_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>element</b> (<a class="el" href="structVS__XML__NS_1_1query_1_1filter__t.html">filter_t</a> name={})</td></tr>
+<tr class="memdesc:a4b2f4a04c0157ed82b8ed91c5d53aad4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience for matching an element by local name, in any namespace. <br /></td></tr>
+<tr class="separator:a4b2f4a04c0157ed82b8ed91c5d53aad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a256a5a8db6d12823ef9f3d32a0cdb514" id="r_a256a5a8db6d12823ef9f3d32a0cdb514"><td class="memTemplParams" colspan="2"><a id="a256a5a8db6d12823ef9f3d32a0cdb514" name="a256a5a8db6d12823ef9f3d32a0cdb514"></a>
+template&lt;typename Fn &gt; </td></tr>
+<tr class="memitem:a256a5a8db6d12823ef9f3d32a0cdb514"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>for_each</b> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">node_t</a> root, Fn &amp;&amp;fn) const</td></tr>
+<tr class="memdesc:a256a5a8db6d12823ef9f3d32a0cdb514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the query over a subtree, invoking <code>fn</code> for every accepted node. <br /></td></tr>
+<tr class="separator:a256a5a8db6d12823ef9f3d32a0cdb514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ba05bb6cf079621559e4102e702c994" id="r_a5ba05bb6cf079621559e4102e702c994"><td class="memTemplParams" colspan="2">template&lt;typename Fn &gt; </td></tr>
+<tr class="memitem:a5ba05bb6cf079621559e4102e702c994"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structVS__XML__NS_1_1query_1_1query__t.html#a5ba05bb6cf079621559e4102e702c994">for_each_while</a> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">node_t</a> root, Fn &amp;&amp;fn) const</td></tr>
+<tr class="memdesc:a5ba05bb6cf079621559e4102e702c994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Like for_each, but <code>fn</code> returns false to stop the traversal early.  <br /></td></tr>
+<tr class="separator:a5ba05bb6cf079621559e4102e702c994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38171342e4e73eae7c935a00b0b60662" id="r_a38171342e4e73eae7c935a00b0b60662"><td class="memItemLeft" align="right" valign="top"><a id="a38171342e4e73eae7c935a00b0b60662" name="a38171342e4e73eae7c935a00b0b60662"></a>
+vector&lt; <a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">node_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>collect</b> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">node_t</a> root) const</td></tr>
+<tr class="memdesc:a38171342e4e73eae7c935a00b0b60662"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collect all accepted nodes, in document order. <br /></td></tr>
+<tr class="separator:a38171342e4e73eae7c935a00b0b60662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9ef3efa239472dac673a30731f445c4" id="r_ae9ef3efa239472dac673a30731f445c4"><td class="memItemLeft" align="right" valign="top"><a id="ae9ef3efa239472dac673a30731f445c4" name="ae9ef3efa239472dac673a30731f445c4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>has</b> (<a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">node_t</a> root) const</td></tr>
+<tr class="memdesc:ae9ef3efa239472dac673a30731f445c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if at least one node is accepted. <br /></td></tr>
+<tr class="separator:ae9ef3efa239472dac673a30731f445c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a50a1e61d8d4e213e7dbf1f344e8b0c81" id="r_a50a1e61d8d4e213e7dbf1f344e8b0c81"><td class="memItemLeft" align="right" valign="top"><a id="a50a1e61d8d4e213e7dbf1f344e8b0c81" name="a50a1e61d8d4e213e7dbf1f344e8b0c81"></a>
-container_type&#160;</td><td class="memItemRight" valign="bottom"><b>tokens</b></td></tr>
-<tr class="separator:a50a1e61d8d4e213e7dbf1f344e8b0c81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe3f9bcced950108a1095d2c3eb7fd0d" id="r_abe3f9bcced950108a1095d2c3eb7fd0d"><td class="memItemLeft" align="right" valign="top"><a id="abe3f9bcced950108a1095d2c3eb7fd0d" name="abe3f9bcced950108a1095d2c3eb7fd0d"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>current</b> =0</td></tr>
-<tr class="separator:abe3f9bcced950108a1095d2c3eb7fd0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a119ade15d84362c6fd1913ab346b3b5e" id="r_a119ade15d84362c6fd1913ab346b3b5e"><td class="memItemLeft" align="right" valign="top"><a id="a119ade15d84362c6fd1913ab346b3b5e" name="a119ade15d84362c6fd1913ab346b3b5e"></a>
+vector&lt; <a class="el" href="structVS__XML__NS_1_1query_1_1query__t_1_1step__t.html">step_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>steps</b></td></tr>
+<tr class="separator:a119ade15d84362c6fd1913ab346b3b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A compiled path query. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5ba05bb6cf079621559e4102e702c994" name="a5ba05bb6cf079621559e4102e702c994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ba05bb6cf079621559e4102e702c994">&#9670;&#160;</a></span>for_each_while()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Fn &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VS_XML_NS::query::query_t::for_each_while </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structVS__XML__NS_1_1wrp_1_1base__t.html">node_t</a>&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Fn &amp;&amp;&#160;</td>
+          <td class="paramname"><em>fn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Like for_each, but <code>fn</code> returns false to stop the traversal early. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the traversal completed, false if it was stopped. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/vs-xml/<a class="el" href="query_8hpp_source.html">query.hpp</a></li>
 </ul>

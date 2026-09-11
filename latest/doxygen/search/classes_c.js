@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['query_5ft_0',['query_t',['../structVS__XML__NS_1_1query_1_1query__t.html',1,'VS_XML_NS::query']]],
-  ['query_5ft_3c_200_20_3e_1',['query_t&lt; 0 &gt;',['../structVS__XML__NS_1_1query_1_1query__t_3_010_01_4.html',1,'VS_XML_NS::query']]],
-  ['querybuilder_2',['QueryBuilder',['../structVS__XML__NS_1_1query_1_1QueryBuilder.html',1,'VS_XML_NS::query']]]
+  ['randomaccessindex_0',['RandomAccessIndex',['../structRandomAccessIndex.html',1,'']]],
+  ['randomaccessindexlazy_1',['RandomAccessIndexLazy',['../structRandomAccessIndexLazy.html',1,'']]],
+  ['reserve_5ft_2',['reserve_t',['../structRandomAccessIndex_1_1reserve__t.html',1,'RandomAccessIndex::reserve_t'],['../structRandomAccessIndexLazy_1_1reserve__t.html',1,'RandomAccessIndexLazy::reserve_t'],['../structVS__XML__NS_1_1ArchiveBuilder_1_1reserve__t.html',1,'VS_XML_NS::ArchiveBuilder&lt; cfg &gt;::reserve_t'],['../structVS__XML__NS_1_1TreeBuilder_1_1reserve__t.html',1,'VS_XML_NS::TreeBuilder&lt; cfg &gt;::reserve_t']]],
+  ['root_5ft_3',['root_t',['../structVS__XML__NS_1_1root__t.html',1,'VS_XML_NS']]]
 ];

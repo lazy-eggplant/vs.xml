@@ -73,27 +73,98 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">format.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Helpers to handle format/print portably.  
+<p>fmt-based formatting helpers.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;format&gt;</code><br />
+<div class="textblock"><code>#include &lt;vs-xml/commons.hpp&gt;</code><br />
+<code>#include &lt;fmt/format.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for format.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="format_8hpp__incl.png" border="0" usemap="#ainclude_2vs-xml_2fwd_2format_8hpp" alt=""/></div>
 <map name="ainclude_2vs-xml_2fwd_2format_8hpp" id="ainclude_2vs-xml_2fwd_2format_8hpp">
-<area shape="rect" title="Helpers to handle format/print portably." alt="" coords="5,5,151,45"/>
-<area shape="rect" title=" " alt="" coords="45,93,111,119"/>
-<area shape="poly" title=" " alt="" coords="81,46,81,79,75,79,75,46"/>
+<area shape="rect" title="fmt&#45;based formatting helpers." alt="" coords="481,5,627,45"/>
+<area shape="rect" href="commons_8hpp_source.html" title=" " alt="" coords="394,93,557,119"/>
+<area shape="poly" title=" " alt="" coords="537,47,499,85,495,82,533,44"/>
+<area shape="rect" title=" " alt="" coords="581,93,687,119"/>
+<area shape="poly" title=" " alt="" coords="575,44,614,82,610,85,572,47"/>
+<area shape="rect" title=" " alt="" coords="5,167,76,192"/>
+<area shape="poly" title=" " alt="" coords="394,121,256,141,90,169,89,164,255,135,394,115"/>
+<area shape="rect" title=" " alt="" coords="101,167,170,192"/>
+<area shape="poly" title=" " alt="" coords="416,121,185,169,183,164,415,116"/>
+<area shape="rect" title=" " alt="" coords="194,167,261,192"/>
+<area shape="poly" title=" " alt="" coords="436,121,274,167,273,162,435,116"/>
+<area shape="rect" title=" " alt="" coords="285,167,365,192"/>
+<area shape="poly" title=" " alt="" coords="452,121,363,163,361,158,450,116"/>
+<area shape="rect" title=" " alt="" coords="389,167,471,192"/>
+<area shape="poly" title=" " alt="" coords="470,120,447,157,442,154,466,118"/>
+<area shape="rect" title=" " alt="" coords="495,167,549,192"/>
+<area shape="poly" title=" " alt="" coords="485,118,509,154,505,157,481,120"/>
+<area shape="rect" title=" " alt="" coords="573,167,671,192"/>
+<area shape="poly" title=" " alt="" coords="500,116,587,158,585,163,498,121"/>
+<area shape="rect" title=" " alt="" coords="695,167,733,192"/>
+<area shape="poly" title=" " alt="" coords="519,116,682,164,681,169,517,121"/>
+<area shape="rect" title=" " alt="" coords="757,167,849,192"/>
+<area shape="poly" title=" " alt="" coords="529,116,744,163,743,168,527,121"/>
+<area shape="rect" href="assert_8hpp.html" title="Utility for assertions." alt="" coords="873,167,1040,192"/>
+<area shape="poly" title=" " alt="" coords="553,116,866,162,865,167,552,121"/>
+<area shape="rect" title=" " alt="" coords="824,240,889,265"/>
+<area shape="poly" title=" " alt="" coords="942,194,886,234,883,230,939,190"/>
+<area shape="rect" title=" " alt="" coords="913,240,1000,265"/>
+<area shape="poly" title=" " alt="" coords="959,192,959,226,954,226,954,192"/>
+<area shape="rect" title=" " alt="" coords="1024,240,1148,265"/>
+<area shape="poly" title=" " alt="" coords="979,190,1054,231,1051,235,976,194"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="format_8hpp__dep__incl.png" border="0" usemap="#ainclude_2vs-xml_2fwd_2format_8hppdep" alt=""/></div>
+<map name="ainclude_2vs-xml_2fwd_2format_8hppdep" id="ainclude_2vs-xml_2fwd_2format_8hppdep">
+<area shape="rect" title="fmt&#45;based formatting helpers." alt="" coords="201,5,347,45"/>
+<area shape="rect" href="print_8hpp.html" title="fmt&#45;based printing helpers." alt="" coords="116,93,261,133"/>
+<area shape="poly" title=" " alt="" coords="247,57,209,95,206,91,244,53"/>
+<area shape="rect" href="wrp-node_8hpp_source.html" title=" " alt="" coords="393,93,539,133"/>
+<area shape="poly" title=" " alt="" coords="330,49,425,91,423,96,328,53"/>
+<area shape="rect" href="pretty-header_8hpp.html" title="Extra ut8ilities to display colored headers, just for debugging and visualization." alt="" coords="5,181,156,221"/>
+<area shape="poly" title=" " alt="" coords="156,144,106,183,103,179,152,140"/>
+<area shape="rect" href="wrp-visit_8hpp.html" title="Visitor patterns for trees and derived." alt="" coords="181,181,349,221"/>
+<area shape="poly" title=" " alt="" coords="410,141,310,184,308,179,408,136"/>
+<area shape="rect" href="query_8hpp.html" title="Tree queries." alt="" coords="373,189,559,214"/>
+<area shape="poly" title=" " alt="" coords="469,147,469,188,463,188,463,147"/>
+<area shape="rect" href="tree-builder_8hpp.html" title="Tree builder classes." alt="" coords="583,181,731,221"/>
+<area shape="poly" title=" " alt="" coords="521,137,616,179,614,184,519,141"/>
+<area shape="rect" href="rand-access_8hpp.html" title="Utility class to enable an external index used to provide random access to children information." alt="" coords="755,181,905,221"/>
+<area shape="poly" title=" " alt="" coords="553,132,755,180,754,185,552,138"/>
+<area shape="rect" href="archive-builder_8hpp.html" title="Archive builder wrapper implementation for tree builder." alt="" coords="611,431,782,471"/>
+<area shape="poly" title=" " alt="" coords="634,233,611,265,593,303,585,343,587,363,594,381,617,409,648,428,645,433,614,413,589,384,581,364,579,343,588,301,607,262,629,230"/>
+<area shape="rect" href="document-builder_8hpp.html" title="Document builder wrapper implementation for tree builder." alt="" coords="603,343,790,383"/>
+<area shape="poly" title=" " alt="" coords="667,234,695,342,689,343,662,235"/>
+<area shape="rect" href="document_8hpp.html" title="Document wrapper for a tree." alt="" coords="695,269,909,295"/>
+<area shape="poly" title=" " alt="" coords="705,225,782,267,779,271,702,230"/>
+<area shape="poly" title=" " alt="" coords="699,397,699,430,694,430,694,397"/>
+<area shape="poly" title=" " alt="" coords="777,305,724,345,720,340,774,301"/>
+<area shape="rect" href="archive_8hpp.html" title="A collection of multiple documents, stored in a single data structure. Archives will use shared symbo..." alt="" coords="815,350,1013,375"/>
+<area shape="poly" title=" " alt="" coords="832,301,899,348,896,352,829,305"/>
+<area shape="poly" title=" " alt="" coords="873,383,746,433,744,428,871,378"/>
 </map>
 </div>
 </div>
 <p><a href="format_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceVS__XML__NS" id="r_namespaceVS__XML__NS"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVS__XML__NS.html">VS_XML_NS</a></td></tr>
+<tr class="memdesc:namespaceVS__XML__NS"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main namespace for the application. By default <code>xml</code> and controlled via the macro <a class="el" href="namespaceVS__XML__NS.html" title="The main namespace for the application. By default xml and controlled via the macro VS_XML_NS.">VS_XML_NS</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Helpers to handle format/print portably. </p>
+<div class="textblock"><p>fmt-based formatting helpers. </p>
 <dl class="section author"><dt>Author</dt><dd>karurochari </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2025-05-17</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 </dd></dl>
