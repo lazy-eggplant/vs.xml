@@ -32,7 +32,7 @@ jobs:
           xmake f -m release -y
           xmake package -y
       - name: Add artifact
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             ./build/packages/**/*
